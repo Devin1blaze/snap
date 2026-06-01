@@ -52,6 +52,24 @@ Template Name: Front Page
         .animate-marquee:hover {
             animation-play-state: paused;
         }
+        @keyframes marquee-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        @keyframes marquee-down {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+        }
+        .animate-marquee-vertical { animation: marquee-up 18s linear infinite; }
+        .animate-marquee-vertical-reverse { animation: marquee-down 18s linear infinite; }
+        .marquee-col:hover .animate-marquee-vertical,
+        .marquee-col:hover .animate-marquee-vertical-reverse { animation-play-state: paused; }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .brand-card { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+        .brand-card:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-color: #1A56DB; }
+        .why-icon-box { transition: background 0.2s; }
+        .why-icon-box:hover { background: rgba(26,86,219,0.15); }
         /* Custom Hover for Snap Advantage */
         .advantage-card:hover {
             transform: translateY(-10px);
@@ -321,31 +339,230 @@ Template Name: Front Page
     </div>
 </section>
 
-<!-- Section: Why Choose Snap Marketing? (With Hover Animations) -->
-<section class="bg-zinc-950 py-32 text-white">
-    <div class="container mx-auto px-8">
-        <h2 class="text-white text-4xl font-black mb-20 text-center uppercase tracking-tight">The Snap Advantage</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="advantage-card bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center cursor-pointer">
-                <span class="material-symbols-outlined text-secondary-container text-7xl mb-6">verified</span>
-                <div class="text-5xl font-black text-secondary-container mb-4 counter" data-target="100">0</div>
-                <h3 class="text-2xl font-black uppercase mb-4 tracking-tight">Genuine Brands</h3>
-                <p class="text-gray-300 leading-relaxed">Certified industrial equipment from leading global manufacturers only.</p>
-            </div>
-            <div class="advantage-card bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center cursor-pointer">
-                <span class="material-symbols-outlined text-secondary-container text-7xl mb-6">support_agent</span>
-                <div class="text-5xl font-black text-secondary-container mb-4">24/7</div>
-                <h3 class="text-2xl font-black uppercase mb-4 tracking-tight">Procurement Support</h3>
-                <p class="text-gray-300 leading-relaxed">Expert account managers for seamless corporate facility management.</p>
-            </div>
-            <div class="advantage-card bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center cursor-pointer">
-                <span class="material-symbols-outlined text-secondary-container text-7xl mb-6">inventory</span>
-                <div class="text-5xl font-black text-secondary-container mb-4 counter" data-target="5000">0</div>
-                <h3 class="text-2xl font-black uppercase mb-4 tracking-tight">Available SKUs</h3>
-                <p class="text-gray-300 leading-relaxed">The widest catalog of high-performance industrial equipment in India.</p>
-            </div>
+<!-- Section: What We Do -->
+<section class="w-full bg-white py-20 px-4 sm:px-8 lg:px-20 overflow-x-hidden">
+  <div class="max-w-screen-xl mx-auto">
+    <div class="flex flex-col lg:flex-row lg:items-start lg:gap-16">
+      <!-- Left: Image -->
+      <div class="reveal w-full lg:w-[45%] shrink-0 mb-10 lg:mb-0">
+        <div class="overflow-hidden shadow-2xl group" style="border-radius:1.5rem;">
+          <img
+            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=85"
+            alt="Snap Marketing - Industrial Equipment Solutions"
+            class="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            style="aspect-ratio:2/3;"
+          />
         </div>
+      </div>
+      <!-- Right: Content -->
+      <div class="flex flex-col flex-1 gap-8">
+        <div class="flex flex-col gap-4">
+          <div class="reveal">
+            <span class="inline-block bg-secondary-container text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">What We Do</span>
+          </div>
+          <div class="reveal">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-on-surface">Delivering Excellence in Industrial Solutions</h2>
+          </div>
+          <div class="reveal">
+            <p class="text-lg leading-relaxed text-on-surface-variant font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India — reliability and scale you can count on.</p>
+          </div>
+        </div>
+        <!-- Feature items -->
+        <div class="flex flex-col gap-6">
+          <div class="reveal flex gap-4 items-start">
+            <div class="w-10 h-10 shrink-0 bg-primary-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-white text-xl">verified</span>
+            </div>
+            <div>
+              <h3 class="font-black text-base text-on-surface mb-1">Genuine Brand Products</h3>
+              <p class="text-sm leading-relaxed text-on-surface-variant">Certified industrial equipment sourced directly from leading global manufacturers.</p>
+            </div>
+          </div>
+          <div class="reveal flex gap-4 items-start">
+            <div class="w-10 h-10 shrink-0 bg-primary-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-white text-xl">local_shipping</span>
+            </div>
+            <div>
+              <h3 class="font-black text-base text-on-surface mb-1">Pan-India Distribution</h3>
+              <p class="text-sm leading-relaxed text-on-surface-variant">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
+            </div>
+          </div>
+          <div class="reveal flex gap-4 items-start">
+            <div class="w-10 h-10 shrink-0 bg-primary-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-white text-xl">workspace_premium</span>
+            </div>
+            <div>
+              <h3 class="font-black text-base text-on-surface mb-1">Quality Assurance</h3>
+              <p class="text-sm leading-relaxed text-on-surface-variant">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <a href="/about-us" class="inline-flex items-center gap-3 bg-primary-container text-white font-black px-8 py-4 uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-200">
+            Learn More About Us
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- Section: Why Choose Snap Marketing? -->
+<section class="bg-white py-20 px-4 sm:px-8 lg:px-20">
+  <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row lg:items-center lg:gap-16">
+    <!-- Left: Visual -->
+    <div class="reveal hidden lg:block w-full max-w-lg shrink-0">
+      <div class="overflow-hidden shadow-2xl" style="border-radius:1.5rem;">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=85" alt="Why Choose Snap Marketing" class="w-full object-cover" style="aspect-ratio:3/2;" />
+      </div>
+    </div>
+    <!-- Right: Features -->
+    <div class="flex flex-col gap-6 w-full">
+      <div class="reveal">
+        <span class="inline-block bg-secondary-container text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">Why Choose Us</span>
+      </div>
+      <div class="reveal">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-on-surface">Why Choose Snap Marketing?</h2>
+      </div>
+      <!-- Mobile image -->
+      <div class="reveal lg:hidden mb-4">
+        <div class="overflow-hidden shadow-xl" style="border-radius:1.5rem;">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=85" alt="Why Choose Snap Marketing" class="w-full object-cover" style="aspect-ratio:16/9;" />
+        </div>
+      </div>
+      <div class="flex flex-col gap-5">
+        <div class="reveal flex gap-4 items-start">
+          <div class="why-icon-box w-12 h-12 shrink-0 bg-primary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-white">verified</span>
+          </div>
+          <div>
+            <div class="font-black text-lg text-on-surface mb-1">Genuine Brand Products</div>
+            <div class="text-sm leading-relaxed text-on-surface-variant">Certified equipment from global manufacturers. Zero counterfeits, zero compromise.</div>
+          </div>
+        </div>
+        <div class="reveal flex gap-4 items-start">
+          <div class="why-icon-box w-12 h-12 shrink-0 bg-primary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-white">local_shipping</span>
+          </div>
+          <div>
+            <div class="font-black text-lg text-on-surface mb-1">Pan-India Fast Shipping</div>
+            <div class="text-sm leading-relaxed text-on-surface-variant">Reliable delivery to dealers and enterprises across all major Indian cities.</div>
+          </div>
+        </div>
+        <div class="reveal flex gap-4 items-start">
+          <div class="why-icon-box w-12 h-12 shrink-0 bg-primary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-white">support_agent</span>
+          </div>
+          <div>
+            <div class="font-black text-lg text-on-surface mb-1">24/7 Procurement Support</div>
+            <div class="text-sm leading-relaxed text-on-surface-variant">Dedicated account managers available round the clock for bulk orders and queries.</div>
+          </div>
+        </div>
+        <div class="reveal flex gap-4 items-start">
+          <div class="why-icon-box w-12 h-12 shrink-0 bg-primary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-white">currency_rupee</span>
+          </div>
+          <div>
+            <div class="font-black text-lg text-on-surface mb-1">Institutional Pricing</div>
+            <div class="text-sm leading-relaxed text-on-surface-variant">Competitive bulk rates with volume discounts and flexible payment terms for corporates.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Section: Brand Partners Marquee -->
+<section class="bg-white py-20 px-4 sm:px-8 lg:px-20">
+  <div class="max-w-screen-xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <span class="inline-block bg-secondary-container text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest mb-4">Brand Partners</span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-on-surface mb-4">Trusted Global Brands</h2>
+      <p class="text-on-surface-variant text-base sm:text-lg font-medium max-w-2xl mx-auto">Partnering with world-class manufacturers to deliver premium industrial solutions across India.</p>
+    </div>
+    <!-- 3D Perspective Marquee Grid -->
+    <div class="relative reveal" style="height:420px;overflow:hidden;">
+      <div style="
+        display:flex;
+        flex-direction:row;
+        gap:16px;
+        align-items:center;
+        justify-content:center;
+        height:100%;
+        perspective:900px;
+        perspective-origin:center;
+      ">
+        <!-- Column 1 - scrolls UP -->
+        <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:100%;transform:rotateX(8deg) rotateY(-6deg) rotateZ(6deg);flex-shrink:0;">
+          <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
+            <?php
+            $brands_col1 = [
+              ['name'=>'Euronics','icon'=>'sensor_occupied','color'=>'#1A56DB'],
+              ['name'=>'Blue Star','icon'=>'ac_unit','color'=>'#0369a1'],
+              ['name'=>'Aquaguard','icon'=>'water_drop','color'=>'#0891b2'],
+              ['name'=>'Kimberly Clark','icon'=>'soap','color'=>'#1A56DB'],
+              ['name'=>'Dettol','icon'=>'sanitizer','color'=>'#dc2626'],
+              ['name'=>'Euronics','icon'=>'sensor_occupied','color'=>'#1A56DB'],
+              ['name'=>'Blue Star','icon'=>'ac_unit','color'=>'#0369a1'],
+            ];
+            foreach(array_merge($brands_col1,$brands_col1) as $b): ?>
+            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;border-radius:0.75rem;">
+              <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+              <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+        <!-- Column 2 - scrolls DOWN -->
+        <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:100%;flex-shrink:0;">
+          <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
+            <?php
+            $brands_col2 = [
+              ['name'=>'Somany','icon'=>'door_front','color'=>'#7c3aed'],
+              ['name'=>'KENT','icon'=>'water_drop','color'=>'#059669'],
+              ['name'=>'Godrej','icon'=>'lock','color'=>'#d97706'],
+              ['name'=>'Finolex','icon'=>'electrical_services','color'=>'#dc2626'],
+              ['name'=>'Astral','icon'=>'plumbing','color'=>'#1A56DB'],
+              ['name'=>'Somany','icon'=>'door_front','color'=>'#7c3aed'],
+              ['name'=>'KENT','icon'=>'water_drop','color'=>'#059669'],
+            ];
+            foreach(array_merge($brands_col2,$brands_col2) as $b): ?>
+            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;border-radius:0.75rem;">
+              <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+              <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+        <!-- Column 3 - scrolls UP -->
+        <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:100%;flex-shrink:0;">
+          <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
+            <?php
+            $brands_col3 = [
+              ['name'=>'Hafele','icon'=>'kitchen','color'=>'#1A56DB'],
+              ['name'=>'Johnson Controls','icon'=>'hvac','color'=>'#dc2626'],
+              ['name'=>'Honeywell','icon'=>'settings_remote','color'=>'#d97706'],
+              ['name'=>'3M India','icon'=>'science','color'=>'#dc2626'],
+              ['name'=>'EBCO','icon'=>'inventory','color'=>'#059669'],
+              ['name'=>'Hafele','icon'=>'kitchen','color'=>'#1A56DB'],
+              ['name'=>'Johnson Controls','icon'=>'hvac','color'=>'#dc2626'],
+            ];
+            foreach(array_merge($brands_col3,$brands_col3) as $b): ?>
+            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;border-radius:0.75rem;">
+              <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+              <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+      </div>
+      <!-- Fade overlays -->
+      <div style="pointer-events:none;position:absolute;top:0;left:0;right:0;height:25%;background:linear-gradient(to bottom,white,transparent);"></div>
+      <div style="pointer-events:none;position:absolute;bottom:0;left:0;right:0;height:25%;background:linear-gradient(to top,white,transparent);"></div>
+    </div>
+  </div>
 </section>
 
 <!-- Section 6: Industries We Serve -->
@@ -499,7 +716,18 @@ Template Name: Front Page
         });
     };
 
-    // Trigger animation when scrolled into view
+// Scroll-reveal animation
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), i * 80);
+            revealObs.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.15 });
+revealEls.forEach(el => revealObs.observe(el));
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if(entry.isIntersecting) {
