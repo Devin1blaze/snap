@@ -410,24 +410,27 @@ Template Name: Front Page
 </section>
 
 <!-- Section: Testimonials (Client Reviews) -->
-<section class="bg-surface py-32 px-8">
+<section class="bg-surface-container-low py-32 px-8 border-t border-black/5">
     <div class="container mx-auto">
         <h2 class="text-black text-4xl font-black mb-20 uppercase tracking-tight text-center">B2B Trust Report</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-12 border-t-8 border-secondary-container industrial-glow transition-all">
-                <span class="material-symbols-outlined text-secondary-container text-6xl mb-6">format_quote</span>
+            <!-- Card 1 -->
+            <div class="bg-white p-12 border-t-8 border-secondary-container industrial-glow transition-all shadow-xl">
+                <span class="material-symbols-outlined text-secondary-container text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                 <p class="text-black text-xl font-bold leading-relaxed mb-8 italic">"Snap Marketing transformed our facility hygiene with their automated solutions. The scale they operate at is truly impressive."</p>
-                <div class="text-primary-container font-black uppercase text-sm tracking-widest">Operation Manager, Fortis Hospitals</div>
+                <div class="text-primary-container font-black uppercase text-sm tracking-widest border-l-4 border-primary-container pl-4">Operation Manager, Fortis Hospitals</div>
             </div>
-            <div class="bg-white p-12 border-t-8 border-secondary-container industrial-glow transition-all">
-                <span class="material-symbols-outlined text-secondary-container text-6xl mb-6">format_quote</span>
+            <!-- Card 2 -->
+            <div class="bg-white p-12 border-t-8 border-secondary-container industrial-glow transition-all shadow-xl">
+                <span class="material-symbols-outlined text-secondary-container text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                 <p class="text-black text-xl font-bold leading-relaxed mb-8 italic">"The technical support during our cold-chain setup was world-class. Reliable partners for any large-scale industrial project."</p>
-                <div class="text-primary-container font-black uppercase text-sm tracking-widest">Director, Amul Cold Storage</div>
+                <div class="text-primary-container font-black uppercase text-sm tracking-widest border-l-4 border-primary-container pl-4">Director, Amul Cold Storage</div>
             </div>
-            <div class="bg-white p-12 border-t-8 border-secondary-container industrial-glow transition-all">
-                <span class="material-symbols-outlined text-secondary-container text-6xl mb-6">format_quote</span>
+            <!-- Card 3 -->
+            <div class="bg-white p-12 border-t-8 border-secondary-container industrial-glow transition-all shadow-xl">
+                <span class="material-symbols-outlined text-secondary-container text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                 <p class="text-black text-xl font-bold leading-relaxed mb-8 italic">"Precision and speed. Snap handles our bulk requirements with zero friction. Highly recommended for corporate procurement."</p>
-                <div class="text-primary-container font-black uppercase text-sm tracking-widest">Procurement Head, Tata Motors</div>
+                <div class="text-primary-container font-black uppercase text-sm tracking-widest border-l-4 border-primary-container pl-4">Procurement Head, Tata Motors</div>
             </div>
         </div>
     </div>
