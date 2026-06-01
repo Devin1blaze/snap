@@ -52,6 +52,15 @@ Template Name: Front Page
         .animate-marquee:hover {
             animation-play-state: paused;
         }
+        /* Custom Hover for Snap Advantage */
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            border-bottom-width: 12px;
+            background-color: #000;
+        }
+        .advantage-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
@@ -171,15 +180,15 @@ Template Name: Front Page
 <div class="bg-secondary-container w-full py-12 relative z-20">
     <div class="container mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
         <div class="text-center md:text-left border-r border-black/10 last:border-none">
-            <div class="text-black text-5xl font-black">500+</div>
+            <div class="text-black text-5xl font-black counter" data-target="500">0</div>
             <div class="text-black/70 text-sm uppercase font-bold tracking-widest">Active Clients</div>
         </div>
         <div class="text-center md:text-left border-r border-black/10 last:border-none">
-            <div class="text-black text-5xl font-black">40+</div>
+            <div class="text-black text-5xl font-black counter" data-target="40">0</div>
             <div class="text-black/70 text-sm uppercase font-bold tracking-widest">Global Brands</div>
         </div>
         <div class="text-center md:text-left border-r border-black/10 last:border-none">
-            <div class="text-black text-5xl font-black">25</div>
+            <div class="text-black text-5xl font-black counter" data-target="25">0</div>
             <div class="text-black/70 text-sm uppercase font-bold tracking-widest">Years Legacy</div>
         </div>
         <div class="text-center md:text-left border-r border-black/10 last:border-none">
@@ -213,41 +222,61 @@ Template Name: Front Page
     </div>
 </section>
 
-<!-- Section 2: Shop by Category -->
+<!-- Section 2: Shop by Category (Refactored to 4x4 Equal Boxes) -->
 <section class="bg-primary-container py-24">
     <div class="container mx-auto px-8">
         <h2 class="text-white text-4xl font-black mb-16 uppercase tracking-tight">Shop by Category</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
-            <a class="group bg-blue-800/50 p-12 h-[500px] flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/washroom-automations/">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
+            <!-- Row 1 -->
+            <a class="group bg-blue-800/50 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/washroom-automations/">
                 <span class="material-symbols-outlined text-white text-6xl">sanitizer</span>
                 <div>
-                    <div class="flex justify-between items-end mb-2">
-                        <span class="text-secondary-container font-bold text-xs uppercase block">Automated</span>
-                        <span class="text-secondary-container font-bold text-xs">45 Products</span>
-                    </div>
-                    <h3 class="text-white text-3xl font-black">Washroom Automations</h3>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Automated</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Washroom Automations</h3>
                 </div>
             </a>
-            <a class="group bg-blue-800/80 p-12 h-[500px] flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/commercial-refrigeration/">
+            <a class="group bg-blue-800/80 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/commercial-refrigeration/">
                 <span class="material-symbols-outlined text-white text-6xl">ac_unit</span>
                 <div>
-                    <div class="flex justify-between items-end mb-2">
-                        <span class="text-secondary-container font-bold text-xs uppercase block">Commercial</span>
-                        <span class="text-secondary-container font-bold text-xs">38 Products</span>
-                    </div>
-                    <h3 class="text-white text-3xl font-black">Commercial Refrigeration</h3>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Commercial</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Commercial Refrigeration</h3>
                 </div>
             </a>
-            <a class="group bg-blue-900/50 p-12 h-[500px] flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/water-purifiers/">
+            <a class="group bg-blue-900/50 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/water-purifiers/">
                 <span class="material-symbols-outlined text-white text-6xl">water_drop</span>
                 <div>
-                    <div class="flex justify-between items-end mb-2">
-                        <span class="text-secondary-container font-bold text-xs uppercase block">Pure</span>
-                        <span class="text-secondary-container font-bold text-xs">22 Products</span>
-                    </div>
-                    <h3 class="text-white text-3xl font-black">Water Purifiers</h3>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Pure</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Water Purifiers</h3>
                 </div>
             </a>
+            <a class="group bg-blue-900/80 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/vending-machines/">
+                <span class="material-symbols-outlined text-white text-6xl">coffee_maker</span>
+                <div>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Premium</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Vending Machines</h3>
+                </div>
+            </a>
+            <!-- Row 2 -->
+            <a class="group bg-blue-900/80 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/hygiene-ppe/">
+                <span class="material-symbols-outlined text-white text-6xl">masks</span>
+                <div>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Safety</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Hygiene &amp; PPE</h3>
+                </div>
+            </a>
+            <a class="group bg-blue-800/50 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/entrance-solutions/">
+                <span class="material-symbols-outlined text-white text-6xl">door_front</span>
+                <div>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Security</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Entrance Solutions</h3>
+                </div>
+            </a>
+            <div class="bg-blue-800/80 p-12 aspect-square flex flex-col justify-center items-center text-center opacity-40 grayscale pointer-events-none">
+                <span class="text-white text-xl font-black uppercase opacity-20 tracking-widest">More Coming Soon</span>
+            </div>
+            <div class="bg-blue-900/50 p-12 aspect-square flex flex-col justify-center items-center text-center opacity-40 grayscale pointer-events-none">
+                <span class="text-white text-xl font-black uppercase opacity-20 tracking-widest">Global Sourcing</span>
+            </div>
         </div>
     </div>
 </section>
@@ -345,26 +374,26 @@ Template Name: Front Page
     </div>
 </section>
 
-<!-- Section: Why Choose Snap Marketing? -->
+<!-- Section: Why Choose Snap Marketing? (With Hover Animations) -->
 <section class="bg-zinc-950 py-32 text-white">
     <div class="container mx-auto px-8">
         <h2 class="text-white text-4xl font-black mb-20 text-center uppercase tracking-tight">The Snap Advantage</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center">
+            <div class="advantage-card bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center cursor-pointer">
                 <span class="material-symbols-outlined text-secondary-container text-7xl mb-6">verified</span>
-                <div class="text-5xl font-black text-secondary-container mb-4">100%</div>
+                <div class="text-5xl font-black text-secondary-container mb-4 counter" data-target="100">0</div>
                 <h3 class="text-2xl font-black uppercase mb-4 tracking-tight">Genuine Brands</h3>
                 <p class="text-gray-300 leading-relaxed">Certified industrial equipment from leading global manufacturers only.</p>
             </div>
-            <div class="bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center">
+            <div class="advantage-card bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center cursor-pointer">
                 <span class="material-symbols-outlined text-secondary-container text-7xl mb-6">support_agent</span>
                 <div class="text-5xl font-black text-secondary-container mb-4">24/7</div>
                 <h3 class="text-2xl font-black uppercase mb-4 tracking-tight">Procurement Support</h3>
                 <p class="text-gray-300 leading-relaxed">Expert account managers for seamless corporate facility management.</p>
             </div>
-            <div class="bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center">
+            <div class="advantage-card bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center cursor-pointer">
                 <span class="material-symbols-outlined text-secondary-container text-7xl mb-6">inventory</span>
-                <div class="text-5xl font-black text-secondary-container mb-4">5000+</div>
+                <div class="text-5xl font-black text-secondary-container mb-4 counter" data-target="5000">0</div>
                 <h3 class="text-2xl font-black uppercase mb-4 tracking-tight">Available SKUs</h3>
                 <p class="text-gray-300 leading-relaxed">The widest catalog of high-performance industrial equipment in India.</p>
             </div>
@@ -414,19 +443,16 @@ Template Name: Front Page
     <div class="container mx-auto">
         <h2 class="text-black text-4xl font-black mb-20 uppercase tracking-tight text-center">B2B Trust Report</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Card 1 -->
             <div class="bg-white p-12 border-t-8 border-secondary-container industrial-glow transition-all shadow-xl">
                 <span class="material-symbols-outlined text-secondary-container text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                 <p class="text-black text-xl font-bold leading-relaxed mb-8 italic">"Snap Marketing transformed our facility hygiene with their automated solutions. The scale they operate at is truly impressive."</p>
                 <div class="text-primary-container font-black uppercase text-sm tracking-widest border-l-4 border-primary-container pl-4">Operation Manager, Fortis Hospitals</div>
             </div>
-            <!-- Card 2 -->
             <div class="bg-white p-12 border-t-8 border-secondary-container industrial-glow transition-all shadow-xl">
                 <span class="material-symbols-outlined text-secondary-container text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                 <p class="text-black text-xl font-bold leading-relaxed mb-8 italic">"The technical support during our cold-chain setup was world-class. Reliable partners for any large-scale industrial project."</p>
                 <div class="text-primary-container font-black uppercase text-sm tracking-widest border-l-4 border-primary-container pl-4">Director, Amul Cold Storage</div>
             </div>
-            <!-- Card 3 -->
             <div class="bg-white p-12 border-t-8 border-secondary-container industrial-glow transition-all shadow-xl">
                 <span class="material-symbols-outlined text-secondary-container text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                 <p class="text-black text-xl font-bold leading-relaxed mb-8 italic">"Precision and speed. Snap handles our bulk requirements with zero friction. Highly recommended for corporate procurement."</p>
@@ -502,6 +528,42 @@ Template Name: Front Page
         <div class="mt-4 md:mt-0">Precision. Scale. Authority.</div>
     </div>
 </footer>
+
+<script>
+    // Counter Animation Logic
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    const animateCounters = () => {
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 1);
+                } else {
+                    counter.innerText = target + (target > 100 ? '+' : '');
+                }
+            };
+            updateCount();
+        });
+    };
+
+    // Trigger animation when scrolled into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                animateCounters();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+</script>
 
 <!-- Agentation Visual Feedback Tool -->
 <script type="module">
