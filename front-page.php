@@ -198,6 +198,65 @@ Template Name: Front Page
     </div>
 </div>
 
+<!-- Section 2: Shop by Category (Refactored to 4x4 Equal Boxes) -->
+<section class="bg-primary-container py-24">
+    <div class="container mx-auto px-8">
+        <h2 class="text-white text-4xl font-black mb-16 uppercase tracking-tight">Shop by Category</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
+            <!-- Row 1 -->
+            <a class="group bg-blue-800/50 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/washroom-automations/">
+                <span class="material-symbols-outlined text-white text-6xl">sanitizer</span>
+                <div>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Automated</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Washroom Automations</h3>
+                </div>
+            </a>
+            <a class="group bg-blue-800/80 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/commercial-refrigeration/">
+                <span class="material-symbols-outlined text-white text-6xl">ac_unit</span>
+                <div>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Commercial</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Commercial Refrigeration</h3>
+                </div>
+            </a>
+            <a class="group bg-blue-900/50 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/water-purifiers/">
+                <span class="material-symbols-outlined text-white text-6xl">water_drop</span>
+                <div>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Pure</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Water Purifiers</h3>
+                </div>
+            </a>
+            <a class="group bg-blue-900/80 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/vending-machines/">
+                <span class="material-symbols-outlined text-white text-6xl">coffee_maker</span>
+                <div>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Premium</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Vending Machines</h3>
+                </div>
+            </a>
+            <!-- Row 2 -->
+            <a class="group bg-blue-900/80 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/hygiene-ppe/">
+                <span class="material-symbols-outlined text-white text-6xl">masks</span>
+                <div>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Safety</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Hygiene &amp; PPE</h3>
+                </div>
+            </a>
+            <a class="group bg-blue-800/50 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/entrance-solutions/">
+                <span class="material-symbols-outlined text-white text-6xl">door_front</span>
+                <div>
+                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Security</span>
+                    <h3 class="text-white text-2xl font-black leading-tight">Entrance Solutions</h3>
+                </div>
+            </a>
+            <div class="bg-blue-800/80 p-12 aspect-square flex flex-col justify-center items-center text-center opacity-40 grayscale pointer-events-none">
+                <span class="text-white text-xl font-black uppercase opacity-20 tracking-widest">More Coming Soon</span>
+            </div>
+            <div class="bg-blue-900/50 p-12 aspect-square flex flex-col justify-center items-center text-center opacity-40 grayscale pointer-events-none">
+                <span class="text-white text-xl font-black uppercase opacity-20 tracking-widest">Global Sourcing</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Section: Featured Products -->
 <section class="bg-white py-24">
     <div class="container mx-auto px-8">
