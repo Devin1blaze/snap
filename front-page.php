@@ -13,6 +13,13 @@ Template Name: Front Page
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
+  .nav-link { position:relative; }
+  .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:#FBBF24; transition:width 0.25s ease; }
+  .nav-link:hover::after { width:100%; }
+  #mobile-menu { display:none; }
+  #mobile-menu.open { display:flex; }
+</style>
+<style>
         body { font-family: 'Inter', sans-serif; }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -148,20 +155,53 @@ Template Name: Front Page
 <body class="bg-surface text-on-surface">
 
 <!-- Section: TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-primary-container flex justify-between items-center px-8 py-4 shadow-none">
-    <div class="text-2xl font-black text-white italic tracking-tighter">Snap Marketing</div>
-    <div class="hidden md:flex gap-8 items-center">
-        <a class="font-bold uppercase tracking-tight text-white hover:text-secondary-container transition-colors" href="/shop">Shop</a>
-        <a class="font-bold uppercase tracking-tight text-white hover:text-secondary-container transition-colors" href="/request-a-quote">Bulk Quote</a>
-        <a class="font-bold uppercase tracking-tight text-white hover:text-secondary-container transition-colors" href="/order-tracking">Tracking</a>
-        <a class="font-bold uppercase tracking-tight text-white hover:text-secondary-container transition-colors" href="/about-us">About</a>
-        <a class="font-bold uppercase tracking-tight text-white hover:text-secondary-container transition-colors" href="/contact-us">Support</a>
+<nav class="fixed top-0 w-full z-50 bg-black border-b border-white/10" style="backdrop-filter:blur(10px);">
+  <div class="max-w-screen-xl mx-auto flex items-center justify-between px-6 sm:px-10" style="height:68px;">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 shrink-0">
+      <span class="w-9 h-9 bg-secondary-container flex items-center justify-center">
+        <span class="material-symbols-outlined text-black text-xl" style="font-variation-settings:'FILL' 1">bolt</span>
+      </span>
+      <span class="text-xl font-black text-white tracking-tight">Snap <span class="text-secondary-container">Marketing</span></span>
+    </a>
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-10">
+      <a class="nav-link text-white/80 hover:text-white font-semibold text-sm uppercase tracking-widest transition-colors" href="/shop">Shop</a>
+      <a class="nav-link text-white/80 hover:text-white font-semibold text-sm uppercase tracking-widest transition-colors" href="/about-us">About</a>
+      <a class="nav-link text-white/80 hover:text-white font-semibold text-sm uppercase tracking-widest transition-colors" href="/contact-us">Contact</a>
     </div>
+    <!-- CTA + Hamburger -->
     <div class="flex items-center gap-4">
-        <a href="/request-a-quote" class="bg-secondary-container text-black font-bold py-2 px-6 uppercase text-sm tracking-widest hover:scale-95 duration-150">Get Quote</a>
-        <a href="/my-account" class="text-white font-bold uppercase text-sm border-b-2 border-transparent hover:border-secondary-container transition-all">Login</a>
+      <a href="/request-a-quote" class="hidden sm:inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-2.5 tracking-widest hover:bg-yellow-400 hover:-translate-y-0.5 transition-all duration-150">
+        Get Quote
+        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </a>
+      <!-- Hamburger -->
+      <button id="nav-toggle" class="md:hidden flex flex-col gap-1.5 p-2 group" aria-label="Toggle menu">
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
+      </button>
     </div>
+  </div>
+  <!-- Mobile drawer -->
+  <div id="mobile-menu" class="md:hidden flex-col bg-black border-t border-white/10 px-6 pb-6 pt-4 gap-4">
+    <a class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block" href="/shop">Shop</a>
+    <a class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block" href="/about-us">About</a>
+    <a class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block" href="/contact-us">Contact</a>
+    <a href="/request-a-quote" class="mt-2 inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-3 tracking-widest w-full justify-center">Get Quote</a>
+  </div>
 </nav>
+<script>
+  document.getElementById('nav-toggle').addEventListener('click', function() {
+    this.classList.toggle('open');
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  // Scroll shadow
+  window.addEventListener('scroll', function() {
+    document.querySelector('nav').style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.5)' : 'none';
+  });
+</script>
 
 <!-- Section 1: HERO -->
 <header class="relative min-h-screen pt-20 flex items-center overflow-hidden bg-black">
@@ -654,10 +694,12 @@ Template Name: Front Page
             </div>
         </div>
         <div>
-            <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Corporate Info</h4>
+            <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Quick Links</h4>
             <ul class="space-y-4">
                 <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/about-us">About Us</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/request-a-quote">Bulk Inquiries</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/request-a-quote">Request Bulk Quote</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/order-tracking">Order Tracking</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/my-account">My Account / Login</a></li>
                 <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/terms-of-service">Terms of Service</a></li>
                 <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/privacy-policy">Privacy Policy</a></li>
             </ul>
