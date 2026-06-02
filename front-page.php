@@ -385,7 +385,7 @@ Template Name: Front Page
     <div class="flex flex-col lg:flex-row lg:items-start lg:gap-16">
       <!-- Left: Image -->
       <div class="reveal w-full lg:w-[45%] shrink-0 mb-10 lg:mb-0">
-        <div class="overflow-hidden shadow-2xl group" style="border-radius:1.5rem;">
+        <div class="overflow-hidden shadow-2xl group">
           <img
             src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=85"
             alt="Snap Marketing - Industrial Equipment Solutions"
@@ -453,7 +453,7 @@ Template Name: Front Page
   <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row lg:items-center lg:gap-16">
     <!-- Left: Visual -->
     <div class="reveal hidden lg:block w-full max-w-lg shrink-0">
-      <div class="overflow-hidden shadow-2xl" style="border-radius:1.5rem;">
+      <div class="overflow-hidden shadow-2xl">
         <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=85" alt="Why Choose Snap Marketing" class="w-full object-cover" style="aspect-ratio:3/2;" />
       </div>
     </div>
@@ -467,7 +467,7 @@ Template Name: Front Page
       </div>
       <!-- Mobile image -->
       <div class="reveal lg:hidden mb-4">
-        <div class="overflow-hidden shadow-xl" style="border-radius:1.5rem;">
+        <div class="overflow-hidden shadow-xl">
           <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=85" alt="Why Choose Snap Marketing" class="w-full object-cover" style="aspect-ratio:16/9;" />
         </div>
       </div>
@@ -548,7 +548,7 @@ Template Name: Front Page
               ['name'=>'Blue Star','icon'=>'ac_unit','color'=>'#0369a1'],
             ];
             foreach(array_merge($brands_col1,$brands_col1) as $b): ?>
-            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;border-radius:0.75rem;">
+            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
               <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
               <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
             </div>
@@ -569,7 +569,7 @@ Template Name: Front Page
               ['name'=>'KENT','icon'=>'water_drop','color'=>'#059669'],
             ];
             foreach(array_merge($brands_col2,$brands_col2) as $b): ?>
-            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;border-radius:0.75rem;">
+            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
               <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
               <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
             </div>
@@ -590,7 +590,7 @@ Template Name: Front Page
               ['name'=>'Johnson Controls','icon'=>'hvac','color'=>'#dc2626'],
             ];
             foreach(array_merge($brands_col3,$brands_col3) as $b): ?>
-            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;border-radius:0.75rem;">
+            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
               <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
               <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
             </div>
