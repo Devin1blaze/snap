@@ -512,92 +512,99 @@ Template Name: Front Page
 
 
 <!-- Section: Brand Partners Marquee -->
-<section class="bg-white py-20 px-4 sm:px-8 lg:px-20">
-  <div class="max-w-screen-xl mx-auto">
-    <div class="text-center mb-12 reveal">
-      <span class="inline-block bg-secondary-container text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest mb-4">Brand Partners</span>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-on-surface mb-4">Trusted Global Brands</h2>
-      <p class="text-on-surface-variant text-base sm:text-lg font-medium max-w-2xl mx-auto">Partnering with world-class manufacturers to deliver premium industrial solutions across India.</p>
+<section class="bg-white py-14 sm:py-18 lg:py-20 px-4 sm:px-8 lg:px-[7.7vw]">
+  <div class="w-full mx-auto xl:max-w-[1440px]">
+    <div class="text-center mb-8 sm:mb-10 lg:mb-12 reveal">
+      <span class="inline-block bg-secondary-container text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest mb-3">Brand Partners</span>
+      <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-on-surface mb-4 sm:mb-6">Global Brand Connections</h2>
+      <p class="text-base sm:text-lg leading-relaxed text-on-surface-variant font-medium text-center px-2">Partnering with global brands to deliver premium products and enterprise solutions.</p>
     </div>
-    <!-- 3D Perspective Marquee Grid -->
-    <div class="relative reveal" style="height:420px;overflow:hidden;">
-      <div style="
-        display:flex;
-        flex-direction:row;
-        gap:16px;
-        align-items:center;
-        justify-content:center;
-        height:100%;
-        perspective:900px;
-        perspective-origin:center;
-      ">
-        <!-- Column 1 - scrolls UP -->
-        <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:100%;transform:rotateX(8deg) rotateY(-6deg) rotateZ(6deg);flex-shrink:0;">
-          <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
-            <?php
-            $brands_col1 = [
-              ['name'=>'Euronics','icon'=>'sensor_occupied','color'=>'#1A56DB'],
-              ['name'=>'Blue Star','icon'=>'ac_unit','color'=>'#0369a1'],
-              ['name'=>'Aquaguard','icon'=>'water_drop','color'=>'#0891b2'],
-              ['name'=>'Kimberly Clark','icon'=>'soap','color'=>'#1A56DB'],
-              ['name'=>'Dettol','icon'=>'sanitizer','color'=>'#dc2626'],
-              ['name'=>'Euronics','icon'=>'sensor_occupied','color'=>'#1A56DB'],
-              ['name'=>'Blue Star','icon'=>'ac_unit','color'=>'#0369a1'],
-            ];
-            foreach(array_merge($brands_col1,$brands_col1) as $b): ?>
-            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
-              <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-              <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+    <!-- 3D Perspective Marquee Grid (Bhakti-style tilted layout) -->
+    <div class="relative reveal" style="overflow:hidden;">
+      <div class="relative flex max-w-full w-full flex-row items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white px-1 lg:px-2" style="height:420px;perspective:800px;">
+        <!-- Single 3D-tilted wrapper for ALL columns -->
+        <div class="flex flex-row items-center gap-1 sm:gap-4" style="transform:translateX(-80px) translateY(-1px) translateZ(-100px) rotateX(15deg) rotateY(-8deg) rotateZ(18deg);">
+
+          <!-- Column 1 - scrolls UP -->
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:420px;flex-shrink:0;">
+            <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
+              <?php
+              $brands_col1 = [
+                ['name'=>'Euronics','icon'=>'sensor_occupied','color'=>'#1A56DB'],
+                ['name'=>'Blue Star','icon'=>'ac_unit','color'=>'#0369a1'],
+                ['name'=>'Aquaguard','icon'=>'water_drop','color'=>'#0891b2'],
+              ];
+              foreach(array_merge($brands_col1,$brands_col1,$brands_col1,$brands_col1) as $b): ?>
+              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-2 sm:p-5 cursor-pointer" style="width:100px;height:100px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-3xl sm:text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+                <span class="text-[0.65rem] sm:text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+              </div>
+              <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
           </div>
-        </div>
-        <!-- Column 2 - scrolls DOWN -->
-        <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:100%;flex-shrink:0;">
-          <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
-            <?php
-            $brands_col2 = [
-              ['name'=>'Somany','icon'=>'door_front','color'=>'#7c3aed'],
-              ['name'=>'KENT','icon'=>'water_drop','color'=>'#059669'],
-              ['name'=>'Godrej','icon'=>'lock','color'=>'#d97706'],
-              ['name'=>'Finolex','icon'=>'electrical_services','color'=>'#dc2626'],
-              ['name'=>'Astral','icon'=>'plumbing','color'=>'#1A56DB'],
-              ['name'=>'Somany','icon'=>'door_front','color'=>'#7c3aed'],
-              ['name'=>'KENT','icon'=>'water_drop','color'=>'#059669'],
-            ];
-            foreach(array_merge($brands_col2,$brands_col2) as $b): ?>
-            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
-              <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-              <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+
+          <!-- Column 2 - scrolls DOWN -->
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:420px;flex-shrink:0;">
+            <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
+              <?php
+              $brands_col2 = [
+                ['name'=>'Kimberly Clark','icon'=>'soap','color'=>'#1A56DB'],
+                ['name'=>'Dettol','icon'=>'sanitizer','color'=>'#dc2626'],
+                ['name'=>'Somany','icon'=>'door_front','color'=>'#7c3aed'],
+              ];
+              foreach(array_merge($brands_col2,$brands_col2,$brands_col2,$brands_col2) as $b): ?>
+              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-2 sm:p-5 cursor-pointer" style="width:100px;height:100px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-3xl sm:text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+                <span class="text-[0.65rem] sm:text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+              </div>
+              <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
           </div>
-        </div>
-        <!-- Column 3 - scrolls UP -->
-        <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:100%;flex-shrink:0;">
-          <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
-            <?php
-            $brands_col3 = [
-              ['name'=>'Hafele','icon'=>'kitchen','color'=>'#1A56DB'],
-              ['name'=>'Johnson Controls','icon'=>'hvac','color'=>'#dc2626'],
-              ['name'=>'Honeywell','icon'=>'settings_remote','color'=>'#d97706'],
-              ['name'=>'3M India','icon'=>'science','color'=>'#dc2626'],
-              ['name'=>'EBCO','icon'=>'inventory','color'=>'#059669'],
-              ['name'=>'Hafele','icon'=>'kitchen','color'=>'#1A56DB'],
-              ['name'=>'Johnson Controls','icon'=>'hvac','color'=>'#dc2626'],
-            ];
-            foreach(array_merge($brands_col3,$brands_col3) as $b): ?>
-            <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
-              <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-              <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+
+          <!-- Column 3 - scrolls UP -->
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:420px;flex-shrink:0;">
+            <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
+              <?php
+              $brands_col3 = [
+                ['name'=>'KENT','icon'=>'water_drop','color'=>'#059669'],
+                ['name'=>'Godrej','icon'=>'lock','color'=>'#d97706'],
+                ['name'=>'Finolex','icon'=>'electrical_services','color'=>'#dc2626'],
+              ];
+              foreach(array_merge($brands_col3,$brands_col3,$brands_col3,$brands_col3) as $b): ?>
+              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-2 sm:p-5 cursor-pointer" style="width:100px;height:100px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-3xl sm:text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+                <span class="text-[0.65rem] sm:text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+              </div>
+              <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
           </div>
+
+          <!-- Column 4 - scrolls DOWN -->
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:420px;flex-shrink:0;">
+            <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
+              <?php
+              $brands_col4 = [
+                ['name'=>'Astral','icon'=>'plumbing','color'=>'#1A56DB'],
+                ['name'=>'Hafele','icon'=>'kitchen','color'=>'#1A56DB'],
+                ['name'=>'Johnson Controls','icon'=>'hvac','color'=>'#dc2626'],
+                ['name'=>'Honeywell','icon'=>'settings_remote','color'=>'#d97706'],
+              ];
+              foreach(array_merge($brands_col4,$brands_col4,$brands_col4) as $b): ?>
+              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-2 sm:p-5 cursor-pointer" style="width:100px;height:100px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-3xl sm:text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+                <span class="text-[0.65rem] sm:text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+              </div>
+              <?php endforeach; ?>
+            </div>
+          </div>
+
         </div>
       </div>
-      <!-- Fade overlays -->
-      <div style="pointer-events:none;position:absolute;top:0;left:0;right:0;height:25%;background:linear-gradient(to bottom,white,transparent);"></div>
+      <!-- 4-sided fade overlays (Bhakti-style) -->
+      <div style="pointer-events:none;position:absolute;inset:0;top:-2px;height:25%;background:linear-gradient(to bottom,white,transparent);"></div>
       <div style="pointer-events:none;position:absolute;bottom:0;left:0;right:0;height:25%;background:linear-gradient(to top,white,transparent);"></div>
+      <div style="pointer-events:none;position:absolute;inset:0;left:0;width:25%;background:linear-gradient(to right,white,transparent);"></div>
+      <div style="pointer-events:none;position:absolute;top:0;right:0;bottom:0;width:25%;background:linear-gradient(to left,white,transparent);"></div>
     </div>
   </div>
 </section>
