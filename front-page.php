@@ -27,7 +27,11 @@ Template Name: Front Page
         .diagonal-band {
             clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
         }
+        .industrial-glow {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
         .industrial-glow:hover {
+            transform: translateY(-4px);
             box-shadow: 0 0 25px rgba(251, 191, 36, 0.4);
         }
         .yellow-underline {
@@ -73,19 +77,12 @@ Template Name: Front Page
         .marquee-col:hover .animate-marquee-vertical-reverse { animation-play-state: paused; }
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .brand-card { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
-        .brand-card:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-color: #1A56DB; }
-        .why-icon-box { transition: background 0.2s; }
+        
+        /* Unified Hover Animation System */
+        .brand-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .brand-card:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-color: #1A56DB; background-color: #f9fafb; }
+        .why-icon-box { transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .why-icon-box:hover { background: rgba(26,86,219,0.15); }
-        /* Custom Hover for Snap Advantage */
-        .advantage-card:hover {
-            transform: translateY(-10px);
-            border-bottom-width: 12px;
-            background-color: #000;
-        }
-        .advantage-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
@@ -172,7 +169,7 @@ Template Name: Front Page
     </div>
     <!-- CTA + Hamburger -->
     <div class="flex items-center gap-4">
-      <a href="/request-a-quote" class="hidden sm:inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-2.5 tracking-widest hover:bg-yellow-400 hover:-translate-y-0.5 transition-all duration-150">
+      <a href="/request-a-quote" class="hidden sm:inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-2.5 tracking-widest hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-300">
         Get Quote
         <span class="material-symbols-outlined text-sm">arrow_forward</span>
       </a>
@@ -215,10 +212,10 @@ Template Name: Front Page
                     <span class="yellow-underline text-white">Bulk Pricing.</span>
                 </h1>
                 <div class="flex flex-wrap gap-4 mb-8">
-                    <a href="/shop" class="bg-secondary-container text-black px-10 py-5 font-black uppercase text-xl flex items-center gap-2 hover:bg-yellow-500 transition-colors">
+                    <a href="/shop" class="bg-secondary-container text-black px-10 py-5 font-black uppercase text-xl flex items-center gap-2 hover:bg-yellow-500 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
                         Browse Products <span class="material-symbols-outlined">arrow_forward</span>
                     </a>
-                    <a href="/request-a-quote" class="border-2 border-white text-white px-10 py-5 font-black uppercase text-xl hover:bg-white hover:text-black transition-all">
+                    <a href="/request-a-quote" class="border-2 border-white text-white px-10 py-5 font-black uppercase text-xl hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
                         Request Bulk Quote
                     </a>
                 </div>
@@ -332,7 +329,7 @@ Template Name: Front Page
                     <span class="inline-block bg-primary-container text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3">EURONICS</span>
                     <h4 class="text-black font-black text-xl mb-3 leading-tight">Euronics Auto Sensor Flusher EF-100</h4>
                     <div class="mt-auto">
-                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 transition-colors italic text-center">₹ Request Bulk Price</a>
+                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition-all duration-300 italic text-center">₹ Request Bulk Price</a>
                     </div>
                 </div>
             </div>
@@ -345,7 +342,7 @@ Template Name: Front Page
                     <span class="inline-block bg-primary-container text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3">BLUE STAR</span>
                     <h4 class="text-black font-black text-xl mb-3 leading-tight">Blue Star Deep Freezer DF-300</h4>
                     <div class="mt-auto">
-                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 transition-colors italic text-center">₹ Request Bulk Price</a>
+                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition-all duration-300 italic text-center">₹ Request Bulk Price</a>
                     </div>
                 </div>
             </div>
@@ -358,7 +355,7 @@ Template Name: Front Page
                     <span class="inline-block bg-primary-container text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3">AQUAGUARD</span>
                     <h4 class="text-black font-black text-xl mb-3 leading-tight">Aquaguard Grand RO+UV System</h4>
                     <div class="mt-auto">
-                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 transition-colors italic text-center">₹ Request Bulk Price</a>
+                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition-all duration-300 italic text-center">₹ Request Bulk Price</a>
                     </div>
                 </div>
             </div>
@@ -371,7 +368,7 @@ Template Name: Front Page
                     <span class="inline-block bg-primary-container text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3">KIMBERLY CLARK</span>
                     <h4 class="text-black font-black text-xl mb-3 leading-tight">KC In-Sight Soap Dispenser 1L</h4>
                     <div class="mt-auto">
-                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 transition-colors italic text-center">₹ Request Bulk Price</a>
+                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition-all duration-300 italic text-center">₹ Request Bulk Price</a>
                     </div>
                 </div>
             </div>
@@ -389,7 +386,7 @@ Template Name: Front Page
           <img
             src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=85"
             alt="Snap Marketing - Industrial Equipment Solutions"
-            class="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            class="w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             style="aspect-ratio:2/3;"
           />
         </div>
@@ -438,7 +435,7 @@ Template Name: Front Page
           </div>
         </div>
         <div class="reveal">
-          <a href="/about-us" class="inline-flex items-center gap-3 bg-primary-container text-white font-black px-8 py-4 uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-200">
+          <a href="/about-us" class="inline-flex items-center gap-3 bg-primary-container text-white font-black px-8 py-4 uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
             Learn More About Us
             <span class="material-symbols-outlined text-base">arrow_forward</span>
           </a>
@@ -672,7 +669,7 @@ Template Name: Front Page
     <div class="container mx-auto px-8 relative z-10 text-center">
         <h2 class="text-secondary-container text-5xl md:text-6xl font-black mb-6 uppercase italic">Ready to Order in Bulk?</h2>
         <p class="text-white text-xl mb-12 max-w-2xl mx-auto opacity-80 font-medium">Get exclusive institutional pricing for your enterprise today. Our dedicated account managers are ready to assist.</p>
-        <a href="/request-a-quote" class="inline-block bg-secondary-container text-black px-12 py-6 font-black uppercase text-xl hover:scale-105 transition-transform tracking-widest shadow-[10px_10px_0px_rgba(251,191,36,0.3)]">
+        <a href="/request-a-quote" class="inline-block bg-secondary-container text-black px-12 py-6 font-black uppercase text-xl hover:-translate-y-1 hover:shadow-2xl active:scale-95 transition-all duration-300 tracking-widest shadow-[10px_10px_0px_rgba(251,191,36,0.3)]">
             GET A CUSTOM QUOTE NOW
         </a>
     </div>
@@ -685,10 +682,10 @@ Template Name: Front Page
             <div class="text-3xl font-black text-white italic">Snap Marketing</div>
             <p class="font-medium text-lg leading-relaxed">Defining the standard in industrial B2B equipment distribution since 1999.</p>
             <div class="flex gap-4">
-                <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black transition-colors">
+                <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black hover:-translate-y-1 active:scale-95 transition-all duration-300">
                     <span class="material-symbols-outlined text-sm">link</span>
                 </a>
-                <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black transition-colors">
+                <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black hover:-translate-y-1 active:scale-95 transition-all duration-300">
                     <span class="material-symbols-outlined text-sm">link</span>
                 </a>
             </div>
