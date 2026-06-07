@@ -6,12 +6,9 @@ get_header();
 ?>
 
 <!-- Section 1: HERO SLIDER -->
-<header id="hero-slider" class="relative min-h-screen pt-20 flex items-center overflow-hidden bg-black">
-    <!-- Animated background gradient -->
-    <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 opacity-30 diagonal-band bg-primary-container scale-150 -rotate-12 translate-x-1/4"></div>
-      <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent z-[1]"></div>
-    </div>
+<header id="hero-slider" class="relative min-h-screen pt-20 flex items-center overflow-hidden bg-[#172554]">
+    <!-- Bottom fade for stat strip transition -->
+    <div class="absolute bottom-0 left-0 w-full h-1/5 bg-gradient-to-t from-[#172554] to-transparent z-[15]"></div>
 
     <!-- Slide Counter -->
     <div class="absolute top-28 right-8 sm:right-12 z-30 text-white/30 font-black text-7xl sm:text-9xl leading-none select-none" style="font-variant-numeric:tabular-nums;">
@@ -58,6 +55,7 @@ get_header();
       ];
       foreach($hero_slides as $i => $slide): ?>
       <div class="hero-slide absolute inset-0 flex items-center <?= $i === 0 ? 'is-active' : '' ?>" data-slide="<?= $i ?>">
+        <div class="absolute inset-0 hero-bg-<?= $i + 1 ?>"></div>
         <div class="container mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
             <div class="flex flex-col justify-center">
                 <div class="hero-text-block">
@@ -65,7 +63,7 @@ get_header();
                     <h1 class="hero-animate text-white text-4xl sm:text-5xl md:text-[72px] font-black leading-[1.05] tracking-tight mb-6">
                         <?= $slide['heading'] ?>
                     </h1>
-                    <p class="hero-animate text-white/60 text-base md:text-lg max-w-lg leading-relaxed mb-8">
+                    <p class="hero-animate text-white/80 text-base md:text-lg max-w-lg leading-relaxed mb-8">
                         <?= $slide['desc'] ?>
                     </p>
                     <div class="hero-animate flex flex-wrap gap-3">
@@ -136,6 +134,42 @@ get_header();
   .hero-slide.is-active .hero-img {
     opacity: 1; transform: translateX(0) scale(1);
   }
+
+  /* Per-slide gradient backgrounds */
+  .hero-bg-1 {
+    background:
+      radial-gradient(ellipse at 65% 40%, rgba(37,99,235,0.35) 0%, transparent 55%),
+      radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 25%, #2563EB 45%, #1E40AF 65%, #172554 100%);
+    background-size: 100% 100%, 32px 32px, 100% 100%;
+  }
+  .hero-bg-2 {
+    background:
+      radial-gradient(ellipse at 65% 40%, rgba(59,130,160,0.30) 0%, transparent 55%),
+      radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(135deg, #1E3A5F 0%, #276090 25%, #3B82A0 45%, #1E5578 65%, #0F2942 100%);
+    background-size: 100% 100%, 32px 32px, 100% 100%;
+  }
+  .hero-bg-3 {
+    background:
+      radial-gradient(ellipse at 65% 40%, rgba(13,148,136,0.30) 0%, transparent 55%),
+      radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(135deg, #134E45 0%, #0F766E 25%, #0D9488 45%, #115E59 65%, #042F2E 100%);
+    background-size: 100% 100%, 32px 32px, 100% 100%;
+  }
+  /* Left side darkening removed - kept clean */
+  /* Warm accent glow */
+  .hero-bg-1::after, .hero-bg-2::after, .hero-bg-3::after {
+    content: '';
+    position: absolute;
+    top: -20%; right: -5%;
+    width: 55%; height: 140%;
+    border-radius: 0 0 0 40%;
+    pointer-events: none;
+  }
+  .hero-bg-1::after { background: linear-gradient(180deg, rgba(251,191,36,0.18), transparent 65%); }
+  .hero-bg-2::after { background: linear-gradient(180deg, rgba(96,165,250,0.15), transparent 65%); }
+  .hero-bg-3::after { background: linear-gradient(180deg, rgba(52,211,153,0.15), transparent 65%); }
 </style>
 <script>
 (function(){
