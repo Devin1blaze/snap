@@ -7,8 +7,16 @@ get_header();
 
 <!-- Section 1: HERO SLIDER -->
 <header id="hero-slider" class="relative min-h-screen pt-20 flex items-center overflow-hidden bg-black">
-    <!-- Background decorative element -->
-    <div class="absolute inset-0 z-0 opacity-40 diagonal-band bg-primary-container scale-150 -rotate-12 translate-x-1/4"></div>
+    <!-- Animated background gradient -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 opacity-30 diagonal-band bg-primary-container scale-150 -rotate-12 translate-x-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent z-[1]"></div>
+    </div>
+
+    <!-- Slide Counter -->
+    <div class="absolute top-28 right-8 sm:right-12 z-30 text-white/30 font-black text-7xl sm:text-9xl leading-none select-none" style="font-variant-numeric:tabular-nums;">
+      <span id="hero-counter">01</span><span class="text-secondary-container">/</span><span class="text-4xl sm:text-5xl">03</span>
+    </div>
 
     <!-- Slides Container -->
     <div class="relative w-full h-full z-10">
@@ -16,63 +24,63 @@ get_header();
       $hero_slides = [
         [
           'badge'    => 'NEW CATALOG 2025',
-          'heading'  => 'Precision Equipment. <br/><span class="yellow-underline text-white">Bulk Pricing.</span>',
+          'heading'  => 'Precision Equipment. <br/><span class="text-secondary-container">Bulk Pricing.</span>',
           'desc'     => 'Supplying washroom automations, commercial refrigeration, and hygiene solutions to 500+ enterprises pan-India.',
           'cta1_text'=> 'Browse Products',
           'cta1_href'=> '/shop',
-          'cta2_text'=> 'Request Bulk Quote',
+          'cta2_text'=> 'Request Quote',
           'cta2_href'=> '/request-a-quote',
           'img'      => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDE4MzqiH8Hzcnme1hwaU5h6AYhAx0i3dIbjNKElAvN-0dI3VHfR3Hexm1SxwZhUH3xTH7PTh005QytdXaS-e67Dqta7QxYnSPk81X26hEeR5PdRThP6ErVqR07iP3sQV6oQ9-qQFmuiIguK9lVu2XsU8oeL2RI3HoXXTAf2dymX9WJBcHcbXI5k_7Rz8aKCs8Q7HD0BtKxTOrOgI4PZHNKR2CkNxynLuWg39Nl8irWfVMFFPTiMf0ZQI2MjQBTVuKOdEGB6lwHW2o',
           'img_alt'  => 'Sensor Tap',
         ],
         [
           'badge'    => 'COMMERCIAL REFRIGERATION',
-          'heading'  => 'Cold Chain <br/><span class="yellow-underline text-white">Solutions.</span>',
+          'heading'  => 'Cold Chain <br/><span class="text-secondary-container">Solutions.</span>',
           'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western — engineered for industrial uptime.',
           'cta1_text'=> 'Explore Range',
           'cta1_href'=> '/product-category/commercial-refrigeration/',
-          'cta2_text'=> 'Get Bulk Pricing',
+          'cta2_text'=> 'Get Pricing',
           'cta2_href'=> '/request-a-quote',
           'img'      => 'https://lh3.googleusercontent.com/aida-public/AB6AXuA6EO5K0zcbj9qmQ1pr2VNltfcLFoeebNpGYXfSInJSIZPXAqy4fH8A-LKcTBuL0lDH2uvZ9E-2ucygYRE5I1q-gEnSLXQxmuUzdkkIRV6LcKfWI7RY1GOzaiol0tqS6LQodunm23Ktq1iiVoP146n5s6pnUZSRY--ZYbHNlj0HIp76MeafAPY_ViEoTh3r0UkifABN3dmTQbDT6oURBSalugjrFsuTwDoXua1Fmb1tzIoTWid6_N8qIOXvvPLw6JemIoEr3rRjmt4',
           'img_alt'  => 'Commercial Refrigerator',
         ],
         [
           'badge'    => 'HYGIENE & PPE',
-          'heading'  => 'Automated Hygiene <br/><span class="yellow-underline text-white">at Scale.</span>',
+          'heading'  => 'Automated Hygiene <br/><span class="text-secondary-container">at Scale.</span>',
           'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics — deployed across 500+ facilities.',
           'cta1_text'=> 'Shop Hygiene',
           'cta1_href'=> '/product-category/hygiene-ppe/',
-          'cta2_text'=> 'Institutional Quote',
+          'cta2_text'=> 'Get Quote',
           'cta2_href'=> '/request-a-quote',
           'img'      => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAoXkJP5BaMyzbVYVTdPzXnxlJKuuNs7X9SNfzG2RPCL5khTeZvIwalCh9XZfZSIACZg7H9LCJMZklabaIQerylTaKO3rwp0XfnHKVZIuFSt2-Oj_tkX5PGOZOkNbLPDW0sspZDyPTBFF8M3T_Wu4ElNy3F-LLZeD1vJDWuVSYMbRDHicRYaL57ngwa6JvpJkqegAz4UlQFbTfebljpmmcYwmmbQ07zUF8HKbJvKeUV-1HBWTyBbZsKMDxU0Fn_ZkKEtvGgWm3X9EQ',
           'img_alt'  => 'Hygiene Equipment',
         ],
       ];
       foreach($hero_slides as $i => $slide): ?>
-      <div class="hero-slide absolute inset-0 flex items-center transition-all duration-700 ease-in-out <?= $i === 0 ? 'opacity-100 z-20' : 'opacity-0 z-10' ?>" data-slide="<?= $i ?>">
+      <div class="hero-slide absolute inset-0 flex items-center <?= $i === 0 ? 'is-active' : '' ?>" data-slide="<?= $i ?>">
         <div class="container mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
-            <div class="flex flex-col justify-center space-y-8">
-                <div>
-                    <span class="inline-block bg-secondary-container text-black font-black text-sm px-4 py-1.5 mb-6 tracking-widest uppercase"><?= $slide['badge'] ?></span>
-                    <h1 class="text-white text-5xl md:text-[80px] font-black leading-[1.05] tracking-tight mb-8">
+            <div class="flex flex-col justify-center">
+                <div class="hero-text-block">
+                    <span class="hero-animate inline-block bg-secondary-container text-black font-black text-xs px-4 py-1.5 mb-5 tracking-widest uppercase"><?= $slide['badge'] ?></span>
+                    <h1 class="hero-animate text-white text-4xl sm:text-5xl md:text-[72px] font-black leading-[1.05] tracking-tight mb-6">
                         <?= $slide['heading'] ?>
                     </h1>
-                    <div class="flex flex-wrap gap-4 mb-8">
-                        <a href="<?= $slide['cta1_href'] ?>" class="bg-secondary-container text-black px-10 py-5 font-black uppercase text-xl flex items-center gap-2 hover:bg-yellow-500 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
-                            <?= $slide['cta1_text'] ?> <span class="material-symbols-outlined">arrow_forward</span>
+                    <p class="hero-animate text-white/60 text-base md:text-lg max-w-lg leading-relaxed mb-8">
+                        <?= $slide['desc'] ?>
+                    </p>
+                    <div class="hero-animate flex flex-wrap gap-3">
+                        <a href="<?= $slide['cta1_href'] ?>" class="bg-secondary-container text-black px-8 py-4 font-black uppercase text-sm tracking-widest flex items-center gap-2 hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
+                            <?= $slide['cta1_text'] ?> <span class="material-symbols-outlined text-lg">arrow_forward</span>
                         </a>
-                        <a href="<?= $slide['cta2_href'] ?>" class="border-2 border-white text-white px-10 py-5 font-black uppercase text-xl hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
+                        <a href="<?= $slide['cta2_href'] ?>" class="border-2 border-white/30 text-white px-8 py-4 font-black uppercase text-sm tracking-widest hover:bg-white hover:text-black hover:border-white hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
                             <?= $slide['cta2_text'] ?>
                         </a>
                     </div>
-                    <p class="text-gray-300 text-lg md:text-xl max-w-lg leading-relaxed">
-                        <?= $slide['desc'] ?>
-                    </p>
                 </div>
             </div>
-            <div class="flex items-center justify-center relative">
-                <div class="absolute w-[120%] h-[120%] bg-primary-container rounded-full blur-[120px] opacity-20"></div>
-                <img alt="<?= $slide['img_alt'] ?>" class="relative z-10 w-full max-w-md drop-shadow-2xl" src="<?= $slide['img'] ?>"/>
+            <div class="hidden md:flex items-center justify-center relative">
+                <div class="absolute w-[120%] h-[120%] bg-secondary-container rounded-full blur-[140px] opacity-10"></div>
+                <img alt="<?= $slide['img_alt'] ?>" class="hero-img relative z-10 w-full max-w-md drop-shadow-2xl" src="<?= $slide['img'] ?>"/>
             </div>
         </div>
       </div>
@@ -80,18 +88,18 @@ get_header();
     </div>
 
     <!-- Slider Navigation: Arrows -->
-    <button id="hero-prev" class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-black/40 hover:bg-secondary-container hover:text-black text-white flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-sm border border-white/10" aria-label="Previous slide">
-      <span class="material-symbols-outlined">chevron_left</span>
+    <button id="hero-prev" class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-white/5 hover:bg-secondary-container hover:text-black text-white/60 flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-md border border-white/10" aria-label="Previous slide">
+      <span class="material-symbols-outlined text-xl">chevron_left</span>
     </button>
-    <button id="hero-next" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-black/40 hover:bg-secondary-container hover:text-black text-white flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-sm border border-white/10" aria-label="Next slide">
-      <span class="material-symbols-outlined">chevron_right</span>
+    <button id="hero-next" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-white/5 hover:bg-secondary-container hover:text-black text-white/60 flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-md border border-white/10" aria-label="Next slide">
+      <span class="material-symbols-outlined text-xl">chevron_right</span>
     </button>
 
     <!-- Slider Navigation: Dots + Progress -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
+    <div class="absolute bottom-8 left-8 sm:left-12 z-30 flex items-center gap-2">
       <?php for($i = 0; $i < count($hero_slides); $i++): ?>
-      <button class="hero-dot group relative w-10 h-1.5 bg-white/30 transition-all duration-300 overflow-hidden <?= $i === 0 ? 'w-16 bg-white/60' : '' ?>" data-dot="<?= $i ?>" aria-label="Go to slide <?= $i + 1 ?>">
-        <span class="hero-dot-fill absolute inset-0 bg-secondary-container origin-left scale-x-0 transition-transform <?= $i === 0 ? 'animate-hero-progress' : '' ?>"></span>
+      <button class="hero-dot group relative h-1 transition-all duration-500 overflow-hidden <?= $i === 0 ? 'w-16 bg-white/40' : 'w-8 bg-white/15' ?>" data-dot="<?= $i ?>" aria-label="Go to slide <?= $i + 1 ?>">
+        <span class="hero-dot-fill absolute inset-0 bg-secondary-container origin-left scale-x-0 <?= $i === 0 ? 'animate-hero-progress' : '' ?>"></span>
       </button>
       <?php endfor; ?>
     </div>
@@ -102,31 +110,60 @@ get_header();
     to   { transform: scaleX(1); }
   }
   .animate-hero-progress { animation: heroProgress 6s linear forwards; }
-  .hero-slide { pointer-events: none; }
-  .hero-slide.opacity-100 { pointer-events: auto; }
+
+  /* Slide visibility */
+  .hero-slide { pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
+  .hero-slide.is-active { pointer-events: auto; opacity: 1; }
+
+  /* Staggered text entrance */
+  .hero-animate {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .hero-slide.is-active .hero-animate {
+    opacity: 1; transform: translateY(0);
+  }
+  .hero-slide.is-active .hero-animate:nth-child(1) { transition-delay: 0.1s; }
+  .hero-slide.is-active .hero-animate:nth-child(2) { transition-delay: 0.25s; }
+  .hero-slide.is-active .hero-animate:nth-child(3) { transition-delay: 0.4s; }
+  .hero-slide.is-active .hero-animate:nth-child(4) { transition-delay: 0.55s; }
+
+  /* Image entrance */
+  .hero-img {
+    opacity: 0; transform: translateX(40px) scale(0.95);
+    transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+  }
+  .hero-slide.is-active .hero-img {
+    opacity: 1; transform: translateX(0) scale(1);
+  }
 </style>
 <script>
 (function(){
   const slides = document.querySelectorAll('.hero-slide');
   const dots   = document.querySelectorAll('.hero-dot');
+  const counter = document.getElementById('hero-counter');
   const total  = slides.length;
   let current  = 0;
   let timer    = null;
   const INTERVAL = 6000;
 
   function goTo(idx) {
-    slides[current].classList.remove('opacity-100','z-20');
-    slides[current].classList.add('opacity-0','z-10');
-    dots[current].classList.remove('w-16','bg-white/60');
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('w-16','bg-white/40');
+    dots[current].classList.add('w-8','bg-white/15');
     dots[current].querySelector('.hero-dot-fill').classList.remove('animate-hero-progress');
+
     current = ((idx % total) + total) % total;
-    slides[current].classList.remove('opacity-0','z-10');
-    slides[current].classList.add('opacity-100','z-20');
-    dots[current].classList.add('w-16','bg-white/60');
+
+    slides[current].classList.add('is-active');
+    dots[current].classList.remove('w-8','bg-white/15');
+    dots[current].classList.add('w-16','bg-white/40');
+    if(counter) counter.textContent = String(current + 1).padStart(2, '0');
+
     // Reset & restart progress animation
     const fill = dots[current].querySelector('.hero-dot-fill');
     fill.classList.remove('animate-hero-progress');
-    void fill.offsetWidth; // force reflow
+    void fill.offsetWidth;
     fill.classList.add('animate-hero-progress');
   }
 
@@ -432,7 +469,7 @@ get_header();
 
 
 <!-- Section: Brand Partners Marquee -->
-<section class="bg-white py-14 sm:py-18 lg:py-20 px-4 sm:px-8 lg:px-[7.7vw]">
+<section class="bg-white py-10 sm:py-12 lg:py-14 px-4 sm:px-8 lg:px-[7.7vw]">
   <div class="w-full mx-auto xl:max-w-[1440px]">
     <div class="text-center mb-8 sm:mb-10 lg:mb-12 reveal">
       <span class="inline-block bg-secondary-container text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest mb-3">Brand Partners</span>
@@ -441,12 +478,12 @@ get_header();
     </div>
     <!-- 3D Perspective Marquee Grid (Bhakti-style tilted layout) -->
     <div class="relative reveal" style="overflow:hidden;">
-      <div class="relative flex max-w-full w-full flex-row items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white px-1 lg:px-2" style="height:900px;perspective:800px;">
+      <div class="relative flex max-w-full w-full flex-row items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white px-1 lg:px-2" style="height:600px;perspective:800px;">
         <!-- Single 3D-tilted wrapper for ALL columns -->
         <div class="flex flex-row items-center gap-2 sm:gap-4" style="transform:translateX(-80px) translateY(-1px) translateZ(-100px) rotateX(15deg) rotateY(-8deg) rotateZ(18deg);">
 
           <!-- Column 1 - scrolls UP -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:900px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:600px;flex-shrink:0;">
             <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col1 = [
@@ -455,16 +492,16 @@ get_header();
                 ['name'=>'Aquaguard','icon'=>'water_drop','color'=>'#0891b2'],
               ];
               foreach(array_merge($brands_col1,$brands_col1,$brands_col1,$brands_col1) as $b): ?>
-              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-3 sm:gap-4 p-5 sm:p-8 cursor-pointer rounded-lg" style="width:240px;height:240px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-6xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-sm font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 p-4 cursor-pointer rounded-lg" style="width:160px;height:160px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+                <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
             </div>
           </div>
 
           <!-- Column 2 - scrolls DOWN -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:900px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:600px;flex-shrink:0;">
             <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col2 = [
@@ -473,16 +510,16 @@ get_header();
                 ['name'=>'Somany','icon'=>'door_front','color'=>'#7c3aed'],
               ];
               foreach(array_merge($brands_col2,$brands_col2,$brands_col2,$brands_col2) as $b): ?>
-              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-3 sm:gap-4 p-5 sm:p-8 cursor-pointer rounded-lg" style="width:240px;height:240px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-6xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-sm font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 p-4 cursor-pointer rounded-lg" style="width:160px;height:160px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+                <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
             </div>
           </div>
 
           <!-- Column 3 - scrolls UP -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:900px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:600px;flex-shrink:0;">
             <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col3 = [
@@ -491,16 +528,16 @@ get_header();
                 ['name'=>'Finolex','icon'=>'electrical_services','color'=>'#dc2626'],
               ];
               foreach(array_merge($brands_col3,$brands_col3,$brands_col3,$brands_col3) as $b): ?>
-              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-3 sm:gap-4 p-5 sm:p-8 cursor-pointer rounded-lg" style="width:240px;height:240px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-6xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-sm font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 p-4 cursor-pointer rounded-lg" style="width:160px;height:160px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+                <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
             </div>
           </div>
 
           <!-- Column 4 - scrolls DOWN -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:900px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:600px;flex-shrink:0;">
             <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col4 = [
@@ -509,16 +546,16 @@ get_header();
                 ['name'=>'Honeywell','icon'=>'settings_remote','color'=>'#d97706'],
               ];
               foreach(array_merge($brands_col4,$brands_col4,$brands_col4,$brands_col4) as $b): ?>
-              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-3 sm:gap-4 p-5 sm:p-8 cursor-pointer rounded-lg" style="width:240px;height:240px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-6xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-sm font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 p-4 cursor-pointer rounded-lg" style="width:160px;height:160px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+                <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
             </div>
           </div>
 
           <!-- Column 5 - scrolls UP -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:900px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:600px;flex-shrink:0;">
             <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col5 = [
@@ -527,16 +564,16 @@ get_header();
                 ['name'=>'EBCO','icon'=>'inventory','color'=>'#059669'],
               ];
               foreach(array_merge($brands_col5,$brands_col5,$brands_col5,$brands_col5) as $b): ?>
-              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-3 sm:gap-4 p-5 sm:p-8 cursor-pointer rounded-lg" style="width:240px;height:240px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-6xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-sm font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 p-4 cursor-pointer rounded-lg" style="width:160px;height:160px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+                <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
             </div>
           </div>
 
           <!-- Column 6 - scrolls DOWN -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:900px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:600px;flex-shrink:0;">
             <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col6 = [
