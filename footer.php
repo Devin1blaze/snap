@@ -1,63 +1,67 @@
 <?php
 /**
  * The template for displaying the footer
+ * Unified footer used across all pages
  */
 ?>
 <!-- Section 9: Corporate Footer -->
-<footer class="bg-black text-on-tertiary-container w-full border-t-4 border-secondary-container">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 max-w-full">
-<div class="space-y-6">
-<div class="text-3xl font-black text-white italic"><?php bloginfo( 'name' ); ?></div>
-<p class="text-gray-400 font-medium text-lg leading-relaxed">Defining the standard in industrial B2B equipment distribution since 1999.</p>
-<div class="flex gap-4">
-<div class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black transition-colors">
-<span class="material-symbols-outlined text-sm">link</span>
-</div>
-<div class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black transition-colors">
-<span class="material-symbols-outlined text-sm">link</span>
-</div>
-</div>
-</div>
-<div>
-<h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Corporate Info</h4>
-<ul class="space-y-4">
-<li><a class="text-gray-400 hover:text-white transition-colors block font-['Inter'] font-medium text-lg" href="/about">About Us</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors block font-['Inter'] font-medium text-lg" href="/contact">Bulk Inquiries</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors block font-['Inter'] font-medium text-lg" href="#">Terms of Service</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors block font-['Inter'] font-medium text-lg" href="#">Privacy Policy</a></li>
-</ul>
-</div>
-<div>
-<h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Major Categories</h4>
-<ul class="space-y-4">
-<li><a class="text-gray-400 hover:text-white transition-colors block font-['Inter'] font-medium text-lg" href="/product-category/commercial-refrigeration/">Refrigeration</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors block font-['Inter'] font-medium text-lg" href="/product-category/water-purifiers/">Water Treatment</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors block font-['Inter'] font-medium text-lg" href="/product-category/washroom-automations/">Washroom Tech</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors block font-['Inter'] font-medium text-lg" href="/product-category/hygiene-ppe/">Safety Gear</a></li>
-</ul>
-</div>
-<div class="space-y-6">
-<h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Contact Us</h4>
-<div class="flex gap-4 items-start">
-<span class="material-symbols-outlined text-secondary-container">location_on</span>
-<p class="text-gray-400 font-['Inter'] font-medium text-lg">Snap Marketing HQ, Industrial Estate, Pune, Maharashtra 411013</p>
-</div>
-<div class="flex gap-4 items-center">
-<span class="material-symbols-outlined text-secondary-container">call</span>
-<p class="text-gray-400 font-['Inter'] font-medium text-lg">+91 (20) 2445-XXXX</p>
-</div>
-<div class="flex gap-4 items-center">
-<span class="material-symbols-outlined text-secondary-container">mail</span>
-<p class="text-gray-400 font-['Inter'] font-medium text-lg">sales@snapmarketing.in</p>
-</div>
-</div>
-</div>
-<div class="px-12 py-8 bg-zinc-950 flex flex-col md:flex-row justify-between items-center text-sm font-bold uppercase tracking-widest text-gray-500 border-t border-white/5">
-<div>© <?php echo date('Y'); ?> Snap Marketing. All Rights Reserved. Pune, India.</div>
-<div class="mt-4 md:mt-0">Precision. Scale. Authority.</div>
-</div>
+<footer class="bg-black text-gray-400 w-full border-t-4 border-secondary-container">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 max-w-full">
+        <div class="space-y-6">
+            <div class="text-3xl font-black text-white italic"><?php bloginfo( 'name' ); ?></div>
+            <p class="font-medium text-lg leading-relaxed">Defining the standard in industrial B2B equipment distribution since 1999.</p>
+            <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black hover:-translate-y-1 active:scale-95 transition-all duration-300">
+                    <span class="material-symbols-outlined text-sm">link</span>
+                </a>
+                <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black hover:-translate-y-1 active:scale-95 transition-all duration-300">
+                    <span class="material-symbols-outlined text-sm">link</span>
+                </a>
+            </div>
+        </div>
+        <div>
+            <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Quick Links</h4>
+            <ul class="space-y-4">
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/about-us">About Us</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/request-a-quote">Request Bulk Quote</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/order-tracking">Order Tracking</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/my-account">My Account / Login</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/terms-of-service">Terms of Service</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/privacy-policy">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Major Categories</h4>
+            <ul class="space-y-4">
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/commercial-refrigeration/">Refrigeration</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/water-purifiers/">Water Treatment</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/washroom-automations/">Washroom Tech</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/hygiene-ppe/">Safety Gear</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/entrance-solutions/">Entrance Solutions</a></li>
+                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/vending-machines/">Vending Machines</a></li>
+            </ul>
+        </div>
+        <div class="space-y-6">
+            <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Contact Us</h4>
+            <div class="flex gap-4 items-start">
+                <span class="material-symbols-outlined text-secondary-container">location_on</span>
+                <p class="font-medium text-lg">Snap Marketing HQ, Industrial Estate, Pune, Maharashtra 411013</p>
+            </div>
+            <div class="flex gap-4 items-center">
+                <span class="material-symbols-outlined text-secondary-container">call</span>
+                <p class="font-medium text-lg">+91 (20) 2445-8899</p>
+            </div>
+            <div class="flex gap-4 items-center">
+                <span class="material-symbols-outlined text-secondary-container">email</span>
+                <p class="font-medium text-lg">sales@snapmarketing.in</p>
+            </div>
+        </div>
+    </div>
+    <div class="px-12 py-8 bg-zinc-950 flex flex-col md:flex-row justify-between items-center text-sm font-bold uppercase tracking-widest text-gray-500 border-t border-white/5">
+        <div>© <?php echo date('Y'); ?> Snap Marketing. All Rights Reserved. Pune, India.</div>
+        <div class="mt-4 md:mt-0">Precision. Scale. Authority.</div>
+    </div>
 </footer>
-</div><!-- #page -->
 
 <!-- Quote Modal -->
 <div id="quote-modal" class="fixed inset-0 z-[100000] hidden items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300 p-4">
@@ -81,7 +85,7 @@
                 .wpcf7-not-valid-tip { color: #ef4444; font-size: 0.75rem; margin-top: -0.5rem; margin-bottom: 0.5rem; display: block; font-weight: 600; }
                 .wpcf7-response-output { border: 2px solid #FBBF24 !important; color: #FBBF24 !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 0.8rem !important; margin-top: 1rem !important; padding: 1rem !important; text-align: center; }
             </style>
-            <?php 
+            <?php
             $cf7_form = get_page_by_title('Bulk Quote Form', OBJECT, 'wpcf7_contact_form');
             if($cf7_form) {
                 echo do_shortcode('[contact-form-7 id="'.$cf7_form->ID.'" title="Bulk Quote Form"]');
@@ -96,14 +100,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('quote-modal');
     const closeBtn = document.getElementById('close-quote-modal');
-    // Select all links pointing to /request-a-quote
-    const triggers = document.querySelectorAll('a[href="/request-a-quote"], a[href="http://localhost:8080/request-a-quote"], a[href="http://localhost:8080/request-a-quote/"]');
 
     function openModal(e) {
         if(e) e.preventDefault();
         modal.classList.remove('hidden');
         modal.classList.add('flex');
-        // trigger reflow
         void modal.offsetWidth;
         modal.classList.remove('opacity-0');
         modal.querySelector('.bg-zinc-900').classList.remove('scale-95');
@@ -119,59 +120,64 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.remove('flex');
         }, 300);
     }
-// Robust selector for all quote triggers
-const allLinks = document.querySelectorAll('a');
-allLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && (href.includes('request-a-quote') || href === '/request-a-quote')) {
-        link.addEventListener('click', openModal);
-    }
-});
 
-if(closeBtn) closeBtn.addEventListener('click', closeModal);
-modal.addEventListener('click', (e) => {
-    if(e.target === modal) closeModal();
-});
-
-// Counter Animation Logic
-const counters = document.querySelectorAll('.js-counter');
-const animationDuration = 2000; // 2 seconds
-
-const animateCounter = (counter) => {
-    const target = +counter.getAttribute('data-target');
-    const startTime = performance.now();
-
-    const updateCounter = (currentTime) => {
-        const elapsedTime = currentTime - startTime;
-        if (elapsedTime < animationDuration) {
-            // Ease out quad for smooth deceleration
-            const progress = elapsedTime / animationDuration;
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-
-            counter.innerText = Math.ceil(easeOut * target);
-            requestAnimationFrame(updateCounter);
-        } else {
-            counter.innerText = target;
-        }
-    };
-    requestAnimationFrame(updateCounter);
-};
-
-const counterObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            // Unobserve after animating once
-            observer.unobserve(entry.target);
+    // Robust selector for all quote triggers
+    const allLinks = document.querySelectorAll('a');
+    allLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && (href.includes('request-a-quote') || href === '/request-a-quote')) {
+            link.addEventListener('click', openModal);
         }
     });
-}, {
-    threshold: 0.5 // Start animation when 50% of the element is visible
-});
 
-counters.forEach(counter => {
-    counterObserver.observe(counter);
-});
+    if(closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal) closeModal();
+    });
+
+    // Scroll-reveal animation (shared)
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                revealObs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Counter Animation Logic (shared)
+    const counters = document.querySelectorAll('.counter, .js-counter');
+    const animationDuration = 2000;
+
+    const animateCounter = (counter) => {
+        const target = +counter.getAttribute('data-target');
+        const startTime = performance.now();
+        const updateCounter = (currentTime) => {
+            const elapsedTime = currentTime - startTime;
+            if (elapsedTime < animationDuration) {
+                const progress = elapsedTime / animationDuration;
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                counter.innerText = Math.ceil(easeOut * target);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.innerText = target + (target > 100 ? '+' : '');
+            }
+        };
+        requestAnimationFrame(updateCounter);
+    };
+
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
 
     // CF7 Submit Button Hotfix
     document.addEventListener('wpcf7init', () => {
@@ -179,7 +185,6 @@ counters.forEach(counter => {
         if(submitBtn) {
             submitBtn.classList.remove('hoverbg-yellow-500');
             submitBtn.classList.add('hover:bg-yellow-500');
-            console.log('Snap Leads: CF7 Submit button hotfixed.');
         }
     });
 });
@@ -187,23 +192,17 @@ counters.forEach(counter => {
 
 <!-- Agentation Visual Feedback Tool -->
 <script type="module">
-  // Pinning exact versions to prevent "Multiple React Instance" errors
   import React from 'https://esm.sh/react@18.3.1';
   import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
-  
-  // Tell esm.sh to use the EXACT same React instance for Agentation
   import { Agentation } from 'https://esm.sh/agentation@latest?deps=react@18.3.1';
 
   function initAgentation() {
     try {
-      console.log('Agentation: Bootstrapping...');
       const container = document.createElement('div');
       container.id = 'agentation-root';
       document.body.appendChild(container);
-      
       const root = createRoot(container);
       root.render(React.createElement(Agentation));
-      console.log('Agentation: Live.');
     } catch (err) {
       console.error('Agentation Failed:', err);
     }

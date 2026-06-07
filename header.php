@@ -7,13 +7,13 @@
 require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="scroll-smooth">
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?>
-    
-    <!-- Consolidated Tailwind Configuration -->
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         window.tailwind = window.tailwind || {};
         tailwind.config = {
@@ -25,23 +25,30 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
                         "secondary": "#FBBF24",
                         "surface": "#FFFFFF",
                         "on-surface": "#0A0A0A",
+                        "on-surface-variant": "#52525b",
                         "royal-blue": "#1A56DB",
                         "snap-yellow": "#FBBF24",
                         "snap-black": "#0A0A0A",
                         "primary-container": "#1A56DB",
                         "secondary-container": "#FBBF24",
-                        "surface-container-low": "#F4F4F5"
+                        "surface-container-low": "#F4F4F5",
+                        "deepskyblue": "#00aeef",
+                        "whitesmoke": "#f5f5f5",
+                        "dimgray": "#6b7280",
+                        "gray": "#1f2937"
                     },
                     fontFamily: {
-                        "headline": ["Plus Jakarta Sans", "sans-serif"],
-                        "body": ["Plus Jakarta Sans", "sans-serif"],
-                        "label": ["Plus Jakarta Sans", "sans-serif"]
-                    }
+                        "headline": ["Inter", "Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Inter", "Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Inter", "Plus Jakarta Sans", "sans-serif"],
+                        "poppins": ["Poppins", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}
                 }
             }
         }
     </script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <style>
@@ -50,14 +57,18 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
             width: 100%;
             position: relative;
         }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Inter', 'Plus Jakarta Sans', sans-serif; }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .diagonal-band {
             clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
         }
+        .industrial-glow {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
         .industrial-glow:hover {
+            transform: translateY(-4px);
             box-shadow: 0 0 25px rgba(251, 191, 36, 0.4);
         }
         .yellow-underline {
@@ -69,25 +80,29 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
             position: absolute;
             left: 0;
             bottom: 4px;
-            width: 100%;
-            height: 12px;
+            width: 100%; height: 12px;
             background-color: #FBBF24;
-            z-index: -1;
-            transform: skewX(-15deg);
+            z-index: -1; transform: skewX(-15deg);
             animation: growLine 0.6s ease-out forwards;
         }
         @keyframes growLine {
-            from { width: 0; }
-            to { width: 100%; }
+            from { width: 0; } to { width: 100%; }
         }
-        
+
         /* Blueprint pattern used in industrial sections */
         .blueprint-pattern {
-            background-image: 
+            background-image:
                 linear-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
             background-size: 20px 20px;
         }
+
+        /* Nav link underline animation */
+        .nav-link { position:relative; }
+        .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:#FBBF24; transition:width 0.25s ease; }
+        .nav-link:hover::after { width:100%; }
+        #mobile-menu { display:none; }
+        #mobile-menu.open { display:flex; }
 
         /* Style adjustments for dynamic submenus */
         .sub-menu {
@@ -95,9 +110,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
             min-width: 280px !important;
             left: 0 !important;
         }
-        .sub-menu li {
-            width: 100% !important;
-        }
+        .sub-menu li { width: 100% !important; }
         .sub-menu li a {
             padding: 1rem 1.5rem !important;
             display: flex !important;
@@ -112,104 +125,92 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
             color: white !important;
             transition: all 0.2s ease !important;
         }
-        .sub-menu li:last-child a {
-            border-bottom: none !important;
-        }
+        .sub-menu li:last-child a { border-bottom: none !important; }
         .sub-menu li a:hover {
             background-color: rgba(255,255,255,0.08) !important;
             padding-left: 2rem !important;
             color: #FBBF24 !important;
         }
 
-        /* Keyframes for Vertical Marquee */
-        @keyframes marquee-vertical {
-            from { transform: translateY(0); }
-            to { transform: translateY(-100%); }
+        /* Marquee keyframes */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
-        @keyframes marquee-vertical-reverse {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
+        .animate-marquee { display: flex; width: 200%; animation: marquee 30s linear infinite; }
+        .animate-marquee:hover { animation-play-state: paused; }
+        @keyframes marquee-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
         }
-        .animate-marquee-vertical {
-            animation: marquee-vertical 40s linear infinite;
+        @keyframes marquee-down {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
         }
-        .animate-marquee-vertical-reverse {
-            animation: marquee-vertical-reverse 40s linear infinite;
-        }
+        .animate-marquee-vertical { animation: marquee-up 18s linear infinite; }
+        .animate-marquee-vertical-reverse { animation: marquee-down 18s linear infinite; }
+        .marquee-col:hover .animate-marquee-vertical,
+        .marquee-col:hover .animate-marquee-vertical-reverse { animation-play-state: paused; }
+
+        /* Scroll reveal */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Unified Hover Animation System */
+        .brand-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .brand-card:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-color: #1A56DB; background-color: #f9fafb; }
+        .why-icon-box { transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .why-icon-box:hover { background: rgba(26,86,219,0.15); }
     </style>
 </head>
-<body <?php body_class('bg-white text-[#0A0A0A]'); ?>>
+<body <?php body_class('bg-surface text-on-surface'); ?>>
 <?php wp_body_open(); ?>
 
-<div id="page" class="site">
-    
-    <!-- Top Contact Bar -->
-    <div class="w-full bg-black text-white text-xs font-bold tracking-widest uppercase py-2 px-8 flex justify-between items-center z-50 relative border-b border-white/10 hidden md:flex">
-        <div class="flex gap-6 items-center">
-            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-[#FBBF24]">call</span> +91 (20) 2445-8899</span>
-            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-[#FBBF24]">mail</span> sales@snapmarketing.in</span>
-        </div>
-        <div class="flex gap-4">
-            <?php
-            if ( has_nav_menu( 'top_bar' ) ) {
-                wp_nav_menu( array(
-                    'theme_location' => 'top_bar',
-                    'container'      => false,
-                    'menu_class'     => 'flex gap-4',
-                    'fallback_cb'    => false,
-                ) );
-            } else {
-                echo '<a href="/about" class="hover:text-[#FBBF24] transition-colors">About Us</a>';
-                echo '<a href="/contact" class="hover:text-[#FBBF24] transition-colors">Support</a>';
-            }
-            ?>
-        </div>
+<!-- Section: TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-black border-b border-white/10" style="backdrop-filter:blur(10px);">
+  <div class="max-w-screen-xl mx-auto flex items-center justify-between px-6 sm:px-10" style="height:68px;">
+    <!-- Logo -->
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3 shrink-0">
+      <span class="w-9 h-9 bg-secondary-container flex items-center justify-center">
+        <span class="material-symbols-outlined text-black text-xl" style="font-variation-settings:'FILL' 1">bolt</span>
+      </span>
+      <span class="text-xl font-black text-white tracking-tight">Snap <span class="text-secondary-container">Marketing</span></span>
+    </a>
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-10">
+      <a class="nav-link text-white/80 hover:text-white font-semibold text-sm uppercase tracking-widest transition-colors" href="/shop">Shop</a>
+      <a class="nav-link text-white/80 hover:text-white font-semibold text-sm uppercase tracking-widest transition-colors" href="/about-us">About</a>
+      <a class="nav-link text-white/80 hover:text-white font-semibold text-sm uppercase tracking-widest transition-colors" href="/contact-us">Contact</a>
     </div>
-
-    <!-- Main Navigation -->
-    <nav class="sticky top-0 w-full z-40 bg-black flex justify-between items-center px-8 py-0 shadow-2xl border-b-4 border-[#FBBF24]">
-        <div class="text-2xl font-black text-white italic tracking-tighter">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
-        </div>
-        
-        <div class="hidden md:flex items-center h-full">
-            <?php
-            if ( has_nav_menu( 'primary' ) ) {
-                wp_nav_menu( array(
-                    'theme_location' => 'primary',
-                    'container'      => false,
-                    'menu_class'     => 'flex gap-8 items-center h-full',
-                    'walker'         => new Tailwind_Nav_Walker(),
-                    'fallback_cb'    => false,
-                ) );
-            } else {
-                ?>
-                <ul class="flex gap-8 items-center h-full">
-                    <li><a class="font-bold uppercase tracking-tight text-white hover:text-[#FBBF24] transition-colors py-6 border-b-4 border-transparent hover:border-[#FBBF24]" href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
-                    <li><a class="font-bold uppercase tracking-tight text-white hover:text-[#FBBF24] transition-colors py-6 border-b-4 border-transparent hover:border-[#FBBF24]" href="/about">About Us</a></li>
-                    <li class="relative group h-full">
-                        <a class="font-bold uppercase tracking-tight text-white hover:text-[#FBBF24] transition-colors flex items-center py-6 border-b-4 border-transparent group-hover:border-[#FBBF24]" href="/shop">Products <span class="material-symbols-outlined text-[16px] ml-1 transition-transform group-hover:rotate-180">expand_more</span></a>
-                        <ul class="sub-menu absolute left-0 top-full mt-0 w-72 bg-black shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0 flex flex-col py-4 border-t-4 border-[#FBBF24]">
-                            <li><a href="<?php echo snap_get_category_link('washroom-automations'); ?>">Washroom Automations</a></li>
-                            <li><a href="<?php echo snap_get_category_link('commercial-refrigeration'); ?>">Commercial Refrigeration</a></li>
-                            <li><a href="<?php echo snap_get_category_link('water-purifiers'); ?>">Water Purifiers</a></li>
-                            <li><a href="<?php echo snap_get_category_link('vending-machines'); ?>">Vending Machines</a></li>
-                            <li><a href="<?php echo snap_get_category_link('hygiene-ppe'); ?>">Hygiene & PPE</a></li>
-                            <li><a href="<?php echo snap_get_category_link('entrance-solutions'); ?>">Entrance Solutions</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="font-bold uppercase tracking-tight text-white hover:text-[#FBBF24] transition-colors py-6 border-b-4 border-transparent hover:border-[#FBBF24]" href="/contact">Contact Us</a></li>
-                </ul>
-                <?php
-            }
-            ?>
-        </div>
-
-        <div class="flex items-center gap-6 ml-4">
-            <a href="/request-a-quote" class="bg-[#FBBF24] text-black font-black py-3 px-6 uppercase text-sm tracking-widest hover:scale-95 transition-all duration-300 inline-block text-center hidden lg:block shadow-[5px_5px_0px_rgba(255,255,255,0.2)]">Request Quote</a>
-            <a href="<?php echo is_user_logged_in() ? esc_url( wc_get_page_permalink( 'myaccount' ) ) : '/login'; ?>" class="text-white font-bold uppercase text-sm border-b-2 border-transparent hover:border-[#FBBF24] transition-all inline-block flex items-center gap-1">
-                <span class="material-symbols-outlined text-[20px]">account_circle</span>
-                <?php echo is_user_logged_in() ? 'Account' : 'Login'; ?>
-            </a>
-        </div>
-    </nav>
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-4">
+      <a href="/request-a-quote" class="hidden sm:inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-2.5 tracking-widest hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-300">
+        Get Quote
+        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </a>
+      <!-- Hamburger -->
+      <button id="nav-toggle" class="md:hidden flex flex-col gap-1.5 p-2 group" aria-label="Toggle menu">
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile drawer -->
+  <div id="mobile-menu" class="md:hidden flex-col bg-black border-t border-white/10 px-6 pb-6 pt-4 gap-4">
+    <a class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block" href="/shop">Shop</a>
+    <a class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block" href="/about-us">About</a>
+    <a class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block" href="/contact-us">Contact</a>
+    <a href="/request-a-quote" class="mt-2 inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-3 tracking-widest w-full justify-center">Get Quote</a>
+  </div>
+</nav>
+<script>
+  document.getElementById('nav-toggle').addEventListener('click', function() {
+    this.classList.toggle('open');
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  // Scroll shadow
+  window.addEventListener('scroll', function() {
+    document.querySelector('nav').style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.5)' : 'none';
+  });
+</script>
