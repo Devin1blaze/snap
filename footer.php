@@ -153,16 +153,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const animateCounter = (counter) => {
         const target = +counter.getAttribute('data-target');
+        const suffix = counter.hasAttribute('data-suffix') 
+            ? counter.getAttribute('data-suffix') 
+            : (target > 100 ? '+' : '');
         const startTime = performance.now();
         const updateCounter = (currentTime) => {
             const elapsedTime = currentTime - startTime;
             if (elapsedTime < animationDuration) {
                 const progress = elapsedTime / animationDuration;
                 const easeOut = 1 - Math.pow(1 - progress, 3);
-                counter.innerText = Math.ceil(easeOut * target);
+                counter.innerText = Math.ceil(easeOut * target) + suffix;
                 requestAnimationFrame(updateCounter);
             } else {
-                counter.innerText = target + (target > 100 ? '+' : '');
+                counter.innerText = target + suffix;
             }
         };
         requestAnimationFrame(updateCounter);

@@ -21,20 +21,20 @@ get_header(); ?>
         </p>
 <!-- Trust Badges -->
 <div class="grid grid-cols-2 md:flex gap-6 items-center">
-<div class=" flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer" style="transition-delay: 0.1s">
-<span class="material-symbols-outlined text-[#FBBF24]">verified</span>
+<div class="group flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="transition-delay: 0.1s">
+<span class="material-symbols-outlined text-[#FBBF24] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">verified</span>
 <span class="text-white text-sm font-black uppercase tracking-wider">Blue Star Authorized</span>
 </div>
-<div class=" flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer" style="transition-delay: 0.2s">
-<span class="material-symbols-outlined text-[#FBBF24]">workspace_premium</span>
+<div class="group flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="transition-delay: 0.2s">
+<span class="material-symbols-outlined text-[#FBBF24] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">workspace_premium</span>
 <span class="text-white text-sm font-black uppercase tracking-wider">ISO 9001</span>
 </div>
-<div class=" flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer" style="transition-delay: 0.3s">
-<span class="material-symbols-outlined text-[#FBBF24]">gavel</span>
+<div class="group flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="transition-delay: 0.3s">
+<span class="material-symbols-outlined text-[#FBBF24] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">gavel</span>
 <span class="text-white text-sm font-black uppercase tracking-wider">BIS Certified</span>
 </div>
-<div class=" flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer" style="transition-delay: 0.4s">
-<span class="material-symbols-outlined text-[#FBBF24]">groups</span>
+<div class="group flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="transition-delay: 0.4s">
+<span class="material-symbols-outlined text-[#FBBF24] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">groups</span>
 <span class="text-white text-sm font-black uppercase tracking-wider">500+ Clients</span>
 </div>
 </div>
@@ -67,19 +67,19 @@ get_header(); ?>
 <!-- Key Stats Section -->
 <section class="bg-[#0A0A0A] py-24 px-8 md:px-24 border-y border-white/10">
 <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
-<div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer">
-<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none">500+</div>
+<div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="500" data-suffix="+">0</div>
 <div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Clients Worldwide</div>
 </div>
-<div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer" style="animation-delay: 0.1s">
-<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none">40+</div>
+<div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="animation-delay: 0.1s">
+<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="40" data-suffix="+">0</div>
 <div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Global Brands</div>
 </div>
-<div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer" style="animation-delay: 0.2s">
-<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none">25</div>
+<div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="animation-delay: 0.2s">
+<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="25">0</div>
 <div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Years Active</div>
 </div>
-<div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer" style="animation-delay: 0.3s">
+<div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="animation-delay: 0.3s">
 <div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none">ISO</div>
 <div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Certified Quality</div>
 </div>
@@ -91,28 +91,28 @@ get_header(); ?>
 <h3 class="text-center text-3xl font-black mb-16 tracking-tight uppercase">Industrial Excellence Certified</h3>
 <div class="flex overflow-x-auto gap-8 pb-12 no-scrollbar snap-x">
 <!-- Badge Card -->
-<div class="flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white">
-<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6">verified</span>
+<div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">verified</span>
 <h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">ISO 9001:2015</h4>
 <p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Quality Management Systems</p>
 </div>
-<div class="flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white">
-<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6">shield</span>
+<div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">shield</span>
 <h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">Compliance A+</h4>
 <p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Regulatory Safety Standards</p>
 </div>
-<div class="flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white">
-<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6">public</span>
+<div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">public</span>
 <h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">Global Export</h4>
 <p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Licensed Logistics Partner</p>
 </div>
-<div class="flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white">
-<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6">handshake</span>
+<div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">handshake</span>
 <h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">Authorized PTR</h4>
 <p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Certified Brand Distributor</p>
 </div>
-<div class="flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white">
-<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6">construction</span>
+<div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+<span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">construction</span>
 <h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">Site Certified</h4>
 <p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Field Operational Safety</p>
 </div>
@@ -124,16 +124,16 @@ get_header(); ?>
 <h3 class="text-white text-4xl font-black mb-16 tracking-tight uppercase">Partner Trust</h3>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 <!-- High Impact Quote Card -->
-<div class="bg-white p-12 relative border-t-8 border-[#FBBF24] cursor-pointer">
-<span class="material-symbols-outlined text-[#FBBF24] text-6xl absolute top-6 right-6 opacity-20" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<div class="group bg-white p-12 relative border-t-8 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+<span class="material-symbols-outlined text-[#FBBF24] text-6xl absolute top-6 right-6 opacity-20 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" style="font-variation-settings: 'FILL' 1;">format_quote</span>
 <p class="text-[#0A0A0A] font-bold text-2xl leading-relaxed relative z-10 mb-10">"Snap Marketing has been our backbone for machinery supply. Their commitment to timelines is unmatched in the Indian market."</p>
 <div class="flex items-center gap-4">
 <div class="w-12 h-12 bg-primary-container flex items-center justify-center text-white font-black text-xs">HG</div>
 <div class="text-primary-container font-black uppercase tracking-widest text-lg">Industrial Heavy Gears Ltd.</div>
 </div>
 </div>
-<div class="bg-white p-12 relative border-t-8 border-[#FBBF24] cursor-pointer">
-<span class="material-symbols-outlined text-[#FBBF24] text-6xl absolute top-6 right-6 opacity-20" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<div class="group bg-white p-12 relative border-t-8 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+<span class="material-symbols-outlined text-[#FBBF24] text-6xl absolute top-6 right-6 opacity-20 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" style="font-variation-settings: 'FILL' 1;">format_quote</span>
 <p class="text-[#0A0A0A] font-bold text-2xl leading-relaxed relative z-10 mb-10">"The technical expertise of the team at Snap is what sets them apart. They understand the equipment as well as the manufacturers."</p>
 <div class="flex items-center gap-4">
 <div class="w-12 h-12 bg-primary-container flex items-center justify-center text-white font-black text-xs">PA</div>
@@ -148,25 +148,25 @@ get_header(); ?>
 <h3 class="text-4xl font-black mb-12 tracking-tight uppercase">Board of Directors</h3>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Director Card -->
-<div class="bg-white p-8 relative overflow-hidden group border-l-4 border-[#FBBF24] cursor-pointer">
+<div class="group bg-white p-8 relative overflow-hidden border-l-4 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-black transition-all duration-300">
 <h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Rajesh Malhotra</h4>
-<div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4">
+<div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4 group-hover:bg-[#FBBF24] group-hover:text-[#0A0A0A] transition-colors duration-300">
                 Managing Director
             </div>
 <p class="text-sm leading-relaxed opacity-70 mb-4">Over 30 years of industrial experience leading multi-million dollar supply chain operations across South Asia.</p>
 <p class="text-[#FBBF24] italic font-bold text-sm">"Excellence is not an act, but a habit."</p>
 </div>
-<div class="bg-white p-8 relative overflow-hidden group border-l-4 border-[#FBBF24] cursor-pointer">
+<div class="group bg-white p-8 relative overflow-hidden border-l-4 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-black transition-all duration-300">
 <h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Anita Deshmukh</h4>
-<div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4">
+<div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4 group-hover:bg-[#FBBF24] group-hover:text-[#0A0A0A] transition-colors duration-300">
                 Director of Operations
             </div>
 <p class="text-sm leading-relaxed opacity-70 mb-4">Architect of our logistical framework, ensuring 99.9% uptime for our nationwide distribution hubs.</p>
 <p class="text-[#FBBF24] italic font-bold text-sm">"Efficiency defines our competitive edge."</p>
 </div>
-<div class="bg-white p-8 relative overflow-hidden group border-l-4 border-[#FBBF24] cursor-pointer">
+<div class="group bg-white p-8 relative overflow-hidden border-l-4 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-black transition-all duration-300">
 <h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Vikram Singhania</h4>
-<div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4">
+<div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4 group-hover:bg-[#FBBF24] group-hover:text-[#0A0A0A] transition-colors duration-300">
                 Head of Partnerships
             </div>
 <p class="text-sm leading-relaxed opacity-70 mb-4">Pioneer in building strategic alliances with European and American industrial manufacturers.</p>
@@ -179,7 +179,7 @@ get_header(); ?>
 <section class=" bg-[#0A0A0A] py-32 px-8 md:px-24 text-center">
 <h2 class="text-[#FBBF24] text-[48px] md:text-[64px] font-black mb-6 uppercase tracking-tight">Partner With Us Today</h2>
 <p class="text-white text-xl md:text-2xl mb-12 max-w-3xl mx-auto opacity-70">Experience the gold standard in industrial distribution. Let's power your operations with the world's best equipment.</p>
-<a href="/request-a-quote" class="inline-block bg-[#FBBF24] text-[#0A0A0A] px-12 py-8 text-3xl font-black uppercase tracking-tight">
+<a href="/request-a-quote" class="inline-block bg-[#FBBF24] text-[#0A0A0A] px-12 py-8 text-3xl font-black uppercase tracking-tight hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-2xl active:scale-95 transition-all duration-300">
         GET A CUSTOM QUOTE
     </a>
 </section>
