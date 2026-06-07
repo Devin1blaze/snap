@@ -200,36 +200,151 @@ Template Name: Front Page
   });
 </script>
 
-<!-- Section 1: HERO -->
-<header class="relative min-h-screen pt-20 flex items-center overflow-hidden bg-black">
+<!-- Section 1: HERO SLIDER -->
+<header id="hero-slider" class="relative min-h-screen pt-20 flex items-center overflow-hidden bg-black">
+    <!-- Background decorative element -->
     <div class="absolute inset-0 z-0 opacity-40 diagonal-band bg-primary-container scale-150 -rotate-12 translate-x-1/4"></div>
-    <div class="container mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
-        <div class="flex flex-col justify-center space-y-8">
-            <div>
-                <span class="inline-block bg-secondary-container text-black font-black text-sm px-4 py-1.5 mb-6 tracking-widest uppercase">NEW CATALOG 2025</span>
-                <h1 class="text-white text-6xl md:text-[80px] font-black leading-[1.05] tracking-tight mb-8">
-                    Precision Equipment. <br/>
-                    <span class="yellow-underline text-white">Bulk Pricing.</span>
-                </h1>
-                <div class="flex flex-wrap gap-4 mb-8">
-                    <a href="/shop" class="bg-secondary-container text-black px-10 py-5 font-black uppercase text-xl flex items-center gap-2 hover:bg-yellow-500 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
-                        Browse Products <span class="material-symbols-outlined">arrow_forward</span>
-                    </a>
-                    <a href="/request-a-quote" class="border-2 border-white text-white px-10 py-5 font-black uppercase text-xl hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
-                        Request Bulk Quote
-                    </a>
+
+    <!-- Slides Container -->
+    <div class="relative w-full h-full z-10">
+      <?php
+      $hero_slides = [
+        [
+          'badge'    => 'NEW CATALOG 2025',
+          'heading'  => 'Precision Equipment. <br/><span class="yellow-underline text-white">Bulk Pricing.</span>',
+          'desc'     => 'Supplying washroom automations, commercial refrigeration, and hygiene solutions to 500+ enterprises pan-India.',
+          'cta1_text'=> 'Browse Products',
+          'cta1_href'=> '/shop',
+          'cta2_text'=> 'Request Bulk Quote',
+          'cta2_href'=> '/request-a-quote',
+          'img'      => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDE4MzqiH8Hzcnme1hwaU5h6AYhAx0i3dIbjNKElAvN-0dI3VHfR3Hexm1SxwZhUH3xTH7PTh005QytdXaS-e67Dqta7QxYnSPk81X26hEeR5PdRThP6ErVqR07iP3sQV6oQ9-qQFmuiIguK9lVu2XsU8oeL2RI3HoXXTAf2dymX9WJBcHcbXI5k_7Rz8aKCs8Q7HD0BtKxTOrOgI4PZHNKR2CkNxynLuWg39Nl8irWfVMFFPTiMf0ZQI2MjQBTVuKOdEGB6lwHW2o',
+          'img_alt'  => 'Sensor Tap',
+        ],
+        [
+          'badge'    => 'COMMERCIAL REFRIGERATION',
+          'heading'  => 'Cold Chain <br/><span class="yellow-underline text-white">Solutions.</span>',
+          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western — engineered for industrial uptime.',
+          'cta1_text'=> 'Explore Range',
+          'cta1_href'=> '/product-category/commercial-refrigeration/',
+          'cta2_text'=> 'Get Bulk Pricing',
+          'cta2_href'=> '/request-a-quote',
+          'img'      => 'https://lh3.googleusercontent.com/aida-public/AB6AXuA6EO5K0zcbj9qmQ1pr2VNltfcLFoeebNpGYXfSInJSIZPXAqy4fH8A-LKcTBuL0lDH2uvZ9E-2ucygYRE5I1q-gEnSLXQxmuUzdkkIRV6LcKfWI7RY1GOzaiol0tqS6LQodunm23Ktq1iiVoP146n5s6pnUZSRY--ZYbHNlj0HIp76MeafAPY_ViEoTh3r0UkifABN3dmTQbDT6oURBSalugjrFsuTwDoXua1Fmb1tzIoTWid6_N8qIOXvvPLw6JemIoEr3rRjmt4',
+          'img_alt'  => 'Commercial Refrigerator',
+        ],
+        [
+          'badge'    => 'HYGIENE & PPE',
+          'heading'  => 'Automated Hygiene <br/><span class="yellow-underline text-white">at Scale.</span>',
+          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics — deployed across 500+ facilities.',
+          'cta1_text'=> 'Shop Hygiene',
+          'cta1_href'=> '/product-category/hygiene-ppe/',
+          'cta2_text'=> 'Institutional Quote',
+          'cta2_href'=> '/request-a-quote',
+          'img'      => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAoXkJP5BaMyzbVYVTdPzXnxlJKuuNs7X9SNfzG2RPCL5khTeZvIwalCh9XZfZSIACZg7H9LCJMZklabaIQerylTaKO3rwp0XfnHKVZIuFSt2-Oj_tkX5PGOZOkNbLPDW0sspZDyPTBFF8M3T_Wu4ElNy3F-LLZeD1vJDWuVSYMbRDHicRYaL57ngwa6JvpJkqegAz4UlQFbTfebljpmmcYwmmbQ07zUF8HKbJvKeUV-1HBWTyBbZsKMDxU0Fn_ZkKEtvGgWm3X9EQ',
+          'img_alt'  => 'Hygiene Equipment',
+        ],
+      ];
+      foreach($hero_slides as $i => $slide): ?>
+      <div class="hero-slide absolute inset-0 flex items-center transition-all duration-700 ease-in-out <?= $i === 0 ? 'opacity-100 z-20' : 'opacity-0 z-10' ?>" data-slide="<?= $i ?>">
+        <div class="container mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+            <div class="flex flex-col justify-center space-y-8">
+                <div>
+                    <span class="inline-block bg-secondary-container text-black font-black text-sm px-4 py-1.5 mb-6 tracking-widest uppercase"><?= $slide['badge'] ?></span>
+                    <h1 class="text-white text-5xl md:text-[80px] font-black leading-[1.05] tracking-tight mb-8">
+                        <?= $slide['heading'] ?>
+                    </h1>
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <a href="<?= $slide['cta1_href'] ?>" class="bg-secondary-container text-black px-10 py-5 font-black uppercase text-xl flex items-center gap-2 hover:bg-yellow-500 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
+                            <?= $slide['cta1_text'] ?> <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                        <a href="<?= $slide['cta2_href'] ?>" class="border-2 border-white text-white px-10 py-5 font-black uppercase text-xl hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
+                            <?= $slide['cta2_text'] ?>
+                        </a>
+                    </div>
+                    <p class="text-gray-300 text-lg md:text-xl max-w-lg leading-relaxed">
+                        <?= $slide['desc'] ?>
+                    </p>
                 </div>
-                <p class="text-gray-300 text-lg md:text-xl max-w-lg leading-relaxed">
-                    Supplying washroom automations, commercial refrigeration, and hygiene solutions to 500+ enterprises pan-India.
-                </p>
+            </div>
+            <div class="flex items-center justify-center relative">
+                <div class="absolute w-[120%] h-[120%] bg-primary-container rounded-full blur-[120px] opacity-20"></div>
+                <img alt="<?= $slide['img_alt'] ?>" class="relative z-10 w-full max-w-md drop-shadow-2xl" src="<?= $slide['img'] ?>"/>
             </div>
         </div>
-        <div class="flex items-center justify-center relative">
-            <div class="absolute w-[120%] h-[120%] bg-primary-container rounded-full blur-[120px] opacity-20"></div>
-            <img alt="Sensor Tap" class="relative z-10 w-full max-w-md drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE4MzqiH8Hzcnme1hwaU5h6AYhAx0i3dIbjNKElAvN-0dI3VHfR3Hexm1SxwZhUH3xTH7PTh005QytdXaS-e67Dqta7QxYnSPk81X26hEeR5PdRThP6ErVqR07iP3sQV6oQ9-qQFmuiIguK9lVu2XsU8oeL2RI3HoXXTAf2dymX9WJBcHcbXI5k_7Rz8aKCs8Q7HD0BtKxTOrOgI4PZHNKR2CkNxynLuWg39Nl8irWfVMFFPTiMf0ZQI2MjQBTVuKOdEGB6lwHW2o"/>
-        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+
+    <!-- Slider Navigation: Arrows -->
+    <button id="hero-prev" class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-black/40 hover:bg-secondary-container hover:text-black text-white flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-sm border border-white/10" aria-label="Previous slide">
+      <span class="material-symbols-outlined">chevron_left</span>
+    </button>
+    <button id="hero-next" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-black/40 hover:bg-secondary-container hover:text-black text-white flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-sm border border-white/10" aria-label="Next slide">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </button>
+
+    <!-- Slider Navigation: Dots + Progress -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
+      <?php for($i = 0; $i < count($hero_slides); $i++): ?>
+      <button class="hero-dot group relative w-10 h-1.5 bg-white/30 transition-all duration-300 overflow-hidden <?= $i === 0 ? 'w-16 bg-white/60' : '' ?>" data-dot="<?= $i ?>" aria-label="Go to slide <?= $i + 1 ?>">
+        <span class="hero-dot-fill absolute inset-0 bg-secondary-container origin-left scale-x-0 transition-transform <?= $i === 0 ? 'animate-hero-progress' : '' ?>"></span>
+      </button>
+      <?php endfor; ?>
     </div>
 </header>
+<style>
+  @keyframes heroProgress {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  .animate-hero-progress { animation: heroProgress 6s linear forwards; }
+  .hero-slide { pointer-events: none; }
+  .hero-slide.opacity-100 { pointer-events: auto; }
+</style>
+<script>
+(function(){
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots   = document.querySelectorAll('.hero-dot');
+  const total  = slides.length;
+  let current  = 0;
+  let timer    = null;
+  const INTERVAL = 6000;
+
+  function goTo(idx) {
+    slides[current].classList.remove('opacity-100','z-20');
+    slides[current].classList.add('opacity-0','z-10');
+    dots[current].classList.remove('w-16','bg-white/60');
+    dots[current].querySelector('.hero-dot-fill').classList.remove('animate-hero-progress');
+    current = ((idx % total) + total) % total;
+    slides[current].classList.remove('opacity-0','z-10');
+    slides[current].classList.add('opacity-100','z-20');
+    dots[current].classList.add('w-16','bg-white/60');
+    // Reset & restart progress animation
+    const fill = dots[current].querySelector('.hero-dot-fill');
+    fill.classList.remove('animate-hero-progress');
+    void fill.offsetWidth; // force reflow
+    fill.classList.add('animate-hero-progress');
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function startAuto() { timer = setInterval(next, INTERVAL); }
+  function stopAuto()  { clearInterval(timer); }
+
+  document.getElementById('hero-next').addEventListener('click', function(){ stopAuto(); next(); startAuto(); });
+  document.getElementById('hero-prev').addEventListener('click', function(){ stopAuto(); prev(); startAuto(); });
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){ stopAuto(); goTo(parseInt(this.dataset.dot)); startAuto(); });
+  });
+
+  // Pause on hover
+  var heroEl = document.getElementById('hero-slider');
+  heroEl.addEventListener('mouseenter', stopAuto);
+  heroEl.addEventListener('mouseleave', startAuto);
+
+  startAuto();
+})();
+</script>
 
 <!-- Stat Counters Strip -->
 <div class="bg-secondary-container w-full py-12 relative z-20">
