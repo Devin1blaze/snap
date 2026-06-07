@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 Template Name: Front Page
 */
@@ -441,12 +441,12 @@ get_header();
     </div>
     <!-- 3D Perspective Marquee Grid (Bhakti-style tilted layout) -->
     <div class="relative reveal" style="overflow:hidden;">
-      <div class="relative flex max-w-full w-full flex-row items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white px-1 lg:px-2" style="height:700px;perspective:800px;">
+      <div class="relative flex max-w-full w-full flex-row items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white px-1 lg:px-2" style="height:800px;perspective:800px;">
         <!-- Single 3D-tilted wrapper for ALL columns -->
         <div class="flex flex-row items-center gap-2 sm:gap-4" style="transform:translateX(-80px) translateY(-1px) translateZ(-100px) rotateX(15deg) rotateY(-8deg) rotateZ(18deg);">
 
           <!-- Column 1 - scrolls UP -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:700px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:800px;flex-shrink:0;">
             <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col1 = [
@@ -455,7 +455,7 @@ get_header();
                 ['name'=>'Aquaguard','icon'=>'water_drop','color'=>'#0891b2'],
               ];
               foreach(array_merge($brands_col1,$brands_col1,$brands_col1,$brands_col1) as $b): ?>
-              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-3 sm:p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 cursor-pointer rounded-lg" style="width:180px;height:180px;flex-shrink:0;">
                 <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
               </div>
@@ -464,7 +464,7 @@ get_header();
           </div>
 
           <!-- Column 2 - scrolls DOWN -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:700px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:800px;flex-shrink:0;">
             <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col2 = [
@@ -473,7 +473,7 @@ get_header();
                 ['name'=>'Somany','icon'=>'door_front','color'=>'#7c3aed'],
               ];
               foreach(array_merge($brands_col2,$brands_col2,$brands_col2,$brands_col2) as $b): ?>
-              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-3 sm:p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 cursor-pointer rounded-lg" style="width:180px;height:180px;flex-shrink:0;">
                 <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
               </div>
@@ -482,7 +482,7 @@ get_header();
           </div>
 
           <!-- Column 3 - scrolls UP -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:700px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:800px;flex-shrink:0;">
             <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col3 = [
@@ -491,7 +491,7 @@ get_header();
                 ['name'=>'Finolex','icon'=>'electrical_services','color'=>'#dc2626'],
               ];
               foreach(array_merge($brands_col3,$brands_col3,$brands_col3,$brands_col3) as $b): ?>
-              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-3 sm:p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 cursor-pointer rounded-lg" style="width:180px;height:180px;flex-shrink:0;">
                 <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
               </div>
@@ -500,7 +500,7 @@ get_header();
           </div>
 
           <!-- Column 4 - scrolls DOWN -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:700px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:800px;flex-shrink:0;">
             <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col4 = [
@@ -509,7 +509,7 @@ get_header();
                 ['name'=>'Honeywell','icon'=>'settings_remote','color'=>'#d97706'],
               ];
               foreach(array_merge($brands_col4,$brands_col4,$brands_col4,$brands_col4) as $b): ?>
-              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-3 sm:p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 cursor-pointer rounded-lg" style="width:180px;height:180px;flex-shrink:0;">
                 <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
               </div>
@@ -518,7 +518,7 @@ get_header();
           </div>
 
           <!-- Column 5 - scrolls UP -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:700px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:800px;flex-shrink:0;">
             <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col5 = [
@@ -527,7 +527,7 @@ get_header();
                 ['name'=>'EBCO','icon'=>'inventory','color'=>'#059669'],
               ];
               foreach(array_merge($brands_col5,$brands_col5,$brands_col5,$brands_col5) as $b): ?>
-              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-3 sm:p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 cursor-pointer rounded-lg" style="width:180px;height:180px;flex-shrink:0;">
                 <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
               </div>
@@ -536,7 +536,7 @@ get_header();
           </div>
 
           <!-- Column 6 - scrolls DOWN -->
-          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:700px;flex-shrink:0;">
+          <div class="marquee-col" style="display:flex;flex-direction:column;gap:16px;overflow:hidden;height:800px;flex-shrink:0;">
             <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col6 = [
@@ -545,7 +545,7 @@ get_header();
                 ['name'=>'Siemens','icon'=>'settings','color'=>'#0891b2'],
               ];
               foreach(array_merge($brands_col6,$brands_col6,$brands_col6,$brands_col6) as $b): ?>
-              <div class="brand-card bg-white border border-gray-200 shadow-md flex flex-col items-center justify-center gap-2 sm:gap-3 p-3 sm:p-5 cursor-pointer" style="width:140px;height:140px;flex-shrink:0;">
+              <div class="brand-card bg-white shadow-sm flex flex-col items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 cursor-pointer rounded-lg" style="width:180px;height:180px;flex-shrink:0;">
                 <span class="material-symbols-outlined text-4xl" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-xs font-black text-gray-700 text-center uppercase tracking-tight"><?= $b['name'] ?></span>
               </div>

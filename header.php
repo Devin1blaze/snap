@@ -158,7 +158,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 
         /* Unified Hover Animation System */
         .brand-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .brand-card:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-color: #1A56DB; background-color: #f9fafb; }
+        .brand-card:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(26,86,219,0.15); background-color: #f9fafb; }
         .why-icon-box { transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .why-icon-box:hover { background: rgba(26,86,219,0.15); }
     </style>
