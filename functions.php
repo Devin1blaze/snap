@@ -150,6 +150,9 @@ function snap_stitch_b2b_btn_text( $text, $product ) {
     return $text;
 }
 
+// Auto-provision the primary menu
+require_once get_template_directory() . '/setup-menu.php';
+
 /**
  * Lead Capture Logic: Capture input data for B2B quotes
  */
