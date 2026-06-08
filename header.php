@@ -166,8 +166,26 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 <body <?php body_class('bg-surface text-on-surface'); ?>>
 <?php wp_body_open(); ?>
 
+<!-- Section: Top Contact Bar -->
+<div class="hidden md:flex bg-[#0A0A0A] border-b border-white/5 text-white/70 py-2 px-6 sm:px-10 justify-between items-center text-xs font-semibold uppercase tracking-widest relative z-[60]">
+  <div class="flex items-center gap-6">
+    <a href="tel:+912024458899" class="flex items-center gap-2 hover:text-secondary-container transition-colors">
+      <span class="material-symbols-outlined text-[14px]">call</span>
+      +91 (20) 2445-8899
+    </a>
+    <a href="mailto:sales@snapmarketing.in" class="flex items-center gap-2 hover:text-secondary-container transition-colors">
+      <span class="material-symbols-outlined text-[14px]">mail</span>
+      sales@snapmarketing.in
+    </a>
+  </div>
+  <div class="flex items-center gap-6">
+    <a href="/about-us" class="hover:text-secondary-container transition-colors">About Us</a>
+    <a href="/contact-us" class="hover:text-secondary-container transition-colors">Support</a>
+  </div>
+</div>
+
 <!-- Section: TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-black border-b border-white/10" style="backdrop-filter:blur(10px);">
+<nav class="sticky top-0 w-full z-50 bg-black border-b border-white/10" style="backdrop-filter:blur(10px);">
   <div class="max-w-screen-xl mx-auto flex items-center justify-between px-6 sm:px-10" style="height:68px;">
     <!-- Logo -->
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3 shrink-0">
@@ -178,9 +196,15 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
     </a>
     <!-- Desktop links -->
     <div class="hidden md:flex items-center gap-10">
-      <a class="nav-link text-white/80 hover:text-white font-semibold text-sm uppercase tracking-widest transition-colors" href="/shop">Shop</a>
-      <a class="nav-link text-white/80 hover:text-white font-semibold text-sm uppercase tracking-widest transition-colors" href="/about-us">About</a>
-      <a class="nav-link text-white/80 hover:text-white font-semibold text-sm uppercase tracking-widest transition-colors" href="/contact-us">Contact</a>
+      <?php
+      wp_nav_menu( array(
+          'theme_location'  => 'primary',
+          'container'       => false,
+          'menu_class'      => 'flex items-center gap-10',
+          'walker'          => new Tailwind_Nav_Walker(),
+          'fallback_cb'     => false,
+      ) );
+      ?>
     </div>
     <!-- CTA + Hamburger -->
     <div class="flex items-center gap-4">
@@ -198,9 +222,16 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
   </div>
   <!-- Mobile drawer -->
   <div id="mobile-menu" class="md:hidden flex-col bg-black border-t border-white/10 px-6 pb-6 pt-4 gap-4">
-    <a class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block" href="/shop">Shop</a>
-    <a class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block" href="/about-us">About</a>
-    <a class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block" href="/contact-us">Contact</a>
+    <?php
+      wp_nav_menu( array(
+          'theme_location'  => 'primary',
+          'container'       => false,
+          'menu_class'      => 'flex flex-col gap-2',
+          'link_before'     => '<span class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block">',
+          'link_after'      => '</span>',
+          'fallback_cb'     => false,
+      ) );
+    ?>
     <a href="/request-a-quote" class="mt-2 inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-3 tracking-widest w-full justify-center">Get Quote</a>
   </div>
 </nav>
