@@ -166,82 +166,109 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 <body <?php body_class('bg-surface text-on-surface'); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Section: Top Contact Bar -->
-<div class="hidden md:flex bg-[#0A0A0A] border-b border-white/5 text-white/70 py-2 px-6 sm:px-10 justify-between items-center text-xs font-semibold uppercase tracking-widest relative z-[60]">
-  <div class="flex items-center gap-6">
-    <a href="tel:+912024458899" class="flex items-center gap-2 hover:text-secondary-container transition-colors">
-      <span class="material-symbols-outlined text-[14px]">call</span>
-      +91 (20) 2445-8899
-    </a>
-    <a href="mailto:sales@snapmarketing.in" class="flex items-center gap-2 hover:text-secondary-container transition-colors">
-      <span class="material-symbols-outlined text-[14px]">mail</span>
-      sales@snapmarketing.in
-    </a>
-  </div>
-  <div class="flex items-center gap-6">
-    <a href="/about-us" class="hover:text-secondary-container transition-colors">About Us</a>
-    <a href="/contact-us" class="hover:text-secondary-container transition-colors">Support</a>
-  </div>
-</div>
-
-<!-- Section: TopNavBar -->
-<nav class="sticky top-0 w-full z-50 bg-black border-b border-white/10" style="backdrop-filter:blur(10px);">
-  <div class="max-w-screen-xl mx-auto flex items-center justify-between px-6 sm:px-10" style="height:68px;">
-    <!-- Logo -->
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3 shrink-0">
-      <span class="w-9 h-9 bg-secondary-container flex items-center justify-center">
-        <span class="material-symbols-outlined text-black text-xl" style="font-variation-settings:'FILL' 1">bolt</span>
-      </span>
-      <span class="text-xl font-black text-white tracking-tight">Snap <span class="text-secondary-container">Marketing</span></span>
-    </a>
-    <!-- Desktop links -->
-    <div class="hidden md:flex items-center gap-10">
-      <?php
-      wp_nav_menu( array(
-          'theme_location'  => 'primary',
-          'container'       => false,
-          'menu_class'      => 'flex items-center gap-10',
-          'walker'          => new Tailwind_Nav_Walker(),
-          'fallback_cb'     => false,
-      ) );
-      ?>
-    </div>
-    <!-- CTA + Hamburger -->
-    <div class="flex items-center gap-4">
-      <a href="/request-a-quote" class="hidden sm:inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-2.5 tracking-widest hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-300">
-        Get Quote
-        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+<!-- Section: Top Contact Bar & Navigation -->
+<header class="w-full relative z-50">
+  <!-- Top Contact Bar (Scrolls away) -->
+  <div class="hidden md:flex bg-[#0A0A0A] border-b border-white/5 text-white/70 py-2 px-6 sm:px-10 justify-between items-center text-xs font-semibold uppercase tracking-widest relative z-[60]">
+    <div class="flex items-center gap-6">
+      <a href="tel:+912024458899" class="flex items-center gap-2 hover:text-secondary-container transition-colors">
+        <span class="material-symbols-outlined text-[14px]">call</span>
+        +91 (20) 2445-8899
       </a>
-      <!-- Hamburger -->
-      <button id="nav-toggle" class="md:hidden flex flex-col gap-1.5 p-2 group" aria-label="Toggle menu">
-        <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
-        <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
-        <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
-      </button>
+      <a href="mailto:sales@snapmarketing.in" class="flex items-center gap-2 hover:text-secondary-container transition-colors">
+        <span class="material-symbols-outlined text-[14px]">mail</span>
+        sales@snapmarketing.in
+      </a>
+    </div>
+    <div class="flex items-center gap-6">
+      <a href="/about-us" class="hover:text-secondary-container transition-colors">About Us</a>
+      <a href="/contact-us" class="hover:text-secondary-container transition-colors">Support</a>
     </div>
   </div>
-  <!-- Mobile drawer -->
-  <div id="mobile-menu" class="md:hidden flex-col bg-black border-t border-white/10 px-6 pb-6 pt-4 gap-4">
-    <?php
-      wp_nav_menu( array(
-          'theme_location'  => 'primary',
-          'container'       => false,
-          'menu_class'      => 'flex flex-col gap-2',
-          'link_before'     => '<span class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block">',
-          'link_after'      => '</span>',
-          'fallback_cb'     => false,
-      ) );
-    ?>
-    <a href="/request-a-quote" class="mt-2 inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-3 tracking-widest w-full justify-center">Get Quote</a>
+
+  <!-- Sticky Floating Nav -->
+  <div class="sticky top-0 z-50 w-full px-2 pt-2 pb-2 pointer-events-none">
+    <nav id="nav-container" class="mx-auto max-w-screen-xl px-6 transition-all duration-300 lg:px-10 bg-black border border-transparent rounded-none pointer-events-auto">
+      <div class="relative flex flex-wrap items-center justify-between py-3 lg:py-0" style="min-height:68px;">
+        
+        <!-- Logo (Left) -->
+        <div class="flex w-full justify-between lg:w-auto items-center relative z-20">
+          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3 shrink-0">
+            <span class="w-9 h-9 bg-secondary-container flex items-center justify-center rounded-sm">
+              <span class="material-symbols-outlined text-black text-xl" style="font-variation-settings:'FILL' 1">bolt</span>
+            </span>
+            <span class="text-xl font-black text-white tracking-tight">Snap <span class="text-secondary-container">Marketing</span></span>
+          </a>
+
+          <!-- Hamburger -->
+          <button id="nav-toggle" class="md:hidden flex flex-col gap-1.5 p-2 group" aria-label="Toggle menu">
+            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
+            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
+            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
+          </button>
+        </div>
+
+        <!-- Desktop links (Absolute Center) -->
+        <div class="absolute inset-0 m-auto hidden w-fit lg:flex items-center justify-center pointer-events-none">
+          <div class="pointer-events-auto flex h-full items-center">
+            <?php
+            wp_nav_menu( array(
+                'theme_location'  => 'primary',
+                'container'       => false,
+                'menu_class'      => 'flex items-center gap-8 h-full',
+                'walker'          => new Tailwind_Nav_Walker(),
+                'fallback_cb'     => false,
+            ) );
+            ?>
+          </div>
+        </div>
+
+        <!-- CTA (Right) -->
+        <div class="hidden lg:flex items-center gap-6 relative z-20">
+          <a href="/login" class="text-white/80 hover:text-white font-bold text-sm uppercase tracking-widest transition-colors">Login</a>
+          <a href="/request-a-quote" class="inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-2.5 tracking-widest hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-300 rounded-sm">
+            Get Quote
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden w-full flex-col bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 p-6 rounded-xl mt-4 gap-4 lg:hidden absolute top-full left-0 z-50 shadow-2xl">
+          <?php
+          wp_nav_menu( array(
+              'theme_location'  => 'primary',
+              'container'       => false,
+              'menu_class'      => 'flex flex-col gap-2',
+              'link_before'     => '<span class="text-white/80 hover:text-white font-bold text-base uppercase tracking-widest py-2 border-b border-white/5 block">',
+              'link_after'      => '</span>',
+              'fallback_cb'     => false,
+          ) );
+          ?>
+          <div class="flex flex-col gap-3 mt-4">
+            <a href="/login" class="text-center text-white hover:text-white font-bold text-sm uppercase tracking-widest border border-white/20 py-3 rounded-sm transition-colors">Login</a>
+            <a href="/request-a-quote" class="inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-3 tracking-widest w-full justify-center rounded-sm">Get Quote</a>
+          </div>
+        </div>
+      </div>
+    </nav>
   </div>
-</nav>
+</header>
 <script>
-  document.getElementById('nav-toggle').addEventListener('click', function() {
-    this.classList.toggle('open');
-    document.getElementById('mobile-menu').classList.toggle('open');
-  });
-  // Scroll shadow
+  const navContainer = document.getElementById('nav-container');
   window.addEventListener('scroll', function() {
-    document.querySelector('nav').style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.5)' : 'none';
+    if (window.scrollY > 50) {
+        navContainer.classList.remove('max-w-screen-xl', 'bg-black', 'border-transparent', 'rounded-none');
+        navContainer.classList.add('max-w-4xl', 'bg-black/70', 'backdrop-blur-lg', 'rounded-2xl', 'border-white/10', 'shadow-2xl');
+    } else {
+        navContainer.classList.add('max-w-screen-xl', 'bg-black', 'border-transparent', 'rounded-none');
+        navContainer.classList.remove('max-w-4xl', 'bg-black/70', 'backdrop-blur-lg', 'rounded-2xl', 'border-white/10', 'shadow-2xl');
+    }
   });
-</script>
+
+  const navToggle = document.getElementById('nav-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  navToggle.addEventListener('click', function() {
+    this.classList.toggle('open');
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  });
