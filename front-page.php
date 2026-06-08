@@ -271,69 +271,146 @@ get_header();
     </div>
 </section>
 
-<!-- Section: Featured Products -->
-<section class="bg-white py-24">
-    <div class="container mx-auto px-8">
-        <div class="mb-16 border-l-8 border-secondary-container pl-6">
+<!-- Section: Featured Products (Carousel) -->
+<section class="bg-white py-24 overflow-hidden">
+    <div class="container mx-auto px-8 relative">
+        <div class="mb-16 border-l-8 border-[#FBBF24] pl-6">
             <h2 class="text-black text-4xl font-black uppercase tracking-tight">Featured Products</h2>
-            <p class="text-primary-container font-bold mt-2 uppercase tracking-widest text-sm">Most Requested B2B Equipment This Month</p>
+            <p class="text-[#0F172A] font-bold mt-2 uppercase tracking-widest text-sm">Most Requested B2B Equipment This Month</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="group bg-white flex flex-col">
-                <div class="relative bg-primary-container aspect-square flex items-center justify-center p-12 mb-6">
-                    <span class="absolute top-0 left-0 bg-secondary-container text-black font-black text-[10px] px-3 py-1.5 uppercase">BEST SELLER</span>
-                    <span class="material-symbols-outlined text-white text-8xl">sensor_occupied</span>
-                </div>
-                <div class="px-2 flex-grow flex flex-col">
-                    <span class="inline-block bg-primary-container text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3">EURONICS</span>
-                    <h4 class="text-black font-black text-xl mb-3 leading-tight">Euronics Auto Sensor Flusher EF-100</h4>
-                    <div class="mt-auto">
-                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition-all duration-300 italic text-center">₹ Request Bulk Price</a>
+        
+        <!-- Carousel Wrapper -->
+        <div class="relative w-full">
+            <div id="featured-carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-20 no-scrollbar scroll-smooth">
+                
+                <!-- Product 1 -->
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-[#0F172A] aspect-square flex items-center justify-center p-12">
+                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">BEST SELLER</span>
+                        <span class="material-symbols-outlined text-white text-8xl group-hover:scale-110 transition-transform duration-500">sensor_occupied</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">EURONICS</span>
+                        <h4 class="text-black font-black text-xl mb-6 leading-tight">Euronics Auto Sensor Flusher EF-100</h4>
+                        <div class="mt-auto">
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Product 2 -->
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-zinc-100 aspect-square flex items-center justify-center p-12 border-b-2 border-zinc-200">
+                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">TOP PICK</span>
+                        <span class="material-symbols-outlined text-[#0F172A] text-8xl group-hover:scale-110 transition-transform duration-500">kitchen</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">BLUE STAR</span>
+                        <h4 class="text-black font-black text-xl mb-6 leading-tight">Blue Star Deep Freezer DF-300</h4>
+                        <div class="mt-auto">
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-[#0F172A] aspect-square flex items-center justify-center p-12">
+                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">POPULAR</span>
+                        <span class="material-symbols-outlined text-white text-8xl group-hover:scale-110 transition-transform duration-500">water_damage</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">AQUAGUARD</span>
+                        <h4 class="text-black font-black text-xl mb-6 leading-tight">Aquaguard Grand RO+UV System</h4>
+                        <div class="mt-auto">
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-zinc-100 aspect-square flex items-center justify-center p-12 border-b-2 border-zinc-200">
+                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">NEW</span>
+                        <span class="material-symbols-outlined text-[#0F172A] text-8xl group-hover:scale-110 transition-transform duration-500">soap</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">KIMBERLY CLARK</span>
+                        <h4 class="text-black font-black text-xl mb-6 leading-tight">KC In-Sight Soap Dispenser 1L</h4>
+                        <div class="mt-auto">
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-[#0F172A] aspect-square flex items-center justify-center p-12">
+                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">HEAVY DUTY</span>
+                        <span class="material-symbols-outlined text-white text-8xl group-hover:scale-110 transition-transform duration-500">air</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">EURONICS</span>
+                        <h4 class="text-black font-black text-xl mb-6 leading-tight">Jet Hand Dryer ES-01</h4>
+                        <div class="mt-auto">
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="group bg-white flex flex-col">
-                <div class="relative bg-black aspect-square flex items-center justify-center p-12 mb-6">
-                    <span class="absolute top-0 left-0 bg-secondary-container text-black font-black text-[10px] px-3 py-1.5 uppercase">TOP PICK</span>
-                    <span class="material-symbols-outlined text-white text-8xl">kitchen</span>
-                </div>
-                <div class="px-2 flex-grow flex flex-col">
-                    <span class="inline-block bg-primary-container text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3">BLUE STAR</span>
-                    <h4 class="text-black font-black text-xl mb-3 leading-tight">Blue Star Deep Freezer DF-300</h4>
-                    <div class="mt-auto">
-                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition-all duration-300 italic text-center">₹ Request Bulk Price</a>
-                    </div>
-                </div>
-            </div>
-            <div class="group bg-white flex flex-col">
-                <div class="relative bg-primary-container aspect-square flex items-center justify-center p-12 mb-6">
-                    <span class="absolute top-0 left-0 bg-secondary-container text-black font-black text-[10px] px-3 py-1.5 uppercase">POPULAR</span>
-                    <span class="material-symbols-outlined text-white text-8xl">water_damage</span>
-                </div>
-                <div class="px-2 flex-grow flex flex-col">
-                    <span class="inline-block bg-primary-container text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3">AQUAGUARD</span>
-                    <h4 class="text-black font-black text-xl mb-3 leading-tight">Aquaguard Grand RO+UV System</h4>
-                    <div class="mt-auto">
-                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition-all duration-300 italic text-center">₹ Request Bulk Price</a>
-                    </div>
-                </div>
-            </div>
-            <div class="group bg-white flex flex-col">
-                <div class="relative bg-gray-100 aspect-square flex items-center justify-center p-12 mb-6">
-                    <span class="absolute top-0 left-0 bg-secondary-container text-black font-black text-[10px] px-3 py-1.5 uppercase">NEW</span>
-                    <span class="material-symbols-outlined text-primary-container text-8xl">soap</span>
-                </div>
-                <div class="px-2 flex-grow flex flex-col">
-                    <span class="inline-block bg-primary-container text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3">KIMBERLY CLARK</span>
-                    <h4 class="text-black font-black text-xl mb-3 leading-tight">KC In-Sight Soap Dispenser 1L</h4>
-                    <div class="mt-auto">
-                        <a href="/request-a-quote" class="block w-full bg-secondary-container text-black font-black py-3 px-4 uppercase text-sm hover:bg-yellow-500 hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition-all duration-300 italic text-center">₹ Request Bulk Price</a>
-                    </div>
-                </div>
+            
+            <!-- Carousel Navigation -->
+            <div class="absolute bottom-0 right-0 flex gap-2">
+                <button id="feat-prev" class="bg-zinc-800 text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors" aria-label="Previous">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <button id="feat-next" class="bg-zinc-800 text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors" aria-label="Next">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
             </div>
         </div>
+
     </div>
 </section>
+
+<style>
+/* Hide scrollbar for carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const carousel = document.getElementById('featured-carousel');
+    const prevBtn = document.getElementById('feat-prev');
+    const nextBtn = document.getElementById('feat-next');
+
+    if(carousel && prevBtn && nextBtn) {
+        const scrollAmount = () => {
+            const card = carousel.querySelector('div.snap-start');
+            if(!card) return 0;
+            // Get the card width plus the gap (gap-6 is 1.5rem = 24px)
+            const style = window.getComputedStyle(carousel);
+            const gap = parseFloat(style.gap) || 24;
+            return card.offsetWidth + gap; 
+        };
+
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+        });
+    }
+});
+</script>
 
 <!-- Section: What We Do -->
 <section class="w-full bg-white py-20 px-4 sm:px-8 lg:px-20 overflow-x-hidden">
