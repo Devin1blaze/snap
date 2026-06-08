@@ -71,11 +71,64 @@ function snap_stitch_woocommerce_customizations() {
 
 /**
  * Check if a product is B2B
-
- * Logic: Product belongs to 'B2B' category or has a 'b2b' attribute
+ * Logic: Product belongs to 'B2B' category or has a 'b2b' attribute or the custom meta box is set to B2B
  */
 function snap_stitch_is_b2b_product( $product_id ) {
-    return has_term( 'b2b', 'product_cat', $product_id ) || get_post_meta( $product_id, '_is_b2b', true ) === 'yes';
+    $meta_b2b = get_post_meta( $product_id, '_is_b2b', true );
+    $meta_design = get_post_meta( $product_id, '_product_design_type', true );
+    return has_term( 'b2b', 'product_cat', $product_id ) || $meta_b2b === 'yes' || $meta_design === 'b2b';
+}
+
+/**
+ * Add Meta Box for Product Design Type (B2B vs B2C)
+ */
+add_action( 'add_meta_boxes', 'snap_stitch_add_product_design_meta_box' );
+function snap_stitch_add_product_design_meta_box() {
+    add_meta_box(
+        'snap_product_design_type',
+        __( 'Product Design Type', 'snap-stitch-theme' ),
+        'snap_stitch_product_design_meta_box_html',
+        'product',
+        'side',
+        'default'
+    );
+}
+
+function snap_stitch_product_design_meta_box_html( $post ) {
+    $value = get_post_meta( $post->ID, '_product_design_type', true );
+    if ( empty( $value ) ) {
+        $value = 'b2b'; // Default to B2B
+    }
+    
+    wp_nonce_field( 'snap_save_product_design', 'snap_product_design_nonce' );
+    ?>
+    <p>Select which design layout to apply to this product page:</p>
+    <label>
+        <input type="radio" name="snap_product_design_type" value="b2b" <?php checked( $value, 'b2b' ); ?> />
+        B2B Design (Bulk Quote, Specs)
+    </label>
+    <br/>
+    <label>
+        <input type="radio" name="snap_product_design_type" value="b2c" <?php checked( $value, 'b2c' ); ?> />
+        B2C Design (Retail, Add to Cart)
+    </label>
+    <?php
+}
+
+add_action( 'save_post_product', 'snap_stitch_save_product_design_meta_box' );
+function snap_stitch_save_product_design_meta_box( $post_id ) {
+    if ( ! isset( $_POST['snap_product_design_nonce'] ) || ! wp_verify_nonce( $_POST['snap_product_design_nonce'], 'snap_save_product_design' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+    if ( isset( $_POST['snap_product_design_type'] ) ) {
+        update_post_meta( $post_id, '_product_design_type', sanitize_text_field( $_POST['snap_product_design_type'] ) );
+    }
 }
 
 /**
