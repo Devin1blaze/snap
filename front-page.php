@@ -494,8 +494,8 @@ get_header();
                 ['name'=>'Aquaguard','icon'=>'water_drop','color'=>'#0891b2'],
               ];
               foreach(array_merge($brands_col1,$brands_col1,$brands_col1) as $b): ?>
-              <div class="brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl" style="width:320px;height:320px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[80px]" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:250px;height:250px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-[80px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
@@ -512,8 +512,8 @@ get_header();
                 ['name'=>'Somany','icon'=>'door_front','color'=>'#7c3aed'],
               ];
               foreach(array_merge($brands_col2,$brands_col2,$brands_col2) as $b): ?>
-              <div class="brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl" style="width:320px;height:320px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[80px]" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:250px;height:250px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-[80px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
@@ -530,8 +530,8 @@ get_header();
                 ['name'=>'Finolex','icon'=>'electrical_services','color'=>'#dc2626'],
               ];
               foreach(array_merge($brands_col3,$brands_col3,$brands_col3) as $b): ?>
-              <div class="brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl" style="width:320px;height:320px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[80px]" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:250px;height:250px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-[80px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
@@ -548,8 +548,8 @@ get_header();
                 ['name'=>'Honeywell','icon'=>'settings_remote','color'=>'#d97706'],
               ];
               foreach(array_merge($brands_col4,$brands_col4,$brands_col4) as $b): ?>
-              <div class="brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl" style="width:320px;height:320px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[80px]" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:250px;height:250px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-[80px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
@@ -566,8 +566,8 @@ get_header();
                 ['name'=>'EBCO','icon'=>'inventory','color'=>'#059669'],
               ];
               foreach(array_merge($brands_col5,$brands_col5,$brands_col5) as $b): ?>
-              <div class="brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl" style="width:320px;height:320px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[80px]" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:250px;height:250px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-[80px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
@@ -584,8 +584,8 @@ get_header();
                 ['name'=>'Siemens','icon'=>'settings','color'=>'#0891b2'],
               ];
               foreach(array_merge($brands_col6,$brands_col6,$brands_col6) as $b): ?>
-              <div class="brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl" style="width:320px;height:320px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[80px]" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-none flex flex-col items-center justify-center gap-6 p-8 cursor-pointer rounded-2xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:250px;height:250px;flex-shrink:0;">
+                <span class="material-symbols-outlined text-[80px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
                 <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
               </div>
               <?php endforeach; ?>
