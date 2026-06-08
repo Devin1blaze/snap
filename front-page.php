@@ -284,76 +284,91 @@ get_header();
             <div id="featured-carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-20 no-scrollbar scroll-smooth">
                 
                 <!-- Product 1 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-[#0F172A] aspect-square flex items-center justify-center p-12">
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.2rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-[#0F172A] aspect-square flex items-center justify-center p-8 lg:p-12">
                         <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">BEST SELLER</span>
-                        <span class="material-symbols-outlined text-white text-8xl group-hover:scale-110 transition-transform duration-500">sensor_occupied</span>
+                        <span class="material-symbols-outlined text-white text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">sensor_occupied</span>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
+                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
                         <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">EURONICS</span>
-                        <h4 class="text-black font-black text-xl mb-6 leading-tight">Euronics Auto Sensor Flusher EF-100</h4>
+                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Auto Sensor Flusher EF-100</h4>
                         <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Product 2 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-zinc-100 aspect-square flex items-center justify-center p-12 border-b-2 border-zinc-200">
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.2rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-zinc-100 aspect-square flex items-center justify-center p-8 lg:p-12 border-b-2 border-zinc-200">
                         <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">TOP PICK</span>
-                        <span class="material-symbols-outlined text-[#0F172A] text-8xl group-hover:scale-110 transition-transform duration-500">kitchen</span>
+                        <span class="material-symbols-outlined text-[#0F172A] text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">kitchen</span>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
+                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
                         <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">BLUE STAR</span>
-                        <h4 class="text-black font-black text-xl mb-6 leading-tight">Blue Star Deep Freezer DF-300</h4>
+                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Deep Freezer DF-300</h4>
                         <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Product 3 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-[#0F172A] aspect-square flex items-center justify-center p-12">
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.2rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-[#0F172A] aspect-square flex items-center justify-center p-8 lg:p-12">
                         <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">POPULAR</span>
-                        <span class="material-symbols-outlined text-white text-8xl group-hover:scale-110 transition-transform duration-500">water_damage</span>
+                        <span class="material-symbols-outlined text-white text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">water_damage</span>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
+                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
                         <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">AQUAGUARD</span>
-                        <h4 class="text-black font-black text-xl mb-6 leading-tight">Aquaguard Grand RO+UV System</h4>
+                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Grand RO+UV System</h4>
                         <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Product 4 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-zinc-100 aspect-square flex items-center justify-center p-12 border-b-2 border-zinc-200">
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.2rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-zinc-100 aspect-square flex items-center justify-center p-8 lg:p-12 border-b-2 border-zinc-200">
                         <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">NEW</span>
-                        <span class="material-symbols-outlined text-[#0F172A] text-8xl group-hover:scale-110 transition-transform duration-500">soap</span>
+                        <span class="material-symbols-outlined text-[#0F172A] text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">soap</span>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
+                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
                         <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">KIMBERLY CLARK</span>
-                        <h4 class="text-black font-black text-xl mb-6 leading-tight">KC In-Sight Soap Dispenser 1L</h4>
+                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">KC Soap Dispenser 1L</h4>
                         <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Product 5 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-[#0F172A] aspect-square flex items-center justify-center p-12">
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.2rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-[#0F172A] aspect-square flex items-center justify-center p-8 lg:p-12">
                         <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">HEAVY DUTY</span>
-                        <span class="material-symbols-outlined text-white text-8xl group-hover:scale-110 transition-transform duration-500">air</span>
+                        <span class="material-symbols-outlined text-white text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">air</span>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
+                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
                         <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">EURONICS</span>
-                        <h4 class="text-black font-black text-xl mb-6 leading-tight">Jet Hand Dryer ES-01</h4>
+                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Jet Hand Dryer ES-01</h4>
                         <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-4 px-4 uppercase text-sm hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Request Bulk Price</a>
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.2rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
+                    <div class="relative bg-zinc-100 aspect-square flex items-center justify-center p-8 lg:p-12 border-b-2 border-zinc-200">
+                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">RESTOCKED</span>
+                        <span class="material-symbols-outlined text-[#0F172A] text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">delete</span>
+                    </div>
+                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
+                        <span class="inline-block bg-[#0F172A] text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">DIVERSEY</span>
+                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Commercial Waste Bin 60L</h4>
+                        <div class="mt-auto">
+                            <a href="/request-a-quote" class="block w-full bg-black text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
                         </div>
                     </div>
                 </div>
