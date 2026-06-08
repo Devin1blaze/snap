@@ -6,7 +6,7 @@
 get_header(); ?>
 
 <!-- Hero Section -->
-<section class="relative bg-primary-container min-h-[850px] flex flex-col justify-center px-8 md:px-24 pt-40 pb-24 overflow-hidden">
+<section class="relative bg-primary-container min-h-[600px] flex flex-col justify-center px-8 md:px-24 py-24 md:py-32 overflow-hidden">
 <div class="max-w-6xl z-10">
 <h1 class="text-white text-[48px] md:text-[72px] font-black leading-[1] tracking-[-0.02em] mb-8">
 <span class="text-[#FBBF24] text-[100px] md:text-[120px] block mb-2 leading-none">25</span>
