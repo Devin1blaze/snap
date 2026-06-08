@@ -169,7 +169,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 <!-- Section: Floating Navigation Wrapper -->
 <header class="relative z-50">
   <nav id="floating-nav" class="fixed top-0 left-0 w-full z-[100] px-4 pointer-events-none transition-all duration-300">
-    <div id="nav-island" class="mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-3xl pointer-events-auto shadow-2xl">
+    <div id="nav-island" class="mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-2xl pointer-events-auto shadow-2xl">
       <div class="relative flex flex-wrap items-center justify-between py-3 lg:py-4">
         
         <!-- Logo -->
@@ -203,7 +203,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
           <div class="hidden lg:flex items-center gap-3">
             <!-- Login/Signup: Hidden when scrolled -->
             <a id="btn-login" href="/login" class="text-white/80 hover:text-white font-bold text-xs uppercase tracking-widest px-5 py-2 border border-white/10 rounded-xl hover:bg-white/5 transition-all duration-300">Login</a>
-            <a id="btn-signup" href="/register" class="bg-white text-black font-black text-xs uppercase tracking-widest px-5 py-2 rounded-xl hover:bg-white/90 transition-all duration-300 shadow-xl">Sign Up</a>
+            <a id="btn-signup" href="/register" class="bg-secondary-container text-black font-black text-xs uppercase tracking-widest px-5 py-2 rounded-xl hover:bg-yellow-400 transition-all duration-300 shadow-xl">Sign Up</a>
             
             <!-- Get Started: Visible ONLY when scrolled -->
             <a id="btn-scrolled-cta" href="/request-a-quote" class="hidden items-center gap-2 bg-secondary-container text-black font-black text-xs uppercase px-6 py-2 rounded-xl tracking-widest hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-500 border border-black/10">
@@ -251,8 +251,8 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
   window.addEventListener('scroll', function() {
     if (window.scrollY > 50) {
         // Shrink the island
-        navIsland.classList.remove('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5');
-        navIsland.classList.add('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]');
+        navIsland.classList.remove('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl');
+        navIsland.classList.add('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full');
         
         // Swap buttons
         btnLogin.classList.add('lg:hidden');
@@ -261,8 +261,8 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         btnScrolledCta.classList.add('flex');
     } else {
         // Expand the island
-        navIsland.classList.add('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5');
-        navIsland.classList.remove('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]');
+        navIsland.classList.add('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl');
+        navIsland.classList.remove('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full');
         
         // Revert buttons
         btnLogin.classList.remove('lg:hidden');
