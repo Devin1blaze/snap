@@ -60,12 +60,13 @@ get_header( 'shop' ); ?>
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 </div>
-<span class="text-xs font-bold uppercase tracking-widest text-zinc-500">4.8/5 — 120 B2B Orders</span>
+<span class="text-xs font-bold uppercase tracking-widest text-zinc-500">4.8/5 — <?php echo ( function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product( isset($product) ? $product->get_id() : get_the_ID() ) ) ? '120 B2B Orders' : '120 Reviews'; ?></span>
 </div>
 </div>
 <div class="mb-8">
 <span class="bg-secondary/20 text-secondary text-[10px] font-black px-2 py-1 rounded-sm border border-secondary/30">IN STOCK</span>
 </div>
+<?php if ( function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product( isset($product) ? $product->get_id() : get_the_ID() ) ) : ?>
 <!-- Specs Table -->
 <div class="mb-6 overflow-hidden border-none">
 <table class="w-full text-left text-sm">
@@ -109,6 +110,7 @@ get_header( 'shop' ); ?>
 <p><strong class="text-black">2-Year Warranty:</strong> Full on-site support ensures zero downtime in critical hospitality and hospital facilities.</p>
 </div>
 </details>
+<?php endif; ?>
 <!-- Actions -->
 <div class="space-y-4">
 <?php 
@@ -151,7 +153,7 @@ if ( function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product
 </div>
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">percent</span>
-<span class="text-[10px] font-black uppercase tracking-widest">Bulk Discounts</span>
+<span class="text-[10px] font-black uppercase tracking-widest"><?php echo ( function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product( isset($product) ? $product->get_id() : get_the_ID() ) ) ? 'Bulk Discounts' : 'Retail Support'; ?></span>
 </div>
 </div>
 </div>
@@ -206,7 +208,7 @@ if ( function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product
 </div>
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-secondary">monetization_on</span>
-<span class="font-black text-xs uppercase tracking-[0.2em]">Bulk Discounts</span>
+<span class="font-black text-xs uppercase tracking-[0.2em]"><?php echo ( function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product( isset($product) ? $product->get_id() : get_the_ID() ) ) ? 'Bulk Discounts' : 'Exclusive Deals'; ?></span>
 </div>
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-secondary">security</span>
@@ -231,7 +233,7 @@ if ( function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product
 <div class="p-8 md:w-1/2 flex flex-col justify-center">
 <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest">FLUSHER + SOAP DISPENSER</span>
 <h4 class="text-xl font-black text-black mt-2 leading-tight">Elite Hygiene Bundle: EF-100 + SD-20</h4>
-<p class="text-xs text-zinc-500 mt-4 mb-6">Upgrade your commercial washroom with this high-traffic automation duo. Bulk discount applied.</p>
+<p class="text-xs text-zinc-500 mt-4 mb-6">Upgrade your commercial washroom with this high-traffic automation duo. <?php if ( function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product( isset($product) ? $product->get_id() : get_the_ID() ) ) echo 'Bulk discount applied.'; ?></p>
 <button class="bg-black text-white text-xs font-black py-4 uppercase tracking-widest hover:bg-primary transition-colors">VIEW BUNDLE</button>
 </div>
 </div>
