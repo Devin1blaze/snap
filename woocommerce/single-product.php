@@ -117,7 +117,7 @@ if ( function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product
 ?>
 <!-- B2B Actions -->
 <div>
-<a href="/contact" class="flex items-center justify-center w-full bg-secondary text-black text-xl font-black h-[64px] uppercase tracking-tighter hover:brightness-95 active:scale-95 transition-all">SEND INQUIRY</a>
+<a href="/request-a-quote" class="flex items-center justify-center w-full bg-secondary text-black text-xl font-black h-[64px] uppercase tracking-tighter hover:brightness-95 active:scale-95 transition-all">SEND INQUIRY</a>
 <p class="text-center text-[10px] font-bold uppercase tracking-widest text-zinc-400 mt-2">Typically quoted within 2 hours</p>
 </div>
 <a href="https://wa.me/919876543210" target="_blank" class="flex items-center justify-center gap-2 border-2 border-[#25D366] text-[#25D366] font-bold py-4 uppercase tracking-tighter hover:bg-[#25D366] hover:text-white transition-colors">
