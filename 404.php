@@ -41,7 +41,7 @@ get_header(); ?>
 <div class="mb-6">
 <span class="material-symbols-outlined text-5xl text-secondary-container group-hover:text-black transition-colors duration-300" data-icon="sensor_occupied">sensor_occupied</span>
 </div>
-<h3 class="text-xl font-black uppercase tracking-tight group-hover:text-black transition-colors duration-300">Browse Washroom Automation</h3>
+<h3 class="text-xl text-white font-black uppercase tracking-tight group-hover:text-black transition-colors duration-300">Browse Washroom Automation</h3>
 <p class="mt-2 text-gray-500 text-sm uppercase tracking-widest group-hover:text-black/70 transition-colors duration-300">Sensors &amp; Flushers</p>
 </a>
 <!-- Card 2 -->
@@ -49,7 +49,7 @@ get_header(); ?>
 <div class="mb-6">
 <span class="material-symbols-outlined text-5xl text-primary-container group-hover:text-white transition-colors duration-300" data-icon="kitchen">kitchen</span>
 </div>
-<h3 class="text-xl font-black uppercase tracking-tight group-hover:text-white transition-colors duration-300">View Commercial Refrigeration</h3>
+<h3 class="text-xl text-white font-black uppercase tracking-tight group-hover:text-white transition-colors duration-300">View Commercial Refrigeration</h3>
 <p class="mt-2 text-gray-500 text-sm uppercase tracking-widest group-hover:text-white/70 transition-colors duration-300">Industrial Cooling</p>
 </a>
 <!-- Card 3 -->
@@ -57,7 +57,7 @@ get_header(); ?>
 <div class="mb-6">
 <span class="material-symbols-outlined text-5xl text-secondary-container group-hover:text-black transition-colors duration-300" data-icon="description">description</span>
 </div>
-<h3 class="text-xl font-black uppercase tracking-tight group-hover:text-black transition-colors duration-300">Get a Bulk Quote</h3>
+<h3 class="text-xl text-white font-black uppercase tracking-tight group-hover:text-black transition-colors duration-300">Get a Bulk Quote</h3>
 <p class="mt-2 text-gray-500 text-sm uppercase tracking-widest group-hover:text-black/70 transition-colors duration-300">Wholesale Logistics</p>
 </a>
 </div>
