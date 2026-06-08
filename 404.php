@@ -37,28 +37,28 @@ get_header(); ?>
 <!-- Quick Links Bento-ish Layout -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl px-4">
 <!-- Card 1 -->
-<a class="group block bg-[#161616] p-8 border-l-4 border-secondary-container hover:bg-secondary-container transition-all duration-300" href="#">
+<a class="group block bg-[#161616] p-8 border-l-4 border-secondary-container hover:bg-secondary-container hover:-translate-y-1 hover:shadow-lg transition-all duration-300" href="#">
 <div class="mb-6">
-<span class="material-symbols-outlined text-5xl text-secondary-container group-hover:text-black" data-icon="sensor_occupied">sensor_occupied</span>
+<span class="material-symbols-outlined text-5xl text-secondary-container group-hover:text-black transition-colors duration-300" data-icon="sensor_occupied">sensor_occupied</span>
 </div>
-<h3 class="text-xl font-black uppercase tracking-tight group-hover:text-black">Browse Washroom Automation</h3>
-<p class="mt-2 text-gray-500 text-sm uppercase tracking-widest group-hover:text-black/70">Sensors &amp; Flushers</p>
+<h3 class="text-xl font-black uppercase tracking-tight group-hover:text-black transition-colors duration-300">Browse Washroom Automation</h3>
+<p class="mt-2 text-gray-500 text-sm uppercase tracking-widest group-hover:text-black/70 transition-colors duration-300">Sensors &amp; Flushers</p>
 </a>
 <!-- Card 2 -->
-<a class="group block bg-[#161616] p-8 border-l-4 border-primary-container hover:bg-primary-container transition-all duration-300" href="#">
+<a class="group block bg-[#161616] p-8 border-l-4 border-primary-container hover:bg-primary-container hover:-translate-y-1 hover:shadow-lg transition-all duration-300" href="#">
 <div class="mb-6">
-<span class="material-symbols-outlined text-5xl text-primary-container group-hover:text-white" data-icon="kitchen">kitchen</span>
+<span class="material-symbols-outlined text-5xl text-primary-container group-hover:text-white transition-colors duration-300" data-icon="kitchen">kitchen</span>
 </div>
-<h3 class="text-xl font-black uppercase tracking-tight group-hover:text-white">View Commercial Refrigeration</h3>
-<p class="mt-2 text-gray-500 text-sm uppercase tracking-widest group-hover:text-white/70">Industrial Cooling</p>
+<h3 class="text-xl font-black uppercase tracking-tight group-hover:text-white transition-colors duration-300">View Commercial Refrigeration</h3>
+<p class="mt-2 text-gray-500 text-sm uppercase tracking-widest group-hover:text-white/70 transition-colors duration-300">Industrial Cooling</p>
 </a>
 <!-- Card 3 -->
-<a class="group block bg-[#161616] p-8 border-l-4 border-secondary-container hover:bg-secondary-container transition-all duration-300" href="#">
+<a class="group block bg-[#161616] p-8 border-l-4 border-secondary-container hover:bg-secondary-container hover:-translate-y-1 hover:shadow-lg transition-all duration-300" href="#">
 <div class="mb-6">
-<span class="material-symbols-outlined text-5xl text-secondary-container group-hover:text-black" data-icon="description">description</span>
+<span class="material-symbols-outlined text-5xl text-secondary-container group-hover:text-black transition-colors duration-300" data-icon="description">description</span>
 </div>
-<h3 class="text-xl font-black uppercase tracking-tight group-hover:text-black">Get a Bulk Quote</h3>
-<p class="mt-2 text-gray-500 text-sm uppercase tracking-widest group-hover:text-black/70">Wholesale Logistics</p>
+<h3 class="text-xl font-black uppercase tracking-tight group-hover:text-black transition-colors duration-300">Get a Bulk Quote</h3>
+<p class="mt-2 text-gray-500 text-sm uppercase tracking-widest group-hover:text-black/70 transition-colors duration-300">Wholesale Logistics</p>
 </a>
 </div>
 </main>
