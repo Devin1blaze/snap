@@ -10,13 +10,8 @@ get_header();
     <!-- Bottom fade for stat strip transition -->
     <div class="absolute bottom-0 left-0 w-full h-1/5 bg-gradient-to-t from-[#172554] to-transparent z-[15]"></div>
 
-    <!-- Slide Counter -->
-    <div class="absolute top-28 right-8 sm:right-12 z-30 text-white/30 font-black text-7xl sm:text-9xl leading-none select-none" style="font-variant-numeric:tabular-nums;">
-      <span id="hero-counter">01</span><span class="text-secondary-container">/</span><span class="text-4xl sm:text-5xl">03</span>
-    </div>
-
     <!-- Slides Container -->
-    <div class="relative w-full h-full z-10">
+    <div class="absolute inset-0 z-10">
       <?php
       $hero_slides = [
         [
@@ -27,8 +22,8 @@ get_header();
           'cta1_href'=> '/shop',
           'cta2_text'=> 'Request Quote',
           'cta2_href'=> '/request-a-quote',
-          'img'      => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDE4MzqiH8Hzcnme1hwaU5h6AYhAx0i3dIbjNKElAvN-0dI3VHfR3Hexm1SxwZhUH3xTH7PTh005QytdXaS-e67Dqta7QxYnSPk81X26hEeR5PdRThP6ErVqR07iP3sQV6oQ9-qQFmuiIguK9lVu2XsU8oeL2RI3HoXXTAf2dymX9WJBcHcbXI5k_7Rz8aKCs8Q7HD0BtKxTOrOgI4PZHNKR2CkNxynLuWg39Nl8irWfVMFFPTiMf0ZQI2MjQBTVuKOdEGB6lwHW2o',
-          'img_alt'  => 'Sensor Tap',
+          'bg_img'   => 'https://images.unsplash.com/photo-1620626011761-996317b8d101?w=1920&q=80',
+          'overlay'  => 'from-[#0A0A0A]/90 via-[#0A0A0A]/50 to-transparent',
         ],
         [
           'badge'    => 'COMMERCIAL REFRIGERATION',
@@ -38,8 +33,8 @@ get_header();
           'cta1_href'=> '/product-category/commercial-refrigeration/',
           'cta2_text'=> 'Get Pricing',
           'cta2_href'=> '/request-a-quote',
-          'img'      => 'https://lh3.googleusercontent.com/aida-public/AB6AXuA6EO5K0zcbj9qmQ1pr2VNltfcLFoeebNpGYXfSInJSIZPXAqy4fH8A-LKcTBuL0lDH2uvZ9E-2ucygYRE5I1q-gEnSLXQxmuUzdkkIRV6LcKfWI7RY1GOzaiol0tqS6LQodunm23Ktq1iiVoP146n5s6pnUZSRY--ZYbHNlj0HIp76MeafAPY_ViEoTh3r0UkifABN3dmTQbDT6oURBSalugjrFsuTwDoXua1Fmb1tzIoTWid6_N8qIOXvvPLw6JemIoEr3rRjmt4',
-          'img_alt'  => 'Commercial Refrigerator',
+          'bg_img'   => get_template_directory_uri() . '/images/slide2_bg.png',
+          'overlay'  => 'from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-[#0A0A0A]/20',
         ],
         [
           'badge'    => 'HYGIENE & PPE',
@@ -49,36 +44,38 @@ get_header();
           'cta1_href'=> '/product-category/hygiene-ppe/',
           'cta2_text'=> 'Get Quote',
           'cta2_href'=> '/request-a-quote',
-          'img'      => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAoXkJP5BaMyzbVYVTdPzXnxlJKuuNs7X9SNfzG2RPCL5khTeZvIwalCh9XZfZSIACZg7H9LCJMZklabaIQerylTaKO3rwp0XfnHKVZIuFSt2-Oj_tkX5PGOZOkNbLPDW0sspZDyPTBFF8M3T_Wu4ElNy3F-LLZeD1vJDWuVSYMbRDHicRYaL57ngwa6JvpJkqegAz4UlQFbTfebljpmmcYwmmbQ07zUF8HKbJvKeUV-1HBWTyBbZsKMDxU0Fn_ZkKEtvGgWm3X9EQ',
-          'img_alt'  => 'Hygiene Equipment',
+          'bg_img'   => get_template_directory_uri() . '/images/slide3_bg.png',
+          'overlay'  => 'from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-[#0A0A0A]/10',
         ],
       ];
       foreach($hero_slides as $i => $slide): ?>
-      <div class="hero-slide absolute inset-0 flex items-center <?= $i === 0 ? 'is-active' : '' ?>" data-slide="<?= $i ?>">
-        <div class="absolute inset-0 hero-bg-<?= $i + 1 ?>"></div>
-        <div class="container mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
-            <div class="flex flex-col justify-center">
+      <div class="hero-slide absolute inset-0 flex items-center <?= $i === 0 ? 'is-active' : '' ?> overflow-hidden" data-slide="<?= $i ?>">
+        <!-- Full-bleed background image with Ken Burns animation -->
+        <div class="hero-bg-img absolute inset-0 bg-cover bg-center bg-no-repeat" 
+             style="background-image: url('<?= $slide['bg_img'] ?>');">
+        </div>
+        <!-- Dark overlay gradient (heavier on left for text readability) -->
+        <div class="absolute inset-0 bg-gradient-to-r <?= $slide['overlay'] ?> z-0"></div>
+        
+        <div class="container mx-auto px-8 md:px-16 relative z-10 w-full">
+            <div class="max-w-4xl flex flex-col justify-center">
                 <div class="hero-text-block">
-                    <span class="hero-animate inline-block bg-secondary-container text-black font-black text-xs px-4 py-1.5 mb-5 tracking-widest uppercase"><?= $slide['badge'] ?></span>
-                    <h1 class="hero-animate text-white text-4xl sm:text-5xl md:text-[72px] font-black leading-[1.05] tracking-tight mb-6">
+                    <span class="hero-animate inline-block bg-secondary-container text-black font-black text-[12px] px-4 py-1.5 mb-5 tracking-[0.05em] uppercase"><?= $slide['badge'] ?></span>
+                    <h1 class="hero-animate text-white text-4xl sm:text-5xl md:text-[72px] font-extrabold leading-[1.05] tracking-tight mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">
                         <?= $slide['heading'] ?>
                     </h1>
-                    <p class="hero-animate text-white/80 text-base md:text-lg max-w-lg leading-relaxed mb-8">
+                    <p class="hero-animate text-white/90 text-[18px] max-w-2xl leading-relaxed mb-8 font-medium">
                         <?= $slide['desc'] ?>
                     </p>
                     <div class="hero-animate flex flex-wrap gap-3">
-                        <a href="<?= $slide['cta1_href'] ?>" class="bg-secondary-container text-black px-8 py-4 font-black uppercase text-sm tracking-widest flex items-center gap-2 hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
+                        <a href="<?= $slide['cta1_href'] ?>" class="bg-secondary-container text-black px-8 py-4 font-black uppercase text-sm tracking-widest flex items-center gap-2 hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300 rounded-none">
                             <?= $slide['cta1_text'] ?> <span class="material-symbols-outlined text-lg">arrow_forward</span>
                         </a>
-                        <a href="<?= $slide['cta2_href'] ?>" class="border-2 border-white/30 text-white px-8 py-4 font-black uppercase text-sm tracking-widest hover:bg-white hover:text-black hover:border-white hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300">
+                        <a href="<?= $slide['cta2_href'] ?>" class="border-2 border-white/30 text-white px-8 py-4 font-black uppercase text-sm tracking-widest hover:bg-white hover:text-black hover:border-white hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300 rounded-none bg-black/20 backdrop-blur-sm">
                             <?= $slide['cta2_text'] ?>
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="hidden md:flex items-center justify-center relative">
-                <div class="absolute w-[120%] h-[120%] bg-secondary-container rounded-full blur-[140px] opacity-10"></div>
-                <img alt="<?= $slide['img_alt'] ?>" class="hero-img relative z-10 w-full max-w-md drop-shadow-2xl" src="<?= $slide['img'] ?>"/>
             </div>
         </div>
       </div>
@@ -103,79 +100,51 @@ get_header();
     </div>
 </header>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+
   @keyframes heroProgress {
     from { transform: scaleX(0); }
     to   { transform: scaleX(1); }
   }
   .animate-hero-progress { animation: heroProgress 6s linear forwards; }
+  
+  .hero-slide {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s;
+  }
+  .hero-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Ken Burns Effect for background image */
+  .hero-bg-img {
+    transform: scale(1);
+    transition: transform 6.5s linear;
+  }
+  .is-active .hero-bg-img {
+    transform: scale(1.08);
+  }
 
-  /* Slide visibility */
-  .hero-slide { pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
-  .hero-slide.is-active { pointer-events: auto; opacity: 1; }
-
-  /* Staggered text entrance */
   .hero-animate {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .hero-slide.is-active .hero-animate {
-    opacity: 1; transform: translateY(0);
+  .is-active .hero-animate {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .hero-slide.is-active .hero-animate:nth-child(1) { transition-delay: 0.1s; }
-  .hero-slide.is-active .hero-animate:nth-child(2) { transition-delay: 0.25s; }
-  .hero-slide.is-active .hero-animate:nth-child(3) { transition-delay: 0.4s; }
-  .hero-slide.is-active .hero-animate:nth-child(4) { transition-delay: 0.55s; }
-
-  /* Image entrance */
-  .hero-img {
-    opacity: 0; transform: translateX(40px) scale(0.95);
-    transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
-  }
-  .hero-slide.is-active .hero-img {
-    opacity: 1; transform: translateX(0) scale(1);
-  }
-
-  /* Per-slide gradient backgrounds */
-  .hero-bg-1 {
-    background:
-      radial-gradient(ellipse at 65% 40%, rgba(37,99,235,0.35) 0%, transparent 55%),
-      radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 25%, #2563EB 45%, #1E40AF 65%, #172554 100%);
-    background-size: 100% 100%, 32px 32px, 100% 100%;
-  }
-  .hero-bg-2 {
-    background:
-      radial-gradient(ellipse at 65% 40%, rgba(59,130,160,0.30) 0%, transparent 55%),
-      radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(135deg, #1E3A5F 0%, #276090 25%, #3B82A0 45%, #1E5578 65%, #0F2942 100%);
-    background-size: 100% 100%, 32px 32px, 100% 100%;
-  }
-  .hero-bg-3 {
-    background:
-      radial-gradient(ellipse at 65% 40%, rgba(13,148,136,0.30) 0%, transparent 55%),
-      radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(135deg, #134E45 0%, #0F766E 25%, #0D9488 45%, #115E59 65%, #042F2E 100%);
-    background-size: 100% 100%, 32px 32px, 100% 100%;
-  }
-  /* Left side darkening removed - kept clean */
-  /* Warm accent glow */
-  .hero-bg-1::after, .hero-bg-2::after, .hero-bg-3::after {
-    content: '';
-    position: absolute;
-    top: -20%; right: -5%;
-    width: 55%; height: 140%;
-    border-radius: 0 0 0 40%;
-    pointer-events: none;
-  }
-  .hero-bg-1::after { background: linear-gradient(180deg, rgba(251,191,36,0.18), transparent 65%); }
-  .hero-bg-2::after { background: linear-gradient(180deg, rgba(96,165,250,0.15), transparent 65%); }
-  .hero-bg-3::after { background: linear-gradient(180deg, rgba(52,211,153,0.15), transparent 65%); }
+  .is-active .hero-text-block .hero-animate:nth-child(1) { transition-delay: 0.1s; }
+  .is-active .hero-text-block .hero-animate:nth-child(2) { transition-delay: 0.25s; }
+  .is-active .hero-text-block .hero-animate:nth-child(3) { transition-delay: 0.4s; }
+  .is-active .hero-text-block .hero-animate:nth-child(4) { transition-delay: 0.55s; }
 </style>
 <script>
 (function(){
   const slides = document.querySelectorAll('.hero-slide');
   const dots   = document.querySelectorAll('.hero-dot');
-  const counter = document.getElementById('hero-counter');
   const total  = slides.length;
   let current  = 0;
   let timer    = null;
@@ -192,7 +161,6 @@ get_header();
     slides[current].classList.add('is-active');
     dots[current].classList.remove('w-8','bg-white/15');
     dots[current].classList.add('w-16','bg-white/40');
-    if(counter) counter.textContent = String(current + 1).padStart(2, '0');
 
     // Reset & restart progress animation
     const fill = dots[current].querySelector('.hero-dot-fill');
