@@ -695,6 +695,173 @@ document.addEventListener("DOMContentLoaded", function() {
   </div>
 </section>
 
+<!-- Section: Process Management -->
+<section class="bg-zinc-50 py-24 overflow-hidden border-t border-zinc-200">
+    <div class="container mx-auto px-8 relative flex flex-col gap-6 xl:min-h-[2200px] w-full">
+        <div class="mx-auto text-center">
+            <p class="inline-block py-1.5 px-3.5 text-xs font-black uppercase tracking-widest border-2 border-primary bg-primary/10 text-primary mb-4">Process Management</p>
+            <h2 class="font-black uppercase tracking-tight lg:text-5xl text-3xl text-black">Industrial-Scale Order Fulfillment</h2>
+        </div>
+
+        <div id="process-svg-container" class="relative w-full max-w-[320px] md:max-w-[744px] xl:max-w-full mt-16 mx-auto h-[908px] md:h-[2128px] xl:h-[1851px]">
+            
+            <!-- Desktop SVG -->
+            <div class="svg-container min-h-fit xl:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center">
+                <svg data-hiw-svg="true" class="hiw-line-desktop" width="1110" height="1851" viewBox="0 0 1110 1851" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M293 245C293 245 982.532 152.487 1020 444.5C1059.34 751.135 307.651 427.758 284 736C259.284 1058.11 987.03 759.333 1037 1078.5C1096.32 1457.41 76.9361 971.376 94.4998 1354.5C111.046 1715.43 957.5 1688 957.5 1688" stroke="#1A56DB" stroke-width="8" stroke-linecap="square" style="stroke-dashoffset: 4766px; stroke-dasharray: 4766.23; transition: stroke-dashoffset 0.1s ease-out;"></path>
+                </svg>
+            </div>
+            
+            <!-- Tablet SVG -->
+            <div class="svg-container xl:hidden md:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center">
+                <svg data-hiw-svg="true" class="hiw-line-tablet" width="744" height="2128" viewBox="0 0 744 2128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M155 168.5C155 168.5 599.832 241.232 621 453.5C643.654 680.676 167.935 578.564 155 806.5C143.871 1002.6 465.793 1008.11 462.5 1204.5C459.277 1396.74 156.671 1396.74 155 1589C153.492 1762.51 399.5 1960 399.5 1960" stroke="#1A56DB" stroke-width="6" stroke-linecap="square" style="stroke-dashoffset: 2718px; stroke-dasharray: 2718.54; transition: stroke-dashoffset 0.1s ease-out;"></path>
+                </svg>
+            </div>
+            
+            <!-- Mobile SVG -->
+            <div class="svg-container md:hidden flex pointer-events-none w-full absolute top-0 left-0 justify-center items-center">
+                <svg data-hiw-svg="true" class="hiw-line-mobile" width="320" height="908" viewBox="0 0 320 908" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M60.0003 69.5C60.0003 69.5 278.851 120.833 270.5 222C262.594 317.783 56.8652 253.442 60.0003 349.5C62.4685 425.123 195.269 410.369 197.5 486C199.635 558.372 89.0992 557.236 79.5003 629C67.9425 715.41 197.5 818.5 197.5 818.5" stroke="#1A56DB" stroke-width="4" stroke-linecap="square" style="stroke-dashoffset: 1178px; stroke-dasharray: 1178.73; transition: stroke-dashoffset 0.1s ease-out;"></path>
+                </svg>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="hiw-card z-10 absolute top-[2%] md:top-[3%] xl:top-[9%] left-[0%] md:left-[4%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-primary flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">shopping_cart</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Order Placed</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">1</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Customer submits an enquiry through our platform, providing detailed specifications and requirements.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="hiw-card z-10 absolute top-[15%] md:top-[20%] xl:top-[28%] right-[0%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-primary flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">assignment</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Account Work</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">2</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Order verification and account processing to ensure accuracy and enterprise satisfaction.</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="hiw-card z-10 absolute top-[30%] md:top-[35%] xl:top-[52%] left-[0%] md:left-[6%] xl:left-[20%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-primary flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">precision_manufacturing</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Processing</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">3</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Order preparation with strict industrial quality checks and inventory management for optimal fulfillment.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="hiw-card z-10 absolute top-[48%] md:top-[54%] xl:top-[74%] right-[0%] md:right-[20%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-primary flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">inventory_2</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Packaging</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">4</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Secure bulk packing with heavy-duty protective materials ensuring safe transit.</p>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="hiw-card z-10 absolute top-[60%] md:top-[70%] xl:top-[90%] left-[5%] md:left-[6%] xl:left-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-primary flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">local_shipping</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Logistics</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">5</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Shipping coordination with trusted B2B carriers for reliable and timely delivery.</p>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="hiw-card z-10 absolute top-[83%] md:top-[88%] xl:top-[103%] left-[35%] md:left-[30%] xl:left-[59%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-primary bg-zinc-900 p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#FBBF24] flex items-center justify-center text-black">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">task_alt</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-white uppercase leading-tight">Dispatch</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">6</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-400 leading-relaxed">Delivery complete with tracking confirmation and institutional guarantee.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- SVG & Reveal Animation Logic -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const svgContainer = document.getElementById('process-svg-container');
+        const paths = document.querySelectorAll('path[data-animated-path="true"]');
+        const cards = document.querySelectorAll('.hiw-card');
+
+        // Setup scroll-linked SVG drawing
+        if(paths.length > 0 && svgContainer) {
+            window.addEventListener('scroll', () => {
+                const rect = svgContainer.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // Calculate scroll percentage through the section
+                const startDrawPos = windowHeight * 0.8; // Start drawing when container top is at 80% of screen height
+                const endDrawPos = windowHeight * 0.2;   // Finish drawing when container bottom reaches 20% of screen height
+                
+                let scrollPercentage = (windowHeight - rect.top) / (rect.height + windowHeight);
+                // Adjust curve to be a bit more aggressive so it draws before user reaches end
+                scrollPercentage = Math.min(Math.max(scrollPercentage * 1.5 - 0.2, 0), 1);
+                
+                paths.forEach(path => {
+                    const length = path.getTotalLength();
+                    path.style.strokeDasharray = length;
+                    path.style.strokeDashoffset = length * (1 - scrollPercentage);
+                });
+            }, { passive: true });
+        }
+
+        // Setup Intersection Observer for card pop-ins
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0', 'translate-y-6', 'scale-95', 'blur-sm');
+                    entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100', 'blur-0');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.3, // Trigger when 30% of the card is visible
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        cards.forEach(card => observer.observe(card));
+    });
+    </script>
+</section>
+
 <!-- Section 6: Industries We Serve -->
 <section class="bg-primary-container py-24">
     <div class="container mx-auto px-8">
