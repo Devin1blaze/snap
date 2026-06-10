@@ -706,21 +706,21 @@ document.addEventListener("DOMContentLoaded", function() {
         <div id="process-svg-container" class="relative w-full max-w-[320px] md:max-w-[744px] xl:max-w-full mt-16 mx-auto h-[908px] md:h-[2128px] xl:h-[1851px]">
             
             <!-- Desktop SVG -->
-            <div class="svg-container min-h-fit xl:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center">
+            <div class="svg-container h-full xl:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
                 <svg data-hiw-svg="true" class="hiw-line-desktop" width="1110" height="1851" viewBox="0 0 1110 1851" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M293 245C293 245 982.532 152.487 1020 444.5C1059.34 751.135 307.651 427.758 284 736C259.284 1058.11 987.03 759.333 1037 1078.5C1096.32 1457.41 76.9361 971.376 94.4998 1354.5C111.046 1715.43 957.5 1688 957.5 1688" stroke="#1A56DB" stroke-width="8" stroke-linecap="square" style="stroke-dashoffset: 4766px; stroke-dasharray: 4766.23; transition: stroke-dashoffset 0.1s ease-out;"></path>
                 </svg>
             </div>
             
             <!-- Tablet SVG -->
-            <div class="svg-container xl:hidden md:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center">
+            <div class="svg-container h-full xl:hidden md:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
                 <svg data-hiw-svg="true" class="hiw-line-tablet" width="744" height="2128" viewBox="0 0 744 2128" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M155 168.5C155 168.5 599.832 241.232 621 453.5C643.654 680.676 167.935 578.564 155 806.5C143.871 1002.6 465.793 1008.11 462.5 1204.5C459.277 1396.74 156.671 1396.74 155 1589C153.492 1762.51 399.5 1960 399.5 1960" stroke="#1A56DB" stroke-width="6" stroke-linecap="square" style="stroke-dashoffset: 2718px; stroke-dasharray: 2718.54; transition: stroke-dashoffset 0.1s ease-out;"></path>
                 </svg>
             </div>
             
             <!-- Mobile SVG -->
-            <div class="svg-container md:hidden flex pointer-events-none w-full absolute top-0 left-0 justify-center items-center">
+            <div class="svg-container h-full md:hidden flex pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
                 <svg data-hiw-svg="true" class="hiw-line-mobile" width="320" height="908" viewBox="0 0 320 908" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M60.0003 69.5C60.0003 69.5 278.851 120.833 270.5 222C262.594 317.783 56.8652 253.442 60.0003 349.5C62.4685 425.123 195.269 410.369 197.5 486C199.635 558.372 89.0992 557.236 79.5003 629C67.9425 715.41 197.5 818.5 197.5 818.5" stroke="#1A56DB" stroke-width="4" stroke-linecap="square" style="stroke-dashoffset: 1178px; stroke-dasharray: 1178.73; transition: stroke-dashoffset 0.1s ease-out;"></path>
                 </svg>
@@ -817,29 +817,38 @@ document.addEventListener("DOMContentLoaded", function() {
     <script>
     document.addEventListener("DOMContentLoaded", () => {
         const svgContainer = document.getElementById('process-svg-container');
-        const paths = document.querySelectorAll('path[data-animated-path="true"]');
+        const paths = document.querySelectorAll('.svg-container svg path');
         const cards = document.querySelectorAll('.hiw-card');
+
+        const updatePaths = () => {
+            if(!svgContainer) return;
+            const rect = svgContainer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            let scrollPercentage = (windowHeight - rect.top) / (rect.height + windowHeight);
+            scrollPercentage = Math.min(Math.max(scrollPercentage * 1.5 - 0.2, 0), 1);
+            
+            paths.forEach(path => {
+                // Only process visible paths to avoid getTotalLength() returning 0
+                if (path.closest('.svg-container').offsetParent !== null) {
+                    // Fallback to explicit lengths if browser still returns 0
+                    let length = path.getTotalLength();
+                    if (!length || length === 0) {
+                        if (path.closest('.hiw-line-desktop')) length = 4766;
+                        else if (path.closest('.hiw-line-tablet')) length = 2718;
+                        else length = 1178;
+                    }
+                    path.style.strokeDasharray = length;
+                    path.style.strokeDashoffset = length * (1 - scrollPercentage);
+                }
+            });
+        };
 
         // Setup scroll-linked SVG drawing
         if(paths.length > 0 && svgContainer) {
-            window.addEventListener('scroll', () => {
-                const rect = svgContainer.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                
-                // Calculate scroll percentage through the section
-                const startDrawPos = windowHeight * 0.8; // Start drawing when container top is at 80% of screen height
-                const endDrawPos = windowHeight * 0.2;   // Finish drawing when container bottom reaches 20% of screen height
-                
-                let scrollPercentage = (windowHeight - rect.top) / (rect.height + windowHeight);
-                // Adjust curve to be a bit more aggressive so it draws before user reaches end
-                scrollPercentage = Math.min(Math.max(scrollPercentage * 1.5 - 0.2, 0), 1);
-                
-                paths.forEach(path => {
-                    const length = path.getTotalLength();
-                    path.style.strokeDasharray = length;
-                    path.style.strokeDashoffset = length * (1 - scrollPercentage);
-                });
-            }, { passive: true });
+            window.addEventListener('scroll', updatePaths, { passive: true });
+            // Run once on load to set initial state
+            setTimeout(updatePaths, 100);
         }
 
         // Setup Intersection Observer for card pop-ins
