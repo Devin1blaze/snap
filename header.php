@@ -161,6 +161,12 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         .brand-card:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(26,86,219,0.15); background-color: #f9fafb; }
         .why-icon-box { transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .why-icon-box:hover { background: rgba(26,86,219,0.15); }
+
+        /* WP Admin Bar Offset for Floating Nav */
+        body.admin-bar #floating-nav { top: 32px; }
+        @media screen and (max-width: 782px) {
+            body.admin-bar #floating-nav { top: 46px; }
+        }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
