@@ -122,12 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Robust selector for all quote triggers
-    const allLinks = document.querySelectorAll('a');
-    allLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && (href.includes('request-a-quote') || href === '/request-a-quote')) {
-            link.addEventListener('click', openModal);
-        }
+    const quoteButtons = document.querySelectorAll('.js-open-quote-modal');
+    quoteButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
     });
 
     if(closeBtn) closeBtn.addEventListener('click', closeModal);
