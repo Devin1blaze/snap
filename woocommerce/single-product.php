@@ -141,7 +141,7 @@ get_header( 'shop' ); ?>
                             <a href="/request-a-quote" class="flex items-center justify-center w-full bg-secondary text-black text-xl font-black h-[64px] uppercase tracking-tighter hover:brightness-95 active:scale-95 transition-all">SEND INQUIRY</a>
                             <p class="text-center text-[10px] font-bold uppercase tracking-widest text-zinc-400 mt-2">Typically quoted within 2 hours</p>
                         </div>
-                        <div class="pt-2">
+                        <div class="pt-2 space-y-2">
                             <a href="https://wa.me/919876543210" target="_blank" class="group flex items-center justify-between w-full bg-zinc-900 text-white pl-6 pr-2 py-2 rounded-full hover:bg-black transition-all duration-300">
                                 <div class="flex items-center gap-3">
                                     <div class="w-2 h-2 rounded-full bg-[#25D366] animate-pulse"></div>
@@ -152,6 +152,16 @@ get_header( 'shop' ); ?>
                                     <span class="text-xs font-black uppercase tracking-widest">Chat Now</span>
                                 </div>
                             </a>
+                            
+                            <?php 
+                                $brochure_url = get_post_meta( $product_id, '_brochure_url', true );
+                                if ( ! empty( $brochure_url ) ) :
+                            ?>
+                            <a href="<?php echo esc_url( $brochure_url ); ?>" target="_blank" class="flex items-center justify-center gap-2 w-full border-2 border-zinc-200 text-black font-bold py-3 mt-4 rounded-full uppercase tracking-widest hover:border-black hover:bg-black hover:text-white transition-all text-xs">
+                                <span class="material-symbols-outlined text-base">download</span>
+                                Download Brochure
+                            </a>
+                            <?php endif; ?>
                         </div>
                     <?php else : ?>
                         <!-- B2C Actions -->
