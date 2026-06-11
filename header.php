@@ -161,12 +161,6 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         .brand-card:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(26,86,219,0.15); background-color: #f9fafb; }
         .why-icon-box { transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .why-icon-box:hover { background: rgba(26,86,219,0.15); }
-
-        /* WP Admin Bar Offset for Floating Nav */
-        body.admin-bar #floating-nav { top: 32px; }
-        @media screen and (max-width: 782px) {
-            body.admin-bar #floating-nav { top: 46px; }
-        }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
@@ -175,7 +169,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 <!-- Section: Floating Navigation Wrapper -->
 <header class="relative z-50">
   <nav id="floating-nav" class="fixed top-0 left-0 w-full z-[100] px-4 pointer-events-none transition-all duration-300">
-    <div id="nav-island" class="mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-2xl pointer-events-auto shadow-2xl">
+    <div id="nav-island" class="mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-none pointer-events-auto shadow-2xl">
       <div class="relative flex flex-wrap items-center justify-between py-3 lg:py-4">
         
         <!-- Logo -->
