@@ -696,7 +696,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <!-- Section: Process Management -->
-<section class="bg-zinc-50 py-24 overflow-hidden border-t border-zinc-200">
+<section class="bg-white py-24 overflow-hidden border-t border-zinc-200">
     <div class="container mx-auto px-8 relative flex flex-col gap-6 xl:min-h-[2200px] w-full">
         <div class="mx-auto text-center">
             <p class="inline-block py-1.5 px-3.5 text-xs font-black uppercase tracking-widest border-2 border-primary bg-primary/10 text-primary mb-4">Process Management</p>
