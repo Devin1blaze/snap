@@ -251,8 +251,8 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
   window.addEventListener('scroll', function() {
     if (window.scrollY > 50) {
         // Shrink the island
-        navIsland.classList.remove('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl');
-        navIsland.classList.add('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full');
+        navIsland.classList.remove('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5');
+        navIsland.classList.add('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]');
         
         // Swap buttons
         btnLogin.classList.add('lg:hidden');
@@ -261,8 +261,8 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         btnScrolledCta.classList.add('flex');
     } else {
         // Expand the island
-        navIsland.classList.add('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl');
-        navIsland.classList.remove('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full');
+        navIsland.classList.add('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5');
+        navIsland.classList.remove('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]');
         
         // Revert buttons
         btnLogin.classList.remove('lg:hidden');
