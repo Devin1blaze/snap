@@ -9,13 +9,13 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 max-w-full">
         <div class="space-y-6">
             <div class="text-3xl font-black text-white italic"><?php bloginfo( 'name' ); ?></div>
-            <p class="font-medium text-lg leading-relaxed">Defining the standard in industrial B2B equipment distribution since 1999.</p>
+            <p class="font-medium text-lg text-zinc-400 leading-relaxed">Defining the standard in industrial B2B equipment distribution since 1999.</p>
             <div class="flex gap-4">
                 <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black hover:-translate-y-1 active:scale-95 transition-all duration-300">
-                    <span class="material-symbols-outlined text-sm">link</span>
+                    <span class="material-symbols-outlined text-primary text-sm">link</span>
                 </a>
                 <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black hover:-translate-y-1 active:scale-95 transition-all duration-300">
-                    <span class="material-symbols-outlined text-sm">link</span>
+                    <span class="material-symbols-outlined text-primary text-sm">link</span>
                 </a>
             </div>
         </div>
@@ -45,15 +45,15 @@
             <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Contact Us</h4>
             <div class="flex gap-4 items-start">
                 <span class="material-symbols-outlined text-secondary-container">location_on</span>
-                <p class="font-medium text-lg">Snap Marketing HQ, Industrial Estate, Pune, Maharashtra 411013</p>
+                <p class="font-medium text-lg text-zinc-400">Snap Marketing HQ, Industrial Estate, Pune, Maharashtra 411013</p>
             </div>
             <div class="flex gap-4 items-center">
                 <span class="material-symbols-outlined text-secondary-container">call</span>
-                <p class="font-medium text-lg">+91 (20) 2445-8899</p>
+                <p class="font-medium text-lg text-zinc-400">+91 (20) 2445-8899</p>
             </div>
             <div class="flex gap-4 items-center">
                 <span class="material-symbols-outlined text-secondary-container">email</span>
-                <p class="font-medium text-lg">sales@snapmarketing.in</p>
+                <p class="font-medium text-lg text-zinc-400">sales@snapmarketing.in</p>
             </div>
         </div>
     </div>
