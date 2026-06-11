@@ -22,23 +22,23 @@
         <div>
             <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Quick Links</h4>
             <ul class="space-y-4">
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/about-us">About Us</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/request-a-quote">Request Bulk Quote</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/order-tracking">Order Tracking</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/my-account">My Account / Login</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/terms-of-service">Terms of Service</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/privacy-policy">Privacy Policy</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/about-us">About Us</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/request-a-quote">Request Bulk Quote</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/order-tracking">Order Tracking</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/my-account">My Account / Login</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/terms-of-service">Terms of Service</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/privacy-policy">Privacy Policy</a></li>
             </ul>
         </div>
         <div>
             <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Major Categories</h4>
             <ul class="space-y-4">
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/commercial-refrigeration/">Refrigeration</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/water-purifiers/">Water Treatment</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/washroom-automations/">Washroom Tech</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/hygiene-ppe/">Safety Gear</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/entrance-solutions/">Entrance Solutions</a></li>
-                <li><a class="hover:text-white transition-colors block font-medium text-lg" href="/product-category/vending-machines/">Vending Machines</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/commercial-refrigeration/">Refrigeration</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/water-purifiers/">Water Treatment</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/washroom-automations/">Washroom Tech</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/hygiene-ppe/">Safety Gear</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/entrance-solutions/">Entrance Solutions</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/vending-machines/">Vending Machines</a></li>
             </ul>
         </div>
         <div class="space-y-6">
