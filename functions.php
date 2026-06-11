@@ -127,7 +127,21 @@ function snap_stitch_save_product_design_meta_box( $post_id ) {
         return;
     }
     if ( isset( $_POST['snap_product_design_type'] ) ) {
-        update_post_meta( $post_id, '_product_design_type', sanitize_text_field( $_POST['snap_product_design_type'] ) );
+        $design_type = sanitize_text_field( $_POST['snap_product_design_type'] );
+        update_post_meta( $post_id, '_product_design_type', $design_type );
+
+        // Automatically sync category
+        $term_slug = ( $design_type === 'b2b' ) ? 'b2b' : 'b2c';
+        $opposite_slug = ( $design_type === 'b2b' ) ? 'b2c' : 'b2b';
+
+        // Ensure category exists
+        if ( ! term_exists( $term_slug, 'product_cat' ) ) {
+            wp_insert_term( strtoupper($term_slug), 'product_cat', array( 'slug' => $term_slug ) );
+        }
+
+        // Add to correct category and remove from opposite
+        wp_set_object_terms( $post_id, $term_slug, 'product_cat', true );
+        wp_remove_object_terms( $post_id, $opposite_slug, 'product_cat' );
     }
 }
 
