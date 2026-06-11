@@ -167,6 +167,9 @@ function snap_stitch_b2b_btn_text( $text, $product ) {
 // Auto-provision the primary menu
 require_once get_template_directory() . '/setup-menu.php';
 
+// Custom Meta Box for Technical Specifications
+require_once get_template_directory() . '/inc/meta-box-tech-specs.php';
+
 /**
  * Lead Capture Logic: Capture input data for B2B quotes
  */

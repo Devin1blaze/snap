@@ -103,44 +103,34 @@ get_header( 'shop' ); ?>
                     <?php endif; ?>
                 </div>
 
-                <?php if ( $is_b2b ) : ?>
-                    <!-- Specs Table (Dynamic) -->
-                    <?php 
-                        $attributes = $product->get_attributes();
-                        if ( $attributes ) :
-                    ?>
-                    <div class="mb-6 overflow-hidden border-none">
-                        <table class="w-full text-left text-sm">
-                            <tbody class="divide-y-0">
-                                <?php 
-                                $row_count = 0;
-                                foreach ( $attributes as $attribute ) : 
-                                    $row_count++;
-                                    $bg_class = ($row_count % 2 === 0) ? 'bg-primary/5' : 'bg-white';
-                                    $border_class = ($row_count % 2 !== 0) ? 'border-l-4 border-secondary' : '';
-                                ?>
-                                <tr class="<?php echo $bg_class; ?> <?php echo $border_class; ?>">
-                                    <td class="py-3 px-4 font-black uppercase text-[10px] tracking-widest text-zinc-400 w-1/3"><?php echo wc_attribute_label( $attribute->get_name() ); ?></td>
-                                    <td class="py-3 px-4 font-bold text-black">
-                                        <?php
-                                            if ( $attribute->is_taxonomy() ) {
-                                                echo implode( ', ', wc_get_product_terms( $product_id, $attribute->get_name(), array( 'fields' => 'names' ) ) );
-                                            } else {
-                                                echo implode( ', ', $attribute->get_options() );
-                                            }
-                                        ?>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                <!-- Specs Table (Dynamic Custom Meta) -->
+                <?php 
+                    $tech_specs = get_post_meta( $product_id, '_technical_specs', true );
+                    if ( !empty($tech_specs) && is_array($tech_specs) ) :
+                ?>
+                <div class="mb-6 overflow-hidden border-none">
+                    <table class="w-full text-left text-sm">
+                        <tbody class="divide-y-0">
+                            <?php 
+                            $row_count = 0;
+                            foreach ( $tech_specs as $spec ) : 
+                                $row_count++;
+                                $bg_class = ($row_count % 2 === 0) ? 'bg-primary/5' : 'bg-white';
+                                $border_class = ($row_count % 2 !== 0) ? 'border-l-4 border-secondary' : '';
+                            ?>
+                            <tr class="<?php echo $bg_class; ?> <?php echo $border_class; ?>">
+                                <td class="py-3 px-4 font-black uppercase text-[10px] tracking-widest text-zinc-400 w-1/3"><?php echo esc_html( $spec['name'] ); ?></td>
+                                <td class="py-3 px-4 font-bold text-black"><?php echo esc_html( $spec['value'] ); ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?php elseif ( $is_b2b ): ?>
+                    <!-- Fallback Spec Table if B2B and no attributes -->
+                    <div class="mb-6 p-4 bg-zinc-50 border-l-4 border-zinc-200">
+                         <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Technical Data Sheet available on request.</p>
                     </div>
-                    <?php else: ?>
-                        <!-- Fallback Spec Table if no attributes -->
-                        <div class="mb-6 p-4 bg-zinc-50 border-l-4 border-zinc-200">
-                             <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Technical Data Sheet available on request.</p>
-                        </div>
-                    <?php endif; ?>
                 <?php endif; ?>
 
                 <!-- Actions -->
