@@ -151,10 +151,18 @@ get_header( 'shop' ); ?>
                             <a href="/request-a-quote" class="flex items-center justify-center w-full bg-secondary text-black text-xl font-black h-[64px] uppercase tracking-tighter hover:brightness-95 active:scale-95 transition-all">SEND INQUIRY</a>
                             <p class="text-center text-[10px] font-bold uppercase tracking-widest text-zinc-400 mt-2">Typically quoted within 2 hours</p>
                         </div>
-                        <a href="https://wa.me/919876543210" target="_blank" class="flex items-center justify-center gap-2 border-2 border-[#25D366] text-[#25D366] font-bold py-4 uppercase tracking-tighter hover:bg-[#25D366] hover:text-white transition-colors">
-                            <span class="material-symbols-outlined text-base">chat</span>
-                            Quick WhatsApp Inquiry
-                        </a>
+                        <div class="pt-2">
+                            <a href="https://wa.me/919876543210" target="_blank" class="group flex items-center justify-between w-full bg-zinc-900 text-white pl-6 pr-2 py-2 rounded-full hover:bg-black transition-all duration-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-[#25D366] animate-pulse"></div>
+                                    <span class="text-[11px] font-black uppercase tracking-[0.15em]">WhatsApp Desk Live</span>
+                                </div>
+                                <div class="bg-[#25D366] text-white px-4 py-2 rounded-full flex items-center gap-2 group-hover:scale-105 transition-transform">
+                                    <span class="text-xs font-black uppercase tracking-widest">Chat Now</span>
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </div>
+                            </a>
+                        </div>
                     <?php else : ?>
                         <!-- B2C Actions -->
                         <?php woocommerce_template_single_add_to_cart(); ?>
