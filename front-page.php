@@ -703,7 +703,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <h2 class="font-black uppercase tracking-tight lg:text-5xl text-3xl text-black">Industrial-Scale Order Fulfillment</h2>
         </div>
 
-        <div id="process-svg-container" class="relative w-full max-w-[320px] md:max-w-[744px] xl:max-w-full mt-16 mx-auto h-[908px] md:h-[2128px] xl:h-[1851px]">
+        <div id="process-svg-container" class="relative w-full max-w-[320px] md:max-w-[744px] xl:max-w-[1110px] mt-16 mx-auto h-[908px] md:h-[2128px] xl:h-[1851px]">
             
             <!-- Desktop SVG -->
             <div class="svg-container h-full xl:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
@@ -741,7 +741,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
 
             <!-- Step 2 -->
-            <div class="hiw-card z-10 absolute top-[15%] md:top-[20%] xl:top-[28%] right-[0%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 absolute top-[20%] md:top-[20%] xl:top-[22%] right-[0%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-primary flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">assignment</span>
                 </div>
@@ -755,7 +755,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
 
             <!-- Step 3 -->
-            <div class="hiw-card z-10 absolute top-[30%] md:top-[35%] xl:top-[52%] left-[0%] md:left-[6%] xl:left-[20%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 absolute top-[33%] md:top-[35%] xl:top-[38%] left-[0%] md:left-[6%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-primary flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">precision_manufacturing</span>
                 </div>
@@ -769,7 +769,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
 
             <!-- Step 4 -->
-            <div class="hiw-card z-10 absolute top-[48%] md:top-[54%] xl:top-[74%] right-[0%] md:right-[20%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 absolute top-[50%] md:top-[54%] xl:top-[56%] right-[0%] md:right-[20%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-primary flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">inventory_2</span>
                 </div>
@@ -783,7 +783,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
 
             <!-- Step 5 -->
-            <div class="hiw-card z-10 absolute top-[60%] md:top-[70%] xl:top-[90%] left-[5%] md:left-[6%] xl:left-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 absolute top-[65%] md:top-[70%] xl:top-[71%] left-[5%] md:left-[6%] xl:left-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-primary flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">local_shipping</span>
                 </div>
@@ -797,7 +797,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
 
             <!-- Step 6 -->
-            <div class="hiw-card z-10 absolute top-[83%] md:top-[88%] xl:top-[103%] left-[35%] md:left-[30%] xl:left-[59%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-primary bg-zinc-900 p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 absolute top-[85%] md:top-[88%] xl:top-[89%] left-[35%] md:left-[30%] xl:left-[60%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-primary bg-zinc-900 p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#FBBF24] flex items-center justify-center text-black">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">task_alt</span>
                 </div>
