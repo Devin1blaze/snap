@@ -184,6 +184,71 @@ function snap_stitch_capture_partial_quote() {
 }
 
 /**
+ * Handle Final Form Submission directly to Snap Leads without CF7
+ */
+add_action( 'wp_ajax_snap_capture_final_quote', 'snap_stitch_capture_final_quote' );
+add_action( 'wp_ajax_nopriv_snap_capture_final_quote', 'snap_stitch_capture_final_quote' );
+function snap_stitch_capture_final_quote() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'snap_leads';
+    
+    if ( ! session_id() && ! headers_sent() ) {
+        session_start();
+    }
+    $session_id = session_id();
+
+    $data = isset( $_POST['form_data'] ) ? json_decode( wp_unslash( $_POST['form_data'] ), true ) : array();
+    if ( empty( $data ) ) {
+        wp_send_json_error( array( 'message' => 'No data received.' ) );
+    }
+    
+    $email = isset( $data['your-email'] ) ? sanitize_email( $data['your-email'] ) : '';
+    $phone = isset( $data['your-phone'] ) ? sanitize_text_field( $data['your-phone'] ) : '';
+    $company = isset( $data['your-company'] ) ? sanitize_text_field( $data['your-company'] ) : '';
+    $product_category = isset( $data['product-category'] ) ? sanitize_text_field( $data['product-category'] ) : '';
+    
+    $data['source_page'] = isset($_SERVER['HTTP_REFERER']) ? esc_url_raw($_SERVER['HTTP_REFERER']) : '';
+    $raw_data = wp_json_encode( $data );
+
+    $existing = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM $table_name WHERE session_id = %s AND lead_status = 'abandoned'", $session_id ) );
+
+    if ( $existing ) {
+        $wpdb->update(
+            $table_name,
+            array(
+                'lead_source'  => 'B2B_Quote_Custom_Form',
+                'lead_status'  => 'submitted',
+                'user_email'   => $email,
+                'user_phone'   => $phone,
+                'company_name' => $company,
+                'product_id'   => 0, // Not tied to a single product ID, handled in raw_data
+                'raw_data'     => $raw_data,
+                'updated_at'   => current_time( 'mysql' )
+            ),
+            array( 'id' => $existing->id )
+        );
+    } else {
+        $wpdb->insert(
+            $table_name,
+            array(
+                'lead_source'  => 'B2B_Quote_Custom_Form',
+                'lead_status'  => 'submitted',
+                'user_email'   => $email,
+                'user_phone'   => $phone,
+                'company_name' => $company,
+                'product_id'   => 0,
+                'raw_data'     => $raw_data,
+                'session_id'   => $session_id,
+                'created_at'   => current_time( 'mysql' ),
+                'updated_at'   => current_time( 'mysql' )
+            )
+        );
+    }
+
+    wp_send_json_success(array('message' => 'Thank you for your request. Our team will contact you shortly with bulk pricing.'));
+}
+
+/**
  * Force CF7 Success for local testing (skips mail check)
  */
 add_filter( 'wpcf7_display_message', function( $message, $status ) {
