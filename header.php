@@ -136,39 +136,44 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         .why-icon-box { transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .why-icon-box:hover { background: rgba(26,86,219,0.15); }
 
-        /* Dynamic Sub-menu Hover Logic */
+        /* Robust Sub-menu Logic */
         .sub-menu {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(10px);
-            position: absolute;
-            z-index: 100;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            transform: translateY(8px) !important;
+            position: absolute !important;
+            background-color: #0A0A0A !important;
+            z-index: 100 !important;
         }
         
-        /* Level 1 Dropdown positioning */
-        li.menu-item-has-children > .sub-menu {
-            top: 100%;
-            left: 0;
-        }
-
-        /* Level 2 Flyout positioning */
-        .sub-menu li.menu-item-has-children > .sub-menu {
-            top: 0;
-            left: 100%;
-            transform: translateX(10px);
-        }
-
-        .menu-item-has-children:hover > .sub-menu {
+        /* Level 1 (Products -> B2B) */
+        li.menu-item-depth-0:hover > .sub-menu {
             opacity: 1 !important;
             visibility: visible !important;
             pointer-events: auto !important;
             transform: translateY(0) !important;
         }
 
-        .sub-menu li.menu-item-has-children:hover > .sub-menu {
+        /* Level 2 Flyout (B2B -> Categories) */
+        li.menu-item-depth-1 > .sub-menu {
+            top: 0 !important;
+            left: 100% !important;
+            transform: translateX(8px) !important;
+            margin-left: 2px !important;
+        }
+
+        li.menu-item-depth-1:hover > .sub-menu {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
             transform: translateX(0) !important;
+        }
+        
+        /* Level 0 link hover icon rotation */
+        li.menu-item-depth-0:hover > a .material-symbols-outlined {
+            transform: rotate(180deg);
         }
     </style>
 </head>

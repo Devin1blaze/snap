@@ -935,4 +935,35 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 
+<!-- Section: Trust & Scale Features -->
+<section class="bg-[#0A0A0A] py-24 border-t border-white/5">
+    <div class="container mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Feature Box 1 -->
+            <div class="bg-zinc-900 p-12 border-b-4 border-primary-container flex flex-col items-center text-center industrial-glow">
+                <span class="material-symbols-outlined text-primary-container text-7xl mb-6">verified_user</span>
+                <div class="text-5xl font-black text-white mb-4">100%</div>
+                <h3 class="text-2xl font-black uppercase mb-4 tracking-tight text-white">Genuine Brands</h3>
+                <p class="text-gray-400 leading-relaxed">Direct partnerships with Blue Star, Euronics, and Kimberly Clark ensure authentic equipment.</p>
+            </div>
+
+            <!-- Feature Box 2 -->
+            <div class="bg-zinc-900 p-12 border-b-4 border-white/10 flex flex-col items-center text-center industrial-glow">
+                <span class="material-symbols-outlined text-white text-7xl mb-6">local_shipping</span>
+                <div class="text-5xl font-black text-white mb-4">24H</div>
+                <h3 class="text-2xl font-black uppercase mb-4 tracking-tight text-white">Dispatch Readiness</h3>
+                <p class="text-gray-400 leading-relaxed">Strategic warehousing across India allows for rapid fulfillment of high-volume B2B orders.</p>
+            </div>
+
+            <!-- Feature Box 3 (User Requested) -->
+            <div class="bg-zinc-900 p-12 border-b-4 border-secondary-container flex flex-col items-center text-center industrial-glow">
+                <span class="material-symbols-outlined text-secondary-container text-7xl mb-6">inventory</span>
+                <div class="text-5xl font-black text-secondary-container mb-4">5000+</div>
+                <h3 class="text-2xl font-black uppercase mb-4 tracking-tight text-white">Available SKUs</h3>
+                <p class="text-gray-300 leading-relaxed">The widest catalog of high-performance industrial equipment in India.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <?php get_footer(); ?>

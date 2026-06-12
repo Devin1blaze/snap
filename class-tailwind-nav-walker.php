@@ -13,9 +13,7 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
 
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
-        
-        // Always add relative to LI so sub-menus can anchor to them
-        $classes[] = 'relative group';
+        $classes[] = 'relative menu-item-depth-' . $depth;
 
         if ($depth > 0) {
             $classes[] = 'w-full block';
@@ -76,7 +74,7 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
 
     function start_lvl( &$output, $depth = 0, $args = null ) {
         $indent = str_repeat("\t", $depth);
-        // Matching the header "menu style" (bg-black/40 backdrop-blur-md) but slightly darker for contrast
-        $output .= "\n$indent<ul class=\"sub-menu absolute z-50 w-72 bg-black/80 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden flex flex-col shadow-2xl transition-all duration-300\">\n";   
+        // Using solid bg-[#0A0A0A] to match the site's dark sections and ensure readability
+        $output .= "\n$indent<ul class=\"sub-menu absolute z-50 w-72 bg-[#0A0A0A] border border-white/10 rounded-xl overflow-hidden flex flex-col shadow-2xl transition-all duration-300\">\n";   
     }
 }
