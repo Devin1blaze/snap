@@ -13,8 +13,14 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
 
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
-        $classes[] = 'relative group/lvl' . $depth; // Add specific group for depth to prevent multi-dropdown overlap
         
+        // Hardcode group classes so Tailwind JIT can find them
+        if ( $depth === 0 ) {
+            $classes[] = 'relative group/lvl0';
+        } else {
+            $classes[] = 'relative group/lvl1';
+        }
+
         if ($depth > 0) {
             $classes[] = 'w-full block';
         }
@@ -63,7 +69,11 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
         // Add dropdown arrow if has children
         if ( in_array( 'menu-item-has-children', $classes ) ) {
             $icon_class = ($depth === 0) ? 'expand_more' : 'chevron_right';
-            $item_output .= ' <span class="material-symbols-outlined text-[16px] ml-1 transition-transform group-hover/lvl' . $depth . ':rotate-180">' . $icon_class . '</span>';
+            if ( $depth === 0 ) {
+                $item_output .= ' <span class="material-symbols-outlined text-[16px] ml-1 transition-transform group-hover/lvl0:rotate-180">' . $icon_class . '</span>';
+            } else {
+                $item_output .= ' <span class="material-symbols-outlined text-[16px] ml-1 transition-transform group-hover/lvl1:rotate-180">' . $icon_class . '</span>';
+            }
         }
 
         $item_output .= '</a>';
