@@ -2,6 +2,11 @@
 /**
  * Snap Marketing - Lead Capture and B2B Script
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -18,6 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 formData.append('field_name', field.name);
                 formData.append('field_value', field.value);
                 formData.append('product_id', field.dataset.productId || '');
+
+                formData.append('snap_lead_nonce', '<?php echo esc_js( wp_create_nonce( 'snap_capture_lead_action' ) ); ?>');
 
                 fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
                     method: 'POST',

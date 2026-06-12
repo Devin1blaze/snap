@@ -165,59 +165,14 @@
 <div class="flex flex-col lg:grid lg:grid-cols-12 w-full">
 <!-- Form Section -->
 <section class="lg:col-span-8 border-b-border-thick lg:border-b-0 lg:border-r-border-thick border-on-surface bg-surface p-margin-mobile md:p-gutter lg:p-margin-desktop">
-<form class="space-y-8 max-w-2xl">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-<!-- Full Name -->
-<div class="group">
-<label class="block font-label-tech text-label-tech uppercase text-on-surface-variant mb-2 group-focus-within:text-secondary transition-colors">Full Name</label>
-<input class="w-full bg-background border-0 border-b-border-thick border-on-tertiary-fixed-variant focus:ring-0 focus:border-primary-container text-on-surface font-mono-data placeholder:text-on-surface-variant/30 px-0 py-3 uppercase" placeholder="ENTER NAME" type="text"/>
-</div>
-<!-- Company Name -->
-<div class="group">
-<label class="block font-label-tech text-label-tech uppercase text-on-surface-variant mb-2 group-focus-within:text-secondary transition-colors">Company Name</label>
-<input class="w-full bg-background border-0 border-b-border-thick border-on-tertiary-fixed-variant focus:ring-0 focus:border-primary-container text-on-surface font-mono-data placeholder:text-on-surface-variant/30 px-0 py-3 uppercase" placeholder="ENTER ENTITY" type="text"/>
-</div>
-<!-- Work Email -->
-<div class="group">
-<label class="block font-label-tech text-label-tech uppercase text-on-surface-variant mb-2 group-focus-within:text-secondary transition-colors">Work Email</label>
-<input class="w-full bg-background border-0 border-b-border-thick border-on-tertiary-fixed-variant focus:ring-0 focus:border-primary-container text-on-surface font-mono-data placeholder:text-on-surface-variant/30 px-0 py-3 uppercase" placeholder="EMAIL@CORPORATE.IND" type="email"/>
-</div>
-<!-- Phone Number -->
-<div class="group">
-<label class="block font-label-tech text-label-tech uppercase text-on-surface-variant mb-2 group-focus-within:text-secondary transition-colors">Phone Number</label>
-<input class="w-full bg-background border-0 border-b-border-thick border-on-tertiary-fixed-variant focus:ring-0 focus:border-primary-container text-on-surface font-mono-data placeholder:text-on-surface-variant/30 px-0 py-3 uppercase" placeholder="+91 XXXXX XXXXX" type="tel"/>
-</div>
-</div>
-<!-- Product Categories -->
-<div class="group">
-<label class="block font-label-tech text-label-tech uppercase text-on-surface-variant mb-2 group-focus-within:text-secondary transition-colors">Product Categories</label>
-<select class="w-full bg-background border-0 border-b-border-thick border-on-tertiary-fixed-variant focus:ring-0 focus:border-primary-container text-on-surface font-mono-data px-0 py-3 uppercase appearance-none">
-<option>Commercial Refrigeration</option>
-<option>Washroom Automation</option>
-<option>Hygiene &amp; PPE</option>
-<option>Vending Systems</option>
-</select>
-</div>
-<!-- Expected Volume -->
-<div class="group">
-<label class="block font-label-tech text-label-tech uppercase text-on-surface-variant mb-2 group-focus-within:text-secondary transition-colors">Expected Volume</label>
-<select class="w-full bg-background border-0 border-b-border-thick border-on-tertiary-fixed-variant focus:ring-0 focus:border-primary-container text-on-surface font-mono-data px-0 py-3 uppercase appearance-none">
-<option>50-100 UNITS</option>
-<option>100-500 UNITS</option>
-<option>500+ UNITS</option>
-</select>
-</div>
-<!-- Additional Requirements -->
-<div class="group">
-<label class="block font-label-tech text-label-tech uppercase text-on-surface-variant mb-2 group-focus-within:text-secondary transition-colors">Additional Requirements</label>
-<textarea class="w-full bg-background border-0 border-b-border-thick border-on-tertiary-fixed-variant focus:ring-0 focus:border-primary-container text-on-surface font-mono-data placeholder:text-on-surface-variant/30 px-0 py-3 uppercase resize-none" placeholder="SPECIFY TECHNICAL REQUIREMENTS OR LOGISTICS CONSTRAINTS..." rows="4"></textarea>
-</div>
-<!-- Submit Button -->
-<button class="w-full bg-secondary text-background font-headline-md text-headline-md font-bold uppercase py-6 hover:bg-on-surface hover:text-background active:scale-[0.98] transition-all flex items-center justify-center gap-3" type="submit">
-                        GENERATE QUOTE REQUEST
-                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
-</button>
-</form>
+    <?php
+    $cf7_form = get_page_by_title('Bulk Quote Form', OBJECT, 'wpcf7_contact_form');
+    if ( $cf7_form ) {
+        echo do_shortcode( '[contact-form-7 id="' . esc_attr( $cf7_form->ID ) . '" title="Bulk Quote Form"]' );
+    } else {
+        echo '<p class="text-on-surface">Quote form is not configured. Please create a "Bulk Quote Form" in Contact Form 7.</p>';
+    }
+    ?>
 </section>
 <!-- Trust & Contact Sidebar -->
 <aside class="lg:col-span-4 bg-surface-container flex flex-col">
@@ -316,20 +271,4 @@
 <span class="text-[10px] font-label-tech uppercase">Support</span>
 </button>
 </nav>
-<script>
-        // Simple form interaction
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = 'PROCESSING TRANSMISSION...';
-            btn.classList.add('opacity-50', 'pointer-events-none');
-            
-            setTimeout(() => {
-                btn.innerHTML = 'REQUEST TRANSMITTED';
-                btn.classList.remove('bg-secondary');
-                btn.classList.add('bg-primary-container', 'text-on-primary-container');
-            }, 1500);
-        });
-    </script>
 </body></html>

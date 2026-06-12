@@ -2,6 +2,10 @@
 /**
  * Auto-provision the primary menu with 3-level hierarchy
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 function snap_stitch_auto_provision_menu() {
     $menu_name = 'Snap Primary Menu V2'; // Incrementing version to force refresh
     $menu_exists = wp_get_nav_menu_object($menu_name);

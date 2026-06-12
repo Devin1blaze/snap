@@ -193,31 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<!-- Agentation Visual Feedback Tool -->
-<script type="module">
-  import React from 'https://esm.sh/react@18.3.1';
-  import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
-  import { Agentation } from 'https://esm.sh/agentation@latest?deps=react@18.3.1';
-
-  function initAgentation() {
-    try {
-      const container = document.createElement('div');
-      container.id = 'agentation-root';
-      document.body.appendChild(container);
-      const root = createRoot(container);
-      root.render(React.createElement(Agentation));
-    } catch (err) {
-      console.error('Agentation Failed:', err);
-    }
-  }
-
-  if (document.readyState === 'complete') {
-    initAgentation();
-  } else {
-    window.addEventListener('load', initAgentation);
-  }
-</script>
-
 <?php wp_footer(); ?>
 </body>
 </html>

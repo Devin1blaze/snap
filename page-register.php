@@ -27,13 +27,13 @@ get_header(); ?>
                             <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
                                 <div class="space-y-2">
                                     <label for="reg_username" class="text-gray-400 font-bold uppercase text-xs tracking-widest">Username <span class="text-secondary-container">*</span></label>
-                                    <input type="text" class="w-full bg-zinc-800 border-none text-white p-4 focus:ring-2 focus:ring-secondary-container transition-all" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" required /><?php // phpcs:ignore WordPress.Security.NonceVerification.Missing ?>
+                                    <input type="text" class="w-full bg-zinc-800 border-none text-white p-4 focus:ring-2 focus:ring-secondary-container transition-all" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" required />
                                 </div>
                             <?php endif; ?>
 
                             <div class="space-y-2">
                                 <label for="reg_email" class="text-gray-400 font-bold uppercase text-xs tracking-widest">Email address <span class="text-secondary-container">*</span></label>
-                                <input type="email" class="w-full bg-zinc-800 border-none text-white p-4 focus:ring-2 focus:ring-secondary-container transition-all" name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" required /><?php // phpcs:ignore WordPress.Security.NonceVerification.Missing ?>
+                                <input type="email" class="w-full bg-zinc-800 border-none text-white p-4 focus:ring-2 focus:ring-secondary-container transition-all" name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" required />
                             </div>
 
                             <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>

@@ -209,6 +209,12 @@ require_once get_template_directory() . '/inc/meta-box-tech-specs.php';
 add_action( 'wp_ajax_snap_capture_lead', 'snap_stitch_capture_partial_quote' );
 add_action( 'wp_ajax_nopriv_snap_capture_lead', 'snap_stitch_capture_partial_quote' );
 function snap_stitch_capture_partial_quote() {
+    // Verify nonce to prevent CSRF attacks
+    if ( ! isset( $_POST['snap_lead_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['snap_lead_nonce'] ) ), 'snap_capture_lead_action' ) ) {
+        wp_send_json_error( 'Security check failed.', 403 );
+        return;
+    }
+
     if ( class_exists( 'Snap_Leads_B2B_CF7_Handler' ) ) {
         $handler = new Snap_Leads_B2B_CF7_Handler();
         $handler->capture_partial_lead();
