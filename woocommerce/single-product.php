@@ -178,6 +178,17 @@ get_header( 'shop' ); ?>
                         <?php woocommerce_template_single_add_to_cart(); ?>
                     <?php endif; ?>
                 </div>
+
+                <div class="mt-12 pt-8 border-t border-zinc-100 flex flex-wrap gap-x-6 gap-y-4 opacity-60">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        <span class="text-[10px] font-black uppercase tracking-widest">Genuine Product</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">percent</span>
+                        <span class="text-[10px] font-black uppercase tracking-widest">Bulk Discounts</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
