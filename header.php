@@ -104,33 +104,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         #mobile-menu { display:none; }
         #mobile-menu.open { display:flex; }
 
-        /* Style adjustments for dynamic submenus */
-        .sub-menu {
-            text-align: left !important;
-            min-width: 280px !important;
-            left: 0 !important;
-        }
-        .sub-menu li { width: 100% !important; }
-        .sub-menu li a {
-            padding: 1rem 1.5rem !important;
-            display: flex !important;
-            align-items: center !important;
-            width: 100% !important;
-            text-transform: none !important;
-            font-weight: 600 !important;
-            font-size: 0.95rem !important;
-            border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-            text-align: left !important;
-            justify-content: flex-start !important;
-            color: white !important;
-            transition: all 0.2s ease !important;
-        }
-        .sub-menu li:last-child a { border-bottom: none !important; }
-        .sub-menu li a:hover {
-            background-color: rgba(255,255,255,0.08) !important;
-            padding-left: 2rem !important;
-            color: #FBBF24 !important;
-        }
+        
 
         /* Marquee keyframes */
         @keyframes marquee {

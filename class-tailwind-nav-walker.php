@@ -14,6 +14,10 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
         $classes[] = 'relative group/lvl' . $depth; // Add specific group for depth to prevent multi-dropdown overlap
+        
+        if ($depth > 0) {
+            $classes[] = 'w-full block';
+        }
 
         $args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
 
@@ -32,11 +36,11 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
         $atts['href']   = ! empty( $item->url )        ? $item->url        : '';
 
         if ( $depth === 0 ) {
-            $atts['class'] = 'font-[\'Plus Jakarta Sans\'] font-bold uppercase tracking-[0.2em] text-white/70 hover:text-secondary-container transition-all flex items-center py-6';
+            $atts['class'] = 'nav-link font-[\'Plus Jakarta Sans\'] font-bold uppercase tracking-[0.2em] text-white/70 hover:text-secondary-container transition-all flex items-center py-6';
         } elseif ( $depth === 1 ) {
-            $atts['class'] = 'font-[\'Plus Jakarta Sans\'] font-bold uppercase tracking-widest text-white/60 hover:text-white transition-all flex items-center justify-between px-6 py-4 hover:bg-white/5 border-b border-white/5';
+            $atts['class'] = 'font-[\'Plus Jakarta Sans\'] text-[13px] font-bold uppercase tracking-widest text-white/70 hover:text-secondary-container transition-all flex items-center justify-between px-6 py-4 hover:bg-white/5 hover:pl-8 border-b border-white/5 w-full text-left';
         } else {
-            $atts['class'] = 'font-[\'Plus Jakarta Sans\'] text-xs font-semibold uppercase tracking-widest text-white/40 hover:text-secondary-container transition-all block px-8 py-3 hover:bg-white/5';
+            $atts['class'] = 'font-[\'Plus Jakarta Sans\'] text-[11px] font-bold uppercase tracking-widest text-white/50 hover:text-white transition-all block px-6 py-4 hover:bg-white/5 hover:pl-8 border-b border-white/5 w-full text-left';
         }
 
         $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
@@ -72,10 +76,10 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
         $indent = str_repeat("\t", $depth);
         if ( $depth === 0 ) {
             // Main dropdown (B2B, B2C list)
-            $output .= "\n$indent<ul class=\"sub-menu absolute left-0 top-full mt-0 w-72 bg-[#0A0A0A]/95 backdrop-blur-2xl shadow-2xl opacity-0 invisible group-hover/lvl0:opacity-100 group-hover/lvl0:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover/lvl0:translate-y-0 py-2 border border-white/10 rounded-xl\">\n";   
+            $output .= "\n$indent<ul class=\"sub-menu absolute left-0 top-full mt-0 w-72 bg-[#0A0A0A]/95 backdrop-blur-2xl shadow-2xl opacity-0 invisible group-hover/lvl0:opacity-100 group-hover/lvl0:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover/lvl0:translate-y-0 py-2 border border-white/10 rounded-xl overflow-hidden flex flex-col\">\n";   
         } else {
             // Level 3 fly-out (Categories)
-            $output .= "\n$indent<ul class=\"sub-menu absolute left-full top-0 ml-1 w-64 bg-[#0A0A0A]/98 backdrop-blur-2xl shadow-2xl opacity-0 invisible group-hover/lvl1:opacity-100 group-hover/lvl1:visible transition-all duration-300 transform origin-left -translate-x-2 group-hover/lvl1:translate-x-0 py-2 border border-white/10 rounded-xl\">\n";  
+            $output .= "\n$indent<ul class=\"sub-menu absolute left-full top-0 ml-1 w-72 bg-[#0A0A0A]/98 backdrop-blur-2xl shadow-2xl opacity-0 invisible group-hover/lvl1:opacity-100 group-hover/lvl1:visible transition-all duration-300 transform origin-left -translate-x-2 group-hover/lvl1:translate-x-0 py-2 border border-white/10 rounded-xl overflow-hidden flex flex-col\">\n";  
         }
     }
 }
