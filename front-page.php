@@ -275,122 +275,113 @@ get_header();
 <section class="bg-white py-24 overflow-hidden">
     <div class="container mx-auto px-8 relative">
         <div class="mb-16 border-l-8 border-[#FBBF24] pl-6">
-            <h2 class="text-black text-4xl font-black uppercase tracking-tight">Featured Products</h2>
-            <p class="text-[#0F172A] font-bold mt-2 uppercase tracking-widest text-sm">Most Requested B2B Equipment This Month</p>
+            <h2 class="text-[#0A0A0A] text-4xl font-black uppercase tracking-tight">Featured Products</h2>
+            <p class="text-[#1A56DB] font-bold mt-2 uppercase tracking-widest text-sm">Most Requested B2B Equipment This Month</p>
         </div>
         
         <!-- Carousel Wrapper -->
         <div class="relative w-full">
-            <div id="featured-carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-20 no-scrollbar scroll-smooth">
-                
-                <!-- Product 1 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-primary aspect-square flex items-center justify-center p-8 lg:p-12">
-                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">BEST SELLER</span>
-                        <span class="material-symbols-outlined text-white text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">sensor_occupied</span>
+            <div id="featured-carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-8 no-scrollbar scroll-smooth">
+            <?php
+            $args = array(
+                'post_type'      => 'product',
+                'posts_per_page' => 8,
+                'tax_query'      => array(
+                    array(
+                        'taxonomy' => 'product_visibility',
+                        'field'    => 'name',
+                        'terms'    => 'featured',
+                    ),
+                ),
+            );
+            $featured_query = new WP_Query( $args );
+            if ( ! $featured_query->have_posts() ) {
+                $args = array(
+                    'post_type'      => 'product',
+                    'posts_per_page' => 8,
+                );
+                $featured_query = new WP_Query( $args );
+            }
+
+            if ( $featured_query->have_posts() ) :
+                $badge_labels = ['BEST SELLER', 'TOP PICK', 'POPULAR', 'NEW'];
+                $index = 0;
+                while ( $featured_query->have_posts() ) : $featured_query->the_post();
+                    global $product;
+                    $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'large' ) ?: wc_placeholder_img_src();
+                    $title = $product->get_name();
+                    
+                    $terms = wc_get_product_terms( $product->get_id(), 'product_cat', array( 'fields' => 'names' ) );
+                    $brand = !empty($terms) ? $terms[0] : 'SNAP STITCH';
+                    
+                    $specs = get_post_meta( $product->get_id(), '_technical_specs', true );
+                    $spec1 = 'Standard Size';
+                    $spec2 = 'Industrial Grade';
+                    if ( is_array($specs) && count($specs) > 0 ) {
+                        $spec1 = esc_html($specs[0]['name'] . ': ' . $specs[0]['value']);
+                        if ( count($specs) > 1 ) {
+                            $spec2 = esc_html($specs[1]['name'] . ': ' . $specs[1]['value']);
+                        }
+                    }
+
+                    $badge = $badge_labels[$index % count($badge_labels)];
+                    $bg_classes = ['bg-[#1A56DB]', 'bg-[#0A0A0A]', 'bg-zinc-100'];
+                    $bg_class = $bg_classes[$index % count($bg_classes)];
+                    $is_b2b = snap_stitch_is_b2b_product( $product->get_id() );
+            ?>
+            <div class="snap-start shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] group bg-white flex flex-col border border-zinc-100 hover:shadow-2xl transition-all duration-300">
+                <div class="relative <?php echo $bg_class; ?> aspect-square flex items-center justify-center p-8 mb-6 overflow-hidden">
+                    <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest z-10"><?php echo $badge; ?></span>
+                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div class="px-6 pb-6 flex-grow flex flex-col">
+                    <span class="inline-block bg-[#1A56DB] text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3 uppercase tracking-widest"><?php echo esc_html($brand); ?></span>
+                    <h4 class="text-[#0A0A0A] font-black text-xl mb-3 leading-tight line-clamp-2"><?php echo esc_html($title); ?></h4>
+                    <div class="text-gray-500 text-sm font-medium mb-6 space-y-1">
+                        <p class="truncate"><?php echo $spec1; ?></p>
+                        <p class="truncate"><?php echo $spec2; ?></p>
                     </div>
-                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
-                        <span class="inline-block bg-primary text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">EURONICS</span>
-                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Auto Sensor Flusher EF-100</h4>
-                        <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-primary text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
-                        </div>
+                    <div class="mt-auto flex gap-2">
+                        <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-xs hover:bg-yellow-500 transition-colors italic flex items-center justify-center">
+                            <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
+                        </a>
+                        <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
+                            <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
-
-                <!-- Product 2 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-primary aspect-square flex items-center justify-center p-8 lg:p-12 border-b-2 border-zinc-200">
-                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">TOP PICK</span>
-                        <span class="material-symbols-outlined text-white text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">kitchen</span>
-                    </div>
-                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
-                        <span class="inline-block bg-primary text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">BLUE STAR</span>
-                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Deep Freezer DF-300</h4>
-                        <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-primary text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-primary aspect-square flex items-center justify-center p-8 lg:p-12">
-                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">POPULAR</span>
-                        <span class="material-symbols-outlined text-white text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">water_damage</span>
-                    </div>
-                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
-                        <span class="inline-block bg-primary text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">AQUAGUARD</span>
-                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Grand RO+UV System</h4>
-                        <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-primary text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-primary aspect-square flex items-center justify-center p-8 lg:p-12 border-b-2 border-zinc-200">
-                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">NEW</span>
-                        <span class="material-symbols-outlined text-white text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">soap</span>
-                    </div>
-                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
-                        <span class="inline-block bg-primary text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">KIMBERLY CLARK</span>
-                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">KC Soap Dispenser 1L</h4>
-                        <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-primary text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 5 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-primary aspect-square flex items-center justify-center p-8 lg:p-12">
-                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">HEAVY DUTY</span>
-                        <span class="material-symbols-outlined text-white text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">air</span>
-                    </div>
-                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
-                        <span class="inline-block bg-primary text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">EURONICS</span>
-                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Jet Hand Dryer ES-01</h4>
-                        <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-primary text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 6 -->
-                <div class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)] group bg-white border-2 border-zinc-200 hover:border-[#FBBF24] transition-colors duration-300 flex flex-col cursor-pointer">
-                    <div class="relative bg-primary aspect-square flex items-center justify-center p-8 lg:p-12 border-b-2 border-zinc-200">
-                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest">RESTOCKED</span>
-                        <span class="material-symbols-outlined text-white text-6xl lg:text-8xl group-hover:scale-110 transition-transform duration-500">delete</span>
-                    </div>
-                    <div class="p-4 lg:p-6 flex-grow flex flex-col">
-                        <span class="inline-block bg-primary text-white text-[10px] font-black px-2 py-0.5 w-fit mb-3 uppercase tracking-widest">DIVERSEY</span>
-                        <h4 class="text-black font-black text-lg lg:text-xl mb-6 leading-tight">Commercial Waste Bin 60L</h4>
-                        <div class="mt-auto">
-                            <a href="/request-a-quote" class="block w-full bg-primary text-white font-black py-3 lg:py-4 px-2 uppercase text-xs hover:bg-[#FBBF24] hover:text-black transition-colors duration-300 text-center">₹ Quote</a>
-                        </div>
-                    </div>
-                </div>
-
+            </div>
+            <?php 
+                $index++;
+                endwhile; 
+                wp_reset_postdata();
+            endif; 
+            ?>
             </div>
             
-            <!-- Carousel Navigation -->
-            <div class="absolute bottom-0 right-0 flex gap-2">
-                <button id="feat-prev" class="bg-primary text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors" aria-label="Previous">
+            <!-- Custom Navigation Buttons -->
+            <div class="absolute -bottom-16 right-0 flex gap-2">
+                <button id="feat-prev" class="bg-[#0A0A0A] text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors" aria-label="Previous">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </button>
-                <button id="feat-next" class="bg-primary text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors" aria-label="Next">
+                <button id="feat-next" class="bg-[#1A56DB] text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors" aria-label="Next">
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
             </div>
         </div>
 
+        <div class="mt-24 flex justify-center">
+            <a href="/shop" class="bg-[#FBBF24] text-black px-12 h-[52px] font-black uppercase text-lg hover:bg-yellow-500 transition-all flex items-center justify-center gap-3 w-full max-w-2xl">
+                VIEW ENTIRE CATALOG <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </div>
     </div>
 </section>
 
 <style>
-/* Hide scrollbar for carousel */
+/* Hide scrollbar for carousel */ 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -410,9 +401,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const scrollAmount = () => {
             const card = carousel.querySelector('div.snap-start');
             if(!card) return 0;
-            // Get the card width plus the gap (gap-6 is 1.5rem = 24px)
             const style = window.getComputedStyle(carousel);
-            const gap = parseFloat(style.gap) || 24;
+            const gap = parseFloat(style.gap) || 32; // gap-8 = 32px
             return card.offsetWidth + gap; 
         };
 
