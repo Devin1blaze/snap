@@ -262,38 +262,55 @@ get_header( 'shop' ); ?>
 
     <?php endif; ?>
 
+    <?php
+        // Fetch up to 2 related products
+        $related_products = wc_get_related_products( $product_id, 2 );
+        if ( ! empty( $related_products ) ) :
+    ?>
     <!-- Bundles / Cross Sells Section -->
     <section class="max-w-7xl mx-auto px-8 mt-24">
-        <h2 class="text-3xl font-black mb-12 uppercase tracking-tighter">COMPLETE YOUR WASHROOM</h2>
+        <h2 class="text-3xl font-black mb-12 uppercase tracking-tighter">RECOMMENDED PRODUCTS</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Bundle Card 1 -->
+            <?php 
+            $bundle_labels = ['SAVINGS BUNDLE', 'ECO BUNDLE'];
+            $index = 0;
+            foreach ( $related_products as $related_id ) : 
+                $related_product = wc_get_product( $related_id );
+                if ( ! $related_product ) continue;
+                
+                $rel_image_id = $related_product->get_image_id();
+                $rel_image_url = $rel_image_id ? wp_get_attachment_image_url( $rel_image_id, 'large' ) : wc_placeholder_img_src( 'large' );
+                $rel_title = $related_product->get_name();
+                $rel_excerpt = wp_trim_words( $related_product->get_short_description(), 15, '...' );
+                if ( empty( $rel_excerpt ) ) {
+                    $rel_excerpt = "Enhance your facility's efficiency and hygiene with this recommended industrial product.";
+                }
+                $rel_link = $related_product->get_permalink();
+                
+                $terms = wc_get_product_terms( $related_id, 'product_cat', array( 'fields' => 'names' ) );
+                $rel_cat = !empty($terms) ? $terms[0] : 'SUGGESTED ADD-ON';
+                
+                $label = isset($bundle_labels[$index]) ? $bundle_labels[$index] : 'RECOMMENDED';
+            ?>
             <div class="group bg-white border border-zinc-100 flex flex-col md:flex-row hover:shadow-2xl transition-all duration-300">
                 <div class="md:w-1/2 aspect-square bg-zinc-50 flex items-center justify-center p-8 relative overflow-hidden">
-                    <img class="group-hover:scale-105 transition-transform duration-500" data-alt="Flusher and soap dispenser bundle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_NW9NNhFEPUVMkLNFbtvQmnQ4SchytO3_1lE3xSoYYthG8xod_pQdbrbONvVMlhCEThTWubnA2NHkVHNh3LQVDoizabZxWf_zn3Kl_OHIVBwcV6cHByXIJZ4KDm_lJVmFi9BhhtnLgdTfQyd5CwxvLmypneqF3Y8fIrARgA-IV5-rUmS-D7n7NKTA5HgnHOiVdzP_4-qzZm_vQO_ABUiwZ4IZcxTZEappLZRxwOj7XyiCM-OVpcfVk3JY9txRnGySZpl7LZGceu0">
-                    <div class="absolute top-4 left-4 bg-primary text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest">SAVINGS BUNDLE</div>
+                    <img class="group-hover:scale-105 transition-transform duration-500 w-full h-full object-contain mix-blend-multiply" alt="<?php echo esc_attr($rel_title); ?>" src="<?php echo esc_url($rel_image_url); ?>">
+                    <div class="absolute top-4 left-4 bg-primary text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest"><?php echo esc_html($label); ?></div>
                 </div>
                 <div class="p-8 md:w-1/2 flex flex-col justify-center">
-                    <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest">FLUSHER + SOAP DISPENSER</span>
-                    <h4 class="text-xl font-black text-black mt-2 leading-tight">Elite Hygiene Bundle: EF-100 + SD-20</h4>
-                    <p class="text-xs text-zinc-500 mt-4 mb-6">Upgrade your commercial washroom with this high-traffic automation duo. Bulk discount applied.</p>
-                    <button class="bg-black text-white text-xs font-black py-4 uppercase tracking-widest hover:bg-primary transition-colors">VIEW BUNDLE</button>
+                    <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest"><?php echo esc_html($rel_cat); ?></span>
+                    <h4 class="text-xl font-black text-black mt-2 leading-tight"><?php echo esc_html($rel_title); ?></h4>
+                    <p class="text-xs text-zinc-500 mt-4 mb-6"><?php echo esc_html($rel_excerpt); ?></p>
+                    <a href="<?php echo esc_url($rel_link); ?>" class="bg-black text-white text-center text-xs font-black py-4 uppercase tracking-widest hover:bg-primary transition-colors w-full block">VIEW DETAILS</a>
                 </div>
             </div>
-            <!-- Bundle Card 2 -->
-            <div class="group bg-white border border-zinc-100 flex flex-col md:flex-row hover:shadow-2xl transition-all duration-300">
-                <div class="md:w-1/2 aspect-square bg-zinc-50 flex items-center justify-center p-8 relative overflow-hidden">
-                    <img class="group-hover:scale-105 transition-transform duration-500" data-alt="Flusher and hand dryer bundle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQhDsfB46LCjYP56SSXUDeE-Vzh4TjczAZpPdNbOiv3yak04eowqae4owqae4VR1GxhsQPAva1koqoqtjuw_w1K0bupVDZQcSZ8i0X3ne-UQHb7TaNFMz-H-LQrsX2mBcVubJWcYfJNX3FvYhBhh586voIDp79XdsSkmpR4Wzf52Hyn75oi1N4HGfKL1lqnULMlKrsC0vumHSYoE0Lg9pveuOEOZ1LqKgELtjKT05lOQ-C4Jzs-UgP-EyUkZJwzG7PIAoAiRMKDN5uKWfWE">
-                    <div class="absolute top-4 left-4 bg-primary text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest">ECO BUNDLE</div>
-                </div>
-                <div class="p-8 md:w-1/2 flex flex-col justify-center">
-                    <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest">FLUSHER + HAND DRYER</span>
-                    <h4 class="text-xl font-black text-black mt-2 leading-tight">Eco-Efficient Pair: EF-100 + X-500</h4>
-                    <p class="text-xs text-zinc-500 mt-4 mb-6">Minimize water and paper waste with this essential facility automation package.</p>
-                    <button class="bg-black text-white text-xs font-black py-4 uppercase tracking-widest hover:bg-primary transition-colors">VIEW BUNDLE</button>
-                </div>
-            </div>
+            <?php 
+                $index++;
+            endforeach; 
+            ?>
         </div>
     </section>
+    <?php endif; ?>
 
 </main>
 
