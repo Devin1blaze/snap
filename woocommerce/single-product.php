@@ -206,7 +206,93 @@ get_header( 'shop' ); ?>
                 <p class="text-zinc-600 leading-relaxed"><?php echo get_the_excerpt(); ?></p>
             <?php endif; ?>
         </div>
+        
+        <?php if ( $is_b2b ) : ?>
+        <!-- Core Advantage / Technical Note Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            <div class="bg-surface-container p-8 border-l-4 border-primary">
+                <h4 class="font-black text-xs uppercase tracking-widest mb-4">Core Advantage</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+                        <span class="text-sm font-bold">Intelligent Post-Flush Logic</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+                        <span class="text-sm font-bold">Anti-Leak Valve Solenoid</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+                        <span class="text-sm font-bold">Low Battery Indicator Light</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-black p-8 text-white border-l-4 border-secondary">
+                <h4 class="font-black text-xs uppercase tracking-widest text-secondary mb-4">Technical Note</h4>
+                <p class="text-sm leading-relaxed text-zinc-400">
+                    Recommended for use in Airports, Hospitals, Corporate Offices, and High-End Hospitality venues. Compatible with standard concealed plumbing layouts.
+                </p>
+            </div>
+        </div>
+        <?php endif; ?>
     </section>
+
+    <?php if ( $is_b2b ) : ?>
+    <!-- Full Width Trust Banner -->
+    <div class="w-full bg-primary text-white py-6 mt-24">
+        <div class="max-w-7xl mx-auto px-8 flex flex-wrap justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary">verified</span>
+                <span class="font-black text-xs uppercase tracking-[0.2em]">Genuine Product</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary">monetization_on</span>
+                <span class="font-black text-xs uppercase tracking-[0.2em]">Bulk Discounts</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary">security</span>
+                <span class="font-black text-xs uppercase tracking-[0.2em]">2-Year Warranty</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary">local_shipping</span>
+                <span class="font-black text-xs uppercase tracking-[0.2em]">Pan-India Delivery</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bundles / Cross Sells Section -->
+    <section class="max-w-7xl mx-auto px-8 mt-24">
+        <h2 class="text-3xl font-black mb-12 uppercase tracking-tighter">COMPLETE YOUR WASHROOM</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Bundle Card 1 -->
+            <div class="group bg-white border border-zinc-100 flex flex-col md:flex-row hover:shadow-2xl transition-all duration-300">
+                <div class="md:w-1/2 aspect-square bg-zinc-50 flex items-center justify-center p-8 relative overflow-hidden">
+                    <img class="group-hover:scale-105 transition-transform duration-500" data-alt="Flusher and soap dispenser bundle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_NW9NNhFEPUVMkLNFbtvQmnQ4SchytO3_1lE3xSoYYthG8xod_pQdbrbONvVMlhCEThTWubnA2NHkVHNh3LQVDoizabZxWf_zn3Kl_OHIVBwcV6cHByXIJZ4KDm_lJVmFi9BhhtnLgdTfQyd5CwxvLmypneqF3Y8fIrARgA-IV5-rUmS-D7n7NKTA5HgnHOiVdzP_4-qzZm_vQO_ABUiwZ4IZcxTZEappLZRxwOj7XyiCM-OVpcfVk3JY9txRnGySZpl7LZGceu0">
+                    <div class="absolute top-4 left-4 bg-primary text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest">SAVINGS BUNDLE</div>
+                </div>
+                <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                    <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest">FLUSHER + SOAP DISPENSER</span>
+                    <h4 class="text-xl font-black text-black mt-2 leading-tight">Elite Hygiene Bundle: EF-100 + SD-20</h4>
+                    <p class="text-xs text-zinc-500 mt-4 mb-6">Upgrade your commercial washroom with this high-traffic automation duo. Bulk discount applied.</p>
+                    <button class="bg-black text-white text-xs font-black py-4 uppercase tracking-widest hover:bg-primary transition-colors">VIEW BUNDLE</button>
+                </div>
+            </div>
+            <!-- Bundle Card 2 -->
+            <div class="group bg-white border border-zinc-100 flex flex-col md:flex-row hover:shadow-2xl transition-all duration-300">
+                <div class="md:w-1/2 aspect-square bg-zinc-50 flex items-center justify-center p-8 relative overflow-hidden">
+                    <img class="group-hover:scale-105 transition-transform duration-500" data-alt="Flusher and hand dryer bundle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQhDsfB46LCjYP56SSXUDeE-Vzh4TjczAZpPdNbOiv3yak04eowqae4owqae4VR1GxhsQPAva1koqoqtjuw_w1K0bupVDZQcSZ8i0X3ne-UQHb7TaNFMz-H-LQrsX2mBcVubJWcYfJNX3FvYhBhh586voIDp79XdsSkmpR4Wzf52Hyn75oi1N4HGfKL1lqnULMlKrsC0vumHSYoE0Lg9pveuOEOZ1LqKgELtjKT05lOQ-C4Jzs-UgP-EyUkZJwzG7PIAoAiRMKDN5uKWfWE">
+                    <div class="absolute top-4 left-4 bg-primary text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest">ECO BUNDLE</div>
+                </div>
+                <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                    <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest">FLUSHER + HAND DRYER</span>
+                    <h4 class="text-xl font-black text-black mt-2 leading-tight">Eco-Efficient Pair: EF-100 + X-500</h4>
+                    <p class="text-xs text-zinc-500 mt-4 mb-6">Minimize water and paper waste with this essential facility automation package.</p>
+                    <button class="bg-black text-white text-xs font-black py-4 uppercase tracking-widest hover:bg-primary transition-colors">VIEW BUNDLE</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
 
 </main>
 
