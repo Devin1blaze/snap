@@ -197,8 +197,14 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
           </div>
         </div>
 
-        <!-- Right Side: Buttons & Hamburger -->
+        <!-- Right Side: Search, Buttons & Hamburger -->
         <div class="flex items-center gap-4 relative z-20">
+          
+          <!-- Search Catalog Button -->
+          <div class="hidden lg:flex items-center bg-white/10 px-4 py-2 rounded-sm cursor-pointer hover:bg-white/20 transition-colors">
+            <span class="material-symbols-outlined text-white text-sm mr-2">search</span>
+            <span class="text-white/60 text-xs font-bold uppercase tracking-widest">Search Catalog</span>
+          </div>
           <!-- Button Container (Visible on Desktop) -->
           <div class="hidden lg:flex items-center gap-3">
             <!-- Login/Signup: Hidden when scrolled -->
