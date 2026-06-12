@@ -260,6 +260,8 @@ get_header( 'shop' ); ?>
         </div>
     </div>
 
+    <?php endif; ?>
+
     <!-- Bundles / Cross Sells Section -->
     <section class="max-w-7xl mx-auto px-8 mt-24">
         <h2 class="text-3xl font-black mb-12 uppercase tracking-tighter">COMPLETE YOUR WASHROOM</h2>
@@ -292,7 +294,6 @@ get_header( 'shop' ); ?>
             </div>
         </div>
     </section>
-    <?php endif; ?>
 
 </main>
 
