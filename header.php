@@ -135,6 +135,41 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         .brand-card:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(26,86,219,0.15); background-color: #f9fafb; }
         .why-icon-box { transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .why-icon-box:hover { background: rgba(26,86,219,0.15); }
+
+        /* Dynamic Sub-menu Hover Logic */
+        .sub-menu {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(10px);
+            position: absolute;
+            z-index: 100;
+        }
+        
+        /* Level 1 Dropdown positioning */
+        li.menu-item-has-children > .sub-menu {
+            top: 100%;
+            left: 0;
+        }
+
+        /* Level 2 Flyout positioning */
+        .sub-menu li.menu-item-has-children > .sub-menu {
+            top: 0;
+            left: 100%;
+            transform: translateX(10px);
+        }
+
+        .menu-item-has-children:hover > .sub-menu {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: translateY(0) !important;
+        }
+
+        .sub-menu li.menu-item-has-children:hover > .sub-menu {
+            transform: translateX(0) !important;
+        }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>

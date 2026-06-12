@@ -194,8 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <?php if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) : ?>
-<!-- Agentation Visual Feedback Tool (Development Only) -->
-<script type="module">
+<!-- Agentation Visual Feedback Tool -->
+<script type="module" crossorigin="anonymous">
   import React from 'https://esm.sh/react@18.3.1';
   import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
   import { Agentation } from 'https://esm.sh/agentation@latest?deps=react@18.3.1';

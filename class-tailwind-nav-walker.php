@@ -14,12 +14,8 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
         
-        // Hardcode group classes so Tailwind JIT can find them
-        if ( $depth === 0 ) {
-            $classes[] = 'relative group/lvl0';
-        } else {
-            $classes[] = 'relative group/lvl1';
-        }
+        // Always add relative to LI so sub-menus can anchor to them
+        $classes[] = 'relative group';
 
         if ($depth > 0) {
             $classes[] = 'w-full block';
@@ -44,9 +40,9 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
         if ( $depth === 0 ) {
             $atts['class'] = 'nav-link font-[\'Plus Jakarta Sans\'] font-bold uppercase tracking-[0.2em] text-white/70 hover:text-secondary-container transition-all flex items-center py-6';
         } elseif ( $depth === 1 ) {
-            $atts['class'] = 'font-[\'Plus Jakarta Sans\'] text-[13px] font-bold uppercase tracking-widest text-white/70 hover:text-secondary-container transition-all flex items-center justify-between px-6 py-4 hover:bg-white/5 hover:pl-8 border-b border-white/5 w-full text-left';
+            $atts['class'] = 'font-[\'Plus Jakarta Sans\'] text-[13px] font-bold uppercase tracking-widest text-white/70 hover:text-secondary-container transition-all flex items-center justify-between px-6 py-4 hover:bg-white/10 hover:pl-8 border-b border-white/5 w-full text-left';
         } else {
-            $atts['class'] = 'font-[\'Plus Jakarta Sans\'] text-[11px] font-bold uppercase tracking-widest text-white/50 hover:text-white transition-all block px-6 py-4 hover:bg-white/5 hover:pl-8 border-b border-white/5 w-full text-left';
+            $atts['class'] = 'font-[\'Plus Jakarta Sans\'] text-[11px] font-bold uppercase tracking-widest text-white/50 hover:text-white transition-all block px-6 py-4 hover:bg-white/10 hover:pl-8 border-b border-white/5 w-full text-left';
         }
 
         $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
@@ -69,11 +65,7 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
         // Add dropdown arrow if has children
         if ( in_array( 'menu-item-has-children', $classes ) ) {
             $icon_class = ($depth === 0) ? 'expand_more' : 'chevron_right';
-            if ( $depth === 0 ) {
-                $item_output .= ' <span class="material-symbols-outlined text-[16px] ml-1 transition-transform group-hover/lvl0:rotate-180">' . $icon_class . '</span>';
-            } else {
-                $item_output .= ' <span class="material-symbols-outlined text-[16px] ml-1 transition-transform group-hover/lvl1:rotate-180">' . $icon_class . '</span>';
-            }
+            $item_output .= ' <span class="material-symbols-outlined text-[16px] ml-1 transition-transform group-hover:rotate-180">' . $icon_class . '</span>';
         }
 
         $item_output .= '</a>';
@@ -84,14 +76,7 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
 
     function start_lvl( &$output, $depth = 0, $args = null ) {
         $indent = str_repeat("\t", $depth);
-        if ( $depth === 0 ) {
-            // Main dropdown (B2B, B2C list)
-            // Added bg-[#0A0A0A] and removed backdrop-blur for solid background as requested
-            $output .= "\n$indent<ul class=\"sub-menu absolute left-0 top-full mt-0 w-72 bg-[#0A0A0A] shadow-2xl opacity-0 invisible group-hover/lvl0:opacity-100 group-hover/lvl0:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover/lvl0:translate-y-0 py-2 border border-white/10 rounded-xl overflow-hidden flex flex-col\">\n";   
-        } else {
-            // Level 3 fly-out (Categories)
-            // Added bg-[#0A0A0A] and positioned top-0 relative to the parent LI which is relative
-            $output .= "\n$indent<ul class=\"sub-menu absolute left-full top-0 ml-1 w-72 bg-[#0A0A0A] shadow-2xl opacity-0 invisible group-hover/lvl1:opacity-100 group-hover/lvl1:visible transition-all duration-300 transform origin-left -translate-x-2 group-hover/lvl1:translate-x-0 py-2 border border-white/10 rounded-xl overflow-hidden flex flex-col\">\n";  
-        }
+        // Matching the header "menu style" (bg-black/40 backdrop-blur-md) but slightly darker for contrast
+        $output .= "\n$indent<ul class=\"sub-menu absolute z-50 w-72 bg-black/80 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden flex flex-col shadow-2xl transition-all duration-300\">\n";   
     }
 }

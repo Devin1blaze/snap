@@ -3,6 +3,10 @@
  * Add a custom Meta Box for Technical Specifications
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 add_action( 'add_meta_boxes', 'snap_stitch_add_tech_specs_meta_box' );
 function snap_stitch_add_tech_specs_meta_box() {
     add_meta_box(
