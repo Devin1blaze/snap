@@ -169,7 +169,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 <!-- Section: Floating Navigation Wrapper -->
 <header class="relative z-50">
   <nav id="floating-nav" class="fixed top-0 left-0 w-full z-[100] px-4 pointer-events-none transition-all duration-300">
-    <div id="nav-island" class="mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-none pointer-events-auto shadow-2xl">
+    <div id="nav-island" class="mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-2xl pointer-events-auto shadow-2xl">
       <div class="relative flex flex-wrap items-center justify-between py-3 lg:py-4">
         
         <!-- Logo -->
@@ -182,19 +182,17 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
           </a>
         </div>
 
-        <!-- Desktop Menu (Absolute Center) -->
-        <div class="absolute inset-0 m-auto hidden w-fit lg:block pointer-events-none">
-          <div class="pointer-events-auto h-full flex items-center">
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex flex-1 items-center justify-center relative z-20 mx-4">
             <?php
             wp_nav_menu( array(
                 'theme_location'  => 'primary',
                 'container'       => false,
-                'menu_class'      => 'flex items-center gap-10 text-sm font-semibold uppercase tracking-[0.15em] text-white/70',
+                'menu_class'      => 'flex items-center gap-6 xl:gap-10 text-sm font-semibold uppercase tracking-[0.15em] text-white/70',
                 'walker'          => new Tailwind_Nav_Walker(),
                 'fallback_cb'     => false,
             ) );
             ?>
-          </div>
         </div>
 
         <!-- Right Side: Search, Buttons & Hamburger -->
@@ -256,9 +254,9 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 
   window.addEventListener('scroll', function() {
     if (window.scrollY > 50) {
-        // Shrink the island
-        navIsland.classList.remove('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5');
-        navIsland.classList.add('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]');
+        // Shrink the island slightly and round the corners
+        navIsland.classList.remove('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl', 'rounded-none');
+        navIsland.classList.add('max-w-6xl', 'mt-2', 'lg:px-10', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full');
         
         // Swap buttons
         btnLogin.classList.add('lg:hidden');
@@ -267,8 +265,8 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         btnScrolledCta.classList.add('flex');
     } else {
         // Expand the island
-        navIsland.classList.add('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5');
-        navIsland.classList.remove('max-w-4xl', 'mt-2', 'lg:px-6', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]');
+        navIsland.classList.add('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl');
+        navIsland.classList.remove('max-w-6xl', 'mt-2', 'lg:px-10', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full', 'rounded-none');
         
         // Revert buttons
         btnLogin.classList.remove('lg:hidden');

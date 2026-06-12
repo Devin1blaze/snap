@@ -3,6 +3,10 @@
  * Snap Marketing Stitch Theme functions and definitions
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'snap_stitch_theme_setup' ) ) :
     function snap_stitch_theme_setup() {
         // Add default posts and comments RSS feed links to head.
