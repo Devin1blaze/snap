@@ -76,10 +76,12 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
         $indent = str_repeat("\t", $depth);
         if ( $depth === 0 ) {
             // Main dropdown (B2B, B2C list)
-            $output .= "\n$indent<ul class=\"sub-menu absolute left-0 top-full mt-0 w-72 bg-[#0A0A0A]/95 backdrop-blur-2xl shadow-2xl opacity-0 invisible group-hover/lvl0:opacity-100 group-hover/lvl0:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover/lvl0:translate-y-0 py-2 border border-white/10 rounded-xl overflow-hidden flex flex-col\">\n";   
+            // Added bg-[#0A0A0A] and removed backdrop-blur for solid background as requested
+            $output .= "\n$indent<ul class=\"sub-menu absolute left-0 top-full mt-0 w-72 bg-[#0A0A0A] shadow-2xl opacity-0 invisible group-hover/lvl0:opacity-100 group-hover/lvl0:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover/lvl0:translate-y-0 py-2 border border-white/10 rounded-xl overflow-hidden flex flex-col\">\n";   
         } else {
             // Level 3 fly-out (Categories)
-            $output .= "\n$indent<ul class=\"sub-menu absolute left-full top-0 ml-1 w-72 bg-[#0A0A0A]/98 backdrop-blur-2xl shadow-2xl opacity-0 invisible group-hover/lvl1:opacity-100 group-hover/lvl1:visible transition-all duration-300 transform origin-left -translate-x-2 group-hover/lvl1:translate-x-0 py-2 border border-white/10 rounded-xl overflow-hidden flex flex-col\">\n";  
+            // Added bg-[#0A0A0A] and positioned top-0 relative to the parent LI which is relative
+            $output .= "\n$indent<ul class=\"sub-menu absolute left-full top-0 ml-1 w-72 bg-[#0A0A0A] shadow-2xl opacity-0 invisible group-hover/lvl1:opacity-100 group-hover/lvl1:visible transition-all duration-300 transform origin-left -translate-x-2 group-hover/lvl1:translate-x-0 py-2 border border-white/10 rounded-xl overflow-hidden flex flex-col\">\n";  
         }
     }
 }
