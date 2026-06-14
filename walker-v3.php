@@ -1,19 +1,22 @@
 <?php
 /**
- * Custom Walker for Tailwind CSS Menu - Enhanced for 3 levels
+ * Custom Walker for Tailwind CSS Menu - V3 Unique
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
         exit;
 }
 
-class Tailwind_Nav_Walker_V2 extends Walker_Nav_Menu {
+exit('WALKER LOADED');
+
+class Tailwind_Nav_Walker_V3 extends Walker_Nav_Menu {
     function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
-        $classes[] = 'relative menu-item-depth-' . $depth;
+        // ULTRA UNIQUE CLASS TO VERIFY
+        $classes[] = 'menu-depth-v3-' . $depth;
 
         if ($depth > 0) {
             $classes[] = 'w-full block';
@@ -74,7 +77,6 @@ class Tailwind_Nav_Walker_V2 extends Walker_Nav_Menu {
 
     function start_lvl( &$output, $depth = 0, $args = null ) {
         $indent = str_repeat("\t", $depth);
-        // Using solid bg-[#0A0A0A] to match the site's dark sections and ensure readability
         $output .= "\n$indent<ul class=\"sub-menu absolute z-50 w-72 bg-[#0A0A0A] border border-white/10 rounded-xl overflow-hidden flex flex-col shadow-2xl transition-all duration-300\">\n";   
     }
 }
