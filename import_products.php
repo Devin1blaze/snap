@@ -291,6 +291,12 @@ foreach ( $products as $item ) {
             update_post_meta( $product_id, '_yoast_wpseo_title', $seo_meta_title );
             update_post_meta( $product_id, '_yoast_wpseo_metadesc', $seo_meta_desc );
 
+            // Handle B2B Brochure PDF
+            if ( isset( $item['brochure_url'] ) && ! empty( $item['brochure_url'] ) ) {
+                $brochure_url = sanitize_text_field( $item['brochure_url'] );
+                update_post_meta( $product_id, '_brochure_url', $brochure_url );
+            }
+
             // Handle Image Sideloading
             if ( ! empty( $image_url ) ) {
                 require_once( ABSPATH . 'wp-admin/includes/media.php' );
