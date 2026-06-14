@@ -1,0 +1,236 @@
+{
+    "b2c": [
+        {
+            "name": "Air Conditioners",
+            "slug": "air-conditioners",
+            "children": [
+                {
+                    "name": "Flagship ACs",
+                    "slug": "flagship-acs",
+                    "children": [
+                        {
+                            "name": "Iconia Series",
+                            "slug": "iconia-series"
+                        },
+                        {
+                            "name": "Special Edition AC",
+                            "slug": "special-edition-ac"
+                        },
+                        {
+                            "name": "Heavy Duty ACs",
+                            "slug": "heavy-duty-acs"
+                        },
+                        {
+                            "name": "Super Energy Efficient ACs",
+                            "slug": "super-energy-efficient-acs"
+                        },
+                        {
+                            "name": "Hot & Cold ACs",
+                            "slug": "hot-cold-acs"
+                        },
+                        {
+                            "name": "Anti-Virus ACs",
+                            "slug": "anti-virus-acs"
+                        }
+                    ]
+                },
+                {
+                    "name": "Inverter Split ACs",
+                    "slug": "inverter-split-acs"
+                },
+                {
+                    "name": "Fixed Speed Split ACs",
+                    "slug": "fixed-speed-split-acs"
+                },
+                {
+                    "name": "Window ACs",
+                    "slug": "window-acs"
+                }
+            ]
+        },
+        {
+            "name": "Air Coolers",
+            "slug": "air-coolers",
+            "children": [
+                {
+                    "name": "Desert Air Coolers",
+                    "slug": "desert-air-coolers",
+                    "children": [
+                        {
+                            "name": "Aura Duo",
+                            "slug": "aura-duo"
+                        },
+                        {
+                            "name": "Aura Neo",
+                            "slug": "aura-neo"
+                        },
+                        {
+                            "name": "Maxima",
+                            "slug": "maxima"
+                        },
+                        {
+                            "name": "Ultima",
+                            "slug": "ultima"
+                        },
+                        {
+                            "name": "Mega",
+                            "slug": "mega"
+                        }
+                    ]
+                },
+                {
+                    "name": "Personal Air Coolers",
+                    "slug": "personal-air-coolers",
+                    "children": [
+                        {
+                            "name": "Astra",
+                            "slug": "astra"
+                        }
+                    ]
+                },
+                {
+                    "name": "Window Air Coolers",
+                    "slug": "window-air-coolers",
+                    "children": [
+                        {
+                            "name": "Fabia",
+                            "slug": "fabia"
+                        }
+                    ]
+                },
+                {
+                    "name": "Tower Air Coolers",
+                    "slug": "tower-air-coolers",
+                    "children": [
+                        {
+                            "name": "Premia",
+                            "slug": "premia"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Refrigeration",
+            "slug": "refrigeration",
+            "children": [
+                {
+                    "name": "Deep Freezers",
+                    "slug": "deep-freezers",
+                    "children": [
+                        {
+                            "name": "Hard Top",
+                            "slug": "hard-top"
+                        },
+                        {
+                            "name": "Glass Top",
+                            "slug": "glass-top"
+                        }
+                    ]
+                },
+                {
+                    "name": "Bottled Water Dispensers",
+                    "slug": "bottled-water-dispensers",
+                    "children": [
+                        {
+                            "name": "Floor Standing",
+                            "slug": "floor-standing"
+                        },
+                        {
+                            "name": "Table Top",
+                            "slug": "table-top"
+                        }
+                    ]
+                },
+                {
+                    "name": "Visi Coolers",
+                    "slug": "visi-coolers",
+                    "children": [
+                        {
+                            "name": "Floor Standing",
+                            "slug": "floor-standing-visi"
+                        },
+                        {
+                            "name": "Table Top",
+                            "slug": "table-top-visi"
+                        }
+                    ]
+                },
+                {
+                    "name": "Mini Bar",
+                    "slug": "mini-bar"
+                }
+            ]
+        },
+        {
+            "name": "Water Purifiers",
+            "slug": "water-purifiers"
+        },
+        {
+            "name": "Air Purifiers",
+            "slug": "air-purifiers"
+        }
+    ],
+    "b2b": [
+        {
+            "name": "Room Air Conditioners",
+            "slug": "b2b-room-air-conditioners",
+            "has_pdf": true
+        },
+        {
+            "name": "Air Coolers",
+            "slug": "b2b-air-coolers",
+            "has_pdf": true
+        },
+        {
+            "name": "Air Purifiers",
+            "slug": "b2b-air-purifiers",
+            "has_pdf": true
+        },
+        {
+            "name": "Water Purifiers",
+            "slug": "b2b-water-purifiers",
+            "has_pdf": true
+        },
+        {
+            "name": "Cassette Air Conditioners",
+            "slug": "cassette-air-conditioners",
+            "has_pdf": true
+        },
+        {
+            "name": "Verticool Air Conditioners",
+            "slug": "verticool-air-conditioners",
+            "has_pdf": true
+        },
+        {
+            "name": "Central Air Conditioning",
+            "slug": "central-air-conditioning",
+            "has_pdf": true
+        },
+        {
+            "name": "Heat Pumps",
+            "slug": "heat-pumps",
+            "has_pdf": true
+        },
+        {
+            "name": "Commercial Refrigeration",
+            "slug": "b2b-commercial-refrigeration",
+            "has_pdf": true
+        },
+        {
+            "name": "Cold Storages",
+            "slug": "cold-storages",
+            "has_pdf": true
+        },
+        {
+            "name": "Water Coolers",
+            "slug": "water-coolers",
+            "has_pdf": true
+        },
+        {
+            "name": "Speciality Products",
+            "slug": "speciality-products",
+            "has_pdf": true
+        }
+    ]
+}

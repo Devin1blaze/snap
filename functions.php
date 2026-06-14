@@ -254,3 +254,30 @@ function snap_get_category_link( $slug ) {
     return esc_url( home_url( '/product-category/' . $slug ) );
 }
 
+
+
+/**
+ * Add B2B Brochure PDF Custom Field to Product Data
+ */
+add_action( 'woocommerce_product_options_general_product_data', 'snap_stitch_add_b2b_brochure_field' );
+function snap_stitch_add_b2b_brochure_field() {
+    echo '<div class="options_group">';
+    woocommerce_wp_text_input( array(
+        'id'          => '_brochure_url',
+        'label'       => __( 'Brochure PDF URL (B2B)', 'snap-stitch-theme' ),
+        'placeholder' => 'https://...',
+        'description' => __( 'Enter the URL for the product brochure PDF. This will show a "Download Brochure" button on the product page.', 'snap-stitch-theme' ),
+        'desc_tip'    => true,
+    ) );
+    echo '</div>';
+}
+
+/**
+ * Save the B2B Brochure PDF Custom Field
+ */
+add_action( 'woocommerce_process_product_meta', 'snap_stitch_save_b2b_brochure_field' );
+function snap_stitch_save_b2b_brochure_field( $post_id ) {
+    if ( isset( $_POST['_brochure_url'] ) ) {
+        update_post_meta( $post_id, '_brochure_url', sanitize_url( $_POST['_brochure_url'] ) );
+    }
+}
