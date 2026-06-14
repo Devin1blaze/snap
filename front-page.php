@@ -283,31 +283,26 @@ get_header();
         <div class="relative w-full">
             <div id="featured-carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-8 no-scrollbar scroll-smooth">
             <?php
-            $args = array(
-                'post_type'      => 'product',
-                'posts_per_page' => 8,
-                'tax_query'      => array(
-                    array(
-                        'taxonomy' => 'product_visibility',
-                        'field'    => 'name',
-                        'terms'    => 'featured',
-                    ),
-                ),
-            );
-            $featured_query = new WP_Query( $args );
-            if ( ! $featured_query->have_posts() ) {
-                $args = array(
-                    'post_type'      => 'product',
-                    'posts_per_page' => 8,
-                );
-                $featured_query = new WP_Query( $args );
+            // Try to fetch products explicitly assigned to the "Featured Products" category
+            $featured_products = wc_get_products( array(
+                'limit'    => 8,
+                'status'   => 'publish',
+                'category' => array( 'featured-products' )
+            ) );
+
+            // Fallback: If no products are in the featured category, just get the most recent products
+            if ( empty( $featured_products ) ) {
+                $featured_products = wc_get_products( array(
+                    'limit'      => 8,
+                    'status'     => 'publish',
+                    'visibility' => 'catalog'
+                ) );
             }
 
-            if ( $featured_query->have_posts() ) :
+            if ( ! empty( $featured_products ) ) :
                 $badge_labels = ['BEST SELLER', 'TOP PICK', 'POPULAR', 'NEW'];
                 $index = 0;
-                while ( $featured_query->have_posts() ) : $featured_query->the_post();
-                    global $product;
+                foreach ( $featured_products as $product ) :
                     $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'large' ) ?: wc_placeholder_img_src();
                     $title = $product->get_name();
                     
@@ -355,8 +350,7 @@ get_header();
             </div>
             <?php 
                 $index++;
-                endwhile; 
-                wp_reset_postdata();
+                endforeach; 
             endif; 
             ?>
             </div>
