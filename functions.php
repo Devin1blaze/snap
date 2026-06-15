@@ -7,6 +7,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Disable WooCommerce's new Coming Soon mode for store pages
+update_option('woocommerce_coming_soon', 'no');
+update_option('woocommerce_store_pages_only', 'no');
+add_filter( 'woocommerce_is_coming_soon', '__return_false' );
+add_filter( 'woocommerce_store_pages_only', '__return_false' );
+
 if ( ! function_exists( 'snap_stitch_theme_setup' ) ) :
     function snap_stitch_theme_setup() {
         // Add default posts and comments RSS feed links to head.

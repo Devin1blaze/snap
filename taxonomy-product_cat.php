@@ -131,16 +131,16 @@ if (!$category_desc && isset($term->post_content)) {
         }
         $is_b2b = snap_stitch_is_b2b_product( $product->get_id() );
         ?>
-        <article class="bg-white p-6 flex flex-col group relative cursor-pointer" onclick="window.location.href='<?php echo esc_url($permalink); ?>'">
+        <article class="bg-white p-6 flex flex-col group relative cursor-pointer hover:z-10 transition-all hover:scale-[1.02] duration-300 focus-within:ring-4 focus-within:ring-[#FBBF24] outline-none" onclick="window.location.href='<?php echo esc_url($permalink); ?>'" tabindex="0" role="link" aria-label="<?php echo esc_attr(sprintf(__('View details for %s', 'snap-stitch'), $title)); ?>">
             <?php if ($product->is_featured()) : ?>
             <div class="absolute top-0 left-0 z-10 bg-[#FBBF24] text-[#0A0A0A] px-3 py-1 text-[10px] font-black uppercase tracking-tighter">TOP SELLER</div>
             <?php endif; ?>
-            <div class="relative aspect-square mb-6 bg-surface-container-low overflow-hidden">
-                <img alt="<?php echo esc_attr($title); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 p-2" src="<?php echo esc_url($image_url); ?>"/>
+            <div class="relative aspect-square mb-6 bg-[#F3F4F6] overflow-hidden border border-transparent group-hover:border-[#1A56DB]/20 transition-colors">
+                <img alt="<?php echo esc_attr($title); ?>" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 p-2" src="<?php echo esc_url($image_url); ?>"/>
                 <div class="absolute bottom-0 left-0 bg-[#FBBF24] text-[#0A0A0A] px-2 py-1 text-[10px] font-black uppercase tracking-tighter">MODEL: <?php echo esc_html($sku); ?></div>
             </div>
-            <h3 class="text-[#0A0A0A] font-black uppercase tracking-tighter text-xl mb-4 leading-tight"><?php echo esc_html($title); ?></h3>
-            <div class="space-y-1 mb-8">
+            <h3 class="text-[#0A0A0A] font-black uppercase tracking-tighter text-xl mb-4 leading-tight group-hover:text-[#1A56DB] transition-colors"><?php echo esc_html($title); ?></h3>
+            <div class="space-y-1 mb-8 border-t border-[#1A56DB]/10 pt-4 mt-auto">
                 <div class="flex justify-between text-[10px] font-bold uppercase text-[#1A56DB]">
                     <span><?php echo esc_html($spec1_name); ?></span>
                     <span><?php echo esc_html($spec1_value); ?></span>
@@ -150,13 +150,13 @@ if (!$category_desc && isset($term->post_content)) {
                     <span><?php echo esc_html($spec2_value); ?></span>
                 </div>
             </div>
-            <div class="mt-auto space-y-2">
+            <div class="mt-4 space-y-2 relative z-20">
                 <?php if ($is_b2b) : ?>
-                    <button class="w-full bg-[#FBBF24] text-[#0A0A0A] py-3 font-black uppercase tracking-widest text-xs hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-colors js-open-quote-modal">Get Best Price</button>
-                    <button class="w-full border-2 border-[#1A56DB] text-[#1A56DB] py-3 font-black uppercase tracking-widest text-xs hover:bg-[#1A56DB] hover:text-white transition-colors js-open-quote-modal">Add to Quote Cart</button>
+                    <button class="w-full bg-[#FBBF24] text-[#0A0A0A] py-3 font-black uppercase tracking-widest text-xs hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-all hover:-translate-y-1 focus:ring-2 focus:ring-offset-2 focus:ring-[#0A0A0A] js-open-quote-modal" aria-label="<?php echo esc_attr(sprintf(__('Get best price for %s', 'snap-stitch'), $title)); ?>">Get Best Price</button>
+                    <button class="w-full border-2 border-[#1A56DB] text-[#1A56DB] py-3 font-black uppercase tracking-widest text-xs hover:bg-[#1A56DB] hover:text-white transition-all hover:-translate-y-1 focus:ring-2 focus:ring-offset-2 focus:ring-[#1A56DB] js-open-quote-modal" aria-label="<?php echo esc_attr(sprintf(__('Add %s to quote cart', 'snap-stitch'), $title)); ?>">Add to Quote Cart</button>
                 <?php else : ?>
-                    <div class="text-xl font-black mb-2 text-center"><?php echo $product->get_price_html(); ?></div>
-                    <a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>" class="w-full bg-[#1A56DB] text-white py-3 font-black uppercase tracking-widest text-xs hover:bg-[#0A0A0A] hover:text-white transition-colors block text-center">Add to Cart</a>
+                    <div class="text-xl font-black mb-2 text-center text-[#0A0A0A]"><?php echo $product->get_price_html(); ?></div>
+                    <a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>" class="w-full bg-[#1A56DB] text-white py-3 font-black uppercase tracking-widest text-xs hover:bg-[#0A0A0A] hover:text-white transition-all hover:-translate-y-1 focus:ring-2 focus:ring-offset-2 focus:ring-[#1A56DB] block text-center" aria-label="<?php echo esc_attr(sprintf(__('Add %s to cart', 'snap-stitch'), $title)); ?>">Add to Cart</a>
                 <?php endif; ?>
             </div>
         </article>

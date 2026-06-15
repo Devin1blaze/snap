@@ -1,10 +1,12 @@
-<!-- SNAP_VERSION_1006 -->
+<!-- SNAP_VERSION_1007 -->
 <?php
 /**
- * The header for our theme
+ * Header - Efferd Header 2 Style
+ * Clean, elegant responsive header with scroll-based floating card transition.
+ * Logo left, nav + CTAs right. Transparent default, frosted card on scroll.
  */
 
-function snap_stitch_render_custom_menu() {
+function snap_stitch_render_custom_menu($context = 'desktop') {
     $locations = get_nav_menu_locations();
     if (!isset($locations['primary'])) return;
     
@@ -21,50 +23,97 @@ function snap_stitch_render_custom_menu() {
             $child_items[$item->menu_item_parent][] = $item;
         }
     }
-    
-    echo '<ul class="flex items-center gap-6 xl:gap-10 text-sm font-semibold uppercase tracking-[0.15em] text-white/70">';
+
+    if ($context === 'mobile') {
+        // Mobile: vertical stack
+        echo '<nav class="flex flex-col gap-1">';
+        foreach ($menu_items as $item) {
+            if (!$item->menu_item_parent) {
+                $has_children = isset($child_items[$item->ID]);
+                echo '<div class="mobile-menu-group">';
+                echo '<a href="' . esc_url($item->url) . '" class="flex items-center justify-between px-4 py-3 text-[15px] font-semibold text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all">';
+                echo esc_html($item->title);
+                if ($has_children) {
+                    echo '<span class="material-symbols-outlined text-[18px] text-white/40 mobile-chevron transition-transform">expand_more</span>';
+                }
+                echo '</a>';
+                
+                if ($has_children) {
+                    echo '<div class="mobile-submenu hidden pl-4 pb-2">';
+                    foreach ($child_items[$item->ID] as $child) {
+                        $has_subchildren = isset($child_items[$child->ID]);
+                        echo '<a href="' . esc_url($child->url) . '" class="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-all">';
+                        echo esc_html($child->title);
+                        if ($has_subchildren) {
+                            echo '<span class="material-symbols-outlined text-[14px] text-white/30">chevron_right</span>';
+                        }
+                        echo '</a>';
+                        
+                        if ($has_subchildren) {
+                            echo '<div class="pl-4">';
+                            foreach ($child_items[$child->ID] as $subchild) {
+                                echo '<a href="' . esc_url($subchild->url) . '" class="block px-4 py-2 text-[12px] font-medium text-white/40 hover:text-white/70 rounded-lg transition-all">';
+                                echo esc_html($subchild->title);
+                                echo '</a>';
+                            }
+                            echo '</div>';
+                        }
+                    }
+                    echo '</div>';
+                }
+                echo '</div>';
+            }
+        }
+        echo '</nav>';
+        return;
+    }
+
+    // Desktop: horizontal inline
+    echo '<div class="flex items-center gap-1">';
     foreach ($menu_items as $item) {
         if (!$item->menu_item_parent) {
             $has_children = isset($child_items[$item->ID]);
-            echo '<li class="relative menu-item-depth-0 group">';
-            echo '<a href="' . esc_url($item->url) . '" class="nav-link font-[\'Plus Jakarta Sans\'] font-bold uppercase tracking-[0.2em] text-white/70 hover:text-secondary-container transition-all flex items-center py-6">';
+            echo '<div class="relative group">';
+            echo '<a href="' . esc_url($item->url) . '" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all whitespace-nowrap">';
             echo esc_html($item->title);
             if ($has_children) {
-                echo ' <span class="material-symbols-outlined text-[16px] ml-1 transition-transform group-hover:rotate-180">expand_more</span>';
+                echo '<span class="material-symbols-outlined text-[16px] opacity-50 transition-transform group-hover:rotate-180">expand_more</span>';
             }
             echo '</a>';
             
             if ($has_children) {
-                echo '<ul class="sub-menu absolute z-50 w-72 bg-[#0A0A0A] border border-white/10 rounded-xl overflow-hidden flex flex-col shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">';
+                echo '<div class="sub-menu absolute right-0 top-full pt-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">';
+                echo '<div class="w-64 bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl">';
                 foreach ($child_items[$item->ID] as $child) {
                     $has_subchildren = isset($child_items[$child->ID]);
-                    echo '<li class="relative menu-item-depth-1 group/lvl2">';
-                    echo '<a href="' . esc_url($child->url) . '" class="font-[\'Plus Jakarta Sans\'] text-[13px] font-bold uppercase tracking-widest text-white/70 hover:text-secondary-container transition-all flex items-center justify-between px-6 py-4 hover:bg-white/10 hover:pl-8 border-b border-white/5 w-full text-left">';
+                    echo '<div class="relative group/lvl2">';
+                    echo '<a href="' . esc_url($child->url) . '" class="flex items-center justify-between px-5 py-3.5 text-[13px] font-medium text-white/60 hover:text-white hover:bg-white/5 transition-all border-b border-white/5 last:border-0">';
                     echo esc_html($child->title);
                     if ($has_subchildren) {
-                        echo ' <span class="material-symbols-outlined text-[16px] transition-transform">chevron_right</span>';
+                        echo '<span class="material-symbols-outlined text-[14px] opacity-40">chevron_right</span>';
                     }
                     echo '</a>';
                     
                     if ($has_subchildren) {
-                        echo '<ul class="sub-menu-lvl3 absolute left-full top-0 z-50 w-72 bg-[#0A0A0A] border border-white/10 rounded-xl overflow-hidden flex flex-col shadow-2xl opacity-0 invisible group-hover/lvl2:opacity-100 group-hover/lvl2:visible transition-all duration-300 transform translate-x-2 group-hover/lvl2:translate-x-0">';
+                        echo '<div class="absolute left-full top-0 pt-0 z-50 opacity-0 invisible group-hover/lvl2:opacity-100 group-hover/lvl2:visible transition-all duration-200 translate-x-1 group-hover/lvl2:translate-x-0">';
+                        echo '<div class="w-60 bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl ml-1">';
                         foreach ($child_items[$child->ID] as $subchild) {
-                            echo '<li class="menu-item-depth-2">';
-                            echo '<a href="' . esc_url($subchild->url) . '" class="font-[\'Plus Jakarta Sans\'] text-[11px] font-bold uppercase tracking-widest text-white/50 hover:text-white transition-all block px-6 py-4 hover:bg-white/10 hover:pl-8 border-b border-white/5 w-full text-left">';
+                            echo '<a href="' . esc_url($subchild->url) . '" class="block px-5 py-3 text-[12px] font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all border-b border-white/5 last:border-0">';
                             echo esc_html($subchild->title);
                             echo '</a>';
-                            echo '</li>';
                         }
-                        echo '</ul>';
+                        echo '</div>';
+                        echo '</div>';
                     }
-                    echo '</li>';
+                    echo '</div>';
                 }
-                echo '</ul>';
+                echo '</div>';
+                echo '</div>';
             }
-            echo '</li>';
+            echo '</div>';
         }
     }
-    echo '</ul>';
+    echo '</div>';
 }
 
 ?><!DOCTYPE html>
@@ -107,76 +156,83 @@ function snap_stitch_render_custom_menu() {
         body { font-family: 'Inter', 'Plus Jakarta Sans', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         
-        /* Nav link underline animation */
-        .nav-link { position:relative; }
-        .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:#FBBF24; transition:width 0.25s ease; }
-        .nav-link:hover::after { width:100%; }
-
         /* Industrial Glow for interactive elements */
         .industrial-glow:hover { box-shadow: 0 0 25px rgba(251, 191, 36, 0.4); }
+
+        /* Header scroll transition */
+        #nav-header {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #nav-header.scrolled {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mobile menu accordion */
+        .mobile-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .mobile-submenu.open { max-height: 500px; }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
 <?php wp_body_open(); ?>
 
 <header class="relative z-50">
-  <nav id="floating-nav" class="fixed top-0 left-0 w-full z-[100] px-4 pointer-events-none transition-all duration-300">
-    <div id="nav-island" class="w-full mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-2xl pointer-events-auto shadow-2xl">
-      <div class="relative flex flex-wrap items-center justify-between py-3 lg:py-4">
+  <nav id="floating-nav" class="fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300">
+    <div id="nav-header" class="w-full max-w-5xl mx-auto mt-3 px-4 lg:px-5 border border-transparent rounded-xl transition-all duration-500">
+      <div class="flex items-center justify-between py-3 lg:py-3.5">
         
         <!-- Logo -->
-        <div class="flex items-center relative z-20 shrink-0">
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3">
-            <span class="w-9 h-9 bg-secondary-container flex items-center justify-center rounded-lg shadow-inner">
-              <span class="material-symbols-outlined text-black text-xl" style="font-variation-settings:'FILL' 1">bolt</span>
+        <div class="flex items-center shrink-0">
+          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-2.5 group">
+            <span class="w-8 h-8 bg-secondary-container flex items-center justify-center rounded-lg shadow-sm group-hover:shadow-[0_0_16px_rgba(251,191,36,0.3)] transition-shadow">
+              <span class="material-symbols-outlined text-black text-lg" style="font-variation-settings:'FILL' 1">bolt</span>
             </span>
-            <span class="text-xl font-black text-white tracking-tight uppercase">Snap <span class="text-secondary-container italic">Marketing</span></span>
+            <span class="text-lg font-extrabold text-white tracking-tight">Snap <span class="text-secondary-container">Marketing</span></span>
           </a>
         </div>
 
-        <!-- Desktop Menu -->
-        <div class="hidden lg:flex flex-1 items-center justify-center relative z-20 mx-4">
-            <?php snap_stitch_render_custom_menu(); ?>
-        </div>
-
-        <!-- Right Side: Search, Buttons & Hamburger -->
-        <div class="flex items-center gap-4 relative z-20">
+        <!-- Desktop: Nav Links + Actions (right-aligned) -->
+        <div class="hidden lg:flex items-center gap-2">
+          <?php snap_stitch_render_custom_menu('desktop'); ?>
           
-          <!-- Search Catalog Button -->
-          <button id="search-trigger" class="hidden lg:flex items-center bg-white/10 px-4 py-2 rounded-sm cursor-pointer hover:bg-white/20 transition-colors border border-white/5 group">
-            <span class="material-symbols-outlined text-white text-sm mr-2 group-hover:scale-110 transition-transform">search</span>
-            <span class="text-white/60 text-xs font-bold uppercase tracking-widest">Search Catalog</span>
-          </button>
+          <!-- Divider -->
+          <div class="w-px h-5 bg-white/10 mx-2"></div>
 
-          <!-- Desktop Buttons -->
-          <div class="hidden lg:flex items-center gap-3">
-            <a id="btn-login" href="/my-account" class="text-white/80 hover:text-white font-bold text-xs uppercase tracking-widest px-5 py-2 border border-white/10 rounded-xl hover:bg-white/5 transition-all duration-300">Login</a>
-            <a id="btn-signup" href="/my-account/?action=register" class="bg-secondary-container text-black font-black text-xs uppercase tracking-widest px-5 py-2 rounded-xl hover:bg-yellow-400 transition-all duration-300 shadow-xl">Sign Up</a>
-            <a id="btn-scrolled-cta" href="/request-a-quote" class="hidden items-center gap-2 bg-secondary-container text-black font-black text-xs uppercase px-6 py-2 rounded-xl tracking-widest hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-500 border border-black/10">
-              Get Quote
-              <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-            </a>
-          </div>
-
-          <!-- Search Trigger (Mobile) -->
-          <button id="search-trigger-mobile" class="lg:hidden p-2 text-white/70 hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-2xl">search</span>
+          <!-- Search -->
+          <button id="search-trigger" class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-white/50 hover:text-white hover:bg-white/10 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[18px]">search</span>
           </button>
-
-          <!-- Hamburger -->
-          <button id="nav-toggle" class="lg:hidden flex flex-col gap-1.5 p-2 group" aria-label="Toggle menu">
-            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
-            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
-            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
-          </button>
+          
+          <!-- Sign In -->
+          <a id="btn-login" href="/my-account" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/20 hover:bg-white/5 rounded-lg transition-all whitespace-nowrap">Login</a>
+          
+          <!-- Get Quote (Primary CTA) -->
+          <a id="btn-quote" href="/request-a-quote" class="inline-flex items-center px-4 py-2 text-sm font-semibold bg-secondary-container text-snap-black hover:bg-yellow-400 rounded-lg transition-all shadow-sm hover:shadow-md whitespace-nowrap">Get Quote</a>
         </div>
 
-        <!-- Mobile Drawer -->
-        <div id="mobile-menu" class="hidden w-full flex-col bg-[#0A0A0A]/98 backdrop-blur-2xl border border-white/10 p-8 rounded-[2.5rem] mt-6 gap-6 lg:hidden absolute top-full left-0 z-50 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.6)]">
-          <?php snap_stitch_render_custom_menu(); ?>
-          <div class="flex flex-col gap-4 mt-4">
-            <a href="/my-account" class="text-center text-white/80 hover:text-white font-bold text-sm uppercase tracking-[0.2em] border border-white/10 py-4 rounded-2xl hover:bg-white/5 transition-all">Login</a>
-            <a href="/request-a-quote" class="inline-flex items-center gap-2 bg-secondary-container text-black font-black text-sm uppercase px-6 py-5 tracking-[0.2em] w-full justify-center rounded-2xl shadow-xl active:scale-95 transition-all">Get Quote</a>
+        <!-- Mobile: Search + Hamburger -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <button id="search-trigger-mobile" class="p-2 text-white/60 hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-xl">search</span>
+          </button>
+          <button id="nav-toggle" class="flex flex-col gap-[5px] p-2 group" aria-label="Toggle menu">
+            <span class="block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center group-[.open]:rotate-45 group-[.open]:translate-y-[7px]"></span>
+            <span class="block w-5 h-[2px] bg-white rounded-full transition-all duration-300 group-[.open]:opacity-0"></span>
+            <span class="block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center group-[.open]:-rotate-45 group-[.open]:-translate-y-[7px]"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Drawer -->
+      <div id="mobile-menu" class="hidden lg:hidden overflow-hidden transition-all duration-300">
+        <div class="pb-6 pt-4 border-t border-white/5 bg-[#0A0A0A]/95 backdrop-blur-xl rounded-b-xl mt-1">
+          <?php snap_stitch_render_custom_menu('mobile'); ?>
+          <div class="flex flex-col gap-3 mt-5 px-4">
+            <a href="/my-account" class="text-center text-sm font-medium text-white/70 hover:text-white border border-white/10 py-3 rounded-xl hover:bg-white/5 transition-all">Login</a>
+            <a href="/request-a-quote" class="text-center text-sm font-semibold bg-secondary-container text-snap-black py-3 rounded-xl hover:bg-yellow-400 transition-all shadow-sm">Get Quote</a>
           </div>
         </div>
       </div>
@@ -187,24 +243,26 @@ function snap_stitch_render_custom_menu() {
 <!-- Search Modal -->
 <div id="search-modal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/90 backdrop-blur-xl p-4 transition-all duration-300 opacity-0 invisible">
     <div class="w-full max-w-4xl transform scale-95 transition-all duration-300">
-        <button id="search-close" class="absolute -top-12 right-0 text-white/60 hover:text-white flex items-center gap-2 uppercase text-xs font-bold tracking-widest">
+        <button id="search-close" class="absolute -top-12 right-0 text-white/60 hover:text-white flex items-center gap-2 text-xs font-medium tracking-widest uppercase">
             Close <span class="material-symbols-outlined text-xl">close</span>
         </button>
         <form role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="relative">
             <input type="text" name="s" id="search-input" placeholder="Search by brand, SKU, or category..." 
-                class="w-full bg-white/5 border-b-2 border-white/20 text-white text-3xl md:text-5xl font-black py-8 px-4 focus:outline-none focus:border-secondary-container transition-colors placeholder:text-white/10">
+                class="w-full bg-white/5 border-b-2 border-white/20 text-white text-3xl md:text-5xl font-bold py-8 px-4 focus:outline-none focus:border-secondary-container transition-colors placeholder:text-white/10">
             <input type="hidden" name="post_type" value="product">
             <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 text-secondary-container">
                 <span class="material-symbols-outlined text-5xl">arrow_forward</span>
             </button>
         </form>
         <div class="mt-12">
-            <h4 class="text-white/30 text-xs font-black uppercase tracking-[0.3em] mb-6">Trending Categories</h4>
-            <div class="flex flex-wrap gap-4">
+            <h4 class="text-white/30 text-xs font-bold uppercase tracking-[0.3em] mb-6">Trending Categories</h4>
+            <div class="flex flex-wrap gap-3">
                 <?php
                 $pop_cats = get_terms( array('taxonomy' => 'product_cat', 'number' => 5, 'orderby' => 'count', 'order' => 'DESC') );
-                foreach ($pop_cats as $cat) {
-                    echo '<a href="' . get_term_link($cat) . '" class="px-6 py-3 bg-white/5 border border-white/10 rounded-full text-white/70 text-sm font-bold hover:bg-secondary-container hover:text-black transition-all">'. $cat->name .'</a>';
+                if (!is_wp_error($pop_cats)) {
+                    foreach ($pop_cats as $cat) {
+                        echo '<a href="' . get_term_link($cat) . '" class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full text-white/60 text-sm font-medium hover:bg-secondary-container hover:text-black hover:border-transparent transition-all">'. $cat->name .'</a>';
+                    }
                 }
                 ?>
             </div>
@@ -213,37 +271,68 @@ function snap_stitch_render_custom_menu() {
 </div>
 
 <script>
-  // Navigation Island Logic
-  const navIsland = document.getElementById('nav-island');
+  // Header Scroll Logic — Efferd Header 2 pattern
+  const navHeader = document.getElementById('nav-header');
   const btnLogin = document.getElementById('btn-login');
-  const btnSignup = document.getElementById('btn-signup');
-  const btnScrolledCta = document.getElementById('btn-scrolled-cta');
+
+  let lastScrollY = 0;
+  let ticking = false;
+
+  function updateHeader() {
+    const scrollY = window.scrollY;
+    
+    if (scrollY > 10) {
+      navHeader.classList.add('scrolled');
+      navHeader.classList.remove('mt-3', 'border-transparent');
+      navHeader.classList.add('mt-2', 'border-white/[0.06]');
+    } else {
+      navHeader.classList.remove('scrolled');
+      navHeader.classList.add('mt-3', 'border-transparent');
+      navHeader.classList.remove('mt-2', 'border-white/[0.06]');
+    }
+    
+    ticking = false;
+  }
 
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 50) {
-        navIsland.classList.remove('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl');
-        navIsland.classList.add('max-w-6xl', 'mt-2', 'lg:px-10', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full');
-        btnLogin.classList.add('lg:hidden');
-        btnSignup.classList.add('lg:hidden');
-        btnScrolledCta.classList.remove('hidden');
-        btnScrolledCta.classList.add('flex');
-    } else {
-        navIsland.classList.add('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl');
-        navIsland.classList.remove('max-w-6xl', 'mt-2', 'lg:px-10', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full');
-        btnLogin.classList.remove('lg:hidden');
-        btnSignup.classList.remove('lg:hidden');
-        btnScrolledCta.classList.add('hidden');
-        btnScrolledCta.classList.remove('flex');
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeader);
+      ticking = true;
     }
   });
 
   // Mobile Menu Toggle
   const navToggle = document.getElementById('nav-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
+  
   navToggle.addEventListener('click', function() {
     this.classList.toggle('open');
     mobileMenu.classList.toggle('hidden');
-    mobileMenu.classList.toggle('flex');
+    // Add dark bg to header when mobile menu is open
+    if (!mobileMenu.classList.contains('hidden')) {
+      navHeader.style.background = 'rgba(10, 10, 10, 0.95)';
+      navHeader.style.backdropFilter = 'blur(20px)';
+    } else if (window.scrollY <= 10) {
+      navHeader.style.background = '';
+      navHeader.style.backdropFilter = '';
+    }
+  });
+
+  // Mobile Accordion Submenus
+  document.querySelectorAll('.mobile-menu-group > a').forEach(link => {
+    const chevron = link.querySelector('.mobile-chevron');
+    if (!chevron) return;
+    
+    link.addEventListener('click', function(e) {
+      const submenu = this.nextElementSibling;
+      if (submenu && submenu.classList.contains('mobile-submenu')) {
+        e.preventDefault();
+        submenu.classList.toggle('hidden');
+        submenu.classList.toggle('open');
+        chevron.style.transform = submenu.classList.contains('open') ? 'rotate(180deg)' : '';
+      }
+    });
   });
 
   // Search Modal Logic
@@ -262,7 +351,7 @@ function snap_stitch_render_custom_menu() {
       document.body.style.overflow = 'hidden';
   };
 
-  searchTrigger.addEventListener('click', openSearch);
+  if (searchTrigger) searchTrigger.addEventListener('click', openSearch);
   if (searchTriggerMobile) searchTriggerMobile.addEventListener('click', openSearch);
 
   function closeSearch() {
