@@ -83,7 +83,7 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
             
             if ($has_children) {
                 echo '<div class="sub-menu absolute right-0 top-full pt-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">';
-                echo '<div class="w-64 bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl">';
+                echo '<div class="w-64 bg-[#0A0A0A] border border-white/10 rounded-xl overflow-hidden shadow-2xl">';
                 foreach ($child_items[$item->ID] as $child) {
                     $has_subchildren = isset($child_items[$child->ID]);
                     echo '<div class="relative group/lvl2">';
@@ -96,7 +96,7 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
                     
                     if ($has_subchildren) {
                         echo '<div class="absolute left-full top-0 pt-0 z-50 opacity-0 invisible group-hover/lvl2:opacity-100 group-hover/lvl2:visible transition-all duration-200 translate-x-1 group-hover/lvl2:translate-x-0">';
-                        echo '<div class="w-60 bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl ml-1">';
+                        echo '<div class="w-60 bg-[#0A0A0A] border border-white/10 rounded-xl overflow-hidden shadow-2xl ml-1">';
                         foreach ($child_items[$child->ID] as $subchild) {
                             echo '<a href="' . esc_url($subchild->url) . '" class="block px-5 py-3 text-[12px] font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all border-b border-white/5 last:border-0">';
                             echo esc_html($subchild->title);
