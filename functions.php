@@ -77,6 +77,9 @@ add_action( 'init', 'snap_stitch_woocommerce_customizations' );
 function snap_stitch_woocommerce_customizations() {
     // Remove default loop title as we have a custom one in content-product.php
     remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
+    
+    // Remove the default WooCommerce breadcrumb as we use custom hero breadcrumbs
+    remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 }
 
 /**
