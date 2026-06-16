@@ -20,7 +20,57 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
     $child_items = [];
     foreach ($menu_items as $item) {
         if ($item->menu_item_parent) {
+            // We'll skip adding static children to 'Products' below if we successfully fetch dynamic categories
             $child_items[$item->menu_item_parent][] = $item;
+        }
+    }
+
+    // Dynamically inject WooCommerce product categories under the "Products" menu item
+    foreach ($menu_items as $item) {
+        if (strtolower($item->title) === 'products') {
+            if (taxonomy_exists('product_cat')) {
+                $product_cats = get_terms([
+                    'taxonomy' => 'product_cat',
+                    'hide_empty' => false,
+                    'parent' => 0
+                ]);
+                
+                if (!is_wp_error($product_cats) && !empty($product_cats)) {
+                    $dynamic_children = [];
+                    foreach ($product_cats as $cat) {
+                        if (strtolower($cat->name) === 'uncategorized') continue;
+                        
+                        $fake_child = new stdClass();
+                        $fake_child->ID = 'cat_' . $cat->term_id;
+                        $fake_child->title = $cat->name;
+                        $fake_child->url = get_term_link($cat);
+                        $fake_child->menu_item_parent = $item->ID;
+                        $dynamic_children[] = $fake_child;
+                        
+                        // Check for subcategories
+                        $sub_cats = get_terms([
+                            'taxonomy' => 'product_cat',
+                            'hide_empty' => false,
+                            'parent' => $cat->term_id
+                        ]);
+                        
+                        if (!is_wp_error($sub_cats) && !empty($sub_cats)) {
+                            $dynamic_subchildren = [];
+                            foreach ($sub_cats as $sub_cat) {
+                                $fake_subchild = new stdClass();
+                                $fake_subchild->ID = 'cat_' . $sub_cat->term_id;
+                                $fake_subchild->title = $sub_cat->name;
+                                $fake_subchild->url = get_term_link($sub_cat);
+                                $fake_subchild->menu_item_parent = $fake_child->ID;
+                                $dynamic_subchildren[] = $fake_subchild;
+                            }
+                            $child_items[$fake_child->ID] = $dynamic_subchildren;
+                        }
+                    }
+                    // Replace static children with dynamic WooCommerce categories
+                    $child_items[$item->ID] = $dynamic_children;
+                }
+            }
         }
     }
 
