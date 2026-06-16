@@ -212,55 +212,42 @@ get_header();
     </div>
 </div>
 
-<!-- Section 2: Shop by Category (Refactored to 4x4 Equal Boxes) -->
+<!-- Section 2: Shop by Category (Dynamic) -->
 <section class="bg-primary-container py-24">
-    <div class="container mx-auto px-8">
+    <div class="container mx-auto px-8 max-w-[1536px]">
         <h2 class="text-white text-4xl font-black mb-16 uppercase tracking-tight">Shop by Category</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
-            <!-- Row 1 -->
-            <a class="group bg-blue-800/50 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/washroom-automations/">
-                <span class="material-symbols-outlined text-white text-6xl">sanitizer</span>
-                <div>
-                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Automated</span>
-                    <h3 class="text-white text-2xl font-black leading-tight">Washroom Automations</h3>
-                </div>
-            </a>
-            <a class="group bg-blue-800/80 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/commercial-refrigeration/">
-                <span class="material-symbols-outlined text-white text-6xl">ac_unit</span>
-                <div>
-                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Commercial</span>
-                    <h3 class="text-white text-2xl font-black leading-tight">Commercial Refrigeration</h3>
-                </div>
-            </a>
-            <a class="group bg-blue-900/50 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/water-purifiers/">
-                <span class="material-symbols-outlined text-white text-6xl">water_drop</span>
-                <div>
-                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Pure</span>
-                    <h3 class="text-white text-2xl font-black leading-tight">Water Purifiers</h3>
-                </div>
-            </a>
-            <a class="group bg-blue-900/80 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/vending-machines/">
-                <span class="material-symbols-outlined text-white text-6xl">coffee_maker</span>
-                <div>
-                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Premium</span>
-                    <h3 class="text-white text-2xl font-black leading-tight">Vending Machines</h3>
-                </div>
-            </a>
-            <!-- Row 2 -->
-            <a class="group bg-blue-900/80 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/hygiene-ppe/">
-                <span class="material-symbols-outlined text-white text-6xl">masks</span>
-                <div>
-                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Safety</span>
-                    <h3 class="text-white text-2xl font-black leading-tight">Hygiene &amp; PPE</h3>
-                </div>
-            </a>
-            <a class="group bg-blue-800/50 p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-yellow-400 transition-all" href="/product-category/entrance-solutions/">
-                <span class="material-symbols-outlined text-white text-6xl">door_front</span>
-                <div>
-                    <span class="text-secondary-container font-bold text-xs uppercase block mb-1">Security</span>
-                    <h3 class="text-white text-2xl font-black leading-tight">Entrance Solutions</h3>
-                </div>
-            </a>
+            <?php
+            $shop_cats = get_terms([
+                'taxonomy' => 'product_cat',
+                'hide_empty' => true,
+                'number' => 6,
+                'orderby' => 'count',
+                'order' => 'DESC'
+            ]);
+            
+            $bg_classes = [
+                'bg-blue-800/50', 'bg-blue-800/80', 'bg-blue-900/50', 'bg-blue-900/80',
+                'bg-blue-900/80', 'bg-blue-800/50'
+            ];
+            $icons = ['sanitizer', 'ac_unit', 'water_drop', 'coffee_maker', 'masks', 'door_front', 'electrical_services'];
+
+            if (!is_wp_error($shop_cats)) {
+                foreach($shop_cats as $i => $cat) {
+                    $bg = $bg_classes[$i % count($bg_classes)];
+                    $icon = $icons[$i % count($icons)];
+                    ?>
+                    <a class="group <?php echo $bg; ?> p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-[#FBBF24] transition-all" href="<?php echo esc_url(get_term_link($cat)); ?>">
+                        <span class="material-symbols-outlined text-white text-6xl"><?php echo $icon; ?></span>
+                        <div>
+                            <span class="text-[#FBBF24] font-bold text-xs uppercase block mb-1">Category</span>
+                            <h3 class="text-white text-2xl font-black leading-tight"><?php echo esc_html($cat->name); ?></h3>
+                        </div>
+                    </a>
+                    <?php
+                }
+            }
+            ?>
             <div class="bg-blue-800/80 p-12 aspect-square flex flex-col justify-center items-center text-center opacity-40 grayscale pointer-events-none">
                 <span class="text-white text-xl font-black uppercase opacity-20 tracking-widest">More Coming Soon</span>
             </div>
@@ -273,10 +260,36 @@ get_header();
 
 <!-- Section: Featured Products (Carousel) -->
 <section class="bg-white py-24 overflow-hidden">
-    <div class="container mx-auto px-8 relative">
-        <div class="mb-16 border-l-8 border-[#FBBF24] pl-6">
-            <h2 class="text-[#0A0A0A] text-4xl font-black uppercase tracking-tight">Featured Products</h2>
-            <p class="text-[#1A56DB] font-bold mt-2 uppercase tracking-widest text-sm">Most Requested B2B Equipment This Month</p>
+    <div class="container mx-auto px-8 relative max-w-[1536px]">
+        <div class="mb-8 border-l-8 border-[#FBBF24] pl-6">
+            <h2 class="text-[#0A0A0A] text-4xl font-black uppercase tracking-tight">This Weeks Highlights</h2>
+            <p class="text-[#1A56DB] font-bold mt-2 uppercase tracking-widest text-sm">Most Requested Products This Month</p>
+        </div>
+
+        <!-- Custom Tabs Navigation (Industrial Authority style) -->
+        <div class="mb-12 overflow-x-auto no-scrollbar">
+            <ul role="tablist" class="flex gap-2 border-b-2 border-gray-200 w-max pb-[2px]">
+                <li role="tab" class="ui-tabs-tab" tabindex="0" aria-selected="true">
+                    <a href="#tab-trending" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-[#0A0A0A] bg-[#FBBF24] border-b-4 border-[#1A56DB] transition-all">Trending</a>
+                </li>
+                <?php
+                // Fetch top categories dynamically to create tabs
+                $top_cats = get_terms( [
+                    'taxonomy' => 'product_cat',
+                    'number' => 5,
+                    'orderby' => 'count',
+                    'order' => 'DESC',
+                    'hide_empty' => true
+                ] );
+                if ( ! is_wp_error( $top_cats ) ) {
+                    foreach ( $top_cats as $cat ) {
+                        echo '<li role="tab" class="ui-tabs-tab" tabindex="-1" aria-selected="false">';
+                        echo '<a href="#tab-' . esc_attr($cat->slug) . '" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-gray-500 hover:text-[#1A56DB] hover:bg-blue-50 border-b-4 border-transparent hover:border-gray-300 transition-all">' . esc_html($cat->name) . '</a>';
+                        echo '</li>';
+                    }
+                }
+                ?>
+            </ul>
         </div>
         
         <!-- Carousel Wrapper -->
@@ -382,6 +395,22 @@ get_header();
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+/* Marquee Animations */
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+@keyframes marquee-vertical-reverse {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+.animate-marquee-vertical {
+  animation: marquee-vertical 30s linear infinite;
+}
+.animate-marquee-vertical-reverse {
+  animation: marquee-vertical-reverse 30s linear infinite;
 }
 </style>
 

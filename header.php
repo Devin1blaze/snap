@@ -285,7 +285,7 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         if ( (int) $item->menu_item_parent !== 0 ) continue;
         $has_ch = ! empty( $children[ $item->ID ] );
 
-        echo '<li class="snap-nav-item">';
+        echo '<li class="snap-nav-item group relative">';
         echo '<a href="' . esc_url( $item->url ) . '" class="snap-nav-link">';
         echo esc_html( $item->title );
         if ( $has_ch ) {
@@ -294,69 +294,37 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         echo '</a>';
 
         if ( $has_ch ) {
-            $first_l2 = true;
-            echo '<div class="snap-mega-wrapper" role="region" aria-label="' . esc_attr( $item->title ) . ' menu">';
-            echo '<div class="snap-mega-menu">';
-
-            // LEFT SIDEBAR
-            echo '<div class="snap-mega-sidebar">';
-            echo '<div class="snap-mega-sidebar-header">Categories</div>';
-            echo '<ul class="snap-mega-cat-list">';
+            // L2 Dropdown (Standard vertical list, not mega)
+            echo '<ul class="snap-dropdown hidden group-hover:block absolute left-0 top-full min-w-[240px] pt-2 z-50">';
+            echo '<div class="snap-dropdown-inner">';
             foreach ( $children[ $item->ID ] as $l2 ) {
-                $cat_key  = 'megacat-' . $item->ID . '-' . $l2->ID;
-                $active   = $first_l2 ? ' snap-mega-cat-active' : '';
-                $has_l3   = ! empty( $children[ $l2->ID ] );
-                $initial  = mb_strtoupper( mb_substr( $l2->title, 0, 1 ) );
-                echo '<li class="snap-mega-cat-item' . $active . '" data-cat="' . esc_attr( $cat_key ) . '">';
-                echo '<a href="' . esc_url( $l2->url ) . '" class="snap-mega-cat-link">';
-                echo '<span class="snap-mega-cat-icon-wrap" aria-hidden="true">' . esc_html( $initial ) . '</span>';
-                echo '<span class="snap-mega-cat-name">' . esc_html( $l2->title ) . '</span>';
+                $has_l3 = ! empty( $children[ $l2->ID ] );
+                echo '<li class="snap-dropdown-item group/sub relative">';
+                echo '<a href="' . esc_url( $l2->url ) . '" class="snap-dropdown-link flex items-center justify-between">';
+                echo esc_html( $l2->title );
                 if ( $has_l3 ) {
-                    echo '<span class="material-symbols-outlined snap-mega-cat-arrow">chevron_right</span>';
+                    echo '<span class="material-symbols-outlined text-[16px] opacity-60">chevron_right</span>';
                 }
                 echo '</a>';
-                echo '</li>';
-                $first_l2 = false;
-            }
-            echo '</ul>';
-            echo '</div>'; // end .snap-mega-sidebar
-
-            // RIGHT CONTENT PANEL
-            echo '<div class="snap-mega-content">';
-            $first_r = true;
-            foreach ( $children[ $item->ID ] as $l2 ) {
-                $cat_key = 'megacat-' . $item->ID . '-' . $l2->ID;
-                $active  = $first_r ? ' snap-mega-sub-active' : '';
-                $has_l3  = ! empty( $children[ $l2->ID ] );
-                echo '<div class="snap-mega-sub' . $active . '" data-for="' . esc_attr( $cat_key ) . '">';
-                echo '<div class="snap-mega-sub-title">';
-                echo esc_html( $l2->title );
-                echo '<a href="' . esc_url( $l2->url ) . '">View all &rarr;</a>';
-                echo '</div>';
+                
                 if ( $has_l3 ) {
-                    echo '<div class="snap-mega-sub-grid">';
+                    // L3 Flyout
+                    echo '<ul class="snap-dropdown-flyout hidden group-hover/sub:block absolute left-full top-0 min-w-[240px] pl-0.5 z-50">';
+                    echo '<div class="snap-dropdown-inner">';
                     foreach ( $children[ $l2->ID ] as $l3 ) {
-                        echo '<a href="' . esc_url( $l3->url ) . '" class="snap-mega-sub-link">';
-                        echo '<span class="snap-mega-sub-dot"></span>';
+                        echo '<li>';
+                        echo '<a href="' . esc_url( $l3->url ) . '" class="snap-dropdown-link">';
                         echo esc_html( $l3->title );
                         echo '</a>';
+                        echo '</li>';
                     }
                     echo '</div>';
-                } else {
-                    echo '<div class="snap-mega-sub-grid">';
-                    echo '<a href="' . esc_url( $l2->url ) . '" class="snap-mega-sub-link snap-mega-sub-link-full">';
-                    echo '<span class="snap-mega-sub-dot"></span>';
-                    echo 'Browse all &mdash; ' . esc_html( $l2->title );
-                    echo '</a>';
-                    echo '</div>';
+                    echo '</ul>';
                 }
-                echo '</div>'; // .snap-mega-sub
-                $first_r = false;
+                echo '</li>';
             }
-            echo '</div>'; // .snap-mega-content
-
-            echo '</div>'; // .snap-mega-menu
-            echo '</div>'; // .snap-mega-wrapper
+            echo '</div>';
+            echo '</ul>';
         }
 
         echo '</li>';
@@ -464,44 +432,18 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         }
         li.snap-nav-item:hover .snap-nav-caret { transform: rotate(180deg); color: #FBBF24; }
 
-        /* ── MEGA MENU WRAPPER ──────────────────────────────── */
-        .snap-mega-wrapper {
-            position: absolute;
-            right: 0;
-            top: 100%;
-            padding-top: 8px;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(8px);
-            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-            pointer-events: none;
-        }
-        li.snap-nav-item:hover > .snap-mega-wrapper {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
-        /* ── MEGA MENU CONTAINER ────────────────────────────── */
-        .snap-mega-menu {
-            display: flex;
-            width: 700px;
-            min-height: 380px;
-            /* Base state matches unscrolled header (transparent) */
-            background: rgba(10, 10, 10, 0.4); /* Slight tint for readability even when transparent */
+        /* ── STANDARD DROPDOWN MENU ─────────────────────────── */
+        .snap-dropdown-inner {
+            background: rgba(10, 10, 10, 0.4);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-top: 3px solid #1A56DB;       /* Royal Blue top accent */
             border-radius: 0;                    /* NO ROUND EDGES */
-            overflow: hidden;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        /* Scrolled state matches scrolled header */
-        #nav-header.scrolled .snap-mega-menu {
+        #nav-header.scrolled .snap-dropdown-inner {
             background: rgba(10, 10, 10, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -511,185 +453,7 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(26,86,219,0.1) inset;
         }
 
-        /* ── LEFT SIDEBAR ───────────────────────────────────── */
-        .snap-mega-sidebar {
-            width: 235px;
-            flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.03);
-            border-right: 2px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
-        }
-        .snap-mega-sidebar-header {
-            padding: 14px 16px 8px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #FBBF24;                      /* Sunshine Yellow */
-        }
-        .snap-mega-cat-list {
-            list-style: none;
-            margin: 0;
-            padding: 2px 0 12px;
-            overflow-y: auto;
-            flex: 1;
-        }
-        .snap-mega-cat-list::-webkit-scrollbar { width: 3px; }
-        .snap-mega-cat-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 0; }
 
-        /* Sidebar L2 item */
-        .snap-mega-cat-item { position: relative; list-style: none; }
-        .snap-mega-cat-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 16px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            border-left: 3px solid transparent;
-            transition: color 0.12s, background 0.12s, border-color 0.12s;
-        }
-        .snap-mega-cat-item:hover .snap-mega-cat-link {
-            color: #fff;
-            background: rgba(255,255,255,0.06);
-        }
-        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-link {
-            color: #0A0A0A;
-            background: #FBBF24;                 /* Sunshine Yellow active indicator */
-            border-left-color: #1A56DB;          /* Royal Blue accent */
-            font-weight: 700;
-        }
-
-        /* Icon badge — letter initial */
-        .snap-mega-cat-icon-wrap {
-            width: 30px;
-            height: 30px;
-            border-radius: 0;                    /* No round edges */
-            background: rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 13px;
-            font-weight: 800;
-            color: #fff;
-            transition: background 0.12s, color 0.12s;
-        }
-        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-icon-wrap {
-            background: #0A0A0A;                 /* Black badge when active */
-            color: #FBBF24;
-        }
-        .snap-mega-cat-item:hover .snap-mega-cat-icon-wrap {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .snap-mega-cat-name { flex: 1; }
-        .snap-mega-cat-arrow {
-            font-size: 14px;
-            color: rgba(255,255,255,0.3);
-            flex-shrink: 0;
-        }
-        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-arrow { color: #0A0A0A; }
-
-        /* ── RIGHT CONTENT PANEL ────────────────────────────── */
-        .snap-mega-content {
-            flex: 1;
-            padding: 20px 22px 18px;
-            overflow-y: auto;
-            background: transparent;
-        }
-        .snap-mega-content::-webkit-scrollbar { width: 3px; }
-        .snap-mega-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 0; }
-
-        /* Sub-panel (one per L2 item, hidden/shown via JS) */
-        .snap-mega-sub { display: none; flex-direction: column; }
-        .snap-mega-sub.snap-mega-sub-active { display: flex; }
-
-        /* Sub-panel section header */
-        .snap-mega-sub-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #1A56DB;                      /* Royal Blue label */
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255,255,255,0.1);   /* Underline */
-        }
-        .snap-mega-sub-title a {
-            font-size: 11px;
-            font-weight: 600;
-            color: #FBBF24;                      /* Sunshine yellow */
-            text-decoration: none;
-            margin-left: auto;
-            letter-spacing: 0;
-            text-transform: none;
-            padding: 2px 8px;
-            background: rgba(251,191,36,0.1);
-            border-radius: 0;                    /* No round edges */
-            transition: background 0.12s, color 0.12s;
-        }
-        .snap-mega-sub-title a:hover { background: #FBBF24; color: #0A0A0A; }
-
-        /* Sub-links grid */
-        .snap-mega-sub-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px;
-        }
-
-        .snap-mega-sub-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 9px 10px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            border-radius: 0;                    /* Sharp — Industrial Authority */
-            transition: color 0.12s, background 0.12s;
-        }
-        .snap-mega-sub-link:hover {
-            color: #fff;
-            background: rgba(255,255,255,0.06);
-        }
-        .snap-mega-sub-link:hover .snap-mega-sub-dot { background: #FBBF24; }
-
-        /* Bullet dot */
-        .snap-mega-sub-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 0;                    /* Square dot! */
-            background: rgba(255,255,255,0.2);
-            flex-shrink: 0;
-            transition: background 0.12s;
-        }
-
-        /* "Browse all" fallback — full width CTA-style */
-        .snap-mega-sub-link-full {
-            grid-column: 1 / -1;
-            color: #FBBF24;
-            font-weight: 700;
-            border: 1px solid rgba(251,191,36,0.3);
-            margin-top: 6px;
-            padding: 10px 14px;
-        }
-        .snap-mega-sub-link-full:hover {
-            background: #FBBF24;
-            color: #0A0A0A;
-            border-color: #FBBF24;
-        }
-        .snap-mega-sub-link-full:hover .snap-mega-sub-dot { background: #0A0A0A; }
-        .snap-mega-sub-link-full .snap-mega-sub-dot { background: #FBBF24; }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
@@ -697,7 +461,7 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
 
 <header class="relative z-50">
   <nav id="floating-nav" class="fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300">
-    <div id="nav-header" class="w-full max-w-6xl mx-auto mt-3 px-4 lg:px-6 border border-transparent rounded-none transition-all duration-500">
+    <div id="nav-header" class="w-full max-w-[1536px] mx-auto mt-3 px-4 lg:px-6 border border-transparent rounded-none transition-all duration-500">
       <div class="flex items-center justify-between py-3 lg:py-3.5">
 
         <!-- Logo -->
