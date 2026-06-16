@@ -29,77 +29,54 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
     foreach ($menu_items as $item) {
         if (stripos($item->title, 'product') !== false || stripos($item->title, 'categor') !== false) {
             if (taxonomy_exists('product_cat')) {
-                // Get root-level categories (parent=0)
+                // Get ROOT categories (B2B, B2C, etc.) — these become the LEFT SIDEBAR items
                 $root_cats = get_terms([
-                    'taxonomy' => 'product_cat',
+                    'taxonomy'   => 'product_cat',
                     'hide_empty' => false,
-                    'parent' => 0,
-                    'orderby' => 'name',
-                    'order' => 'ASC'
+                    'parent'     => 0,
+                    'orderby'    => 'name',
+                    'order'      => 'ASC',
+                    'exclude'    => get_term_by('slug', 'uncategorized', 'product_cat') ? [get_term_by('slug', 'uncategorized', 'product_cat')->term_id] : [],
                 ]);
-                
+
                 if (!is_wp_error($root_cats) && !empty($root_cats)) {
                     $dynamic_children = [];
-                    
+
                     foreach ($root_cats as $root_cat) {
-                        // Skip generic/utility categories
-                        if (in_array(strtolower($root_cat->name), ['uncategorized'])) continue;
-                        
-                        // Check if this root category is a wrapper (like "B2B Products", "B2C Products")
-                        // If it has children, show those children directly in the dropdown
-                        $children_of_root = get_terms([
-                            'taxonomy' => 'product_cat',
+                        if (strtolower($root_cat->name) === 'uncategorized') continue;
+
+                        // Each root (B2B, B2C, Featured Products, Washroom Automations...)
+                        // becomes a sidebar L1 item
+                        $fake_child = new stdClass();
+                        $fake_child->ID = 'cat_' . $root_cat->term_id;
+                        $fake_child->title = $root_cat->name;
+                        $fake_child->url = get_term_link($root_cat);
+                        $fake_child->menu_item_parent = $item->ID;
+                        $dynamic_children[] = $fake_child;
+
+                        // Get sub-categories of each root — these go in the RIGHT PANEL
+                        $sub_cats = get_terms([
+                            'taxonomy'   => 'product_cat',
                             'hide_empty' => false,
-                            'parent' => $root_cat->term_id,
-                            'orderby' => 'name',
-                            'order' => 'ASC'
+                            'parent'     => $root_cat->term_id,
+                            'orderby'    => 'name',
+                            'order'      => 'ASC',
                         ]);
-                        
-                        if (!is_wp_error($children_of_root) && !empty($children_of_root)) {
-                            // This is a wrapper category (B2B/B2C) — show it as a group header
-                            // and its children as the actual dropdown items
-                            foreach ($children_of_root as $child_cat) {
-                                $fake_child = new stdClass();
-                                $fake_child->ID = 'cat_' . $child_cat->term_id;
-                                $fake_child->title = $child_cat->name;
-                                $fake_child->url = get_term_link($child_cat);
-                                $fake_child->menu_item_parent = $item->ID;
-                                $fake_child->_group_label = $root_cat->name; // store group for reference
-                                $dynamic_children[] = $fake_child;
-                                
-                                // Get grandchildren (sub-subcategories) for flyout
-                                $grandchildren = get_terms([
-                                    'taxonomy' => 'product_cat',
-                                    'hide_empty' => false,
-                                    'parent' => $child_cat->term_id,
-                                    'orderby' => 'name',
-                                    'order' => 'ASC'
-                                ]);
-                                
-                                if (!is_wp_error($grandchildren) && !empty($grandchildren)) {
-                                    $dynamic_subchildren = [];
-                                    foreach ($grandchildren as $grandchild) {
-                                        $fake_subchild = new stdClass();
-                                        $fake_subchild->ID = 'cat_' . $grandchild->term_id;
-                                        $fake_subchild->title = $grandchild->name;
-                                        $fake_subchild->url = get_term_link($grandchild);
-                                        $fake_subchild->menu_item_parent = $fake_child->ID;
-                                        $dynamic_subchildren[] = $fake_subchild;
-                                    }
-                                    $child_items[$fake_child->ID] = $dynamic_subchildren;
-                                }
+
+                        if (!is_wp_error($sub_cats) && !empty($sub_cats)) {
+                            $dynamic_subchildren = [];
+                            foreach ($sub_cats as $sub_cat) {
+                                $fake_sub = new stdClass();
+                                $fake_sub->ID = 'cat_' . $sub_cat->term_id;
+                                $fake_sub->title = $sub_cat->name;
+                                $fake_sub->url = get_term_link($sub_cat);
+                                $fake_sub->menu_item_parent = $fake_child->ID;
+                                $dynamic_subchildren[] = $fake_sub;
                             }
-                        } else {
-                            // Leaf root category (no children) — show directly
-                            $fake_child = new stdClass();
-                            $fake_child->ID = 'cat_' . $root_cat->term_id;
-                            $fake_child->title = $root_cat->name;
-                            $fake_child->url = get_term_link($root_cat);
-                            $fake_child->menu_item_parent = $item->ID;
-                            $dynamic_children[] = $fake_child;
+                            $child_items[$fake_child->ID] = $dynamic_subchildren;
                         }
                     }
-                    
+
                     // Replace static menu children with dynamic WooCommerce categories
                     $child_items[$item->ID] = $dynamic_children;
                 }
@@ -178,9 +155,12 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
                     $cat_key = 'megacat-' . sanitize_html_class($child->ID);
                     $active = $first ? ' snap-mega-cat-active' : '';
                     $has_sub = isset($child_items[$child->ID]);
+                    // Pick a category icon letter/emoji based on name
+                    $cat_initial = mb_strtoupper(mb_substr($child->title, 0, 1));
                     echo '<li class="snap-mega-cat-item' . $active . '" data-cat="' . esc_attr($cat_key) . '">';
                     echo '<a href="' . esc_url($child->url) . '" class="snap-mega-cat-link">';
-                    echo '<span>' . esc_html($child->title) . '</span>';
+                    echo '<span class="snap-mega-cat-icon-wrap" aria-hidden="true">' . esc_html($cat_initial) . '</span>';
+                    echo '<span class="snap-mega-cat-name">' . esc_html($child->title) . '</span>';
                     if ($has_sub) {
                         echo '<span class="material-symbols-outlined snap-mega-cat-arrow">chevron_right</span>';
                     }
@@ -199,12 +179,16 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
                     $active = $first ? ' snap-mega-sub-active' : '';
                     $has_sub = isset($child_items[$child->ID]);
                     echo '<div class="snap-mega-sub' . $active . '" data-for="' . esc_attr($cat_key) . '">';
-                    echo '<div class="snap-mega-sub-title">' . esc_html($child->title) . '</div>';
+                    // Section header with View All link
+                    echo '<div class="snap-mega-sub-title">';
+                    echo esc_html($child->title);
+                    echo '<a href="' . esc_url($child->url) . '">View all &rarr;</a>';
+                    echo '</div>';
                     if ($has_sub) {
                         echo '<div class="snap-mega-sub-grid">';
                         foreach ($child_items[$child->ID] as $subchild) {
                             echo '<a href="' . esc_url($subchild->url) . '" class="snap-mega-sub-link">';
-                            echo '<span class="material-symbols-outlined snap-mega-sub-icon">arrow_forward</span>';
+                            echo '<span class="snap-mega-sub-dot"></span>';
                             echo esc_html($subchild->title);
                             echo '</a>';
                         }
@@ -212,8 +196,8 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
                     } else {
                         echo '<div class="snap-mega-sub-grid">';
                         echo '<a href="' . esc_url($child->url) . '" class="snap-mega-sub-link snap-mega-sub-link-full">';
-                        echo '<span class="material-symbols-outlined snap-mega-sub-icon">open_in_new</span>';
-                        echo 'Browse all ' . esc_html($child->title);
+                        echo '<span class="snap-mega-sub-dot"></span>';
+                        echo 'Browse all &mdash; ' . esc_html($child->title);
                         echo '</a>';
                         echo '</div>';
                     }
@@ -289,7 +273,7 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
         .mobile-submenu.open { max-height: 500px; }
 
         /* ================================================
-           TOP NAV LINK STYLES
+           TOP NAV LINKS
         ================================================ */
         li.snap-nav-item { position: relative; list-style: none; }
 
@@ -316,7 +300,8 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
         li.snap-nav-item:hover .snap-nav-caret { transform: rotate(180deg); }
 
         /* ================================================
-           MEGA MENU — HAVELLS STYLE, SNAP AESTHETIC
+           MEGA MENU — HAVELLS STYLE
+           White background, left sidebar, right content
         ================================================ */
 
         /* Wrapper: hidden by default, shown on hover */
@@ -324,12 +309,12 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
             position: absolute;
             right: 0;
             top: 100%;
-            padding-top: 10px;
+            padding-top: 8px;
             z-index: 9999;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(8px);
-            transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
+            transform: translateY(6px);
+            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
         }
         li.snap-nav-item:hover > .snap-mega-wrapper {
             opacity: 1;
@@ -337,139 +322,195 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
             transform: translateY(0);
         }
 
-        /* Main mega container */
+        /* Main container — white like Havells */
         .snap-mega-menu {
             display: flex;
-            width: 620px;
-            min-height: 340px;
-            background: rgba(8, 8, 8, 0.98);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
+            width: 680px;
+            min-height: 380px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04) inset;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.08);
         }
 
-        /* LEFT SIDEBAR */
+        /* LEFT SIDEBAR — grey tinted like Havells */
         .snap-mega-sidebar {
-            width: 210px;
+            width: 230px;
             flex-shrink: 0;
-            background: rgba(255,255,255,0.02);
-            border-right: 1px solid rgba(255,255,255,0.06);
+            background: #f9fafb;
+            border-right: 1px solid #e5e7eb;
             display: flex;
             flex-direction: column;
         }
         .snap-mega-sidebar-header {
-            padding: 14px 16px 8px;
+            padding: 16px 16px 8px;
             font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.25);
+            color: #9ca3af;
         }
         .snap-mega-cat-list {
             list-style: none;
             margin: 0;
-            padding: 0 0 12px;
+            padding: 4px 0 12px;
             overflow-y: auto;
             flex: 1;
         }
         .snap-mega-cat-list::-webkit-scrollbar { width: 3px; }
-        .snap-mega-cat-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+        .snap-mega-cat-list::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
 
-        .snap-mega-cat-item { position: relative; }
+        /* Sidebar category item */
+        .snap-mega-cat-item { position: relative; list-style: none; }
         .snap-mega-cat-link {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 16px;
+            padding: 11px 16px;
             font-size: 13px;
             font-weight: 500;
-            color: rgba(255,255,255,0.55);
+            color: #374151;
             text-decoration: none;
             transition: color 0.15s, background 0.15s;
-            border-left: 2px solid transparent;
+            border-left: 3px solid transparent;
+            gap: 8px;
         }
-        .snap-mega-cat-item:hover .snap-mega-cat-link,
+        .snap-mega-cat-item:hover .snap-mega-cat-link {
+            color: #111827;
+            background: #f3f4f6;
+        }
         .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-link {
-            color: #fff;
-            background: rgba(255,255,255,0.05);
+            color: #111827;
+            background: #ffffff;
+            border-left-color: #d97706; /* amber-600 — matches snap-yellow */
+            font-weight: 600;
         }
-        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-link {
-            border-left-color: #FBBF24;
-            color: #fff;
+        .snap-mega-cat-icon-wrap {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 16px;
+            transition: background 0.15s;
         }
+        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-icon-wrap {
+            background: #fef3c7; /* amber-100 */
+        }
+        .snap-mega-cat-name { flex: 1; }
         .snap-mega-cat-arrow {
             font-size: 14px;
-            opacity: 0.35;
+            color: #9ca3af;
             flex-shrink: 0;
         }
-        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-arrow { opacity: 0.7; color: #FBBF24; }
+        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-arrow { color: #d97706; }
 
         /* RIGHT CONTENT PANEL */
         .snap-mega-content {
             flex: 1;
-            padding: 20px;
+            padding: 20px 20px 16px;
             overflow-y: auto;
-            position: relative;
+            background: #fff;
         }
         .snap-mega-content::-webkit-scrollbar { width: 3px; }
-        .snap-mega-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+        .snap-mega-content::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
 
-        /* Sub-panel: each category's sub-items */
-        .snap-mega-sub {
-            display: none;
-            flex-direction: column;
-        }
+        /* Sub panel */
+        .snap-mega-sub { display: none; flex-direction: column; gap: 0; }
         .snap-mega-sub.snap-mega-sub-active { display: flex; }
 
+        /* Sub panel title / section header */
         .snap-mega-sub-title {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.09em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: #FBBF24;
-            margin-bottom: 12px;
+            color: #d97706;
+            margin-bottom: 10px;
             padding-bottom: 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid #fde68a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+        .snap-mega-sub-title a {
+            font-size: 11px;
+            font-weight: 500;
+            color: #d97706;
+            text-decoration: none;
+            margin-left: auto;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+        .snap-mega-sub-title a:hover { text-decoration: underline; }
 
-        /* Grid of sub-links */
+        /* Sub-links grid */
         .snap-mega-sub-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2px;
+            gap: 1px;
         }
 
         .snap-mega-sub-link {
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 6px;
             padding: 9px 10px;
             font-size: 13px;
             font-weight: 400;
-            color: rgba(255,255,255,0.6);
+            color: #4b5563;
             text-decoration: none;
-            border-radius: 8px;
-            transition: color 0.15s, background 0.15s;
+            border-radius: 6px;
+            transition: color 0.12s, background 0.12s;
         }
         .snap-mega-sub-link:hover {
-            color: #fff;
-            background: rgba(255,255,255,0.06);
+            color: #111827;
+            background: #f9fafb;
         }
+        .snap-mega-sub-link:hover .snap-mega-sub-dot { background: #d97706; }
+
+        .snap-mega-sub-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #d1d5db;
+            flex-shrink: 0;
+            transition: background 0.12s;
+        }
+
+        /* "Browse all" full-width link */
         .snap-mega-sub-link-full {
             grid-column: 1 / -1;
-            color: rgba(251,191,36,0.8);
+            color: #d97706;
+            font-weight: 500;
+            border: 1px dashed #fde68a;
+            margin-top: 4px;
         }
-        .snap-mega-sub-link-full:hover { color: #FBBF24; background: rgba(251,191,36,0.06); }
+        .snap-mega-sub-link-full:hover { background: #fffbeb; color: #b45309; }
+        .snap-mega-sub-link-full .snap-mega-sub-dot { background: #d97706; }
 
-        .snap-mega-sub-icon {
-            font-size: 13px;
-            opacity: 0.4;
-            flex-shrink: 0;
+        /* Footer strip inside right panel */
+        .snap-mega-footer {
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1px solid #f3f4f6;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
         }
-        .snap-mega-sub-link:hover .snap-mega-sub-icon { opacity: 0.8; }
+        .snap-mega-footer-link {
+            font-size: 11px;
+            color: #9ca3af;
+            text-decoration: none;
+            padding: 3px 8px;
+            border-radius: 4px;
+            transition: color 0.12s, background 0.12s;
+        }
+        .snap-mega-footer-link:hover { color: #374151; background: #f3f4f6; }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
