@@ -156,48 +156,74 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
     foreach ($menu_items as $item) {
         if (!$item->menu_item_parent) {
             $has_children = isset($child_items[$item->ID]);
-            echo '<li class="relative group">';
-            echo '<a href="' . esc_url($item->url) . '" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all whitespace-nowrap">';
+            echo '<li class="snap-nav-item">';
+            echo '<a href="' . esc_url($item->url) . '" class="snap-nav-link">';
             echo esc_html($item->title);
             if ($has_children) {
-            echo '<span class="material-symbols-outlined expand-icon" style="font-size:16px;opacity:0.5">expand_more</span>';
+                echo '<span class="material-symbols-outlined snap-nav-caret">expand_more</span>';
             }
             echo '</a>';
-            
+
             if ($has_children) {
-                echo '<ul class="nav-dropdown">';
-                echo '<div class="nav-panel">';
-                echo '<div class="nav-scroll">';
+                // Build category data for mega-menu
+                $first = true;
+                echo '<div class="snap-mega-wrapper">';
+                echo '<div class="snap-mega-menu">';
+
+                // LEFT SIDEBAR
+                echo '<div class="snap-mega-sidebar">';
+                echo '<div class="snap-mega-sidebar-header">Categories</div>';
+                echo '<ul class="snap-mega-cat-list">';
                 foreach ($child_items[$item->ID] as $child) {
-                    $has_subchildren = isset($child_items[$child->ID]);
-                    echo '<li class="nav-item-lvl2">';
-                    echo '<a href="' . esc_url($child->url) . '" class="nav-link-child">';
+                    $cat_key = 'megacat-' . sanitize_html_class($child->ID);
+                    $active = $first ? ' snap-mega-cat-active' : '';
+                    $has_sub = isset($child_items[$child->ID]);
+                    echo '<li class="snap-mega-cat-item' . $active . '" data-cat="' . esc_attr($cat_key) . '">';
+                    echo '<a href="' . esc_url($child->url) . '" class="snap-mega-cat-link">';
                     echo '<span>' . esc_html($child->title) . '</span>';
-                    if ($has_subchildren) {
-                        echo '<span class="material-symbols-outlined" style="font-size:14px;opacity:0.4">chevron_right</span>';
+                    if ($has_sub) {
+                        echo '<span class="material-symbols-outlined snap-mega-cat-arrow">chevron_right</span>';
                     }
                     echo '</a>';
-                    
-                    if ($has_subchildren) {
-                        echo '<ul class="nav-flyout">';
-                        echo '<div class="nav-panel nav-panel-sm">';
-                        echo '<div class="nav-scroll nav-scroll-sm">';
+                    echo '</li>';
+                    $first = false;
+                }
+                echo '</ul>';
+                echo '</div>'; // end sidebar
+
+                // RIGHT CONTENT PANEL
+                echo '<div class="snap-mega-content">';
+                $first = true;
+                foreach ($child_items[$item->ID] as $child) {
+                    $cat_key = 'megacat-' . sanitize_html_class($child->ID);
+                    $active = $first ? ' snap-mega-sub-active' : '';
+                    $has_sub = isset($child_items[$child->ID]);
+                    echo '<div class="snap-mega-sub' . $active . '" data-for="' . esc_attr($cat_key) . '">';
+                    echo '<div class="snap-mega-sub-title">' . esc_html($child->title) . '</div>';
+                    if ($has_sub) {
+                        echo '<div class="snap-mega-sub-grid">';
                         foreach ($child_items[$child->ID] as $subchild) {
-                            echo '<li>';
-                            echo '<a href="' . esc_url($subchild->url) . '" class="nav-link-sub">';
+                            echo '<a href="' . esc_url($subchild->url) . '" class="snap-mega-sub-link">';
+                            echo '<span class="material-symbols-outlined snap-mega-sub-icon">arrow_forward</span>';
                             echo esc_html($subchild->title);
                             echo '</a>';
-                            echo '</li>';
                         }
                         echo '</div>';
+                    } else {
+                        echo '<div class="snap-mega-sub-grid">';
+                        echo '<a href="' . esc_url($child->url) . '" class="snap-mega-sub-link snap-mega-sub-link-full">';
+                        echo '<span class="material-symbols-outlined snap-mega-sub-icon">open_in_new</span>';
+                        echo 'Browse all ' . esc_html($child->title);
+                        echo '</a>';
                         echo '</div>';
-                        echo '</ul>';
                     }
-                    echo '</li>';
+                    echo '</div>'; // end snap-mega-sub
+                    $first = false;
                 }
-                echo '</div>';
-                echo '</div>';
-                echo '</ul>';
+                echo '</div>'; // end snap-mega-content
+
+                echo '</div>'; // end snap-mega-menu
+                echo '</div>'; // end snap-mega-wrapper
             }
             echo '</li>';
         }
@@ -244,136 +270,206 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
         html, body { overflow-x: hidden; width: 100%; position: relative; }
         body { font-family: 'Inter', 'Plus Jakarta Sans', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        
-        /* Industrial Glow for interactive elements */
+
+        /* Industrial Glow */
         .industrial-glow:hover { box-shadow: 0 0 25px rgba(251, 191, 36, 0.4); }
 
-        /* Header scroll transition */
-        #nav-header {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        /* Header scroll */
+        #nav-header { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         #nav-header.scrolled {
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-color: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255,255,255,0.08);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
-        /* Mobile menu accordion */
+        /* Mobile accordion */
         .mobile-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
         .mobile-submenu.open { max-height: 500px; }
 
-        /* ============================================
-           NAVIGATION DROPDOWN SYSTEM
-           Pure CSS — no Tailwind group-hover needed
-        ============================================ */
+        /* ================================================
+           TOP NAV LINK STYLES
+        ================================================ */
+        li.snap-nav-item { position: relative; list-style: none; }
 
-        /* L1 top-level nav item wrapper */
-        li.relative.group { position: relative; }
+        a.snap-nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: color 0.15s, background 0.15s;
+            white-space: nowrap;
+        }
+        a.snap-nav-link:hover { color: #fff; background: rgba(255,255,255,0.08); }
 
-        /* L1 dropdown panel — hidden by default */
-        ul.nav-dropdown {
+        .snap-nav-caret {
+            font-size: 16px;
+            opacity: 0.5;
+            transition: transform 0.2s ease;
+        }
+        li.snap-nav-item:hover .snap-nav-caret { transform: rotate(180deg); }
+
+        /* ================================================
+           MEGA MENU — HAVELLS STYLE, SNAP AESTHETIC
+        ================================================ */
+
+        /* Wrapper: hidden by default, shown on hover */
+        .snap-mega-wrapper {
             position: absolute;
             right: 0;
             top: 100%;
-            padding-top: 8px;
+            padding-top: 10px;
             z-index: 9999;
-            list-style: none;
-            margin: 0;
-            padding-left: 0;
-            /* hidden state */
             opacity: 0;
             visibility: hidden;
-            transform: translateY(6px);
-            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-            min-width: 288px;
+            transform: translateY(8px);
+            transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
         }
-
-        /* Show L1 dropdown on parent li hover */
-        li.relative.group:hover > ul.nav-dropdown {
+        li.snap-nav-item:hover > .snap-mega-wrapper {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
 
-        /* Dropdown inner panel */
-        .nav-panel {
-            width: 288px;
-            background: rgba(10, 10, 10, 0.97);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        /* Main mega container */
+        .snap-mega-menu {
+            display: flex;
+            width: 620px;
+            min-height: 340px;
+            background: rgba(8, 8, 8, 0.98);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04) inset;
         }
-        .nav-panel-sm { width: 256px; margin-left: 4px; }
 
-        /* Scrollable inner area */
-        .nav-scroll { max-height: 400px; overflow-y: auto; }
-        .nav-scroll-sm { max-height: 300px; overflow-y: auto; }
-        .nav-scroll::-webkit-scrollbar, .nav-scroll-sm::-webkit-scrollbar { width: 4px; }
-        .nav-scroll::-webkit-scrollbar-track, .nav-scroll-sm::-webkit-scrollbar-track { background: transparent; }
-        .nav-scroll::-webkit-scrollbar-thumb, .nav-scroll-sm::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+        /* LEFT SIDEBAR */
+        .snap-mega-sidebar {
+            width: 210px;
+            flex-shrink: 0;
+            background: rgba(255,255,255,0.02);
+            border-right: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            flex-direction: column;
+        }
+        .snap-mega-sidebar-header {
+            padding: 14px 16px 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+        }
+        .snap-mega-cat-list {
+            list-style: none;
+            margin: 0;
+            padding: 0 0 12px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .snap-mega-cat-list::-webkit-scrollbar { width: 3px; }
+        .snap-mega-cat-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
 
-        /* L2 child link item */
-        li.nav-item-lvl2 { position: relative; list-style: none; }
-        a.nav-link-child {
+        .snap-mega-cat-item { position: relative; }
+        .snap-mega-cat-link {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 11px 20px;
+            padding: 10px 16px;
             font-size: 13px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.65);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: color 0.15s, background 0.15s;
-        }
-        a.nav-link-child:hover { color: #fff; background: rgba(255,255,255,0.04); }
-        li.nav-item-lvl2:last-child > a.nav-link-child { border-bottom: none; }
-
-        /* L3 flyout panel — hidden by default */
-        ul.nav-flyout {
-            position: absolute;
-            left: 100%;
-            top: 0;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            z-index: 9999;
-            /* hidden state */
-            opacity: 0;
-            visibility: hidden;
-            transform: translateX(4px);
-            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-        }
-
-        /* Show L3 flyout on L2 item hover */
-        li.nav-item-lvl2:hover > ul.nav-flyout {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(0);
-        }
-
-        /* L3 sub link */
-        a.nav-link-sub {
-            display: block;
-            padding: 11px 20px;
-            font-size: 12px;
             font-weight: 500;
             color: rgba(255,255,255,0.55);
             text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: color 0.15s, background 0.15s;
+            border-left: 2px solid transparent;
+        }
+        .snap-mega-cat-item:hover .snap-mega-cat-link,
+        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-link {
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-link {
+            border-left-color: #FBBF24;
+            color: #fff;
+        }
+        .snap-mega-cat-arrow {
+            font-size: 14px;
+            opacity: 0.35;
+            flex-shrink: 0;
+        }
+        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-arrow { opacity: 0.7; color: #FBBF24; }
+
+        /* RIGHT CONTENT PANEL */
+        .snap-mega-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+        .snap-mega-content::-webkit-scrollbar { width: 3px; }
+        .snap-mega-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+        /* Sub-panel: each category's sub-items */
+        .snap-mega-sub {
+            display: none;
+            flex-direction: column;
+        }
+        .snap-mega-sub.snap-mega-sub-active { display: flex; }
+
+        .snap-mega-sub-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: #FBBF24;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* Grid of sub-links */
+        .snap-mega-sub-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+
+        .snap-mega-sub-link {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 10px;
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            border-radius: 8px;
             transition: color 0.15s, background 0.15s;
         }
-        a.nav-link-sub:hover { color: #fff; background: rgba(255,255,255,0.04); }
-        li:last-child > a.nav-link-sub { border-bottom: none; }
+        .snap-mega-sub-link:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.06);
+        }
+        .snap-mega-sub-link-full {
+            grid-column: 1 / -1;
+            color: rgba(251,191,36,0.8);
+        }
+        .snap-mega-sub-link-full:hover { color: #FBBF24; background: rgba(251,191,36,0.06); }
 
-        /* Rotate expand_more icon on hover */
-        li.relative.group:hover .expand-icon { transform: rotate(180deg); }
-        .expand-icon { transition: transform 0.2s ease; display: inline-flex; }
+        .snap-mega-sub-icon {
+            font-size: 13px;
+            opacity: 0.4;
+            flex-shrink: 0;
+        }
+        .snap-mega-sub-link:hover .snap-mega-sub-icon { opacity: 0.8; }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
@@ -572,6 +668,47 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
   });
   window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeSearch();
+  });
+  // =============================================
+  // MEGA MENU — Sidebar Hover Interaction
+  // =============================================
+  document.querySelectorAll('.snap-mega-cat-item').forEach(function(catItem) {
+    catItem.addEventListener('mouseenter', function() {
+      var menu = this.closest('.snap-mega-menu');
+      if (!menu) return;
+      var catKey = this.getAttribute('data-cat');
+
+      // Deactivate all sidebar items
+      menu.querySelectorAll('.snap-mega-cat-item').forEach(function(el) {
+        el.classList.remove('snap-mega-cat-active');
+      });
+      // Deactivate all right panels
+      menu.querySelectorAll('.snap-mega-sub').forEach(function(el) {
+        el.classList.remove('snap-mega-sub-active');
+      });
+
+      // Activate hovered sidebar item
+      this.classList.add('snap-mega-cat-active');
+
+      // Show matching right panel
+      var sub = menu.querySelector('.snap-mega-sub[data-for="' + catKey + '"]');
+      if (sub) sub.classList.add('snap-mega-sub-active');
+    });
+  });
+
+  // Prevent mega-menu closing when moving from sidebar to content
+  document.querySelectorAll('.snap-mega-menu').forEach(function(menu) {
+    menu.addEventListener('mouseleave', function() {
+      // Reset to first active on leave (optional, keeps state clean)
+      var firstCat = menu.querySelector('.snap-mega-cat-item');
+      var firstSub = menu.querySelector('.snap-mega-sub');
+      if (firstCat && firstSub) {
+        menu.querySelectorAll('.snap-mega-cat-item').forEach(function(el) { el.classList.remove('snap-mega-cat-active'); });
+        menu.querySelectorAll('.snap-mega-sub').forEach(function(el) { el.classList.remove('snap-mega-sub-active'); });
+        firstCat.classList.add('snap-mega-cat-active');
+        firstSub.classList.add('snap-mega-sub-active');
+      }
+    });
   });
 </script>
 </body>
