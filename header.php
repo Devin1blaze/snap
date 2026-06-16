@@ -27,7 +27,7 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
 
     // Dynamically inject WooCommerce product categories under the "Products" menu item
     foreach ($menu_items as $item) {
-        if (strtolower($item->title) === 'products') {
+        if (stripos($item->title, 'product') !== false || stripos($item->title, 'categor') !== false) {
             if (taxonomy_exists('product_cat')) {
                 // Get root-level categories (parent=0)
                 $root_cats = get_terms([
@@ -152,55 +152,57 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
     }
 
     // Desktop: horizontal inline
-    echo '<div class="flex items-center gap-1">';
+    echo '<ul class="flex items-center gap-1">';
     foreach ($menu_items as $item) {
         if (!$item->menu_item_parent) {
             $has_children = isset($child_items[$item->ID]);
-            echo '<div class="relative group">';
-            echo '<a href="' . esc_url($item->url) . '" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all whitespace-nowrap">';
+            echo '<li class="relative group">';
+            echo '<a href="' . esc_url($item->url) . '" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all whitespace-nowrap">';
             echo esc_html($item->title);
             if ($has_children) {
-                echo '<span class="material-symbols-outlined text-[16px] opacity-50 transition-transform group-hover:rotate-180">expand_more</span>';
+            echo '<span class="material-symbols-outlined expand-icon" style="font-size:16px;opacity:0.5">expand_more</span>';
             }
             echo '</a>';
             
             if ($has_children) {
-                echo '<div class="sub-menu absolute right-0 top-full pt-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">';
-                echo '<div class="w-72 bg-[#0A0A0A]/85 backdrop-blur-[20px] border border-white/10 rounded-xl overflow-hidden shadow-2xl">';
-                echo '<div class="max-h-[400px] overflow-y-auto scrollbar-thin">';
+                echo '<ul class="nav-dropdown">';
+                echo '<div class="nav-panel">';
+                echo '<div class="nav-scroll">';
                 foreach ($child_items[$item->ID] as $child) {
                     $has_subchildren = isset($child_items[$child->ID]);
-                    echo '<div class="relative group/lvl2">';
-                    echo '<a href="' . esc_url($child->url) . '" class="flex items-center justify-between px-5 py-3 text-[13px] font-medium text-white/60 hover:text-white hover:bg-white/5 transition-all border-b border-white/5 last:border-0">';
-                    echo esc_html($child->title);
+                    echo '<li class="nav-item-lvl2">';
+                    echo '<a href="' . esc_url($child->url) . '" class="nav-link-child">';
+                    echo '<span>' . esc_html($child->title) . '</span>';
                     if ($has_subchildren) {
-                        echo '<span class="material-symbols-outlined text-[14px] opacity-40">chevron_right</span>';
+                        echo '<span class="material-symbols-outlined" style="font-size:14px;opacity:0.4">chevron_right</span>';
                     }
                     echo '</a>';
                     
                     if ($has_subchildren) {
-                        echo '<div class="absolute left-full top-0 pt-0 z-50 opacity-0 invisible group-hover/lvl2:opacity-100 group-hover/lvl2:visible transition-all duration-200 translate-x-1 group-hover/lvl2:translate-x-0">';
-                        echo '<div class="w-60 bg-[#0A0A0A]/85 backdrop-blur-[20px] border border-white/10 rounded-xl overflow-hidden shadow-2xl ml-1">';
-                        echo '<div class="max-h-[300px] overflow-y-auto">';
+                        echo '<ul class="nav-flyout">';
+                        echo '<div class="nav-panel nav-panel-sm">';
+                        echo '<div class="nav-scroll nav-scroll-sm">';
                         foreach ($child_items[$child->ID] as $subchild) {
-                            echo '<a href="' . esc_url($subchild->url) . '" class="block px-5 py-3 text-[12px] font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all border-b border-white/5 last:border-0">';
+                            echo '<li>';
+                            echo '<a href="' . esc_url($subchild->url) . '" class="nav-link-sub">';
                             echo esc_html($subchild->title);
                             echo '</a>';
+                            echo '</li>';
                         }
                         echo '</div>';
                         echo '</div>';
-                        echo '</div>';
+                        echo '</ul>';
                     }
-                    echo '</div>';
+                    echo '</li>';
                 }
                 echo '</div>';
                 echo '</div>';
-                echo '</div>';
+                echo '</ul>';
             }
-            echo '</div>';
+            echo '</li>';
         }
     }
-    echo '</div>';
+    echo '</ul>';
 }
 
 ?><!DOCTYPE html>
@@ -261,6 +263,117 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
         /* Mobile menu accordion */
         .mobile-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
         .mobile-submenu.open { max-height: 500px; }
+
+        /* ============================================
+           NAVIGATION DROPDOWN SYSTEM
+           Pure CSS — no Tailwind group-hover needed
+        ============================================ */
+
+        /* L1 top-level nav item wrapper */
+        li.relative.group { position: relative; }
+
+        /* L1 dropdown panel — hidden by default */
+        ul.nav-dropdown {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            padding-top: 8px;
+            z-index: 9999;
+            list-style: none;
+            margin: 0;
+            padding-left: 0;
+            /* hidden state */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(6px);
+            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+            min-width: 288px;
+        }
+
+        /* Show L1 dropdown on parent li hover */
+        li.relative.group:hover > ul.nav-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Dropdown inner panel */
+        .nav-panel {
+            width: 288px;
+            background: rgba(10, 10, 10, 0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+        }
+        .nav-panel-sm { width: 256px; margin-left: 4px; }
+
+        /* Scrollable inner area */
+        .nav-scroll { max-height: 400px; overflow-y: auto; }
+        .nav-scroll-sm { max-height: 300px; overflow-y: auto; }
+        .nav-scroll::-webkit-scrollbar, .nav-scroll-sm::-webkit-scrollbar { width: 4px; }
+        .nav-scroll::-webkit-scrollbar-track, .nav-scroll-sm::-webkit-scrollbar-track { background: transparent; }
+        .nav-scroll::-webkit-scrollbar-thumb, .nav-scroll-sm::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+        /* L2 child link item */
+        li.nav-item-lvl2 { position: relative; list-style: none; }
+        a.nav-link-child {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: color 0.15s, background 0.15s;
+        }
+        a.nav-link-child:hover { color: #fff; background: rgba(255,255,255,0.04); }
+        li.nav-item-lvl2:last-child > a.nav-link-child { border-bottom: none; }
+
+        /* L3 flyout panel — hidden by default */
+        ul.nav-flyout {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            z-index: 9999;
+            /* hidden state */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(4px);
+            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+        }
+
+        /* Show L3 flyout on L2 item hover */
+        li.nav-item-lvl2:hover > ul.nav-flyout {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* L3 sub link */
+        a.nav-link-sub {
+            display: block;
+            padding: 11px 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: color 0.15s, background 0.15s;
+        }
+        a.nav-link-sub:hover { color: #fff; background: rgba(255,255,255,0.04); }
+        li:last-child > a.nav-link-sub { border-bottom: none; }
+
+        /* Rotate expand_more icon on hover */
+        li.relative.group:hover .expand-icon { transform: rotate(180deg); }
+        .expand-icon { transition: transform 0.2s ease; display: inline-flex; }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
