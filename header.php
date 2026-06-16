@@ -485,24 +485,38 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         }
 
         /* ── MEGA MENU CONTAINER ────────────────────────────── */
-        /* White panel — premium editorial (Design.md Glass Rule for overlays) */
         .snap-mega-menu {
             display: flex;
             width: 700px;
             min-height: 380px;
-            background: #ffffff;
+            /* Base state matches unscrolled header (transparent) */
+            background: rgba(10, 10, 10, 0.4); /* Slight tint for readability even when transparent */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-top: 3px solid #1A56DB;       /* Royal Blue top accent */
-            border-radius: 0 0 12px 12px;
+            border-radius: 0;                    /* NO ROUND EDGES */
             overflow: hidden;
-            box-shadow: 0 24px 60px rgba(10,10,10,0.18), 0 4px 16px rgba(26,86,219,0.08);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* Scrolled state matches scrolled header */
+        #nav-header.scrolled .snap-mega-menu {
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(26, 86, 219, 0.2);
+            border-right: 1px solid rgba(26, 86, 219, 0.2);
+            border-bottom: 1px solid rgba(26, 86, 219, 0.2);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(26,86,219,0.1) inset;
         }
 
         /* ── LEFT SIDEBAR ───────────────────────────────────── */
         .snap-mega-sidebar {
             width: 235px;
             flex-shrink: 0;
-            background: #f4f6fb;                 /* Very light Royal Blue tint */
-            border-right: 2px solid #e8edf8;
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 2px solid rgba(255, 255, 255, 0.05);
             display: flex;
             flex-direction: column;
         }
@@ -512,7 +526,7 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
             font-weight: 700;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: #1A56DB;                      /* Royal Blue label */
+            color: #FBBF24;                      /* Sunshine Yellow */
         }
         .snap-mega-cat-list {
             list-style: none;
@@ -522,7 +536,7 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
             flex: 1;
         }
         .snap-mega-cat-list::-webkit-scrollbar { width: 3px; }
-        .snap-mega-cat-list::-webkit-scrollbar-thumb { background: #c3cfe8; border-radius: 3px; }
+        .snap-mega-cat-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 0; }
 
         /* Sidebar L2 item */
         .snap-mega-cat-item { position: relative; list-style: none; }
@@ -534,19 +548,19 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 13px;
             font-weight: 600;
-            color: #374151;
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
             border-left: 3px solid transparent;
             transition: color 0.12s, background 0.12s, border-color 0.12s;
         }
         .snap-mega-cat-item:hover .snap-mega-cat-link {
-            color: #1A56DB;
-            background: #edf1fb;
+            color: #fff;
+            background: rgba(255,255,255,0.06);
         }
         .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-link {
             color: #0A0A0A;
-            background: #ffffff;
-            border-left-color: #FBBF24;          /* Sunshine Yellow active indicator */
+            background: #FBBF24;                 /* Sunshine Yellow active indicator */
+            border-left-color: #1A56DB;          /* Royal Blue accent */
             font-weight: 700;
         }
 
@@ -554,42 +568,42 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         .snap-mega-cat-icon-wrap {
             width: 30px;
             height: 30px;
-            border-radius: 6px;
-            background: #e8edf8;
+            border-radius: 0;                    /* No round edges */
+            background: rgba(255,255,255,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             font-size: 13px;
             font-weight: 800;
-            color: #1A56DB;
+            color: #fff;
             transition: background 0.12s, color 0.12s;
         }
         .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-icon-wrap {
-            background: #FBBF24;                 /* Sunshine Yellow badge when active */
-            color: #0A0A0A;
+            background: #0A0A0A;                 /* Black badge when active */
+            color: #FBBF24;
         }
         .snap-mega-cat-item:hover .snap-mega-cat-icon-wrap {
-            background: #dce5f8;
+            background: rgba(255,255,255,0.2);
         }
 
         .snap-mega-cat-name { flex: 1; }
         .snap-mega-cat-arrow {
             font-size: 14px;
-            color: #9ca3af;
+            color: rgba(255,255,255,0.3);
             flex-shrink: 0;
         }
-        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-arrow { color: #FBBF24; }
+        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-arrow { color: #0A0A0A; }
 
         /* ── RIGHT CONTENT PANEL ────────────────────────────── */
         .snap-mega-content {
             flex: 1;
             padding: 20px 22px 18px;
             overflow-y: auto;
-            background: #fff;
+            background: transparent;
         }
         .snap-mega-content::-webkit-scrollbar { width: 3px; }
-        .snap-mega-content::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 3px; }
+        .snap-mega-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 0; }
 
         /* Sub-panel (one per L2 item, hidden/shown via JS) */
         .snap-mega-sub { display: none; flex-direction: column; }
@@ -607,22 +621,22 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
             color: #1A56DB;                      /* Royal Blue label */
             margin-bottom: 12px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #FBBF24;   /* Sunshine Yellow underline */
+            border-bottom: 2px solid rgba(255,255,255,0.1);   /* Underline */
         }
         .snap-mega-sub-title a {
             font-size: 11px;
             font-weight: 600;
-            color: #1A56DB;
+            color: #FBBF24;                      /* Sunshine yellow */
             text-decoration: none;
             margin-left: auto;
             letter-spacing: 0;
             text-transform: none;
             padding: 2px 8px;
-            background: #EBF0FB;
-            border-radius: 4px;
+            background: rgba(251,191,36,0.1);
+            border-radius: 0;                    /* No round edges */
             transition: background 0.12s, color 0.12s;
         }
-        .snap-mega-sub-title a:hover { background: #1A56DB; color: #fff; }
+        .snap-mega-sub-title a:hover { background: #FBBF24; color: #0A0A0A; }
 
         /* Sub-links grid */
         .snap-mega-sub-grid {
@@ -639,14 +653,14 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 13px;
             font-weight: 500;
-            color: #374151;
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
             border-radius: 0;                    /* Sharp — Industrial Authority */
             transition: color 0.12s, background 0.12s;
         }
         .snap-mega-sub-link:hover {
-            color: #0A0A0A;
-            background: #f4f6fb;
+            color: #fff;
+            background: rgba(255,255,255,0.06);
         }
         .snap-mega-sub-link:hover .snap-mega-sub-dot { background: #FBBF24; }
 
@@ -654,8 +668,8 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         .snap-mega-sub-dot {
             width: 5px;
             height: 5px;
-            border-radius: 50%;
-            background: #cbd5e1;
+            border-radius: 0;                    /* Square dot! */
+            background: rgba(255,255,255,0.2);
             flex-shrink: 0;
             transition: background 0.12s;
         }
@@ -663,19 +677,19 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         /* "Browse all" fallback — full width CTA-style */
         .snap-mega-sub-link-full {
             grid-column: 1 / -1;
-            color: #1A56DB;
+            color: #FBBF24;
             font-weight: 700;
-            border: 1px solid #c3cfe8;
+            border: 1px solid rgba(251,191,36,0.3);
             margin-top: 6px;
             padding: 10px 14px;
         }
         .snap-mega-sub-link-full:hover {
-            background: #1A56DB;
-            color: #fff;
-            border-color: #1A56DB;
+            background: #FBBF24;
+            color: #0A0A0A;
+            border-color: #FBBF24;
         }
-        .snap-mega-sub-link-full:hover .snap-mega-sub-dot { background: #FBBF24; }
-        .snap-mega-sub-link-full .snap-mega-sub-dot { background: #1A56DB; }
+        .snap-mega-sub-link-full:hover .snap-mega-sub-dot { background: #0A0A0A; }
+        .snap-mega-sub-link-full .snap-mega-sub-dot { background: #FBBF24; }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
