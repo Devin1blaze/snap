@@ -218,13 +218,32 @@ get_header();
         <h2 class="text-white text-4xl font-black mb-16 uppercase tracking-tight">Shop by Category</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
             <?php
-            $shop_cats = get_terms([
+            // Get root B2B and B2C category IDs to filter only their direct children
+            $b2b_term = get_term_by('slug', 'b2b', 'product_cat');
+            $b2c_term = get_term_by('slug', 'b2c', 'product_cat');
+            $parent_ids = [];
+            if ($b2b_term) $parent_ids[] = (int) $b2b_term->term_id;
+            if ($b2c_term) $parent_ids[] = (int) $b2c_term->term_id;
+
+            $all_cats = get_terms([
                 'taxonomy' => 'product_cat',
                 'hide_empty' => true,
-                'number' => 6,
-                'orderby' => 'count',
-                'order' => 'DESC'
             ]);
+
+            $shop_cats = [];
+            if (!is_wp_error($all_cats)) {
+                foreach ($all_cats as $cat) {
+                    if (in_array((int)$cat->parent, $parent_ids, true)) {
+                        $shop_cats[] = $cat;
+                    }
+                }
+            }
+            // Sort direct children by count DESC
+            usort($shop_cats, function($a, $b) {
+                return $b->count - $a->count;
+            });
+            // Slice the top 6 categories
+            $shop_cats = array_slice($shop_cats, 0, 6);
             
             $bg_classes = [
                 'bg-blue-800/50', 'bg-blue-800/80', 'bg-blue-900/50', 'bg-blue-900/80',
@@ -232,7 +251,7 @@ get_header();
             ];
             $icons = ['sanitizer', 'ac_unit', 'water_drop', 'coffee_maker', 'masks', 'door_front', 'electrical_services'];
 
-            if (!is_wp_error($shop_cats)) {
+            if (!empty($shop_cats)) {
                 foreach($shop_cats as $i => $cat) {
                     $bg = $bg_classes[$i % count($bg_classes)];
                     $icon = $icons[$i % count($icons)];
