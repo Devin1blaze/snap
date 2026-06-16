@@ -29,45 +29,78 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
     foreach ($menu_items as $item) {
         if (strtolower($item->title) === 'products') {
             if (taxonomy_exists('product_cat')) {
-                $product_cats = get_terms([
+                // Get root-level categories (parent=0)
+                $root_cats = get_terms([
                     'taxonomy' => 'product_cat',
                     'hide_empty' => false,
-                    'parent' => 0
+                    'parent' => 0,
+                    'orderby' => 'name',
+                    'order' => 'ASC'
                 ]);
                 
-                if (!is_wp_error($product_cats) && !empty($product_cats)) {
+                if (!is_wp_error($root_cats) && !empty($root_cats)) {
                     $dynamic_children = [];
-                    foreach ($product_cats as $cat) {
-                        if (strtolower($cat->name) === 'uncategorized') continue;
+                    
+                    foreach ($root_cats as $root_cat) {
+                        // Skip generic/utility categories
+                        if (in_array(strtolower($root_cat->name), ['uncategorized'])) continue;
                         
-                        $fake_child = new stdClass();
-                        $fake_child->ID = 'cat_' . $cat->term_id;
-                        $fake_child->title = $cat->name;
-                        $fake_child->url = get_term_link($cat);
-                        $fake_child->menu_item_parent = $item->ID;
-                        $dynamic_children[] = $fake_child;
-                        
-                        // Check for subcategories
-                        $sub_cats = get_terms([
+                        // Check if this root category is a wrapper (like "B2B Products", "B2C Products")
+                        // If it has children, show those children directly in the dropdown
+                        $children_of_root = get_terms([
                             'taxonomy' => 'product_cat',
                             'hide_empty' => false,
-                            'parent' => $cat->term_id
+                            'parent' => $root_cat->term_id,
+                            'orderby' => 'name',
+                            'order' => 'ASC'
                         ]);
                         
-                        if (!is_wp_error($sub_cats) && !empty($sub_cats)) {
-                            $dynamic_subchildren = [];
-                            foreach ($sub_cats as $sub_cat) {
-                                $fake_subchild = new stdClass();
-                                $fake_subchild->ID = 'cat_' . $sub_cat->term_id;
-                                $fake_subchild->title = $sub_cat->name;
-                                $fake_subchild->url = get_term_link($sub_cat);
-                                $fake_subchild->menu_item_parent = $fake_child->ID;
-                                $dynamic_subchildren[] = $fake_subchild;
+                        if (!is_wp_error($children_of_root) && !empty($children_of_root)) {
+                            // This is a wrapper category (B2B/B2C) — show it as a group header
+                            // and its children as the actual dropdown items
+                            foreach ($children_of_root as $child_cat) {
+                                $fake_child = new stdClass();
+                                $fake_child->ID = 'cat_' . $child_cat->term_id;
+                                $fake_child->title = $child_cat->name;
+                                $fake_child->url = get_term_link($child_cat);
+                                $fake_child->menu_item_parent = $item->ID;
+                                $fake_child->_group_label = $root_cat->name; // store group for reference
+                                $dynamic_children[] = $fake_child;
+                                
+                                // Get grandchildren (sub-subcategories) for flyout
+                                $grandchildren = get_terms([
+                                    'taxonomy' => 'product_cat',
+                                    'hide_empty' => false,
+                                    'parent' => $child_cat->term_id,
+                                    'orderby' => 'name',
+                                    'order' => 'ASC'
+                                ]);
+                                
+                                if (!is_wp_error($grandchildren) && !empty($grandchildren)) {
+                                    $dynamic_subchildren = [];
+                                    foreach ($grandchildren as $grandchild) {
+                                        $fake_subchild = new stdClass();
+                                        $fake_subchild->ID = 'cat_' . $grandchild->term_id;
+                                        $fake_subchild->title = $grandchild->name;
+                                        $fake_subchild->url = get_term_link($grandchild);
+                                        $fake_subchild->menu_item_parent = $fake_child->ID;
+                                        $dynamic_subchildren[] = $fake_subchild;
+                                    }
+                                    $child_items[$fake_child->ID] = $dynamic_subchildren;
+                                }
                             }
-                            $child_items[$fake_child->ID] = $dynamic_subchildren;
+                        } else {
+                            // Leaf root category (no children) — show directly
+                            $fake_child = new stdClass();
+                            $fake_child->ID = 'cat_' . $root_cat->term_id;
+                            $fake_child->title = $root_cat->name;
+                            $fake_child->url = get_term_link($root_cat);
+                            $fake_child->menu_item_parent = $item->ID;
+                            $dynamic_children[] = $fake_child;
                         }
                     }
-                    // Replace static children with dynamic WooCommerce categories
+                    
+                    // Replace static menu children with dynamic WooCommerce categories
                     $child_items[$item->ID] = $dynamic_children;
                 }
             }
@@ -133,11 +166,12 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
             
             if ($has_children) {
                 echo '<div class="sub-menu absolute right-0 top-full pt-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">';
-                echo '<div class="w-64 bg-[#0A0A0A]/85 backdrop-blur-[20px] border border-white/10 rounded-xl overflow-hidden shadow-2xl">';
+                echo '<div class="w-72 bg-[#0A0A0A]/85 backdrop-blur-[20px] border border-white/10 rounded-xl overflow-hidden shadow-2xl">';
+                echo '<div class="max-h-[400px] overflow-y-auto scrollbar-thin">';
                 foreach ($child_items[$item->ID] as $child) {
                     $has_subchildren = isset($child_items[$child->ID]);
                     echo '<div class="relative group/lvl2">';
-                    echo '<a href="' . esc_url($child->url) . '" class="flex items-center justify-between px-5 py-3.5 text-[13px] font-medium text-white/60 hover:text-white hover:bg-white/5 transition-all border-b border-white/5 last:border-0">';
+                    echo '<a href="' . esc_url($child->url) . '" class="flex items-center justify-between px-5 py-3 text-[13px] font-medium text-white/60 hover:text-white hover:bg-white/5 transition-all border-b border-white/5 last:border-0">';
                     echo esc_html($child->title);
                     if ($has_subchildren) {
                         echo '<span class="material-symbols-outlined text-[14px] opacity-40">chevron_right</span>';
@@ -147,6 +181,7 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
                     if ($has_subchildren) {
                         echo '<div class="absolute left-full top-0 pt-0 z-50 opacity-0 invisible group-hover/lvl2:opacity-100 group-hover/lvl2:visible transition-all duration-200 translate-x-1 group-hover/lvl2:translate-x-0">';
                         echo '<div class="w-60 bg-[#0A0A0A]/85 backdrop-blur-[20px] border border-white/10 rounded-xl overflow-hidden shadow-2xl ml-1">';
+                        echo '<div class="max-h-[300px] overflow-y-auto">';
                         foreach ($child_items[$child->ID] as $subchild) {
                             echo '<a href="' . esc_url($subchild->url) . '" class="block px-5 py-3 text-[12px] font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all border-b border-white/5 last:border-0">';
                             echo esc_html($subchild->title);
@@ -154,9 +189,11 @@ function snap_stitch_render_custom_menu($context = 'desktop') {
                         }
                         echo '</div>';
                         echo '</div>';
+                        echo '</div>';
                     }
                     echo '</div>';
                 }
+                echo '</div>';
                 echo '</div>';
                 echo '</div>';
             }
