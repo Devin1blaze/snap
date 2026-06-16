@@ -83,10 +83,10 @@ get_header();
     </div>
 
     <!-- Slider Navigation: Arrows -->
-    <button id="hero-prev" class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-white/5 hover:bg-[#FBBF24] hover:text-black text-white/60 flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-md border border-white/10" aria-label="Previous slide">
+    <button id="hero-prev" class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-white/5 hover:bg-[#FBBF24] hover:text-black text-white/60 flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-md border border-white/10 rounded-none" aria-label="Previous slide">
       <span class="material-symbols-outlined text-xl">chevron_left</span>
     </button>
-    <button id="hero-next" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-white/5 hover:bg-[#FBBF24] hover:text-black text-white/60 flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-md border border-white/10" aria-label="Next slide">
+    <button id="hero-next" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-white/5 hover:bg-[#FBBF24] hover:text-black text-white/60 flex items-center justify-center transition-all duration-300 active:scale-90 backdrop-blur-md border border-white/10 rounded-none" aria-label="Next slide">
       <span class="material-symbols-outlined text-xl">chevron_right</span>
     </button>
 
@@ -215,7 +215,7 @@ get_header();
 
 
 <!-- Section: What We Do -->
-<section class="w-full bg-[#FFFFFF] py-20 px-4 sm:px-8 lg:px-20 overflow-x-hidden">
+<section class="w-full bg-[#FFFFFF] py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden">
   <div class="max-w-screen-xl mx-auto">
     <div class="flex flex-col lg:flex-row lg:items-start lg:gap-16">
       <!-- Left: Image -->
@@ -250,7 +250,7 @@ get_header();
             </div>
             <div>
               <h3 class="font-black text-base text-[#0A0A0A] mb-1">Genuine Brand Products</h3>
-              <p class="text-sm leading-relaxed text-zinc-650">Certified industrial equipment sourced directly from leading global manufacturers.</p>
+              <p class="text-sm leading-relaxed text-zinc-600">Certified industrial equipment sourced directly from leading global manufacturers.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
@@ -259,7 +259,7 @@ get_header();
             </div>
             <div>
               <h3 class="font-black text-base text-[#0A0A0A] mb-1">Pan-India Distribution</h3>
-              <p class="text-sm leading-relaxed text-zinc-650">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
+              <p class="text-sm leading-relaxed text-zinc-600">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
@@ -268,7 +268,7 @@ get_header();
             </div>
             <div>
               <h3 class="font-black text-base text-[#0A0A0A] mb-1">Quality Assurance</h3>
-              <p class="text-sm leading-relaxed text-zinc-650">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
+              <p class="text-sm leading-relaxed text-zinc-600">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
             </div>
           </div>
         </div>
@@ -284,7 +284,7 @@ get_header();
 </section>
 
 <!-- Section: Why Choose Snap Marketing? -->
-<section class="bg-[#0A0A0A] py-20 px-4 sm:px-8 lg:px-20">
+<section class="bg-[#0A0A0A] py-24 px-4 sm:px-8 lg:px-20">
   <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row lg:items-center lg:gap-16">
     <!-- Left: Visual -->
     <div class="reveal hidden lg:block w-full max-w-lg shrink-0">
@@ -350,7 +350,7 @@ get_header();
 
 
 <!-- Section: Brand Partners Marquee -->
-<section class="bg-[#FFFFFF] py-10 sm:py-12 lg:py-14 px-4 sm:px-8 lg:px-[7.7vw]">
+<section class="bg-[#FFFFFF] py-24 px-4 sm:px-8 lg:px-[7.7vw]">
   <div class="w-full mx-auto xl:max-w-[1440px]">
     <div class="text-center mb-8 sm:mb-10 lg:mb-12 reveal">
       <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest mb-3">Brand Partners</span>
@@ -839,24 +839,24 @@ get_header();
                     $bg_class = $bg_classes[$index % count($bg_classes)];
                     $is_b2b = snap_stitch_is_b2b_product( $product->get_id() );
             ?>
-            <div class="snap-start shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] group bg-white flex flex-col border border-zinc-100 hover:shadow-2xl transition-all duration-300">
-                <div class="relative <?php echo $bg_class; ?> aspect-square flex items-center justify-center p-8 mb-6 overflow-hidden">
+            <div class="snap-start shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] group bg-white flex flex-col border border-zinc-100 hover:shadow-2xl transition-all duration-300 rounded-none">
+                <div class="relative <?php echo $bg_class; ?> aspect-square flex items-center justify-center p-8 mb-6 overflow-hidden rounded-none">
                     <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest z-10"><?php echo $badge; ?></span>
-                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" />
+                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 rounded-none" />
                 </div>
                 <div class="px-6 pb-6 flex-grow flex flex-col">
-                    <span class="inline-block bg-[#1A56DB] text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-3 uppercase tracking-widest"><?php echo esc_html($brand); ?></span>
+                    <span class="inline-block bg-[#1A56DB] text-white text-[10px] font-black px-2 py-0.5 rounded-none w-fit mb-3 uppercase tracking-widest"><?php echo esc_html($brand); ?></span>
                     <h4 class="text-[#0A0A0A] font-black text-xl mb-3 leading-tight line-clamp-2"><?php echo esc_html($title); ?></h4>
-                    <div class="text-gray-500 text-sm font-medium mb-6 space-y-1">
+                    <div class="text-zinc-500 text-sm font-medium mb-6 space-y-1">
                         <p class="truncate"><?php echo $spec1; ?></p>
                         <p class="truncate"><?php echo $spec2; ?></p>
                     </div>
                     <div class="mt-auto flex gap-2">
-                        <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-xs hover:bg-yellow-500 transition-colors italic flex items-center justify-center">
+                        <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-xs hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
                             <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
                         </a>
                         <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
-                            <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
+                            <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
                                 <span class="material-symbols-outlined">shopping_cart</span>
                             </a>
                         <?php endif; ?>
@@ -872,17 +872,17 @@ get_header();
             
             <!-- Custom Navigation Buttons -->
             <div class="absolute -bottom-16 right-0 flex gap-2">
-                <button id="feat-prev" class="bg-[#0A0A0A] text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors" aria-label="Previous">
+                <button id="feat-prev" class="bg-[#0A0A0A] text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors rounded-none" aria-label="Previous">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </button>
-                <button id="feat-next" class="bg-[#1A56DB] text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors" aria-label="Next">
+                <button id="feat-next" class="bg-[#1A56DB] text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors rounded-none" aria-label="Next">
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
             </div>
         </div>
 
         <div class="mt-24 flex justify-center">
-            <a href="/shop" class="bg-[#FBBF24] text-black px-12 h-[52px] font-black uppercase text-lg hover:bg-yellow-500 transition-all flex items-center justify-center gap-3 w-full max-w-2xl">
+            <a href="/shop" class="bg-[#FBBF24] text-black px-12 h-[52px] font-black uppercase text-lg hover:bg-yellow-500 transition-all flex items-center justify-center gap-3 w-full max-w-2xl rounded-none">
                 VIEW ENTIRE CATALOG <span class="material-symbols-outlined">arrow_forward</span>
             </a>
         </div>
@@ -974,7 +974,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <!-- Section: Testimonials (Client Reviews) -->
-<section class="bg-zinc-50 py-32 px-8">
+<section class="bg-zinc-50 py-24 px-8">
     <div class="container mx-auto">
         <h2 class="text-black text-4xl font-black mb-20 uppercase tracking-tight text-center">B2B Trust Report</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
