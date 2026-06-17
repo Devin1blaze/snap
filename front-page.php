@@ -483,7 +483,7 @@ get_header();
 </section>
 
 <!-- Section 6: Product Grid by Category (Tabbed Showcase) -->
-<section class="bg-[#0A0A0A] py-24 border-t border-zinc-900">
+<section class="bg-[#0A0A0A] py-24">
     <div class="container mx-auto px-8 max-w-[1536px]">
         <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
             <h2 class="text-white text-4xl font-black uppercase tracking-tight">Our Collection</h2>
@@ -515,12 +515,14 @@ get_header();
             $queries = [
                 'tab-grid-trending' => [
                     'post_type' => 'product',
+                    'post_status' => 'publish',
                     'posts_per_page' => 4,
                     'orderby' => 'date',
                     'order' => 'DESC',
                 ],
                 'tab-grid-ac' => [
                     'post_type' => 'product',
+                    'post_status' => 'publish',
                     'posts_per_page' => 4,
                     'tax_query' => [[
                         'taxonomy' => 'product_cat',
@@ -530,6 +532,7 @@ get_header();
                 ],
                 'tab-grid-freezers' => [
                     'post_type' => 'product',
+                    'post_status' => 'publish',
                     'posts_per_page' => 4,
                     'tax_query' => [[
                         'taxonomy' => 'product_cat',
@@ -539,6 +542,7 @@ get_header();
                 ],
                 'tab-grid-minibar' => [
                     'post_type' => 'product',
+                    'post_status' => 'publish',
                     'posts_per_page' => 4,
                     'tax_query' => [[
                         'taxonomy' => 'product_cat',
@@ -565,21 +569,21 @@ get_header();
                                     $discount_percentage = round((( (float)$regular_price - (float)$sale_price ) / (float)$regular_price) * 100);
                                 }
                                 ?>
-                                <div class="bg-zinc-950 p-6 flex flex-col justify-between border-b-4 border-transparent hover:border-[#FBBF24] transition-all group duration-350">
-                                    <div class="relative overflow-hidden mb-6 aspect-square bg-zinc-900 flex items-center justify-center">
+                                <div class="bg-zinc-950 p-6 flex flex-col justify-between border-b-4 border-transparent hover:border-[#FBBF24] transition-all group duration-350 rounded-none">
+                                    <div class="relative overflow-hidden mb-6 aspect-square bg-zinc-900 flex items-center justify-center rounded-none">
                                         <a href="<?php the_permalink(); ?>" class="block w-full h-full">
                                             <?php 
                                             if (has_post_thumbnail()) {
-                                                the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105']);
+                                                the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-none']);
                                             } else {
-                                                echo '<div class="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-600 uppercase text-xs font-bold tracking-widest">No Image</div>';
+                                                echo '<div class="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-600 uppercase text-xs font-bold tracking-widest rounded-none">No Image</div>';
                                             }
                                             ?>
                                         </a>
                                         <?php if (!$is_b2b && $discount_percentage > 0) : ?>
-                                            <span class="absolute top-4 right-4 bg-[#FBBF24] text-black text-[10px] font-black uppercase px-2.5 py-1 tracking-wider"><?php echo $discount_percentage; ?>% Off</span>
+                                            <span class="absolute top-4 right-4 bg-[#FBBF24] text-black text-[10px] font-black uppercase px-2.5 py-1 tracking-wider rounded-none"><?php echo $discount_percentage; ?>% Off</span>
                                         <?php endif; ?>
-                                        <span class="absolute bottom-4 left-4 bg-zinc-900/95 backdrop-blur-md text-white text-[9px] font-bold uppercase px-2 py-0.5 tracking-widest border border-zinc-800">
+                                        <span class="absolute bottom-4 left-4 bg-zinc-900/95 backdrop-blur-md text-white text-[9px] font-bold uppercase px-2 py-0.5 tracking-widest border border-zinc-800 rounded-none">
                                             <?php echo $is_b2b ? 'B2B Equipment' : 'B2C Appliance'; ?>
                                         </span>
                                     </div>
@@ -605,7 +609,7 @@ get_header();
                                                 </div>
                                             <?php endif; ?>
 
-                                            <a href="<?php the_permalink(); ?>" class="block text-center bg-[#1A56DB] text-white py-3.5 font-bold uppercase tracking-wider text-xs hover:bg-[#FBBF24] hover:text-[#0A0A0A] transition-all">
+                                            <a href="<?php the_permalink(); ?>" class="block text-center bg-[#1A56DB] text-white py-3.5 font-bold uppercase tracking-wider text-xs hover:bg-[#FBBF24] hover:text-[#0A0A0A] transition-all rounded-none">
                                                 <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
                                             </a>
                                         </div>
