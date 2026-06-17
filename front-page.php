@@ -710,7 +710,7 @@ get_header();
 
             $all_cats = get_terms([
                 'taxonomy' => 'product_cat',
-                'hide_empty' => true,
+                'hide_empty' => false,
             ]);
 
             $shop_cats = [];
@@ -721,28 +721,45 @@ get_header();
                     }
                 }
             }
-            // Sort direct children by count DESC
-            usort($shop_cats, function($a, $b) {
-                return $b->count - $a->count;
-            });
-            // Slice the top 6 categories
-            $shop_cats = array_slice($shop_cats, 0, 6);
-            
+
+            // Slice to exactly 16 categories for the 4x4 grid
+            $shop_cats = array_slice($shop_cats, 0, 16);
+
             $bg_classes = [
                 'bg-[#1A56DB]/20', 'bg-[#1A56DB]/40', 'bg-zinc-900', 'bg-zinc-800/80',
                 'bg-zinc-800/50', 'bg-[#1A56DB]/30'
             ];
-            $icons = ['sanitizer', 'ac_unit', 'water_drop', 'coffee_maker', 'masks', 'door_front', 'electrical_services'];
+
+            // Material Symbols Icon Map for a premium custom feel
+            $icon_map = [
+                'air-conditioners'             => 'ac_unit',
+                'b2b-room-air-conditioners'    => 'ac_unit',
+                'cassette-air-conditioners'    => 'ac_unit',
+                'verticool-air-conditioners'   => 'ac_unit',
+                'central-air-conditioning'     => 'ac_unit',
+                'air-coolers'                  => 'mode_fan',
+                'b2b-air-coolers'              => 'mode_fan',
+                'water-purifiers'              => 'water_drop',
+                'b2b-water-purifiers'          => 'water_drop',
+                'water-coolers'                => 'water_drop',
+                'air-purifiers'                => 'air',
+                'b2b-air-purifiers'            => 'air',
+                'refrigeration'                => 'kitchen',
+                'b2b-commercial-refrigeration' => 'kitchen',
+                'cold-storages'                => 'kitchen',
+                'heat-pumps'                   => 'heat_pump',
+            ];
 
             if (!empty($shop_cats)) {
                 foreach($shop_cats as $i => $cat) {
                     $bg = $bg_classes[$i % count($bg_classes)];
-                    $icon = $icons[$i % count($icons)];
+                    $icon = isset($icon_map[$cat->slug]) ? $icon_map[$cat->slug] : 'electrical_services';
+                    $type_label = ($b2b_term && (int)$cat->parent === (int)$b2b_term->term_id) ? 'B2B Equipment' : 'B2C Appliances';
                     ?>
                     <a class="group <?php echo $bg; ?> p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-[#FBBF24] transition-all" href="<?php echo esc_url(get_term_link($cat)); ?>">
                         <span class="material-symbols-outlined text-white text-6xl"><?php echo $icon; ?></span>
                         <div>
-                            <span class="text-[#FBBF24] font-bold text-xs uppercase block mb-1">Category</span>
+                            <span class="text-[#FBBF24] font-bold text-xs uppercase block mb-1"><?php echo esc_html($type_label); ?></span>
                             <h3 class="text-white text-2xl font-black leading-tight"><?php echo esc_html($cat->name); ?></h3>
                         </div>
                     </a>
@@ -750,12 +767,6 @@ get_header();
                 }
             }
             ?>
-            <div class="bg-zinc-900 p-12 aspect-square flex flex-col justify-center items-center text-center opacity-40 grayscale pointer-events-none">
-                <span class="text-white text-xl font-black uppercase opacity-20 tracking-widest">More Coming Soon</span>
-            </div>
-            <div class="bg-zinc-900 p-12 aspect-square flex flex-col justify-center items-center text-center opacity-40 grayscale pointer-events-none">
-                <span class="text-white text-xl font-black uppercase opacity-20 tracking-widest">Global Sourcing</span>
-            </div>
         </div>
     </div>
 </section>
