@@ -482,187 +482,238 @@ get_header();
   </div>
 </section>
 
-<!-- Section 6: Product Grid by Category (Tabbed Showcase) -->
-<section class="bg-[#0A0A0A] py-24">
+<!-- Section 6: Industries We Serve -->
+<?php
+$industries = [
+    [
+        'id'       => 'medical',
+        'label'    => 'Medical & Healthcare',
+        'icon'     => 'medical_services',
+        'tag'      => 'Medical',
+        'cats'     => ['b2b-water-purifiers', 'b2b-air-purifiers'],
+        'headline' => 'Certified Equipment for Clinical Environments',
+        'desc'     => 'Blue Star sterilizers, Kimberly-Clark hygiene solutions, and bulk sanitization consumables for hospitals and clinics.',
+        'image'    => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAoXkJP5BaMyzbVYVTdPzXnxlJKuuNs7X9SNfzG2RPCL5khTeZvIwalCh9XZfZSIACZg7H9LCJMZklabaIQerylTaKO3rwp0XfnHKVZIuFSt2-Oj_tkX5PGOZOkNbLPDW0sspZDyPTBFF8M3T_Wu4ElNy3F-LLZeD1vJDWuVSYMbRDHicRYaL57ngwa6JvpJkqegAz4UlQFbTfebljpmmcYwmmbQ07zUF8HKbJvKeUV-1HBWTyBbZsKMDxU0Fn_ZkKEtvGgWm3X9EQ',
+    ],
+    [
+        'id'       => 'hospitality',
+        'label'    => 'Hotels & Hospitality',
+        'icon'     => 'hotel',
+        'tag'      => 'Hospitality',
+        'cats'     => ['b2b-room-air-conditioners', 'b2b-air-coolers'],
+        'headline' => 'Scale-Ready Equipment for Hospitality Operations',
+        'desc'     => 'Industrial laundry systems, housekeeping carts, and kitchen-grade appliances built for high-throughput hospitality.',
+        'image'    => 'https://lh3.googleusercontent.com/aida-public/AB6AXuA6EO5K0zcbj9qmQ1pr2VNltfcLFoeebNpGYXfSInJSIZPXAqy4fH8A-LKcTBuL0lDH2uvZ9E-2ucygYRE5I1q-gEnSLXQxmuUzdkkIRV6LcKfWI7RY1GOzaiol0tqS6LQodunm23Ktq1iiVoP146n5s6pnUZSRY--ZYbHNlj0HIp76MeafAPY_ViEoTh3r0UkifABN3dmTQbDT6oURBSalugjrFsuTwDoXua1Fmb1tzIoTWid6_N8qIOXvvPLw6JemIoEr3rRjmt4',
+    ],
+    [
+        'id'       => 'corporate',
+        'label'    => 'Corporate Offices',
+        'icon'     => 'corporate_fare',
+        'tag'      => 'Corporate',
+        'cats'     => ['b2b-air-purifiers', 'b2b-water-purifiers'],
+        'headline' => 'Workplace Hygiene & Facility Management',
+        'desc'     => 'Smart dispensers, air purification systems, and consumables keeping corporate environments clean and compliant.',
+        'image'    => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAX_YnU92Il1WBQ9ajQFetNtoJA85UAoEsmy_lcsj5xm8MYrOTUADxvzGNMaLF4lS_F7-gqr8Df7mjXZk4z7PBAGjUyRZZFDwJkgOz2dwy0O8Dea5uRQF8eWQKukPaNzkZYDOe6_kdEIVU46FAuM2F64bgtjqZvovIZk5ivX1QU5SPLu4TDKsddZzPyAzyJHNEe8JIuAxvWldl0RXsynCwdlk7dsnksJHCe-p0ZY0fkFRDX6yPM5_OtZv1LUYe-9nPMYCGFv4Yefkk',
+    ],
+    [
+        'id'       => 'industrial',
+        'label'    => 'Industrial Facilities',
+        'icon'     => 'factory',
+        'tag'      => 'Manufacturing',
+        'cats'     => ['b2b-commercial-refrigeration', 'cold-storages'],
+        'headline' => 'Heavy-Duty Equipment for Industrial Scale',
+        'desc'     => 'Euronics industrial scrubbers, cold-chain equipment, and PPE for manufacturing plants and logistics facilities.',
+        'image'    => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDFSeFnVNTbWH0jsdGiX2tFRvXBVcweyDTRzIxvMX70TWqoacUfTCcrabju-nfEJ3j7-uXq7x_7Oehh5MSlh3_gLv4uj-XsVIF5NuuFpWIAC-zfU1MbDCVi5zu_J3WU81Krq7-z4DlN1qfwcNqQt-2Q9d9hdbjHetYnbar_N2Ron7Q1daeLG0kksmFpTcr5jUoIW8rn-o4t8KJnmopwz9_Mh13Jy-6-L-8Z1P6OQmOOijrgmpFPS5q1nmgMuuE4RX21OlCCZemcg8Y',
+    ],
+];
+?>
+<section class="bg-[#1A56DB] py-24">
     <div class="container mx-auto px-8 max-w-[1536px]">
         <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
-            <h2 class="text-white text-4xl font-black uppercase tracking-tight">Our Collection</h2>
-            <p class="text-[#1A56DB] font-bold mt-2 uppercase tracking-widest text-sm">Industrial Grade Equipment & Premium Appliances</p>
+            <h2 class="text-white text-4xl font-black uppercase tracking-tight">Industries We Serve</h2>
+            <p class="text-[#FBBF24] font-bold mt-2 uppercase tracking-widest text-sm font-jakarta">Precision-matched equipment for every operational environment</p>
         </div>
-        
-        <!-- Tabs Navigation -->
-        <div class="mb-12 overflow-x-auto no-scrollbar">
-            <ul role="tablist" class="flex gap-2 border-b-2 border-zinc-800 w-max pb-[2px] product-grid-tabs">
-                <li role="tab" class="ui-tabs-tab active" data-tab="tab-grid-trending" tabindex="0" aria-selected="true">
-                    <a href="javascript:void(0)" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-black bg-[#FBBF24] border-b-4 border-[#1A56DB] transition-all">Trending</a>
-                </li>
-                <li role="tab" class="ui-tabs-tab" data-tab="tab-grid-ac" tabindex="-1" aria-selected="false">
-                    <a href="javascript:void(0)" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-zinc-400 hover:text-white hover:bg-zinc-900 border-b-4 border-transparent hover:border-zinc-700 transition-all">Air Conditioners</a>
-                </li>
-                <li role="tab" class="ui-tabs-tab" data-tab="tab-grid-freezers" tabindex="-1" aria-selected="false">
-                    <a href="javascript:void(0)" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-zinc-400 hover:text-white hover:bg-zinc-900 border-b-4 border-transparent hover:border-zinc-700 transition-all">Deep Freezers</a>
-                </li>
-                <li role="tab" class="ui-tabs-tab" data-tab="tab-grid-minibar" tabindex="-1" aria-selected="false">
-                    <a href="javascript:void(0)" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-zinc-400 hover:text-white hover:bg-zinc-900 border-b-4 border-transparent hover:border-zinc-700 transition-all">Mini Bars</a>
-                </li>
+
+        <!-- Horizontal Tabs Nav -->
+        <div class="mb-12 border-b-2 border-white/20">
+            <ul role="tablist" class="flex flex-wrap gap-2 -mb-[2px] overflow-x-auto no-scrollbar">
+                <?php foreach ($industries as $index => $ind) : ?>
+                    <li role="presentation">
+                        <button role="tab" 
+                                id="tab-<?php echo esc_attr($ind['id']); ?>"
+                                aria-controls="panel-<?php echo esc_attr($ind['id']); ?>"
+                                aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>"
+                                data-industry-tab="<?php echo esc_attr($ind['id']); ?>"
+                                class="flex items-center gap-3 px-8 py-4 font-black text-sm uppercase tracking-wider transition-all border-b-4 duration-300 rounded-none <?php echo $index === 0 ? 'bg-[#FBBF24] text-[#0A0A0A] border-[#1A56DB]' : 'text-white border-transparent hover:bg-white/10 hover:border-[#FBBF24]' ; ?>">
+                            <span class="material-symbols-outlined text-lg"><?php echo esc_html($ind['icon']); ?></span>
+                            <?php echo esc_html($ind['label']); ?>
+                        </button>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
 
-        <!-- Tab Contents -->
-        <div class="product-grid-contents">
-            <?php
-            // Define queries for the tabs
-            $queries = [
-                'tab-grid-trending' => [
-                    'post_type' => 'product',
-                    'post_status' => 'publish',
-                    'posts_per_page' => 4,
-                    'orderby' => 'date',
-                    'order' => 'DESC',
-                ],
-                'tab-grid-ac' => [
-                    'post_type' => 'product',
-                    'post_status' => 'publish',
-                    'posts_per_page' => 4,
-                    'tax_query' => [[
-                        'taxonomy' => 'product_cat',
-                        'field' => 'slug',
-                        'terms' => 'air-conditioners',
-                    ]],
-                ],
-                'tab-grid-freezers' => [
-                    'post_type' => 'product',
-                    'post_status' => 'publish',
-                    'posts_per_page' => 4,
-                    'tax_query' => [[
-                        'taxonomy' => 'product_cat',
-                        'field' => 'slug',
-                        'terms' => 'deep-freezers',
-                    ]],
-                ],
-                'tab-grid-minibar' => [
-                    'post_type' => 'product',
-                    'post_status' => 'publish',
-                    'posts_per_page' => 4,
-                    'tax_query' => [[
-                        'taxonomy' => 'product_cat',
-                        'field' => 'slug',
-                        'terms' => 'mini-bar',
-                    ]],
-                ],
-            ];
-
-            foreach ($queries as $tab_id => $query_args) {
-                $loop = new WP_Query($query_args);
-                $is_hidden = ($tab_id === 'tab-grid-trending') ? '' : 'hidden';
-                ?>
-                <div id="<?php echo esc_attr($tab_id); ?>" class="product-grid-panel <?php echo $is_hidden; ?>">
-                    <?php if ($loop->have_posts()) : ?>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <?php while ($loop->have_posts()) : $loop->the_post(); 
-                                global $product;
-                                $is_b2b = snap_stitch_is_b2b_product($product->get_id());
-                                $regular_price = $product->get_regular_price();
-                                $sale_price = $product->get_sale_price();
-                                $discount_percentage = 0;
-                                if (!empty($regular_price) && !empty($sale_price) && (float)$regular_price > (float)$sale_price) {
-                                    $discount_percentage = round((( (float)$regular_price - (float)$sale_price ) / (float)$regular_price) * 100);
-                                }
-                                ?>
-                                <div class="bg-zinc-950 p-6 flex flex-col justify-between border-b-4 border-transparent hover:border-[#FBBF24] transition-all group duration-350 rounded-none">
-                                    <div class="relative overflow-hidden mb-6 aspect-square bg-zinc-900 flex items-center justify-center rounded-none">
-                                        <a href="<?php the_permalink(); ?>" class="block w-full h-full">
-                                            <?php 
-                                            if (has_post_thumbnail()) {
-                                                the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-none']);
-                                            } else {
-                                                echo '<div class="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-600 uppercase text-xs font-bold tracking-widest rounded-none">No Image</div>';
-                                            }
-                                            ?>
-                                        </a>
-                                        <?php if (!$is_b2b && $discount_percentage > 0) : ?>
-                                            <span class="absolute top-4 right-4 bg-[#FBBF24] text-black text-[10px] font-black uppercase px-2.5 py-1 tracking-wider rounded-none"><?php echo $discount_percentage; ?>% Off</span>
-                                        <?php endif; ?>
-                                        <span class="absolute bottom-4 left-4 bg-zinc-900/95 backdrop-blur-md text-white text-[9px] font-bold uppercase px-2 py-0.5 tracking-widest border border-zinc-800 rounded-none">
-                                            <?php echo $is_b2b ? 'B2B Equipment' : 'B2C Appliance'; ?>
-                                        </span>
-                                    </div>
-                                    
-                                    <div class="flex-grow flex flex-col justify-between">
-                                        <div>
-                                            <h3 class="text-white text-lg font-bold mb-2 group-hover:text-[#FBBF24] transition-colors leading-snug line-clamp-2">
-                                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                            </h3>
-                                        </div>
-
-                                        <div class="mt-4">
-                                            <?php if ($is_b2b) : ?>
-                                                <div class="text-[#FBBF24] text-xs font-black uppercase tracking-widest mb-4">Request Commercial Pricing</div>
-                                            <?php else : ?>
-                                                <div class="price-box mb-4 flex items-baseline gap-2">
-                                                    <?php if (!empty($sale_price)) : ?>
-                                                        <span class="text-white text-xl font-black">₹<?php echo number_format((float)$sale_price, 0); ?></span>
-                                                        <span class="text-zinc-500 line-through text-sm">MRP: ₹<?php echo number_format((float)$regular_price, 0); ?></span>
-                                                    <?php else : ?>
-                                                        <span class="text-white text-xl font-black">₹<?php echo number_format((float)$regular_price, 0); ?></span>
-                                                    <?php endif; ?>
-                                                </div>
-                                            <?php endif; ?>
-
-                                            <a href="<?php the_permalink(); ?>" class="block text-center bg-[#1A56DB] text-white py-3.5 font-bold uppercase tracking-wider text-xs hover:bg-[#FBBF24] hover:text-[#0A0A0A] transition-all rounded-none">
-                                                <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endwhile; ?>
+        <!-- Tab Content Panels -->
+        <div class="relative min-h-[500px]">
+            <?php foreach ($industries as $index => $ind) : ?>
+                <div id="panel-<?php echo esc_attr($ind['id']); ?>" 
+                     role="tabpanel" 
+                     aria-labelledby="tab-<?php echo esc_attr($ind['id']); ?>"
+                     data-industry-panel="<?php echo esc_attr($ind['id']); ?>"
+                     class="industry-panel-transition <?php echo $index === 0 ? 'grid' : 'hidden' ; ?> grid-cols-1 lg:grid-cols-12 gap-8 bg-[#0A0A0A] p-8 lg:p-12 border-b-4 border-[#FBBF24]">
+                    
+                    <!-- Left: Hero Image + Info (5 Columns) -->
+                    <div class="lg:col-span-5 flex flex-col justify-between h-full min-h-[400px]">
+                        <div class="relative h-[250px] overflow-hidden mb-6 group">
+                            <img src="<?php echo esc_url($ind['image']); ?>" alt="<?php echo esc_attr($ind['label']); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none">
+                            <span class="absolute top-4 left-4 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest"><?php echo esc_html($ind['tag']); ?></span>
                         </div>
-                    <?php else : ?>
-                        <div class="py-12 text-center text-zinc-500 font-bold uppercase tracking-widest">No products found in this category.</div>
-                    <?php endif; wp_reset_postdata(); ?>
+                        <div class="flex-grow flex flex-col justify-end">
+                            <h3 class="text-white text-3xl font-black uppercase mb-4 leading-tight tracking-tight"><?php echo esc_html($ind['headline']); ?></h3>
+                            <p class="text-zinc-300 leading-relaxed mb-6 font-medium"><?php echo esc_html($ind['desc']); ?></p>
+                            <a href="/shop" class="bg-[#1A56DB] text-white border-2 border-transparent font-black py-4 px-8 uppercase text-sm hover:bg-white hover:text-black hover:border-black transition-all italic flex items-center justify-center gap-2 w-fit rounded-none">
+                                Browse Industry Catalog <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Dynamic WooCommerce Product Cards (7 Columns) -->
+                    <div class="lg:col-span-7">
+                        <h4 class="text-[#FBBF24] font-black text-sm uppercase tracking-widest mb-6 pb-2 border-b border-zinc-800 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg">inventory_2</span> Recommended Equipment
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <?php
+                            // Fetch WooCommerce products for this industry
+                            $args = [
+                                'limit'    => 2,
+                                'status'   => 'publish',
+                                'category' => $ind['cats'],
+                            ];
+                            $products = wc_get_products($args);
+
+                            // Fallback if no products in target categories
+                            if (empty($products)) {
+                                $products = wc_get_products([
+                                    'limit'      => 2,
+                                    'status'     => 'publish',
+                                    'visibility' => 'catalog'
+                                ]);
+                            }
+
+                            if (!empty($products)) {
+                                $badge_labels = ['BEST SELLER', 'TOP PICK', 'POPULAR', 'NEW'];
+                                $card_idx = 0;
+                                foreach ($products as $product) {
+                                    $image_url = wp_get_attachment_image_url($product->get_image_id(), 'large') ?: wc_placeholder_img_src();
+                                    $title = $product->get_name();
+                                    $terms = wc_get_product_terms($product->get_id(), 'product_cat', ['fields' => 'names']);
+                                    $brand = !empty($terms) ? $terms[0] : 'SNAP STITCH';
+                                    
+                                    $specs = get_post_meta($product->get_id(), '_technical_specs', true);
+                                    $spec1 = 'Standard Size';
+                                    $spec2 = 'Industrial Grade';
+                                    if (is_array($specs) && count($specs) > 0) {
+                                        $spec1 = esc_html($specs[0]['name'] . ': ' . $specs[0]['value']);
+                                        if (count($specs) > 1) {
+                                            $spec2 = esc_html($specs[1]['name'] . ': ' . $specs[1]['value']);
+                                        }
+                                    }
+                                    $badge = $badge_labels[($card_idx + $index) % count($badge_labels)];
+                                    $is_b2b = snap_stitch_is_b2b_product($product->get_id());
+                                    ?>
+                                    <div class="group bg-white flex flex-col border border-zinc-900 hover:shadow-2xl transition-all duration-300 rounded-none">
+                                        <div class="relative bg-zinc-100 aspect-square flex items-center justify-center p-6 overflow-hidden rounded-none">
+                                            <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest z-10"><?php echo esc_html($badge); ?></span>
+                                            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-2/3 h-2/3 object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 rounded-none" />
+                                        </div>
+                                        <div class="p-6 flex-grow flex flex-col">
+                                            <span class="inline-block bg-[#1A56DB] text-white text-[10px] font-black px-2 py-0.5 rounded-none w-fit mb-3 uppercase tracking-widest"><?php echo esc_html($brand); ?></span>
+                                            <h5 class="text-[#0A0A0A] font-black text-lg mb-3 leading-tight line-clamp-2"><?php echo esc_html($title); ?></h5>
+                                            <div class="text-zinc-500 text-xs font-medium mb-6 space-y-1">
+                                                <p class="truncate"><?php echo $spec1; ?></p>
+                                                <p class="truncate"><?php echo $spec2; ?></p>
+                                            </div>
+                                            <div class="mt-auto flex gap-2">
+                                                <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-[10px] hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
+                                                    <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
+                                                </a>
+                                                <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
+                                                    <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
+                                                        <span class="material-symbols-outlined text-sm">shopping_cart</span>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    $card_idx++;
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
                 </div>
-            <?php } ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
 
-<!-- Lightweight Javascript Tab Switcher -->
+<!-- Vanilla JS for smooth tab switching and transitions -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const tabLinks = document.querySelectorAll('.product-grid-tabs li');
-    const tabPanels = document.querySelectorAll('.product-grid-panel');
+document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('[data-industry-tab]');
+    const panels = document.querySelectorAll('[data-industry-panel]');
 
-    tabLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // Remove active states from tabs
-            tabLinks.forEach(item => {
-                item.classList.remove('active');
-                item.setAttribute('aria-selected', 'false');
-                item.setAttribute('tabindex', '-1');
-                const a = item.querySelector('a');
-                a.className = "inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-zinc-400 hover:text-white hover:bg-zinc-900 border-b-4 border-transparent hover:border-zinc-700 transition-all";
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.industryTab;
+            
+            // Deactivate all tabs
+            tabs.forEach(t => {
+                t.setAttribute('aria-selected', 'false');
+                t.classList.remove('bg-[#FBBF24]', 'text-[#0A0A0A]', 'border-[#1A56DB]');
+                t.classList.add('text-white', 'border-transparent', 'hover:bg-white/10', 'hover:border-[#FBBF24]');
             });
 
-            // Add active state to clicked tab
-            link.classList.add('active');
-            link.setAttribute('aria-selected', 'true');
-            link.setAttribute('tabindex', '0');
-            const clickedA = link.querySelector('a');
-            clickedA.className = "inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-black bg-[#FBBF24] border-b-4 border-[#1A56DB] transition-all";
+            // Activate current tab
+            tab.setAttribute('aria-selected', 'true');
+            tab.classList.remove('text-white', 'border-transparent', 'hover:bg-white/10', 'hover:border-[#FBBF24]');
+            tab.classList.add('bg-[#FBBF24]', 'text-[#0A0A0A]', 'border-[#1A56DB]');
 
-            // Toggle panels
-            const targetTab = link.getAttribute('data-tab');
-            tabPanels.forEach(panel => {
-                if (panel.id === targetTab) {
-                    panel.classList.remove('hidden');
-                } else {
-                    panel.classList.add('hidden');
-                }
+            // Fade out and hide panels, then show active one
+            panels.forEach(p => {
+                p.classList.add('hidden');
+                p.classList.remove('grid');
             });
+
+            const activePanel = document.getElementById(`panel-${target}`);
+            if (activePanel) {
+                activePanel.classList.remove('hidden');
+                activePanel.classList.add('grid');
+            }
         });
     });
 });
 </script>
+
+<style>
+/* Smooth transition style for panels */
+.industry-panel-transition {
+    animation: panelFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes panelFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
 
 <!-- Section: Process Management -->
 <section class="bg-[#FFFFFF] py-24 overflow-hidden">
