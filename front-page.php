@@ -493,7 +493,7 @@ $industries = [
         'cats'     => ['b2b-water-purifiers', 'b2b-air-purifiers'],
         'headline' => 'Certified Equipment for Clinical Environments',
         'desc'     => 'Blue Star sterilizers, Kimberly-Clark hygiene solutions, and bulk sanitization consumables for hospitals and clinics.',
-        'image'    => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAoXkJP5BaMyzbVYVTdPzXnxlJKuuNs7X9SNfzG2RPCL5khTeZvIwalCh9XZfZSIACZg7H9LCJMZklabaIQerylTaKO3rwp0XfnHKVZIuFSt2-Oj_tkX5PGOZOkNbLPDW0sspZDyPTBFF8M3T_Wu4ElNy3F-LLZeD1vJDWuVSYMbRDHicRYaL57ngwa6JvpJkqegAz4UlQFbTfebljpmmcYwmmbQ07zUF8HKbJvKeUV-1HBWTyBbZsKMDxU0Fn_ZkKEtvGgWm3X9EQ',
+        'image'    => 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&q=80&auto=format&fit=crop',
     ],
     [
         'id'       => 'hospitality',
@@ -503,7 +503,7 @@ $industries = [
         'cats'     => ['b2b-room-air-conditioners', 'b2b-air-coolers'],
         'headline' => 'Scale-Ready Equipment for Hospitality Operations',
         'desc'     => 'Industrial laundry systems, housekeeping carts, and kitchen-grade appliances built for high-throughput hospitality.',
-        'image'    => 'https://lh3.googleusercontent.com/aida-public/AB6AXuA6EO5K0zcbj9qmQ1pr2VNltfcLFoeebNpGYXfSInJSIZPXAqy4fH8A-LKcTBuL0lDH2uvZ9E-2ucygYRE5I1q-gEnSLXQxmuUzdkkIRV6LcKfWI7RY1GOzaiol0tqS6LQodunm23Ktq1iiVoP146n5s6pnUZSRY--ZYbHNlj0HIp76MeafAPY_ViEoTh3r0UkifABN3dmTQbDT6oURBSalugjrFsuTwDoXua1Fmb1tzIoTWid6_N8qIOXvvPLw6JemIoEr3rRjmt4',
+        'image'    => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80&auto=format&fit=crop',
     ],
     [
         'id'       => 'corporate',
@@ -513,7 +513,7 @@ $industries = [
         'cats'     => ['b2b-air-purifiers', 'b2b-water-purifiers'],
         'headline' => 'Workplace Hygiene & Facility Management',
         'desc'     => 'Smart dispensers, air purification systems, and consumables keeping corporate environments clean and compliant.',
-        'image'    => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAX_YnU92Il1WBQ9ajQFetNtoJA85UAoEsmy_lcsj5xm8MYrOTUADxvzGNMaLF4lS_F7-gqr8Df7mjXZk4z7PBAGjUyRZZFDwJkgOz2dwy0O8Dea5uRQF8eWQKukPaNzkZYDOe6_kdEIVU46FAuM2F64bgtjqZvovIZk5ivX1QU5SPLu4TDKsddZzPyAzyJHNEe8JIuAxvWldl0RXsynCwdlk7dsnksJHCe-p0ZY0fkFRDX6yPM5_OtZv1LUYe-9nPMYCGFv4Yefkk',
+        'image'    => 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop',
     ],
     [
         'id'       => 'industrial',
@@ -523,7 +523,7 @@ $industries = [
         'cats'     => ['b2b-commercial-refrigeration', 'cold-storages'],
         'headline' => 'Heavy-Duty Equipment for Industrial Scale',
         'desc'     => 'Euronics industrial scrubbers, cold-chain equipment, and PPE for manufacturing plants and logistics facilities.',
-        'image'    => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDFSeFnVNTbWH0jsdGiX2tFRvXBVcweyDTRzIxvMX70TWqoacUfTCcrabju-nfEJ3j7-uXq7x_7Oehh5MSlh3_gLv4uj-XsVIF5NuuFpWIAC-zfU1MbDCVi5zu_J3WU81Krq7-z4DlN1qfwcNqQt-2Q9d9hdbjHetYnbar_N2Ron7Q1daeLG0kksmFpTcr5jUoIW8rn-o4t8KJnmopwz9_Mh13Jy-6-L-8Z1P6OQmOOijrgmpFPS5q1nmgMuuE4RX21OlCCZemcg8Y',
+        'image'    => 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80&auto=format&fit=crop',
     ],
 ];
 ?>
@@ -564,7 +564,7 @@ $industries = [
                     
                     <!-- Left: Hero Image + Info (5 Columns) -->
                     <div class="lg:col-span-5 flex flex-col gap-6">
-                        <div class="relative aspect-video overflow-hidden group">
+                        <div class="relative aspect-[4/3] overflow-hidden group">
                             <img src="<?php echo esc_url($ind['image']); ?>" alt="<?php echo esc_attr($ind['label']); ?>" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 rounded-none">
                             <span class="absolute top-4 left-4 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest"><?php echo esc_html($ind['tag']); ?></span>
                         </div>
