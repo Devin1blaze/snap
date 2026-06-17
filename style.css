@@ -172,3 +172,86 @@ Text Domain: snap-stitch-theme
     scrollbar-color: #FBBF24 rgba(255, 255, 255, 0.1);
 }
 
+/* --------------------------------------------------------------------------
+ * ORDER TRACKING PAGE WOOCOMMERCE OVERRIDES
+ * -------------------------------------------------------------------------- */
+
+/* Notices */
+.woocommerce-error, .woocommerce-info, .woocommerce-message {
+    background-color: #ffffff !important;
+    border: 2px solid #0A0A0A !important;
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,1) !important;
+    border-radius: 0 !important;
+    padding: 1rem 1.5rem !important;
+    margin-bottom: 2rem !important;
+    color: #0A0A0A !important;
+    font-weight: 700 !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    position: relative;
+    border-left: 6px solid #1A56DB !important;
+}
+
+.woocommerce-error {
+    border-left-color: #e53e3e !important;
+}
+
+.woocommerce-error::before, .woocommerce-info::before, .woocommerce-message::before {
+    display: none !important; /* Hide default WC icons */
+}
+
+/* Order Details Table */
+.woocommerce table.shop_table.order_details {
+    border: 2px solid #0A0A0A !important;
+    border-radius: 0 !important;
+    background-color: #ffffff !important;
+    margin-bottom: 2rem !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+}
+
+.woocommerce table.shop_table.order_details th {
+    background-color: #1A56DB !important;
+    color: #ffffff !important;
+    font-family: 'Rubik', sans-serif !important;
+    text-transform: uppercase !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.05em !important;
+    padding: 1rem !important;
+    border: 2px solid #0A0A0A !important;
+}
+
+.woocommerce table.shop_table.order_details td {
+    border: 2px solid #0A0A0A !important;
+    padding: 1rem !important;
+    color: #0A0A0A !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-weight: 600 !important;
+}
+
+.woocommerce table.shop_table.order_details tr:nth-child(even) td {
+    background-color: #f4f4f5 !important; /* zinc-100 */
+}
+
+/* Mark tags in order details (e.g. status) */
+.woocommerce mark.order-status {
+    background-color: #FBBF24 !important;
+    color: #0A0A0A !important;
+    padding: 0.25rem 0.5rem !important;
+    font-weight: 800 !important;
+    border: 2px solid #0A0A0A !important;
+    text-transform: uppercase !important;
+    font-size: 0.8rem !important;
+}
+
+.woocommerce .order_details li {
+    font-family: 'Nunito Sans', sans-serif !important;
+    color: #0A0A0A !important;
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.woocommerce .order_details li strong {
+    font-weight: 800 !important;
+    color: #1A56DB !important;
+}
+
