@@ -13,7 +13,7 @@ get_header(); ?>
     <div class="container mx-auto px-8 relative z-10">
         <div class="max-w-md mx-auto bg-zinc-900 border-b-4 border-secondary-container p-10 shadow-2xl">
             <div class="mb-10 text-center">
-                <div class="text-secondary-container font-black text-xs uppercase tracking-widest mb-2">B2B Registration</div>
+                <div class="text-secondary-container font-black text-xs uppercase tracking-widest mb-2">Customer Registration</div>
                 <h1 class="text-white text-4xl font-black uppercase tracking-tight">Register</h1>
             </div>
 
@@ -53,7 +53,7 @@ get_header(); ?>
 
                             <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
                             
-                            <button type="submit" class="w-full bg-secondary-container text-black font-black py-4 px-6 uppercase tracking-widest hover:bg-yellow-500 transition-colors italic" name="register" value="Register">Join B2B Network</button>
+                            <button type="submit" class="w-full bg-secondary-container text-black font-black py-4 px-6 uppercase tracking-widest hover:bg-yellow-500 transition-colors italic" name="register" value="Register">Register</button>
 
                             <div class="pt-8 text-center border-t border-zinc-800">
                                 <p class="text-gray-500 text-xs font-bold uppercase mb-4 tracking-tight">Already have an account?</p>
@@ -66,7 +66,7 @@ get_header(); ?>
                     </div>
                 <?php else : ?>
                     <div class="text-center space-y-6">
-                        <p class="text-gray-300 italic">Registration is currently closed for new B2B partners. Please contact support for assistance.</p>
+                        <p class="text-gray-300 italic">Registration is currently closed. Please contact support for assistance.</p>
                         <a href="/contact" class="bg-primary-container text-white font-black py-4 px-8 uppercase tracking-widest inline-block italic">Contact Support</a>
                     </div>
                 <?php endif; ?>

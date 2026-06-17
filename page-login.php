@@ -13,7 +13,7 @@ get_header(); ?>
     <div class="container mx-auto px-8 relative z-10">
         <div class="max-w-md mx-auto bg-zinc-900 border-b-4 border-secondary-container p-10 shadow-2xl">
             <div class="mb-10 text-center">
-                <div class="text-secondary-container font-black text-xs uppercase tracking-widest mb-2">B2B Portal</div>
+                <div class="text-secondary-container font-black text-xs uppercase tracking-widest mb-2">Customer Portal</div>
                 <h1 class="text-white text-4xl font-black uppercase tracking-tight">Login</h1>
             </div>
 
@@ -45,11 +45,11 @@ get_header(); ?>
 
                         <?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
                         
-                        <button type="submit" class="w-full bg-secondary-container text-black font-black py-4 px-6 uppercase tracking-widest hover:bg-yellow-500 transition-colors italic" name="login" value="Login">Access Dashboard</button>
+                        <button type="submit" class="w-full bg-secondary-container text-black font-black py-4 px-6 uppercase tracking-widest hover:bg-yellow-500 transition-colors italic" name="login" value="Login">Log In</button>
 
                         <div class="pt-8 text-center border-t border-zinc-800">
                             <p class="text-gray-500 text-xs font-bold uppercase mb-4 tracking-tight">New to Snap Marketing?</p>
-                            <a href="/register" class="text-white border-2 border-white px-8 py-3 font-black uppercase text-sm hover:bg-white hover:text-black transition-all inline-block">Create B2B Account</a>
+                            <a href="/register" class="text-white border-2 border-white px-8 py-3 font-black uppercase text-sm hover:bg-white hover:text-black transition-all inline-block">Create Account</a>
                         </div>
 
                         <?php do_action( 'woocommerce_login_form_end' ); ?>
