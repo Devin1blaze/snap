@@ -560,18 +560,18 @@ $industries = [
                      role="tabpanel" 
                      aria-labelledby="tab-<?php echo esc_attr($ind['id']); ?>"
                      data-industry-panel="<?php echo esc_attr($ind['id']); ?>"
-                     class="industry-panel-transition <?php echo $index === 0 ? 'grid' : 'hidden' ; ?> grid-cols-1 lg:grid-cols-12 gap-8 bg-[#0A0A0A] p-8 lg:p-12 border-b-4 border-[#FBBF24]">
+                     class="industry-panel-transition <?php echo $index === 0 ? 'grid' : 'hidden' ; ?> grid-cols-1 lg:grid-cols-12 gap-8 bg-zinc-50 p-8 lg:p-12 border-b-4 border-[#FBBF24]">
                     
                     <!-- Left: Hero Image + Info (5 Columns) -->
-                    <div class="lg:col-span-5 flex flex-col justify-between h-full min-h-[400px]">
-                        <div class="relative h-[250px] overflow-hidden mb-6 group">
-                            <img src="<?php echo esc_url($ind['image']); ?>" alt="<?php echo esc_attr($ind['label']); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none">
+                    <div class="lg:col-span-5 flex flex-col gap-6">
+                        <div class="relative aspect-video overflow-hidden group">
+                            <img src="<?php echo esc_url($ind['image']); ?>" alt="<?php echo esc_attr($ind['label']); ?>" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 rounded-none">
                             <span class="absolute top-4 left-4 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest"><?php echo esc_html($ind['tag']); ?></span>
                         </div>
-                        <div class="flex-grow flex flex-col justify-end">
-                            <h3 class="text-white text-3xl font-black uppercase mb-4 leading-tight tracking-tight"><?php echo esc_html($ind['headline']); ?></h3>
-                            <p class="text-zinc-300 leading-relaxed mb-6 font-medium"><?php echo esc_html($ind['desc']); ?></p>
-                            <a href="/shop" class="bg-[#1A56DB] text-white border-2 border-transparent font-black py-4 px-8 uppercase text-sm hover:bg-white hover:text-black hover:border-black transition-all italic flex items-center justify-center gap-2 w-fit rounded-none">
+                        <div class="flex flex-col">
+                            <h3 class="text-[#0A0A0A] text-3xl font-black uppercase mb-4 leading-tight tracking-tight"><?php echo esc_html($ind['headline']); ?></h3>
+                            <p class="text-zinc-600 leading-relaxed mb-6 font-medium"><?php echo esc_html($ind['desc']); ?></p>
+                            <a href="/shop" class="bg-[#1A56DB] text-white border-2 border-[#1A56DB] font-black py-4 px-8 uppercase text-sm hover:bg-[#0A0A0A] hover:border-[#0A0A0A] transition-all italic flex items-center justify-center gap-2 w-fit rounded-none">
                                 Browse Industry Catalog <span class="material-symbols-outlined text-sm">arrow_forward</span>
                             </a>
                         </div>
@@ -579,7 +579,7 @@ $industries = [
 
                     <!-- Right: Dynamic WooCommerce Product Cards (7 Columns) -->
                     <div class="lg:col-span-7">
-                        <h4 class="text-[#FBBF24] font-black text-sm uppercase tracking-widest mb-6 pb-2 border-b border-zinc-800 flex items-center gap-2">
+                        <h4 class="text-[#1A56DB] font-black text-sm uppercase tracking-widest mb-6 pb-2 border-b-2 border-[#FBBF24] flex items-center gap-2">
                             <span class="material-symbols-outlined text-lg">inventory_2</span> Recommended Equipment
                         </h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
