@@ -9,7 +9,7 @@ get_header(); ?>
 <section class="relative bg-primary-container min-h-[600px] flex flex-col justify-center px-8 md:px-24 py-24 md:py-32 overflow-hidden">
 <div class="max-w-6xl z-10">
 <h1 class="text-white text-[48px] md:text-[72px] font-black leading-[1] tracking-[-0.02em] mb-8">
-<span class="text-[#FBBF24] text-[100px] md:text-[120px] block mb-2 leading-none">25</span>
+<span class="text-[#FBBF24] text-[100px] md:text-[120px] block mb-2 leading-none">35+</span>
             Years of Trust.<br/>
 <span class="relative inline-block">
                 Built on Quality.
@@ -17,25 +17,25 @@ get_header(); ?>
 </span>
 </h1>
 <p class="text-white text-xl md:text-2xl font-medium max-w-2xl opacity-90 leading-relaxed mb-12">
-            India's premier gateway for industrial excellence. We represent the global standard in B2B equipment distribution, bridging the gap between world-class engineering and local operational demands.
+            Snap Marketing Private Limited — Pune's trusted Wholesaler & Distributor since 1988 for premium hygiene, washroom automation, refrigeration, and vending solutions. Authorized partner for Blue Star, Euronics, Usha, Aquaguard, and more.
         </p>
 <!-- Trust Badges -->
 <div class="grid grid-cols-2 md:flex gap-6 items-center">
 <div class="group flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="transition-delay: 0.1s">
 <span class="material-symbols-outlined text-[#FBBF24] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">verified</span>
-<span class="text-white text-sm font-black uppercase tracking-wider">Blue Star Authorized</span>
+<span class="text-white text-sm font-black uppercase tracking-wider">TrustSEAL Verified</span>
 </div>
 <div class="group flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="transition-delay: 0.2s">
 <span class="material-symbols-outlined text-[#FBBF24] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">workspace_premium</span>
-<span class="text-white text-sm font-black uppercase tracking-wider">ISO 9001</span>
+<span class="text-white text-sm font-black uppercase tracking-wider">Blue Star Partner</span>
 </div>
 <div class="group flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="transition-delay: 0.3s">
 <span class="material-symbols-outlined text-[#FBBF24] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">gavel</span>
-<span class="text-white text-sm font-black uppercase tracking-wider">BIS Certified</span>
+<span class="text-white text-sm font-black uppercase tracking-wider">Euronics Distributor</span>
 </div>
 <div class="group flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 border border-white/20 cursor-pointer hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="transition-delay: 0.4s">
 <span class="material-symbols-outlined text-[#FBBF24] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">groups</span>
-<span class="text-white text-sm font-black uppercase tracking-wider">500+ Clients</span>
+<span class="text-white text-sm font-black uppercase tracking-wider">GST Registered</span>
 </div>
 </div>
 </div>
@@ -49,10 +49,10 @@ get_header(); ?>
 <span class="inline-block bg-[#FBBF24] text-[#0A0A0A] px-4 py-1 text-xs font-black tracking-[0.1em] mb-6 uppercase">
             OUR STORY
         </span>
-<h2 class="text-[#0A0A0A] text-4xl font-black mb-8 tracking-tight uppercase">FOUNDED IN PUNE, SCALED ACROSS BORDERS.</h2>
+<h2 class="text-[#0A0A0A] text-4xl font-black mb-8 tracking-tight uppercase">BORN IN PUNE. BUILT ON TRUST. OVER 35 YEARS OF EXCELLENCE.</h2>
 <div class="space-y-6 text-[#0A0A0A] text-lg font-medium leading-relaxed">
-<p>Starting from a modest operational base in Pune, Snap Marketing emerged with a singular vision: to revolutionize the supply chain of industrial machinery in India. Over two and a half decades, we have evolved from a local distributor into a nationwide strategic partner.</p>
-<p>Our growth is anchored in a relentless pursuit of reliability. We don't just sell products; we engineer supply chain solutions that empower manufacturing giants and emerging enterprises alike to operate with zero downtime.</p>
+<p>Snap Marketing Private Limited was established in 1988 in Pune, Maharashtra. For over three decades, we have been dedicated to making world-class hygiene, sanitation, and facility management equipment accessible to businesses across India.</p>
+<p>We have grown into a trusted Wholesaler and Distributor, partnering with global brands like Euronics, Blue Star, Usha, Atlantis, and Aquaguard to serve hospitals, hotels, corporate offices, and industrial facilities with reliable service and bulk logistics support.</p>
 </div>
 </div>
 <div class="relative">
@@ -68,20 +68,20 @@ get_header(); ?>
 <section class="bg-[#0A0A0A] py-24 px-8 md:px-24 border-y border-white/10">
 <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
 <div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="500" data-suffix="+">0</div>
-<div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Clients Worldwide</div>
+<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="124" data-suffix="+">0</div>
+<div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Verified Reviews</div>
 </div>
 <div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="animation-delay: 0.1s">
-<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="40" data-suffix="+">0</div>
-<div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Global Brands</div>
+<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="4" data-suffix=".2 ★">0</div>
+<div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Average Rating</div>
 </div>
 <div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="animation-delay: 0.2s">
-<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="25">0</div>
+<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="35" data-suffix="+">0</div>
 <div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Years Active</div>
 </div>
 <div class="stat-card flex flex-col items-center md:items-start p-6 bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300" style="animation-delay: 0.3s">
-<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none">ISO</div>
-<div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Certified Quality</div>
+<div class="text-[#FBBF24] text-6xl md:text-7xl font-black mb-4 leading-none counter" data-target="82" data-suffix="%">0</div>
+<div class="text-white text-sm font-black tracking-widest uppercase opacity-60">Response Rate</div>
 </div>
 </div>
 </section>
@@ -93,28 +93,28 @@ get_header(); ?>
 <!-- Badge Card -->
 <div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
 <span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">verified</span>
-<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">ISO 9001:2015</h4>
-<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Quality Management Systems</p>
+<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">TrustSEAL</h4>
+<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">IndiaMart Verified Member</p>
 </div>
 <div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
 <span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">shield</span>
-<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">Compliance A+</h4>
-<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Regulatory Safety Standards</p>
+<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">Authorized Partner</h4>
+<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Blue Star & Euronics Distributor</p>
 </div>
 <div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
 <span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">public</span>
-<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">Global Export</h4>
-<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Licensed Logistics Partner</p>
+<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">GST Registered</h4>
+<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">27**********1ZP</p>
 </div>
 <div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
 <span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">handshake</span>
-<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">Authorized PTR</h4>
-<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Certified Brand Distributor</p>
+<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">B2B Wholesaler</h4>
+<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Premium Industrial Equipment</p>
 </div>
 <div class="group flex-none w-[300px] border-4 border-[#FBBF24] p-10 flex flex-col items-center text-center snap-center cursor-pointer bg-white hover:border-black hover:bg-[#FBBF24]/5 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
 <span class="material-symbols-outlined text-[#FBBF24] text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">construction</span>
-<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">Site Certified</h4>
-<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Field Operational Safety</p>
+<h4 class="font-black text-[#0A0A0A] text-xl uppercase tracking-tighter">35+ Years Active</h4>
+<p class="text-[#1A56DB] font-bold text-sm mt-4 uppercase">Serving Pune & Beyond Since 1988</p>
 </div>
 </div>
 </section>
@@ -149,28 +149,28 @@ get_header(); ?>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Director Card -->
 <div class="group bg-white p-8 relative overflow-hidden border-l-4 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-black transition-all duration-300">
-<h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Rajesh Malhotra</h4>
+<h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Parag Chinubhai Shah</h4>
 <div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4 group-hover:bg-[#FBBF24] group-hover:text-[#0A0A0A] transition-colors duration-300">
-                Managing Director
+                Director
             </div>
-<p class="text-sm leading-relaxed opacity-70 mb-4">Over 30 years of industrial experience leading multi-million dollar supply chain operations across South Asia.</p>
-<p class="text-[#FBBF24] italic font-bold text-sm">"Excellence is not an act, but a habit."</p>
+<p class="text-sm leading-relaxed opacity-70 mb-4">Guiding the corporate vision and financial governance of Snap Marketing Private Limited for over three decades.</p>
+<p class="text-[#FBBF24] italic font-bold text-sm">"Integrity and quality are the cornerstones of our growth."</p>
 </div>
 <div class="group bg-white p-8 relative overflow-hidden border-l-4 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-black transition-all duration-300">
-<h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Anita Deshmukh</h4>
+<h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Lokesh Omparkash Arya</h4>
 <div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4 group-hover:bg-[#FBBF24] group-hover:text-[#0A0A0A] transition-colors duration-300">
-                Director of Operations
+                Director
             </div>
-<p class="text-sm leading-relaxed opacity-70 mb-4">Architect of our logistical framework, ensuring 99.9% uptime for our nationwide distribution hubs.</p>
-<p class="text-[#FBBF24] italic font-bold text-sm">"Efficiency defines our competitive edge."</p>
+<p class="text-sm leading-relaxed opacity-70 mb-4">Driving partnerships, business development, and distributor relationships with premium brands like Blue Star and Euronics.</p>
+<p class="text-[#FBBF24] italic font-bold text-sm">"We build partnerships that stand the test of time."</p>
 </div>
 <div class="group bg-white p-8 relative overflow-hidden border-l-4 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-black transition-all duration-300">
-<h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Vikram Singhania</h4>
+<h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Meena Parag Shah</h4>
 <div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4 group-hover:bg-[#FBBF24] group-hover:text-[#0A0A0A] transition-colors duration-300">
-                Head of Partnerships
+                Director
             </div>
-<p class="text-sm leading-relaxed opacity-70 mb-4">Pioneer in building strategic alliances with European and American industrial manufacturers.</p>
-<p class="text-[#FBBF24] italic font-bold text-sm">"Bridges built on trust span generations."</p>
+<p class="text-sm leading-relaxed opacity-70 mb-4">Overseeing operational standards and compliance, ensuring alignment with corporate governance records.</p>
+<p class="text-[#FBBF24] italic font-bold text-sm">"Operational rigor ensures we deliver on our promises."</p>
 </div>
 </div>
 </section>

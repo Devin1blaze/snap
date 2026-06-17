@@ -19,10 +19,10 @@ get_header(); ?>
 <button class="bg-[#FBBF24] text-[#0A0A0A] px-10 h-[56px] rounded-full font-black uppercase text-sm tracking-widest hover:scale-105 transition-transform flex items-center justify-center">
                         Submit Enquiry
                     </button>
-<button class="bg-[#FBBF24] text-[#0A0A0A] px-10 h-[56px] rounded-full font-black uppercase text-sm tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-2">
+<a href="https://wa.me/919823012724" target="_blank" rel="noopener noreferrer" class="bg-[#FBBF24] text-[#0A0A0A] px-10 h-[56px] rounded-full font-black uppercase text-sm tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-2">
 <span class="material-symbols-outlined text-xl">chat</span>
                         WhatsApp Us
-                    </button>
+                    </a>
 </div>
 <p class="text-[#FBBF24] text-xs font-bold uppercase tracking-widest pl-4">Typically responds in 2 hours</p>
 </div>
@@ -113,10 +113,10 @@ get_header(); ?>
 </div>
 <!-- RIGHT Column: Contact Info Card (Layout Swap) -->
 <div class="bg-[#1A56DB] p-10 md:p-14 flex flex-col h-full space-y-12 order-2">
-<button class="w-full bg-[#FBBF24] text-[#0A0A0A] py-5 font-black uppercase tracking-widest text-lg flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform">
+<a href="tel:+919823012724" class="w-full bg-[#FBBF24] text-[#0A0A0A] py-5 font-black uppercase tracking-widest text-lg flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform">
 <span class="material-symbols-outlined font-black">call</span>
                     CALL US NOW
-                </button>
+                </a>
 <div>
 <h2 class="text-white text-3xl font-black uppercase tracking-tight mb-12">Corporate Headquarters</h2>
 <div class="space-y-10">
@@ -124,7 +124,7 @@ get_header(); ?>
 <span class="material-symbols-outlined text-[#FBBF24] text-3xl">location_on</span>
 <div>
 <p class="text-white/60 font-bold text-xs uppercase tracking-widest mb-1">Office Address</p>
-<p class="text-white text-lg font-medium">12 Industrial Way, Steel Quarter, SQ 500, Pune</p>
+<p class="text-white text-lg font-medium">Snap House, Plot No. 322/16, Ghorpade Peth, Shankar Sheth Road, Opp. Mira Housing Society, Pune - 411042, Maharashtra, India</p>
 </div>
 </div>
 <div class="flex flex-col gap-6">
@@ -132,35 +132,40 @@ get_header(); ?>
 <span class="material-symbols-outlined text-[#FBBF24] text-3xl">call</span>
 <div>
 <p class="text-white/60 font-bold text-xs uppercase tracking-widest mb-1">Business Phone</p>
-<p class="text-white text-lg font-medium">+1 (555) 900-SNAP</p>
+<p class="text-white text-lg font-medium">+91 98230 12724</p>
 </div>
 </div>
-<button class="ml-[54px] w-fit flex items-center gap-2 bg-[#FBBF24] text-[#0A0A0A] px-6 py-2 rounded-full font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-transform">
+<a href="https://wa.me/919823012724" target="_blank" rel="noopener noreferrer" class="ml-[54px] w-fit flex items-center gap-2 bg-[#FBBF24] text-[#0A0A0A] px-6 py-2 rounded-full font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-transform">
 <span class="material-symbols-outlined text-sm">chat</span>
                                 WhatsApp Support
-                            </button>
+                            </a>
 </div>
 <div class="flex items-start gap-6">
 <span class="material-symbols-outlined text-[#FBBF24] text-3xl">mail</span>
 <div>
 <p class="text-white/60 font-bold text-xs uppercase tracking-widest mb-1">Direct Email</p>
-<p class="text-white text-lg font-medium">sales@snapmarketing.in</p>
+<p class="text-white text-lg font-medium">sales@snapmktg.com</p>
 </div>
 </div>
 <div class="flex items-start gap-6">
 <span class="material-symbols-outlined text-[#FBBF24] text-3xl">schedule</span>
 <div>
 <p class="text-white/60 font-bold text-xs uppercase tracking-widest mb-1">Working Hours</p>
-<p class="text-white text-lg font-medium">Mon-Sat, 9AM - 6PM</p>
+<p class="text-white text-lg font-medium">Mon-Sat, 10AM - 7PM</p>
 </div>
 </div>
 </div>
 </div>
 <div class="w-full h-80 border-4 border-[#FBBF24] relative overflow-hidden bg-[#1A56DB]">
-<!-- Detailed Map Illustration Placeholder -->
-<img alt="Detailed map of Pune Industrial Cluster" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9oZ7Z4D5Xo9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9Q9X9"/>
+<iframe 
+    class="w-full h-full border-0 opacity-90 grayscale hover:grayscale-0 transition-all duration-500" 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.389279589332!2d73.86431947597548!3d18.511326469455322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c045bdf5e08b%3A0xc391ad5c28269d7b!2sShankar%20Sheth%20Rd%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1718616161616!5m2!1sen!2sin" 
+    allowfullscreen="" 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+</iframe>
 <div class="absolute inset-0 bg-gradient-to-t from-[#1A56DB]/80 to-transparent flex items-end p-6">
-<div class="bg-[#FBBF24] text-black px-4 py-2 font-black uppercase text-xs">Steel Quarter, SQ 500</div>
+<div class="bg-[#FBBF24] text-black px-4 py-2 font-black uppercase text-xs">Snap House, Pune</div>
 </div>
 </div>
 </div>
