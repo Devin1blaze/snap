@@ -15,7 +15,7 @@ get_header(); ?>
             Track Your Order.
         </h1>
         <p class="text-[#FBBF24] text-xl md:text-2xl font-bold max-w-2xl leading-relaxed font-['Nunito_Sans']">
-            Enter your order details below to get real-time status updates on your industrial procurement.
+            Enter your order details below to get real-time status updates on your purchase.
         </p>
     </div>
 </section>
@@ -69,5 +69,35 @@ get_header(); ?>
 
     </div>
 </section>
+
+<!-- Custom Styles for Order Tracking Page Inputs -->
+<style>
+    /* Scoped styling for Order Tracking form inputs */
+    .track_order input.input-text {
+        background-color: #ffffff !important;
+        border: 2px solid #000000 !important;
+        color: #0A0A0A !important;
+        padding: 0.75rem 1rem !important;
+        border-radius: 0 !important;
+        font-family: 'Nunito Sans', sans-serif !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+    }
+    .track_order input.input-text:focus {
+        border-color: #1A56DB !important;
+        box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.2) !important;
+        outline: none !important;
+    }
+    .track_order label {
+        font-family: 'Nunito Sans', sans-serif !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.05em !important;
+        color: #000000 !important;
+        margin-bottom: 0.5rem !important;
+        display: block !important;
+    }
+</style>
 
 <?php get_footer(); ?>
