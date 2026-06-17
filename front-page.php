@@ -722,8 +722,8 @@ get_header();
                 }
             }
 
-            // Slice to exactly 16 categories for the 4x4 grid
-            $shop_cats = array_slice($shop_cats, 0, 16);
+            // Slice to exactly 8 categories for the 2x4 grid
+            $shop_cats = array_slice($shop_cats, 0, 8);
 
             $bg_classes = [
                 'bg-[#1A56DB]/20', 'bg-[#1A56DB]/40', 'bg-zinc-900', 'bg-zinc-800/80',
