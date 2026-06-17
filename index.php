@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-<main id="primary" class="site-main py-24">
+<main id="primary" class="site-main py-24 bg-zinc-50">
     <div class="container mx-auto px-8">
         <?php
         if ( have_posts() ) :
