@@ -290,3 +290,13 @@ function snap_stitch_save_b2b_brochure_field( $post_id ) {
         update_post_meta( $post_id, '_brochure_url', sanitize_url( $_POST['_brochure_url'] ) );
     }
 }
+
+/**
+ * WooCommerce Customizations: Remove Downloads navigation link from My Account
+ */
+add_filter( 'woocommerce_account_menu_items', 'snap_stitch_custom_my_account_menu_items' );
+function snap_stitch_custom_my_account_menu_items( $items ) {
+    unset( $items['downloads'] );
+    return $items;
+}
+

@@ -15,8 +15,8 @@ defined( 'ABSPATH' ) || exit;
 <div class="max-w-7xl mx-auto px-8 py-16">
     <div class="mb-10 border-b-4 border-black pb-4 flex justify-between items-end">
         <div>
-            <h1 class="text-4xl font-black uppercase tracking-tighter text-black">Client Portal</h1>
-            <p class="text-sm font-bold uppercase tracking-widest text-zinc-400 mt-2">Manage your procurement dashboard.</p>
+            <h1 class="text-4xl font-black uppercase tracking-tighter text-black">My Account</h1>
+            <p class="text-sm font-bold uppercase tracking-widest text-zinc-400 mt-2">Manage your personal account, orders, and profile.</p>
         </div>
         <div class="hidden md:block">
             <span class="inline-block bg-black text-[#FBBF24] text-[10px] font-black px-4 py-2 uppercase tracking-widest">Authorized Access</span>
@@ -56,6 +56,16 @@ defined( 'ABSPATH' ) || exit;
 
 <!-- Custom Styles for My Account -->
 <style>
+    /* Override WooCommerce default floated layout */
+    .woocommerce-MyAccount-navigation {
+        float: none !important;
+        width: 100% !important;
+    }
+    .woocommerce-MyAccount-content {
+        float: none !important;
+        width: 100% !important;
+    }
+
     /* Navigation Overrides */
     .woocommerce-MyAccount-navigation ul {
         list-style: none;
@@ -77,6 +87,7 @@ defined( 'ABSPATH' ) || exit;
         color: #0A0A0A;
         transition: all 0.2s;
         border-left: 4px solid transparent;
+        white-space: nowrap;
     }
     .woocommerce-MyAccount-navigation ul li a:hover {
         background: #fff;
