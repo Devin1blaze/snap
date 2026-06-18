@@ -359,7 +359,7 @@ get_header();
     </div>
     <!-- 3D Perspective Marquee Grid (Bhakti-style tilted layout) -->
     <div class="relative reveal" style="overflow:hidden;">
-      <div class="relative flex max-w-full w-full flex-row items-center justify-center overflow-hidden bg-[#FFFFFF] px-1 lg:px-2" style="height:600px;perspective:800px;">
+      <div class="relative flex max-w-full w-full flex-row items-center justify-center overflow-hidden bg-[#FFFFFF] px-1 lg:px-2 group/marquee" style="height:600px;perspective:800px;">
         <!-- Single 3D-tilted wrapper for ALL columns -->
         <div class="flex flex-row items-center gap-4 sm:gap-4 lg:gap-4" style="transform:translateX(0) translateY(-1px) translateZ(-50px) rotateX(15deg) rotateY(-5deg) rotateZ(12deg);">
 
@@ -946,15 +946,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 'heat-pumps'                   => 'heat_pump',
             ];
 
+            $image_map = [
+                'air-conditioners'             => 'https://images.unsplash.com/photo-1621905252507-b354bc25edac?w=600&q=80',
+                'b2b-room-air-conditioners'    => 'https://images.unsplash.com/photo-1621905252507-b354bc25edac?w=600&q=80',
+                'cassette-air-conditioners'    => 'https://images.unsplash.com/photo-1585338114002-c94380f279d4?w=600&q=80',
+                'verticool-air-conditioners'   => 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80',
+                'central-air-conditioning'     => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80',
+                'air-coolers'                  => 'https://images.unsplash.com/photo-1618944847828-82e943c3dba7?w=600&q=80',
+                'b2b-air-coolers'              => 'https://images.unsplash.com/photo-1618944847828-82e943c3dba7?w=600&q=80',
+                'water-purifiers'              => 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=600&q=80',
+                'b2b-water-purifiers'          => 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=600&q=80',
+                'water-coolers'                => 'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&q=80',
+                'air-purifiers'                => 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=600&q=80',
+                'b2b-air-purifiers'            => 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=600&q=80',
+                'refrigeration'                => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80',
+                'b2b-commercial-refrigeration' => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80',
+                'cold-storages'                => 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80',
+                'heat-pumps'                   => 'https://images.unsplash.com/photo-1605647540924-852290f6b0d5?w=600&q=80',
+            ];
+
             if (!empty($shop_cats)) {
                 foreach($shop_cats as $i => $cat) {
                     $bg = $bg_classes[$i % count($bg_classes)];
                     $icon = isset($icon_map[$cat->slug]) ? $icon_map[$cat->slug] : 'electrical_services';
                     $type_label = ($b2b_term && (int)$cat->parent === (int)$b2b_term->term_id) ? 'B2B Equipment' : 'B2C Appliances';
+                    
+                    // Fetch category image or fallback to stock image map
+                    $thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
+                    $image_url = $thumbnail_id ? wp_get_attachment_image_url( $thumbnail_id, 'large' ) : '';
+                    if ( ! $image_url ) {
+                        $image_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80';
+                    }
                     ?>
-                    <a class="group <?php echo $bg; ?> p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-[#FBBF24] transition-all" href="<?php echo esc_url(get_term_link($cat)); ?>">
-                        <span class="material-symbols-outlined text-white text-6xl"><?php echo $icon; ?></span>
-                        <div>
+                    <a class="group relative <?php echo $bg; ?> p-12 aspect-square flex flex-col justify-between industrial-glow border border-transparent hover:border-[#FBBF24] transition-all overflow-hidden" href="<?php echo esc_url(get_term_link($cat)); ?>">
+                        <!-- Background Image overlay for rich branding -->
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('<?php echo esc_url($image_url); ?>');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40 group-hover:from-black/95 group-hover:via-black/85 group-hover:to-black/50 transition-all duration-300"></div>
+
+                        <span class="material-symbols-outlined text-white text-6xl relative z-10"><?php echo $icon; ?></span>
+                        <div class="relative z-10">
                             <span class="text-[#FBBF24] font-bold text-xs uppercase block mb-1"><?php echo esc_html($type_label); ?></span>
                             <h3 class="text-white text-2xl font-black leading-tight"><?php echo esc_html($cat->name); ?></h3>
                         </div>
@@ -1120,6 +1150,10 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 .animate-marquee-vertical-reverse {
   animation: marquee-vertical-reverse 30s linear infinite;
+}
+.group\/marquee:hover .animate-marquee-vertical,
+.group\/marquee:hover .animate-marquee-vertical-reverse {
+  animation-play-state: paused;
 }
 </style>
 

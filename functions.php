@@ -400,6 +400,26 @@ function snap_stitch_save_registration_fields( $customer_id, $new_customer_data 
     }
     update_user_meta( $customer_id, 'newsletter_opt_in', isset( $_POST['newsletter_opt_in'] ) ? 'yes' : 'no' );
     update_user_meta( $customer_id, 'terms_agreement', isset( $_POST['terms_agreement'] ) ? 'yes' : 'no' );
+
+    // Sync to standard WordPress user profile fields (first_name, last_name, display_name, nickname)
+    $first_name = isset( $_POST['billing_first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_first_name'] ) ) : '';
+    $last_name  = isset( $_POST['billing_last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_last_name'] ) ) : '';
+
+    if ( ! empty( $first_name ) ) {
+        update_user_meta( $customer_id, 'first_name', $first_name );
+    }
+    if ( ! empty( $last_name ) ) {
+        update_user_meta( $customer_id, 'last_name', $last_name );
+    }
+
+    if ( ! empty( $first_name ) || ! empty( $last_name ) ) {
+        $display_name = trim( $first_name . ' ' . $last_name );
+        wp_update_user( array(
+            'ID'           => $customer_id,
+            'display_name' => $display_name,
+            'nickname'     => $display_name,
+        ) );
+    }
 }
 
 

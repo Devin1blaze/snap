@@ -5,6 +5,15 @@
 
 get_header(); ?>
 
+<style>
+    /* Force solid header background on this page to prevent white-on-white text contrast issues */
+    #nav-header {
+        background: #0a0a0a !important;
+        border-color: rgba(26, 86, 219, 0.2) !important;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4) !important;
+    }
+</style>
+
 <main id="primary" class="site-main pt-28 pb-12 relative overflow-hidden bg-white text-zinc-900">
     <div class="absolute inset-0 pointer-events-none opacity-10" style="background-image: linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px); background-size: 24px 24px;"></div>
     
