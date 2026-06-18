@@ -300,3 +300,106 @@ function snap_stitch_custom_my_account_menu_items( $items ) {
     return $items;
 }
 
+/**
+ * Validate B2C registration fields
+ */
+add_action( 'woocommerce_register_post', 'snap_stitch_validate_registration_fields', 10, 3 );
+function snap_stitch_validate_registration_fields( $username, $email, $validation_errors ) {
+    // Required billing fields check
+    $required_fields = array(
+        'billing_first_name' => __( 'First name', 'woocommerce' ),
+        'billing_last_name'  => __( 'Last name', 'woocommerce' ),
+        'billing_phone'      => __( 'Phone number', 'woocommerce' ),
+        'billing_address_1'  => __( 'Street address', 'woocommerce' ),
+        'billing_city'       => __( 'Town / City', 'woocommerce' ),
+        'billing_state'      => __( 'State', 'woocommerce' ),
+        'billing_postcode'   => __( 'Postcode / ZIP', 'woocommerce' ),
+    );
+
+    foreach ( $required_fields as $field_key => $field_label ) {
+        if ( empty( $_POST[ $field_key ] ) ) {
+            $validation_errors->add( $field_key . '_error', sprintf( __( '<strong>Error</strong>: %s is required.', 'woocommerce' ), $field_label ) );
+        }
+    }
+
+    // Validate email confirmation
+    $email_confirm = isset( $_POST['email_confirm'] ) ? sanitize_email( wp_unslash( $_POST['email_confirm'] ) ) : '';
+    if ( $email !== $email_confirm ) {
+        $validation_errors->add( 'email_confirm_error', __( '<strong>Error</strong>: Email addresses do not match.', 'woocommerce' ) );
+    }
+
+    // Validate password confirmation
+    $password = isset( $_POST['password'] ) ? $_POST['password'] : '';
+    $password_confirm = isset( $_POST['password_confirm'] ) ? $_POST['password_confirm'] : '';
+    if ( $password !== $password_confirm ) {
+        $validation_errors->add( 'password_confirm_error', __( '<strong>Error</strong>: Passwords do not match.', 'woocommerce' ) );
+    }
+
+    // Validate Terms of Service & Privacy Policy agreement
+    if ( empty( $_POST['terms_agreement'] ) ) {
+        $validation_errors->add( 'terms_agreement_error', __( '<strong>Error</strong>: You must agree to the Terms of Service & Privacy Policy.', 'woocommerce' ) );
+    }
+}
+
+/**
+ * Save B2C registration fields
+ */
+add_action( 'woocommerce_created_customer', 'snap_stitch_save_registration_fields', 10, 3 );
+function snap_stitch_save_registration_fields( $customer_id, $new_customer_data = array(), $password_generated = false ) {
+    // Save standard billing fields
+    $billing_fields = array(
+        'billing_first_name',
+        'billing_last_name',
+        'billing_phone',
+        'billing_address_1',
+        'billing_address_2',
+        'billing_city',
+        'billing_state',
+        'billing_postcode',
+        'billing_country',
+    );
+
+    foreach ( $billing_fields as $field ) {
+        if ( isset( $_POST[ $field ] ) ) {
+            update_user_meta( $customer_id, $field, sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) );
+        }
+    }
+
+    // Save standard shipping fields (handle fallback to billing fields if shipping same as billing)
+    $shipping_fields = array(
+        'shipping_first_name',
+        'shipping_last_name',
+        'shipping_address_1',
+        'shipping_address_2',
+        'shipping_city',
+        'shipping_state',
+        'shipping_postcode',
+        'shipping_country',
+    );
+
+    $ship_to_different = ! empty( $_POST['ship_to_different_address'] );
+
+    foreach ( $shipping_fields as $field ) {
+        $billing_equivalent = str_replace( 'shipping_', 'billing_', $field );
+        if ( $ship_to_different && isset( $_POST[ $field ] ) ) {
+            update_user_meta( $customer_id, $field, sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) );
+        } elseif ( ! $ship_to_different && isset( $_POST[ $billing_equivalent ] ) ) {
+            update_user_meta( $customer_id, $field, sanitize_text_field( wp_unslash( $_POST[ $billing_equivalent ] ) ) );
+        }
+    }
+
+    // Save custom B2C fields to user metadata
+    if ( isset( $_POST['gender'] ) ) {
+        update_user_meta( $customer_id, 'gender', sanitize_text_field( wp_unslash( $_POST['gender'] ) ) );
+    }
+    if ( isset( $_POST['dob'] ) ) {
+        update_user_meta( $customer_id, 'dob', sanitize_text_field( wp_unslash( $_POST['dob'] ) ) );
+    }
+    if ( isset( $_POST['hear_about_us'] ) ) {
+        update_user_meta( $customer_id, 'hear_about_us', sanitize_text_field( wp_unslash( $_POST['hear_about_us'] ) ) );
+    }
+    update_user_meta( $customer_id, 'newsletter_opt_in', isset( $_POST['newsletter_opt_in'] ) ? 'yes' : 'no' );
+    update_user_meta( $customer_id, 'terms_agreement', isset( $_POST['terms_agreement'] ) ? 'yes' : 'no' );
+}
+
+
