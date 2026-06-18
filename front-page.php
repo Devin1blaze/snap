@@ -894,7 +894,9 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Section 2: Shop by Category (Dynamic) -->
 <section class="bg-[#0A0A0A] py-24">
     <div class="container mx-auto px-8 max-w-[1536px]">
-        <h2 class="text-white text-4xl font-black mb-16 uppercase tracking-tight">Shop by Category</h2>
+        <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
+            <h2 class="text-white text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
             <?php
             // Get root B2B and B2C category IDs to filter only their direct children
@@ -910,74 +912,71 @@ document.addEventListener('DOMContentLoaded', () => {
             ]);
 
             $shop_cats = [];
+            $seen_names = [];
             if (!is_wp_error($all_cats)) {
-                $b2b_cats = [];
-                $b2c_cats = [];
                 foreach ($all_cats as $cat) {
-                    if ($b2b_term && (int)$cat->parent === (int)$b2b_term->term_id) {
-                        $b2b_cats[] = $cat;
-                    } elseif ($b2c_term && (int)$cat->parent === (int)$b2c_term->term_id) {
-                        $b2c_cats[] = $cat;
-                    }
-                }
-
-                $unique_cats = [];
-                // Process B2B categories first to prioritize them
-                foreach ($b2b_cats as $cat) {
-                    $norm_name = strtolower(trim($cat->name));
-                    if (!isset($unique_cats[$norm_name])) {
-                        $unique_cats[$norm_name] = $cat;
-                    }
-                }
-                // Process B2C categories next, only adding if not already present
-                foreach ($b2c_cats as $cat) {
-                    $norm_name = strtolower(trim($cat->name));
-                    if (!isset($unique_cats[$norm_name])) {
-                        $unique_cats[$norm_name] = $cat;
-                    }
-                }
-
-                $shop_cats = array_values($unique_cats);
-            }
-
-            // Slice to exactly 8 categories for the 2x4 grid
-            $shop_cats = array_slice($shop_cats, 0, 8);
-
-            // Stock Image Map for categories
-            $image_map = [
-                'air-condition' => 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80',
-                'water'         => 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&q=80',
-                'air-cool'      => 'https://images.unsplash.com/photo-1615748564840-c9e9a4a18d44?w=600&q=80',
-                'air-purif'     => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
-                'refriger'      => 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=600&q=80',
-                'cold'          => 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80',
-                'heat'          => 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80',
-                'vend'          => 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&q=80',
-                'hygiene'       => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80',
-                'default'       => 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80',
-            ];
-
-            if (!empty($shop_cats)) {
-                foreach($shop_cats as $cat) {
-                    $img = '';
-                    foreach ($image_map as $key => $url) {
-                        if ($key !== 'default' && strpos($cat->slug, $key) !== false) {
-                            $img = $url;
-                            break;
+                    if (in_array((int)$cat->parent, $parent_ids, true)) {
+                        // Deduplicate by category name
+                        $name_lower = strtolower($cat->name);
+                        // Optional: remove 'B2B ' or 'B2C ' prefix if it exists in the name to merge them
+                        $name_clean = trim(str_ireplace(['b2b', 'b2c'], '', $name_lower));
+                        
+                        if (!in_array($name_clean, $seen_names)) {
+                            $seen_names[] = $name_clean;
+                            $shop_cats[] = $cat;
                         }
                     }
-                    if (empty($img)) {
-                        $img = $image_map['default'];
-                    }
+                }
+            }
 
+            // Deduplicate categories by name
+            $seen_names = [];
+            $unique_cats = [];
+            foreach ($shop_cats as $cat) {
+                if (!in_array(strtolower($cat->name), $seen_names)) {
+                    $seen_names[] = strtolower($cat->name);
+                    $unique_cats[] = $cat;
+                }
+            }
+            // Slice to exactly 8 categories for the 2x4 grid
+            $shop_cats = array_slice($unique_cats, 0, 8);
+
+            if (!empty($shop_cats)) {
+                foreach($shop_cats as $i => $cat) {
+                    // WooCommerce category thumbnail
+                    $thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
+                    $image_url = '';
+                    if ( $thumbnail_id ) {
+                        $image_url = wp_get_attachment_url( $thumbnail_id );
+                    }
+                    if ( empty( $image_url ) ) {
+                        $image_url = wc_placeholder_img_src();
+                    }
+                    
                     $type_label = ($b2b_term && (int)$cat->parent === (int)$b2b_term->term_id) ? 'B2B Equipment' : 'B2C Appliances';
                     ?>
-                    <a class="group relative overflow-hidden aspect-square flex flex-col justify-end border border-transparent hover:border-[#FBBF24] transition-all" href="<?php echo esc_url(get_term_link($cat)); ?>">
-                        <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($cat->name); ?>" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent"></div>
-                        <div class="relative z-10 p-6">
-                            <span class="text-[#FBBF24] font-bold text-xs uppercase block mb-1"><?php echo esc_html($type_label); ?></span>
-                            <h3 class="text-white text-2xl font-black leading-tight"><?php echo esc_html($cat->name); ?></h3>
+                    <a class="group relative p-12 aspect-square flex flex-col justify-end overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300" href="<?php echo esc_url(get_term_link($cat)); ?>">
+                        <!-- Background Image -->
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('<?php echo esc_url($image_url); ?>');"></div>
+                    <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
+                        <?php if ($cat_img_src): ?>
+                            <img src="<?php echo esc_url($cat_img_src[0]); ?>" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-300" alt="<?php echo esc_attr($cat->name); ?>" />
+                        <?php endif; ?>
+                        <!-- Dark-to-gold gradient overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent"></div>
+                        <!-- Gold accent top-left corner bar -->
+                        <div class="absolute top-0 left-0 w-12 h-1 bg-[#FBBF24]"></div>
+                        <!-- Card content -->
+                        <div class="relative z-10 h-full p-8 flex flex-col justify-between">
+                            <?php if (!$cat_img_src): ?>
+                                <span class="material-symbols-outlined text-white/60 text-5xl"><?php echo esc_html($icon); ?></span>
+                            <?php else: ?>
+                                <div></div> <!-- Spacer -->
+                            <?php endif; ?>
+                            <div>
+                                <span class="text-[#FBBF24] font-black text-xs uppercase tracking-widest block mb-1"><?php echo esc_html($type_label); ?></span>
+                                <h3 class="text-white text-2xl font-black leading-tight"><?php echo esc_html($cat->name); ?></h3>
+                            </div>
                         </div>
                     </a>
                     <?php
@@ -1167,20 +1166,6 @@ document.addEventListener("DOMContentLoaded", function() {
             carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
         });
     }
-
-    // Pause vertical marquees on hover
-    const marqueeCols = document.querySelectorAll('.marquee-col');
-    marqueeCols.forEach(col => {
-        const inner = col.querySelector('.animate-marquee-vertical, .animate-marquee-vertical-reverse');
-        if (inner) {
-            col.addEventListener('mouseenter', () => {
-                inner.style.animationPlayState = 'paused';
-            });
-            col.addEventListener('mouseleave', () => {
-                inner.style.animationPlayState = 'running';
-            });
-        }
-    });
 });
 </script>
 
