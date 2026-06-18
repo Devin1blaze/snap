@@ -5,29 +5,23 @@
 
 get_header(); ?>
 
-<style>
-    /* Force solid header background on this page to prevent white-on-white text contrast issues */
-    #nav-header {
-        background: #0a0a0a !important;
-        border-color: rgba(26, 86, 219, 0.2) !important;
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4) !important;
-    }
-</style>
-
-<main id="primary" class="site-main pt-28 pb-12 relative overflow-hidden bg-white text-zinc-900">
+<main id="primary" class="site-main pb-12 relative overflow-hidden bg-white text-zinc-900">
     <div class="absolute inset-0 pointer-events-none opacity-10" style="background-image: linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px); background-size: 24px 24px;"></div>
     
     <!-- Hero Section -->
-    <section class="relative bg-secondary px-5 py-12 md:px-16 md:py-24 border-b-4 border-zinc-950 overflow-hidden">
-        <div class="absolute right-[-10%] top-[-10%] opacity-10 pointer-events-none">
+    <section class="relative px-5 pt-32 pb-12 md:px-16 md:pt-40 md:pb-24 border-b-4 border-[#FBBF24] overflow-hidden" style="background: linear-gradient(135deg, #0A0A0A 65%, #FBBF24 100%);">
+        <!-- Yellow diagonal accent block (right) -->
+        <div class="absolute right-0 top-0 bottom-0 w-1/3 opacity-20 pointer-events-none" style="background: #FBBF24; clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);"></div>
+        <!-- Decorative icon -->
+        <div class="absolute right-[-5%] top-[-10%] opacity-10 pointer-events-none text-[#FBBF24]">
             <span class="material-symbols-outlined text-[300px] leading-none" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
         </div>
         <div class="relative z-10 max-w-4xl">
-            <h1 class="font-black text-3xl md:text-5xl text-black uppercase leading-none tracking-tighter mb-4">
+            <h1 class="font-black text-3xl md:text-5xl text-white uppercase leading-none tracking-tighter mb-4">
                 REQUEST INDUSTRIAL QUOTE
             </h1>
-            <div class="bg-zinc-950 inline-block px-4 py-2 border-l-4 border-primary">
-                <p class="font-mono text-sm tracking-widest text-primary uppercase">
+            <div class="bg-[#FBBF24] inline-block px-4 py-2 border-l-4 border-[#0A0A0A]">
+                <p class="font-mono text-sm tracking-widest text-[#0A0A0A] font-black uppercase">
                     High-Volume Procurement Control Center
                 </p>
             </div>
