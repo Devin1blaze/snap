@@ -912,19 +912,10 @@ document.addEventListener('DOMContentLoaded', () => {
             ]);
 
             $shop_cats = [];
-            $seen_names = [];
             if (!is_wp_error($all_cats)) {
                 foreach ($all_cats as $cat) {
                     if (in_array((int)$cat->parent, $parent_ids, true)) {
-                        // Deduplicate by category name
-                        $name_lower = strtolower($cat->name);
-                        // Optional: remove 'B2B ' or 'B2C ' prefix if it exists in the name to merge them
-                        $name_clean = trim(str_ireplace(['b2b', 'b2c'], '', $name_lower));
-                        
-                        if (!in_array($name_clean, $seen_names)) {
-                            $seen_names[] = $name_clean;
-                            $shop_cats[] = $cat;
-                        }
+                        $shop_cats[] = $cat;
                     }
                 }
             }
@@ -938,26 +929,43 @@ document.addEventListener('DOMContentLoaded', () => {
                     $unique_cats[] = $cat;
                 }
             }
+            
             // Slice to exactly 8 categories for the 2x4 grid
             $shop_cats = array_slice($unique_cats, 0, 8);
 
+            $bg_classes = [
+                'bg-[#1A56DB]/20', 'bg-[#1A56DB]/40', 'bg-zinc-900', 'bg-zinc-800/80',
+                'bg-zinc-800/50', 'bg-[#1A56DB]/30'
+            ];
+
+            // Material Symbols Icon Map for a premium custom feel
+            $icon_map = [
+                'air-conditioners'             => 'ac_unit',
+                'b2b-room-air-conditioners'    => 'ac_unit',
+                'cassette-air-conditioners'    => 'ac_unit',
+                'verticool-air-conditioners'   => 'ac_unit',
+                'central-air-conditioning'     => 'ac_unit',
+                'air-coolers'                  => 'mode_fan',
+                'b2b-air-coolers'              => 'mode_fan',
+                'water-purifiers'              => 'water_drop',
+                'b2b-water-purifiers'          => 'water_drop',
+                'water-coolers'                => 'water_drop',
+                'air-purifiers'                => 'air',
+                'b2b-air-purifiers'            => 'air',
+                'refrigeration'                => 'kitchen',
+                'b2b-commercial-refrigeration' => 'kitchen',
+                'cold-storages'                => 'kitchen',
+                'heat-pumps'                   => 'heat_pump',
+            ];
+
             if (!empty($shop_cats)) {
                 foreach($shop_cats as $i => $cat) {
-                    // WooCommerce category thumbnail
-                    $thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
-                    $image_url = '';
-                    if ( $thumbnail_id ) {
-                        $image_url = wp_get_attachment_url( $thumbnail_id );
-                    }
-                    if ( empty( $image_url ) ) {
-                        $image_url = wc_placeholder_img_src();
-                    }
-                    
+                    $bg = $bg_classes[$i % count($bg_classes)];
+                    $icon = isset($icon_map[$cat->slug]) ? $icon_map[$cat->slug] : 'electrical_services';
                     $type_label = ($b2b_term && (int)$cat->parent === (int)$b2b_term->term_id) ? 'B2B Equipment' : 'B2C Appliances';
+                    $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
+                    $cat_img_src  = $thumbnail_id ? wp_get_attachment_image_src($thumbnail_id, 'medium') : false;
                     ?>
-                    <a class="group relative p-12 aspect-square flex flex-col justify-end overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300" href="<?php echo esc_url(get_term_link($cat)); ?>">
-                        <!-- Background Image -->
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('<?php echo esc_url($image_url); ?>');"></div>
                     <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
                         <?php if ($cat_img_src): ?>
                             <img src="<?php echo esc_url($cat_img_src[0]); ?>" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-300" alt="<?php echo esc_attr($cat->name); ?>" />
