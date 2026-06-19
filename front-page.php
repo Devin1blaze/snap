@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 Template Name: Front Page
 */
@@ -28,7 +28,7 @@ get_header();
         [
           'badge'    => 'COMMERCIAL REFRIGERATION',
           'heading'  => 'Cold Chain <br/><span class="text-[#FBBF24]">Solutions.</span>',
-          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western â€” engineered for industrial uptime.',
+          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western Ã¢â‚¬â€ engineered for industrial uptime.',
           'cta1_text'=> 'Explore Range',
           'cta1_href'=> '/product-category/commercial-refrigeration/',
           'cta2_text'=> 'Get Pricing',
@@ -39,7 +39,7 @@ get_header();
         [
           'badge'    => 'HYGIENE & PPE',
           'heading'  => 'Automated Hygiene <br/><span class="text-[#FBBF24]">at Scale.</span>',
-          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics â€” deployed across 500+ facilities.',
+          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics Ã¢â‚¬â€ deployed across 500+ facilities.',
           'cta1_text'=> 'Shop Hygiene',
           'cta1_href'=> '/product-category/hygiene-ppe/',
           'cta2_text'=> 'Get Quote',
@@ -239,7 +239,7 @@ get_header();
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Delivering Excellence in Industrial Solutions</h2>
           </div>
           <div class="reveal">
-            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India â€” reliability and scale you can count on.</p>
+            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India Ã¢â‚¬â€ reliability and scale you can count on.</p>
           </div>
         </div>
         <!-- Feature items -->
@@ -636,7 +636,7 @@ $industries = [
                                             </div>
                                             <div class="mt-auto flex gap-2">
                                                 <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-[10px] hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
-                                                    <?php echo $is_b2b ? 'â‚¹ Request Bulk Price' : 'View Details'; ?>
+                                                    <?php echo $is_b2b ? 'Ã¢â€šÂ¹ Request Bulk Price' : 'View Details'; ?>
                                                 </a>
                                                 <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
                                                     <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
@@ -939,23 +939,23 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
 
             // Exact category image mapping as requested
-            $image_map = [
-                'air-conditioners'             => get_template_directory_uri() . '/images/snap-industry-office.jpg',
-                'b2b-room-air-conditioners'    => get_template_directory_uri() . '/images/snap-industry-office.jpg',
-                'cassette-air-conditioners'    => get_template_directory_uri() . '/images/snap-industry-office.jpg',
-                'verticool-air-conditioners'   => get_template_directory_uri() . '/images/snap-industry-office.jpg',
-                'central-air-conditioning'     => get_template_directory_uri() . '/images/snap-industry-office.jpg',
-                'air-coolers'                  => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
-                'b2b-air-coolers'              => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
-                'water-purifiers'              => get_template_directory_uri() . '/images/snap-industry-office.jpg',
-                'b2b-water-purifiers'          => get_template_directory_uri() . '/images/snap-industry-office.jpg',
-                'water-coolers'                => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
-                'air-purifiers'                => get_template_directory_uri() . '/images/snap-industry-hospital.jpg',
-                'b2b-air-purifiers'            => get_template_directory_uri() . '/images/snap-industry-hospital.jpg',
-                'refrigeration'                => get_template_directory_uri() . '/images/snap-industry-hotel.jpg',
-                'b2b-commercial-refrigeration' => get_template_directory_uri() . '/images/snap-industry-hotel.jpg',
-                'cold-storages'                => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
-                'heat-pumps'                   => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
+                        $image_map = [
+                'air-conditioners'             => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
+                'b2b-room-air-conditioners'    => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
+                'cassette-air-conditioners'    => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
+                'verticool-air-conditioners'   => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
+                'central-air-conditioning'     => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
+                'air-coolers'                  => get_template_directory_uri() . '/images/ind_factory_1781898524001.png',
+                'b2b-air-coolers'              => get_template_directory_uri() . '/images/ind_factory_1781898524001.png',
+                'water-purifiers'              => get_template_directory_uri() . '/images/ind_hospital_1781898535090.png',
+                'b2b-water-purifiers'          => get_template_directory_uri() . '/images/ind_hospital_1781898535090.png',
+                'water-coolers'                => get_template_directory_uri() . '/images/ind_factory_1781898524001.png',
+                'air-purifiers'                => get_template_directory_uri() . '/images/ind_hospital_1781898535090.png',
+                'b2b-air-purifiers'            => get_template_directory_uri() . '/images/ind_hospital_1781898535090.png',
+                'refrigeration'                => get_template_directory_uri() . '/images/ind_hotel_1781898547449.png',
+                'b2b-commercial-refrigeration' => get_template_directory_uri() . '/images/ind_hotel_1781898547449.png',
+                'cold-storages'                => get_template_directory_uri() . '/images/ind_warehouse_1781898561090.png',
+                'heat-pumps'                   => get_template_directory_uri() . '/images/ind_factory_1781898524001.png',
             ];
 
             if (!empty($shop_cats)) {
@@ -972,7 +972,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Fallback to exact mapped images
                     if (!$cat_img_url) {
-                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : get_template_directory_uri() . '/images/snap-industry-office.jpg';
+                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : get_template_directory_uri() . '/images/ind_ac_1781898513191.png';
                     }
                     ?>
                     <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
@@ -1090,7 +1090,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="mt-auto flex gap-2">
                         <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-xs hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
-                            <?php echo $is_b2b ? 'â‚¹ Request Bulk Price' : 'View Details'; ?>
+                            <?php echo $is_b2b ? 'Ã¢â€šÂ¹ Request Bulk Price' : 'View Details'; ?>
                         </a>
                         <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
                             <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
@@ -1247,6 +1247,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <?php get_footer(); ?>
+
+
 
 
 
