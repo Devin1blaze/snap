@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 Template Name: Front Page
 */
@@ -28,7 +28,7 @@ get_header();
         [
           'badge'    => 'COMMERCIAL REFRIGERATION',
           'heading'  => 'Cold Chain <br/><span class="text-[#FBBF24]">Solutions.</span>',
-          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western — engineered for industrial uptime.',
+          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western â€” engineered for industrial uptime.',
           'cta1_text'=> 'Explore Range',
           'cta1_href'=> '/product-category/commercial-refrigeration/',
           'cta2_text'=> 'Get Pricing',
@@ -39,7 +39,7 @@ get_header();
         [
           'badge'    => 'HYGIENE & PPE',
           'heading'  => 'Automated Hygiene <br/><span class="text-[#FBBF24]">at Scale.</span>',
-          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics — deployed across 500+ facilities.',
+          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics â€” deployed across 500+ facilities.',
           'cta1_text'=> 'Shop Hygiene',
           'cta1_href'=> '/product-category/hygiene-ppe/',
           'cta2_text'=> 'Get Quote',
@@ -215,7 +215,7 @@ get_header();
 
 
 <!-- Section: What We Do -->
-<section class="w-full bg-[#0A0A0A] py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden border-y-4 border-[#FBBF24]">
+<section class="w-full bg-[#FFFFFF] py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden">
   <div class="max-w-screen-xl mx-auto">
     <div class="flex flex-col lg:flex-row lg:items-start lg:gap-16">
       <!-- Left: Image -->
@@ -236,10 +236,10 @@ get_header();
             <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">What We Do</span>
           </div>
           <div class="reveal">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white">Delivering Excellence in Industrial Solutions</h2>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Delivering Excellence in Industrial Solutions</h2>
           </div>
           <div class="reveal">
-            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India — reliability and scale you can count on.</p>
+            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India â€” reliability and scale you can count on.</p>
           </div>
         </div>
         <!-- Feature items -->
@@ -249,8 +249,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">verified</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-white mb-1">Genuine Brand Products</h3>
-              <p class="text-sm leading-relaxed text-zinc-400">Certified industrial equipment sourced directly from leading global manufacturers.</p>
+              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Genuine Brand Products</h3>
+              <p class="text-sm leading-relaxed text-zinc-600">Certified industrial equipment sourced directly from leading global manufacturers.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
@@ -636,7 +636,7 @@ $industries = [
                                             </div>
                                             <div class="mt-auto flex gap-2">
                                                 <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-[10px] hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
-                                                    <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
+                                                    <?php echo $is_b2b ? 'â‚¹ Request Bulk Price' : 'View Details'; ?>
                                                 </a>
                                                 <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
                                                     <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
@@ -940,23 +940,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Exact category image mapping as requested
             $image_map = [
-                'air-conditioners'             => $theme_img . 'cat-air-conditioners.png',
-                'b2b-room-air-conditioners'    => $theme_img . 'cat-air-conditioners.png',
-                'cassette-air-conditioners'    => $theme_img . 'cat-air-conditioners.png',
-                'verticool-air-conditioners'   => $theme_img . 'cat-air-conditioners.png',
-                'central-air-conditioning'     => $theme_img . 'cat-air-conditioners.png',
-                'air-coolers'                  => $theme_img . 'cat-air-coolers.png',
-                'b2b-air-coolers'              => $theme_img . 'cat-air-coolers.png',
-                'water-purifiers'              => $theme_img . 'cat-water-purifiers.png',
-                'b2b-water-purifiers'          => $theme_img . 'cat-water-purifiers.png',
-                'water-coolers'                => $theme_img . 'cat-water-coolers.png',
-                'air-purifiers'                => $theme_img . 'cat-air-purifiers.png',
-                'b2b-air-purifiers'            => $theme_img . 'cat-air-purifiers.png',
-                'refrigeration'                => $theme_img . 'cat-refrigeration.png',
-                'b2b-commercial-refrigeration' => $theme_img . 'cat-refrigeration.png',
-                'cold-storages'                => $theme_img . 'cat-cold-storages.png',
-                'heat-pumps'                   => $theme_img . 'cat-heat-pumps.png',
-                'speciality-products'          => $theme_img . 'cat-air-conditioners.png',
+                'air-conditioners'             => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'b2b-room-air-conditioners'    => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'cassette-air-conditioners'    => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'verticool-air-conditioners'   => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'central-air-conditioning'     => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'air-coolers'                  => 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'b2b-air-coolers'              => 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'water-purifiers'              => 'https://images.pexels.com/photos/6544379/pexels-photo-6544379.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'b2b-water-purifiers'          => 'https://images.pexels.com/photos/6544379/pexels-photo-6544379.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'water-coolers'                => 'https://images.pexels.com/photos/1029796/pexels-photo-1029796.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'air-purifiers'                => 'https://images.pexels.com/photos/4321539/pexels-photo-4321539.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'b2b-air-purifiers'            => 'https://images.pexels.com/photos/4321539/pexels-photo-4321539.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'refrigeration'                => 'https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'b2b-commercial-refrigeration' => 'https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'cold-storages'                => 'https://images.pexels.com/photos/4481533/pexels-photo-4481533.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'heat-pumps'                   => 'https://images.pexels.com/photos/8985454/pexels-photo-8985454.jpeg?auto=compress&cs=tinysrgb&w=800',
             ];
 
             if (!empty($shop_cats)) {
@@ -973,7 +972,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Fallback to exact mapped images
                     if (!$cat_img_url) {
-                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : $theme_img . 'cat-air-conditioners.png';
+                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80';
                     }
                     ?>
                     <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
@@ -1091,7 +1090,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="mt-auto flex gap-2">
                         <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-xs hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
-                            <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
+                            <?php echo $is_b2b ? 'â‚¹ Request Bulk Price' : 'View Details'; ?>
                         </a>
                         <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
                             <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
@@ -1248,3 +1247,4 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <?php get_footer(); ?>
+
