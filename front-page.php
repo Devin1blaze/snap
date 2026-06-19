@@ -215,14 +215,14 @@ get_header();
 
 
 <!-- Section: What We Do -->
-<section class="w-full bg-[#0A0A0A] py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden border-y-4 border-[#FBBF24]">
+<section class="w-full bg-white py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden">
   <div class="max-w-screen-xl mx-auto">
     <div class="flex flex-col lg:flex-row lg:items-start lg:gap-16">
       <!-- Left: Image -->
       <div class="reveal w-full lg:w-[45%] shrink-0 mb-10 lg:mb-0">
         <div class="overflow-hidden shadow-2xl group">
           <img
-            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=85"
+            src="<?php echo get_template_directory_uri(); ?>/images/snap-industry-factory.jpg"
             alt="Snap Marketing - Industrial Equipment Solutions"
             class="w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             style="aspect-ratio:2/3;"
@@ -233,13 +233,13 @@ get_header();
       <div class="flex flex-col flex-1 gap-8">
         <div class="flex flex-col gap-4">
           <div class="reveal">
-            <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">What We Do</span>
+            <span class="inline-block bg-[#1A56DB] text-white font-black text-xs px-4 py-1.5 uppercase tracking-widest">What We Do</span>
           </div>
           <div class="reveal">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white">Delivering Excellence in Industrial Solutions</h2>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Delivering Excellence in Industrial Solutions</h2>
           </div>
           <div class="reveal">
-            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India — reliability and scale you can count on.</p>
+            <p class="text-lg leading-relaxed text-zinc-600 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India — reliability and scale you can count on.</p>
           </div>
         </div>
         <!-- Feature items -->
@@ -249,8 +249,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">verified</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-white mb-1">Genuine Brand Products</h3>
-              <p class="text-sm leading-relaxed text-zinc-400">Certified industrial equipment sourced directly from leading global manufacturers.</p>
+              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Genuine Brand Products</h3>
+              <p class="text-sm leading-relaxed text-zinc-500">Certified industrial equipment sourced directly from leading global manufacturers.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
@@ -258,8 +258,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">local_shipping</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-white mb-1">Pan-India Distribution</h3>
-              <p class="text-sm leading-relaxed text-zinc-400">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
+              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Pan-India Distribution</h3>
+              <p class="text-sm leading-relaxed text-zinc-500">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
@@ -267,8 +267,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">workspace_premium</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-white mb-1">Quality Assurance</h3>
-              <p class="text-sm leading-relaxed text-zinc-400">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
+              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Quality Assurance</h3>
+              <p class="text-sm leading-relaxed text-zinc-500">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
             </div>
           </div>
         </div>
@@ -284,26 +284,26 @@ get_header();
 </section>
 
 <!-- Section: Why Choose Snap Marketing? -->
-<section class="bg-[#0A0A0A] py-24 px-4 sm:px-8 lg:px-20">
+<section class="bg-[#F7F8FC] py-24 px-4 sm:px-8 lg:px-20">
   <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row lg:items-center lg:gap-16">
     <!-- Left: Visual -->
     <div class="reveal hidden lg:block w-full max-w-lg shrink-0">
       <div class="overflow-hidden shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=85" alt="Why Choose Snap Marketing" class="w-full object-cover" style="aspect-ratio:3/2;" />
+        <img src="<?php echo get_template_directory_uri(); ?>/images/snap-industry-office.jpg" alt="Why Choose Snap Marketing" class="w-full object-cover" style="aspect-ratio:3/2;" />
       </div>
     </div>
     <!-- Right: Features -->
     <div class="flex flex-col gap-6 w-full">
       <div class="reveal">
-        <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">Why Choose Us</span>
+        <span class="inline-block bg-[#1A56DB] text-white font-black text-xs px-4 py-1.5 uppercase tracking-widest">Why Choose Us</span>
       </div>
       <div class="reveal">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white">Why Choose Snap Marketing?</h2>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Why Choose Snap Marketing?</h2>
       </div>
       <!-- Mobile image -->
       <div class="reveal lg:hidden mb-4">
         <div class="overflow-hidden shadow-xl">
-          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=85" alt="Why Choose Snap Marketing" class="w-full object-cover" style="aspect-ratio:16/9;" />
+          <img src="<?php echo get_template_directory_uri(); ?>/images/snap-industry-office.jpg" alt="Why Choose Snap Marketing" class="w-full object-cover" style="aspect-ratio:16/9;" />
         </div>
       </div>
       <div class="flex flex-col gap-5">
@@ -312,8 +312,8 @@ get_header();
             <span class="material-symbols-outlined text-white">verified</span>
           </div>
           <div>
-            <div class="font-black text-lg text-white mb-1">Genuine Brand Products</div>
-            <div class="text-sm leading-relaxed text-zinc-400">Certified equipment from global manufacturers. Zero counterfeits, zero compromise.</div>
+            <div class="font-black text-lg text-[#0A0A0A] mb-1">Genuine Brand Products</div>
+            <div class="text-sm leading-relaxed text-zinc-500">Certified equipment from global manufacturers. Zero counterfeits, zero compromise.</div>
           </div>
         </div>
         <div class="reveal flex gap-4 items-start">
@@ -321,8 +321,8 @@ get_header();
             <span class="material-symbols-outlined text-white">local_shipping</span>
           </div>
           <div>
-            <div class="font-black text-lg text-white mb-1">Pan-India Fast Shipping</div>
-            <div class="text-sm leading-relaxed text-zinc-400">Reliable delivery to dealers and enterprises across all major Indian cities.</div>
+            <div class="font-black text-lg text-[#0A0A0A] mb-1">Pan-India Fast Shipping</div>
+            <div class="text-sm leading-relaxed text-zinc-500">Reliable delivery to dealers and enterprises across all major Indian cities.</div>
           </div>
         </div>
         <div class="reveal flex gap-4 items-start">
@@ -330,8 +330,8 @@ get_header();
             <span class="material-symbols-outlined text-white">support_agent</span>
           </div>
           <div>
-            <div class="font-black text-lg text-white mb-1">24/7 Procurement Support</div>
-            <div class="text-sm leading-relaxed text-zinc-400">Dedicated account managers available round the clock for bulk orders and queries.</div>
+            <div class="font-black text-lg text-[#0A0A0A] mb-1">24/7 Procurement Support</div>
+            <div class="text-sm leading-relaxed text-zinc-500">Dedicated account managers available round the clock for bulk orders and queries.</div>
           </div>
         </div>
         <div class="reveal flex gap-4 items-start">
@@ -339,8 +339,8 @@ get_header();
             <span class="material-symbols-outlined text-white">currency_rupee</span>
           </div>
           <div>
-            <div class="font-black text-lg text-white mb-1">Institutional Pricing</div>
-            <div class="text-sm leading-relaxed text-zinc-400">Competitive bulk rates with volume discounts and flexible payment terms for corporates.</div>
+            <div class="font-black text-lg text-[#0A0A0A] mb-1">Institutional Pricing</div>
+            <div class="text-sm leading-relaxed text-zinc-500">Competitive bulk rates with volume discounts and flexible payment terms for corporates.</div>
           </div>
         </div>
       </div>
@@ -892,10 +892,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 <!-- Section 2: Shop by Category (Dynamic) -->
-<section class="bg-[#0A0A0A] py-24 border-b-4 border-[#FBBF24]">
+<section class="bg-white py-24">
     <div class="container mx-auto px-8 max-w-[1536px]">
-        <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
-            <h2 class="text-white text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
+        <div class="mb-12 border-l-8 border-[#1A56DB] pl-6">
+            <h2 class="text-[#0A0A0A] text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
             <?php
@@ -938,24 +938,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 'bg-zinc-800/50', 'bg-[#1A56DB]/30'
             ];
 
-            // Exact category image mapping as requested
+            // Exact category image mapping — LOCAL theme images only
+            $theme_img = get_template_directory_uri() . '/images/';
             $image_map = [
-                'air-conditioners'             => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-room-air-conditioners'    => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'cassette-air-conditioners'    => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'verticool-air-conditioners'   => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'central-air-conditioning'     => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'air-coolers'                  => 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-air-coolers'              => 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'water-purifiers'              => 'https://images.pexels.com/photos/6544379/pexels-photo-6544379.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-water-purifiers'          => 'https://images.pexels.com/photos/6544379/pexels-photo-6544379.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'water-coolers'                => 'https://images.pexels.com/photos/1029796/pexels-photo-1029796.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'air-purifiers'                => 'https://images.pexels.com/photos/4321539/pexels-photo-4321539.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-air-purifiers'            => 'https://images.pexels.com/photos/4321539/pexels-photo-4321539.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'refrigeration'                => 'https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-commercial-refrigeration' => 'https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'cold-storages'                => 'https://images.pexels.com/photos/4481533/pexels-photo-4481533.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'heat-pumps'                   => 'https://images.pexels.com/photos/8985454/pexels-photo-8985454.jpeg?auto=compress&cs=tinysrgb&w=800',
+                'air-conditioners'             => $theme_img . 'cat-air-conditioners.png',
+                'b2b-room-air-conditioners'    => $theme_img . 'cat-air-conditioners.png',
+                'cassette-air-conditioners'    => $theme_img . 'cat-air-conditioners.png',
+                'verticool-air-conditioners'   => $theme_img . 'cat-air-conditioners.png',
+                'central-air-conditioning'     => $theme_img . 'cat-air-conditioners.png',
+                'air-coolers'                  => $theme_img . 'cat-air-coolers.png',
+                'b2b-air-coolers'              => $theme_img . 'cat-air-coolers.png',
+                'water-purifiers'              => $theme_img . 'cat-water-purifiers.png',
+                'b2b-water-purifiers'          => $theme_img . 'cat-water-purifiers.png',
+                'water-coolers'                => $theme_img . 'cat-water-coolers.png',
+                'air-purifiers'                => $theme_img . 'cat-air-purifiers.png',
+                'b2b-air-purifiers'            => $theme_img . 'cat-air-purifiers.png',
+                'refrigeration'                => $theme_img . 'cat-refrigeration.png',
+                'b2b-commercial-refrigeration' => $theme_img . 'cat-refrigeration.png',
+                'cold-storages'                => $theme_img . 'cat-cold-storages.png',
+                'heat-pumps'                   => $theme_img . 'cat-heat-pumps.png',
+                'speciality-products'          => $theme_img . 'cat-air-conditioners.png',
             ];
 
             if (!empty($shop_cats)) {
@@ -972,19 +974,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Fallback to exact mapped images
                     if (!$cat_img_url) {
-                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80';
+                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : $theme_img . 'cat-air-conditioners.png';
                     }
                     ?>
-                    <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
-                        <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-70 transition-opacity duration-300" alt="<?php echo esc_attr($cat->name); ?>" />
-                        <!-- Dark-to-gold gradient overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent mix-blend-multiply"></div>
-                        <!-- Gold accent top-left corner bar -->
-                        <div class="absolute top-0 left-0 w-12 h-1 bg-[#FBBF24]"></div>
+                    <a class="group relative bg-white aspect-square overflow-hidden border border-zinc-200 hover:border-[#1A56DB] transition-all duration-300 flex flex-col shadow-sm hover:shadow-lg" href="<?php echo esc_url(get_term_link($cat)); ?>">
+                        <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" alt="<?php echo esc_attr($cat->name); ?>" />
+                        <!-- Gradient overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-[#0A0A0A]/30 to-transparent"></div>
+                        <!-- Blue accent top-left corner bar -->
+                        <div class="absolute top-0 left-0 w-12 h-1 bg-[#1A56DB]"></div>
                         <!-- Card content -->
                         <div class="relative z-10 h-full p-8 flex flex-col justify-end">
                             <div>
-                                <span class="text-[#FBBF24] font-black text-xs uppercase tracking-widest block mb-1"><?php echo esc_html($type_label); ?></span>
+                                <span class="text-blue-300 font-black text-xs uppercase tracking-widest block mb-1"><?php echo esc_html($type_label); ?></span>
                                 <h3 class="text-white text-2xl font-black leading-tight"><?php echo esc_html($cat->name); ?></h3>
                             </div>
                         </div>
