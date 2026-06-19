@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 Template Name: Front Page
 */
@@ -28,7 +28,7 @@ get_header();
         [
           'badge'    => 'COMMERCIAL REFRIGERATION',
           'heading'  => 'Cold Chain <br/><span class="text-[#FBBF24]">Solutions.</span>',
-          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western Ã¢â‚¬â€ engineered for industrial uptime.',
+          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western — engineered for industrial uptime.',
           'cta1_text'=> 'Explore Range',
           'cta1_href'=> '/product-category/commercial-refrigeration/',
           'cta2_text'=> 'Get Pricing',
@@ -39,7 +39,7 @@ get_header();
         [
           'badge'    => 'HYGIENE & PPE',
           'heading'  => 'Automated Hygiene <br/><span class="text-[#FBBF24]">at Scale.</span>',
-          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics Ã¢â‚¬â€ deployed across 500+ facilities.',
+          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics — deployed across 500+ facilities.',
           'cta1_text'=> 'Shop Hygiene',
           'cta1_href'=> '/product-category/hygiene-ppe/',
           'cta2_text'=> 'Get Quote',
@@ -215,7 +215,7 @@ get_header();
 
 
 <!-- Section: What We Do -->
-<section class="w-full bg-[#FFFFFF] py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden">
+<section class="w-full py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden bg-[#0A0A0A] border-y-4 border-[#FBBF24]">
   <div class="max-w-screen-xl mx-auto">
     <div class="flex flex-col lg:flex-row lg:items-start lg:gap-16">
       <!-- Left: Image -->
@@ -236,10 +236,10 @@ get_header();
             <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">What We Do</span>
           </div>
           <div class="reveal">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Delivering Excellence in Industrial Solutions</h2>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white">Delivering Excellence in Industrial Solutions</h2>
           </div>
           <div class="reveal">
-            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India Ã¢â‚¬â€ reliability and scale you can count on.</p>
+            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India — reliability and scale you can count on.</p>
           </div>
         </div>
         <!-- Feature items -->
@@ -249,8 +249,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">verified</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Genuine Brand Products</h3>
-              <p class="text-sm leading-relaxed text-zinc-600">Certified industrial equipment sourced directly from leading global manufacturers.</p>
+              <h3 class="font-black text-base text-white mb-1">Genuine Brand Products</h3>
+              <p class="text-sm leading-relaxed text-zinc-400">Certified industrial equipment sourced directly from leading global manufacturers.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
@@ -636,7 +636,7 @@ $industries = [
                                             </div>
                                             <div class="mt-auto flex gap-2">
                                                 <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-[10px] hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
-                                                    <?php echo $is_b2b ? 'Ã¢â€šÂ¹ Request Bulk Price' : 'View Details'; ?>
+                                                    <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
                                                 </a>
                                                 <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
                                                     <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
@@ -892,10 +892,15 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 <!-- Section 2: Shop by Category (Dynamic) -->
-<section class="bg-[#0A0A0A] py-24 border-b-4 border-[#FBBF24]">
-    <div class="container mx-auto px-8 max-w-[1536px]">
-        <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
-            <h2 class="text-white text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
+<section class="relative py-24 border-b-4 border-[#FBBF24]">
+    <!-- High-Contrast Split Background -->
+    <div class="absolute inset-0 pointer-events-none z-0 flex flex-col">
+        <div class="h-64 bg-[#FBBF24]"></div>
+        <div class="flex-grow bg-[#0A0A0A]"></div>
+    </div>
+    <div class="container mx-auto px-8 max-w-[1536px] relative z-10">
+        <div class="mb-12 border-l-8 border-[#0A0A0A] pl-6">
+            <h2 class="text-[#0A0A0A] text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
             <?php
@@ -939,23 +944,23 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
 
             // Exact category image mapping as requested
-                        $image_map = [
-                'air-conditioners'             => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
-                'b2b-room-air-conditioners'    => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
-                'cassette-air-conditioners'    => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
-                'verticool-air-conditioners'   => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
-                'central-air-conditioning'     => get_template_directory_uri() . '/images/ind_ac_1781898513191.png',
-                'air-coolers'                  => get_template_directory_uri() . '/images/ind_factory_1781898524001.png',
-                'b2b-air-coolers'              => get_template_directory_uri() . '/images/ind_factory_1781898524001.png',
-                'water-purifiers'              => get_template_directory_uri() . '/images/ind_hospital_1781898535090.png',
-                'b2b-water-purifiers'          => get_template_directory_uri() . '/images/ind_hospital_1781898535090.png',
-                'water-coolers'                => get_template_directory_uri() . '/images/ind_factory_1781898524001.png',
-                'air-purifiers'                => get_template_directory_uri() . '/images/ind_hospital_1781898535090.png',
-                'b2b-air-purifiers'            => get_template_directory_uri() . '/images/ind_hospital_1781898535090.png',
-                'refrigeration'                => get_template_directory_uri() . '/images/ind_hotel_1781898547449.png',
-                'b2b-commercial-refrigeration' => get_template_directory_uri() . '/images/ind_hotel_1781898547449.png',
-                'cold-storages'                => get_template_directory_uri() . '/images/ind_warehouse_1781898561090.png',
-                'heat-pumps'                   => get_template_directory_uri() . '/images/ind_factory_1781898524001.png',
+            $image_map = [
+                'air-conditioners'             => 'https://images.unsplash.com/photo-1617886322168-72b88fcebf4e?w=800&q=80', // Air conditioner
+                'b2b-room-air-conditioners'    => 'https://images.unsplash.com/photo-1617886322168-72b88fcebf4e?w=800&q=80',
+                'cassette-air-conditioners'    => 'https://images.unsplash.com/photo-1617886322168-72b88fcebf4e?w=800&q=80',
+                'verticool-air-conditioners'   => 'https://images.unsplash.com/photo-1617886322168-72b88fcebf4e?w=800&q=80',
+                'central-air-conditioning'     => 'https://images.unsplash.com/photo-1617886322168-72b88fcebf4e?w=800&q=80',
+                'air-coolers'                  => 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=800&q=80', // Industrial fan/cooler
+                'b2b-air-coolers'              => 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=800&q=80',
+                'water-purifiers'              => 'https://images.unsplash.com/photo-1544441892-794166f1e31c?w=800&q=80', // Water purification
+                'b2b-water-purifiers'          => 'https://images.unsplash.com/photo-1544441892-794166f1e31c?w=800&q=80',
+                'water-coolers'                => 'https://images.unsplash.com/photo-1523461244030-9b4b9b94dfab?w=800&q=80', // Commercial water cooler
+                'air-purifiers'                => 'https://images.unsplash.com/photo-1596708688402-b2d9d15024c6?w=800&q=80', // Air purifier
+                'b2b-air-purifiers'            => 'https://images.unsplash.com/photo-1596708688402-b2d9d15024c6?w=800&q=80',
+                'refrigeration'                => 'https://images.unsplash.com/photo-1584269600519-112d0ebeade3?w=800&q=80', // Commercial fridge
+                'b2b-commercial-refrigeration' => 'https://images.unsplash.com/photo-1584269600519-112d0ebeade3?w=800&q=80',
+                'cold-storages'                => 'https://images.unsplash.com/photo-1582298538104-e1b10a2f7c00?w=800&q=80', // Cold storage
+                'heat-pumps'                   => 'https://images.unsplash.com/photo-1506509536814-c157f3ff7a73?w=800&q=80', // HVAC Heat pump
             ];
 
             if (!empty($shop_cats)) {
@@ -972,13 +977,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Fallback to exact mapped images
                     if (!$cat_img_url) {
-                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : get_template_directory_uri() . '/images/ind_ac_1781898513191.png';
+                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80';
                     }
                     ?>
                     <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
-                        <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="<?php echo esc_attr($cat->name); ?>" />
-                        <!-- Dark-to-gold gradient overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-transparent to-transparent"></div>
+                        <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" alt="<?php echo esc_attr($cat->name); ?>" />
+                        <!-- Dark-to-transparent gradient overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent"></div>
                         <!-- Gold accent top-left corner bar -->
                         <div class="absolute top-0 left-0 w-12 h-1 bg-[#FBBF24]"></div>
                         <!-- Card content -->
@@ -1090,7 +1095,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="mt-auto flex gap-2">
                         <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-xs hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
-                            <?php echo $is_b2b ? 'Ã¢â€šÂ¹ Request Bulk Price' : 'View Details'; ?>
+                            <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
                         </a>
                         <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
                             <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
@@ -1247,11 +1252,3 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <?php get_footer(); ?>
-
-
-
-
-
-
-
-
