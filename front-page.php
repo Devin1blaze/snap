@@ -975,7 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : get_template_directory_uri() . '/images/cat-air-conditioners.png';
                     }
                     ?>
-                    <a class="group relative bg-white aspect-square overflow-hidden border border-zinc-200 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
+                    <a class="group relative bg-[#FBBF24] aspect-square overflow-hidden border border-zinc-200 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
                         <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-110" alt="<?php echo esc_attr($cat->name); ?>" />
                         <!-- Dark-to-gold gradient overlay -->
                         <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/40 to-transparent"></div>
@@ -1247,6 +1247,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <?php get_footer(); ?>
+
 
 
 
