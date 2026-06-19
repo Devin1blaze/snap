@@ -529,7 +529,7 @@ $industries = [
 ?>
 <section class="bg-[#1A56DB] py-24">
     <div class="container mx-auto px-8 max-w-[1536px]">
-        <div class="mb-12 border-l-8 border-[#0A0A0A] pl-6">
+        <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
             <h2 class="text-white text-4xl font-black uppercase tracking-tight">Industries We Serve</h2>
             <p class="text-[#FBBF24] font-bold mt-2 uppercase tracking-widest text-sm font-jakarta">Precision-matched equipment for every operational environment</p>
         </div>
@@ -892,10 +892,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 <!-- Section 2: Shop by Category (Dynamic) -->
-<section class="bg-[#FBBF24] py-24">
+<section class="bg-[#0A0A0A] py-24 border-b-4 border-[#FBBF24]">
     <div class="container mx-auto px-8 max-w-[1536px]">
-        <div class="mb-12 border-l-8 border-[#0A0A0A] pl-6">
-            <h2 class="text-[#0A0A0A] text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
+        <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
+            <h2 class="text-white text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
             <?php
@@ -975,10 +975,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : get_template_directory_uri() . '/images/cat-air-conditioners.png';
                     }
                     ?>
-                    <a class="group relative bg-[#FFFFFF] aspect-square overflow-hidden border border-zinc-200 hover:border-[#0A0A0A] hover:shadow-2xl transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
-                        <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-110" alt="<?php echo esc_attr($cat->name); ?>" />
+                    <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
+                        <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-70 transition-opacity duration-300" alt="<?php echo esc_attr($cat->name); ?>" />
                         <!-- Dark-to-gold gradient overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/40 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent mix-blend-multiply"></div>
                         <!-- Gold accent top-left corner bar -->
                         <div class="absolute top-0 left-0 w-12 h-1 bg-[#FBBF24]"></div>
                         <!-- Card content -->
@@ -1247,12 +1247,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <?php get_footer(); ?>
-
-
-
-
-
-
 
 
 
