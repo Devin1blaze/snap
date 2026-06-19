@@ -215,7 +215,7 @@ get_header();
 
 
 <!-- Section: What We Do -->
-<section class="w-full bg-white py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden">
+<section class="w-full bg-[#0A0A0A] py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden border-y-4 border-[#FBBF24]">
   <div class="max-w-screen-xl mx-auto">
     <div class="flex flex-col lg:flex-row lg:items-start lg:gap-16">
       <!-- Left: Image -->
@@ -233,13 +233,13 @@ get_header();
       <div class="flex flex-col flex-1 gap-8">
         <div class="flex flex-col gap-4">
           <div class="reveal">
-            <span class="inline-block bg-[#1A56DB] text-white font-black text-xs px-4 py-1.5 uppercase tracking-widest">What We Do</span>
+            <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">What We Do</span>
           </div>
           <div class="reveal">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Delivering Excellence in Industrial Solutions</h2>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white">Delivering Excellence in Industrial Solutions</h2>
           </div>
           <div class="reveal">
-            <p class="text-lg leading-relaxed text-zinc-600 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India — reliability and scale you can count on.</p>
+            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India — reliability and scale you can count on.</p>
           </div>
         </div>
         <!-- Feature items -->
@@ -249,8 +249,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">verified</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Genuine Brand Products</h3>
-              <p class="text-sm leading-relaxed text-zinc-500">Certified industrial equipment sourced directly from leading global manufacturers.</p>
+              <h3 class="font-black text-base text-white mb-1">Genuine Brand Products</h3>
+              <p class="text-sm leading-relaxed text-zinc-400">Certified industrial equipment sourced directly from leading global manufacturers.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
@@ -258,8 +258,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">local_shipping</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Pan-India Distribution</h3>
-              <p class="text-sm leading-relaxed text-zinc-500">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
+              <h3 class="font-black text-base text-white mb-1">Pan-India Distribution</h3>
+              <p class="text-sm leading-relaxed text-zinc-400">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
@@ -267,8 +267,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">workspace_premium</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Quality Assurance</h3>
-              <p class="text-sm leading-relaxed text-zinc-500">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
+              <h3 class="font-black text-base text-white mb-1">Quality Assurance</h3>
+              <p class="text-sm leading-relaxed text-zinc-400">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
             </div>
           </div>
         </div>
@@ -284,7 +284,7 @@ get_header();
 </section>
 
 <!-- Section: Why Choose Snap Marketing? -->
-<section class="bg-[#F7F8FC] py-24 px-4 sm:px-8 lg:px-20">
+<section class="bg-[#0A0A0A] py-24 px-4 sm:px-8 lg:px-20">
   <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row lg:items-center lg:gap-16">
     <!-- Left: Visual -->
     <div class="reveal hidden lg:block w-full max-w-lg shrink-0">
@@ -295,10 +295,10 @@ get_header();
     <!-- Right: Features -->
     <div class="flex flex-col gap-6 w-full">
       <div class="reveal">
-        <span class="inline-block bg-[#1A56DB] text-white font-black text-xs px-4 py-1.5 uppercase tracking-widest">Why Choose Us</span>
+        <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">Why Choose Us</span>
       </div>
       <div class="reveal">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Why Choose Snap Marketing?</h2>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white">Why Choose Snap Marketing?</h2>
       </div>
       <!-- Mobile image -->
       <div class="reveal lg:hidden mb-4">
@@ -312,8 +312,8 @@ get_header();
             <span class="material-symbols-outlined text-white">verified</span>
           </div>
           <div>
-            <div class="font-black text-lg text-[#0A0A0A] mb-1">Genuine Brand Products</div>
-            <div class="text-sm leading-relaxed text-zinc-500">Certified equipment from global manufacturers. Zero counterfeits, zero compromise.</div>
+            <div class="font-black text-lg text-white mb-1">Genuine Brand Products</div>
+            <div class="text-sm leading-relaxed text-zinc-400">Certified equipment from global manufacturers. Zero counterfeits, zero compromise.</div>
           </div>
         </div>
         <div class="reveal flex gap-4 items-start">
@@ -321,8 +321,8 @@ get_header();
             <span class="material-symbols-outlined text-white">local_shipping</span>
           </div>
           <div>
-            <div class="font-black text-lg text-[#0A0A0A] mb-1">Pan-India Fast Shipping</div>
-            <div class="text-sm leading-relaxed text-zinc-500">Reliable delivery to dealers and enterprises across all major Indian cities.</div>
+            <div class="font-black text-lg text-white mb-1">Pan-India Fast Shipping</div>
+            <div class="text-sm leading-relaxed text-zinc-400">Reliable delivery to dealers and enterprises across all major Indian cities.</div>
           </div>
         </div>
         <div class="reveal flex gap-4 items-start">
@@ -330,8 +330,8 @@ get_header();
             <span class="material-symbols-outlined text-white">support_agent</span>
           </div>
           <div>
-            <div class="font-black text-lg text-[#0A0A0A] mb-1">24/7 Procurement Support</div>
-            <div class="text-sm leading-relaxed text-zinc-500">Dedicated account managers available round the clock for bulk orders and queries.</div>
+            <div class="font-black text-lg text-white mb-1">24/7 Procurement Support</div>
+            <div class="text-sm leading-relaxed text-zinc-400">Dedicated account managers available round the clock for bulk orders and queries.</div>
           </div>
         </div>
         <div class="reveal flex gap-4 items-start">
@@ -339,8 +339,8 @@ get_header();
             <span class="material-symbols-outlined text-white">currency_rupee</span>
           </div>
           <div>
-            <div class="font-black text-lg text-[#0A0A0A] mb-1">Institutional Pricing</div>
-            <div class="text-sm leading-relaxed text-zinc-500">Competitive bulk rates with volume discounts and flexible payment terms for corporates.</div>
+            <div class="font-black text-lg text-white mb-1">Institutional Pricing</div>
+            <div class="text-sm leading-relaxed text-zinc-400">Competitive bulk rates with volume discounts and flexible payment terms for corporates.</div>
           </div>
         </div>
       </div>
