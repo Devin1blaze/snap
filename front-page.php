@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 Template Name: Front Page
 */
@@ -28,7 +28,7 @@ get_header();
         [
           'badge'    => 'COMMERCIAL REFRIGERATION',
           'heading'  => 'Cold Chain <br/><span class="text-[#FBBF24]">Solutions.</span>',
-          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western — engineered for industrial uptime.',
+          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western â€” engineered for industrial uptime.',
           'cta1_text'=> 'Explore Range',
           'cta1_href'=> '/product-category/commercial-refrigeration/',
           'cta2_text'=> 'Get Pricing',
@@ -39,7 +39,7 @@ get_header();
         [
           'badge'    => 'HYGIENE & PPE',
           'heading'  => 'Automated Hygiene <br/><span class="text-[#FBBF24]">at Scale.</span>',
-          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics — deployed across 500+ facilities.',
+          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics â€” deployed across 500+ facilities.',
           'cta1_text'=> 'Shop Hygiene',
           'cta1_href'=> '/product-category/hygiene-ppe/',
           'cta2_text'=> 'Get Quote',
@@ -191,23 +191,23 @@ get_header();
 </script>
 
 <!-- Stat Counters Strip -->
-<div class="bg-[#0369A1] w-full py-12 relative z-20">
+<div class="bg-[#FBBF24] w-full py-12 relative z-20">
     <div class="container mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div class="text-center md:text-left border-r border-white/20 last:border-none">
-            <div class="text-white text-5xl font-black counter" data-target="500">0</div>
-            <div class="text-white/80 text-sm uppercase font-bold tracking-widest">Active Clients</div>
+        <div class="text-center md:text-left border-r border-black/10 last:border-none">
+            <div class="text-black text-5xl font-black counter" data-target="500">0</div>
+            <div class="text-black/70 text-sm uppercase font-bold tracking-widest">Active Clients</div>
         </div>
-        <div class="text-center md:text-left border-r border-white/20 last:border-none">
-            <div class="text-white text-5xl font-black counter" data-target="40">0</div>
-            <div class="text-white/80 text-sm uppercase font-bold tracking-widest">Global Brands</div>
+        <div class="text-center md:text-left border-r border-black/10 last:border-none">
+            <div class="text-black text-5xl font-black counter" data-target="40">0</div>
+            <div class="text-black/70 text-sm uppercase font-bold tracking-widest">Global Brands</div>
         </div>
-        <div class="text-center md:text-left border-r border-white/20 last:border-none">
-            <div class="text-white text-5xl font-black counter" data-target="25">0</div>
-            <div class="text-white/80 text-sm uppercase font-bold tracking-widest">Years Legacy</div>
+        <div class="text-center md:text-left border-r border-black/10 last:border-none">
+            <div class="text-black text-5xl font-black counter" data-target="25">0</div>
+            <div class="text-black/70 text-sm uppercase font-bold tracking-widest">Years Legacy</div>
         </div>
-        <div class="text-center md:text-left border-r border-white/20 last:border-none">
-            <div class="text-white text-5xl font-black italic">ISO</div>
-            <div class="text-white/80 text-sm uppercase font-bold tracking-widest">9001:2015</div>
+        <div class="text-center md:text-left border-r border-black/10 last:border-none">
+            <div class="text-black text-5xl font-black italic">ISO</div>
+            <div class="text-black/70 text-sm uppercase font-bold tracking-widest">9001:2015</div>
         </div>
     </div>
 </div>
@@ -215,7 +215,7 @@ get_header();
 
 
 <!-- Section: What We Do -->
-<section class="w-full bg-[#F8FAFC] py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden border-y border-slate-200">
+<section class="w-full bg-[#0A0A0A] py-24 px-4 sm:px-8 lg:px-20 overflow-x-hidden border-y-4 border-[#FBBF24]">
   <div class="max-w-screen-xl mx-auto">
     <div class="flex flex-col lg:flex-row lg:items-start lg:gap-16">
       <!-- Left: Image -->
@@ -233,46 +233,47 @@ get_header();
       <div class="flex flex-col flex-1 gap-8">
         <div class="flex flex-col gap-4">
           <div class="reveal">
-            <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest rounded">What We Do</span>
+            <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">What We Do</span>
           </div>
           <div class="reveal">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Delivering Excellence in Industrial Solutions</h2>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white">Delivering Excellence in Industrial Solutions</h2>
           </div>
           <div class="reveal">
-            <p class="text-lg leading-relaxed text-slate-600 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India — reliability and scale you can count on.</p>
+            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India â€” reliability and scale you can count on.</p>
           </div>
         </div>
         <!-- Feature items -->
         <div class="flex flex-col gap-6">
           <div class="reveal flex gap-4 items-start">
+            <div class="w-10 h-10 shrink-0 bg-[#1A56DB] flex items-center justify-center">
               <span class="material-symbols-outlined text-white text-xl">verified</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-[#020617] mb-1">Genuine Brand Products</h3>
-              <p class="text-sm leading-relaxed text-slate-600">Certified industrial equipment sourced directly from leading global manufacturers.</p>
+              <h3 class="font-black text-base text-white mb-1">Genuine Brand Products</h3>
+              <p class="text-sm leading-relaxed text-zinc-400">Certified industrial equipment sourced directly from leading global manufacturers.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
-            <div class="w-10 h-10 shrink-0 bg-[#0369A1] flex items-center justify-center rounded">
+            <div class="w-10 h-10 shrink-0 bg-[#1A56DB] flex items-center justify-center">
               <span class="material-symbols-outlined text-white text-xl">local_shipping</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-[#020617] mb-1">Pan-India Distribution</h3>
-              <p class="text-sm leading-relaxed text-slate-600">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
+              <h3 class="font-black text-base text-white mb-1">Pan-India Distribution</h3>
+              <p class="text-sm leading-relaxed text-zinc-400">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
-            <div class="w-10 h-10 shrink-0 bg-[#0369A1] flex items-center justify-center rounded">
+            <div class="w-10 h-10 shrink-0 bg-[#1A56DB] flex items-center justify-center">
               <span class="material-symbols-outlined text-white text-xl">workspace_premium</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-[#020617] mb-1">Quality Assurance</h3>
-              <p class="text-sm leading-relaxed text-slate-600">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
+              <h3 class="font-black text-base text-white mb-1">Quality Assurance</h3>
+              <p class="text-sm leading-relaxed text-zinc-400">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
             </div>
           </div>
         </div>
         <div class="reveal">
-          <a href="/about-us" class="inline-flex items-center gap-3 bg-[#0369A1] text-white font-black px-8 py-4 uppercase tracking-widest text-sm hover:bg-[#0284C7] hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300 rounded">
+          <a href="/about-us" class="inline-flex items-center gap-3 bg-[#1A56DB] text-white font-black px-8 py-4 uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300 rounded-none">
             Learn More About Us
             <span class="material-symbols-outlined text-base">arrow_forward</span>
           </a>
@@ -283,7 +284,7 @@ get_header();
 </section>
 
 <!-- Section: Why Choose Snap Marketing? -->
-<section class="bg-white py-24 px-4 sm:px-8 lg:px-20">
+<section class="bg-[#FFFFFF] py-24 px-4 sm:px-8 lg:px-20">
   <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row lg:items-center lg:gap-16">
     <!-- Left: Visual -->
     <div class="reveal hidden lg:block w-full max-w-lg shrink-0">
@@ -294,10 +295,10 @@ get_header();
     <!-- Right: Features -->
     <div class="flex flex-col gap-6 w-full">
       <div class="reveal">
-        <span class="inline-block bg-[#0369A1] text-white font-black text-xs px-4 py-1.5 uppercase tracking-widest rounded">Why Choose Us</span>
+        <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest">Why Choose Us</span>
       </div>
       <div class="reveal">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#020617]">Why Choose Snap Marketing?</h2>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Why Choose Snap Marketing?</h2>
       </div>
       <!-- Mobile image -->
       <div class="reveal lg:hidden mb-4">
@@ -307,39 +308,39 @@ get_header();
       </div>
       <div class="flex flex-col gap-5">
         <div class="reveal flex gap-4 items-start">
-          <div class="why-icon-box w-12 h-12 shrink-0 bg-[#0369A1] flex items-center justify-center rounded">
+          <div class="why-icon-box w-12 h-12 shrink-0 bg-[#1A56DB] flex items-center justify-center">
             <span class="material-symbols-outlined text-white">verified</span>
           </div>
           <div>
-            <div class="font-black text-lg text-[#020617] mb-1">Genuine Brand Products</div>
-            <div class="text-sm leading-relaxed text-slate-600">Certified equipment from global manufacturers. Zero counterfeits, zero compromise.</div>
+            <div class="font-black text-lg text-[#0A0A0A] mb-1">Genuine Brand Products</div>
+            <div class="text-sm leading-relaxed text-zinc-600">Certified equipment from global manufacturers. Zero counterfeits, zero compromise.</div>
           </div>
         </div>
         <div class="reveal flex gap-4 items-start">
-          <div class="why-icon-box w-12 h-12 shrink-0 bg-[#0369A1] flex items-center justify-center rounded">
+          <div class="why-icon-box w-12 h-12 shrink-0 bg-[#1A56DB] flex items-center justify-center">
             <span class="material-symbols-outlined text-white">local_shipping</span>
           </div>
           <div>
-            <div class="font-black text-lg text-[#020617] mb-1">Pan-India Fast Shipping</div>
-            <div class="text-sm leading-relaxed text-slate-600">Reliable delivery to dealers and enterprises across all major Indian cities.</div>
+            <div class="font-black text-lg text-[#0A0A0A] mb-1">Pan-India Fast Shipping</div>
+            <div class="text-sm leading-relaxed text-zinc-600">Reliable delivery to dealers and enterprises across all major Indian cities.</div>
           </div>
         </div>
         <div class="reveal flex gap-4 items-start">
-          <div class="why-icon-box w-12 h-12 shrink-0 bg-[#0369A1] flex items-center justify-center rounded">
+          <div class="why-icon-box w-12 h-12 shrink-0 bg-[#1A56DB] flex items-center justify-center">
             <span class="material-symbols-outlined text-white">support_agent</span>
           </div>
           <div>
-            <div class="font-black text-lg text-[#020617] mb-1">24/7 Procurement Support</div>
-            <div class="text-sm leading-relaxed text-slate-600">Dedicated account managers available round the clock for bulk orders and queries.</div>
+            <div class="font-black text-lg text-[#0A0A0A] mb-1">24/7 Procurement Support</div>
+            <div class="text-sm leading-relaxed text-zinc-600">Dedicated account managers available round the clock for bulk orders and queries.</div>
           </div>
         </div>
         <div class="reveal flex gap-4 items-start">
-          <div class="why-icon-box w-12 h-12 shrink-0 bg-[#0369A1] flex items-center justify-center rounded">
+          <div class="why-icon-box w-12 h-12 shrink-0 bg-[#1A56DB] flex items-center justify-center">
             <span class="material-symbols-outlined text-white">currency_rupee</span>
           </div>
           <div>
-            <div class="font-black text-lg text-[#020617] mb-1">Institutional Pricing</div>
-            <div class="text-sm leading-relaxed text-slate-600">Competitive bulk rates with volume discounts and flexible payment terms for corporates.</div>
+            <div class="font-black text-lg text-[#0A0A0A] mb-1">Institutional Pricing</div>
+            <div class="text-sm leading-relaxed text-zinc-600">Competitive bulk rates with volume discounts and flexible payment terms for corporates.</div>
           </div>
         </div>
       </div>
@@ -349,16 +350,16 @@ get_header();
 
 
 <!-- Section: Brand Partners Marquee -->
-<section class="bg-[#F8FAFC] py-24 px-4 sm:px-8 lg:px-[7.7vw]">
+<section class="bg-[#0A0A0A] py-24 px-4 sm:px-8 lg:px-[7.7vw]">
   <div class="w-full mx-auto xl:max-w-[1440px]">
     <div class="text-center mb-8 sm:mb-10 lg:mb-12 reveal">
-      <span class="inline-block bg-[#0369A1] text-white font-black text-xs px-4 py-1.5 uppercase tracking-widest mb-3 rounded">Brand Partners</span>
-      <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-[#020617] mb-4 sm:mb-6">Global Brand Connections</h2>
-      <p class="text-base sm:text-lg leading-relaxed text-zinc-600 font-medium text-center px-2">Partnering with global brands to deliver premium products and enterprise solutions.</p>
+      <span class="inline-block bg-[#FBBF24] text-black font-black text-xs px-4 py-1.5 uppercase tracking-widest mb-3">Brand Partners</span>
+      <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-4 sm:mb-6">Global Brand Connections</h2>
+      <p class="text-base sm:text-lg leading-relaxed text-zinc-400 font-medium text-center px-2">Partnering with global brands to deliver premium products and enterprise solutions.</p>
     </div>
     <!-- 3D Perspective Marquee Grid (Bhakti-style tilted layout) -->
     <div class="relative reveal" style="overflow:hidden;">
-      <div class="relative flex max-w-full w-full flex-row items-center justify-center overflow-hidden bg-[#FFFFFF] px-1 lg:px-2" style="height:600px;perspective:800px;">
+      <div class="relative flex max-w-full w-full flex-row items-center justify-center overflow-hidden bg-[#0A0A0A] px-1 lg:px-2" style="height:600px;perspective:800px;">
         <!-- Single 3D-tilted wrapper for ALL columns -->
         <div class="flex flex-row items-center gap-4 sm:gap-4 lg:gap-4" style="transform:translateX(0) translateY(-1px) translateZ(-50px) rotateX(15deg) rotateY(-5deg) rotateZ(12deg);">
 
@@ -526,11 +527,11 @@ $industries = [
     ],
 ];
 ?>
-<section class="bg-[#0F172A] py-24">
+<section class="bg-[#1A56DB] py-24">
     <div class="container mx-auto px-8 max-w-[1536px]">
-        <div class="mb-12 border-l-8 border-[#0369A1] pl-6">
+        <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
             <h2 class="text-white text-4xl font-black uppercase tracking-tight">Industries We Serve</h2>
-            <p class="text-[#0369A1] font-bold mt-2 uppercase tracking-widest text-sm font-jakarta">Precision-matched equipment for every operational environment</p>
+            <p class="text-[#FBBF24] font-bold mt-2 uppercase tracking-widest text-sm font-jakarta">Precision-matched equipment for every operational environment</p>
         </div>
 
         <!-- Horizontal Tabs Nav -->
@@ -543,7 +544,7 @@ $industries = [
                                 aria-controls="panel-<?php echo esc_attr($ind['id']); ?>"
                                 aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>"
                                 data-industry-tab="<?php echo esc_attr($ind['id']); ?>"
-                                class="flex items-center gap-3 px-8 py-4 font-black text-sm uppercase tracking-wider transition-all border-b-4 duration-300 rounded <?php echo $index === 0 ? 'bg-[#0369A1] text-white border-[#0F172A]' : 'text-white border-transparent hover:bg-white/10 hover:border-[#0369A1]' ; ?>">
+                                class="flex items-center gap-3 px-8 py-4 font-black text-sm uppercase tracking-wider transition-all border-b-4 duration-300 rounded-none <?php echo $index === 0 ? 'bg-[#FBBF24] text-[#0A0A0A] border-[#1A56DB]' : 'text-white border-transparent hover:bg-white/10 hover:border-[#FBBF24]' ; ?>">
                             <span class="material-symbols-outlined text-lg"><?php echo esc_html($ind['icon']); ?></span>
                             <?php echo esc_html($ind['label']); ?>
                         </button>
@@ -620,26 +621,27 @@ $industries = [
                                     }
                                     $badge = $badge_labels[($card_idx + $index) % count($badge_labels)];
                                     $is_b2b = snap_stitch_is_b2b_product($product->get_id());
-                                                                      <div class="group bg-white flex flex-col border border-zinc-200 hover:shadow-2xl transition-all duration-300 rounded">
-                                        <div class="relative bg-zinc-50 aspect-square flex items-center justify-center p-6 overflow-hidden rounded-t">
-                                            <span class="absolute top-0 left-0 bg-[#0369A1] text-white font-black text-[10px] px-3 py-1.5 uppercase tracking-widest z-10"><?php echo esc_html($badge); ?></span>
-                                            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-2/3 h-2/3 object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 rounded" />
+                                    ?>
+                                    <div class="group bg-white flex flex-col border border-zinc-900 hover:shadow-2xl transition-all duration-300 rounded-none">
+                                        <div class="relative bg-zinc-100 aspect-square flex items-center justify-center p-6 overflow-hidden rounded-none">
+                                            <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest z-10"><?php echo esc_html($badge); ?></span>
+                                            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-2/3 h-2/3 object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 rounded-none" />
                                         </div>
                                         <div class="p-6 flex-grow flex flex-col">
-                                            <span class="inline-block bg-[#334155] text-white text-[10px] font-black px-2 py-0.5 rounded w-fit mb-3 uppercase tracking-widest"><?php echo esc_html($brand); ?></span>
-                                            <h5 class="text-[#020617] font-black text-lg mb-3 leading-tight line-clamp-2"><?php echo esc_html($title); ?></h5>
-                                            <div class="text-slate-500 text-xs font-medium mb-6 space-y-1">
+                                            <span class="inline-block bg-[#1A56DB] text-white text-[10px] font-black px-2 py-0.5 rounded-none w-fit mb-3 uppercase tracking-widest"><?php echo esc_html($brand); ?></span>
+                                            <h5 class="text-[#0A0A0A] font-black text-lg mb-3 leading-tight line-clamp-2"><?php echo esc_html($title); ?></h5>
+                                            <div class="text-zinc-500 text-xs font-medium mb-6 space-y-1">
                                                 <p class="truncate"><?php echo $spec1; ?></p>
                                                 <p class="truncate"><?php echo $spec2; ?></p>
                                             </div>
                                             <div class="mt-auto flex gap-2">
-                                                <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#0369A1] text-white text-center font-black py-3 px-4 uppercase text-[10px] hover:bg-[#0284C7] transition-colors flex items-center justify-center rounded">
-                                                    <?php echo $is_b2b ? 'Request Bulk Price' : 'View Details'; ?>
+                                                <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-[10px] hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
+                                                    <?php echo $is_b2b ? 'â‚¹ Request Bulk Price' : 'View Details'; ?>
                                                 </a>
                                                 <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
-                                                    <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#334155] text-white p-3 flex items-center justify-center hover:bg-[#0F172A] transition-colors ajax_add_to_cart rounded" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
+                                                    <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
                                                         <span class="material-symbols-outlined text-sm">shopping_cart</span>
-                                                    </a>    </a>
+                                                    </a>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -670,14 +672,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Deactivate all tabs
             tabs.forEach(t => {
                 t.setAttribute('aria-selected', 'false');
-                t.classList.remove('bg-[#0369A1]', 'text-white', 'border-[#0F172A]');
-                t.classList.add('text-white', 'border-transparent', 'hover:bg-white/10', 'hover:border-[#0369A1]');
+                t.classList.remove('bg-[#FBBF24]', 'text-[#0A0A0A]', 'border-[#1A56DB]');
+                t.classList.add('text-white', 'border-transparent', 'hover:bg-white/10', 'hover:border-[#FBBF24]');
             });
 
             // Activate current tab
             tab.setAttribute('aria-selected', 'true');
-            tab.classList.remove('text-white', 'border-transparent', 'hover:bg-white/10', 'hover:border-[#0369A1]');
-            tab.classList.add('bg-[#0369A1]', 'text-white', 'border-[#0F172A]');
+            tab.classList.remove('text-white', 'border-transparent', 'hover:bg-white/10', 'hover:border-[#FBBF24]');
+            tab.classList.add('bg-[#FBBF24]', 'text-[#0A0A0A]', 'border-[#1A56DB]');
 
             // Fade out and hide panels, then show active one
             panels.forEach(p => {
@@ -714,11 +716,11 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 
 <!-- Section: Process Management -->
-<section class="bg-[#F8FAFC] py-24 overflow-hidden">
+<section class="bg-[#FFFFFF] py-24 overflow-hidden">
     <div class="container mx-auto px-8 relative flex flex-col gap-6 xl:min-h-[2200px] w-full">
         <div class="mx-auto text-center">
-            <p class="inline-block py-1.5 px-3.5 text-xs font-black uppercase tracking-widest border-2 border-[#0369A1] bg-[#0369A1]/10 text-[#0369A1] mb-4 rounded">Process Management</p>
-            <h2 class="font-black uppercase tracking-tight lg:text-5xl text-3xl text-[#020617]">Industrial-Scale Order Fulfillment</h2>
+            <p class="inline-block py-1.5 px-3.5 text-xs font-black uppercase tracking-widest border-2 border-[#1A56DB] bg-[#1A56DB]/10 text-[#1A56DB] mb-4">Process Management</p>
+            <h2 class="font-black uppercase tracking-tight lg:text-5xl text-3xl text-black">Industrial-Scale Order Fulfillment</h2>
         </div>
 
         <div id="process-svg-container" class="relative w-full max-w-[320px] md:max-w-[744px] xl:max-w-[1110px] mt-16 mx-auto h-[908px] md:h-[2128px] xl:h-[1851px]">
@@ -726,103 +728,103 @@ document.addEventListener('DOMContentLoaded', () => {
             <!-- Desktop SVG -->
             <div class="svg-container h-full xl:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
                 <svg data-hiw-svg="true" class="hiw-line-desktop" width="1110" height="1851" viewBox="0 0 1110 1851" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M293 245C293 245 982.532 152.487 1020 444.5C1059.34 751.135 307.651 427.758 284 736C259.284 1058.11 987.03 759.333 1037 1078.5C1096.32 1457.41 76.9361 971.376 94.4998 1354.5C111.046 1715.43 957.5 1688 957.5 1688" stroke="#0369A1" stroke-width="8" stroke-linecap="square" style="stroke-dashoffset: 4766px; stroke-dasharray: 4766.23; transition: stroke-dashoffset 0.1s ease-out;"></path>
+                    <path d="M293 245C293 245 982.532 152.487 1020 444.5C1059.34 751.135 307.651 427.758 284 736C259.284 1058.11 987.03 759.333 1037 1078.5C1096.32 1457.41 76.9361 971.376 94.4998 1354.5C111.046 1715.43 957.5 1688 957.5 1688" stroke="#1A56DB" stroke-width="8" stroke-linecap="square" style="stroke-dashoffset: 4766px; stroke-dasharray: 4766.23; transition: stroke-dashoffset 0.1s ease-out;"></path>
                 </svg>
             </div>
             
             <!-- Tablet SVG -->
             <div class="svg-container h-full xl:hidden md:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
                 <svg data-hiw-svg="true" class="hiw-line-tablet" width="744" height="2128" viewBox="0 0 744 2128" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M155 168.5C155 168.5 599.832 241.232 621 453.5C643.654 680.676 167.935 578.564 155 806.5C143.871 1002.6 465.793 1008.11 462.5 1204.5C459.277 1396.74 156.671 1396.74 155 1589C153.492 1762.51 399.5 1960 399.5 1960" stroke="#0369A1" stroke-width="6" stroke-linecap="square" style="stroke-dashoffset: 2718px; stroke-dasharray: 2718.54; transition: stroke-dashoffset 0.1s ease-out;"></path>
+                    <path d="M155 168.5C155 168.5 599.832 241.232 621 453.5C643.654 680.676 167.935 578.564 155 806.5C143.871 1002.6 465.793 1008.11 462.5 1204.5C459.277 1396.74 156.671 1396.74 155 1589C153.492 1762.51 399.5 1960 399.5 1960" stroke="#1A56DB" stroke-width="6" stroke-linecap="square" style="stroke-dashoffset: 2718px; stroke-dasharray: 2718.54; transition: stroke-dashoffset 0.1s ease-out;"></path>
                 </svg>
             </div>
             
             <!-- Mobile SVG -->
             <div class="svg-container h-full md:hidden flex pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
                 <svg data-hiw-svg="true" class="hiw-line-mobile" width="320" height="908" viewBox="0 0 320 908" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M60.0003 69.5C60.0003 69.5 278.851 120.833 270.5 222C262.594 317.783 56.8652 253.442 60.0003 349.5C62.4685 425.123 195.269 410.369 197.5 486C199.635 558.372 89.0992 557.236 79.5003 629C67.9425 715.41 197.5 818.5 197.5 818.5" stroke="#0369A1" stroke-width="4" stroke-linecap="square" style="stroke-dashoffset: 1178px; stroke-dasharray: 1178.73; transition: stroke-dashoffset 0.1s ease-out;"></path>
+                    <path d="M60.0003 69.5C60.0003 69.5 278.851 120.833 270.5 222C262.594 317.783 56.8652 253.442 60.0003 349.5C62.4685 425.123 195.269 410.369 197.5 486C199.635 558.372 89.0992 557.236 79.5003 629C67.9425 715.41 197.5 818.5 197.5 818.5" stroke="#1A56DB" stroke-width="4" stroke-linecap="square" style="stroke-dashoffset: 1178px; stroke-dasharray: 1178.73; transition: stroke-dashoffset 0.1s ease-out;"></path>
                 </svg>
             </div>
 
             <!-- Step 1 -->
-            <div class="hiw-card z-10 absolute top-[2%] md:top-[3%] xl:top-[9%] left-[0%] md:left-[4%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#0369A1] rounded border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#0369A1] flex items-center justify-center text-white">
+            <div class="hiw-card z-10 absolute top-[2%] md:top-[3%] xl:top-[9%] left-[0%] md:left-[4%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">shopping_cart</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-[#020617] uppercase leading-tight">Order Placed</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#0F172A] text-white font-black flex items-center justify-center rounded text-xs lg:text-sm shrink-0">1</div>
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Order Placed</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">1</div>
                     </div>
                     <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Customer submits an enquiry through our platform, providing detailed specifications and requirements.</p>
                 </div>
             </div>
 
             <!-- Step 2 -->
-            <div class="hiw-card z-10 absolute top-[20%] md:top-[20%] xl:top-[22%] right-[0%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#0369A1] rounded border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#0369A1] flex items-center justify-center text-white">
+            <div class="hiw-card z-10 absolute top-[20%] md:top-[20%] xl:top-[22%] right-[0%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">assignment</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-[#020617] uppercase leading-tight">Account Work</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#0F172A] text-white font-black flex items-center justify-center rounded text-xs lg:text-sm shrink-0">2</div>
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Account Work</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">2</div>
                     </div>
                     <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Order verification and account processing to ensure accuracy and enterprise satisfaction.</p>
                 </div>
             </div>
 
             <!-- Step 3 -->
-            <div class="hiw-card z-10 absolute top-[33%] md:top-[35%] xl:top-[38%] left-[0%] md:left-[6%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#0369A1] rounded border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#0369A1] flex items-center justify-center text-white">
+            <div class="hiw-card z-10 absolute top-[33%] md:top-[35%] xl:top-[38%] left-[0%] md:left-[6%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">precision_manufacturing</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-[#020617] uppercase leading-tight">Processing</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#0F172A] text-white font-black flex items-center justify-center rounded text-xs lg:text-sm shrink-0">3</div>
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Processing</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">3</div>
                     </div>
                     <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Order preparation with strict industrial quality checks and inventory management for optimal fulfillment.</p>
                 </div>
             </div>
 
             <!-- Step 4 -->
-            <div class="hiw-card z-10 absolute top-[50%] md:top-[54%] xl:top-[56%] right-[0%] md:right-[20%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#0369A1] rounded border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#0369A1] flex items-center justify-center text-white">
+            <div class="hiw-card z-10 absolute top-[50%] md:top-[54%] xl:top-[56%] right-[0%] md:right-[20%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">inventory_2</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-[#020617] uppercase leading-tight">Packaging</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#0F172A] text-white font-black flex items-center justify-center rounded text-xs lg:text-sm shrink-0">4</div>
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Packaging</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">4</div>
                     </div>
                     <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Secure bulk packing with heavy-duty protective materials ensuring safe transit.</p>
                 </div>
             </div>
 
             <!-- Step 5 -->
-            <div class="hiw-card z-10 absolute top-[65%] md:top-[70%] xl:top-[71%] left-[5%] md:left-[6%] xl:left-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#0369A1] rounded border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#0369A1] flex items-center justify-center text-white">
+            <div class="hiw-card z-10 absolute top-[65%] md:top-[70%] xl:top-[71%] left-[5%] md:left-[6%] xl:left-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">local_shipping</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-[#020617] uppercase leading-tight">Logistics</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#0F172A] text-white font-black flex items-center justify-center rounded text-xs lg:text-sm shrink-0">5</div>
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Logistics</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">5</div>
                     </div>
                     <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Shipping coordination with trusted B2B carriers for reliable and timely delivery.</p>
                 </div>
             </div>
 
             <!-- Step 6 -->
-            <div class="hiw-card z-10 absolute top-[85%] md:top-[88%] xl:top-[89%] left-[35%] md:left-[30%] xl:left-[60%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#0369A1] rounded border-2 border-[#0369A1] bg-[#020617] p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#0369A1] flex items-center justify-center text-black">
+            <div class="hiw-card z-10 absolute top-[85%] md:top-[88%] xl:top-[89%] left-[35%] md:left-[30%] xl:left-[60%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-[#1A56DB] bg-[#0A0A0A] p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#FBBF24] flex items-center justify-center text-black">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">task_alt</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
                         <h3 class="text-sm md:text-lg lg:text-xl font-black text-white uppercase leading-tight">Dispatch</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#0F172A] text-white font-black flex items-center justify-center rounded text-xs lg:text-sm shrink-0">6</div>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">6</div>
                     </div>
                     <p class="text-xs lg:text-sm font-medium text-zinc-400 leading-relaxed">Delivery complete with tracking confirmation and institutional guarantee.</p>
                 </div>
@@ -890,10 +892,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 <!-- Section 2: Shop by Category (Dynamic) -->
-<section class="bg-white py-24">
+<section class="bg-[#0A0A0A] py-24">
     <div class="container mx-auto px-8 max-w-[1536px]">
-        <div class="mb-12 border-l-8 border-[#0369A1] pl-6">
-            <h2 class="text-[#020617] text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
+        <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
+            <h2 class="text-white text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
             <?php
@@ -932,11 +934,11 @@ document.addEventListener('DOMContentLoaded', () => {
             $shop_cats = array_slice($unique_cats, 0, 8);
 
             $bg_classes = [
-                'bg-[#0369A1]/20', 'bg-[#0369A1]/40', 'bg-zinc-900', 'bg-zinc-800/80',
-                'bg-zinc-800/50', 'bg-[#0369A1]/30'
+                'bg-[#1A56DB]/20', 'bg-[#1A56DB]/40', 'bg-zinc-900', 'bg-zinc-800/80',
+                'bg-zinc-800/50', 'bg-[#1A56DB]/30'
             ];
 
-            // Exact category image mapping — LOCAL theme images only
+            // Exact category image mapping â€” LOCAL theme images only
             $theme_img = get_template_directory_uri() . '/images/';
             $image_map = [
                 'air-conditioners'             => $theme_img . 'cat-air-conditioners.png',
@@ -975,12 +977,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : $theme_img . 'cat-air-conditioners.png';
                     }
                     ?>
-                    <a class="group relative bg-white aspect-square overflow-hidden border border-zinc-200 hover:border-[#0369A1] transition-all duration-300 flex flex-col shadow-sm hover:shadow-lg" href="<?php echo esc_url(get_term_link($cat)); ?>">
+                    <a class="group relative bg-white aspect-square overflow-hidden border border-zinc-200 hover:border-[#1A56DB] transition-all duration-300 flex flex-col shadow-sm hover:shadow-lg" href="<?php echo esc_url(get_term_link($cat)); ?>">
                         <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" alt="<?php echo esc_attr($cat->name); ?>" />
                         <!-- Gradient overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#020617]/80 via-[#020617]/30 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-[#0A0A0A]/30 to-transparent"></div>
                         <!-- Blue accent top-left corner bar -->
-                        <div class="absolute top-0 left-0 w-12 h-1 bg-[#0369A1]"></div>
+                        <div class="absolute top-0 left-0 w-12 h-1 bg-[#1A56DB]"></div>
                         <!-- Card content -->
                         <div class="relative z-10 h-full p-8 flex flex-col justify-end">
                             <div>
@@ -1000,16 +1002,16 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Section: Featured Products (Carousel) -->
 <section class="bg-[#FFFFFF] py-24 overflow-hidden">
     <div class="container mx-auto px-8 relative max-w-[1536px]">
-        <div class="mb-8 border-l-8 border-[#0369A1] pl-6">
-            <h2 class="text-[#020617] text-4xl font-black uppercase tracking-tight">This Weeks Highlights</h2>
-            <p class="text-[#0369A1] font-bold mt-2 uppercase tracking-widest text-sm">Most Requested Products This Month</p>
+        <div class="mb-8 border-l-8 border-[#FBBF24] pl-6">
+            <h2 class="text-[#0A0A0A] text-4xl font-black uppercase tracking-tight">This Weeks Highlights</h2>
+            <p class="text-[#1A56DB] font-bold mt-2 uppercase tracking-widest text-sm">Most Requested Products This Month</p>
         </div>
 
         <!-- Custom Tabs Navigation (Industrial Authority style) -->
         <div class="mb-12 overflow-x-auto no-scrollbar">
             <ul role="tablist" class="flex gap-2 border-b-2 border-gray-200 w-max pb-[2px]">
                 <li role="tab" class="ui-tabs-tab" tabindex="0" aria-selected="true">
-                    <a href="#tab-trending" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-[#020617] bg-[#0369A1] border-b-4 border-[#0369A1] transition-all">Trending</a>
+                    <a href="#tab-trending" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-[#0A0A0A] bg-[#FBBF24] border-b-4 border-[#1A56DB] transition-all">Trending</a>
                 </li>
                 <?php
                 // Fetch top categories dynamically to create tabs
@@ -1023,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if ( ! is_wp_error( $top_cats ) ) {
                     foreach ( $top_cats as $cat ) {
                         echo '<li role="tab" class="ui-tabs-tab" tabindex="-1" aria-selected="false">';
-                        echo '<a href="#tab-' . esc_attr($cat->slug) . '" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-gray-500 hover:text-[#0369A1] hover:bg-blue-50 border-b-4 border-transparent hover:border-gray-300 transition-all">' . esc_html($cat->name) . '</a>';
+                        echo '<a href="#tab-' . esc_attr($cat->slug) . '" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-gray-500 hover:text-[#1A56DB] hover:bg-blue-50 border-b-4 border-transparent hover:border-gray-300 transition-all">' . esc_html($cat->name) . '</a>';
                         echo '</li>';
                     }
                 }
@@ -1072,28 +1074,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     $badge = $badge_labels[$index % count($badge_labels)];
-                    $bg_classes = ['bg-[#0369A1]', 'bg-[#020617]', 'bg-zinc-100'];
+                    $bg_classes = ['bg-[#1A56DB]', 'bg-[#0A0A0A]', 'bg-zinc-100'];
                     $bg_class = $bg_classes[$index % count($bg_classes)];
                     $is_b2b = snap_stitch_is_b2b_product( $product->get_id() );
             ?>
             <div class="snap-start shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] group bg-white flex flex-col border border-zinc-100 hover:shadow-2xl transition-all duration-300 rounded-none">
                 <div class="relative <?php echo $bg_class; ?> aspect-square flex items-center justify-center p-8 mb-6 overflow-hidden rounded-none">
-                    <span class="absolute top-0 left-0 bg-[#0369A1] text-white font-black text-[10px] px-3 py-1.5 uppercase tracking-widest z-10"><?php echo $badge; ?></span>
+                    <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest z-10"><?php echo $badge; ?></span>
                     <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 rounded-none" />
                 </div>
                 <div class="px-6 pb-6 flex-grow flex flex-col">
-                    <span class="inline-block bg-[#0369A1] text-white text-[10px] font-black px-2 py-0.5 rounded-none w-fit mb-3 uppercase tracking-widest"><?php echo esc_html($brand); ?></span>
-                    <h4 class="text-[#020617] font-black text-xl mb-3 leading-tight line-clamp-2"><?php echo esc_html($title); ?></h4>
+                    <span class="inline-block bg-[#1A56DB] text-white text-[10px] font-black px-2 py-0.5 rounded-none w-fit mb-3 uppercase tracking-widest"><?php echo esc_html($brand); ?></span>
+                    <h4 class="text-[#0A0A0A] font-black text-xl mb-3 leading-tight line-clamp-2"><?php echo esc_html($title); ?></h4>
                     <div class="text-zinc-500 text-sm font-medium mb-6 space-y-1">
                         <p class="truncate"><?php echo $spec1; ?></p>
                         <p class="truncate"><?php echo $spec2; ?></p>
                     </div>
                     <div class="mt-auto flex gap-2">
-                        <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#0369A1] text-white text-center font-black py-3 px-4 uppercase text-xs hover:bg-[#0284C7] transition-colors italic flex items-center justify-center rounded-none">
-                            <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
+                        <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-xs hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
+                            <?php echo $is_b2b ? 'â‚¹ Request Bulk Price' : 'View Details'; ?>
                         </a>
                         <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
-                            <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#0369A1] text-white p-3 flex items-center justify-center hover:bg-[#0F172A] transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
+                            <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
                                 <span class="material-symbols-outlined">shopping_cart</span>
                             </a>
                         <?php endif; ?>
@@ -1109,17 +1111,17 @@ document.addEventListener('DOMContentLoaded', () => {
             
             <!-- Custom Navigation Buttons -->
             <div class="absolute -bottom-16 right-0 flex gap-2">
-                <button id="feat-prev" class="bg-[#020617] text-white w-12 h-12 flex items-center justify-center hover:bg-[#0369A1] hover:text-white transition-colors rounded-none" aria-label="Previous">
+                <button id="feat-prev" class="bg-[#0A0A0A] text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors rounded-none" aria-label="Previous">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </button>
-                <button id="feat-next" class="bg-[#0369A1] text-white w-12 h-12 flex items-center justify-center hover:bg-[#0369A1] hover:text-white transition-colors rounded-none" aria-label="Next">
+                <button id="feat-next" class="bg-[#1A56DB] text-white w-12 h-12 flex items-center justify-center hover:bg-[#FBBF24] hover:text-black transition-colors rounded-none" aria-label="Next">
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
             </div>
         </div>
 
         <div class="mt-24 flex justify-center">
-            <a href="/shop" class="bg-[#0369A1] text-white px-12 h-[52px] font-black uppercase text-lg hover:bg-[#0284C7] transition-all flex items-center justify-center gap-3 w-full max-w-2xl rounded-none">
+            <a href="/shop" class="bg-[#FBBF24] text-black px-12 h-[52px] font-black uppercase text-lg hover:bg-yellow-500 transition-all flex items-center justify-center gap-3 w-full max-w-2xl rounded-none">
                 VIEW ENTIRE CATALOG <span class="material-symbols-outlined">arrow_forward</span>
             </a>
         </div>
@@ -1180,29 +1182,29 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <!-- Section: Trust & Scale Features -->
-<section class="bg-[#0F172A] py-24">
+<section class="bg-[#1A56DB] py-24">
     <div class="container mx-auto px-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
             <!-- Feature Box 1 -->
-            <div class="bg-[#020617] p-12 border-b-4 border-[#0369A1] flex flex-col items-center text-center industrial-glow">
-                <span class="material-symbols-outlined text-[#0369A1] text-7xl mb-6">verified_user</span>
+            <div class="bg-[#0A0A0A] p-12 border-b-4 border-[#FBBF24] flex flex-col items-center text-center industrial-glow">
+                <span class="material-symbols-outlined text-[#FBBF24] text-7xl mb-6">verified_user</span>
                 <div class="text-5xl font-black text-white mb-4">100%</div>
                 <h3 class="text-2xl font-black uppercase mb-4 tracking-tight text-white">Genuine Brands</h3>
                 <p class="text-zinc-300 leading-relaxed">Direct partnerships with Blue Star, Euronics, and Kimberly Clark ensure authentic equipment.</p>
             </div>
 
             <!-- Feature Box 2 -->
-            <div class="bg-[#020617] p-12 border-b-4 border-[#0369A1] flex flex-col items-center text-center industrial-glow">
-                <span class="material-symbols-outlined text-[#0369A1] text-7xl mb-6">local_shipping</span>
+            <div class="bg-[#0A0A0A] p-12 border-b-4 border-[#FBBF24] flex flex-col items-center text-center industrial-glow">
+                <span class="material-symbols-outlined text-[#FBBF24] text-7xl mb-6">local_shipping</span>
                 <div class="text-5xl font-black text-white mb-4">24H</div>
                 <h3 class="text-2xl font-black uppercase mb-4 tracking-tight text-white">Dispatch Readiness</h3>
                 <p class="text-zinc-300 leading-relaxed">Strategic warehousing across India allows for rapid fulfillment of high-volume B2B orders.</p>
             </div>
 
             <!-- Feature Box 3 (User Requested) -->
-            <div class="bg-[#020617] p-12 border-b-4 border-[#0369A1] flex flex-col items-center text-center industrial-glow">
-                <span class="material-symbols-outlined text-[#0369A1] text-7xl mb-6">inventory</span>
-                <div class="text-5xl font-black text-[#0369A1] mb-4">5000+</div>
+            <div class="bg-[#0A0A0A] p-12 border-b-4 border-[#FBBF24] flex flex-col items-center text-center industrial-glow">
+                <span class="material-symbols-outlined text-[#FBBF24] text-7xl mb-6">inventory</span>
+                <div class="text-5xl font-black text-[#FBBF24] mb-4">5000+</div>
                 <h3 class="text-2xl font-black uppercase mb-4 tracking-tight text-white">Available SKUs</h3>
                 <p class="text-zinc-300 leading-relaxed">The widest catalog of high-performance industrial equipment in India.</p>
             </div>
@@ -1211,39 +1213,40 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <!-- Section: Testimonials (Client Reviews) -->
-<section class="bg-[#F8FAFC] py-24 px-8">
+<section class="bg-zinc-50 py-24 px-8">
     <div class="container mx-auto">
         <h2 class="text-black text-4xl font-black mb-20 uppercase tracking-tight text-center">B2B Trust Report</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-[#FFFFFF] p-12 border-t-8 border-[#0369A1] industrial-glow transition-all shadow-xl">
-                <span class="material-symbols-outlined text-[#0369A1] text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+            <div class="bg-[#FFFFFF] p-12 border-t-8 border-[#FBBF24] industrial-glow transition-all shadow-xl">
+                <span class="material-symbols-outlined text-[#FBBF24] text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                 <p class="text-black text-xl font-bold leading-relaxed mb-8 italic">"Snap Marketing transformed our facility hygiene with their automated solutions. The scale they operate at is truly impressive."</p>
-                <div class="text-[#0369A1] font-black uppercase text-sm tracking-widest border-l-4 border-[#0369A1] pl-4">Operation Manager, Fortis Hospitals</div>
+                <div class="text-[#1A56DB] font-black uppercase text-sm tracking-widest border-l-4 border-[#1A56DB] pl-4">Operation Manager, Fortis Hospitals</div>
             </div>
-            <div class="bg-[#FFFFFF] p-12 border-t-8 border-[#0369A1] industrial-glow transition-all shadow-xl">
-                <span class="material-symbols-outlined text-[#0369A1] text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+            <div class="bg-[#FFFFFF] p-12 border-t-8 border-[#FBBF24] industrial-glow transition-all shadow-xl">
+                <span class="material-symbols-outlined text-[#FBBF24] text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                 <p class="text-black text-xl font-bold leading-relaxed mb-8 italic">"The technical support during our cold-chain setup was world-class. Reliable partners for any large-scale industrial project."</p>
-                <div class="text-[#0369A1] font-black uppercase text-sm tracking-widest border-l-4 border-[#0369A1] pl-4">Director, Amul Cold Storage</div>
+                <div class="text-[#1A56DB] font-black uppercase text-sm tracking-widest border-l-4 border-[#1A56DB] pl-4">Director, Amul Cold Storage</div>
             </div>
-            <div class="bg-[#FFFFFF] p-12 border-t-8 border-[#0369A1] industrial-glow transition-all shadow-xl">
-                <span class="material-symbols-outlined text-[#0369A1] text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+            <div class="bg-[#FFFFFF] p-12 border-t-8 border-[#FBBF24] industrial-glow transition-all shadow-xl">
+                <span class="material-symbols-outlined text-[#FBBF24] text-7xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                 <p class="text-black text-xl font-bold leading-relaxed mb-8 italic">"Precision and speed. Snap handles our bulk requirements with zero friction. Highly recommended for corporate procurement."</p>
-                <div class="text-[#0369A1] font-black uppercase text-sm tracking-widest border-l-4 border-[#0369A1] pl-4">Procurement Head, Tata Motors</div>
+                <div class="text-[#1A56DB] font-black uppercase text-sm tracking-widest border-l-4 border-[#1A56DB] pl-4">Procurement Head, Tata Motors</div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Section 8: Request a Quote Banner -->
-<section class="bg-[#020617] py-24 relative overflow-hidden">
-    <div class="absolute right-0 top-0 w-1/3 h-full bg-[#0369A1] diagonal-band opacity-20"></div>
+<section class="bg-[#0A0A0A] py-24 relative overflow-hidden">
+    <div class="absolute right-0 top-0 w-1/3 h-full bg-[#1A56DB] diagonal-band opacity-20"></div>
     <div class="container mx-auto px-8 relative z-10 text-center">
-        <h2 class="text-[#0369A1] text-5xl md:text-6xl font-black mb-6 uppercase italic">Ready to Order in Bulk?</h2>
+        <h2 class="text-[#FBBF24] text-5xl md:text-6xl font-black mb-6 uppercase italic">Ready to Order in Bulk?</h2>
         <p class="text-white text-xl mb-12 max-w-2xl mx-auto opacity-80 font-medium">Get exclusive institutional pricing for your enterprise today. Our dedicated account managers are ready to assist.</p>
-        <a href="/request-a-quote" class="inline-block bg-[#0369A1] text-white px-12 py-6 font-black uppercase text-xl hover:-translate-y-1 hover:shadow-2xl active:scale-95 transition-all duration-300 tracking-widest shadow-[10px_10px_0px_rgba(3,105,161,0.3)] rounded-none">
+        <a href="/request-a-quote" class="inline-block bg-[#FBBF24] text-black px-12 py-6 font-black uppercase text-xl hover:-translate-y-1 hover:shadow-2xl active:scale-95 transition-all duration-300 tracking-widest shadow-[10px_10px_0px_rgba(251,191,36,0.3)] rounded-none">
             GET A CUSTOM QUOTE NOW
         </a>
     </div>
 </section>
 
 <?php get_footer(); ?>
+
