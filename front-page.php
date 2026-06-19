@@ -939,23 +939,23 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
 
             // Exact category image mapping as requested
-            $image_map = [
-                'air-conditioners'             => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-room-air-conditioners'    => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'cassette-air-conditioners'    => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'verticool-air-conditioners'   => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'central-air-conditioning'     => 'https://images.pexels.com/photos/4107119/pexels-photo-4107119.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'air-coolers'                  => 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-air-coolers'              => 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'water-purifiers'              => 'https://images.pexels.com/photos/6544379/pexels-photo-6544379.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-water-purifiers'          => 'https://images.pexels.com/photos/6544379/pexels-photo-6544379.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'water-coolers'                => 'https://images.pexels.com/photos/1029796/pexels-photo-1029796.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'air-purifiers'                => 'https://images.pexels.com/photos/4321539/pexels-photo-4321539.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-air-purifiers'            => 'https://images.pexels.com/photos/4321539/pexels-photo-4321539.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'refrigeration'                => 'https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'b2b-commercial-refrigeration' => 'https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'cold-storages'                => 'https://images.pexels.com/photos/4481533/pexels-photo-4481533.jpeg?auto=compress&cs=tinysrgb&w=800',
-                'heat-pumps'                   => 'https://images.pexels.com/photos/8985454/pexels-photo-8985454.jpeg?auto=compress&cs=tinysrgb&w=800',
+                        $image_map = [
+                'air-conditioners'             => get_template_directory_uri() . '/images/cat-air-conditioners.png',
+                'b2b-room-air-conditioners'    => get_template_directory_uri() . '/images/cat-air-conditioners.png',
+                'cassette-air-conditioners'    => get_template_directory_uri() . '/images/cat-air-conditioners.png',
+                'verticool-air-conditioners'   => get_template_directory_uri() . '/images/cat-air-conditioners.png',
+                'central-air-conditioning'     => get_template_directory_uri() . '/images/cat-air-conditioners.png',
+                'air-coolers'                  => get_template_directory_uri() . '/images/cat-air-coolers.png',
+                'b2b-air-coolers'              => get_template_directory_uri() . '/images/cat-air-coolers.png',
+                'water-purifiers'              => get_template_directory_uri() . '/images/cat-water-purifiers.png',
+                'b2b-water-purifiers'          => get_template_directory_uri() . '/images/cat-water-purifiers.png',
+                'water-coolers'                => get_template_directory_uri() . '/images/cat-water-coolers.png',
+                'air-purifiers'                => get_template_directory_uri() . '/images/cat-air-purifiers.png',
+                'b2b-air-purifiers'            => get_template_directory_uri() . '/images/cat-air-purifiers.png',
+                'refrigeration'                => get_template_directory_uri() . '/images/cat-refrigeration.png',
+                'b2b-commercial-refrigeration' => get_template_directory_uri() . '/images/cat-refrigeration.png',
+                'cold-storages'                => get_template_directory_uri() . '/images/cat-cold-storages.png',
+                'heat-pumps'                   => get_template_directory_uri() . '/images/cat-heat-pumps.png',
             ];
 
             if (!empty($shop_cats)) {
@@ -972,7 +972,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Fallback to exact mapped images
                     if (!$cat_img_url) {
-                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80';
+                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : get_template_directory_uri() . '/images/cat-air-conditioners.png';
                     }
                     ?>
                     <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
@@ -1247,6 +1247,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <?php get_footer(); ?>
+
+
 
 
 
