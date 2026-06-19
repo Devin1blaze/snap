@@ -976,9 +976,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     ?>
                     <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
-                        <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-70 transition-opacity duration-300" alt="<?php echo esc_attr($cat->name); ?>" />
+                        <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" alt="<?php echo esc_attr($cat->name); ?>" />
                         <!-- Dark-to-gold gradient overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent mix-blend-multiply"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/40 to-transparent"></div>
                         <!-- Gold accent top-left corner bar -->
                         <div class="absolute top-0 left-0 w-12 h-1 bg-[#FBBF24]"></div>
                         <!-- Card content -->
@@ -1247,6 +1247,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 <?php get_footer(); ?>
+
 
 
 
