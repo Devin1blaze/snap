@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 Template Name: Front Page
 */
@@ -939,23 +939,23 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
 
             // Exact category image mapping as requested
-                        $image_map = [
-                'air-conditioners'             => get_template_directory_uri() . '/images/cat-air-conditioners.png',
-                'b2b-room-air-conditioners'    => get_template_directory_uri() . '/images/cat-air-conditioners.png',
-                'cassette-air-conditioners'    => get_template_directory_uri() . '/images/cat-air-conditioners.png',
-                'verticool-air-conditioners'   => get_template_directory_uri() . '/images/cat-air-conditioners.png',
-                'central-air-conditioning'     => get_template_directory_uri() . '/images/cat-air-conditioners.png',
-                'air-coolers'                  => get_template_directory_uri() . '/images/cat-air-coolers.png',
-                'b2b-air-coolers'              => get_template_directory_uri() . '/images/cat-air-coolers.png',
-                'water-purifiers'              => get_template_directory_uri() . '/images/cat-water-purifiers.png',
-                'b2b-water-purifiers'          => get_template_directory_uri() . '/images/cat-water-purifiers.png',
-                'water-coolers'                => get_template_directory_uri() . '/images/cat-water-coolers.png',
-                'air-purifiers'                => get_template_directory_uri() . '/images/cat-air-purifiers.png',
-                'b2b-air-purifiers'            => get_template_directory_uri() . '/images/cat-air-purifiers.png',
-                'refrigeration'                => get_template_directory_uri() . '/images/cat-refrigeration.png',
-                'b2b-commercial-refrigeration' => get_template_directory_uri() . '/images/cat-refrigeration.png',
-                'cold-storages'                => get_template_directory_uri() . '/images/cat-cold-storages.png',
-                'heat-pumps'                   => get_template_directory_uri() . '/images/cat-heat-pumps.png',
+            $image_map = [
+                'air-conditioners'             => get_template_directory_uri() . '/images/snap-industry-office.jpg',
+                'b2b-room-air-conditioners'    => get_template_directory_uri() . '/images/snap-industry-office.jpg',
+                'cassette-air-conditioners'    => get_template_directory_uri() . '/images/snap-industry-office.jpg',
+                'verticool-air-conditioners'   => get_template_directory_uri() . '/images/snap-industry-office.jpg',
+                'central-air-conditioning'     => get_template_directory_uri() . '/images/snap-industry-office.jpg',
+                'air-coolers'                  => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
+                'b2b-air-coolers'              => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
+                'water-purifiers'              => get_template_directory_uri() . '/images/snap-industry-office.jpg',
+                'b2b-water-purifiers'          => get_template_directory_uri() . '/images/snap-industry-office.jpg',
+                'water-coolers'                => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
+                'air-purifiers'                => get_template_directory_uri() . '/images/snap-industry-hospital.jpg',
+                'b2b-air-purifiers'            => get_template_directory_uri() . '/images/snap-industry-hospital.jpg',
+                'refrigeration'                => get_template_directory_uri() . '/images/snap-industry-hotel.jpg',
+                'b2b-commercial-refrigeration' => get_template_directory_uri() . '/images/snap-industry-hotel.jpg',
+                'cold-storages'                => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
+                'heat-pumps'                   => get_template_directory_uri() . '/images/snap-industry-factory.jpg',
             ];
 
             if (!empty($shop_cats)) {
@@ -972,7 +972,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Fallback to exact mapped images
                     if (!$cat_img_url) {
-                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : get_template_directory_uri() . '/images/cat-air-conditioners.png';
+                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : get_template_directory_uri() . '/images/snap-industry-office.jpg';
                     }
                     ?>
                     <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
