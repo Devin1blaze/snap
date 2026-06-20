@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 Template Name: Front Page
 */
@@ -585,20 +585,26 @@ $industries = [
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <?php
                             // Fetch WooCommerce products for this industry
-                            $args = [
-                                'limit'    => 2,
-                                'status'   => 'publish',
-                                'category' => $ind['cats'],
-                            ];
-                            $products = wc_get_products($args);
+                            $transient_key = 'snap_industry_products_' . $ind['id'];
+                            $products = get_transient($transient_key);
+                            
+                            if ( false === $products ) {
+                                $args = [
+                                    'limit'    => 2,
+                                    'status'   => 'publish',
+                                    'category' => $ind['cats'],
+                                ];
+                                $products = wc_get_products($args);
 
-                            // Fallback if no products in target categories
-                            if (empty($products)) {
-                                $products = wc_get_products([
-                                    'limit'      => 2,
-                                    'status'     => 'publish',
-                                    'visibility' => 'catalog'
-                                ]);
+                                // Fallback if no products in target categories
+                                if (empty($products)) {
+                                    $products = wc_get_products([
+                                        'limit'      => 2,
+                                        'status'     => 'publish',
+                                        'visibility' => 'catalog'
+                                    ]);
+                                }
+                                set_transient($transient_key, $products, DAY_IN_SECONDS);
                             }
 
                             if (!empty($products)) {

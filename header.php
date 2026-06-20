@@ -220,8 +220,20 @@ function snap_render_desktop_menu() {
  * Fully editable from WP Dashboard.
  */
 function snap_stitch_render_nav( $context = 'desktop' ) {
+    $transient_key = 'snap_nav_menu_' . $context;
+    $cached_menu = get_transient( $transient_key );
+    if ( false !== $cached_menu ) {
+        echo $cached_menu;
+        return;
+    }
+    
+    ob_start();
+
     $locations = get_nav_menu_locations();
-    if ( empty( $locations['primary'] ) ) return;
+    if ( empty( $locations['primary'] ) ) {
+        ob_end_clean();
+        return;
+    }
 
     $menu_obj = wp_get_nav_menu_object( $locations['primary'] );
     if ( ! $menu_obj ) return;
@@ -276,6 +288,9 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
             echo '</div>';
         }
         echo '</nav>';
+        $output = ob_get_clean();
+        set_transient( $transient_key, $output, DAY_IN_SECONDS );
+        echo $output;
         return;
     }
 
@@ -362,6 +377,10 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         echo '</li>';
     }
     echo '</ul>';
+    
+    $output = ob_get_clean();
+    set_transient( $transient_key, $output, DAY_IN_SECONDS );
+    echo $output;
 }
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="scroll-smooth">
@@ -778,8 +797,15 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
             <h4 class="text-white/30 text-xs font-bold uppercase tracking-[0.3em] mb-6" style="font-family:'Plus Jakarta Sans',sans-serif">Trending Categories</h4>
             <div class="flex flex-wrap gap-3">
                 <?php
-                $pop_cats = get_terms( ['taxonomy' => 'product_cat', 'number' => 5, 'orderby' => 'count', 'order' => 'DESC', 'hide_empty' => true] );
-                if ( ! is_wp_error( $pop_cats ) ) {
+                $pop_cats = get_transient( 'snap_trending_categories' );
+                if ( false === $pop_cats ) {
+                    $pop_cats = get_terms( ['taxonomy' => 'product_cat', 'number' => 5, 'orderby' => 'count', 'order' => 'DESC', 'hide_empty' => true] );
+                    if ( ! is_wp_error( $pop_cats ) ) {
+                        set_transient( 'snap_trending_categories', $pop_cats, DAY_IN_SECONDS );
+                    }
+                }
+                
+                if ( ! is_wp_error( $pop_cats ) && is_array( $pop_cats ) ) {
                     foreach ( $pop_cats as $cat ) {
                         echo '<a href="' . esc_url( get_term_link( $cat ) ) . '" class="px-5 py-2.5 bg-white/5 border border-white/10 text-white/60 text-sm font-medium hover:bg-[#FBBF24] hover:text-[#0A0A0A] hover:border-transparent transition-all" style="font-family:\'Plus Jakarta Sans\',sans-serif">' . esc_html( $cat->name ) . '</a>';
                     }
