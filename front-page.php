@@ -723,14 +723,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Section: Process Management -->
 <section class="bg-[#FFFFFF] py-24 overflow-hidden">
-    <div class="container mx-auto px-8 relative flex flex-col gap-6 xl:min-h-[2200px] w-full">
+    <div class="container mx-auto px-4 md:px-8 relative flex flex-col gap-6 xl:min-h-[2200px] w-full">
         <div class="mx-auto text-center">
             <p class="inline-block py-1.5 px-3.5 text-xs font-black uppercase tracking-widest border-2 border-[#1A56DB] bg-[#1A56DB]/10 text-[#1A56DB] mb-4">Process Management</p>
             <h2 class="font-black uppercase tracking-tight lg:text-5xl text-3xl text-black">Industrial-Scale Order Fulfillment</h2>
         </div>
 
-        <div id="process-svg-container" class="relative w-full max-w-[320px] md:max-w-[744px] xl:max-w-[1110px] mt-16 mx-auto h-[908px] md:h-[2128px] xl:h-[1851px]">
+        <div id="process-svg-container" class="relative w-full max-w-[500px] md:max-w-[744px] xl:max-w-[1110px] mt-12 md:mt-16 mx-auto md:h-[2128px] xl:h-[1851px] flex flex-col md:block gap-6">
             
+            <!-- Mobile Timeline Line -->
+            <div class="absolute left-6 md:hidden top-0 bottom-0 w-1 bg-[#1A56DB]/20 z-0"></div>
+
             <!-- Desktop SVG -->
             <div class="svg-container h-full xl:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
                 <svg data-hiw-svg="true" class="hiw-line-desktop" width="1110" height="1851" viewBox="0 0 1110 1851" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -744,95 +747,88 @@ document.addEventListener('DOMContentLoaded', () => {
                     <path d="M155 168.5C155 168.5 599.832 241.232 621 453.5C643.654 680.676 167.935 578.564 155 806.5C143.871 1002.6 465.793 1008.11 462.5 1204.5C459.277 1396.74 156.671 1396.74 155 1589C153.492 1762.51 399.5 1960 399.5 1960" stroke="#1A56DB" stroke-width="6" stroke-linecap="square" style="stroke-dashoffset: 2718px; stroke-dasharray: 2718.54; transition: stroke-dashoffset 0.1s ease-out;"></path>
                 </svg>
             </div>
-            
-            <!-- Mobile SVG -->
-            <div class="svg-container h-full md:hidden flex pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
-                <svg data-hiw-svg="true" class="hiw-line-mobile" width="320" height="908" viewBox="0 0 320 908" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M60.0003 69.5C60.0003 69.5 278.851 120.833 270.5 222C262.594 317.783 56.8652 253.442 60.0003 349.5C62.4685 425.123 195.269 410.369 197.5 486C199.635 558.372 89.0992 557.236 79.5003 629C67.9425 715.41 197.5 818.5 197.5 818.5" stroke="#1A56DB" stroke-width="4" stroke-linecap="square" style="stroke-dashoffset: 1178px; stroke-dasharray: 1178.73; transition: stroke-dashoffset 0.1s ease-out;"></path>
-                </svg>
-            </div>
 
             <!-- Step 1 -->
-            <div class="hiw-card z-10 absolute top-[2%] md:top-[3%] xl:top-[9%] left-[0%] md:left-[4%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 relative md:absolute md:top-[3%] xl:top-[9%] md:left-[4%] xl:left-[12%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">shopping_cart</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Order Placed</h3>
+                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Order Placed</h3>
                         <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">1</div>
                     </div>
-                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Customer submits an enquiry through our platform, providing detailed specifications and requirements.</p>
+                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Customer submits an enquiry through our platform, providing detailed specifications and requirements.</p>
                 </div>
             </div>
 
             <!-- Step 2 -->
-            <div class="hiw-card z-10 absolute top-[20%] md:top-[20%] xl:top-[22%] right-[0%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 relative md:absolute md:top-[20%] xl:top-[22%] md:right-[0%] xl:right-[3%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">assignment</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Account Work</h3>
+                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Account Work</h3>
                         <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">2</div>
                     </div>
-                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Order verification and account processing to ensure accuracy and enterprise satisfaction.</p>
+                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Order verification and account processing to ensure accuracy and enterprise satisfaction.</p>
                 </div>
             </div>
 
             <!-- Step 3 -->
-            <div class="hiw-card z-10 absolute top-[33%] md:top-[35%] xl:top-[38%] left-[0%] md:left-[6%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 relative md:absolute md:top-[35%] xl:top-[38%] md:left-[6%] xl:left-[12%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">precision_manufacturing</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Processing</h3>
+                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Processing</h3>
                         <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">3</div>
                     </div>
-                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Order preparation with strict industrial quality checks and inventory management for optimal fulfillment.</p>
+                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Order preparation with strict industrial quality checks and inventory management for optimal fulfillment.</p>
                 </div>
             </div>
 
             <!-- Step 4 -->
-            <div class="hiw-card z-10 absolute top-[50%] md:top-[54%] xl:top-[56%] right-[0%] md:right-[20%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 relative md:absolute md:top-[54%] xl:top-[56%] md:right-[20%] xl:right-[3%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">inventory_2</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Packaging</h3>
+                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Packaging</h3>
                         <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">4</div>
                     </div>
-                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Secure bulk packing with heavy-duty protective materials ensuring safe transit.</p>
+                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Secure bulk packing with heavy-duty protective materials ensuring safe transit.</p>
                 </div>
             </div>
 
             <!-- Step 5 -->
-            <div class="hiw-card z-10 absolute top-[65%] md:top-[70%] xl:top-[71%] left-[5%] md:left-[6%] xl:left-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 relative md:absolute md:top-[70%] xl:top-[71%] md:left-[6%] xl:left-[3%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">local_shipping</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Logistics</h3>
+                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Logistics</h3>
                         <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">5</div>
                     </div>
-                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Shipping coordination with trusted B2B carriers for reliable and timely delivery.</p>
+                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Shipping coordination with trusted B2B carriers for reliable and timely delivery.</p>
                 </div>
             </div>
 
             <!-- Step 6 -->
-            <div class="hiw-card z-10 absolute top-[85%] md:top-[88%] xl:top-[89%] left-[35%] md:left-[30%] xl:left-[60%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-[#1A56DB] bg-[#0A0A0A] p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+            <div class="hiw-card z-10 relative md:absolute md:top-[88%] xl:top-[89%] md:left-[30%] xl:left-[60%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-[#1A56DB] bg-[#0A0A0A] p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
                 <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#FBBF24] flex items-center justify-center text-black">
                     <span class="material-symbols-outlined text-2xl lg:text-4xl">task_alt</span>
                 </div>
                 <div class="flex flex-col w-full">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-white uppercase leading-tight">Dispatch</h3>
+                        <h3 class="text-lg lg:text-xl font-black text-white uppercase leading-tight">Dispatch</h3>
                         <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">6</div>
                     </div>
-                    <p class="text-xs lg:text-sm font-medium text-zinc-400 leading-relaxed">Delivery complete with tracking confirmation and institutional guarantee.</p>
+                    <p class="text-sm font-medium text-zinc-400 leading-relaxed">Delivery complete with tracking confirmation and institutional guarantee.</p>
                 </div>
             </div>
 
@@ -846,8 +842,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const paths = document.querySelectorAll('.svg-container svg path');
         const cards = document.querySelectorAll('.hiw-card');
 
+        let ticking = false;
+        
+        // Cache path lengths to avoid recalculating on every scroll frame (huge performance win)
+        paths.forEach(path => {
+            let length = path.getTotalLength();
+            if (!length || length === 0) {
+                if (path.closest('.hiw-line-desktop')) length = 4766;
+                else if (path.closest('.hiw-line-tablet')) length = 2718;
+            }
+            path.dataset.cachedLength = length;
+            path.style.strokeDasharray = length;
+        });
+
         const updatePaths = () => {
-            if(!svgContainer) return;
+            if(!svgContainer) {
+                ticking = false;
+                return;
+            }
+            
             const rect = svgContainer.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             
@@ -855,24 +868,28 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollPercentage = Math.min(Math.max(scrollPercentage * 1.5 - 0.2, 0), 1);
             
             paths.forEach(path => {
-                // Only process visible paths to avoid getTotalLength() returning 0
+                // Only process visible paths
                 if (path.closest('.svg-container').offsetParent !== null) {
-                    // Fallback to explicit lengths if browser still returns 0
-                    let length = path.getTotalLength();
-                    if (!length || length === 0) {
-                        if (path.closest('.hiw-line-desktop')) length = 4766;
-                        else if (path.closest('.hiw-line-tablet')) length = 2718;
-                        else length = 1178;
+                    const length = path.dataset.cachedLength;
+                    if (length) {
+                        path.style.strokeDashoffset = length * (1 - scrollPercentage);
                     }
-                    path.style.strokeDasharray = length;
-                    path.style.strokeDashoffset = length * (1 - scrollPercentage);
                 }
             });
+            
+            ticking = false;
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updatePaths);
+                ticking = true;
+            }
         };
 
         // Setup scroll-linked SVG drawing
         if(paths.length > 0 && svgContainer) {
-            window.addEventListener('scroll', updatePaths, { passive: true });
+            window.addEventListener('scroll', onScroll, { passive: true });
             // Run once on load to set initial state
             setTimeout(updatePaths, 100);
         }
