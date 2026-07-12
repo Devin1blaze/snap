@@ -88,7 +88,7 @@ PAGINATION_TEMPLATE = """
 
 for filepath in files:
     if not os.path.exists(filepath):
-        print(f"File not found: {filepath}")
+        print("File not found: {}".format(filepath))
         continue
         
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -99,7 +99,7 @@ for filepath in files:
     # in entrance solutions it's <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-1 content-start">
     grid_match = re.search(r'<(div|section) class="grid[^>]*gap[^>]*>', content)
     if not grid_match:
-        print(f"Grid opening not found in {filepath}")
+        print("Grid opening not found in {}".format(filepath))
         continue
         
     grid_tag = grid_match.group(1) # 'div' or 'section'
@@ -118,7 +118,7 @@ for filepath in files:
             break
             
     if not product_grid_match:
-        print(f"Product Grid opening not found in {filepath}")
+        print("Product Grid opening not found in {}".format(filepath))
         continue
         
     grid_start_idx = product_grid_match.end()
@@ -139,7 +139,7 @@ for filepath in files:
             else:
                 grid_end_idx = grid_start_idx + pag_match.start()
         else:
-            print(f"Grid end not found in {filepath}")
+            print("Grid end not found in {}".format(filepath))
             continue
     else:
         grid_end_idx = grid_start_idx + grid_end_match.start()
@@ -163,4 +163,4 @@ for filepath in files:
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(new_content)
         
-    print(f"Updated {filepath}")
+    print("Updated {}".format(filepath))

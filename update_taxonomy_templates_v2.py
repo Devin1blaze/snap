@@ -83,7 +83,7 @@ PAGINATION_TEMPLATE = """
 for item in files_patterns:
     filepath = item['file']
     if not os.path.exists(filepath):
-        print(f"File not found: {filepath}")
+        print("File not found: {}".format(filepath))
         continue
         
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -91,14 +91,14 @@ for item in files_patterns:
 
     grid_match = re.search(item['grid_start'], content)
     if not grid_match:
-        print(f"Grid start not found in {filepath}")
+        print("Grid start not found in {}".format(filepath))
         continue
         
     grid_start_idx = grid_match.end()
     
     grid_end_match = re.search(item['grid_end'], content[grid_start_idx:])
     if not grid_end_match:
-        print(f"Grid end not found in {filepath}")
+        print("Grid end not found in {}".format(filepath))
         continue
         
     grid_end_idx = grid_start_idx + grid_end_match.start()
@@ -125,4 +125,4 @@ for item in files_patterns:
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(new_content)
         
-    print(f"Updated {filepath}")
+    print("Updated {}".format(filepath))
