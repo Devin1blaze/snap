@@ -439,9 +439,18 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 
         /* ── HEADER SCROLL ──────────────────────────────────── */
-        #nav-header { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        #nav-header { 
+            transform: translateY(12px);
+            border-color: transparent;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, background-color, border-color, backdrop-filter;
+        }
         #nav-header.scrolled {
-            background: rgba(10, 10, 10, 0.92);
+            transform: translateY(0);
+            background-color: rgba(10, 10, 10, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-color: rgba(26, 86, 219, 0.2);  /* Royal Blue tint border */
@@ -714,7 +723,10 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         #nav-header .text-white, #nav-header .bg-white, #nav-header .border-white\/10, 
         #nav-header .text-white\/80, #nav-header .text-white\/70, #nav-header .text-white\/60, #nav-header .text-white\/50, #nav-header .text-white\/40, 
         #nav-header span.material-symbols-outlined, #nav-header a.snap-nav-link {
-            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+            transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Applied when not scrolled and on non-front pages */
@@ -741,9 +753,9 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
 <?php wp_body_open(); ?>
 
 <header class="relative z-50">
-  <nav id="floating-nav" class="fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300">
+  <nav id="floating-nav" class="fixed top-0 left-0 right-0 w-full z-[100]">
     <?php $is_front = is_front_page(); ?>
-    <div id="nav-header" class="w-full max-w-[1536px] mx-auto mt-3 px-4 lg:px-6 border border-transparent rounded-none transition-all duration-500 <?php echo $is_front ? '' : 'theme-invert'; ?>">
+    <div id="nav-header" class="w-full max-w-[1536px] mx-auto px-4 lg:px-6 border border-transparent rounded-none <?php echo $is_front ? '' : 'theme-invert'; ?>">
       <div class="flex items-center justify-between py-3 lg:py-3.5">
 
         <!-- Logo -->
@@ -851,12 +863,8 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
   function updateHeader() {
     if (window.scrollY > 10) {
       navHeader.classList.add('scrolled');
-      navHeader.classList.remove('mt-3', 'border-transparent');
-      navHeader.classList.add('mt-0', 'border-[rgba(26,86,219,0.2)]');
     } else {
       navHeader.classList.remove('scrolled');
-      navHeader.classList.add('mt-3', 'border-transparent');
-      navHeader.classList.remove('mt-0', 'border-[rgba(26,86,219,0.2)]');
     }
     ticking = false;
   }
