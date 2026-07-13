@@ -716,7 +716,8 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
 
 <header class="relative z-50">
   <nav id="floating-nav" class="fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300">
-    <div id="nav-header" class="w-full max-w-[1536px] mx-auto <?php echo is_front_page() ? 'mt-3 border-transparent' : 'scrolled mt-0 border-[rgba(26,86,219,0.2)]'; ?> px-4 lg:px-6 border rounded-none transition-all duration-500">
+    <?php $is_front = is_front_page(); ?>
+    <div id="nav-header" class="w-full max-w-[1536px] mx-auto <?php echo $is_front ? 'mt-3 border-transparent' : 'mt-0 border-[rgba(26,86,219,0.2)] scrolled'; ?> px-4 lg:px-6 border rounded-none transition-all duration-500">
       <div class="flex items-center justify-between py-3 lg:py-3.5">
 
         <!-- Logo -->
@@ -819,8 +820,8 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
 <script>
   // ── HEADER SCROLL ──────────────────────────────────────────────────
   const navHeader = document.getElementById('nav-header');
+  const isFrontPage = <?php echo $is_front ? 'true' : 'false'; ?>;
   let ticking = false;
-  const isFrontPage = <?php echo is_front_page() ? 'true' : 'false'; ?>;
 
   function updateHeader() {
     if (window.scrollY > 10 || !isFrontPage) {
@@ -834,10 +835,6 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
     }
     ticking = false;
   }
-  
-  // Set correct initial state
-  updateHeader();
-
   window.addEventListener('scroll', function() {
     if (!ticking) { window.requestAnimationFrame(updateHeader); ticking = true; }
   });
