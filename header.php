@@ -709,6 +709,32 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
         }
         .snap-mega-sub-link-full:hover .snap-mega-sub-dot { background: #0A0A0A; }
         .snap-mega-sub-link-full .snap-mega-sub-dot { background: #FBBF24; }
+        /* ── INVERTED THEME (Subpages) ───────────────────────── */
+        /* Smooth transitions for color changes */
+        #nav-header .text-white, #nav-header .bg-white, #nav-header .border-white\/10, 
+        #nav-header .text-white\/80, #nav-header .text-white\/70, #nav-header .text-white\/60, #nav-header .text-white\/50, #nav-header .text-white\/40, 
+        #nav-header span.material-symbols-outlined, #nav-header a.snap-nav-link {
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Applied when not scrolled and on non-front pages */
+        #nav-header.theme-invert:not(.scrolled) .text-white { color: #0A0A0A !important; }
+        #nav-header.theme-invert:not(.scrolled) .text-white\/80 { color: rgba(10,10,10,0.8) !important; }
+        #nav-header.theme-invert:not(.scrolled) .text-white\/70 { color: rgba(10,10,10,0.7) !important; }
+        #nav-header.theme-invert:not(.scrolled) .text-white\/60 { color: rgba(10,10,10,0.6) !important; }
+        #nav-header.theme-invert:not(.scrolled) .text-white\/50 { color: rgba(10,10,10,0.5) !important; }
+        #nav-header.theme-invert:not(.scrolled) .text-white\/40 { color: rgba(10,10,10,0.4) !important; }
+        
+        #nav-header.theme-invert:not(.scrolled) .bg-white { background-color: #0A0A0A !important; }
+        #nav-header.theme-invert:not(.scrolled) .bg-white\/10 { background-color: rgba(10,10,10,0.1) !important; }
+        #nav-header.theme-invert:not(.scrolled) .bg-white\/5 { background-color: rgba(10,10,10,0.05) !important; }
+        
+        #nav-header.theme-invert:not(.scrolled) .border-white\/10 { border-color: rgba(10,10,10,0.2) !important; }
+        #nav-header.theme-invert:not(.scrolled) .border-white\/5 { border-color: rgba(10,10,10,0.1) !important; }
+        
+        #nav-header.theme-invert:not(.scrolled) a.snap-nav-link { color: rgba(10,10,10,0.82); }
+        #nav-header.theme-invert:not(.scrolled) a.snap-nav-link:hover { color: #1A56DB; background: rgba(26,86,219,0.06); }
+        #nav-header.theme-invert:not(.scrolled) .snap-nav-caret { color: #0A0A0A; }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
@@ -717,7 +743,7 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
 <header class="relative z-50">
   <nav id="floating-nav" class="fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300">
     <?php $is_front = is_front_page(); ?>
-    <div id="nav-header" class="w-full max-w-[1536px] mx-auto <?php echo $is_front ? 'mt-3 border-transparent' : 'mt-0 border-[rgba(26,86,219,0.2)] scrolled'; ?> px-4 lg:px-6 border rounded-none transition-all duration-500">
+    <div id="nav-header" class="w-full max-w-[1536px] mx-auto mt-3 px-4 lg:px-6 border border-transparent rounded-none transition-all duration-500 <?php echo $is_front ? '' : 'theme-invert'; ?>">
       <div class="flex items-center justify-between py-3 lg:py-3.5">
 
         <!-- Logo -->
@@ -820,11 +846,10 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
 <script>
   // ── HEADER SCROLL ──────────────────────────────────────────────────
   const navHeader = document.getElementById('nav-header');
-  const isFrontPage = <?php echo $is_front ? 'true' : 'false'; ?>;
   let ticking = false;
 
   function updateHeader() {
-    if (window.scrollY > 10 || !isFrontPage) {
+    if (window.scrollY > 10) {
       navHeader.classList.add('scrolled');
       navHeader.classList.remove('mt-3', 'border-transparent');
       navHeader.classList.add('mt-0', 'border-[rgba(26,86,219,0.2)]');
