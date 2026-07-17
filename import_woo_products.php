@@ -6,9 +6,8 @@
  * wp eval-file wp-content/themes/snap-stitch-theme/import_woo_products.php
  */
 
-if ( 'cli' !== php_sapi_name() ) {
-    die( 'This script can only be run via WP-CLI.' );
-}
+// Load WordPress
+require_once dirname(__FILE__) . '/../../../wp-load.php';
 
 echo "Starting WooCommerce Product Import...\n";
 
