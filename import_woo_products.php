@@ -12,7 +12,7 @@ require_once dirname(__FILE__) . '/../../../wp-load.php';
 echo "Starting WooCommerce Product Import...\n";
 
 // Path to SEO optimized products JSON
-$json_file = dirname(__FILE__) . '/products_seo.json';
+$json_file = dirname(__FILE__) . '/products_consumer_seo.json';
 
 if (!file_exists($json_file)) {
     die("Error: $json_file not found.\n");
