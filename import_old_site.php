@@ -11,7 +11,7 @@ require_once ABSPATH . 'wp-admin/includes/image.php';
 require_once ABSPATH . 'wp-admin/includes/file.php';
 require_once ABSPATH . 'wp-admin/includes/media.php';
 
-$old_data_dir = 'D:/projects/pro/snpmarketing without divi/old data/';
+$old_data_dir = dirname(__FILE__) . '/old_data/';
 
 function import_local_image($file_path, $post_id = 0) {
     if (!file_exists($file_path)) return false;
