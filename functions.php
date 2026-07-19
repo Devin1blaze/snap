@@ -56,6 +56,10 @@ add_action( 'after_setup_theme', 'snap_stitch_theme_setup' );
 function snap_stitch_theme_scripts() {
     wp_enqueue_style( 'snap-stitch-theme-style', get_stylesheet_uri() );
     wp_enqueue_script( 'snap-stitch-animations', get_template_directory_uri() . '/js/animations.js', array(), '1.0.0', true );
+    
+    // Lenis Smooth Scroll
+    wp_enqueue_script( 'lenis', 'https://unpkg.com/lenis@1.0.45/dist/lenis.min.js', array(), '1.0.45', true );
+    wp_enqueue_script( 'snap-stitch-lenis-init', get_template_directory_uri() . '/js/lenis-init.js', array('lenis'), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'snap_stitch_theme_scripts' );
 
