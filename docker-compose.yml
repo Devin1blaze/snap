@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # 1. Local Postgres Database (For structured data, 0 file locks)
+  postgres:
+    image: postgres:15-alpine
+    container_name: hermes_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: scraper
+      POSTGRES_PASSWORD: scraper_bhutrsf08455645
+      POSTGRES_DB: scraper_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - scraper_net
+
+  # 2. Local Redis (For fast queueing and URL state management)
+  redis:
+    image: redis:7-alpine
+    container_name: hermes_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - scraper_net
+
+  # 3. Local Tor SOCKS5 Proxy (For infinite, free IP rotation fallback)
+  tor-proxy:
+    image: peterdavehello/tor-socks-proxy:latest
+    container_name: hermes_tor
+    restart: unless-stopped
+    ports:
+      - "9150:9150"
+    networks:
+      - scraper_net
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  scraper_net:
+    driver: bridge

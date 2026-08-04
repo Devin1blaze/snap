@@ -1,0 +1,181 @@
+{
+    "b2b_categories": [
+        {
+            "name": "ABOUT US",
+            "subcategories": [
+                "Our Company",
+                "Governance Structure",
+                "Guiding Policies",
+                "Social Responsibility"
+            ]
+        },
+        {
+            "name": "PRODUCTS",
+            "subcategories": [
+                "Overview",
+                "Room Air Conditioners",
+                "Air Coolers",
+                "Air Purifiers",
+                "Water Purifiers",
+                "Cassette Air Conditioners",
+                "Verticool Air Conditioners",
+                "Central Air Conditioning",
+                "Heat Pumps",
+                "Commercial Refrigeration",
+                "Cold Storages",
+                "Water Coolers",
+                "Speciality Products"
+            ]
+        },
+        {
+            "name": "PROJECTS",
+            "subcategories": [
+                "MEP and More",
+                "Buildings\u200b",
+                "Data centre",
+                "Industrial",
+                "Infrastructure\u200b\u200b",
+                "Projects Gallery",
+                "Vendor Registration"
+            ]
+        },
+        {
+            "name": "CUSTOMER SERVICE",
+            "subcategories": [
+                "Service Solutions",
+                "Certificates",
+                "Warranty Registration",
+                "Installation and Service Costs",
+                "Buy Extended Warranty & AMC",
+                "Service Escalation"
+            ]
+        },
+        {
+            "name": "MANUFACTURING AND R&D",
+            "subcategories": [
+                "History & Overview",
+                "Manufacturing Excellence",
+                "Manufacturing Facilities",
+                "R & D"
+            ]
+        },
+        {
+            "name": "INTERNATIONAL",
+            "subcategories": [
+                "Overview"
+            ]
+        },
+        {
+            "name": "GROUP COMPANIES",
+            "subcategories": [
+                "Blue Star Climatech Limited",
+                "Blue Star Europe B.V.",
+                "Blue Star Engineering & Electronics Limited",
+                "Blue Star International FZCO",
+                "Blue Star M & E Engineering (Sdn) Bhd",
+                "Blue Star North America Inc.",
+                "Blue Star Qatar WLL",
+                "Blue Star MEA Airconditioning LLC"
+            ]
+        },
+        {
+            "name": "PRESS & INVESTORS",
+            "subcategories": [
+                "Press Releases",
+                "Investors"
+            ]
+        }
+    ],
+    "b2c_categories": [
+        {
+            "name": "AIR CONDITIONERS",
+            "subcategories": [
+                "EXPLORE",
+                "EXPLORE",
+                "Iconia Series",
+                "Special Edition AC",
+                "Heavy Duty ACs",
+                "Super Energy Efficient ACs",
+                "Hot & Cold ACs",
+                "Anti-Virus ACs",
+                "INVERTER SPLIT ACs",
+                "FIXED SPEED SPLIT ACs",
+                "WINDOW ACs",
+                "BROCHURES",
+                "VIDEOS",
+                "ENTIRE RANGE"
+            ]
+        },
+        {
+            "name": "AIR COOLERS",
+            "subcategories": [
+                "EXPLORE",
+                "EXPLORE",
+                "Aura Duo",
+                "Aura Neo",
+                "Maxima",
+                "Ultima",
+                "Mega",
+                "EXPLORE",
+                "Astra",
+                "EXPLORE",
+                "Fabia",
+                "EXPLORE",
+                "Premia",
+                "BROCHURE",
+                "ENTIRE RANGE"
+            ]
+        },
+        {
+            "name": "REFRIGERATION",
+            "subcategories": [
+                "EXPLORE",
+                "EXPLORE",
+                "Hard Top",
+                "Glass Top",
+                "EXPLORE",
+                "Floor Standing",
+                "Table Top",
+                "EXPLORE",
+                "Floor Standing",
+                "Table Top",
+                "MINI BAR",
+                "BROCHURES",
+                "ENTIRE RANGE"
+            ]
+        },
+        {
+            "name": "OFFERS",
+            "subcategories": [
+                "End Of Season Sale",
+                "Corporate Offers",
+                "Smart Sale",
+                "Heavy Duty Sale"
+            ]
+        },
+        {
+            "name": "SERVICE",
+            "subcategories": [
+                "EXPLORE",
+                "Service",
+                "Warranty Terms & Conditions",
+                "Annual Maintenance Contracts",
+                "FAQs",
+                "DIY Videos",
+                "Smart Wi-Fi App"
+            ]
+        },
+        {
+            "name": "EXPLORE",
+            "subcategories": [
+                "EXPLORE",
+                "About Us",
+                "Corporate Website",
+                "Dealer Locations",
+                "BEE Star Rating Standards",
+                "Sustainability",
+                "GST NOTICE"
+            ]
+        }
+    ]
+}

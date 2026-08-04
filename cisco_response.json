@@ -1,0 +1,208 @@
+{
+    "success": true,
+    "message": "SUCCESS",
+    "data": [
+        {
+            "site_name": "RSK NET IT CONSULTING PVT LTD",
+            "language_cd": "EN",
+            "industry_keywords": null,
+            "keyword_id": null,
+            "partner_name": "RSK NET IT CONSULTING PVT LTD",
+            "site_id": 4049052,
+            "be_geo_id": 787824,
+            "keyword_ids": "^136561069^,^136817549^,^136870426^,^137066767^,,,",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "RSK Net IT Consulting Pvt Ltd is an organization with many people of experience who are working towards development and implementation of Various Information Technology solutions. Our biggest competitive edges over any of our competitor is our solutions. We have been able to create first-rate solutions by combining technology with the requests from our users and business partners. Our Solutions are under constant development to meet the changing needs of our customers and to stay ahead of the strong pace of technology. Many years of extensive experience of technology professional is reflected in Solutions and services",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": []
+        },
+        {
+            "site_name": "JOVO XPLORATION PRIVATE LTD",
+            "language_cd": "EN",
+            "industry_keywords": "Government",
+            "keyword_id": null,
+            "partner_name": "JOVO XPLORATION PRIVATE LTD",
+            "site_id": 3775534,
+            "be_geo_id": 731808,
+            "keyword_ids": "^136561069^,^136870426^,^136958099^,^137061565^,^136025192^,,^135766823^",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "JOVO is a security tech startup, which is dealing in to the network and cyber security related services and solutions",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": [
+                {
+                    "keyword_subtext": "Coll_Five",
+                    "category_display_name": "PORTFOLIO",
+                    "category_display_sort_order": "3",
+                    "keyword_display_name": "Collaboration Partner"
+                }
+            ]
+        },
+        {
+            "site_name": "EXORDIOR INFOTECH INDIA PVT LTD",
+            "language_cd": "EN",
+            "industry_keywords": "Manufacturing,Professional Services",
+            "keyword_id": null,
+            "partner_name": "Exordior Infotech India Pvt Ltd",
+            "site_id": 3874396,
+            "be_geo_id": 751497,
+            "keyword_ids": "^136561069^,^136817549^,^136870426^,^136955155^,^136025190^,^136025195^,,^135766823^,^135766825^",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "Exordior is System Integrator supporting Data Centre and enterprise customers across APAC region",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": []
+        },
+        {
+            "site_name": "RALCO SYNERGY PVT LTD",
+            "language_cd": "EN",
+            "industry_keywords": null,
+            "keyword_id": null,
+            "partner_name": "RALCO SYNERGY PRIVATE LTD",
+            "site_id": 3910228,
+            "be_geo_id": 759466,
+            "keyword_ids": "^136561069^,^136871176^,^137064661^,,,",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "Incorporated in 1994, Ralco synergy Private Ltd started with an office in Bangalore. Since then we have grown across India with offices in seven locations and close to 150 employees. Having a strong database of 300+ corporate customer and proven service record, Ralco synergy is today the leading corporate sales and rental solution provider of technology equipment to clients on a long and short term basis. Our clients are all the major software and corporate companies. Products include servers, laptops, desktops, routers, switches, printers and projectors. Apart from rentals, Ralco synergy is a major independent distributor of computer components and semiconductos through its reseller partners and 6 branch offices across India.",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": []
+        },
+        {
+            "site_name": "AVUETECH INDIA PVT LTD",
+            "language_cd": "EN",
+            "industry_keywords": null,
+            "keyword_id": null,
+            "partner_name": "AVUETECH INDIA PVT LTD",
+            "site_id": 4139283,
+            "be_geo_id": 806274,
+            "keyword_ids": "^136561069^,^136815797^,^136871200^,^137054088^,,,",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "End to End Technical Strength and Knowledge in emerging IT landscape; Maintain Transparency with Business partner.",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": []
+        },
+        {
+            "site_name": "IP CONNECT",
+            "language_cd": "EN",
+            "industry_keywords": "Manufacturing",
+            "keyword_id": null,
+            "partner_name": "IP CONNECT",
+            "site_id": 4030904,
+            "be_geo_id": 784447,
+            "keyword_ids": "^136561069^,^136871176^,^136988272^,^136025195^,,^135766826^",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "At IP Connect, we accelerate Customers Business Transformation Journey through our competence in Consulting, Integration and Security, delivering Next-Gen Digital Infrastructure Technologies, Solutions and Services.",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": []
+        },
+        {
+            "site_name": "WISTRIZ TECHNOLOGIES PRIVATE LTD",
+            "language_cd": "EN",
+            "industry_keywords": null,
+            "keyword_id": null,
+            "partner_name": "WISTRIZ TECHNOLOGIES PRIVATE LTD",
+            "site_id": 4114963,
+            "be_geo_id": 801641,
+            "keyword_ids": "^136561069^,^136871195^,^137011296^,^137012355^,,,",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "Wistriz Technologies Private Limited began its journey Dec 2023 in Chennai and Jayamkondacholapuram \u2013 Tamil Nadu, India. We focus on delivering high value to customers through integrated, reliable, responsive, and cost-effective solutions. We have been a reliable partner to several small, medium, and larger companies for enabling their businesses and overcome critical business challenges. Wistriz Technologies is an ISO 27001:2022 Certified Company.",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": []
+        },
+        {
+            "site_name": "ARSHAN INFO SYSTEM PVT LTD",
+            "language_cd": "EN",
+            "industry_keywords": null,
+            "keyword_id": null,
+            "partner_name": "Arshan Info System Pvt Ltd",
+            "site_id": 3988484,
+            "be_geo_id": 774755,
+            "keyword_ids": "^136561069^,^136817549^,^136827787^,^136870426^,^136933948^,,,^135766823^",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "Deals in Server,Storage,Network Devices,Desktop,Laptop & Printers",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": [
+                {
+                    "keyword_subtext": "SELECT",
+                    "category_display_name": "Integrator Level",
+                    "category_display_sort_order": "1",
+                    "keyword_display_name": "Legacy Select Integrator"
+                }
+            ]
+        },
+        {
+            "site_name": "QUBIX TECH PRIVATE LTD",
+            "language_cd": "EN",
+            "industry_keywords": "Professional Services",
+            "keyword_id": null,
+            "partner_name": "QUBIX TECH PRIVATE LTD",
+            "site_id": 4106972,
+            "be_geo_id": 799520,
+            "keyword_ids": "^136561069^,^136827787^,^136871176^,^137078547^,^136025190^,,^135766823^,^135766826^",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "We Design, Build & Support Audio Visual , Lighting and IT Infrastructure for Living, Working, and Public Spaces.",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": [
+                {
+                    "keyword_subtext": "SELECT",
+                    "category_display_name": "Integrator Level",
+                    "category_display_sort_order": "1",
+                    "keyword_display_name": "Legacy Select Integrator"
+                }
+            ]
+        },
+        {
+            "site_name": "ASWINI DIGITECH",
+            "language_cd": "EN",
+            "industry_keywords": null,
+            "keyword_id": null,
+            "partner_name": "ASWINI DIGITECH",
+            "site_id": 4130469,
+            "be_geo_id": 804690,
+            "keyword_ids": "^136561069^,^136871176^,^137047179^,,,",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "We are proud partners of leading global brands, ensuring our clients benefit from the latest and most reliable technologies. Our partnerships include:\nOur esteemed partnerships include:\n\u2022\tHP Inc.\n\u2022\tHewlett Packard Enterprise (HPE)\n\u2022\tLG Electronics\n\u2022\tSamsung\n\u2022\tYamaha\n\u2022\tChristie\n\u2022\tHFCL Limited\n\u2022\tPanasonic\n\u2022\tPhilips\n\u2022\tBenQ\n\u2022\tAcer\n\u2022\tVoltas\n\u2022\tAPC\n\u2022\tLogitech\n\u2022\tSony\n\u2022\tEloam\n\u2022\tTVSe\n\u2022\tMantra\n\u2022\tMicrosoft\n\u2022\tRedhat\n\u2022\tOracle\n\u2022\tSophos\n\u2022\tFortinet\n\u2022\tNumeric\n\u2022\tLegrand\n\u2022\tEpson\n\u2022\tCanon\n\u2022\tTeachmint\n\u2022\tElecdes\n\u2022\tPaneldes",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": []
+        },
+        {
+            "site_name": "BHARUWA SOLUTIONS PRIVATE LTD",
+            "language_cd": "EN",
+            "industry_keywords": null,
+            "keyword_id": null,
+            "partner_name": "BHARUWA SOLUTIONS PRIVATE LTD",
+            "site_id": 4159269,
+            "be_geo_id": 809913,
+            "keyword_ids": "^136561069^,^136817549^,^136870426^,^137073335^,,,",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "Bharuwa Solutions Private Limited is an Indian private limited company engaged in the Information Technology / Software / Digital Transformation / Enterprise Solutions domain. The company provides technology-driven business solutions across multiple sectors, with a focus on software development, enterprise applications, IT infrastructure integration, automation, and digital transformation services.\n\nThe company has established itself as a growing technology organization with experience in handling government, enterprise, institutional, and large-scale digital solution requirements, and is actively participating in various public sector and enterprise projects across India.",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": []
+        },
+        {
+            "site_name": "PYROTECH ELECTRONICS PVT LTD",
+            "language_cd": "EN",
+            "industry_keywords": null,
+            "keyword_id": null,
+            "partner_name": "Pyrotech Electronics Pvt Ltd",
+            "site_id": 3936713,
+            "be_geo_id": 767247,
+            "keyword_ids": "^136561069^,^136815801^,^136871190^,^137064980^,,,",
+            "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+            "note_text": "Our quality products are manufactured with latest machinery in our 40000 sq.ft. modern facility. We have 3 SMT lines (FUJI, JUKI, SAMSUNG) for fast, accurate and reliable production of the products. These machines have capacity of mounting more than 50000 components/hr.\n\nAll our products qualify as per international test standards (LM 79, IEC60598, IS10322, IP65)",
+            "technology_keywords": null,
+            "location_keyword_ids": "136561069",
+            "qualifications": []
+        }
+    ],
+    "matches": 2429
+}

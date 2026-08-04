@@ -1,0 +1,1813 @@
+{
+  "success": true,
+  "message": "SUCCESS",
+  "data": [
+    {
+      "site_name": "AIGENZCOMMUNICATION & SERVICES",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "AIGENZCOMMUNICATION & SERVICES",
+      "site_id": 4019235,
+      "be_geo_id": 782335,
+      "keyword_ids": "^136560941^,^136931058^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Aigenz Communication & Services is a diverse professional undertaking encompassing the modern Technologies and optimizing customer requirements in a viable solution",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "ADVANCED INFORMATION SECURITY SOLUTIONS",
+      "language_cd": "EN",
+      "industry_keywords": "Energy/Utilities,Manufacturing",
+      "keyword_id": null,
+      "partner_name": "AISS Qatar",
+      "site_id": 3903836,
+      "be_geo_id": 716012,
+      "keyword_ids": "^136560941^,^136963840^,^137020234^,^136025195^,^136025202^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "AISS is a leading Master System Integrator",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "AlFuttaim Technologies - Qatar",
+      "language_cd": "EN",
+      "industry_keywords": "Energy/Utilities,Financial Services,Government,Professional Services,Retail,Transportation,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "al futtaim",
+      "site_id": 3873270,
+      "be_geo_id": 430265,
+      "keyword_ids": "^136560941^,^136827784^,^136869579^,^136870158^,^137061567^,^137061578^,^136025189^,^136025190^,^136025192^,^136025196^,^136025198^,^136025199^,^136025202^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=gold||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE=Customer||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "System Integrator",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "GOLD",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Gold Integrator"
+        },
+        {
+          "keyword_subtext": "COMCERT",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "Buying Models Commerce Certification"
+        },
+        {
+          "keyword_subtext": "Net_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Networking Partner"
+        },
+        {
+          "keyword_subtext": "XDRSPEC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Extended Detection and Response Competency"
+        }
+      ]
+    },
+    {
+      "site_name": "AL KAUN TELECOMS",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "AL KAUN TELECOMS",
+      "site_id": 3133037,
+      "be_geo_id": 602865,
+      "keyword_ids": "^136560941^,^137012536^,,,^135766823^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Al-Kaun Telecom is an ICT Certified service provider established in Qatar as a telecommunication solutions provider. Al-Kaun Telecom has been always keen to develop and deliver excellent business solutions aiming to increase end-use revenue, enhance satisfaction, and provide a real competitive edge for its customers. Al-Kaun Telecom\u2019s turnkey solutions deliver voice, data, video, and other applications to diverse business fields and industry sectors.\n\nAl-Kaun is a leading provider of IT & Telecom Infrastructure. We provide end to end services in deployment of Fiber Optic Networks (Activities in OSP (Outside Plant) and ISP (Inside Plant)), FTTx solutions, Copper networks, Wireless & Broadband networks & Unified Communications.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "ALMANA COMPUTER SERVICES  ACS",
+      "language_cd": "EN",
+      "industry_keywords": "Government,Manufacturing,Transportation",
+      "keyword_id": null,
+      "partner_name": "AL-MANA C0MPUTER SERVICES (ACS)",
+      "site_id": 2531368,
+      "be_geo_id": 472056,
+      "keyword_ids": "^136560941^,^136827787^,^136960458^,^136025192^,^136025195^,^136025199^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Established as a trading house in 1960, Almana Group has evolved into one of Qatar\u2019s leading business enterprises, growing with and contributing to the meteoric development of Qatar. Today, the Group\u2019s business activities encompass a spectrum of industries and a portfolio that includes several internationally acclaimed companies .",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "ALFA ROYAL TRADING WLL",
+      "language_cd": "EN",
+      "industry_keywords": "Education,Government,Professional Services",
+      "keyword_id": null,
+      "partner_name": "ALFA ROYAL TRADING WLL",
+      "site_id": 4112497,
+      "be_geo_id": 794739,
+      "keyword_ids": "^136560941^,^137004970^,^136025190^,^136025191^,^136025192^,,^135766823^,^135766824^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Alfa Royal is a leading provider of ICT solutions, sales, and services across the Middle East and Africa. With years of experience, we have built a reputation for delivering exceptional services that meet the evolving needs of businesses in these regions.\n\nOur strong partnerships with top global technology brands allow us to offer innovative, tailored solutions that align with your unique business objectives. Whether it\u2019s hardware, software, or electronic products, we are dedicated to helping you achieve your goals with expertise and high-quality service.\n\nOur mission is to ensure a seamless and hassle-free IT experience for our clients. By collaborating with major technology vendors, we maintain a strong focus on cost efficiency and providing the right solutions to fit your needs.\n\nAt Alfa Royal, we believe in asking the right questions today to ensure the technology we provide empowers your business tomorrow. This proactive approach helps us build lasting IT partnerships that foster growth, innovation, and",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "ALI BIN ALI TECHNOLOGY SOLUTIONS",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "ALI BIN ALI TECHNOLOGY SOLUTIONS",
+      "site_id": 3873426,
+      "be_geo_id": 751182,
+      "keyword_ids": "^136560941^,^137044446^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "AliBinAli Technology Solutions (ABATS) is a division  of AliBinAli Holding Group.\n\nAbats is responsible of providing outsource, managed services and IT solutions in IT, OT and Cybersecurity domains.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "ALM Data Systems",
+      "language_cd": "EN",
+      "industry_keywords": "Education,Government,Manufacturing,Professional Services,Retail,Technical Services,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "ALM Data Systems",
+      "site_id": 4060911,
+      "be_geo_id": 686365,
+      "keyword_ids": "^136560941^,^136827784^,^136870150^,^136870158^,^137061562^,^137061565^,^137061566^,^137061569^,^137061571^,^137061577^,^137061578^,^137061579^,^137062287^,^137062518^,^137067608^,^136025190^,^136025191^,^136025192^,^136025194^,^136025195^,^136025196^,^136025198^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=gold||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE=Customer||PROVIDER_BADGE=managed services practice maturity basic||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "ALM is a leading global technology service company that started its operations in the middle east region in 2009 headquartered in Doha, (QATAR), and operates in UAE, BAHRAIN, SAUDI ARABIA, and INDIA. It is supported by a dedicated resource pool of 1000+ professionals.\n\nALM provides all customers the most efficient and competitive solutions to achieve their business goals through our intelligent technology solutions. Our global expertise, assets, and integrated ICT capabilities provide unique offerings in Networking, Datacenter, Mobility, Digital Transformation, Collaboration, and Cybersecurity.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "GOLD",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Gold Integrator"
+        },
+        {
+          "keyword_subtext": "SEC_ELA",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Security Enterprise Licensing Agreement 1.0"
+        },
+        {
+          "keyword_subtext": "COMCERT",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "Buying Models Commerce Certification"
+        },
+        {
+          "keyword_subtext": "DCAI_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Cloud and AI Infrastructure Partner"
+        },
+        {
+          "keyword_subtext": "Coll_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Collaboration Partner"
+        },
+        {
+          "keyword_subtext": "Net_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Networking Partner"
+        },
+        {
+          "keyword_subtext": "Sec_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Security Partner"
+        },
+        {
+          "keyword_subtext": "Serv_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Services Partner"
+        },
+        {
+          "keyword_subtext": "EVSTNSPC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Environmental Sustainability Business Practice"
+        },
+        {
+          "keyword_subtext": "XDRSPEC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Extended Detection and Response Competency"
+        },
+        {
+          "keyword_subtext": "SECNETSPC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Secure Enterprise Infrastructure Competency"
+        },
+        {
+          "keyword_subtext": "CPCA FY22",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "PCA Anti-Corruption and 3rd party controls meet requirements"
+        },
+        {
+          "keyword_subtext": "MS_L3",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        }
+      ]
+    },
+    {
+      "site_name": "Almoayed Data Group",
+      "language_cd": "EN",
+      "industry_keywords": "Education,Financial Services,Government,Professional Services,Retail,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "Almoayed Data Group",
+      "site_id": 3852855,
+      "be_geo_id": 89805,
+      "keyword_ids": "^136560941^,^136827784^,^136930095^,^137061565^,^137061567^,^137062518^,^136025189^,^136025190^,^136025191^,^136025192^,^136025196^,^136025198^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=gold||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE=Customer||PROVIDER_BADGE=managed services practice maturity basic||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Almoayed Data Group is the largest private IT & Telecommunications Bahraini Company, with extensive experience in provisioning and deploying all kind of IT, Telecom & Security solutions in Middle East. Almoayed Data Group has the largest footprint of ICT clients in Bahrain. We have a highly skilled team of Cisco certified and specialized engineers to carry out Cisco deployments in the kingdom and elsewhere.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "GOLD",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Gold Integrator"
+        },
+        {
+          "keyword_subtext": "Coll_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Collaboration Partner"
+        },
+        {
+          "keyword_subtext": "Net_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Networking Partner"
+        },
+        {
+          "keyword_subtext": "MS_L3",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        }
+      ]
+    },
+    {
+      "site_name": "Alpha Data PJSC",
+      "language_cd": "EN",
+      "industry_keywords": "Education,Energy/Utilities,Financial Services,Government,Healthcare,Hospitality,Manufacturing,Media & Entertainment,Professional Services,Retail,Service Provider,Technical Services,Transportation,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "ALPHA DATA - P.J.S.C",
+      "site_id": 3029921,
+      "be_geo_id": 53803,
+      "keyword_ids": "^136560941^,^136827784^,^136840481^,^136870116^,^136870151^,^136870158^,^136870276^,^137061562^,^137061564^,^137061566^,^137061568^,^137061571^,^137061578^,^137061579^,^137061753^,^137062287^,^137062520^,^137063480^,^137063809^,^137076900^,^136025189^,^136025190^,^136025191^,^136025192^,^136025193^,^136025194^,^136025195^,^136025196^,^136025197^,^136025198^,^136025199^,^136025200^,^136025201^,^136025202^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=gold||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE=Customer||PROVIDER_BADGE=managed services practice maturity expert||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Alpha Data is a leading system integrator in the Middle East. Established in 1981, the company has evolved from an initial team of just two employees to a 900-strong workforce building ICT infrastructure solutions for thousands of organizations. The company, which is BS EN ISO 27001:2013 & ISO 9001:2008 management standard certified, works with its clients through a combination of deep-level business and technical expertise, an extensive knowledge of today\u2019s technologies, and a mature and highly capable delivery and services infrastructure\u2013reinforcing Alpha Data\u2019s leading position among IT companies in the UAE. Alpha Data is renowned for bringing a number of new technologies first to the local market.\n\nAlpha Data has established strong industry ties, with the highest level of accreditation achieved with HP, Juniper, Cisco, Belden and Microsoft Partner in addition to an eco-system of complementary vendors. This enables Alpha Data to deliver a breadth of best-of-breed solutions to its customers through our teams of pre-sales, post sales, project implementation and support experts.\n\nThe company has become a highly preferred IT service provider of choice with its diverse portfolio of offerings, which includes new technologies that encompass the Internet of Things (IoT), mobility, security, big data and the cloud\u2014all designed to help customers improve processes, reduce data centre and infrastructure costs, manage risk and governance and enhance top-line revenue",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "GOLD",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Gold Integrator"
+        },
+        {
+          "keyword_subtext": "ATTAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Accelerated TelePresence Try And Buy"
+        },
+        {
+          "keyword_subtext": "TAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Regular Try And Buy"
+        },
+        {
+          "keyword_subtext": "COMCERT",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "Buying Models Commerce Certification"
+        },
+        {
+          "keyword_subtext": "CP_CMA",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Meraki Access"
+        },
+        {
+          "keyword_subtext": "DCAI_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Cloud and AI Infrastructure Partner"
+        },
+        {
+          "keyword_subtext": "Coll_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Collaboration Partner"
+        },
+        {
+          "keyword_subtext": "Net_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Networking Partner"
+        },
+        {
+          "keyword_subtext": "Sec_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Security Partner"
+        },
+        {
+          "keyword_subtext": "Serv_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Services Partner"
+        },
+        {
+          "keyword_subtext": "XDRSPEC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Extended Detection and Response Competency"
+        },
+        {
+          "keyword_subtext": "SECNETSPC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Secure Enterprise Infrastructure Competency"
+        },
+        {
+          "keyword_subtext": "CP_WBCC",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Webex Contact Center"
+        },
+        {
+          "keyword_subtext": "CPCA FY22",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "PCA Anti-Corruption and 3rd party controls meet requirements"
+        },
+        {
+          "keyword_subtext": "MS_L1",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        },
+        {
+          "keyword_subtext": "WXCPARTNER",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "Webex Calling Partner"
+        },
+        {
+          "keyword_subtext": "CP_Call",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Cloud Calling"
+        },
+        {
+          "keyword_subtext": "CJP-AUTH",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Webex Contact Center Authorization"
+        }
+      ]
+    },
+    {
+      "site_name": "ALPHA LINK TECHNOLOGY",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "Alpha Link Technology",
+      "site_id": 3835840,
+      "be_geo_id": 740356,
+      "keyword_ids": "^136560941^,^137066428^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "We Alpha link Technology offer solutions for optical transport network including SDH, OTN, MPLS-TP, CWDM & DWDM 100Gig solutions, microwave network, WiMax network, safety and security subsystems. For network service providers (NSPs) we provide tools and solutions to verify adherence to specs, functionality, capacity, interoperability, quality of experience (QoE) and quality of service (QoS) for their IP, TDM and Mobile networks including VoLTE.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "ATOS",
+      "language_cd": "EN",
+      "industry_keywords": "Manufacturing",
+      "keyword_id": null,
+      "partner_name": "ATOS ORIGIN",
+      "site_id": 3864219,
+      "be_geo_id": 748736,
+      "keyword_ids": "^136560941^,^136870151^,^136870154^,^136870249^,^136870271^,^136870273^,^136870276^,^136930190^,^137061567^,^137062520^,^137063809^,^137064560^,^136025195^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE=managed services practice maturity expert||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Atos is a global leader in digital transformation with over 110,000 employees in 73 countries and annual revenue of over \u20ac 12 billion. European number one in Cloud, Cybersecurity and High-Performance Computing, the Group provides end-to-end Orchestrated Hybrid Cloud, Big Data, Business Applications and Digital Workplace solutions. The group is the Worldwide Information Technology Partner for the Olympic & Paralympic Games and operates under the brands Atos, Atos Syntel, and Unify. Atos is a SE (Societas Europaea), listed on the CAC40 Paris stock index. The purpose of Atos is to help design the future of the information technology space. Its expertise and services support the development of knowledge, education as well as multicultural and pluralistic approaches to research that contribute to scientific and technological excellence. Across the world, the group enables its customers, employees and collaborators, and members of societies at large to live, work and develop sustainably and confidently in the information technology.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "TAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Regular Try And Buy"
+        },
+        {
+          "keyword_subtext": "UCATAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "UCS Capacity Assurance-Try and Buy"
+        },
+        {
+          "keyword_subtext": "CP_CCAMCP",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Hybrid Cloud"
+        },
+        {
+          "keyword_subtext": "CP_MSD",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Meraki Security & SD-WAN"
+        },
+        {
+          "keyword_subtext": "CP_SA",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Campus Access"
+        },
+        {
+          "keyword_subtext": "CP_CMA",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Meraki Access"
+        },
+        {
+          "keyword_subtext": "CP_MF",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Firewall"
+        },
+        {
+          "keyword_subtext": "Net_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Networking Partner"
+        },
+        {
+          "keyword_subtext": "MS_L1",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        },
+        {
+          "keyword_subtext": "CP_Call",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Cloud Calling"
+        }
+      ]
+    },
+    {
+      "site_name": "Bayanat Engineering Qatar LLC",
+      "language_cd": "EN",
+      "industry_keywords": "Transportation",
+      "keyword_id": null,
+      "partner_name": "BAYANAT AIRPORTS",
+      "site_id": 3538943,
+      "be_geo_id": 468975,
+      "keyword_ids": "^136560941^,^136827787^,^136829188^,^136025199^,,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Founded in 1982, Bayanat Airports Engineering & Supplies (BAES) is a leading company in the United Arab Emirates and Gulf Region focusing on Aviation Technologies and execution of Turnkey Airport projects.\nBAES\u2019 aim is always to provide and achieve the highest standards of engineering, contracting, support and consultancy services.\nWith main offices in Abu Dhabi and Dubai, BAES has the ability to execute different projects throughout the Gulf Region and to provide customers with state-of-the-art networking and communication equipment and the best of engineering services with prompt schedules. \n\nIt is with this goal in mind that BAES has built a talented team of skilled engineers, trained on the latest hardware and software technologies from leading companies from all around the world.The BAES project portfolio includes several large size projects implementation (Dubai Int\u2019l Airport, Dubai World Central Int\u2019l Airport, Abu Dhabi Int\u2019l Airport, Al-Ain Airport, Fujairah Int\u2019l Airport, Doha Int\u2019l Airport and UAE Air Force).\n\nWe have built our reputation on a record of quality, dependability and exceptional customer service. Due to our commitment to uncompromising performance, today we are a Best Practices integrator company which supports federal, local, commercial, over a global client base distributed in the Arabian Peninsula. We also employ a quality management system, and our company is a fully ISO (9001:2008) accredited organization by TUV.\n\nBAYANAT AIRPORTS\u2019 major assets are the skills and dedication of its staff, the support of its international partners and the continuous satisfaction of its customers. BAES has a dedicated CNE project team consisting of Trained and certified Project Managers and Engineers with extensive experience in installing and maintaining networking and systems in various Airports/ Air Bases in the region.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "BEST IN GLOBE TRADING & CONTRACTING",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "Best In Globe Trading & Contracting WLL",
+      "site_id": 3662794,
+      "be_geo_id": 639371,
+      "keyword_ids": "^136560941^,^136953897^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "BEST IN GLOBE TRADING & CONTRACTING W.L.L is one of the leading system integrators in Qatar with a fast growing client base and reputation for quality and deliverance.\n\nEstablished in 2013, Best in Globe has extensive experience working with Oil & Gas, Corporate,Health Care, Entertainment & Hospitality.\n\nSingle Window for Integration:\n\nThe uniqueness of BIG Trading & Contracting is that it offers a single window solution for all your requirements. Your requirement may need different systems from different vendors employing unrelated technologies. You can find all your office systems work together through our thoughtful integration process and it fetches bunch of benefits to your company.\n\nResources:\n\nBIG Trading & contracting comprising of highly skilled engineers with industry wide experience, can contribute to achieving high quality and affordable solutions. They excel in various commitments like Engineering design, System Integration, Installation, Technical Support and Operation & Maintenance.\n\nLogistics:\n\nShortest Delivery Time and High Quality of Service in every moment is our aspiration.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "BLACK ARROW INTEGRATED TECHNOLOGY SERVICES WLL",
+      "language_cd": "EN",
+      "industry_keywords": "Energy/Utilities",
+      "keyword_id": null,
+      "partner_name": "BLACK ARROW",
+      "site_id": 2902235,
+      "be_geo_id": 551344,
+      "keyword_ids": "^136560941^,^136827787^,^136872376^,^136025202^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "SYSTEM INTEGRATOR",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "BT Global Services (North Gulf) LLC",
+      "language_cd": "EN",
+      "industry_keywords": "Energy/Utilities,Financial Services,Government,Manufacturing,Retail,Technical Services,Transportation,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "BT UAE LTD DUBAI BRANCH",
+      "site_id": 3501574,
+      "be_geo_id": 62684,
+      "keyword_ids": "^136560941^,^136827783^,^136855760^,^136870073^,^136870151^,^136870254^,^136870260^,^136870269^,^136870273^,^136870276^,^136899544^,^136930190^,^137061563^,^137061565^,^137061567^,^137061569^,^137061753^,^137062520^,^137063809^,^136025189^,^136025192^,^136025194^,^136025195^,^136025196^,^136025198^,^136025199^,^136025202^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE=Global_Gold||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE=managed services practice maturity expert||DEVELOPER_BADGE=select ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "BT is a market leader in serving global multinational organisations around the world with our security, cloud and networking services.\n\nWe can help your organisation to move to the cloud; turn collaboration into part of your culture; improve your contact centres; transform your customer service and deliver a dynamic network solution.  All with security built-in, not bolted on.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "GLBL_GOLD",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Global Partner Program"
+        },
+        {
+          "keyword_subtext": "DEV-SELECT",
+          "category_display_name": "Authorizations",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Select Developer"
+        },
+        {
+          "keyword_subtext": "TAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Regular Try And Buy"
+        },
+        {
+          "keyword_subtext": "MP_BC",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Business Communications"
+        },
+        {
+          "keyword_subtext": "MP_UCC",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Unified Contact Center"
+        },
+        {
+          "keyword_subtext": "CP_SDWAN",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Catalyst SD-WAN"
+        },
+        {
+          "keyword_subtext": "CP_SA",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Campus Access"
+        },
+        {
+          "keyword_subtext": "CP_CMA",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Meraki Access"
+        },
+        {
+          "keyword_subtext": "EA3XARCH",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "EA 3.0 All Technology"
+        },
+        {
+          "keyword_subtext": "CP_MF",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Firewall"
+        },
+        {
+          "keyword_subtext": "DCAI_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Cloud and AI Infrastructure Partner"
+        },
+        {
+          "keyword_subtext": "Coll_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Collaboration Partner"
+        },
+        {
+          "keyword_subtext": "Net_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Networking Partner"
+        },
+        {
+          "keyword_subtext": "Sec_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Security Partner"
+        },
+        {
+          "keyword_subtext": "CP_WBCC",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Webex Contact Center"
+        },
+        {
+          "keyword_subtext": "MS_L1",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        },
+        {
+          "keyword_subtext": "CP_Call",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Cloud Calling"
+        }
+      ]
+    },
+    {
+      "site_name": "CADD EMIRATES WLL",
+      "language_cd": "EN",
+      "industry_keywords": "Education,Energy/Utilities,Financial Services,Government,Healthcare,Hospitality,Manufacturing,Professional Services,Retail,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "CADD EMIRATES COMPUTER TRADING LLC",
+      "site_id": 3088927,
+      "be_geo_id": 110684,
+      "keyword_ids": "^136560941^,^136827787^,^136828601^,^136870158^,^137061565^,^136025189^,^136025190^,^136025191^,^136025192^,^136025195^,^136025196^,^136025197^,^136025198^,^136025201^,^136025202^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Total IT Solutions Provider",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        },
+        {
+          "keyword_subtext": "COMCERT",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "Buying Models Commerce Certification"
+        },
+        {
+          "keyword_subtext": "Coll_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Collaboration Partner"
+        }
+      ]
+    },
+    {
+      "site_name": "CEGELEC QATAR",
+      "language_cd": "EN",
+      "industry_keywords": "Energy/Utilities,Technical Services",
+      "keyword_id": null,
+      "partner_name": "CEGELEC QATAR",
+      "site_id": 3752350,
+      "be_geo_id": 727246,
+      "keyword_ids": "^136560941^,^136827787^,^136839421^,^136870116^,^136870151^,^136870154^,^137061567^,^137061570^,^137062520^,^137063809^,^136025194^,^136025202^,,^135766823^,^135766824^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE=managed services practice maturity expert||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Cegelec Qatar part of VINCI Energies two axes business lines ICT under Axians Brand and Industrial Solutions under Actemium Brand",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        },
+        {
+          "keyword_subtext": "ATTAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Accelerated TelePresence Try And Buy"
+        },
+        {
+          "keyword_subtext": "TAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Regular Try And Buy"
+        },
+        {
+          "keyword_subtext": "UCATAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "UCS Capacity Assurance-Try and Buy"
+        },
+        {
+          "keyword_subtext": "Net_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Networking Partner"
+        },
+        {
+          "keyword_subtext": "Serv_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Services Partner"
+        },
+        {
+          "keyword_subtext": "MS_L1",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        },
+        {
+          "keyword_subtext": "CP_Call",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Cloud Calling"
+        }
+      ]
+    },
+    {
+      "site_name": "City Technlogy",
+      "language_cd": "EN",
+      "industry_keywords": "Government",
+      "keyword_id": null,
+      "partner_name": "City Technlogy",
+      "site_id": 4004272,
+      "be_geo_id": 778606,
+      "keyword_ids": "^136560941^,^137002620^,^136025192^,,^135766823^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "IT Service Provider",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "CLEOPATRA TECHNOLOGY WLL",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "CLEOPATRA TECHNOLOGY W.L.L",
+      "site_id": 2636770,
+      "be_geo_id": 445705,
+      "keyword_ids": "^136560941^,^136827787^,^136846297^,,,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "System integrator.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "COMPUTER ARABIA",
+      "language_cd": "EN",
+      "industry_keywords": "Energy/Utilities,Professional Services,Retail",
+      "keyword_id": null,
+      "partner_name": "Computer Arabia",
+      "site_id": 2575285,
+      "be_geo_id": 107414,
+      "keyword_ids": "^136560941^,^136827787^,^136829176^,^136025190^,^136025196^,^136025202^,,^135766823^,^135766824^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "IT company",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "EPORTAL COMPANY",
+      "language_cd": "EN",
+      "industry_keywords": "Energy/Utilities,Financial Services,Manufacturing,Professional Services,Technical Services",
+      "keyword_id": null,
+      "partner_name": "COMPUTER DATA NETWORKS W L L",
+      "site_id": 2256251,
+      "be_geo_id": 2524,
+      "keyword_ids": "^136560941^,^136827784^,^136856033^,^136870150^,^137061565^,^137061567^,^137061569^,^137061571^,^137062518^,^136025189^,^136025190^,^136025194^,^136025195^,^136025202^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=gold||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE=Customer||PROVIDER_BADGE=managed services practice maturity basic||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Computer Data Networks is a member of the ePortal Holding group. CDN is a leading regional Systems Integrator specializing in Smart Buildings & Cities, Converged & Unified Communications, Data & Physical Security and Data Center technologies. CDN operates from offices in Kuwait, United Arab Emirates, Qatar, Bahrain and Iraq. Operating since 1983, CDN has well over two thousand satisifed regional customers.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "GOLD",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Gold Integrator"
+        },
+        {
+          "keyword_subtext": "SEC_ELA",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Security Enterprise Licensing Agreement 1.0"
+        },
+        {
+          "keyword_subtext": "Coll_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Collaboration Partner"
+        },
+        {
+          "keyword_subtext": "Net_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Networking Partner"
+        },
+        {
+          "keyword_subtext": "Sec_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Security Partner"
+        },
+        {
+          "keyword_subtext": "Serv_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Services Partner"
+        },
+        {
+          "keyword_subtext": "MS_L3",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        }
+      ]
+    },
+    {
+      "site_name": "CONSOLIDATED ENGINEERING SYSTEMS COMPANY",
+      "language_cd": "EN",
+      "industry_keywords": "Government",
+      "keyword_id": null,
+      "partner_name": "Consolidated Engineering Systems Co.",
+      "site_id": 3842118,
+      "be_geo_id": 742414,
+      "keyword_ids": "^136560941^,^136960303^,^136025192^,,^135766823^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Consolidated Engineering Systems Co. is part of Estithmar Holding Q.P.S.C. The Group Companies' roots started under Trelco Co. in the 1970s. \nCESCO is specialized in Low Current Systems associated with Commercial/ Residential Complexes Industrial Plants and Military Establishments. It also specializes in Lighting and Electrical installation material for different applications.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "CORVIT NETWORKS",
+      "language_cd": "EN",
+      "industry_keywords": "Manufacturing,Media & Entertainment,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "Corvit Networks",
+      "site_id": 3093665,
+      "be_geo_id": 592565,
+      "keyword_ids": "^136560941^,^136827786^,^136860549^,^136870158^,^137061567^,^136025193^,^136025195^,^136025198^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=premier||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Founded in year 2013 as a supplier of networking products, services, trained human resource and trainings, DicoTech Corvit (a Joint Venture of DicoTech WLL Qatar & Corvit Networks Private Limited) has rapidly evolved into a trusted business technology advisor and strategic partner with solutions spanning the entire spectrum of Information and Communication Technology (ICT). \nWe have been providing IT Services in Pakistan since 2000 & currently operating as a Cisco's Gold partner there.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "PREMIER",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Premier Integrator"
+        },
+        {
+          "keyword_subtext": "COMCERT",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "Buying Models Commerce Certification"
+        },
+        {
+          "keyword_subtext": "Net_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Networking Partner"
+        }
+      ]
+    },
+    {
+      "site_name": "DAR EAST TECHNOLOGY SERVICES",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "DAR EAST TECHNOLOGY SERVICES",
+      "site_id": 4120154,
+      "be_geo_id": 802465,
+      "keyword_ids": "^136560941^,^137015390^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Dar East Technology Services is a Qatar-based system integrator on a mission to drive innovation and digital transformation across the region. We\u2019re currently expanding into three key areas: software development and AI, cybersecurity, and enterprise networking\u2014to better serve the growing needs of government and enterprise clients.\nWe\u2019ve already delivered successful projects in AV, ELV, and IT infrastructure, and we\u2019re now building strategic partnerships and growing our team to take things to the next level.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "DATA PLUS NETWORK SOLUTIONS",
+      "language_cd": "EN",
+      "industry_keywords": "Professional Services,Retail",
+      "keyword_id": null,
+      "partner_name": "Data Plus Network Solutions",
+      "site_id": 3317527,
+      "be_geo_id": 630545,
+      "keyword_ids": "^136560941^,^136827787^,^136868089^,^136025190^,^136025196^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Network Infrastructure Solution Provider",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "DIGITALTRACK SOLUTIONS TRADING WLL",
+      "language_cd": "EN",
+      "industry_keywords": "Manufacturing,Professional Services",
+      "keyword_id": null,
+      "partner_name": "Digital Track Computer Trading LLC",
+      "site_id": 3897921,
+      "be_geo_id": 756355,
+      "keyword_ids": "^136560941^,^136827787^,^136870158^,^136898717^,^136025190^,^136025195^,,^135766823^,^135766824^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "IT System Integrator",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        },
+        {
+          "keyword_subtext": "COMCERT",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "Buying Models Commerce Certification"
+        }
+      ]
+    },
+    {
+      "site_name": "DIMENSION DATA QATAR L.L.C.",
+      "language_cd": "EN",
+      "industry_keywords": "Education,Energy/Utilities,Financial Services,Government,Manufacturing,Media & Entertainment,Professional Services,Retail,Service Provider,Technical Services,Transportation,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "DIMENSION DATA MIDDLE EAST LLC",
+      "site_id": 2873489,
+      "be_geo_id": 66826,
+      "keyword_ids": "^136560941^,^136827783^,^136827785^,^136838717^,^136870116^,^136870150^,^136870151^,^136870154^,^136870249^,^136870254^,^136870269^,^136870271^,^136870273^,^136870276^,^136899544^,^136925651^,^136930190^,^137061562^,^137061564^,^137061566^,^137061568^,^137061570^,^137061753^,^137062520^,^137063809^,^136025189^,^136025190^,^136025191^,^136025192^,^136025193^,^136025194^,^136025195^,^136025196^,^136025198^,^136025199^,^136025200^,^136025202^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE=Global_Gold||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE=managed services practice maturity expert||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Founded in 1983 at the inception of networked communications with a simple vision \u2013 to do great things -  Dimension Data is a specialist IT services and solutions provider that helps clients plan, build, support and manage their IT infrastructures. Today we are positioned at the forefront of networking and communications in nearly 40 countries around the world.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "GLBL_GOLD",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Global Partner Program"
+        },
+        {
+          "keyword_subtext": "MULTINL",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Multinational Certified Partner"
+        },
+        {
+          "keyword_subtext": "ATTAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Accelerated TelePresence Try And Buy"
+        },
+        {
+          "keyword_subtext": "SEC_ELA",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Security Enterprise Licensing Agreement 1.0"
+        },
+        {
+          "keyword_subtext": "TAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Regular Try And Buy"
+        },
+        {
+          "keyword_subtext": "UCATAB",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "UCS Capacity Assurance-Try and Buy"
+        },
+        {
+          "keyword_subtext": "CP_CCAMCP",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Hybrid Cloud"
+        },
+        {
+          "keyword_subtext": "MP_BC",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Business Communications"
+        },
+        {
+          "keyword_subtext": "CP_SDWAN",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Catalyst SD-WAN"
+        },
+        {
+          "keyword_subtext": "CP_MSD",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Meraki Security & SD-WAN"
+        },
+        {
+          "keyword_subtext": "CP_SA",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Campus Access"
+        },
+        {
+          "keyword_subtext": "CP_CMA",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Meraki Access"
+        },
+        {
+          "keyword_subtext": "EA3XARCH",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "EA 3.0 All Technology"
+        },
+        {
+          "keyword_subtext": "CP_FSO",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Observability"
+        },
+        {
+          "keyword_subtext": "CP_MF",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Firewall"
+        },
+        {
+          "keyword_subtext": "DCAI_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Cloud and AI Infrastructure Partner"
+        },
+        {
+          "keyword_subtext": "Coll_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Collaboration Partner"
+        },
+        {
+          "keyword_subtext": "Net_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Networking Partner"
+        },
+        {
+          "keyword_subtext": "Sec_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Security Partner"
+        },
+        {
+          "keyword_subtext": "Serv_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Services Partner"
+        },
+        {
+          "keyword_subtext": "CP_WBCC",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Webex Contact Center"
+        },
+        {
+          "keyword_subtext": "MS_L1",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        },
+        {
+          "keyword_subtext": "CP_Call",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Cloud Calling"
+        }
+      ]
+    },
+    {
+      "site_name": "DIYAR UNITED TRADING AND CONTRACTING COMPANY",
+      "language_cd": "EN",
+      "industry_keywords": "Education,Energy/Utilities,Financial Services,Government,Healthcare,Manufacturing,Media & Entertainment,Professional Services,Retail,Service Provider,Technical Services,Transportation,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "Diyar United trading and contracting company",
+      "site_id": 3431019,
+      "be_geo_id": 3576,
+      "keyword_ids": "^136560941^,^136827784^,^136864357^,^136870073^,^136870158^,^136870254^,^136899537^,^136899542^,^136899543^,^136961448^,^137061562^,^137061565^,^137061566^,^137061568^,^137061571^,^137061578^,^137061579^,^137062287^,^137062519^,^137063260^,^137064818^,^136025189^,^136025190^,^136025191^,^136025192^,^136025193^,^136025194^,^136025195^,^136025196^,^136025197^,^136025198^,^136025199^,^136025200^,^136025202^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=gold||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE=Customer||PROVIDER_BADGE=managed services practice maturity intermediate||DEVELOPER_BADGE=select ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Diyar United Company was founded in 1980 in Kuwait and has established itself as a leading ICT Company in the Middle East renowned for providing excellence in IT services and solutions across all sectors and industries like Government, Oil & Gas, Telecom, Security, Financial & Investment, Education, Transportation and Health.\n\nWe have built our success and reputation through partnering with our esteemed customers.\n\n\nWe work harder so our customers can feel the comfort of Home while our team implements the most demanding mission critical ICT projects.\n\nOur culture and work ethics are built on Home values of openness, transparency and team work.\n\nWe continue to invest in our Home (the Middle East), by Integrating latest Technologies, Innovating in Services and by Implementing Solutions that add value to your business.\n\nEveryone at Diyar is committed to your success and will work hard to earn your trust and partnership.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "GOLD",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Gold Integrator"
+        },
+        {
+          "keyword_subtext": "DEV-SELECT",
+          "category_display_name": "Authorizations",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Select Developer"
+        },
+        {
+          "keyword_subtext": "COMCERT",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "Buying Models Commerce Certification"
+        },
+        {
+          "keyword_subtext": "MP_BC",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Business Communications"
+        },
+        {
+          "keyword_subtext": "EA3DNAMER",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "EA 3.0 DNA and Meraki"
+        },
+        {
+          "keyword_subtext": "EA3VWEBEX",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "EA 3.0 Collaboration and Security"
+        },
+        {
+          "keyword_subtext": "EA3WEBEX",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "EA 3.0 Collaboration"
+        },
+        {
+          "keyword_subtext": "EA3PCANA",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "EA 3.0 Automation and Network Assurance"
+        },
+        {
+          "keyword_subtext": "DCAI_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Cloud and AI Infrastructure Partner"
+        },
+        {
+          "keyword_subtext": "Coll_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Collaboration Partner"
+        },
+        {
+          "keyword_subtext": "Net_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Networking Partner"
+        },
+        {
+          "keyword_subtext": "Sec_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Security Partner"
+        },
+        {
+          "keyword_subtext": "Serv_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Services Partner"
+        },
+        {
+          "keyword_subtext": "XDRSPEC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Extended Detection and Response Competency"
+        },
+        {
+          "keyword_subtext": "SECNETSPC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Secure Enterprise Infrastructure Competency"
+        },
+        {
+          "keyword_subtext": "CPCA FY22",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "PCA Anti-Corruption and 3rd party controls meet requirements"
+        },
+        {
+          "keyword_subtext": "MS_L2",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        },
+        {
+          "keyword_subtext": "IOTIND",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Industrial IOT Competency"
+        },
+        {
+          "keyword_subtext": "SMBMM-BP",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "SMB and Mid-Market Business Practice"
+        }
+      ]
+    },
+    {
+      "site_name": "DLI TECHNOLOGY & INFORMATION SYSTEMS WLL",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "DLI Technology & Information Systems W.L.L",
+      "site_id": 3437791,
+      "be_geo_id": 653381,
+      "keyword_ids": "^136560941^,^136827787^,^137010368^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "DLI Systems are the IT/Security/AV system integrator based in Qatar and doing projects to various private and government sectors like QA, Milaha, CAA, QIA, Al Meera, Ooredoo, etc.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "DYARCO TECHNOLOGY WLL",
+      "language_cd": "EN",
+      "industry_keywords": "Manufacturing",
+      "keyword_id": null,
+      "partner_name": "Dyarco Technology WLL",
+      "site_id": 3932034,
+      "be_geo_id": 765868,
+      "keyword_ids": "^136560941^,^136827787^,^137051418^,^136025195^,,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Dyarco Technology is a recognized leader in Qatar\u2019s IT and ELV industry, with over 17 years of expertise delivering reliable and innovative solutions. Established in 2007, we have grown to become one of the country\u2019s top system integrators, known for our technical excellence and client-focused approach.\n\nWe are a 100% Qatari company owned by Dyarco International Group, part of Al Neama Holdings, one of Qatar\u2019s most prominent private sector business groups.\n\nWe specialize in cost-efficient, advanced technology solutions tailored to the unique needs of our clients. Our services span a wide range of sectors, including governmental and educational institutions, healthcare organizations, hospitality, retail, and other corporate environments.\n\nAt Dyarco Technology, we believe in customization\u2014every solution is tailored to meet specific business requirements, ensuring optimal performance, scalability, and long-term value.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "DYNAMIC SOLUTIONS",
+      "language_cd": "EN",
+      "industry_keywords": "Government",
+      "keyword_id": null,
+      "partner_name": "DYNAMIC SOLUTIONS",
+      "site_id": 2822835,
+      "be_geo_id": 474446,
+      "keyword_ids": "^136560941^,^136827787^,^136835647^,^136025192^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Total ICT Company, based in Bahrain/Qatar/ Saudi Arabia",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "Emerson Process Management Qatar WLL",
+      "language_cd": "EN",
+      "industry_keywords": "Energy/Utilities,Financial Services,Government,Manufacturing,Professional Services",
+      "keyword_id": null,
+      "partner_name": "Emerson",
+      "site_id": 3550118,
+      "be_geo_id": 729560,
+      "keyword_ids": "^136560941^,^136870178^,^136942958^,^137019789^,^136025189^,^136025190^,^136025192^,^136025195^,^136025202^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Emerson FZE : Instrumentation company",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "STI",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "SOLUTION TECHNOLOGY INTEGRATOR"
+        }
+      ]
+    },
+    {
+      "site_name": "ENTERPRISE CATALYST ENTELYST",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "Enterprise Catalyst Entelyst",
+      "site_id": 3898838,
+      "be_geo_id": 756862,
+      "keyword_ids": "^136560941^,^137061164^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Cybersecurity Managed Service Provider",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "ERICSSON AB - QATAR BRANCH",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "ERICSSON AB - DUBAI BRANCH",
+      "site_id": 3513362,
+      "be_geo_id": 641432,
+      "keyword_ids": "^136560941^,^137076507^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Ericsson AB Dubai Branch",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "ESHHAR SECURITY SERVICES",
+      "language_cd": "EN",
+      "industry_keywords": "Government,Hospitality",
+      "keyword_id": null,
+      "partner_name": "Eshhar Security Services",
+      "site_id": 3752688,
+      "be_geo_id": 616975,
+      "keyword_ids": "^136560941^,^136827786^,^136873775^,^136025192^,^136025201^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=premier||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "ESHHAR SECURITY SERVICES is a Qatari company founded in 2013, with an official SSD/M0I (Security Systems Department/Ministry of Interior) License and rapidly became a leader in the industry of Security Solutions.\n\t\tIn a very short period of time we were able to deliver hundreds of turnkey solutions to a huge range of customers in a very satisfactory manner because our always No.1 Target is to conform with customer requirements and needs.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "PREMIER",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Premier Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "ETISAQ TECHNOLOGIES",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "ETISAQ TECHNOLOGIES",
+      "site_id": 3450044,
+      "be_geo_id": 656891,
+      "keyword_ids": "^136560941^,^136827787^,^136843285^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Etisaq Technologies is an information technology service provider for software, infrastructure and product solutions for dynamic corporate needs; assisting businesses from consulting steps to implementation.At Etisaq Technologies, we work closely with each client to understand their needs in order to deliver customized solutions that ensure complete satisfaction. We follow ITIL V3 best practices framework and a \u201cTeamwork Style\u201d work culture to expedite projects and optimize processes. Building and maintaining relations is at the core of our values and therefore we make an extra effort to assist in each step throughout your time with us and help you adapt to the new challenges of the changing world.Our technology & solutions partners are trusted world leaders. We provide the following solutions and services to help you retain focus on your business as we work behind the scenes to ensure consistency and smooth processes.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "FAMILY COMPUTERS",
+      "language_cd": "EN",
+      "industry_keywords": "Government,Professional Services",
+      "keyword_id": null,
+      "partner_name": "FAMILY COMPUTERS",
+      "site_id": 3894513,
+      "be_geo_id": 642604,
+      "keyword_ids": "^136560941^,^136936535^,^136025190^,^136025192^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "System Integrator",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "FIBRE OPTIC SUPPLIES & SERVICES",
+      "language_cd": "EN",
+      "industry_keywords": "Professional Services,Transportation",
+      "keyword_id": null,
+      "partner_name": "FIBRE OPTIC SUPPLIES & SERVICES LLC",
+      "site_id": 3266672,
+      "be_geo_id": 706574,
+      "keyword_ids": "^136560941^,^136924700^,^137020058^,^136025190^,^136025199^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Fibre Optic Supplies & Services LLC (FOSS LLC) is a multidisciplinary I.T. Network and Physical Security systems integrator, with extensive and demonstrable capabilities of delivering large scale and complex I.T. networking projects for enterprises, telecommunications operators and government organizations. FOSS has been operating in the Middle East region since 1999. We have offices in Abu Dhabi and Dubai, U.A.E.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "FLORA GROUP W.L.L",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "FLORA TECHNOLOGY COMPANY WLL",
+      "site_id": 4014100,
+      "be_geo_id": 638955,
+      "keyword_ids": "^136560941^,^137045559^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "FLORA GROUP W.L.L is the Main company and Flora Technology is the branch",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "Fusion Integrated Solutions",
+      "language_cd": "EN",
+      "industry_keywords": null,
+      "keyword_id": null,
+      "partner_name": "Fusion Integrated Solutions",
+      "site_id": 4113917,
+      "be_geo_id": 801387,
+      "keyword_ids": "^136560941^,^137014528^,,,",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Fusion Group Holding is a business management company that works with businesses and government leaders to overcome their most pressing challenges and maximize their potential, across a diverse range of industry sectors. We succeed when we work together as a global community of diverse people, determined to improve the world",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "FUSION TECH WLL",
+      "language_cd": "EN",
+      "industry_keywords": "Government,Media & Entertainment,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "Fusion Tech",
+      "site_id": 3959466,
+      "be_geo_id": 735291,
+      "keyword_ids": "^136560941^,^136835691^,^136025192^,^136025193^,^136025198^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Fusion Technology, provides leading products and solutions in the\ninformation technology, communications, aviation & airport\nsystems, and disinfection & hygiene solutions. Partnered with some\nof the most innovative and leading global companies, Fusion\nTechnology offers clients and project partners unique and effective\nsolutions, customized to what clients need, advised and delivered\nby an expert team that brings decades combined worth of\nexperience in technology and innovative solutions.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "GRAND INTERNATIONAL FOR TRADING WLL",
+      "language_cd": "EN",
+      "industry_keywords": "Energy/Utilities,Professional Services,Technical Services",
+      "keyword_id": null,
+      "partner_name": "Grand International for Trading W.L.L",
+      "site_id": 4032369,
+      "be_geo_id": 753704,
+      "keyword_ids": "^136560941^,^136827787^,^136990264^,^136025190^,^136025194^,^136025202^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Grand International for trading was established in 1993 in Kuwait. Now we are in Qatar from 2021. GIFT specializes in providing solutions in the design, execution, and managing of Management Information Systems and its associated operations of administration, technical, financial, and marketing in various fields within the Governmental and Private Sectors.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "GRAPPLE TECHNOLOGIES",
+      "language_cd": "EN",
+      "industry_keywords": "Media & Entertainment",
+      "keyword_id": null,
+      "partner_name": "GRAPPLE TECHNOLOGIES",
+      "site_id": 3638337,
+      "be_geo_id": 696062,
+      "keyword_ids": "^136560941^,^137009296^,^137018725^,^136025193^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "We are system integrated company providing services and support on all IT solutions especially with Cisco we have projects with Ooredoo, vodafone and UDC and many more",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "GULF BUSINESS CENTER",
+      "language_cd": "EN",
+      "industry_keywords": "Professional Services",
+      "keyword_id": null,
+      "partner_name": "Gulf Business Center",
+      "site_id": 3499956,
+      "be_geo_id": 668490,
+      "keyword_ids": "^136560941^,^136827787^,^136862613^,^136025190^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Gulf Business Center is a leading IT Solutions provider in Qatar offering customers the best options in computers and accessories with an innovative product portfolio and an unparalleled after-sales service, through our strong branch network. The company was established in 2007, to provide the Qatar IT sector with the latest and innovative technology. Today we are the preferred Partner in Qatar for may prestigious international brands such as CISCO, HPE, HUAWEI range of products .Under a strong management leadership, our strategy is to provide the products and services to support infrastructure, development and growth within the gulf area and identify with the world leading systems providers to achieve our goals. Through a combination of process excellence, quality frameworks and service delivery innovation we provide unmatched business value to customers.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "G B M QATAR",
+      "language_cd": "EN",
+      "industry_keywords": "Education,Energy/Utilities,Financial Services,Government,Healthcare,Hospitality,Manufacturing,Media & Entertainment,Professional Services,Retail,Service Provider,Technical Services,Transportation,Wholesale/Distribution",
+      "keyword_id": null,
+      "partner_name": "GULF BUSINESS MACHINES",
+      "site_id": 2330729,
+      "be_geo_id": 61808,
+      "keyword_ids": "^136560941^,^136827784^,^136827785^,^136848719^,^136870150^,^136870158^,^136870269^,^136870273^,^136870276^,^136899544^,^137061562^,^137061564^,^137061566^,^137061568^,^137061570^,^137061573^,^137061578^,^137061579^,^137061581^,^137061753^,^137062287^,^137062520^,^137063260^,^137063809^,^137064818^,^137076900^,^136025189^,^136025190^,^136025191^,^136025192^,^136025193^,^136025194^,^136025195^,^136025196^,^136025197^,^136025198^,^136025199^,^136025200^,^136025201^,^136025202^,,^135766823^,^135766824^,^135766825^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=gold||MASTER_BADGE=master||SMB_BADGE= ||CUSTOMER_BADGE=Customer||PROVIDER_BADGE=managed services practice maturity expert||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Founded and operating in the region since 1990, Gulf Business Machines (GBM) is the number one provider of IT solutions, leveraging industry leading technologies to drive real business results for clients. \nOriginally established through its partnership with IBM, GBM continued to evolve its relationship with its partners in order to meet the ever increasing demands of the ICT market. As a major driver and enabler for the advancement of society in the region, ICT is becoming the foundation upon which business is built. \nGBM has therefore nurtured partnerships with IBM, as well as with Cisco. Investing in a talented and skilled workforce, GBM applies innovative solutions that cater to clients\u2019 specific, complex and diverse IT needs. With on-the-ground, readily available expertise, GBM provides round-the-clock support to clients across the region. ",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "GOLD",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Gold Integrator"
+        },
+        {
+          "keyword_subtext": "MULTINL",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Multinational Certified Partner"
+        },
+        {
+          "keyword_subtext": "SEC_ELA",
+          "category_display_name": "Other",
+          "category_display_sort_order": "6",
+          "keyword_display_name": "Security Enterprise Licensing Agreement 1.0"
+        },
+        {
+          "keyword_subtext": "COMCERT",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "Buying Models Commerce Certification"
+        },
+        {
+          "keyword_subtext": "CP_SDWAN",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Catalyst SD-WAN"
+        },
+        {
+          "keyword_subtext": "CP_SA",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Campus Access"
+        },
+        {
+          "keyword_subtext": "CP_CMA",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Meraki Access"
+        },
+        {
+          "keyword_subtext": "EA3XARCH",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "EA 3.0 All Technology"
+        },
+        {
+          "keyword_subtext": "DCAI_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Cloud and AI Infrastructure Partner"
+        },
+        {
+          "keyword_subtext": "Coll_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Collaboration Partner"
+        },
+        {
+          "keyword_subtext": "Net_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Networking Partner"
+        },
+        {
+          "keyword_subtext": "Sec_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Security Partner"
+        },
+        {
+          "keyword_subtext": "Serv_Pref",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Preferred Services Partner"
+        },
+        {
+          "keyword_subtext": "SPL_Five",
+          "category_display_name": "PORTFOLIO",
+          "category_display_sort_order": "3",
+          "keyword_display_name": "Splunk Partner"
+        },
+        {
+          "keyword_subtext": "XDRSPEC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Extended Detection and Response Competency"
+        },
+        {
+          "keyword_subtext": "SECNETSPC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Secure Enterprise Infrastructure Competency"
+        },
+        {
+          "keyword_subtext": "SPLKSEC",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Splunk Security Solutions Competency"
+        },
+        {
+          "keyword_subtext": "CP_WBCC",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Webex Contact Center"
+        },
+        {
+          "keyword_subtext": "CPCA FY22",
+          "category_display_name": "Partner Designations",
+          "category_display_sort_order": "5",
+          "keyword_display_name": "PCA Anti-Corruption and 3rd party controls meet requirements"
+        },
+        {
+          "keyword_subtext": "MS_L1",
+          "category_display_name": "Partner Type",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Managed Services Provider"
+        },
+        {
+          "keyword_subtext": "IOTIND",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Industrial IOT Competency"
+        },
+        {
+          "keyword_subtext": "CP_Call",
+          "category_display_name": "CISCO POWERED SERVICES",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Cloud Calling"
+        },
+        {
+          "keyword_subtext": "SMBMM-BP",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "SMB and Mid-Market Business Practice"
+        },
+        {
+          "keyword_subtext": "CJP-AUTH",
+          "category_display_name": "COMPETENCY",
+          "category_display_sort_order": "2",
+          "keyword_display_name": "Webex Contact Center Authorization"
+        }
+      ]
+    },
+    {
+      "site_name": "GULF NETWORKS SECURITY SOLUTIONS",
+      "language_cd": "EN",
+      "industry_keywords": "Government",
+      "keyword_id": null,
+      "partner_name": "GULF NETWORKS SECURITY SOLUTIONS",
+      "site_id": 3742088,
+      "be_geo_id": 724206,
+      "keyword_ids": "^136560941^,^137054238^,^136025192^,,^135766823^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Gulf Networks is a state of the art firm that supply, install, maintain, testing and commissioning of ELV and Security Systems.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "GULFBUSINESS DEVELOPMENT GROUP",
+      "language_cd": "EN",
+      "industry_keywords": "Government",
+      "keyword_id": null,
+      "partner_name": "GulfBusiness Development Group",
+      "site_id": 3669633,
+      "be_geo_id": 703457,
+      "keyword_ids": "^136560941^,^136978685^,^136025192^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE= ||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "GulfBusiness Development Group introduces the innovative solutions to the market using cutting edge technologies not only as the system integrator but also as a consultant, and as a software expert",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": []
+    },
+    {
+      "site_name": "HAMAD AND MOHAMAD AL FUTTAIM COMPANY LLC",
+      "language_cd": "EN",
+      "industry_keywords": "Hospitality,Professional Services",
+      "keyword_id": null,
+      "partner_name": "HAMAD AND MOHAMAD AL FUTTAIM COMPANY LLC",
+      "site_id": 3443368,
+      "be_geo_id": 655027,
+      "keyword_ids": "^136560941^,^136827787^,^136923681^,^136025190^,^136025201^,,^135766823^,^135766826^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=select||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Alfuttaim Technology which is Hamad and Mohamad Al-Futtaim (Technologies Division) provides complete business solutions for large, medium and small customers. These include networking solutions, IP telephony, infrastructure, contact center solutions, business applications, ELV systems, professional audio visual solutions, and managed services.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "SELECT",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Select Integrator"
+        }
+      ]
+    },
+    {
+      "site_name": "HAYAT COMMUNICATIONS",
+      "language_cd": "EN",
+      "industry_keywords": "Financial Services",
+      "keyword_id": null,
+      "partner_name": "Hayat Communications",
+      "site_id": 3858152,
+      "be_geo_id": 747098,
+      "keyword_ids": "^136560941^,^136827786^,^137004336^,^137019367^,^136025189^,,^135766825^",
+      "qual_icons": "GLOBAL_GOLD_BADGE= ||CERT_BADGE=premier||MASTER_BADGE= ||SMB_BADGE= ||CUSTOMER_BADGE= ||PROVIDER_BADGE= ||DEVELOPER_BADGE= ||ADVISOR_BADGE= ||LEARNING_BADGE= ",
+      "note_text": "Hayat Communications Company KSCC (HCC) is an ISO Certified - Public listed company on the Kuwait Stock Exchange and specializes in providing turnkey system integration solutions for various sectors. Our expertise extends to Hardware & Software Solutions, Turnkey Enterprise Data Centers Technology & Telecommunication solutions & services, Business Applications, Info and Physical Security Solutions and Human resource solutions.",
+      "technology_keywords": null,
+      "location_keyword_ids": "136560941",
+      "qualifications": [
+        {
+          "keyword_subtext": "PREMIER",
+          "category_display_name": "Integrator Level",
+          "category_display_sort_order": "1",
+          "keyword_display_name": "Legacy Premier Integrator"
+        }
+      ]
+    }
+  ],
+  "matches": 118
+}

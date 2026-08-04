@@ -1,0 +1,8 @@
+# Cisco Partner Scraper — Hermes/Oracle deployment
+# No crawl4ai, no LLM dependencies. Scrapling >= 0.4 required (AsyncFetcher API).
+scrapling>=0.4.11
+pandas
+openpyxl
+httpx
+requests
+python-dotenv
