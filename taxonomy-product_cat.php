@@ -107,7 +107,7 @@ if (!$category_desc && isset($term->post_content)) {
 </aside>
 <!-- RIGHT MAIN GRID -->
 <section class="flex-1">
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-[#1A56DB] border border-[#1A56DB]">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 border-t border-l border-[#1A56DB]">
 
 <?php if ( have_posts() ) : ?>
     <?php while ( have_posts() ) : the_post(); global $product; ?>
@@ -131,12 +131,12 @@ if (!$category_desc && isset($term->post_content)) {
         }
         $is_b2b = snap_stitch_is_b2b_product( $product->get_id() );
         ?>
-        <article class="bg-white p-6 flex flex-col group relative cursor-pointer hover:z-10 transition-all hover:scale-[1.02] duration-300 focus-within:ring-4 focus-within:ring-[#FBBF24] outline-none" onclick="window.location.href='<?php echo esc_url($permalink); ?>'" tabindex="0" role="link" aria-label="<?php echo esc_attr(sprintf(__('View details for %s', 'snap-stitch'), $title)); ?>">
+        <article class="bg-white p-6 flex flex-col group relative cursor-pointer hover:z-10 transition-all hover:scale-[1.02] duration-300 focus-within:ring-4 focus-within:ring-[#FBBF24] outline-none border-b border-r border-[#1A56DB]" onclick="window.location.href='<?php echo esc_url($permalink); ?>'" tabindex="0" role="link" aria-label="<?php echo esc_attr(sprintf(__('View details for %s', 'snap-stitch'), $title)); ?>">
             <?php if ($product->is_featured()) : ?>
             <div class="absolute top-0 left-0 z-10 bg-[#FBBF24] text-[#0A0A0A] px-3 py-1 text-[10px] font-black uppercase tracking-tighter">TOP SELLER</div>
             <?php endif; ?>
             <div class="relative aspect-square mb-6 bg-[#F3F4F6] overflow-hidden border border-transparent group-hover:border-[#1A56DB]/20 transition-colors">
-                <img alt="<?php echo esc_attr($title); ?>" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 p-2" src="<?php echo esc_url($image_url); ?>"/>
+                <img alt="<?php echo esc_attr($title); ?>" loading="lazy" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 p-2" src="<?php echo esc_url($image_url); ?>"/>
                 <div class="absolute bottom-0 left-0 bg-[#FBBF24] text-[#0A0A0A] px-2 py-1 text-[10px] font-black uppercase tracking-tighter">MODEL: <?php echo esc_html($sku); ?></div>
             </div>
             <h3 class="text-[#0A0A0A] font-black uppercase tracking-tighter text-xl mb-4 leading-tight group-hover:text-[#1A56DB] transition-colors"><?php echo esc_html($title); ?></h3>

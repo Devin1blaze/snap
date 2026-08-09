@@ -11,11 +11,11 @@
             <div class="text-3xl font-black text-white italic"><?php bloginfo( 'name' ); ?></div>
             <p class="font-medium text-lg text-zinc-400 leading-relaxed">Pune's trusted Wholesaler & Distributor for Hygiene, Refrigeration, Vending & Washroom Automation Solutions since 1988.</p>
             <div class="flex gap-4">
-                <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black hover:-translate-y-1 active:scale-95 transition-all duration-300">
-                    <span class="material-symbols-outlined text-primary text-sm">link</span>
+                <a href="#" aria-label="LinkedIn" class="w-10 h-10 bg-[#1A56DB] flex items-center justify-center hover:bg-[#FBBF24] hover:text-black hover:-translate-y-1 text-white active:scale-95 transition-all duration-300">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
-                <a href="#" class="w-10 h-10 bg-primary-container flex items-center justify-center hover:bg-secondary-container hover:text-black hover:-translate-y-1 active:scale-95 transition-all duration-300">
-                    <span class="material-symbols-outlined text-primary text-sm">link</span>
+                <a href="#" aria-label="Facebook" class="w-10 h-10 bg-[#1A56DB] flex items-center justify-center hover:bg-[#FBBF24] hover:text-black hover:-translate-y-1 text-white active:scale-95 transition-all duration-300">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
                 </a>
             </div>
         </div>
@@ -201,6 +201,71 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.classList.add('hover:bg-yellow-500');
         }
     });
+});
+</script>
+
+<!-- Entry Popup -->
+<div id="entry-popup" class="fixed inset-0 z-[1000000] hidden items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300">
+    <div class="bg-white p-8 max-w-2xl w-full mx-4 shadow-2xl relative text-center">
+        <h2 class="text-3xl font-black text-[#0A0A0A] mb-2 uppercase tracking-tight">Welcome to the corporate website of Blue Star Limited</h2>
+        <div class="flex flex-col md:flex-row gap-4 justify-center mt-8">
+            <div class="flex-1 border-2 border-gray-100 p-6 hover:border-[#1A56DB] transition-colors cursor-pointer js-select-business flex flex-col items-center">
+                <span class="material-symbols-outlined text-4xl text-[#1A56DB] mb-3">domain</span>
+                <h3 class="text-xl font-bold mb-2">Are you a Business?</h3>
+                <p class="text-sm text-gray-500 mb-6 flex-1">Click here to stay on this site.</p>
+                <button class="bg-[#FBBF24] text-black px-6 py-3 font-bold w-full uppercase tracking-wider text-sm hover:bg-yellow-500 transition-colors">Business</button>
+            </div>
+            <div class="flex-1 border-2 border-gray-100 p-6 hover:border-[#1A56DB] transition-colors cursor-pointer js-select-consumer flex flex-col items-center">
+                <span class="material-symbols-outlined text-4xl text-[#1A56DB] mb-3">shopping_cart</span>
+                <h3 class="text-xl font-bold mb-2">Are you a Consumer?</h3>
+                <p class="text-sm text-gray-500 mb-6 flex-1">Click here for our e-commerce site.</p>
+                <button class="bg-[#1A56DB] text-white px-6 py-3 font-bold w-full uppercase tracking-wider text-sm hover:bg-blue-700 transition-colors">Consumer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const entryPopup = document.getElementById('entry-popup');
+    const isConsumerPage = window.location.pathname.includes('/shop');
+    
+    if (entryPopup) {
+        if (!localStorage.getItem('bluestar_user_type')) {
+            entryPopup.classList.remove('hidden');
+            entryPopup.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        const setPreference = (e, type) => {
+            if (e) e.preventDefault();
+            localStorage.setItem('bluestar_user_type', type);
+            if (type === 'business') {
+                if (isConsumerPage) {
+                    window.location.href = '/'; 
+                } else {
+                    entryPopup.classList.add('hidden');
+                    entryPopup.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }
+            } else if (type === 'consumer') {
+                if (!isConsumerPage) {
+                    window.location.href = '/consumer/';
+                } else {
+                    entryPopup.classList.add('hidden');
+                    entryPopup.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        };
+
+        document.querySelectorAll('.js-select-business').forEach(el => {
+            el.addEventListener('click', (e) => setPreference(e, 'business'));
+        });
+        document.querySelectorAll('.js-select-consumer').forEach(el => {
+            el.addEventListener('click', (e) => setPreference(e, 'consumer'));
+        });
+    }
 });
 </script>
 

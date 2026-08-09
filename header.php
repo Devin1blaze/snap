@@ -1,387 +1,11 @@
 <?php
 /**
- * Header — Snap Marketing
- * Uses native WordPress wp_nav_menu() with a custom Walker for the
- * Havells-style two-panel mega-menu. Fully editable from WP Dashboard.
- * Design tokens from DESIGN.md: #1A56DB (Royal Blue), #FBBF24 (Sunshine Yellow), #0A0A0A (Pure Black).
+ * The header for our theme
  */
 
-/**
- * Walker: Desktop Mega-Menu
- * Renders a two-panel mega-menu (left sidebar L1/L2, right panel L3).
- * Menu structure from WP Dashboard:
- *   - Top level items → horizontal nav bar
- *   - L2 items (children) → LEFT sidebar panel
- *   - L3 items (grandchildren) → RIGHT content panel
- */
-class Snap_Mega_Menu_Walker extends Walker_Nav_Menu {
+// Include the custom walker
+require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 
-    private $first_l2 = true;
-
-    public function start_lvl( &$output, $depth = 0, $args = null ) {
-        if ( $depth === 0 ) {
-            // Opening the L2 mega-menu container
-            $this->first_l2 = true;
-            $output .= '<div class="snap-mega-wrapper" role="region">';
-            $output .= '<div class="snap-mega-menu">';
-            // Left sidebar
-            $output .= '<div class="snap-mega-sidebar">';
-            $output .= '<div class="snap-mega-sidebar-header">Categories</div>';
-            $output .= '<ul class="snap-mega-cat-list">';
-        } elseif ( $depth === 1 ) {
-            // Opening the L3 right panel sub-grid (triggered per L2 item)
-            $output .= '<div class="snap-mega-sub-grid">';
-        }
-    }
-
-    public function end_lvl( &$output, $depth = 0, $args = null ) {
-        if ( $depth === 0 ) {
-            // Close L2 sidebar list
-            $output .= '</ul>';
-            $output .= '</div>'; // .snap-mega-sidebar
-            // Close right content panel (opened via start_el at depth 0)
-            $output .= '</div>'; // .snap-mega-content
-            $output .= '</div>'; // .snap-mega-menu
-            $output .= '</div>'; // .snap-mega-wrapper
-        } elseif ( $depth === 1 ) {
-            $output .= '</div>'; // .snap-mega-sub-grid
-            $output .= '</div>'; // .snap-mega-sub
-        }
-    }
-
-    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
-        $classes   = empty( $item->classes ) ? [] : (array) $item->classes;
-        $has_children = in_array( 'menu-item-has-children', $classes );
-        $cat_key   = 'megacat-' . $item->ID;
-        $title     = apply_filters( 'the_title', $item->title, $item->ID );
-        $url       = esc_url( $item->url );
-        $initial   = mb_strtoupper( mb_substr( $title, 0, 1 ) );
-
-        if ( $depth === 0 ) {
-            // Top-level nav item
-            if ( $has_children ) {
-                $output .= '<li class="snap-nav-item">';
-                $output .= '<a href="' . $url . '" class="snap-nav-link">';
-                $output .= esc_html( $title );
-                $output .= '<span class="material-symbols-outlined snap-nav-caret">expand_more</span>';
-                $output .= '</a>';
-                // Right content panel is opened here alongside the sidebar
-                // We'll inject it after the sidebar closes — use a buffer trick via end_lvl
-                // Actually: we open it in start_lvl depth=0, but we need to track opening.
-                // The sidebar UL is opened in start_lvl. The right panel opens after sidebar. 
-                // We inject the right panel open tag using a data attribute hack here.
-                // Simple approach: append to output AFTER start_lvl opens sidebar.
-                // We use a split string approach: sidebar opens in start_lvl,
-                // right content panel opens after last L2 via a marker.
-                // For clean architecture, we track this in end_lvl.
-            } else {
-                $output .= '<li class="snap-nav-item">';
-                $output .= '<a href="' . $url . '" class="snap-nav-link">' . esc_html( $title ) . '</a>';
-            }
-
-        } elseif ( $depth === 1 ) {
-            // L2: sidebar category item
-            $active = $this->first_l2 ? ' snap-mega-cat-active' : '';
-            $this->first_l2 = false;
-            $output .= '<li class="snap-mega-cat-item' . $active . '" data-cat="' . esc_attr( $cat_key ) . '">';
-            $output .= '<a href="' . $url . '" class="snap-mega-cat-link">';
-            $output .= '<span class="snap-mega-cat-icon-wrap" aria-hidden="true">' . esc_html( $initial ) . '</span>';
-            $output .= '<span class="snap-mega-cat-name">' . esc_html( $title ) . '</span>';
-            if ( $has_children ) {
-                $output .= '<span class="material-symbols-outlined snap-mega-cat-arrow">chevron_right</span>';
-            }
-            $output .= '</a>';
-            // Close the <li> in end_el, but we also need to open the right panel sub-div.
-            // We open it here so start_lvl (depth=1) can write into it.
-            // Note: if no children, we inject a "Browse all" fallback in end_el.
-
-        } elseif ( $depth === 2 ) {
-            // L3: sub-category link inside right panel grid
-            $output .= '<a href="' . $url . '" class="snap-mega-sub-link">';
-            $output .= '<span class="snap-mega-sub-dot"></span>';
-            $output .= esc_html( $title );
-            $output .= '</a>';
-        }
-    }
-
-    public function end_el( &$output, $item, $depth = 0, $args = null ) {
-        $classes      = empty( $item->classes ) ? [] : (array) $item->classes;
-        $has_children = in_array( 'menu-item-has-children', $classes );
-        $title        = apply_filters( 'the_title', $item->title, $item->ID );
-        $url          = esc_url( $item->url );
-        $cat_key      = 'megacat-' . $item->ID;
-
-        if ( $depth === 0 ) {
-            $output .= '</li>';
-        } elseif ( $depth === 1 ) {
-            $output .= '</li>';
-        } elseif ( $depth === 2 ) {
-            // Nothing extra needed; the anchor is self-closed in start_el
-        }
-    }
-}
-
-/**
- * Walker: Mobile Accordion Menu
- */
-class Snap_Mobile_Walker extends Walker_Nav_Menu {
-
-    public function start_lvl( &$output, $depth = 0, $args = null ) {
-        if ( $depth === 0 ) {
-            $output .= '<div class="mobile-submenu hidden pl-4 pb-2">';
-        } elseif ( $depth === 1 ) {
-            $output .= '<div class="pl-4">';
-        }
-    }
-
-    public function end_lvl( &$output, $depth = 0, $args = null ) {
-        $output .= '</div>';
-    }
-
-    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
-        $classes      = empty( $item->classes ) ? [] : (array) $item->classes;
-        $has_children = in_array( 'menu-item-has-children', $classes );
-        $title        = apply_filters( 'the_title', $item->title, $item->ID );
-        $url          = esc_url( $item->url );
-
-        if ( $depth === 0 ) {
-            $output .= '<div class="mobile-menu-group">';
-            $output .= '<a href="' . $url . '" class="flex items-center justify-between px-4 py-3 text-[15px] font-semibold text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all">';
-            $output .= esc_html( $title );
-            if ( $has_children ) {
-                $output .= '<span class="material-symbols-outlined text-[18px] text-white/40 mobile-chevron transition-transform">expand_more</span>';
-            }
-            $output .= '</a>';
-        } elseif ( $depth === 1 ) {
-            $output .= '<a href="' . $url . '" class="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-all">';
-            $output .= esc_html( $title );
-            if ( $has_children ) {
-                $output .= '<span class="material-symbols-outlined text-[14px] text-white/30">chevron_right</span>';
-            }
-            $output .= '</a>';
-        } else {
-            $output .= '<a href="' . $url . '" class="block px-4 py-2 text-[12px] font-medium text-white/40 hover:text-white/70 rounded-lg transition-all">';
-            $output .= esc_html( $title );
-            $output .= '</a>';
-        }
-    }
-
-    public function end_el( &$output, $item, $depth = 0, $args = null ) {
-        if ( $depth === 0 ) {
-            $output .= '</div>';
-        }
-    }
-}
-
-/**
- * Render the desktop mega-menu using wp_nav_menu + custom Walker.
- * The Walker approach works for items the user adds in WP Dashboard.
- * However the two-panel layout (sidebar L2 + right panel L3) requires
- * injecting the right panel div between sidebar close and wrapper close.
- * We post-process the output string to do this cleanly.
- */
-function snap_render_desktop_menu() {
-    $locations = get_nav_menu_locations();
-    if ( empty( $locations['primary'] ) ) {
-        echo '<span class="text-white/40 text-sm px-3">No menu assigned</span>';
-        return;
-    }
-
-    ob_start();
-    wp_nav_menu([
-        'theme_location' => 'primary',
-        'container'      => false,
-        'menu_class'     => 'flex items-center gap-1',
-        'menu_id'        => 'snap-desktop-nav',
-        'walker'         => new Snap_Mega_Menu_Walker(),
-        'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-        'depth'          => 3,
-        'fallback_cb'    => false,
-    ]);
-    $html = ob_get_clean();
-
-    // Post-process: inject the right-panel open/close around L3 items.
-    // The Walker generates:
-    //   .snap-mega-sidebar > .snap-mega-cat-list > li.snap-mega-cat-item [L3 subs inline via start_lvl depth=1]
-    // We need L3 subs to appear in .snap-mega-content, not inside .snap-mega-sidebar.
-    // The cleanest approach: render the menu using get_terms for children, 
-    // but keep L1 from WP menu and fetch their children dynamically.
-    // 
-    // Since the Walker approach becomes complex for two separate divs,
-    // we use a hybrid: WP menu for L1 items, then fetch L2/L3 from WP nav_menu_items.
-
-    echo $html;
-}
-
-/**
- * Better approach: hybrid render.
- * L1 comes from WP primary menu. For any L1 item that has children,
- * we render the Havells two-panel mega-menu using those children/grandchildren.
- * Fully editable from WP Dashboard.
- */
-function snap_stitch_render_nav( $context = 'desktop' ) {
-    $transient_key = 'snap_nav_menu_' . $context;
-    $cached_menu = get_transient( $transient_key );
-    if ( false !== $cached_menu ) {
-        echo $cached_menu;
-        return;
-    }
-    
-    ob_start();
-
-    $locations = get_nav_menu_locations();
-    if ( empty( $locations['primary'] ) ) {
-        ob_end_clean();
-        return;
-    }
-
-    $menu_obj = wp_get_nav_menu_object( $locations['primary'] );
-    if ( ! $menu_obj ) return;
-
-    $all_items = wp_get_nav_menu_items( $menu_obj->term_id );
-    if ( ! $all_items ) return;
-
-    // Group by parent
-    $children = [];
-    foreach ( $all_items as $item ) {
-        $pid = (int) $item->menu_item_parent;
-        if ( $pid ) {
-            $children[ $pid ][] = $item;
-        }
-    }
-
-    // ── MOBILE ─────────────────────────────────────────────────────────────
-    if ( $context === 'mobile' ) {
-        echo '<nav class="flex flex-col gap-1">';
-        foreach ( $all_items as $item ) {
-            if ( (int) $item->menu_item_parent !== 0 ) continue;
-            $has_ch = ! empty( $children[ $item->ID ] );
-            echo '<div class="mobile-menu-group">';
-            echo '<a href="' . esc_url( $item->url ) . '" class="flex items-center justify-between px-4 py-3 text-[15px] font-semibold text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all">';
-            echo esc_html( $item->title );
-            if ( $has_ch ) {
-                echo '<span class="material-symbols-outlined text-[18px] text-white/40 mobile-chevron transition-transform">expand_more</span>';
-            }
-            echo '</a>';
-            if ( $has_ch ) {
-                echo '<div class="mobile-submenu hidden pl-4 pb-2">';
-                foreach ( $children[ $item->ID ] as $child ) {
-                    $has_sub = ! empty( $children[ $child->ID ] );
-                    echo '<a href="' . esc_url( $child->url ) . '" class="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-all">';
-                    echo esc_html( $child->title );
-                    if ( $has_sub ) {
-                        echo '<span class="material-symbols-outlined text-[14px] text-white/30">chevron_right</span>';
-                    }
-                    echo '</a>';
-                    if ( $has_sub ) {
-                        echo '<div class="pl-4">';
-                        foreach ( $children[ $child->ID ] as $sub ) {
-                            echo '<a href="' . esc_url( $sub->url ) . '" class="block px-4 py-2 text-[12px] font-medium text-white/40 hover:text-white/70 rounded-lg transition-all">';
-                            echo esc_html( $sub->title );
-                            echo '</a>';
-                        }
-                        echo '</div>';
-                    }
-                }
-                echo '</div>';
-            }
-            echo '</div>';
-        }
-        echo '</nav>';
-        $output = ob_get_clean();
-        set_transient( $transient_key, $output, DAY_IN_SECONDS );
-        echo $output;
-        return;
-    }
-
-    // ── DESKTOP ─────────────────────────────────────────────────────────────
-    echo '<ul class="flex items-center gap-1" id="snap-desktop-nav">';
-    foreach ( $all_items as $item ) {
-        if ( (int) $item->menu_item_parent !== 0 ) continue;
-        $has_ch = ! empty( $children[ $item->ID ] );
-
-        echo '<li class="snap-nav-item">';
-        echo '<a href="' . esc_url( $item->url ) . '" class="snap-nav-link">';
-        echo esc_html( $item->title );
-        if ( $has_ch ) {
-            echo '<span class="material-symbols-outlined snap-nav-caret">expand_more</span>';
-        }
-        echo '</a>';
-
-        if ( $has_ch ) {
-            $first_l2 = true;
-            echo '<div class="snap-mega-wrapper" role="region" aria-label="' . esc_attr( $item->title ) . ' menu">';
-            echo '<div class="snap-mega-menu">';
-
-            // LEFT SIDEBAR
-            echo '<div class="snap-mega-sidebar">';
-            echo '<div class="snap-mega-sidebar-header">Categories</div>';
-            echo '<ul class="snap-mega-cat-list">';
-            foreach ( $children[ $item->ID ] as $l2 ) {
-                $cat_key  = 'megacat-' . $item->ID . '-' . $l2->ID;
-                $active   = $first_l2 ? ' snap-mega-cat-active' : '';
-                $has_l3   = ! empty( $children[ $l2->ID ] );
-                $initial  = mb_strtoupper( mb_substr( $l2->title, 0, 1 ) );
-                echo '<li class="snap-mega-cat-item' . $active . '" data-cat="' . esc_attr( $cat_key ) . '">';
-                echo '<a href="' . esc_url( $l2->url ) . '" class="snap-mega-cat-link">';
-                echo '<span class="snap-mega-cat-icon-wrap" aria-hidden="true">' . esc_html( $initial ) . '</span>';
-                echo '<span class="snap-mega-cat-name">' . esc_html( $l2->title ) . '</span>';
-                if ( $has_l3 ) {
-                    echo '<span class="material-symbols-outlined snap-mega-cat-arrow">chevron_right</span>';
-                }
-                echo '</a>';
-                echo '</li>';
-                $first_l2 = false;
-            }
-            echo '</ul>';
-            echo '</div>'; // end .snap-mega-sidebar
-
-            // RIGHT CONTENT PANEL
-            echo '<div class="snap-mega-content">';
-            $first_r = true;
-            foreach ( $children[ $item->ID ] as $l2 ) {
-                $cat_key = 'megacat-' . $item->ID . '-' . $l2->ID;
-                $active  = $first_r ? ' snap-mega-sub-active' : '';
-                $has_l3  = ! empty( $children[ $l2->ID ] );
-                echo '<div class="snap-mega-sub' . $active . '" data-for="' . esc_attr( $cat_key ) . '">';
-                echo '<div class="snap-mega-sub-title">';
-                echo esc_html( $l2->title );
-                echo '<a href="' . esc_url( $l2->url ) . '">View all &rarr;</a>';
-                echo '</div>';
-                if ( $has_l3 ) {
-                    echo '<div class="snap-mega-sub-grid">';
-                    foreach ( $children[ $l2->ID ] as $l3 ) {
-                        echo '<a href="' . esc_url( $l3->url ) . '" class="snap-mega-sub-link">';
-                        echo '<span class="snap-mega-sub-dot"></span>';
-                        echo esc_html( $l3->title );
-                        echo '</a>';
-                    }
-                    echo '</div>';
-                } else {
-                    echo '<div class="snap-mega-sub-grid">';
-                    echo '<a href="' . esc_url( $l2->url ) . '" class="snap-mega-sub-link snap-mega-sub-link-full">';
-                    echo '<span class="snap-mega-sub-dot"></span>';
-                    echo 'Browse all &mdash; ' . esc_html( $l2->title );
-                    echo '</a>';
-                    echo '</div>';
-                }
-                echo '</div>'; // .snap-mega-sub
-                $first_r = false;
-            }
-            echo '</div>'; // .snap-mega-content
-
-            echo '</div>'; // .snap-mega-menu
-            echo '</div>'; // .snap-mega-wrapper
-        }
-
-        echo '</li>';
-    }
-    echo '</ul>';
-    
-    $output = ob_get_clean();
-    set_transient( $transient_key, $output, DAY_IN_SECONDS );
-    echo $output;
-}
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="scroll-smooth">
 <head>
@@ -397,573 +21,1067 @@ function snap_stitch_render_nav( $context = 'desktop' ) {
             theme: {
                 extend: {
                     colors: {
-                        "primary":             "#1A56DB",
-                        "secondary":           "#FBBF24",
-                        "surface":             "#FFFFFF",
-                        "on-surface":          "#0A0A0A",
-                        "snap-yellow":         "#FBBF24",
-                        "snap-blue":           "#1A56DB",
-                        "snap-black":          "#0A0A0A",
-                        "primary-container":   "#1A56DB",
-                        "secondary-container": "#FBBF24"
+                        "primary": "#1A56DB",
+                        "secondary": "#FBBF24",
+                        "surface": "#FFFFFF",
+                        "on-surface": "#0A0A0A",
+                        "on-surface-variant": "#52525b",
+                        "royal-blue": "#1A56DB",
+                        "snap-yellow": "#FBBF24",
+                        "snap-black": "#0A0A0A",
+                        "primary-container": "#1A56DB",
+                        "secondary-container": "#FBBF24",
+                        "surface-container-low": "#F4F4F5",
+                        "deepskyblue": "#00aeef",
+                        "whitesmoke": "#f5f5f5",
+                        "dimgray": "#6b7280",
+                        "gray": "#1f2937"
                     },
                     fontFamily: {
-                        "headline": ["Plus Jakarta Sans", "Inter", "sans-serif"],
-                        "body":     ["Plus Jakarta Sans", "Inter", "sans-serif"]
-                    }
+                        "headline": ["Inter", "Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Inter", "Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Inter", "Plus Jakarta Sans", "sans-serif"],
+                        "poppins": ["Poppins", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-
     <style>
-        /* ── DESIGN SYSTEM ─────────────────────────────────────
-           Source: DESIGN.md — "Industrial Authority"
-           Primary (Royal Blue):   #1A56DB
-           Secondary (Sun Yellow): #FBBF24
-           Surface/Base:           #FFFFFF / #0A0A0A
-           Font: Plus Jakarta Sans (800 display, 700 headline, 500/400 body)
-        ─────────────────────────────────────────────────────── */
-        :root {
-            --snap-blue:   #1A56DB;
-            --snap-yellow: #FBBF24;
-            --snap-black:  #0A0A0A;
-            --snap-white:  #FFFFFF;
+        html { margin-top: 0 !important; }
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+        body { font-family: 'Inter', 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .diagonal-band {
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        }
+        .industrial-glow {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .industrial-glow:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.4);
+        }
+        .yellow-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .yellow-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 4px;
+            width: 100%; height: 12px;
+            background-color: #FBBF24;
+            z-index: -1; transform: skewX(-15deg);
+            animation: growLine 0.6s ease-out forwards;
+        }
+        @keyframes growLine {
+            from { width: 0; } to { width: 100%; }
         }
 
-        html, body { overflow-x: hidden; width: 100%; position: relative; }
-        body { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-
-        /* ── HEADER SCROLL ──────────────────────────────────── */
-        #nav-header { 
-            transform: translateY(12px);
-            border-color: transparent;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, background-color, border-color, backdrop-filter;
-        }
-        #nav-header.scrolled {
-            transform: translateY(0);
-            background-color: rgba(10, 10, 10, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-color: rgba(26, 86, 219, 0.2);  /* Royal Blue tint border */
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(26,86,219,0.1) inset;
+        /* Blueprint pattern used in industrial sections */
+        .blueprint-pattern {
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
         }
 
-        /* ── MOBILE ACCORDION ───────────────────────────────── */
-        .mobile-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-        .mobile-submenu.open { max-height: 600px; }
+        /* Nav link underline animation */
+        .nav-link { position:relative; }
+        .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:#FBBF24; transition:width 0.25s ease; }
+        .nav-link:hover::after { width:100%; }
 
-        /* ── TOP NAV LINKS ──────────────────────────────────── */
-        #snap-desktop-nav { list-style: none; margin: 0; padding: 0; }
-        li.snap-nav-item  { position: relative; list-style: none; }
+        /* ── MOBILE ACCORDION ────────────────────────────────────── */
+        .mobile-acc-content {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block !important; /* max-height controls visibility, not display */
+        }
+        .mobile-acc-content.is-open {
+            max-height: 1200px; /* large enough for any sub-list */
+        }
+        .mobile-acc-caret {
+            transition: transform 0.28s ease;
+            flex-shrink: 0;
+        }
+        .mobile-acc-toggle[aria-expanded="true"] .mobile-acc-caret {
+            transform: rotate(180deg);
+        }
+        /* L3 accordion inside L2 */
+        .mobile-l3-acc-content {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block !important;
+        }
+        .mobile-l3-acc-content.is-open {
+            max-height: 1000px;
+        }
+        .mobile-l3-caret {
+            transition: transform 0.25s ease;
+            flex-shrink: 0;
+        }
+        .mobile-l3-toggle[aria-expanded="true"] .mobile-l3-caret {
+            transform: rotate(180deg);
+        }
+        /* L2 accordion inside L1 */
+        .mobile-l2-acc-content {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block !important;
+        }
+        .mobile-l2-acc-content.is-open {
+            max-height: 800px;
+        }
+        .mobile-l2-caret {
+            transition: transform 0.25s ease;
+            flex-shrink: 0;
+        }
+        .mobile-l2-toggle[aria-expanded="true"] .mobile-l2-caret {
+            transform: rotate(180deg);
+        }
 
-        a.snap-nav-link {
+        /* Marquee keyframes */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee { display: flex; width: 200%; animation: marquee 30s linear infinite; }
+        .animate-marquee:hover { animation-play-state: paused; }
+        @keyframes marquee-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        @keyframes marquee-down {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+        }
+        .animate-marquee-vertical { animation: marquee-up 18s linear infinite; }
+        .animate-marquee-vertical-reverse { animation: marquee-down 18s linear infinite; }
+        .marquee-col:hover .animate-marquee-vertical,
+        .marquee-col:hover .animate-marquee-vertical-reverse { animation-play-state: paused; }
+
+        /* Scroll reveal */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Unified Hover Animation System */
+        .brand-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .brand-card:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(26,86,219,0.15); background-color: #f9fafb; }
+        .why-icon-box { transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .why-icon-box:hover { background: rgba(26,86,219,0.15); }
+
+        /* ── MEGA MENU: NAV BAR ───────────────────────────────── */
+        #snap-main-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        .mega-nav-item,
+        .mega-nav-item-simple {
+            position: static;
+            list-style: none;
+        }
+        a.mega-top-link {
             display: inline-flex;
             align-items: center;
-            gap: 2px;
-            padding: 8px 13px;
+            gap: 3px;
+            padding: 24px 16px;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 13.5px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.82);
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.70);
             text-decoration: none;
-            border-radius: 0;                    /* Sharp — Industrial Authority */
-            letter-spacing: 0.01em;
-            transition: color 0.15s, background 0.15s;
+            transition: color 0.2s ease;
             white-space: nowrap;
         }
-        a.snap-nav-link:hover {
-            color: #FBBF24;                      /* Sunshine Yellow on hover */
-            background: rgba(251,191,36,0.06);
-        }
-
-        .snap-nav-caret {
+        a.mega-top-link:hover { color: #FBBF24; }
+        .mega-caret {
             font-size: 16px;
             opacity: 0.55;
-            transition: transform 0.2s ease;
+            transition: transform 0.22s ease;
         }
-        li.snap-nav-item:hover .snap-nav-caret { transform: rotate(180deg); color: #FBBF24; }
+        .mega-nav-item:hover > a.mega-top-link { color: #FBBF24; }
+        .mega-nav-item:hover .mega-caret { transform: rotate(180deg); color: #FBBF24; }
 
-        /* ── MEGA MENU WRAPPER ──────────────────────────────── */
-        .snap-mega-wrapper {
-            position: absolute;
+        /* ── MEGA WRAPPER (full-width dropdown) ──────────────── */
+        .mega-wrapper {
+            position: fixed;
+            left: 0;
             right: 0;
-            top: 100%;
-            padding-top: 8px;
-            z-index: 9999;
-            opacity: 0;
+            top: var(--nav-bottom, 72px);
+            margin-top: 12px;
+            z-index: 999;
             visibility: hidden;
-            transform: translateY(8px);
-            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
             pointer-events: none;
         }
-        li.snap-nav-item:hover > .snap-mega-wrapper {
+        /* Invisible bridge to prevent hover loss when moving mouse to dropdown */
+        .mega-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: transparent;
+        }
+        .mega-nav-item:hover > .mega-wrapper {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
             pointer-events: auto;
         }
-
-        /* ── MEGA MENU CONTAINER ────────────────────────────── */
-        .snap-mega-menu {
+        .mega-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #111111;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            box-shadow: 0 32px 64px rgba(0,0,0,0.55);
             display: flex;
-            width: 700px;
-            min-height: 380px;
-            /* Base state matches unscrolled header (transparent) */
-            background: rgba(10, 10, 10, 0.4); /* Slight tint for readability even when transparent */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-top: 3px solid #1A56DB;       /* Royal Blue top accent */
-            border-radius: 0;                    /* NO ROUND EDGES */
+            min-height: 340px;
             overflow: hidden;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        /* Scrolled state matches scrolled header */
-        #nav-header.scrolled .snap-mega-menu {
-            background: rgba(10, 10, 10, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-left: 1px solid rgba(26, 86, 219, 0.2);
-            border-right: 1px solid rgba(26, 86, 219, 0.2);
-            border-bottom: 1px solid rgba(26, 86, 219, 0.2);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(26,86,219,0.1) inset;
         }
 
-        /* ── LEFT SIDEBAR ───────────────────────────────────── */
-        .snap-mega-sidebar {
-            width: 235px;
+        /* ── LEFT SIDEBAR ─────────────────────────────────────── */
+        .mega-sidebar {
+            width: 240px;
             flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.03);
-            border-right: 2px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
+            background: #0A0A0A;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            padding: 24px 0;
         }
-        .snap-mega-sidebar-header {
-            padding: 14px 16px 8px;
+        .mega-sidebar-header {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
+            font-weight: 800;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: #FBBF24;                      /* Sunshine Yellow */
+            color: rgba(255,255,255,0.25);
+            padding: 0 20px 12px;
         }
-        .snap-mega-cat-list {
+        .mega-cat-list {
             list-style: none;
             margin: 0;
-            padding: 2px 0 12px;
-            overflow-y: auto;
-            flex: 1;
+            padding: 0;
         }
-        .snap-mega-cat-list::-webkit-scrollbar { width: 3px; }
-        .snap-mega-cat-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 0; }
-
-        /* Sidebar L2 item */
-        .snap-mega-cat-item { position: relative; list-style: none; }
-        .snap-mega-cat-link {
+        .mega-cat-item { list-style: none; }
+        a.mega-cat-link {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 11px 16px;
+            padding: 11px 20px;
+            text-decoration: none;
+            color: rgba(255,255,255,0.55);
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 13px;
             font-weight: 600;
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            border-left: 3px solid transparent;
-            transition: color 0.12s, background 0.12s, border-color 0.12s;
+            border-left: 2px solid transparent;
+            transition: all 0.18s ease;
         }
-        .snap-mega-cat-item:hover .snap-mega-cat-link {
+        .mega-cat-link:hover,
+        .mega-cat-item.mega-cat-active > a.mega-cat-link {
             color: #fff;
-            background: rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.05);
+            border-left-color: #FBBF24;
         }
-        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-link {
-            color: #0A0A0A;
-            background: #FBBF24;                 /* Sunshine Yellow active indicator */
-            border-left-color: #1A56DB;          /* Royal Blue accent */
-            font-weight: 700;
-        }
-
-        /* Icon badge — letter initial */
-        .snap-mega-cat-icon-wrap {
-            width: 30px;
-            height: 30px;
-            border-radius: 0;                    /* No round edges */
-            background: rgba(255,255,255,0.1);
+        .mega-cat-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(251,191,36,0.12);
+            color: #FBBF24;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            font-weight: 800;
             font-size: 13px;
+            flex-shrink: 0;
+        }
+        .mega-cat-name { flex: 1; }
+        .mega-cat-arrow { font-size: 14px; color: rgba(255,255,255,0.25); }
+
+        /* ── RIGHT CONTENT PANEL ─────────────────────────────── */
+        .mega-content {
+            flex: 1;
+            padding: 28px 32px;
+            overflow-y: auto;
+        }
+        .mega-panel { display: none; }
+        .mega-panel.mega-panel-active { display: block; }
+        .mega-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .mega-panel-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 17px;
             font-weight: 800;
             color: #fff;
-            transition: background 0.12s, color 0.12s;
+            letter-spacing: 0.01em;
         }
-        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-icon-wrap {
-            background: #0A0A0A;                 /* Black badge when active */
+        a.mega-panel-view-all {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
             color: #FBBF24;
-        }
-        .snap-mega-cat-item:hover .snap-mega-cat-icon-wrap {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .snap-mega-cat-name { flex: 1; }
-        .snap-mega-cat-arrow {
-            font-size: 14px;
-            color: rgba(255,255,255,0.3);
-            flex-shrink: 0;
-        }
-        .snap-mega-cat-item.snap-mega-cat-active .snap-mega-cat-arrow { color: #0A0A0A; }
-
-        /* ── RIGHT CONTENT PANEL ────────────────────────────── */
-        .snap-mega-content {
-            flex: 1;
-            padding: 20px 22px 18px;
-            overflow-y: auto;
-            background: transparent;
-        }
-        .snap-mega-content::-webkit-scrollbar { width: 3px; }
-        .snap-mega-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 0; }
-
-        /* Sub-panel (one per L2 item, hidden/shown via JS) */
-        .snap-mega-sub { display: none; flex-direction: column; }
-        .snap-mega-sub.snap-mega-sub-active { display: flex; }
-
-        /* Sub-panel section header */
-        .snap-mega-sub-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #1A56DB;                      /* Royal Blue label */
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255,255,255,0.1);   /* Underline */
-        }
-        .snap-mega-sub-title a {
-            font-size: 11px;
-            font-weight: 600;
-            color: #FBBF24;                      /* Sunshine yellow */
             text-decoration: none;
+            letter-spacing: 0.05em;
+            opacity: 0.85;
+            transition: opacity 0.15s;
+        }
+        a.mega-panel-view-all:hover { opacity: 1; }
+        .mega-panel-grid {
+            column-count: 4;
+            column-gap: 16px;
+        }
+        .mega-sub-container {
+            display: flex;
+            flex-direction: column;
+            break-inside: avoid;
+            margin-bottom: 2px;
+        }
+        .mega-sub-caret {
             margin-left: auto;
-            letter-spacing: 0;
-            text-transform: none;
-            padding: 2px 8px;
-            background: rgba(251,191,36,0.1);
-            border-radius: 0;                    /* No round edges */
-            transition: background 0.12s, color 0.12s;
+            font-size: 16px;
+            opacity: 0.5;
+            transition: transform 0.2s;
         }
-        .snap-mega-sub-title a:hover { background: #FBBF24; color: #0A0A0A; }
-
-        /* Sub-links grid */
-        .snap-mega-sub-grid {
+        .mega-sub-link.is-open .mega-sub-caret {
+            transform: rotate(180deg);
+        }
+        .mega-accordion-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease;
+            overflow: hidden;
         }
-
-        .snap-mega-sub-link {
+        .mega-accordion-content.is-open {
+            grid-template-rows: 1fr;
+        }
+        .mega-accordion-inner {
+            min-height: 0;
+            padding-left: 20px;
+            padding-bottom: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        a.mega-product-link {
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            padding: 4px 0;
+            transition: color 0.15s;
+        }
+        a.mega-product-link:hover {
+            color: rgba(255,255,255,0.8);
+        }
+        .mega-loading {
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            font-style: italic;
+            padding: 4px 0;
+        }
+        a.mega-sub-link {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 9px 10px;
+            padding: 6px 12px;
+            border-radius: 99px;
+            text-decoration: none;
+            color: rgba(255,255,255,0.55);
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 13px;
             font-weight: 500;
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            border-radius: 0;                    /* Sharp — Industrial Authority */
-            transition: color 0.12s, background 0.12s;
+            transition: all 0.15s ease;
         }
-        .snap-mega-sub-link:hover {
+        a.mega-sub-link:hover {
             color: #fff;
             background: rgba(255,255,255,0.06);
         }
-        .snap-mega-sub-link:hover .snap-mega-sub-dot { background: #FBBF24; }
-
-        /* Bullet dot */
-        .snap-mega-sub-dot {
+        .mega-sub-dot {
             width: 5px;
             height: 5px;
-            border-radius: 0;                    /* Square dot! */
-            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            background: rgba(251,191,36,0.5);
             flex-shrink: 0;
-            transition: background 0.12s;
         }
-
-        /* "Browse all" fallback — full width CTA-style */
-        .snap-mega-sub-link-full {
+        a.mega-sub-link:hover .mega-sub-dot { background: #FBBF24; }
+        a.mega-sub-link-browse {
             grid-column: 1 / -1;
-            color: #FBBF24;
-            font-weight: 700;
-            border: 1px solid rgba(251,191,36,0.3);
-            margin-top: 6px;
-            padding: 10px 14px;
+            font-style: italic;
+            color: rgba(255,255,255,0.4);
         }
-        .snap-mega-sub-link-full:hover {
-            background: #FBBF24;
-            color: #0A0A0A;
-            border-color: #FBBF24;
-        }
-        .snap-mega-sub-link-full:hover .snap-mega-sub-dot { background: #0A0A0A; }
-        .snap-mega-sub-link-full .snap-mega-sub-dot { background: #FBBF24; }
-        /* ── INVERTED THEME (Subpages) ───────────────────────── */
-        /* Smooth transitions for color changes */
-        #nav-header .text-white, #nav-header .bg-white, #nav-header .border-white\/10, 
-        #nav-header .text-white\/80, #nav-header .text-white\/70, #nav-header .text-white\/60, #nav-header .text-white\/50, #nav-header .text-white\/40, 
-        #nav-header span.material-symbols-outlined, #nav-header a.snap-nav-link {
-            transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Applied when not scrolled and on non-front pages */
-        #nav-header.theme-invert:not(.scrolled) .text-white { color: #0A0A0A !important; }
-        #nav-header.theme-invert:not(.scrolled) .text-white\/80 { color: rgba(10,10,10,0.8) !important; }
-        #nav-header.theme-invert:not(.scrolled) .text-white\/70 { color: rgba(10,10,10,0.7) !important; }
-        #nav-header.theme-invert:not(.scrolled) .text-white\/60 { color: rgba(10,10,10,0.6) !important; }
-        #nav-header.theme-invert:not(.scrolled) .text-white\/50 { color: rgba(10,10,10,0.5) !important; }
-        #nav-header.theme-invert:not(.scrolled) .text-white\/40 { color: rgba(10,10,10,0.4) !important; }
-        
-        #nav-header.theme-invert:not(.scrolled) .bg-white { background-color: #0A0A0A !important; }
-        #nav-header.theme-invert:not(.scrolled) .bg-white\/10 { background-color: rgba(10,10,10,0.1) !important; }
-        #nav-header.theme-invert:not(.scrolled) .bg-white\/5 { background-color: rgba(10,10,10,0.05) !important; }
-        
-        #nav-header.theme-invert:not(.scrolled) .border-white\/10 { border-color: rgba(10,10,10,0.2) !important; }
-        #nav-header.theme-invert:not(.scrolled) .border-white\/5 { border-color: rgba(10,10,10,0.1) !important; }
-        
-        #nav-header.theme-invert:not(.scrolled) a.snap-nav-link { color: rgba(10,10,10,0.82); }
-        #nav-header.theme-invert:not(.scrolled) a.snap-nav-link:hover { color: #1A56DB; background: rgba(26,86,219,0.06); }
-        #nav-header.theme-invert:not(.scrolled) .snap-nav-caret { color: #0A0A0A; }
     </style>
 </head>
 <body <?php body_class('bg-surface text-on-surface'); ?>>
 <?php wp_body_open(); ?>
 
+<!-- Section: Floating Navigation Wrapper -->
 <header class="relative z-50">
-  <nav id="floating-nav" class="fixed top-0 left-0 right-0 w-full z-[100]">
-    <?php $is_front = is_front_page(); ?>
-    <div id="nav-header" class="w-full max-w-[1536px] mx-auto px-4 lg:px-6 border border-transparent rounded-none <?php echo $is_front ? '' : 'theme-invert'; ?>">
-      <div class="flex items-center justify-between py-3 lg:py-3.5">
-
+  <nav id="floating-nav" class="fixed top-0 left-0 w-full z-[100] px-4 pointer-events-none transition-all duration-300">
+    <div id="nav-island" class="mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-2xl pointer-events-auto shadow-2xl">
+      <div class="relative flex flex-wrap items-center justify-between py-3 lg:py-4">
+        
         <!-- Logo -->
-        <div class="flex items-center shrink-0">
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3 group">
-            <!-- Yellow bolt icon — Industrial Authority -->
-            <span class="w-8 h-8 bg-[#FBBF24] flex items-center justify-center shadow-sm group-hover:shadow-[0_0_16px_rgba(251,191,36,0.4)] transition-shadow">
-              <span class="material-symbols-outlined text-[#0A0A0A] text-lg" style="font-variation-settings:'FILL' 1">bolt</span>
+        <div class="flex items-center relative z-20 shrink-0">
+          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3">
+            <span class="w-9 h-9 bg-secondary-container flex items-center justify-center rounded-lg shadow-inner">
+              <span class="material-symbols-outlined text-black text-xl" style="font-variation-settings:'FILL' 1">bolt</span>
             </span>
-            <span class="text-lg font-extrabold text-white tracking-tight" style="font-family:'Plus Jakarta Sans',sans-serif">
-              Snap <span class="text-[#FBBF24]">Marketing</span>
-            </span>
+            <span class="text-xl font-black text-white tracking-tight">Snap <span class="text-secondary-container italic">Marketing</span></span>
           </a>
         </div>
 
-        <!-- Desktop: Nav Links + Actions -->
-        <div class="hidden lg:flex items-center gap-1">
-          <?php snap_stitch_render_nav('desktop'); ?>
-
-          <!-- Divider -->
-          <div class="w-px h-5 bg-white/10 mx-3"></div>
-
-          <!-- Search -->
-          <button id="search-trigger" class="inline-flex items-center justify-center w-9 h-9 text-white/50 hover:text-[#FBBF24] hover:bg-[rgba(251,191,36,0.08)] transition-all cursor-pointer" aria-label="Search">
-            <span class="material-symbols-outlined text-[18px]">search</span>
-          </button>
-
-          <!-- Login -->
-          <a id="btn-login" href="/my-account" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white/70 hover:text-white border border-white/10 hover:border-[#1A56DB]/50 hover:bg-[rgba(26,86,219,0.08)] transition-all whitespace-nowrap" style="font-family:'Plus Jakarta Sans',sans-serif">Login</a>
-
-          <!-- Get Quote — Primary CTA: Yellow fill, Black text, Sharp corners -->
-          <a id="btn-quote" href="/request-a-quote" class="inline-flex items-center px-5 py-2 text-sm font-bold bg-[#FBBF24] text-[#0A0A0A] hover:bg-yellow-300 transition-all shadow-sm whitespace-nowrap" style="font-family:'Plus Jakarta Sans',sans-serif;border-radius:0;letter-spacing:0.02em">Get Quote</a>
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex flex-1 items-center justify-center relative z-20 mx-4" id="snap-nav-container">
+            <?php
+            wp_nav_menu( array(
+                'theme_location'  => 'primary',
+                'container'       => false,
+                'menu_id'         => 'snap-main-nav',
+                'menu_class'      => '',
+                'walker'          => new Tailwind_Nav_Walker(),
+                'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                'depth'           => 3,
+                'fallback_cb'     => false,
+            ) );
+            ?>
         </div>
 
-        <!-- Mobile: Search + Hamburger -->
-        <div class="flex items-center gap-2 lg:hidden">
-          <button id="search-trigger-mobile" class="p-2 text-white/60 hover:text-[#FBBF24] transition-colors" aria-label="Search">
-            <span class="material-symbols-outlined text-xl">search</span>
+        <!-- Right Side: Search, Buttons & Hamburger -->
+        <div class="flex items-center gap-4 relative z-20">
+          
+          <!-- Search Catalog Button -->
+          <button id="search-trigger" class="hidden lg:flex items-center justify-center p-2 text-white/80 hover:text-white transition-colors" aria-label="Search">
+            <span class="material-symbols-outlined">search</span>
           </button>
-          <button id="nav-toggle" class="flex flex-col gap-[5px] p-2 group" aria-label="Toggle menu">
-            <span class="block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center group-[.open]:rotate-45 group-[.open]:translate-y-[7px]"></span>
-            <span class="block w-5 h-[2px] bg-white rounded-full transition-all duration-300 group-[.open]:opacity-0"></span>
-            <span class="block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center group-[.open]:-rotate-45 group-[.open]:-translate-y-[7px]"></span>
-          </button>
-        </div>
-      </div>
 
-      <!-- Mobile Drawer -->
-      <div id="mobile-menu" class="hidden lg:hidden overflow-hidden transition-all duration-300">
-        <div class="pb-6 pt-4 border-t border-white/5 bg-[#0A0A0A]/95 backdrop-blur-xl mt-1">
-          <?php snap_stitch_render_nav('mobile'); ?>
-          <div class="flex flex-col gap-3 mt-5 px-4">
-            <a href="/my-account" class="text-center text-sm font-semibold text-white/70 hover:text-white border border-white/10 py-3 hover:bg-[rgba(26,86,219,0.1)] transition-all" style="font-family:'Plus Jakarta Sans',sans-serif">Login</a>
-            <a href="/request-a-quote" class="text-center text-sm font-bold bg-[#FBBF24] text-[#0A0A0A] py-3 hover:bg-yellow-300 transition-all shadow-sm" style="font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:0.02em">Get Quote</a>
+          <!-- NEW CART BUTTON DESKTOP -->
+          <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="hidden lg:flex items-center relative text-white/80 hover:text-white transition-colors" title="View your shopping cart">
+            <span class="material-symbols-outlined text-xl">shopping_cart</span>
+            <span class="snap-cart-count absolute -top-2 -right-2 bg-secondary-container text-black text-[10px] font-black w-4 h-4 flex items-center justify-center rounded-full">
+                <?php echo WC()->cart ? WC()->cart->get_cart_contents_count() : 0; ?>
+            </span>
+          </a>
+          <!-- Button Container (Visible on Desktop) -->
+          <div class="hidden lg:flex items-center gap-3">
+            <?php if ( is_user_logged_in() ) : 
+                $current_user = wp_get_current_user();
+                $first_name = $current_user->user_firstname ? $current_user->user_firstname : 'Account';
+            ?>
+                <!-- Hover Dropdown for Logged In User -->
+                <div class="relative group">
+                    <a href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ); ?>" class="flex items-center gap-2 text-white/80 hover:text-white font-bold text-xs uppercase tracking-widest px-5 py-2 border border-white/10 rounded-xl hover:bg-white/5 transition-all duration-300">
+                        <span class="material-symbols-outlined text-[16px]">person</span> 
+                        Hi, <?php echo esc_html( $first_name ); ?>
+                        <span class="material-symbols-outlined text-[14px] opacity-50 group-hover:rotate-180 transition-transform">expand_more</span>
+                    </a>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="absolute right-0 top-full mt-2 w-48 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 overflow-hidden">
+                        <a href="<?php echo esc_url( wc_get_account_endpoint_url( 'orders' ) ); ?>" class="block px-5 py-3 text-white/70 hover:text-[#FBBF24] hover:bg-white/5 text-xs font-bold tracking-widest uppercase transition-colors">Orders</a>
+                        <a href="<?php echo esc_url( wc_get_account_endpoint_url( 'edit-address' ) ); ?>" class="block px-5 py-3 text-white/70 hover:text-[#FBBF24] hover:bg-white/5 text-xs font-bold tracking-widest uppercase transition-colors">Addresses</a>
+                        <div class="border-t border-white/10 my-1"></div>
+                        <a href="<?php echo esc_url( wp_logout_url( home_url() ) ); ?>" class="block px-5 py-3 text-white/70 hover:text-red-400 hover:bg-white/5 text-xs font-bold tracking-widest uppercase transition-colors">Logout</a>
+                    </div>
+                </div>
+            <?php else : ?>
+                <!-- Login/Signup for Logged Out User -->
+                <a id="btn-login" href="/login" class="text-white/80 hover:text-white font-bold text-xs uppercase tracking-widest px-5 py-2 border border-white/10 rounded-xl hover:bg-white/5 transition-all duration-300">Login</a>
+                <a id="btn-signup" href="/register" class="bg-secondary-container text-black font-black text-xs uppercase tracking-widest px-5 py-2 rounded-xl hover:bg-yellow-400 transition-all duration-300 shadow-xl">Sign Up</a>
+            <?php endif; ?>
+
+            <!-- Corporate / Consumer Toggle -->
+            <?php if ( is_page('consumer') ) : ?>
+                <a href="/" class="text-[#FBBF24] hover:text-white font-bold text-xs uppercase tracking-widest px-4 py-2 border border-[#FBBF24]/30 rounded-xl hover:bg-[#FBBF24]/10 transition-all duration-300 js-select-business" title="Switch to Corporate Site"><span class="material-symbols-outlined text-[14px] align-middle mr-1">domain</span>Corporate</a>
+            <?php else : ?>
+                <a href="/consumer/" class="text-[#1A56DB] hover:text-white font-bold text-xs uppercase tracking-widest px-4 py-2 border border-[#1A56DB]/30 rounded-xl hover:bg-[#1A56DB]/10 transition-all duration-300 js-select-consumer" title="Switch to Consumer Site"><span class="material-symbols-outlined text-[14px] align-middle mr-1">shopping_cart</span>Consumer</a>
+            <?php endif; ?>
+            
+            <!-- Get Started: Visible ONLY when scrolled -->
+            <a id="btn-scrolled-cta" href="/request-a-quote" class="hidden items-center gap-2 bg-secondary-container text-black font-black text-xs uppercase px-6 py-2 rounded-xl tracking-widest hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-500 border border-black/10">
+              Get Quote
+              <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+            </a>
           </div>
+
+          <!-- Mobile Search Icon -->
+          <button id="search-trigger-mobile" class="lg:hidden flex items-center justify-center p-2 text-white/80 hover:text-white transition-colors" aria-label="Search">
+            <span class="material-symbols-outlined">search</span>
+          </button>
+
+          <!-- NEW CART BUTTON MOBILE -->
+          <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="lg:hidden flex items-center relative p-2 text-white/80 hover:text-white transition-colors" title="View your shopping cart">
+            <span class="material-symbols-outlined text-xl">shopping_cart</span>
+            <span class="snap-cart-count absolute top-0 right-0 bg-secondary-container text-black text-[10px] font-black w-4 h-4 flex items-center justify-center rounded-full">
+                <?php echo WC()->cart ? WC()->cart->get_cart_contents_count() : 0; ?>
+            </span>
+          </a>
+
+          <!-- Hamburger -->
+          <button id="nav-toggle" class="lg:hidden flex flex-col gap-1.5 p-2 group" aria-label="Toggle menu">
+            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
+            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
+            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
+          </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="w-full flex-col border border-white/10 p-5 rounded-3xl mt-4 gap-4 lg:hidden absolute top-full left-0 z-50 max-h-[85vh] overflow-y-auto overscroll-contain custom-scrollbar" style="background: rgba(10,10,10,0.98); backdrop-filter: blur(24px); box-shadow: 0 32px 64px -12px rgba(0,0,0,0.8); display: none;">
+
+          <!-- Mobile Action Buttons (Inside Hamburger) -->
+          <div class="w-full flex flex-col gap-3 pb-4 mb-2 border-b border-white/10">
+              <div class="w-full flex items-center justify-between gap-3">
+                  <?php if ( is_user_logged_in() ) : ?>
+                      <a href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ); ?>" class="flex flex-col items-center justify-center flex-1 text-center text-white/80 hover:text-white font-bold text-[10px] uppercase tracking-widest border border-white/15 py-1.5 rounded-xl hover:bg-white/5 transition-all">
+                          <span class="material-symbols-outlined text-[16px] mb-0.5">person</span> Account
+                      </a>
+                      <a href="<?php echo esc_url( wp_logout_url( home_url() ) ); ?>" class="flex flex-col items-center justify-center flex-1 text-center text-white/80 hover:text-red-400 font-bold text-[10px] uppercase tracking-widest border border-white/15 py-1.5 rounded-xl hover:bg-white/5 transition-all">
+                          <span class="material-symbols-outlined text-[16px] mb-0.5">logout</span> Logout
+                      </a>
+                  <?php else : ?>
+                      <a href="/login" class="flex-1 text-center text-white/80 hover:text-white font-bold text-xs uppercase tracking-widest border border-white/15 py-2.5 rounded-xl hover:bg-white/5 transition-all">Login</a>
+                      <a href="/request-a-quote" class="flex-1 flex items-center justify-center gap-2 bg-secondary-container text-black font-black text-xs uppercase px-4 py-2.5 tracking-widest rounded-xl shadow-xl active:scale-95 transition-all">Get Quote</a>
+                  <?php endif; ?>
+              </div>
+              
+              <!-- Corporate / Consumer Toggle Mobile -->
+              <div class="w-full flex justify-center">
+                  <?php if ( is_page('consumer') ) : ?>
+                      <a href="/" class="w-full flex items-center justify-center text-[#FBBF24] hover:text-white font-bold text-xs uppercase tracking-widest px-4 py-2 border border-[#FBBF24]/30 rounded-xl hover:bg-[#FBBF24]/10 transition-all duration-300 js-select-business" title="Switch to Corporate Site"><span class="material-symbols-outlined text-[14px] align-middle mr-1">domain</span>Switch to Corporate</a>
+                  <?php else : ?>
+                      <a href="/consumer/" class="w-full flex items-center justify-center text-[#1A56DB] hover:text-white font-bold text-xs uppercase tracking-widest px-4 py-2 border border-[#1A56DB]/30 rounded-xl hover:bg-[#1A56DB]/10 transition-all duration-300 js-select-consumer" title="Switch to Consumer Site"><span class="material-symbols-outlined text-[14px] align-middle mr-1">shopping_cart</span>Switch to Consumer</a>
+                  <?php endif; ?>
+              </div>
+          </div>
+
+
+          <?php
+          // ── 3-Level Mobile Nav: reads from WordPress Primary Menu ──
+          $locations     = get_nav_menu_locations();
+          $menu_obj      = isset( $locations['primary'] ) ? wp_get_nav_menu_object( $locations['primary'] ) : null;
+
+          if ( $menu_obj ) {
+              $all_items = wp_get_nav_menu_items( $menu_obj->term_id );
+
+              // Build a parent→children map
+              $by_parent = [];
+              foreach ( $all_items as $mi ) {
+                  $by_parent[ (int) $mi->menu_item_parent ][] = $mi;
+              }
+
+              // ── Render one level ──────────────────────────────────
+              // $level: 1=L1, 2=L2, 3=L3
+              $render_level = function( $parent_id, $level ) use ( &$render_level, &$by_parent ) {
+                  if ( empty( $by_parent[ $parent_id ] ) ) return;
+
+                  foreach ( $by_parent[ $parent_id ] as $mi ) {
+                      $has_children = ! empty( $by_parent[ $mi->ID ] );
+                      $url          = esc_url( $mi->url );
+                      $title        = esc_html( $mi->title );
+
+                      if ( $level === 1 ) {
+                          // ── L1 item ──────────────────────────────
+                          if ( $has_children ) {
+                              echo '<div class="mobile-accordion">';
+                              echo '<button class="mobile-acc-toggle w-full flex items-center justify-between py-4 text-white/70 hover:text-white font-bold text-sm uppercase tracking-widest transition-colors border-b border-white/8" aria-expanded="false" style="background:none; border-left:none; border-right:none; border-top:none; cursor:pointer;">';
+                              echo '<span>' . $title . '</span>';
+                              echo '<span class="material-symbols-outlined mobile-acc-caret" style="font-size:18px">expand_more</span>';
+                              echo '</button>';
+                              echo '<div class="mobile-acc-content pl-2">';
+                              $render_level( $mi->ID, 2 );
+                              echo '</div>';
+                              echo '</div>';
+                          } else {
+                              echo '<a href="' . $url . '" class="block py-4 border-b border-white/8 text-white/70 hover:text-white font-bold text-sm uppercase tracking-widest transition-colors">' . $title . '</a>';
+                          }
+
+                      } elseif ( $level === 2 ) {
+                          // ── L2 item ──────────────────────────────
+                          if ( $has_children ) {
+                              echo '<div class="mobile-l2-accordion mt-1">';
+                              echo '<button class="mobile-l2-toggle w-full flex items-center justify-between py-2.5 pl-3 pr-1 text-white/55 hover:text-white/90 font-semibold text-xs uppercase tracking-wider rounded-lg hover:bg-white/5 transition-all" aria-expanded="false" style="background:none; border:none; cursor:pointer;">';
+                              echo '<span>' . $title . '</span>';
+                              echo '<span class="material-symbols-outlined mobile-l2-caret" style="font-size:16px">expand_more</span>';
+                              echo '</button>';
+                              echo '<div class="mobile-l2-acc-content pl-4">';
+                              // Add a link to the main category archive
+                              echo '<a href="' . $url . '" class="block py-2.5 pl-2 text-white/40 hover:text-white/90 text-xs font-semibold uppercase tracking-wider rounded-lg hover:bg-white/5 transition-all mb-1 border-b border-white/5 border-dashed"><span class="material-symbols-outlined text-[14px] align-middle mr-1">grid_view</span> Show Products</a>';
+                              $render_level( $mi->ID, 3 );
+                              echo '</div>';
+                              echo '</div>';
+                          } else {
+                              echo '<a href="' . $url . '" class="block py-2.5 pl-3 text-white/55 hover:text-white/90 text-xs font-semibold uppercase tracking-wider rounded-lg hover:bg-white/5 transition-all">' . $title . '</a>';
+                          }
+
+                      } elseif ( $level === 3 ) {
+                          // ── L3 item (AJAX Accordion) ─────────────
+                          $cat_id = $mi->object_id;
+                          echo '<div class="mobile-l3-accordion mt-1">';
+                          echo '<button class="mobile-l3-toggle w-full flex items-center justify-between py-2 pl-2 text-white/40 hover:text-yellow-400 text-xs font-medium tracking-wide rounded hover:bg-white/3 transition-all js-mobile-product-toggle" data-cat="' . $cat_id . '" aria-expanded="false" style="background:none; border:none; cursor:pointer;">';
+                          echo '<div class="flex items-center gap-2">';
+                          echo '<span style="width:4px; height:4px; background: rgba(251,191,36,0.5); border-radius:50%; flex-shrink:0; display:inline-block;"></span>';
+                          echo '<span>' . $title . '</span>';
+                          echo '</div>';
+                          echo '<span class="material-symbols-outlined mobile-l3-caret" style="font-size:14px">expand_more</span>';
+                          echo '</button>';
+                          echo '<div class="mobile-l3-acc-content pl-6 mt-1 flex-col gap-2"></div>';
+                          echo '</div>';
+                      }
+                  }
+              };
+
+              // Render from root (parent_id = 0)
+              $render_level( 0, 1 );
+          }
+          ?>
         </div>
       </div>
     </div>
   </nav>
 </header>
 
-<!-- Search Modal -->
-<div id="search-modal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-[#0A0A0A]/92 backdrop-blur-xl p-4 transition-all duration-300 opacity-0 invisible">
-    <div class="w-full max-w-4xl transform scale-95 transition-all duration-300">
-        <button id="search-close" class="absolute -top-12 right-0 text-white/60 hover:text-[#FBBF24] flex items-center gap-2 text-xs font-bold tracking-widest uppercase" style="font-family:'Plus Jakarta Sans',sans-serif">
-            Close <span class="material-symbols-outlined text-xl">close</span>
-        </button>
-        <form role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="relative">
-            <input type="text" name="s" id="search-input" placeholder="Search by brand, SKU, or category..."
-                class="w-full bg-white/5 border-b-2 border-white/20 text-white text-3xl md:text-5xl font-bold py-8 px-4 focus:outline-none focus:border-[#FBBF24] transition-colors placeholder:text-white/10"
-                style="font-family:'Plus Jakarta Sans',sans-serif">
-            <input type="hidden" name="post_type" value="product">
-            <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#FBBF24]">
-                <span class="material-symbols-outlined text-5xl">arrow_forward</span>
-            </button>
-        </form>
-        <div class="mt-12">
-            <h4 class="text-white/30 text-xs font-bold uppercase tracking-[0.3em] mb-6" style="font-family:'Plus Jakarta Sans',sans-serif">Trending Categories</h4>
-            <div class="flex flex-wrap gap-3">
-                <?php
-                $pop_cats = get_transient( 'snap_trending_categories' );
-                if ( false === $pop_cats ) {
-                    $pop_cats = get_terms( ['taxonomy' => 'product_cat', 'number' => 5, 'orderby' => 'count', 'order' => 'DESC', 'hide_empty' => true] );
-                    if ( ! is_wp_error( $pop_cats ) ) {
-                        set_transient( 'snap_trending_categories', $pop_cats, DAY_IN_SECONDS );
-                    }
-                }
-                
-                if ( ! is_wp_error( $pop_cats ) && is_array( $pop_cats ) ) {
-                    foreach ( $pop_cats as $cat ) {
-                        echo '<a href="' . esc_url( get_term_link( $cat ) ) . '" class="px-5 py-2.5 bg-white/5 border border-white/10 text-white/60 text-sm font-medium hover:bg-[#FBBF24] hover:text-[#0A0A0A] hover:border-transparent transition-all" style="font-family:\'Plus Jakarta Sans\',sans-serif">' . esc_html( $cat->name ) . '</a>';
-                    }
-                }
-                ?>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-  // ── HEADER SCROLL ──────────────────────────────────────────────────
-  const navHeader = document.getElementById('nav-header');
-  let ticking = false;
+  const navIsland = document.getElementById('nav-island');
+  const btnLogin = document.getElementById('btn-login');
+  const btnSignup = document.getElementById('btn-signup');
+  const btnScrolledCta = document.getElementById('btn-scrolled-cta');
 
-  function updateHeader() {
-    if (window.scrollY > 10) {
-      navHeader.classList.add('scrolled');
-    } else {
-      navHeader.classList.remove('scrolled');
-    }
-    ticking = false;
-  }
   window.addEventListener('scroll', function() {
-    if (!ticking) { window.requestAnimationFrame(updateHeader); ticking = true; }
+    if (window.scrollY > 50) {
+        navIsland.classList.remove('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl', 'rounded-none');
+        navIsland.classList.add('max-w-6xl', 'mt-2', 'lg:px-10', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full');
+        btnLogin.classList.add('lg:hidden');
+        btnSignup.classList.add('lg:hidden');
+        btnScrolledCta.classList.remove('hidden');
+        btnScrolledCta.classList.add('flex');
+    } else {
+        navIsland.classList.add('max-w-screen-xl', 'mt-4', 'lg:px-12', 'bg-black/40', 'border-white/5', 'rounded-2xl');
+        navIsland.classList.remove('max-w-6xl', 'mt-2', 'lg:px-10', 'bg-black/80', 'backdrop-blur-xl', 'border-white/15', 'shadow-[0_20px_50px_rgba(0,0,0,0.5)]', 'rounded-full', 'rounded-none');
+        btnLogin.classList.remove('lg:hidden');
+        btnSignup.classList.remove('lg:hidden');
+        btnScrolledCta.classList.add('hidden');
+        btnScrolledCta.classList.remove('flex');
+    }
   });
 
-  // ── MOBILE MENU TOGGLE ─────────────────────────────────────────────
-  const navToggle  = document.getElementById('nav-toggle');
+  const navToggle = document.getElementById('nav-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   navToggle.addEventListener('click', function() {
     this.classList.toggle('open');
-    mobileMenu.classList.toggle('hidden');
-    if (!mobileMenu.classList.contains('hidden')) {
-      navHeader.style.background = 'rgba(10, 10, 10, 0.97)';
-      navHeader.style.backdropFilter = 'blur(20px)';
-    } else if (window.scrollY <= 10) {
-      navHeader.style.background = '';
-      navHeader.style.backdropFilter = '';
+    const isHidden = mobileMenu.style.display === 'none' || mobileMenu.style.display === '';
+    mobileMenu.style.display = isHidden ? 'flex' : 'none';
+    mobileMenu.style.flexDirection = 'column';
+  });
+
+  // ── Mobile Accordion (L1) ────────────────────────────────────
+  document.addEventListener('click', function(e) {
+    const l1Btn = e.target.closest('.mobile-acc-toggle');
+    if (l1Btn) {
+      const content = l1Btn.nextElementSibling;
+      const isOpen  = content.classList.contains('is-open');
+      content.classList.toggle('is-open', !isOpen);
+      l1Btn.setAttribute('aria-expanded', String(!isOpen));
+      return;
+    }
+
+    // ── Mobile Accordion (L2) ──────────────────────────────────
+    const l2Btn = e.target.closest('.mobile-l2-toggle');
+    if (l2Btn) {
+      const content = l2Btn.nextElementSibling;
+      const isOpen  = content.classList.contains('is-open');
+      content.classList.toggle('is-open', !isOpen);
+      l2Btn.setAttribute('aria-expanded', String(!isOpen));
+      return;
+    }
+
+    // ── Mobile Accordion (L3 / Products AJAX) ──────────────────
+    const l3Btn = e.target.closest('.js-mobile-product-toggle');
+    if (l3Btn) {
+      const content = l3Btn.nextElementSibling;
+      const isOpen  = content.classList.contains('is-open');
+      content.classList.toggle('is-open', !isOpen);
+      l3Btn.setAttribute('aria-expanded', String(!isOpen));
+
+      if (!isOpen && !content.hasAttribute('data-loaded')) {
+          content.innerHTML = '<div style="color:rgba(255,255,255,0.5); font-size:11px; padding:8px 0;">Loading products...</div>';
+          content.setAttribute('data-loaded', 'true');
+          
+          let fd = new URLSearchParams();
+          fd.append('action', 'snap_get_menu_products');
+          fd.append('cat_id', l3Btn.dataset.cat);
+
+          fetch(snap_ajax_obj.ajax_url, {
+              method: 'POST',
+              body: fd
+          }).then(r => r.json()).then(res => {
+              if (res.success && res.data.products && res.data.products.length > 0) {
+                  let html = '';
+                  res.data.products.forEach(p => {
+                      html += '<a href="'+p.url+'" class="block py-1.5 text-white/50 hover:text-white text-[11px] font-semibold uppercase tracking-wider transition-colors">'+p.title+'</a>';
+                  });
+                  if(res.data.view_all) {
+                      html += '<a href="'+res.data.view_all+'" class="block py-1.5 text-[#FBBF24] hover:text-white text-[11px] font-bold italic uppercase tracking-wider mt-1">View all products &rarr;</a>';
+                  }
+                  content.innerHTML = html;
+              } else {
+                  content.innerHTML = '<div style="color:#ef4444; font-size:11px; padding:4px 0;">No products found.</div>';
+              }
+          }).catch(err => {
+              content.innerHTML = '<div style="color:#ef4444; font-size:11px; padding:4px 0;">Failed to load.</div>';
+          });
+      }
     }
   });
 
-  // ── MOBILE ACCORDION ───────────────────────────────────────────────
-  document.querySelectorAll('.mobile-menu-group > a').forEach(link => {
-    const chevron = link.querySelector('.mobile-chevron');
-    if (!chevron) return;
-    link.addEventListener('click', function(e) {
-      const submenu = this.nextElementSibling;
-      if (submenu && submenu.classList.contains('mobile-submenu')) {
-        e.preventDefault();
-        submenu.classList.toggle('hidden');
-        submenu.classList.toggle('open');
-        chevron.style.transform = submenu.classList.contains('open') ? 'rotate(180deg)' : '';
+  // ── MEGA MENU: dynamic positioning + panel switching ──────────
+  (function() {
+    function updateNavBottom() {
+      const nav = document.getElementById('floating-nav');
+      if (!nav) return;
+      document.documentElement.style.setProperty('--nav-bottom', nav.getBoundingClientRect().bottom + 'px');
+    }
+    updateNavBottom();
+    window.addEventListener('scroll', updateNavBottom, { passive: true });
+    window.addEventListener('resize', updateNavBottom, { passive: true });
+
+    // Sidebar hover → switch right panel
+      document.querySelectorAll('.mega-cat-item').forEach(function(catItem) {
+        catItem.addEventListener('mouseenter', function() {
+          const panelId = this.dataset.panel;
+          const wrapper = this.closest('.mega-wrapper');
+          if (!wrapper || !panelId) return;
+          wrapper.querySelectorAll('.mega-cat-item').forEach(function(el) { el.classList.remove('mega-cat-active'); });
+          this.classList.add('mega-cat-active');
+          wrapper.querySelectorAll('.mega-panel').forEach(function(el) { el.classList.remove('mega-panel-active'); });
+          const target = wrapper.querySelector('#' + panelId);
+          if (target) target.classList.add('mega-panel-active');
+        });
+      });
+
+      // AJAX Mega Menu Accordion
+      document.querySelectorAll('.js-mega-accordion-trigger').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          const catId = this.dataset.catId;
+          if (!catId) return; // normal navigation
+          
+          const content = document.getElementById('mega-acc-' + catId);
+          if (!content) return;
+          
+          e.preventDefault();
+          
+          const isOpen = content.classList.contains('is-open');
+          
+          // Close others in same panel
+          const wrapper = this.closest('.mega-panel-grid');
+          if (wrapper) {
+              wrapper.querySelectorAll('.mega-accordion-content.is-open').forEach(el => {
+                  if(el !== content) el.classList.remove('is-open');
+              });
+              wrapper.querySelectorAll('.js-mega-accordion-trigger.is-open').forEach(el => {
+                  if(el !== this) el.classList.remove('is-open');
+              });
+          }
+          
+          if (isOpen) {
+              content.classList.remove('is-open');
+              this.classList.remove('is-open');
+              return;
+          }
+          
+          content.classList.add('is-open');
+          this.classList.add('is-open');
+          
+          if (!content.dataset.loaded) {
+              content.dataset.loaded = 'true';
+              const inner = content.querySelector('.mega-accordion-inner');
+              
+              const fd = new FormData();
+              fd.append('action', 'snap_get_menu_products');
+              fd.append('cat_id', catId);
+              
+              // use global ajaxurl if available, fallback to /wp-admin/admin-ajax.php
+              const ajaxUrl = (typeof ajaxurl !== 'undefined') ? ajaxurl : '/wp-admin/admin-ajax.php';
+              
+              fetch(ajaxUrl, {
+                  method: 'POST',
+                  body: fd
+              }).then(r => r.json()).then(res => {
+                  if (res.success && res.data.products && res.data.products.length > 0) {
+                      let html = '';
+                      res.data.products.forEach(p => {
+                          html += '<a href="'+p.url+'" class="mega-product-link">'+p.title+'</a>';
+                      });
+                      if(res.data.view_all) {
+                          html += '<a href="'+res.data.view_all+'" class="mega-product-link" style="color:#FBBF24; margin-top: 4px; display: block; font-style: italic;">View all products &rarr;</a>';
+                      }
+                      inner.innerHTML = html;
+                  } else {
+                      inner.innerHTML = '<div class="mega-loading" style="color: #ef4444">No products found.</div>';
+                  }
+              }).catch(err => {
+                  inner.innerHTML = '<div class="mega-loading" style="color: #ef4444">Failed to load.</div>';
+              });
+          }
+        });
+      });
+    })();
+  </script>
+
+  <div id="snap-search-modal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" id="snap-search-overlay"></div>
+    <div class="absolute top-24 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4">
+      <div class="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col border border-white/10">
+        <div class="relative flex items-center p-4 border-b border-gray-100">
+          <span class="material-symbols-outlined absolute left-6 text-gray-400">search</span>
+          <input type="text" id="snap-search-input" class="w-full pl-12 pr-4 py-3 text-lg font-bold text-gray-900 placeholder-gray-400 outline-none border-none focus:ring-0" placeholder="Search for products, models, or categories..." autocomplete="off">
+          <button id="snap-search-close" class="absolute right-4 p-2 text-gray-400 hover:text-black transition-colors">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div id="snap-search-results" class="max-h-[60vh] overflow-y-auto bg-gray-50 hidden">
+          <!-- Results will be injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const triggerDesktop = document.getElementById('search-trigger');
+      const triggerMobile = document.getElementById('search-trigger-mobile');
+      const modal = document.getElementById('snap-search-modal');
+      const overlay = document.getElementById('snap-search-overlay');
+      const closeBtn = document.getElementById('snap-search-close');
+      const input = document.getElementById('snap-search-input');
+      const resultsContainer = document.getElementById('snap-search-results');
+      
+      let searchTimeout = null;
+
+      function openModal() {
+        modal.classList.remove('hidden');
+        setTimeout(() => input.focus(), 100);
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        input.value = '';
+        resultsContainer.innerHTML = '';
+        resultsContainer.classList.add('hidden');
+      }
+
+      if(triggerDesktop) triggerDesktop.addEventListener('click', openModal);
+      if(triggerMobile) triggerMobile.addEventListener('click', openModal);
+      if(overlay) overlay.addEventListener('click', closeModal);
+      if(closeBtn) closeBtn.addEventListener('click', closeModal);
+
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+
+      if(input) {
+        input.addEventListener('input', function(e) {
+          const query = e.target.value.trim();
+          
+          if (searchTimeout) clearTimeout(searchTimeout);
+          
+          if (query.length < 2) {
+            resultsContainer.classList.add('hidden');
+            resultsContainer.innerHTML = '';
+            return;
+          }
+
+          searchTimeout = setTimeout(() => {
+            resultsContainer.classList.remove('hidden');
+            resultsContainer.innerHTML = '<div class="p-8 text-center text-gray-500 flex items-center justify-center gap-2"><span class="material-symbols-outlined animate-spin">progress_activity</span> Searching...</div>';
+            
+            const fd = new FormData();
+            fd.append('action', 'snap_ajax_search');
+            fd.append('s', query);
+
+            const ajaxUrl = (typeof ajaxurl !== 'undefined') ? ajaxurl : '/wp-admin/admin-ajax.php';
+            
+            fetch(ajaxUrl, {
+              method: 'POST',
+              body: fd
+            })
+            .then(res => res.json())
+            .then(res => {
+              if (res.success && res.data.length > 0) {
+                let html = '<ul class="divide-y divide-gray-100">';
+                res.data.forEach(item => {
+                  html += 
+                    <li>
+                      <a href="\" class="flex items-center gap-4 p-4 hover:bg-white transition-colors group">
+                        <div class="w-16 h-16 bg-white border border-gray-100 p-1 flex-shrink-0">
+                          <img src="\" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform">
+                        </div>
+                        <div class="flex-grow min-w-0">
+                          <h4 class="text-sm font-bold text-gray-900 truncate group-hover:text-[#1A56DB] transition-colors">\</h4>
+                        </div>
+                        <div class="flex-shrink-0 text-right">
+                          \
+                        </div>
+                      </a>
+                    </li>
+                  ;
+                });
+                html += '</ul>';
+                resultsContainer.innerHTML = html;
+              } else {
+                resultsContainer.innerHTML = '<div class="p-8 text-center text-gray-500 font-medium">No products found matching "'+query+'"</div>';
+              }
+            })
+            .catch(() => {
+              resultsContainer.innerHTML = '<div class="p-8 text-center text-red-500 font-medium">An error occurred while searching.</div>';
+            });
+          }, 400);
+        });
       }
     });
-  });
+  </script>
+  <!-- Search Modal -->
+  <div id="snap-search-modal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" id="snap-search-overlay"></div>
+    <div class="absolute top-24 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4">
+      <div class="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col border border-white/10">
+        <div class="relative flex items-center p-4 border-b border-gray-100">
+          <span class="material-symbols-outlined absolute left-6 text-gray-400">search</span>
+          <input type="text" id="snap-search-input" class="w-full pl-12 pr-4 py-3 text-lg font-bold text-gray-900 placeholder-gray-400 outline-none border-none focus:ring-0" placeholder="Search for products, models, or categories..." autocomplete="off">
+          <button id="snap-search-close" class="absolute right-4 p-2 text-gray-400 hover:text-black transition-colors">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div id="snap-search-results" class="max-h-[60vh] overflow-y-auto bg-gray-50 hidden">
+          <!-- Results will be injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
 
-  // ── MEGA MENU — SIDEBAR HOVER INTERACTION ──────────────────────────
-  document.querySelectorAll('.snap-mega-cat-item').forEach(function(catItem) {
-    catItem.addEventListener('mouseenter', function() {
-      var menu = this.closest('.snap-mega-menu');
-      if (!menu) return;
-      var catKey = this.getAttribute('data-cat');
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const triggerDesktop = document.getElementById('search-trigger');
+      const triggerMobile = document.getElementById('search-trigger-mobile');
+      const modal = document.getElementById('snap-search-modal');
+      const overlay = document.getElementById('snap-search-overlay');
+      const closeBtn = document.getElementById('snap-search-close');
+      const input = document.getElementById('snap-search-input');
+      const resultsContainer = document.getElementById('snap-search-results');
+      
+      let searchTimeout = null;
 
-      menu.querySelectorAll('.snap-mega-cat-item').forEach(el => el.classList.remove('snap-mega-cat-active'));
-      menu.querySelectorAll('.snap-mega-sub').forEach(el => el.classList.remove('snap-mega-sub-active'));
+      function openModal() {
+        modal.classList.remove('hidden');
+        setTimeout(() => input.focus(), 100);
+      }
 
-      this.classList.add('snap-mega-cat-active');
-      var sub = menu.querySelector('.snap-mega-sub[data-for="' + catKey + '"]');
-      if (sub) sub.classList.add('snap-mega-sub-active');
-    });
-  });
+      function closeModal() {
+        modal.classList.add('hidden');
+        input.value = '';
+        resultsContainer.innerHTML = '';
+        resultsContainer.classList.add('hidden');
+      }
 
-  // Reset to first item on menu leave
-  document.querySelectorAll('.snap-mega-menu').forEach(function(menu) {
-    menu.addEventListener('mouseleave', function() {
-      var firstCat = menu.querySelector('.snap-mega-cat-item');
-      var firstSub = menu.querySelector('.snap-mega-sub');
-      if (firstCat && firstSub) {
-        menu.querySelectorAll('.snap-mega-cat-item').forEach(el => el.classList.remove('snap-mega-cat-active'));
-        menu.querySelectorAll('.snap-mega-sub').forEach(el => el.classList.remove('snap-mega-sub-active'));
-        firstCat.classList.add('snap-mega-cat-active');
-        firstSub.classList.add('snap-mega-sub-active');
+      if(triggerDesktop) triggerDesktop.addEventListener('click', openModal);
+      if(triggerMobile) triggerMobile.addEventListener('click', openModal);
+      if(overlay) overlay.addEventListener('click', closeModal);
+      if(closeBtn) closeBtn.addEventListener('click', closeModal);
+
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+
+      if(input) {
+        input.addEventListener('input', function(e) {
+          const query = e.target.value.trim();
+          
+          if (searchTimeout) clearTimeout(searchTimeout);
+          
+          if (query.length < 2) {
+            resultsContainer.classList.add('hidden');
+            resultsContainer.innerHTML = '';
+            return;
+          }
+
+          searchTimeout = setTimeout(() => {
+            resultsContainer.classList.remove('hidden');
+            resultsContainer.innerHTML = '<div class="p-8 text-center text-gray-500 flex items-center justify-center gap-2"><span class="material-symbols-outlined animate-spin">progress_activity</span> Searching...</div>';
+            
+            const fd = new FormData();
+            fd.append('action', 'snap_ajax_search');
+            fd.append('s', query);
+
+            const ajaxUrl = (typeof ajaxurl !== 'undefined') ? ajaxurl : '/wp-admin/admin-ajax.php';
+            
+            fetch(ajaxUrl, {
+              method: 'POST',
+              body: fd
+            })
+            .then(res => res.json())
+            .then(res => {
+              if (res.success && res.data.length > 0) {
+                let html = '<ul class="divide-y divide-gray-100">';
+                res.data.forEach(item => {
+                  html += `
+                    <li>
+                      <a href="${item.url}" class="flex items-center gap-4 p-4 hover:bg-white transition-colors group">
+                        <div class="w-16 h-16 bg-white border border-gray-100 p-1 flex-shrink-0">
+                          <img src="${item.image}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform">
+                        </div>
+                        <div class="flex-grow min-w-0">
+                          <h4 class="text-sm font-bold text-gray-900 truncate group-hover:text-[#1A56DB] transition-colors">${item.title}</h4>
+                        </div>
+                        <div class="flex-shrink-0 text-right">
+                          ${item.price}
+                        </div>
+                      </a>
+                    </li>
+                  `;
+                });
+                html += '</ul>';
+                resultsContainer.innerHTML = html;
+              } else {
+                resultsContainer.innerHTML = '<div class="p-8 text-center text-gray-500 font-medium">No products found matching "'+query+'"</div>';
+              }
+            })
+            .catch(() => {
+              resultsContainer.innerHTML = '<div class="p-8 text-center text-red-500 font-medium">An error occurred while searching.</div>';
+            });
+          }, 400);
+        });
       }
     });
-  });
-
-  // ── SEARCH MODAL ───────────────────────────────────────────────────
-  const searchTrigger       = document.getElementById('search-trigger');
-  const searchTriggerMobile = document.getElementById('search-trigger-mobile');
-  const searchModal         = document.getElementById('search-modal');
-  const searchClose         = document.getElementById('search-close');
-  const searchInput         = document.getElementById('search-input');
-
-  const openSearch = () => {
-    searchModal.classList.remove('hidden', 'opacity-0', 'invisible');
-    searchModal.classList.add('flex', 'opacity-100', 'visible');
-    searchModal.querySelector('div').classList.remove('scale-95');
-    searchModal.querySelector('div').classList.add('scale-100');
-    setTimeout(() => searchInput.focus(), 300);
-    document.body.style.overflow = 'hidden';
-  };
-  if (searchTrigger)       searchTrigger.addEventListener('click', openSearch);
-  if (searchTriggerMobile) searchTriggerMobile.addEventListener('click', openSearch);
-
-  function closeSearch() {
-    searchModal.classList.remove('opacity-100', 'visible');
-    searchModal.classList.add('opacity-0', 'invisible');
-    searchModal.querySelector('div').classList.remove('scale-100');
-    searchModal.querySelector('div').classList.add('scale-95');
-    setTimeout(() => {
-      searchModal.classList.add('hidden');
-      searchModal.classList.remove('flex');
-      document.body.style.overflow = '';
-    }, 300);
-  }
-  searchClose.addEventListener('click', closeSearch);
-  searchModal.addEventListener('click', e => { if (e.target === searchModal) closeSearch(); });
-  window.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
-</script>
-</body>
-</html>
+  </script>

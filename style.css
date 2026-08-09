@@ -1,10 +1,9 @@
-
 .bg-primary-container { background-color: #1A56DB !important; }/*
 Theme Name: Snap Marketing Stitch Theme Elite
 Theme URI: http://snapmarketing.in
 Author: Devesh Arya
 Description: A custom native WordPress theme built from Stitch HTML/CSS designs for Snap Marketing.
-Version: 7.0.1004
+Version: 7.0.1005
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: snap-stitch-theme
@@ -273,3 +272,13 @@ html.lenis, html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* Global Product Image Fix */
+.woocommerce img,
+.woocommerce-page img,
+.aspect-square img,
+.snap-woo-wrapper img {
+    mix-blend-mode: multiply !important;
+    object-fit: contain !important;
+}
+
