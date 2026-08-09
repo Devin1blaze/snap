@@ -28,7 +28,7 @@ get_header();
         [
           'badge'    => 'COMMERCIAL REFRIGERATION',
           'heading'  => 'Cold Chain <br/><span class="text-[#FBBF24]">Solutions.</span>',
-          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western Ã¢â‚¬â€ engineered for industrial uptime.',
+          'desc'     => 'Deep freezers, display coolers, and walk-in cold rooms from Blue Star, Voltas, and Western — engineered for industrial uptime.',
           'cta1_text'=> 'Explore Range',
           'cta1_href'=> '/product-category/commercial-refrigeration/',
           'cta2_text'=> 'Get Pricing',
@@ -39,7 +39,7 @@ get_header();
         [
           'badge'    => 'HYGIENE & PPE',
           'heading'  => 'Automated Hygiene <br/><span class="text-[#FBBF24]">at Scale.</span>',
-          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics Ã¢â‚¬â€ deployed across 500+ facilities.',
+          'desc'     => 'Touchless dispensers, sanitizer stations, and PPE kits from Kimberly Clark, Dettol, and Euronics — deployed across 500+ facilities.',
           'cta1_text'=> 'Shop Hygiene',
           'cta1_href'=> '/product-category/hygiene-ppe/',
           'cta2_text'=> 'Get Quote',
@@ -64,9 +64,7 @@ get_header();
                     <h1 class="hero-animate text-white text-4xl sm:text-5xl md:text-[72px] font-extrabold leading-[1.05] tracking-tight mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">
                         <?= $slide['heading'] ?>
                     </h1>
-                    <p class="hero-animate text-white/90 text-[18px] max-w-2xl leading-relaxed mb-8 font-medium">
-                        <?= $slide['desc'] ?>
-                    </p>
+
                     <div class="hero-animate flex flex-wrap gap-3">
                         <a href="<?= $slide['cta1_href'] ?>" class="bg-[#FBBF24] text-black px-8 py-4 font-black uppercase text-sm tracking-widest flex items-center gap-2 hover:bg-yellow-400 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300 rounded-none">
                             <?= $slide['cta1_text'] ?> <span class="material-symbols-outlined text-lg">arrow_forward</span>
@@ -239,7 +237,7 @@ get_header();
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-[#0A0A0A]">Delivering Excellence in Industrial Solutions</h2>
           </div>
           <div class="reveal">
-            <p class="text-lg leading-relaxed text-zinc-300 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India Ã¢â‚¬â€ reliability and scale you can count on.</p>
+            <p class="text-lg leading-relaxed text-zinc-600 font-medium">Snap Marketing supplies washroom automations, commercial refrigeration, vending machines, and hygiene solutions to 500+ enterprises pan-India — reliability and scale you can count on.</p>
           </div>
         </div>
         <!-- Feature items -->
@@ -258,8 +256,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">local_shipping</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-white mb-1">Pan-India Distribution</h3>
-              <p class="text-sm leading-relaxed text-zinc-400">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
+              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Pan-India Distribution</h3>
+              <p class="text-sm leading-relaxed text-zinc-600">Serving distributors, dealers, and corporate clients across India with fast, reliable logistics.</p>
             </div>
           </div>
           <div class="reveal flex gap-4 items-start">
@@ -267,8 +265,8 @@ get_header();
               <span class="material-symbols-outlined text-white text-xl">workspace_premium</span>
             </div>
             <div>
-              <h3 class="font-black text-base text-white mb-1">Quality Assurance</h3>
-              <p class="text-sm leading-relaxed text-zinc-400">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
+              <h3 class="font-black text-base text-[#0A0A0A] mb-1">Quality Assurance</h3>
+              <p class="text-sm leading-relaxed text-zinc-600">Every product is inspected and tested to meet our ISO 9001:2015 standards before dispatch.</p>
             </div>
           </div>
         </div>
@@ -642,7 +640,7 @@ $industries = [
                                             </div>
                                             <div class="mt-auto flex gap-2">
                                                 <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-[10px] hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
-                                                    <?php echo $is_b2b ? 'Ã¢â€šÂ¹ Request Bulk Price' : 'View Details'; ?>
+                                                    <?php echo $is_b2b ? '₹ Request Bulk Price' : 'View Details'; ?>
                                                 </a>
                                                 <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
                                                     <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
@@ -721,198 +719,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 </style>
 
-<!-- Section: Process Management -->
-<section class="bg-[#FFFFFF] py-24 overflow-hidden">
-    <div class="container mx-auto px-4 md:px-8 relative flex flex-col gap-6 xl:min-h-[2200px] w-full">
-        <div class="mx-auto text-center">
-            <p class="inline-block py-1.5 px-3.5 text-xs font-black uppercase tracking-widest border-2 border-[#1A56DB] bg-[#1A56DB]/10 text-[#1A56DB] mb-4">Process Management</p>
-            <h2 class="font-black uppercase tracking-tight lg:text-5xl text-3xl text-black">Industrial-Scale Order Fulfillment</h2>
-        </div>
-
-        <div id="process-svg-container" class="relative w-full max-w-[500px] md:max-w-[744px] xl:max-w-[1110px] mt-12 md:mt-16 mx-auto md:h-[2128px] xl:h-[1851px] flex flex-col md:block gap-6">
-            
-            <!-- Mobile Timeline Line -->
-            <div class="absolute left-6 md:hidden top-0 bottom-0 w-1 bg-[#1A56DB]/20 z-0"></div>
-
-            <!-- Desktop SVG -->
-            <div class="svg-container h-full xl:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
-                <svg data-hiw-svg="true" class="hiw-line-desktop" width="1110" height="1851" viewBox="0 0 1110 1851" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M293 245C293 245 982.532 152.487 1020 444.5C1059.34 751.135 307.651 427.758 284 736C259.284 1058.11 987.03 759.333 1037 1078.5C1096.32 1457.41 76.9361 971.376 94.4998 1354.5C111.046 1715.43 957.5 1688 957.5 1688" stroke="#1A56DB" stroke-width="8" stroke-linecap="square" style="stroke-dashoffset: 4766px; stroke-dasharray: 4766.23; transition: stroke-dashoffset 0.1s ease-out;"></path>
-                </svg>
-            </div>
-            
-            <!-- Tablet SVG -->
-            <div class="svg-container h-full xl:hidden md:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
-                <svg data-hiw-svg="true" class="hiw-line-tablet" width="744" height="2128" viewBox="0 0 744 2128" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M155 168.5C155 168.5 599.832 241.232 621 453.5C643.654 680.676 167.935 578.564 155 806.5C143.871 1002.6 465.793 1008.11 462.5 1204.5C459.277 1396.74 156.671 1396.74 155 1589C153.492 1762.51 399.5 1960 399.5 1960" stroke="#1A56DB" stroke-width="6" stroke-linecap="square" style="stroke-dashoffset: 2718px; stroke-dasharray: 2718.54; transition: stroke-dashoffset 0.1s ease-out;"></path>
-                </svg>
-            </div>
-
-            <!-- Step 1 -->
-            <div class="hiw-card z-10 relative md:absolute md:top-[3%] xl:top-[9%] md:left-[4%] xl:left-[12%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
-                    <span class="material-symbols-outlined text-2xl lg:text-4xl">shopping_cart</span>
-                </div>
-                <div class="flex flex-col w-full">
-                    <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Order Placed</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">1</div>
-                    </div>
-                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Customer submits an enquiry through our platform, providing detailed specifications and requirements.</p>
-                </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="hiw-card z-10 relative md:absolute md:top-[20%] xl:top-[22%] md:right-[0%] xl:right-[3%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
-                    <span class="material-symbols-outlined text-2xl lg:text-4xl">assignment</span>
-                </div>
-                <div class="flex flex-col w-full">
-                    <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Account Work</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">2</div>
-                    </div>
-                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Order verification and account processing to ensure accuracy and enterprise satisfaction.</p>
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="hiw-card z-10 relative md:absolute md:top-[35%] xl:top-[38%] md:left-[6%] xl:left-[12%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
-                    <span class="material-symbols-outlined text-2xl lg:text-4xl">precision_manufacturing</span>
-                </div>
-                <div class="flex flex-col w-full">
-                    <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Processing</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">3</div>
-                    </div>
-                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Order preparation with strict industrial quality checks and inventory management for optimal fulfillment.</p>
-                </div>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="hiw-card z-10 relative md:absolute md:top-[54%] xl:top-[56%] md:right-[20%] xl:right-[3%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
-                    <span class="material-symbols-outlined text-2xl lg:text-4xl">inventory_2</span>
-                </div>
-                <div class="flex flex-col w-full">
-                    <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Packaging</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">4</div>
-                    </div>
-                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Secure bulk packing with heavy-duty protective materials ensuring safe transit.</p>
-                </div>
-            </div>
-
-            <!-- Step 5 -->
-            <div class="hiw-card z-10 relative md:absolute md:top-[70%] xl:top-[71%] md:left-[6%] xl:left-[3%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
-                    <span class="material-symbols-outlined text-2xl lg:text-4xl">local_shipping</span>
-                </div>
-                <div class="flex flex-col w-full">
-                    <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-lg lg:text-xl font-black text-black uppercase leading-tight">Logistics</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">5</div>
-                    </div>
-                    <p class="text-sm font-medium text-zinc-600 leading-relaxed">Shipping coordination with trusted B2B carriers for reliable and timely delivery.</p>
-                </div>
-            </div>
-
-            <!-- Step 6 -->
-            <div class="hiw-card z-10 relative md:absolute md:top-[88%] xl:top-[89%] md:left-[30%] xl:left-[60%] flex w-full md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-[#1A56DB] bg-[#0A0A0A] p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
-                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#FBBF24] flex items-center justify-center text-black">
-                    <span class="material-symbols-outlined text-2xl lg:text-4xl">task_alt</span>
-                </div>
-                <div class="flex flex-col w-full">
-                    <div class="flex items-center justify-between gap-2 mb-2">
-                        <h3 class="text-lg lg:text-xl font-black text-white uppercase leading-tight">Dispatch</h3>
-                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">6</div>
-                    </div>
-                    <p class="text-sm font-medium text-zinc-400 leading-relaxed">Delivery complete with tracking confirmation and institutional guarantee.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    
-    <!-- SVG & Reveal Animation Logic -->
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const svgContainer = document.getElementById('process-svg-container');
-        const paths = document.querySelectorAll('.svg-container svg path');
-        const cards = document.querySelectorAll('.hiw-card');
-
-        let ticking = false;
-        
-        // Cache path lengths to avoid recalculating on every scroll frame (huge performance win)
-        paths.forEach(path => {
-            let length = path.getTotalLength();
-            if (!length || length === 0) {
-                if (path.closest('.hiw-line-desktop')) length = 4766;
-                else if (path.closest('.hiw-line-tablet')) length = 2718;
-            }
-            path.dataset.cachedLength = length;
-            path.style.strokeDasharray = length;
-        });
-
-        const updatePaths = () => {
-            if(!svgContainer) {
-                ticking = false;
-                return;
-            }
-            
-            const rect = svgContainer.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            
-            let scrollPercentage = (windowHeight - rect.top) / (rect.height + windowHeight);
-            scrollPercentage = Math.min(Math.max(scrollPercentage * 1.5 - 0.2, 0), 1);
-            
-            paths.forEach(path => {
-                // Only process visible paths
-                if (path.closest('.svg-container').offsetParent !== null) {
-                    const length = path.dataset.cachedLength;
-                    if (length) {
-                        path.style.strokeDashoffset = length * (1 - scrollPercentage);
-                    }
-                }
-            });
-            
-            ticking = false;
-        };
-
-        const onScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(updatePaths);
-                ticking = true;
-            }
-        };
-
-        // Setup scroll-linked SVG drawing
-        if(paths.length > 0 && svgContainer) {
-            window.addEventListener('scroll', onScroll, { passive: true });
-            // Run once on load to set initial state
-            setTimeout(updatePaths, 100);
-        }
-
-        // Setup Intersection Observer for card pop-ins
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.remove('opacity-0', 'translate-y-6', 'scale-95', 'blur-sm');
-                    entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100', 'blur-0');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            root: null,
-            threshold: 0.3, // Trigger when 30% of the card is visible
-            rootMargin: "0px 0px -50px 0px"
-        });
-
-        cards.forEach(card => observer.observe(card));
-    });
-    </script>
-</section>
 
 <!-- Section 2: Shop by Category (Dynamic) -->
 <section class="bg-[#0A0A0A] py-24 border-b-4 border-[#FBBF24]">
@@ -922,12 +728,10 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
             <?php
-            // Get root B2B and B2C category IDs to filter only their direct children
+            // Get root B2B category ID to filter only its direct children
             $b2b_term = get_term_by('slug', 'b2b', 'product_cat');
-            $b2c_term = get_term_by('slug', 'b2c', 'product_cat');
             $parent_ids = [];
             if ($b2b_term) $parent_ids[] = (int) $b2b_term->term_id;
-            if ($b2c_term) $parent_ids[] = (int) $b2c_term->term_id;
 
             $all_cats = get_terms([
                 'taxonomy' => 'product_cat',
@@ -1028,106 +832,72 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="text-[#1A56DB] font-bold mt-2 uppercase tracking-widest text-sm">Most Requested Products This Month</p>
         </div>
 
-        <!-- Custom Tabs Navigation (Industrial Authority style) -->
-        <div class="mb-12 overflow-x-auto no-scrollbar">
-            <ul role="tablist" class="flex gap-2 border-b-2 border-gray-200 w-max pb-[2px]">
-                <li role="tab" class="ui-tabs-tab" tabindex="0" aria-selected="true">
-                    <a href="#tab-trending" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-[#0A0A0A] bg-[#FBBF24] border-b-4 border-[#1A56DB] transition-all">Trending</a>
-                </li>
-                <?php
-                // Fetch top categories dynamically to create tabs
-                $top_cats = get_terms( [
-                    'taxonomy' => 'product_cat',
-                    'number' => 5,
-                    'orderby' => 'count',
-                    'order' => 'DESC',
-                    'hide_empty' => true
-                ] );
-                if ( ! is_wp_error( $top_cats ) ) {
-                    foreach ( $top_cats as $cat ) {
-                        echo '<li role="tab" class="ui-tabs-tab" tabindex="-1" aria-selected="false">';
-                        echo '<a href="#tab-' . esc_attr($cat->slug) . '" class="inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider text-gray-500 hover:text-[#1A56DB] hover:bg-blue-50 border-b-4 border-transparent hover:border-gray-300 transition-all">' . esc_html($cat->name) . '</a>';
-                        echo '</li>';
-                    }
-                }
+        <?php
+        // Fetch B2B root category
+        $b2b_term = get_term_by('slug', 'b2b', 'product_cat');
+        
+        $root_cats = [];
+        if ($b2b_term) $root_cats[] = $b2b_term;
+        
+        $layer_data = [];
+        foreach ($root_cats as $root_cat) {
+            $children = get_terms([
+                'taxonomy' => 'product_cat',
+                'hide_empty' => false,
+                'parent' => $root_cat->term_id
+            ]);
+            
+            $child_data = [];
+            foreach ($children as $child) {
+                $child_data[] = [
+                    'id' => $child->term_id,
+                    'name' => html_entity_decode($child->name),
+                    'slug' => $child->slug
+                ];
+            }
+            if (!empty($child_data)) {
+                $layer_data[$root_cat->term_id] = $child_data;
+            }
+        }
+        ?>
+
+        <!-- Layer 1: Main Categories -->
+        <div class="mb-4 overflow-x-auto no-scrollbar">
+            <ul id="layer1-tabs" class="flex gap-2 border-b-2 border-gray-200 w-max pb-[2px]">
+                <?php foreach ($root_cats as $index => $cat): 
+                    $is_active = ($index === 0);
+                    $active_classes = $is_active ? 'text-[#0A0A0A] bg-[#FBBF24] border-[#1A56DB]' : 'text-gray-500 hover:text-[#1A56DB] hover:bg-blue-50 border-transparent hover:border-gray-300';
                 ?>
+                <li role="tab">
+                    <button data-cat-id="<?php echo esc_attr($cat->term_id); ?>" class="layer1-btn inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider border-b-4 transition-all <?php echo $active_classes; ?>">
+                        <?php echo esc_html($cat->name); ?>
+                    </button>
+                </li>
+                <?php endforeach; ?>
             </ul>
         </div>
         
+        <!-- Layer 2: Sub-Categories -->
+        <div class="mb-12 overflow-x-auto no-scrollbar">
+            <ul id="layer2-tabs" class="flex gap-2 w-full pb-[2px] overflow-x-auto custom-scrollbar">
+                <!-- Populated via JS -->
+            </ul>
+        </div>
+
+        <script>
+            // Store the PHP generated category structure in JS
+            window.snapCategoryData = <?php echo json_encode($layer_data); ?>;
+        </script>
+        
+        <!-- Loading State -->
+        <div id="feat-products-loader" class="hidden flex justify-center items-center py-24">
+            <span class="material-symbols-outlined animate-spin text-5xl text-[#1A56DB]">progress_activity</span>
+        </div>
+
         <!-- Carousel Wrapper -->
-        <div class="relative w-full">
+        <div class="relative w-full" id="feat-products-container">
             <div id="featured-carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-8 no-scrollbar scroll-smooth">
-            <?php
-            // Try to fetch products explicitly assigned to the "Featured Products" category
-            $featured_products = wc_get_products( array(
-                'limit'    => 8,
-                'status'   => 'publish',
-                'category' => array( 'featured-products' )
-            ) );
-
-            // Fallback: If no products are in the featured category, just get the most recent products
-            if ( empty( $featured_products ) ) {
-                $featured_products = wc_get_products( array(
-                    'limit'      => 8,
-                    'status'     => 'publish',
-                    'visibility' => 'catalog'
-                ) );
-            }
-
-            if ( ! empty( $featured_products ) ) :
-                $badge_labels = ['BEST SELLER', 'TOP PICK', 'POPULAR', 'NEW'];
-                $index = 0;
-                foreach ( $featured_products as $product ) :
-                    $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'large' ) ?: wc_placeholder_img_src();
-                    $title = $product->get_name();
-                    
-                    $terms = wc_get_product_terms( $product->get_id(), 'product_cat', array( 'fields' => 'names' ) );
-                    $brand = !empty($terms) ? $terms[0] : 'SNAP STITCH';
-                    
-                    $specs = get_post_meta( $product->get_id(), '_technical_specs', true );
-                    $spec1 = 'Standard Size';
-                    $spec2 = 'Industrial Grade';
-                    if ( is_array($specs) && count($specs) > 0 ) {
-                        $spec1 = esc_html($specs[0]['name'] . ': ' . $specs[0]['value']);
-                        if ( count($specs) > 1 ) {
-                            $spec2 = esc_html($specs[1]['name'] . ': ' . $specs[1]['value']);
-                        }
-                    }
-
-                    $badge = $badge_labels[$index % count($badge_labels)];
-                    $bg_classes = ['bg-[#1A56DB]', 'bg-[#0A0A0A]', 'bg-zinc-100'];
-                    $bg_class = $bg_classes[$index % count($bg_classes)];
-                    $is_b2b = snap_stitch_is_b2b_product( $product->get_id() );
-            ?>
-            <div class="snap-start shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] group bg-white flex flex-col border border-zinc-100 hover:shadow-2xl transition-all duration-300 rounded-none">
-                <div class="relative <?php echo $bg_class; ?> aspect-square flex items-center justify-center p-8 mb-6 overflow-hidden rounded-none">
-                    <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest z-10"><?php echo $badge; ?></span>
-                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 rounded-none" />
-                </div>
-                <div class="px-6 pb-6 flex-grow flex flex-col">
-                    <span class="inline-block bg-[#1A56DB] text-white text-[10px] font-black px-2 py-0.5 rounded-none w-fit mb-3 uppercase tracking-widest"><?php echo esc_html($brand); ?></span>
-                    <h4 class="text-[#0A0A0A] font-black text-xl mb-3 leading-tight line-clamp-2"><?php echo esc_html($title); ?></h4>
-                    <div class="text-zinc-500 text-sm font-medium mb-6 space-y-1">
-                        <p class="truncate"><?php echo $spec1; ?></p>
-                        <p class="truncate"><?php echo $spec2; ?></p>
-                    </div>
-                    <div class="mt-auto flex gap-2">
-                        <a href="<?php echo esc_url($product->get_permalink()); ?>" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-xs hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
-                            <?php echo $is_b2b ? 'Ã¢â€šÂ¹ Request Bulk Price' : 'View Details'; ?>
-                        </a>
-                        <?php if (!$is_b2b && $product->is_purchasable() && $product->is_in_stock()) : ?>
-                            <a href="?add-to-cart=<?php echo esc_attr($product->get_id()); ?>" data-quantity="1" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors ajax_add_to_cart rounded-none" data-product_id="<?php echo esc_attr($product->get_id()); ?>" aria-label="Add to cart">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-            <?php 
-                $index++;
-                endforeach; 
-            endif; 
-            ?>
+                <!-- Products populated via AJAX -->
             </div>
             
             <!-- Custom Navigation Buttons -->
@@ -1178,6 +948,155 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+    const layer1Btns = document.querySelectorAll('.layer1-btn');
+    const layer2Container = document.getElementById('layer2-tabs');
+    const productsContainer = document.getElementById('featured-carousel');
+    const loader = document.getElementById('feat-products-loader');
+    const carouselWrapper = document.getElementById('feat-products-container');
+    const catData = window.snapCategoryData || {};
+
+    function renderLayer2(parentId) {
+        if(!layer2Container) return;
+        layer2Container.innerHTML = '';
+        const children = catData[parentId] || [];
+        
+        if (children.length === 0) {
+            layer2Container.innerHTML = '<li class="text-gray-500 italic text-sm py-2">No sub-categories available</li>';
+            productsContainer.innerHTML = '';
+            return;
+        }
+
+        children.forEach((child, idx) => {
+            const isFirst = idx === 0;
+            const activeClasses = isFirst ? 'text-white bg-[#1A56DB] border-transparent' : 'text-gray-600 bg-gray-100 hover:bg-gray-200 border-transparent';
+            
+            const li = document.createElement('li');
+            li.className = 'shrink-0';
+            li.innerHTML = `<button data-child-id="${child.id}" class="layer2-btn inline-block px-5 py-2 font-bold text-xs uppercase tracking-wider rounded-none transition-all ${activeClasses}">${child.name}</button>`;
+            layer2Container.appendChild(li);
+        });
+
+        // Add click events to new Layer 2 buttons
+        const layer2Btns = layer2Container.querySelectorAll('.layer2-btn');
+        layer2Btns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active from all L2
+                layer2Btns.forEach(b => {
+                    b.classList.remove('text-white', 'bg-[#1A56DB]');
+                    b.classList.add('text-gray-600', 'bg-gray-100');
+                });
+                // Set active to clicked
+                this.classList.remove('text-gray-600', 'bg-gray-100');
+                this.classList.add('text-white', 'bg-[#1A56DB]');
+                
+                // Fetch products
+                fetchProducts(this.getAttribute('data-child-id'));
+            });
+        });
+
+        // Fetch products for the first sub-category by default
+        if (children.length > 0) {
+            fetchProducts(children[0].id);
+        } else {
+            // If no children, clear products
+            productsContainer.innerHTML = '';
+        }
+    }
+
+    function fetchProducts(categoryId) {
+        if(!categoryId || !carouselWrapper || !loader) return;
+        
+        // Show loader
+        carouselWrapper.style.display = 'none';
+        loader.style.display = 'flex';
+
+        const formData = new FormData();
+        formData.append('action', 'snap_get_menu_products');
+        formData.append('cat_id', categoryId);
+
+        fetch('/wp-admin/admin-ajax.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            loader.style.display = 'none';
+            carouselWrapper.style.display = 'block';
+            
+            if (data.success && data.data && data.data.products && data.data.products.length > 0) {
+                productsContainer.innerHTML = '';
+                const badgeLabels = ['BEST SELLER', 'TOP PICK', 'POPULAR', 'NEW'];
+                
+                data.data.products.forEach((product, idx) => {
+                    const badge = badgeLabels[idx % badgeLabels.length];
+                    const bgClass = (idx % 2 === 0) ? 'bg-zinc-100' : 'bg-zinc-50';
+                    const isB2B = product.is_b2b;
+                    
+                    const html = `
+                    <div class="snap-start shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] group bg-white flex flex-col border border-zinc-100 hover:shadow-2xl transition-all duration-300 rounded-none">
+                        <a href="${product.url}" class="relative ${bgClass} aspect-square flex items-center justify-center p-8 mb-6 overflow-hidden rounded-none block">
+                            <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] px-3 py-1.5 uppercase tracking-widest z-10">${badge}</span>
+                            <img src="${product.image}" alt="${product.title}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 rounded-none" />
+                        </a>
+                        <div class="px-6 pb-6 flex-grow flex flex-col">
+                            <span class="inline-block bg-[#1A56DB] text-white text-[10px] font-black px-2 py-0.5 rounded-none w-fit mb-3 uppercase tracking-widest">${product.brand || 'SNAP STITCH'}</span>
+                            <a href="${product.url}" class="hover:text-[#1A56DB] transition-colors">
+                                <h4 class="text-[#0A0A0A] font-black text-xl mb-3 leading-tight line-clamp-2">${product.title}</h4>
+                            </a>
+                            <div class="text-zinc-500 text-sm font-medium mb-6 space-y-1">
+                                <p class="truncate">Standard Size</p>
+                                <p class="truncate">Industrial Grade</p>
+                            </div>
+                            <div class="mt-auto flex gap-2">
+                                <a href="${product.url}" class="flex-grow bg-[#FBBF24] text-black text-center font-black py-3 px-4 uppercase text-xs hover:bg-yellow-500 transition-colors italic flex items-center justify-center rounded-none">
+                                    ${isB2B ? '₹ Request Bulk Price' : 'View Details'}
+                                </a>
+                                ${!isB2B ? `
+                                <a href="?add-to-cart=${product.id}" class="bg-[#1A56DB] text-white p-3 flex items-center justify-center hover:bg-black transition-colors rounded-none">
+                                    <span class="material-symbols-outlined">shopping_cart</span>
+                                </a>` : ''}
+                            </div>
+                        </div>
+                    </div>`;
+                    productsContainer.insertAdjacentHTML('beforeend', html);
+                });
+            } else {
+                productsContainer.innerHTML = '<div class="w-full py-12 text-center text-zinc-500 font-bold">No products found for this category.</div>';
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            loader.style.display = 'none';
+            carouselWrapper.style.display = 'block';
+            productsContainer.innerHTML = '<div class="w-full py-12 text-center text-red-500 font-bold">Failed to load products.</div>';
+        });
+    }
+
+    // Initialize Layer 1 clicks
+    if (layer1Btns) {
+        layer1Btns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active state from all L1
+                layer1Btns.forEach(b => {
+                    b.classList.remove('text-[#0A0A0A]', 'bg-[#FBBF24]', 'border-[#1A56DB]');
+                    b.classList.add('text-gray-500', 'border-transparent');
+                });
+                // Add active state to clicked L1
+                this.classList.remove('text-gray-500', 'border-transparent');
+                this.classList.add('text-[#0A0A0A]', 'bg-[#FBBF24]', 'border-[#1A56DB]');
+                
+                // Render corresponding L2
+                renderLayer2(this.getAttribute('data-cat-id'));
+            });
+        });
+
+        // Initialize first L1 category
+        if (layer1Btns.length > 0) {
+            layer1Btns[0].click();
+        }
+    }
+
+    // Carousel script
     const carousel = document.getElementById('featured-carousel');
     const prevBtn = document.getElementById('feat-prev');
     const nextBtn = document.getElementById('feat-next');
@@ -1187,14 +1106,13 @@ document.addEventListener("DOMContentLoaded", function() {
             const card = carousel.querySelector('div.snap-start');
             if(!card) return 0;
             const style = window.getComputedStyle(carousel);
-            const gap = parseFloat(style.gap) || 32; // gap-8 = 32px
+            const gap = parseFloat(style.gap) || 32;
             return card.offsetWidth + gap; 
         };
 
         nextBtn.addEventListener('click', () => {
             carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
         });
-
         prevBtn.addEventListener('click', () => {
             carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
         });
