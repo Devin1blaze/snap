@@ -21,7 +21,7 @@ get_header( 'shop' ); ?>
     $is_b2b = function_exists('snap_stitch_is_b2b_product') && snap_stitch_is_b2b_product($product_id);
 ?>
 
-<main class="pt-32 pb-24">
+<main class="pt-40 md:pt-48 pb-24">
     <!-- Breadcrumb -->
     <div class="max-w-7xl mx-auto px-8 py-6">
         <nav class="flex items-center gap-3 text-xs font-bold uppercase tracking-widest">
@@ -210,9 +210,7 @@ get_header( 'shop' ); ?>
     <section class="max-w-7xl mx-auto px-8 mt-24">
         <div class="border-b-2 border-zinc-100 flex gap-12">
             <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-primary border-b-4 border-primary transition-colors" data-target="tab-description">Product Description</button>
-            <?php if ( $is_b2b ) : ?>
-                <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-zinc-400 border-b-4 border-transparent hover:text-black transition-colors" data-target="tab-specifications">Specifications</button>
-            <?php endif; ?>
+            <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-zinc-400 border-b-4 border-transparent hover:text-black transition-colors" data-target="tab-specifications">Specifications</button>
             <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-zinc-400 border-b-4 border-transparent hover:text-black transition-colors" data-target="tab-reviews">Reviews</button>
         </div>
         
@@ -226,37 +224,37 @@ get_header( 'shop' ); ?>
             </div>
         </div>
         
-        <?php if ( $is_b2b ) : ?>
         <!-- Tab Content: Specifications -->
         <div id="tab-specifications" class="snap-tab-content hidden py-12">
-            <!-- Core Advantage / Technical Note Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-surface-container p-8 border-l-4 border-primary">
-                    <h4 class="font-black text-xs uppercase tracking-widest mb-4">Core Advantage</h4>
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
-                            <span class="text-sm font-bold">Intelligent Post-Flush Logic</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
-                            <span class="text-sm font-bold">Anti-Leak Valve Solenoid</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
-                            <span class="text-sm font-bold">Low Battery Indicator Light</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="bg-black p-8 text-white border-l-4 border-secondary">
-                    <h4 class="font-black text-xs uppercase tracking-widest text-secondary mb-4">Technical Note</h4>
-                    <p class="text-sm leading-relaxed text-zinc-400">
-                        Recommended for use in Airports, Hospitals, Corporate Offices, and High-End Hospitality venues. Compatible with standard concealed plumbing layouts.
-                    </p>
-                </div>
+            <div class="max-w-4xl prose prose-zinc prose-lg">
+                <?php 
+                $specs = get_post_meta($post->ID, '_technical_specs', true);
+                if ( !empty($specs) ) {
+                    // Check if specs is an array (e.g. from ACF or decoded JSON)
+                    if ( is_array($specs) ) {
+                        echo '<table class="min-w-full divide-y divide-zinc-200 border border-zinc-200">';
+                        echo '<tbody class="divide-y divide-zinc-200">';
+                        foreach ( $specs as $spec_group ) {
+                            if ( is_array($spec_group) ) {
+                                foreach ( $spec_group as $key => $value ) {
+                                    echo '<tr>';
+                                    echo '<td class="py-3 px-4 bg-zinc-50 font-bold text-sm text-zinc-800 w-1/3">' . esc_html($key) . '</td>';
+                                    echo '<td class="py-3 px-4 text-sm text-zinc-600">' . wp_kses_post($value) . '</td>';
+                                    echo '</tr>';
+                                }
+                            }
+                        }
+                        echo '</tbody></table>';
+                    } else {
+                        // Output the raw HTML if it's already a table string (e.g., from Python scraper)
+                        echo wp_kses_post($specs);
+                    }
+                } else {
+                    echo '<p class="text-zinc-500 italic">No specifications available for this product.</p>';
+                }
+                ?>
             </div>
         </div>
-        <?php endif; ?>
 
         <!-- Tab Content: Reviews -->
         <div id="tab-reviews" class="snap-tab-content hidden py-12">
