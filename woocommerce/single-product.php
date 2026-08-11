@@ -48,7 +48,7 @@ get_header( 'shop' ); ?>
                     <?php 
                         $image_id = $product->get_image_id();
                         if ( $image_id ) {
-                            echo wp_get_attachment_image( $image_id, 'full', false, array( 'class' => 'w-full h-full object-contain hover:scale-105 transition-transform duration-500 mix-blend-multiply' ) );
+                            echo wp_get_attachment_image( $image_id, 'full', false, array( 'class' => 'w-full h-full object-contain hover:scale-105 transition-all duration-500 mix-blend-multiply', 'id' => 'snap-main-image' ) );
                         } else {
                             echo '<span class="material-symbols-outlined text-white text-9xl opacity-20">inventory_2</span>';
                         }
@@ -61,8 +61,16 @@ get_header( 'shop' ); ?>
                 ?>
                 <div class="grid grid-cols-5 gap-2 mt-2">
                     <?php foreach ( $attachment_ids as $attachment_id ) : ?>
-                    <div class="aspect-square border border-zinc-200 bg-white flex items-center justify-center p-2 hover:border-secondary transition-colors cursor-pointer overflow-hidden">
-                        <?php echo wp_get_attachment_image( $attachment_id, 'thumbnail', false, array( 'class' => 'w-full h-full object-contain' ) ); ?>
+                    <div class="aspect-square border border-zinc-200 bg-white flex items-center justify-center p-2 hover:border-secondary transition-colors cursor-pointer overflow-hidden snap-thumbnail-wrapper">
+                        <?php 
+                            $full_src = wp_get_attachment_image_url( $attachment_id, 'full' );
+                            $full_srcset = wp_get_attachment_image_srcset( $attachment_id, 'full' );
+                            echo wp_get_attachment_image( $attachment_id, 'thumbnail', false, array( 
+                                'class' => 'w-full h-full object-contain snap-thumbnail',
+                                'data-full-src' => $full_src,
+                                'data-full-srcset' => $full_srcset ? $full_srcset : ''
+                            ) ); 
+                        ?>
                     </div>
                     <?php endforeach; ?>
                 </div>
@@ -313,6 +321,47 @@ get_header( 'shop' ); ?>
     <?php endif; ?>
 
 </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mainImage = document.getElementById('snap-main-image');
+    const thumbnails = document.querySelectorAll('.snap-thumbnail-wrapper');
+    
+    if (mainImage && thumbnails.length > 0) {
+        thumbnails.forEach(wrapper => {
+            wrapper.addEventListener('click', function() {
+                const img = this.querySelector('.snap-thumbnail');
+                if (!img) return;
+                
+                const newSrc = img.getAttribute('data-full-src');
+                const newSrcset = img.getAttribute('data-full-srcset');
+                const newAlt = img.getAttribute('alt');
+                
+                if (newSrc) {
+                    // Fade out
+                    mainImage.style.opacity = '0.5';
+                    
+                    setTimeout(() => {
+                        // Swap attributes
+                        mainImage.setAttribute('src', newSrc);
+                        if (newSrcset) {
+                            mainImage.setAttribute('srcset', newSrcset);
+                        } else {
+                            mainImage.removeAttribute('srcset');
+                        }
+                        if (newAlt) {
+                            mainImage.setAttribute('alt', newAlt);
+                        }
+                        
+                        // Fade in
+                        mainImage.style.opacity = '1';
+                    }, 250); // half of the duration-500
+                }
+            });
+        });
+    }
+});
+</script>
 
 <?php endwhile; // end of the loop. ?>
 
