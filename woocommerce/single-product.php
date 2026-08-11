@@ -209,45 +209,59 @@ get_header( 'shop' ); ?>
     <!-- Tabs Section -->
     <section class="max-w-7xl mx-auto px-8 mt-24">
         <div class="border-b-2 border-zinc-100 flex gap-12">
-            <button class="pb-4 text-xs font-black uppercase tracking-widest text-primary border-b-4 border-primary">Product Description</button>
-            <?php if ( $is_b2b ) : ?><button class="pb-4 text-xs font-black uppercase tracking-widest text-zinc-400 hover:text-black transition-colors">Specifications</button><?php endif; ?>
-            <button class="pb-4 text-xs font-black uppercase tracking-widest text-zinc-400 hover:text-black transition-colors">Reviews</button>
-        </div>
-        <div class="py-12 max-w-4xl prose prose-zinc prose-lg">
-            <?php the_content(); ?>
-            <?php if ( empty(get_the_content()) ) : ?>
-                <p class="text-zinc-600 leading-relaxed"><?php echo get_the_excerpt(); ?></p>
+            <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-primary border-b-4 border-primary transition-colors" data-target="tab-description">Product Description</button>
+            <?php if ( $is_b2b ) : ?>
+                <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-zinc-400 border-b-4 border-transparent hover:text-black transition-colors" data-target="tab-specifications">Specifications</button>
             <?php endif; ?>
+            <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-zinc-400 border-b-4 border-transparent hover:text-black transition-colors" data-target="tab-reviews">Reviews</button>
+        </div>
+        
+        <!-- Tab Content: Description -->
+        <div id="tab-description" class="snap-tab-content block">
+            <div class="py-12 max-w-4xl prose prose-zinc prose-lg">
+                <?php the_content(); ?>
+                <?php if ( empty(get_the_content()) ) : ?>
+                    <p class="text-zinc-600 leading-relaxed"><?php echo get_the_excerpt(); ?></p>
+                <?php endif; ?>
+            </div>
         </div>
         
         <?php if ( $is_b2b ) : ?>
-        <!-- Core Advantage / Technical Note Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            <div class="bg-surface-container p-8 border-l-4 border-primary">
-                <h4 class="font-black text-xs uppercase tracking-widest mb-4">Core Advantage</h4>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
-                        <span class="text-sm font-bold">Intelligent Post-Flush Logic</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
-                        <span class="text-sm font-bold">Anti-Leak Valve Solenoid</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
-                        <span class="text-sm font-bold">Low Battery Indicator Light</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="bg-black p-8 text-white border-l-4 border-secondary">
-                <h4 class="font-black text-xs uppercase tracking-widest text-secondary mb-4">Technical Note</h4>
-                <p class="text-sm leading-relaxed text-zinc-400">
-                    Recommended for use in Airports, Hospitals, Corporate Offices, and High-End Hospitality venues. Compatible with standard concealed plumbing layouts.
-                </p>
+        <!-- Tab Content: Specifications -->
+        <div id="tab-specifications" class="snap-tab-content hidden py-12">
+            <!-- Core Advantage / Technical Note Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-surface-container p-8 border-l-4 border-primary">
+                    <h4 class="font-black text-xs uppercase tracking-widest mb-4">Core Advantage</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+                            <span class="text-sm font-bold">Intelligent Post-Flush Logic</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+                            <span class="text-sm font-bold">Anti-Leak Valve Solenoid</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+                            <span class="text-sm font-bold">Low Battery Indicator Light</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-black p-8 text-white border-l-4 border-secondary">
+                    <h4 class="font-black text-xs uppercase tracking-widest text-secondary mb-4">Technical Note</h4>
+                    <p class="text-sm leading-relaxed text-zinc-400">
+                        Recommended for use in Airports, Hospitals, Corporate Offices, and High-End Hospitality venues. Compatible with standard concealed plumbing layouts.
+                    </p>
+                </div>
             </div>
         </div>
         <?php endif; ?>
+
+        <!-- Tab Content: Reviews -->
+        <div id="tab-reviews" class="snap-tab-content hidden py-12">
+            <?php comments_template(); ?>
+        </div>
     </section>
 
     <?php if ( $is_b2b ) : ?>
@@ -329,6 +343,7 @@ get_header( 'shop' ); ?>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Image Gallery Logic
     const mainImage = document.getElementById('snap-main-image');
     const thumbnails = document.querySelectorAll('.snap-thumbnail-wrapper');
     
@@ -360,7 +375,42 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         // Fade in
                         mainImage.style.opacity = '1';
-                    }, 250); // half of the duration-500
+                    }, 250);
+                }
+            });
+        });
+    }
+
+    // Tabs Logic
+    const tabButtons = document.querySelectorAll('.snap-tab-btn');
+    const tabContents = document.querySelectorAll('.snap-tab-content');
+
+    if (tabButtons.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                
+                // Reset all buttons
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('text-primary', 'border-primary');
+                    btn.classList.add('text-zinc-400', 'border-transparent');
+                });
+                
+                // Set active button
+                this.classList.remove('text-zinc-400', 'border-transparent');
+                this.classList.add('text-primary', 'border-primary');
+                
+                // Hide all contents
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('block');
+                });
+                
+                // Show target content
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.remove('hidden');
+                    targetContent.classList.add('block');
                 }
             });
         });
