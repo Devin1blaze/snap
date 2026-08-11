@@ -448,15 +448,15 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 <header class="relative z-50">
   <nav id="floating-nav" class="fixed top-0 left-0 w-full z-[100] px-4 pointer-events-none transition-all duration-300">
     <div id="nav-island" class="mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-2xl pointer-events-auto shadow-2xl">
-      <div class="relative flex flex-wrap items-center justify-between py-3 lg:py-4">
+      <div class="relative flex flex-nowrap items-center justify-between py-3 lg:py-4">
         
         <!-- Logo -->
         <div class="flex items-center relative z-20 shrink-0">
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3">
-            <span class="w-9 h-9 bg-secondary-container flex items-center justify-center rounded-lg shadow-inner">
-              <span class="material-symbols-outlined text-black text-xl" style="font-variation-settings:'FILL' 1">bolt</span>
+          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-2 lg:gap-3">
+            <span class="w-8 h-8 lg:w-9 lg:h-9 bg-secondary-container flex items-center justify-center rounded-lg shadow-inner">
+              <span class="material-symbols-outlined text-black text-lg lg:text-xl" style="font-variation-settings:'FILL' 1">bolt</span>
             </span>
-            <span class="text-xl font-black text-white tracking-tight">Snap <span class="text-secondary-container italic">Marketing</span></span>
+            <span class="text-lg lg:text-xl font-black text-white tracking-tight">Snap <span class="text-secondary-container italic hidden sm:inline">Marketing</span></span>
           </a>
         </div>
 
@@ -477,7 +477,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         </div>
 
         <!-- Right Side: Search, Buttons & Hamburger -->
-        <div class="flex items-center gap-4 relative z-20">
+        <div class="flex items-center gap-2 lg:gap-4 relative z-20 shrink-0">
           
           <!-- Search Catalog Button -->
           <button id="search-trigger" class="hidden lg:flex items-center justify-center p-2 text-white/80 hover:text-white transition-colors" aria-label="Search">
@@ -534,12 +534,12 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
           </div>
 
           <!-- Mobile Search Icon -->
-          <button id="search-trigger-mobile" class="lg:hidden flex items-center justify-center p-2 text-white/80 hover:text-white transition-colors" aria-label="Search">
+          <button id="search-trigger-mobile" class="lg:hidden flex items-center justify-center p-1 sm:p-2 text-white/80 hover:text-white transition-colors" aria-label="Search">
             <span class="material-symbols-outlined">search</span>
           </button>
 
           <!-- NEW CART BUTTON MOBILE -->
-          <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="lg:hidden flex items-center relative p-2 text-white/80 hover:text-white transition-colors" title="View your shopping cart">
+          <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="lg:hidden flex items-center relative p-1 sm:p-2 text-white/80 hover:text-white transition-colors" title="View your shopping cart">
             <span class="material-symbols-outlined text-xl">shopping_cart</span>
             <span class="snap-cart-count absolute top-0 right-0 bg-secondary-container text-black text-[10px] font-black w-4 h-4 flex items-center justify-center rounded-full">
                 <?php echo WC()->cart ? WC()->cart->get_cart_contents_count() : 0; ?>
@@ -547,7 +547,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
           </a>
 
           <!-- Hamburger -->
-          <button id="nav-toggle" class="lg:hidden flex flex-col gap-1.5 p-2 group" aria-label="Toggle menu">
+          <button id="nav-toggle" class="lg:hidden flex flex-col gap-1.5 p-1 sm:p-2 group" aria-label="Toggle menu">
             <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
             <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
             <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
