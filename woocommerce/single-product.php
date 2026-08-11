@@ -57,6 +57,11 @@ get_header( 'shop' ); ?>
                 <!-- Thumbnails -->
                 <?php 
                     $attachment_ids = $product->get_gallery_image_ids();
+                    $main_image_id = $product->get_image_id();
+                    if ( $main_image_id ) {
+                        array_unshift( $attachment_ids, $main_image_id );
+                        $attachment_ids = array_unique( $attachment_ids );
+                    }
                     if ( $attachment_ids ) : 
                 ?>
                 <div class="grid grid-cols-5 gap-2 mt-2">
