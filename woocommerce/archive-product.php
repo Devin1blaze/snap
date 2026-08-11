@@ -19,9 +19,9 @@ if (!$category_desc && isset($term->post_content)) {
     <?php do_action('woocommerce_before_main_content'); ?>
 
     <!-- Dynamic Category Hero -->
-    <section class="bg-[#0A0A0A] relative overflow-hidden flex items-center border-b-4 border-[#1A56DB]">
+    <section class="bg-[#0A0A0A] relative overflow-hidden flex items-center border-b-4 border-[#1A56DB] pt-32 md:pt-40">
         <div class="absolute inset-0 industrial-diagonal bg-[#1A56DB] opacity-10 w-2/3 pointer-events-none"></div>
-        <div class="container mx-auto px-8 py-16 md:py-24 relative z-10">
+        <div class="container mx-auto px-8 pb-16 md:pb-24 relative z-10">
             <nav class="flex mb-6 space-x-2 text-[10px] md:text-xs font-black uppercase tracking-widest text-[#FBBF24]">
                 <a href="<?php echo home_url(); ?>" class="hover:text-white transition-colors">Home</a>
                 <span class="text-white/30">/</span>
