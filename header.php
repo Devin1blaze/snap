@@ -446,9 +446,9 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 
 <!-- Section: Floating Navigation Wrapper -->
 <header class="relative z-50">
-  <nav id="floating-nav" class="fixed top-0 left-0 w-full z-[100] px-4 pointer-events-none transition-all duration-300">
-    <div id="nav-island" class="mx-auto mt-4 max-w-screen-xl px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-2xl pointer-events-auto shadow-2xl">
-      <div class="relative flex flex-nowrap items-center justify-between py-3 lg:py-4">
+  <nav id="floating-nav" class="fixed top-0 left-0 w-full z-[100] px-2 sm:px-4 pointer-events-none transition-all duration-300">
+    <div id="nav-island" class="mx-auto mt-2 sm:mt-4 max-w-screen-xl px-4 sm:px-6 transition-all duration-500 lg:px-12 bg-black/40 border border-white/5 backdrop-blur-md rounded-2xl pointer-events-auto shadow-2xl">
+      <div class="relative flex flex-nowrap items-center justify-between py-2 sm:py-3 lg:py-4">
         
         <!-- Logo -->
         <div class="flex items-center relative z-20 shrink-0">
@@ -477,7 +477,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
         </div>
 
         <!-- Right Side: Search, Buttons & Hamburger -->
-        <div class="flex items-center gap-2 lg:gap-4 relative z-20 shrink-0">
+        <div class="flex items-center gap-1 sm:gap-2 lg:gap-4 relative z-20 shrink-0">
           
           <!-- Search Catalog Button -->
           <button id="search-trigger" class="hidden lg:flex items-center justify-center p-2 text-white/80 hover:text-white transition-colors" aria-label="Search">
@@ -535,22 +535,22 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 
           <!-- Mobile Search Icon -->
           <button id="search-trigger-mobile" class="lg:hidden flex items-center justify-center p-1 sm:p-2 text-white/80 hover:text-white transition-colors" aria-label="Search">
-            <span class="material-symbols-outlined">search</span>
+            <span class="material-symbols-outlined text-[20px] sm:text-24px">search</span>
           </button>
 
           <!-- NEW CART BUTTON MOBILE -->
           <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="lg:hidden flex items-center relative p-1 sm:p-2 text-white/80 hover:text-white transition-colors" title="View your shopping cart">
-            <span class="material-symbols-outlined text-xl">shopping_cart</span>
-            <span class="snap-cart-count absolute top-0 right-0 bg-secondary-container text-black text-[10px] font-black w-4 h-4 flex items-center justify-center rounded-full">
+            <span class="material-symbols-outlined text-[20px] sm:text-xl">shopping_cart</span>
+            <span class="snap-cart-count absolute -top-1 -right-1 sm:top-0 sm:right-0 bg-secondary-container text-black text-[9px] sm:text-[10px] font-black w-3.5 h-3.5 sm:w-4 sm:h-4 flex items-center justify-center rounded-full">
                 <?php echo WC()->cart ? WC()->cart->get_cart_contents_count() : 0; ?>
             </span>
           </a>
 
           <!-- Hamburger -->
-          <button id="nav-toggle" class="lg:hidden flex flex-col gap-1.5 p-1 sm:p-2 group" aria-label="Toggle menu">
-            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
-            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
-            <span class="block w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
+          <button id="nav-toggle" class="lg:hidden flex flex-col justify-center items-center gap-[4px] sm:gap-1.5 p-1 sm:p-2 w-8 h-8 group" aria-label="Toggle menu">
+            <span class="block w-5 sm:w-6 h-0.5 bg-white transition-all duration-300 origin-center group-[.open]:rotate-45 group-[.open]:translate-y-[6px] sm:group-[.open]:translate-y-[8px]"></span>
+            <span class="block w-5 sm:w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
+            <span class="block w-5 sm:w-6 h-0.5 bg-white transition-all duration-300 origin-center group-[.open]:-rotate-45 group-[.open]:-translate-y-[6px] sm:group-[.open]:-translate-y-[8px]"></span>
           </button>
         </div>
 
