@@ -22,30 +22,36 @@
         <div>
             <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Quick Links</h4>
             <ul class="space-y-4">
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/about-us">About Us</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/request-a-quote">Request Bulk Quote</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/order-tracking">Order Tracking</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/my-account">My Account / Login</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/terms-of-service">Terms of Service</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/privacy-policy">Privacy Policy</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>">About Us</a></li>
+                <li>
+                    <a class="text-[#FBBF24] hover:text-white transition-colors block font-bold text-lg flex items-center gap-2 group" href="<?php echo esc_url( home_url( '/faq/' ) ); ?>">
+                        <span class="material-symbols-outlined text-sm text-[#FBBF24] group-hover:translate-x-1 transition-transform">help</span>
+                        Frequently Asked Questions (FAQ)
+                    </a>
+                </li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/request-a-quote/' ) ); ?>">Request Bulk Quote</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/order-tracking/' ) ); ?>">Order Tracking</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/registrations/' ) ); ?>">Compliance &amp; Registrations</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>">Contact Us</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a></li>
             </ul>
         </div>
         <div>
             <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Major Categories</h4>
             <ul class="space-y-4">
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/commercial-refrigeration/">Refrigeration</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/water-purifiers/">Water Treatment</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/washroom-automations/">Washroom Tech</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/hygiene-ppe/">Safety Gear</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/entrance-solutions/">Entrance Solutions</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="/product-category/vending-machines/">Vending Machines</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/commercial-refrigeration/' ) ); ?>">Refrigeration</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/water-purifiers/' ) ); ?>">Water Treatment</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/washroom-automations/' ) ); ?>">Washroom Tech</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/hygiene-ppe/' ) ); ?>">Safety Gear</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/entrance-solutions/' ) ); ?>">Entrance Solutions</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/vending-machines/' ) ); ?>">Vending Machines</a></li>
             </ul>
         </div>
         <div class="space-y-6">
             <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Contact Us</h4>
             <div class="flex gap-4 items-start">
                 <span class="material-symbols-outlined text-secondary-container">location_on</span>
-                <p class="font-medium text-lg text-zinc-400">Snap House, Plot No. 322/16, Ghorpade Peth, Pune, Maharashtra 411042</p>
+                <p class="font-medium text-lg text-zinc-400">Snap House, 322/16, Shankar Sheth Road, Near Indian Oil Petrol Pump, Hotel 7 Loves Chowk, Ghorpadi Peth, Pune - 411042, Maharashtra, India</p>
             </div>
             <div class="flex gap-4 items-center">
                 <span class="material-symbols-outlined text-secondary-container">call</span>
@@ -57,11 +63,68 @@
             </div>
         </div>
     </div>
-    <div class="px-12 py-8 bg-zinc-950 flex flex-col md:flex-row justify-between items-center text-sm font-bold uppercase tracking-widest text-gray-500 border-t border-white/5">
-        <div>© <?php echo date('Y'); ?> Snap Marketing. All Rights Reserved. Pune, India.</div>
-        <div class="mt-4 md:mt-0">Precision. Scale. Authority.</div>
+    <div class="px-12 py-8 bg-zinc-950 flex flex-col md:flex-row justify-between items-center text-sm font-bold uppercase tracking-widest text-gray-500 border-t border-white/5 gap-4">
+        <div>© <?php echo date('Y'); ?> Snap Marketing Private Limited. All Rights Reserved. Pune, India.</div>
+        <div class="flex flex-wrap items-center gap-6 text-xs normal-case tracking-normal">
+            <a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" class="text-[#FBBF24] hover:underline font-bold flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">help</span> FAQ Hub
+            </a>
+            <span class="text-zinc-700 hidden sm:inline">•</span>
+            <a href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>" class="text-zinc-400 hover:text-white transition-colors font-medium">Contact Us</a>
+            <span class="text-zinc-700 hidden sm:inline">•</span>
+            <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>" class="text-zinc-400 hover:text-white transition-colors font-medium">Privacy Policy</a>
+            <span class="text-zinc-700 hidden sm:inline">•</span>
+            <a href="<?php echo esc_url( home_url( '/terms-of-service/' ) ); ?>" class="text-zinc-400 hover:text-white transition-colors font-medium">Terms of Service</a>
+        </div>
     </div>
 </footer>
+
+<!-- Floating WhatsApp Chat Widget (Desktop & Mobile) -->
+<div id="snap-floating-whatsapp" class="fixed bottom-20 md:bottom-8 right-6 z-[9990] flex items-center group">
+    <a href="https://wa.me/919823012724?text=Hi%20Snap%20Marketing%2C%20I%20am%20visiting%20your%20website%20and%20would%20like%20to%20inquire%20about%20pricing%20and%20product%20details." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       aria-label="Chat on WhatsApp with Blue Star Specialist"
+       class="relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300">
+        <!-- Subtle ping ring effect -->
+        <span class="absolute -inset-1 rounded-full bg-[#25D366] opacity-30 animate-ping pointer-events-none"></span>
+        <!-- WhatsApp Icon SVG -->
+        <svg class="w-8 h-8 md:w-9 md:h-9 fill-current relative z-10" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
+    </a>
+    <!-- Tooltip badge on hover (Desktop) -->
+    <span class="hidden md:group-hover:inline-block absolute right-20 bg-[#0A0A0A] text-white text-xs font-black uppercase tracking-wider py-2 px-3 shadow-xl whitespace-nowrap border-l-2 border-[#25D366] transition-opacity">
+        WhatsApp Us (Instant Reply)
+    </span>
+</div>
+
+<!-- Mobile Sticky Bottom Quick-Action Bar (Screens < 768px) -->
+<div id="snap-mobile-action-bar" class="block md:hidden fixed bottom-0 left-0 right-0 z-[9995] bg-[#0A0A0A] border-t-2 border-[#1A56DB] shadow-[0_-5px_20px_rgba(0,0,0,0.5)] px-3 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]">
+    <div class="grid grid-cols-2 gap-2">
+        <a href="tel:+919823012724" 
+           class="flex items-center justify-center gap-2 bg-[#1A56DB] active:bg-blue-800 text-white font-black text-xs uppercase tracking-wider py-3.5 px-2 rounded-none transition-all shadow-md">
+            <span class="material-symbols-outlined text-base">call</span>
+            <span>Call Sales</span>
+        </a>
+        <a href="https://wa.me/919823012724?text=Hi%20Snap%20Marketing%2C%20I%20am%20visiting%20your%20website%20and%20would%20like%20to%20request%20a%20quote." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="flex items-center justify-center gap-2 bg-[#FBBF24] active:bg-amber-400 text-[#0A0A0A] font-black text-xs uppercase tracking-wider py-3.5 px-2 rounded-none transition-all shadow-md">
+            <span class="material-symbols-outlined text-base">chat</span>
+            <span>WhatsApp Quote</span>
+        </a>
+    </div>
+</div>
+
+<style>
+/* Ensure content isn't obscured by fixed mobile action bar */
+@media (max-width: 767px) {
+    body {
+        padding-bottom: 64px !important;
+    }
+}
+</style>
 
 <!-- Quote Modal -->
 <div id="quote-modal" class="fixed inset-0 z-[100000] hidden items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300 p-4">
@@ -207,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Entry Popup -->
 <div id="entry-popup" class="fixed inset-0 z-[1000000] hidden items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300">
     <div class="bg-white p-8 max-w-2xl w-full mx-4 shadow-2xl relative text-center">
-        <h2 class="text-3xl font-black text-[#0A0A0A] mb-2 uppercase tracking-tight">Welcome to the corporate website of Blue Star Limited</h2>
+        <h2 class="text-3xl font-black text-[#0A0A0A] mb-2 uppercase tracking-tight">Welcome to the corporate website of Snap Marketing</h2>
         <div class="flex flex-col md:flex-row gap-4 justify-center mt-8">
             <div class="flex-1 border-2 border-gray-100 p-6 hover:border-[#1A56DB] transition-colors cursor-pointer js-select-business flex flex-col items-center">
                 <span class="material-symbols-outlined text-4xl text-[#1A56DB] mb-3">domain</span>
@@ -231,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isConsumerPage = window.location.pathname.includes('/shop');
     
     if (entryPopup) {
-        if (!localStorage.getItem('bluestar_user_type')) {
+        if (!localStorage.getItem('snap_user_type') && !localStorage.getItem('bluestar_user_type')) {
             entryPopup.classList.remove('hidden');
             entryPopup.classList.add('flex');
             document.body.style.overflow = 'hidden';
@@ -239,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const setPreference = (e, type) => {
             if (e) e.preventDefault();
+            localStorage.setItem('snap_user_type', type);
             localStorage.setItem('bluestar_user_type', type);
             if (type === 'business') {
                 if (isConsumerPage) {

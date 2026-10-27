@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#FFFFFF"/>
+  <circle cx="100" cy="65" r="30" fill="#15803D"/>
+  <path d="M88 78 C88 60, 108 52, 108 52 C108 52, 108 72, 88 78 Z" fill="#FFFFFF"/>
+  <text x="100" y="128" font-family="Arial, sans-serif" font-size="26" font-weight="900" fill="#166534" text-anchor="middle">NUTRILITE</text>
+  <text x="100" y="152" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#15803D" text-anchor="middle" letter-spacing="2">BY AMWAY</text>
+</svg>

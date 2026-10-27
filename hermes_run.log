@@ -1,0 +1,94 @@
+
+===== RUN country=oman max=3 resume=False budget=10.0 =====
+=================================================================
+[*] STARTING CISCO PARTNER EXTRACTION PIPELINE FOR: OMAN
+[*] Time budget: 10.0 minute(s). Pipeline checkpoints and exits when exceeded.
+=================================================================
+
+[STAGE 1] Querying Cisco Partner Locator API...
+[DEBUG] getPfPartners payload: {'LOCATION_IDS': '^136560960^', 'LANGUAGE_CD': 'EN', 'pageCount': 1, 'pageSize': 50, 'SORT_BY': 'partner_name.sort', 'SORT_ORDER': 'asc'}
+[DEBUG] getPfPartners payload: {'LOCATION_IDS': '^136560960^', 'LANGUAGE_CD': 'EN', 'pageCount': 2, 'pageSize': 50, 'SORT_BY': 'partner_name.sort', 'SORT_ORDER': 'asc'}
+[*] Limiting scraping queue to first 3 partners (for testing).
+
+[STAGE 2] Fetching Partner Overviews and Multi-Engine Searching...
+[1] Processed details for: ACSC -> https://www.acsc.com.om
+[2] Processed details for: Al Afnan Computers -> https://www.alafnan.net
+[3] Processed details for: Al Khalili United Enterprises -> https://www.alkhalili.com/
+[+] Saved checkpoint (3 partners) and verified domains to urls.txt
+
+[STAGE 3] Launching Scrapling Swarm to extract Emails and Phones from Domains...
+
+[STAGE 4] Merging results and exporting final deliverables...
+[+] Final CSV exported to: D:\projects\pro\scraper for data from brands and website\Cisco_Partners_oman.csv
+[+] Final Excel exported to: D:\projects\pro\scraper for data from brands and website\Cisco_Partners_oman.xlsx
+
+===== RUN country=oman max=25 resume=False budget=0.4 =====
+=================================================================
+[*] STARTING CISCO PARTNER EXTRACTION PIPELINE FOR: OMAN
+[*] Time budget: 0.4 minute(s). Pipeline checkpoints and exits when exceeded.
+=================================================================
+
+[STAGE 1] Querying Cisco Partner Locator API...
+[DEBUG] getPfPartners payload: {'LOCATION_IDS': '^136560960^', 'LANGUAGE_CD': 'EN', 'pageCount': 1, 'pageSize': 50, 'SORT_BY': 'partner_name.sort', 'SORT_ORDER': 'asc'}
+[DEBUG] getPfPartners payload: {'LOCATION_IDS': '^136560960^', 'LANGUAGE_CD': 'EN', 'pageCount': 2, 'pageSize': 50, 'SORT_BY': 'partner_name.sort', 'SORT_ORDER': 'asc'}
+[*] Limiting scraping queue to first 25 partners (for testing).
+
+[STAGE 2] Fetching Partner Overviews and Multi-Engine Searching...
+[1] Processed details for: ACSC -> https://www.acsc.com.om
+[2] Processed details for: Al Afnan Computers -> https://www.alafnan.net
+[3] Processed details for: Al Khalili United Enterprises -> https://www.alkhalili.com/
+[4] Processed details for: AL-NAHLA SOLUTIONS -> https://www.alnahlasolutions.com
+[5] Processed details for: ALMOAYYED INTERNATIONAL LLC -> https://www.almoayyedintl.com/
+[6] Processed details for: ALNOWRAS IT SOLUTION SPC -> https://www.alnowrasit.com/
+[7] Processed details for: Awasr Oman And Partners SAOC -> https://www.awasr.om/en/package/journey/ZVANH?promotionTerm=24
+[8] Processed details for: BADEM MIDDLE EAST LLC -> https://bademoman.com/
+[9] Processed details for: BAHWAN IT LLC -> https://www.bahwanit.com/
+[10] Processed details for: BEN AMER PROJECTS AL MAAMARI UNITED LLC -> https://toptecno.om/
+
+[!] Time budget reached during Stage 2 (10/25 partners done).
+RESUMABLE: rerun with --resume to continue.
+
+===== RUN country=oman max=None resume=True budget=10.0 =====
+=================================================================
+[*] STARTING CISCO PARTNER EXTRACTION PIPELINE FOR: OMAN
+[*] Time budget: 10.0 minute(s). Pipeline checkpoints and exits when exceeded.
+=================================================================
+
+[+] Checkpoint found. Resuming using: D:\projects\pro\scraper for data from brands and website\Cisco_Partners_oman_temp.csv and urls.txt
+[+] Loaded 10 partners from checkpoint.
+
+[STAGE 3] Launching Scrapling Swarm to extract Emails and Phones from Domains...
+
+[STAGE 4] Merging results and exporting final deliverables...
+[+] Final CSV exported to: D:\projects\pro\scraper for data from brands and website\Cisco_Partners_oman.csv
+[+] Final Excel exported to: D:\projects\pro\scraper for data from brands and website\Cisco_Partners_oman.xlsx
+
+===== RUN country=oman max=10 resume=False budget=10.0 =====
+=================================================================
+[*] STARTING CISCO PARTNER EXTRACTION PIPELINE FOR: OMAN
+[*] Time budget: 10.0 minute(s). Pipeline checkpoints and exits when exceeded.
+=================================================================
+
+[STAGE 1] Querying Cisco Partner Locator API...
+[DEBUG] getPfPartners payload: {'LOCATION_IDS': '^136560960^', 'LANGUAGE_CD': 'EN', 'pageCount': 1, 'pageSize': 50, 'SORT_BY': 'partner_name.sort', 'SORT_ORDER': 'asc'}
+[DEBUG] getPfPartners payload: {'LOCATION_IDS': '^136560960^', 'LANGUAGE_CD': 'EN', 'pageCount': 2, 'pageSize': 50, 'SORT_BY': 'partner_name.sort', 'SORT_ORDER': 'asc'}
+[*] Limiting scraping queue to first 10 partners (for testing).
+
+[STAGE 2] Fetching Partner Overviews and Multi-Engine Searching...
+[1] Processed details for: ACSC -> https://www.acsc.com.om
+[2] Processed details for: Al Afnan Computers -> https://www.alafnan.net
+[3] Processed details for: Al Khalili United Enterprises -> https://www.alkhalili.com/
+[4] Processed details for: AL-NAHLA SOLUTIONS -> https://www.alnahlasolutions.com
+[5] Processed details for: ALMOAYYED INTERNATIONAL LLC -> https://www.almoayyedintl.com/
+[6] Processed details for: ALNOWRAS IT SOLUTION SPC -> https://www.alnowrasit.com/
+[7] Processed details for: Awasr Oman And Partners SAOC -> https://www.awasr.om/en/package/journey/ZVANH?promotionTerm=24
+[8] Processed details for: BADEM MIDDLE EAST LLC -> https://bademoman.com/
+[9] Processed details for: BAHWAN IT LLC -> https://www.bahwanit.com/
+[10] Processed details for: BEN AMER PROJECTS AL MAAMARI UNITED LLC -> https://toptecno.om/
+[+] Saved checkpoint (10 partners) and verified domains to urls.txt
+
+[STAGE 3] Launching Scrapling Swarm to extract Emails and Phones from Domains...
+
+[STAGE 4] Merging results and exporting final deliverables...
+[+] Final CSV exported to: D:\projects\pro\scraper for data from brands and website\Cisco_Partners_oman.csv
+[+] Final Excel exported to: D:\projects\pro\scraper for data from brands and website\Cisco_Partners_oman.xlsx

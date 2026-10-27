@@ -116,35 +116,6 @@ get_header( 'shop' ); ?>
                     <?php endif; ?>
                 </div>
 
-                <!-- Specs Table (Dynamic Custom Meta) -->
-                <?php 
-                    $tech_specs = get_post_meta( $product_id, '_technical_specs', true );
-                    if ( !empty($tech_specs) && is_array($tech_specs) ) :
-                ?>
-                <div class="mb-6 overflow-hidden border-none">
-                    <table class="w-full text-left text-sm">
-                        <tbody class="divide-y-0">
-                            <?php 
-                            $row_count = 0;
-                            foreach ( $tech_specs as $spec ) : 
-                                $row_count++;
-                                $bg_class = ($row_count % 2 === 0) ? 'bg-primary/5' : 'bg-white';
-                                $border_class = ($row_count % 2 !== 0) ? 'border-l-4 border-secondary' : '';
-                            ?>
-                            <tr class="<?php echo $bg_class; ?> <?php echo $border_class; ?>">
-                                <td class="py-3 px-4 font-black uppercase text-[10px] tracking-widest text-zinc-400 w-1/3"><?php echo esc_html( $spec['name'] ); ?></td>
-                                <td class="py-3 px-4 font-bold text-black"><?php echo esc_html( $spec['value'] ); ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?php elseif ( $is_b2b ): ?>
-                    <!-- Fallback Spec Table if B2B and no attributes -->
-                    <div class="mb-6 p-4 bg-zinc-50 border-l-4 border-zinc-200">
-                         <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Technical Data Sheet available on request.</p>
-                    </div>
-                <?php endif; ?>
 
                 <!-- Enterprise Specs Info -->
                 <?php 
@@ -208,49 +179,113 @@ get_header( 'shop' ); ?>
 
     <!-- Tabs Section -->
     <section class="max-w-7xl mx-auto px-8 mt-24">
+        <?php 
+        $raw_content = get_the_content();
+        $extracted_specs = '';
+        
+        // Extract Features list (from B2B import)
+        if ( preg_match( '/(<br\s*\/?>)*\s*(<b>|<strong\s*.*?>)\s*Features:.*?<\/ul>/is', $raw_content, $matches ) ) {
+            $extracted_specs .= $matches[0];
+            $raw_content = str_replace( $matches[0], '', $raw_content );
+        }
+        
+        // Extract any Table (from other imports)
+        if ( preg_match( '/<table[^>]*>.*?<\/table>/is', $raw_content, $matches ) ) {
+            $extracted_specs .= $matches[0];
+            $raw_content = str_replace( $matches[0], '', $raw_content );
+        }
+        
+        $final_content = apply_filters( 'the_content', $raw_content );
+        $final_content = str_replace( ']]>', ']]&gt;', $final_content );
+        
+        $has_description = ! empty( trim(strip_tags($final_content)) ) || preg_match('/<img/i', $final_content);
+        $excerpt = get_the_excerpt();
+        if ( !$has_description && !empty(trim($excerpt)) ) {
+            $has_description = true;
+            $final_content = '<p class="text-zinc-600 leading-relaxed">' . $excerpt . '</p>';
+        }
+        
+        $active_tab = $has_description ? 'description' : 'specifications';
+        ?>
         <div class="border-b-2 border-zinc-100 flex gap-12">
-            <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-primary border-b-4 border-primary transition-colors" data-target="tab-description">Product Description</button>
-            <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-zinc-400 border-b-4 border-transparent hover:text-black transition-colors" data-target="tab-specifications">Specifications</button>
+            <?php if ( $has_description ) : ?>
+            <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest <?php echo $active_tab === 'description' ? 'text-primary border-b-4 border-primary' : 'text-zinc-400 border-b-4 border-transparent hover:text-black'; ?> transition-colors" data-target="tab-description">Product Description</button>
+            <?php endif; ?>
+            <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest <?php echo $active_tab === 'specifications' ? 'text-primary border-b-4 border-primary' : 'text-zinc-400 border-b-4 border-transparent hover:text-black'; ?> transition-colors" data-target="tab-specifications">Specifications</button>
             <button class="snap-tab-btn pb-4 text-xs font-black uppercase tracking-widest text-zinc-400 border-b-4 border-transparent hover:text-black transition-colors" data-target="tab-reviews">Reviews</button>
         </div>
         
         <!-- Tab Content: Description -->
-        <div id="tab-description" class="snap-tab-content block">
+        <?php if ( $has_description ) : ?>
+        <div id="tab-description" class="snap-tab-content <?php echo $active_tab === 'description' ? 'block' : 'hidden'; ?>">
             <div class="py-12 max-w-4xl prose prose-zinc prose-lg">
-                <?php the_content(); ?>
-                <?php if ( empty(get_the_content()) ) : ?>
-                    <p class="text-zinc-600 leading-relaxed"><?php echo get_the_excerpt(); ?></p>
-                <?php endif; ?>
+                <?php echo $final_content; ?>
             </div>
         </div>
+        <?php endif; ?>
         
         <!-- Tab Content: Specifications -->
-        <div id="tab-specifications" class="snap-tab-content hidden py-12">
-            <div class="max-w-4xl prose prose-zinc prose-lg">
+        <div id="tab-specifications" class="snap-tab-content <?php echo $active_tab === 'specifications' ? 'block' : 'hidden'; ?> py-12">
+            <div class="max-w-4xl">
                 <?php 
-                $specs = get_post_meta($post->ID, '_technical_specs', true);
-                if ( !empty($specs) ) {
-                    // Check if specs is an array (e.g. from ACF or decoded JSON)
-                    if ( is_array($specs) ) {
-                        echo '<table class="min-w-full divide-y divide-zinc-200 border border-zinc-200">';
-                        echo '<tbody class="divide-y divide-zinc-200">';
-                        foreach ( $specs as $spec_group ) {
-                            if ( is_array($spec_group) ) {
-                                foreach ( $spec_group as $key => $value ) {
-                                    echo '<tr>';
-                                    echo '<td class="py-3 px-4 bg-zinc-50 font-bold text-sm text-zinc-800 w-1/3">' . esc_html($key) . '</td>';
-                                    echo '<td class="py-3 px-4 text-sm text-zinc-600">' . wp_kses_post($value) . '</td>';
-                                    echo '</tr>';
-                                }
-                            }
-                        }
-                        echo '</tbody></table>';
-                    } else {
-                        // Output the raw HTML if it's already a table string (e.g., from Python scraper)
-                        echo wp_kses_post($specs);
+                $specs = get_post_meta( $product_id, '_technical_specs', true );
+                if ( ! empty( $specs ) && is_array( $specs ) ) {
+                    echo '<table class="min-w-full border border-zinc-200" style="border-collapse:collapse;">';
+                    echo '<tbody>';
+                    $row_count = 0;
+                    $known_labels = array(
+                        'product_title' => 'Model & Series',
+                        'nominal_cooling_capacity_tonnage' => 'Cooling Capacity (Tonnage)',
+                        'cooling_capacity_watt_min_max' => 'Cooling Capacity (Watts)',
+                        'cooling_capacity_btu_hr' => 'Cooling Capacity (BTU/hr)',
+                        'star_rating_bee' => 'BEE Star Rating',
+                        'iseer' => 'ISEER Energy Efficiency Rating',
+                        'rated_voltage_frequency_phase' => 'Power Supply (Voltage/Hz/Phase)',
+                        'air_conditioner_technology' => 'Technology Type',
+                        'refrigerant_type' => 'Eco Refrigerant',
+                        'indoor_noise_level_db_a' => 'Acoustic Sound Level (Indoor dBA)',
+                        'air_flow_volume_wet_cfm' => 'Air Flow Volume (Wet CFM)',
+                        'compressor_warranty' => 'Compressor Warranty',
+                        'comprehensive_warranty' => 'Comprehensive Warranty',
+                        'product_dimension_w_x_d_x_h_mm' => 'Dimensions (W x D x H mm)',
+                        'product_net_weight_kg' => 'Product Net Weight',
+                        'storage_capacity_liters' => 'Storage Capacity',
+                        'cooling_medium' => 'Cooling Medium',
+                        'blower_fan' => 'Fan / Blower Type',
+                        'power_consumption_watts' => 'Power Consumption (Watts)',
+                        'works_on_inverter' => 'Inverter Compatible',
+                        'thermal_overload_protection' => 'Thermal Overload Protection',
+                        'ice_chamber' => 'Ice Chamber',
+                        'caster_wheels' => 'Castor Wheels',
+                        'remote_control' => 'Remote Control',
+                        'tank_fill' => 'Water Tank Fill Method',
+                        'country_of_origin' => 'Country of Origin',
+                        'warranty_summary' => 'Warranty Summary',
+                        'covered_in_warranty' => 'Warranty Coverage',
+                        'in_sales_package' => 'In The Sales Package'
+                    );
+                    foreach ( $specs as $spec ) {
+                        $row_count++;
+                        $bg = ( $row_count % 2 === 0 ) ? 'background:#f9fafb;' : 'background:#fff;';
+                        if ( ! is_array( $spec ) || ! isset( $spec['name'], $spec['value'] ) ) continue;
+                        $raw_name = trim( $spec['name'] );
+                        $display_label = isset( $known_labels[strtolower( $raw_name )] ) ? $known_labels[strtolower( $raw_name )] : ucwords( str_replace( '_', ' ', $raw_name ) );
+                        echo '<tr style="' . $bg . '">';
+                        echo '<td style="padding:12px 16px;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em;color:#71717a;width:35%;border-bottom:1px solid #e4e4e7;">' . esc_html( $display_label ) . '</td>';
+                        echo '<td style="padding:12px 16px;font-size:0.875rem;color:#18181b;border-bottom:1px solid #e4e4e7;">' . wp_kses_post( $spec['value'] ) . '</td>';
+                        echo '</tr>';
                     }
+                    echo '</tbody></table>';
+                } elseif ( ! empty( $specs ) && is_string( $specs ) ) {
+                    // Raw HTML table from scraper
+                    echo wp_kses_post( $specs );
+                } elseif ( ! empty( $extracted_specs ) ) {
+                    // Extracted from Description
+                    echo '<div class="prose prose-zinc prose-sm max-w-none">';
+                    echo wp_kses_post( $extracted_specs );
+                    echo '</div>';
                 } else {
-                    echo '<p class="text-zinc-500 italic">No specifications available for this product.</p>';
+                    echo '<p style="color:#71717a;font-style:italic;">No specifications available for this product.</p>';
                 }
                 ?>
             </div>

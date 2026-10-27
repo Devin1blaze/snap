@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#FFFFFF"/>
+  <circle cx="100" cy="70" r="35" fill="#003399"/>
+  <polygon points="100,45 115,70 100,95 85,70" fill="#FFCC00"/>
+  <text x="100" y="135" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#003399" text-anchor="middle" letter-spacing="1">euronics</text>
+  <text x="100" y="158" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#D97706" text-anchor="middle" letter-spacing="2">WASHROOM AUTOMATION</text>
+</svg>

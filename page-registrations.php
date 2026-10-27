@@ -19,51 +19,56 @@ get_header(); ?>
 </div>
 <div class="flex justify-between border-b border-surface-container py-4">
 <span class="text-primary-container font-bold uppercase text-xs tracking-widest">CIN / Reg No</span>
-<span class="text-[#0A0A0A] font-black">U74999PN2018PTC176543</span>
+<span class="text-[#0A0A0A] font-black">U51909MH1988PTC048712</span>
 </div>
 <div class="flex justify-between border-b border-surface-container py-4">
 <span class="text-primary-container font-bold uppercase text-xs tracking-widest">Date of Inc.</span>
-<span class="text-[#0A0A0A] font-black uppercase">12 SEP 2018</span>
+<span class="text-[#0A0A0A] font-black uppercase">05 SEP 1988</span>
 </div>
 <div class="flex justify-between border-b border-surface-container py-4">
 <span class="text-primary-container font-bold uppercase text-xs tracking-widest">GST Number</span>
-<span class="text-[#0A0A0A] font-black">27AAHCS1234A1Z1</span>
-</div>
-<div class="flex justify-between border-b border-surface-container py-4">
-<span class="text-primary-container font-bold uppercase text-xs tracking-widest">MSME Number</span>
-<span class="text-[#0A0A0A] font-black">UDYAM-MH-26-0001234</span>
+<span class="text-[#0A0A0A] font-black">27AACCS5951P1ZP</span>
 </div>
 <div class="flex justify-between border-b border-surface-container py-4">
 <span class="text-primary-container font-bold uppercase text-xs tracking-widest">PAN Number</span>
-<span class="text-[#0A0A0A] font-black">AAHCS1234A</span>
+<span class="text-[#0A0A0A] font-black">AACCS5951P</span>
+</div>
+<div class="flex justify-between border-b border-surface-container py-4">
+<span class="text-primary-container font-bold uppercase text-xs tracking-widest">Entity Status</span>
+<span class="text-green-700 font-black uppercase flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-green-600 inline-block"></span> Active (MCA Verified)</span>
 </div>
 </div>
-<!-- 2. REGISTRATION DETAILS: Updated Button and Microcopy -->
+<!-- 2. REGISTRATION DETAILS: Verification Button -->
 <div class="mt-12 text-center">
-<button class="w-full h-[56px] bg-[#FBBF24] text-[#0A0A0A] font-black px-8 text-sm flex items-center justify-center gap-2 hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-all uppercase tracking-tighter">
+<a href="https://www.mca.gov.in/mcafoportal/viewCompanyMasterData.do" target="_blank" rel="noopener noreferrer" class="w-full h-[56px] bg-[#FBBF24] text-[#0A0A0A] font-black px-8 text-sm flex items-center justify-center gap-2 hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-all uppercase tracking-tighter">
                         VERIFY COMPANY ON MCA PORTAL →
-                    </button>
-<p class="mt-2 text-xs text-gray-500 font-medium">Opens Government MCA21 Portal</p>
+                    </a>
+<p class="mt-2 text-xs text-gray-500 font-medium">Opens Government MCA21 Portal (Search CIN: U51909MH1988PTC048712)</p>
 </div>
 </div>
 <!-- Office Card -->
-<div class="border-2 border-primary-container bg-surface-container-low p-10 flex flex-col">
-<h3 class="text-primary-container font-black text-2xl mb-6 uppercase">Registered Office</h3>
-<p class="text-xl font-bold leading-relaxed mb-10 text-[#0A0A0A]">
-                    Snap Marketing Tower, Sector 4,<br/>
-                    Hinjewadi Phase 1, Pune,<br/>
-                    Maharashtra 411057,<br/>
-                    India
+<div class="border-2 border-primary-container bg-surface-container-low p-10 flex flex-col justify-between">
+<div>
+<h3 class="text-primary-container font-black text-2xl mb-4 uppercase">Registered Office</h3>
+<p class="text-lg font-bold leading-relaxed mb-6 text-[#0A0A0A]">
+                    Snap House, 322/16, Shankar Sheth Road,<br/>
+                    Near Indian Oil Petrol Pump, Hotel 7 Loves Chowk,<br/>
+                    Ghorpadi Peth, Pune - 411042,<br/>
+                    Maharashtra, India
                 </p>
-<div class="flex-grow min-h-[300px] border-4 border-[#FBBF24] bg-surface-container-highest relative mb-8">
-<img alt="Map Location" class="w-full h-full object-cover grayscale contrast-125" data-alt="Stylized grayscale map of Pune city area" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZpZIhZTdxXJV1IBTtfSe28ha7KbTTzVWJtgX4PjEAra16TY2U90ajlfL9jAieyhJLcvDHFeB1Oo8qHc3ILtuqi3JaXuZCULPP6sFyrT5rbxRyRLl3iDeDZuMJGQzEJyx5DSOXde8zcmxv1bBymMD2TroXyH2427_umnSO8_qIihROdAciPnyt2KsEYQ07EzAuN-PT5sqZqUvUYvtbHZ95d3uaCiuEBNdxTlM1O5Lvltpl6ZT8hkkISYZCXkOGPmS6VPRnRKgaLQU"/>
-<div class="absolute inset-0 bg-primary-container/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-6xl text-primary-container">location_on</span>
+<div class="w-full h-[260px] border-4 border-[#FBBF24] relative overflow-hidden mb-6">
+    <iframe 
+        class="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-500" 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.389279589332!2d73.86431947597548!3d18.511326469455322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c045bdf5e08b%3A0xc391ad5c28269d7b!2sShankar%20Sheth%20Rd%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1718616161616!5m2!1sen!2sin" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
 </div>
 </div>
-<button class="bg-[#FBBF24] text-[#0A0A0A] font-black py-4 px-8 text-sm flex items-center justify-center gap-2 hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-all">
-                    GET DIRECTIONS <span class="material-symbols-outlined">directions</span>
-</button>
+<a href="https://maps.google.com/?q=Snap+House,+322/16,+Shankar+Sheth+Road,+Pune+411042" target="_blank" rel="noopener noreferrer" class="bg-[#FBBF24] text-[#0A0A0A] font-black py-4 px-8 text-sm flex items-center justify-center gap-2 hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-all text-center uppercase tracking-wider">
+                    GET DIRECTIONS ON MAPS <span class="material-symbols-outlined">directions</span>
+</a>
 </div>
 </div>
 </div>
@@ -88,67 +93,42 @@ get_header(); ?>
 </div>
 </section>
 <section class="py-24 px-8 bg-[#0A0A0A]">
-<div class="max-w-7xl mx-auto">
+<div class="max-w-5xl mx-auto">
 <span class="text-[#FBBF24] font-black tracking-[0.2em] text-xs uppercase mb-4 block">EXECUTIVE LEADERSHIP</span>
-<h2 class="text-5xl font-black text-white mb-4 uppercase">BOARD OF DIRECTORS</h2>
-<p class="text-white/60 text-xl font-medium mb-16 max-w-2xl">Driving enterprise growth with transparent leadership and industry authority.</p>
-<div class="grid md:grid-cols-3 gap-8">
-<!-- Director 1 -->
-<div class="bg-white p-1 group cursor-pointer">
-<div class="aspect-[4/5] overflow-hidden bg-surface-container">
-<img alt="Director 1" class="w-full h-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0" data-alt="Professional headshot of male managing director" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA1cluZWiEBsoSWx3N48mevqf2tjSVH1XqXOzCMPMKcIW2Gn4T9dfexsx1Nl2bMwumM8_49r4d9__b7F8cZs_DTJPxaWJ3Rozf9RJZSxjPpz31ACjtm2r2Sxtv3VRe4BFeVbSe-XNO0y_ccZCt1xsnRfa4xv2csSJu03gaaCysQCfk8KU6F9KwcTveN77VAHYIf-usohKRPmY6Lv-XnA-_nxwRvWT4jpYbKnPHCHSCbw5B-TkxpR-38oo0asqtpy2Uu8e12dOCytM"/>
+<h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase">Board of Directors</h2>
+<p class="text-white/60 text-lg md:text-xl font-medium mb-12 max-w-2xl">Driving enterprise growth with transparent governance, operational excellence, and industry authority.</p>
+
+<div class="bg-white p-8 md:p-12 border-l-8 border-[#FBBF24] text-[#0A0A0A] shadow-2xl">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 border-b border-gray-200 pb-8">
+<div>
+<h4 class="text-3xl md:text-4xl font-black text-[#0A0A0A] uppercase tracking-tight mb-2">Lokesh Omprakash Arya</h4>
+<p class="text-[#1A56DB] font-black text-sm uppercase tracking-widest">Director &amp; Managing Partner</p>
 </div>
-<div class="p-8">
-<div class="flex justify-between items-start mb-1">
-<h4 class="text-2xl font-black text-[#0A0A0A] uppercase">Arjun Mehta</h4>
-<span class="bg-[#FBBF24] text-[#0A0A0A] text-[10px] font-black px-2 py-1 uppercase whitespace-nowrap">25 YRS EXP</span>
-</div>
-<p class="text-primary-container font-bold text-sm tracking-widest uppercase mb-6">Managing Director</p>
-<p class="italic font-bold text-[#0A0A0A] border-l-4 border-[#FBBF24] pl-4 mb-8">
-                        "Innovation is the foundation of industrial reliability."
-                    </p>
-<button class="w-full bg-[#FBBF24] text-[#0A0A0A] py-4 font-black text-xs tracking-widest flex items-center justify-center gap-2 hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-all">
-                        SCHEDULE A MEETING <span class="material-symbols-outlined text-sm">calendar_today</span>
-</button>
+<div class="flex flex-wrap items-center gap-3">
+<span class="bg-[#FBBF24] text-[#0A0A0A] text-xs font-black px-4 py-2 uppercase tracking-wider">35+ YRS INDUSTRY EXP</span>
+<span class="bg-black text-[#FBBF24] text-xs font-black px-4 py-2 uppercase tracking-wider">MBA (IMDR PUNE)</span>
 </div>
 </div>
-<!-- Director 2 -->
-<div class="bg-white p-1 group cursor-pointer">
-<div class="aspect-[4/5] overflow-hidden bg-surface-container">
-<img alt="Director 2" class="w-full h-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0" data-alt="Professional headshot of female operations director" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGerGaaaiTKbGxkTg4iEBZsfkptUOgXI3K7rBFNZOrlkQYM9LNkZhhvK5tdNokR5xVVZjRQgohbWUjH2LEazAF66Rd2LSRG5m1FkV9xTDBx7Puw7_0UBjnrxxnMPe8n3meeM_CI4za0sfzzsR4HdFPZoGt8aI2kAEyVD0AYW1a4imlF2I8bqPRiWdn3XrATlOxlvir_oylViB4v9E0gqSWrlPNHDK8GwbF27pNuMh4I23Wx4g4aZQNtD7wgHU2DM5gKnTfrbE2U78"/>
+<div class="space-y-4 text-gray-700 text-base md:text-lg leading-relaxed font-medium mb-8">
+<p>
+Lokesh Omprakash Arya has steered Snap Marketing Private Limited as Director since its early years, expanding it into Pune's foremost master distributor for industrial hygiene, washroom automations, and commercial cooling appliances.
+</p>
+<p>
+Under his leadership, Snap Marketing forged master distribution partnerships with Blue Star Limited, Euronics, Usha, and Aquaguard, supplying commercial facilities, corporate IT parks, hospitals, and government institutions across Maharashtra and India.
+</p>
 </div>
-<div class="p-8">
-<div class="flex justify-between items-start mb-1">
-<h4 class="text-2xl font-black text-[#0A0A0A] uppercase">Sarah Chen</h4>
-<span class="bg-[#FBBF24] text-[#0A0A0A] text-[10px] font-black px-2 py-1 uppercase whitespace-nowrap">18 YRS EXP</span>
+<div class="border-l-4 border-[#FBBF24] pl-6 py-4 bg-amber-50/60 mb-8">
+<p class="italic font-bold text-[#0A0A0A] text-base md:text-lg">
+"Precision in delivery, absolute transparency with clients, and unmatched after-sales accountability are the standards we uphold every single day."
+</p>
 </div>
-<p class="text-primary-container font-bold text-sm tracking-widest uppercase mb-6">Operations Director</p>
-<p class="italic font-bold text-[#0A0A0A] border-l-4 border-[#FBBF24] pl-4 mb-8">
-                        "Precision in operations defines our market authority."
-                    </p>
-<button class="w-full bg-[#FBBF24] text-[#0A0A0A] py-4 font-black text-xs tracking-widest flex items-center justify-center gap-2 hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-all">
-                        SCHEDULE A MEETING <span class="material-symbols-outlined text-sm">calendar_today</span>
-</button>
-</div>
-</div>
-<!-- Director 3 -->
-<div class="bg-white p-1 group cursor-pointer">
-<div class="aspect-[4/5] overflow-hidden bg-surface-container">
-<img alt="Director 3" class="w-full h-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0" data-alt="Professional headshot of male sales director" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANvoC5VTrQFGZ7a_B0rJo0BTWY61IcUzo4bkhnZNj06WW6ZBfDYz0lhQdNYhjjl8jK42WoQQFjuWGnMUTn1Sq7f_nt-qZrwW7U1zL80dGgi8bZ3h0Z9t_Q2rk4WW0Sj3yemQtoF0a-Yj1UZq2Lg5OY3RbI3d6oYm4mSQhZjcK_QhIj5ZcCyPPj-QZDATS025xRT4I2rXjEO5rSdCIjjJB2hIExIuPi1CYokVklLsZTTtZmiNMnguD3WqKNarfuHbvyzvf60OlOfZw"/>
-</div>
-<div class="p-8">
-<div class="flex justify-between items-start mb-1">
-<h4 class="text-2xl font-black text-[#0A0A0A] uppercase">Rohan Kapoor</h4>
-<span class="bg-[#FBBF24] text-[#0A0A0A] text-[10px] font-black px-2 py-1 uppercase whitespace-nowrap">12 YRS EXP</span>
-</div>
-<p class="text-primary-container font-bold text-sm tracking-widest uppercase mb-6">Sales &amp; Strategy Director</p>
-<p class="italic font-bold text-[#0A0A0A] border-l-4 border-[#FBBF24] pl-4 mb-8">
-                        "Scalable partnerships are built on transparency."
-                    </p>
-<button class="w-full bg-[#FBBF24] text-[#0A0A0A] py-4 font-black text-xs tracking-widest flex items-center justify-center gap-2 hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-all">
-                        SCHEDULE A MEETING <span class="material-symbols-outlined text-sm">calendar_today</span>
-</button>
-</div>
+<div class="flex flex-wrap gap-4">
+<a href="/contact-us" class="bg-[#FBBF24] text-[#0A0A0A] px-8 py-4 font-black text-xs tracking-widest flex items-center justify-center gap-2 hover:bg-[#0A0A0A] hover:text-[#FBBF24] transition-all uppercase">
+CONNECT WITH EXECUTIVE OFFICE <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a href="tel:+919823012724" class="bg-[#1A56DB] text-white px-8 py-4 font-black text-xs tracking-widest flex items-center justify-center gap-2 hover:bg-[#0A0A0A] transition-all uppercase">
+DIRECT DESK: +91 98230 12724 <span class="material-symbols-outlined text-sm">call</span>
+</a>
 </div>
 </div>
 </div>
@@ -164,10 +144,10 @@ get_header(); ?>
         <!-- Content -->
         <div>
             <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
-                <span class="text-3xl md:text-4xl font-black text-[#FBBF24]">2018</span>
+                <span class="text-3xl md:text-4xl font-black text-[#FBBF24]">1988</span>
                 <h3 class="text-xl md:text-2xl font-black text-white uppercase">Company Founded</h3>
             </div>
-            <p class="text-white/80 font-medium text-lg">Incorporated with a vision to redefine B2B marketing standards.</p>
+            <p class="text-white/80 font-medium text-lg">Incorporated in Pune, Maharashtra (CIN: U51909MH1988PTC048712) with a mission to distribute premium commercial and industrial equipment.</p>
         </div>
     </div>
 

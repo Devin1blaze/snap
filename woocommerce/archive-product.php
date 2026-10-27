@@ -110,8 +110,12 @@ if (!$category_desc && isset($term->post_content)) {
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 border-t border-l border-[#1A56DB]">
 
 <?php if ( have_posts() ) : ?>
-    <?php while ( have_posts() ) : the_post(); global $product; ?>
-        <?php 
+    <?php while ( have_posts() ) : the_post(); 
+        global $product; 
+        if ( ! is_a( $product, 'WC_Product' ) ) {
+            $product = wc_get_product( get_the_ID() );
+        }
+        if ( ! $product ) continue;
         $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'large' ) ?: wc_placeholder_img_src();
         $title = $product->get_name();
         $sku = $product->get_sku() ?: 'N/A';

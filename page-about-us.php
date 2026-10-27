@@ -145,35 +145,31 @@ get_header(); ?>
 
 <!-- Directors Section -->
 <section class="py-16 px-8 md:px-24 bg-surface-container-low">
-<h3 class="text-4xl font-black mb-12 tracking-tight uppercase">Board of Directors</h3>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Director Card -->
-<div class="group bg-white p-8 relative overflow-hidden border-l-4 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-black transition-all duration-300">
-<h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Parag Chinubhai Shah</h4>
-<div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4 group-hover:bg-[#FBBF24] group-hover:text-[#0A0A0A] transition-colors duration-300">
-                Director
+<div class="max-w-5xl mx-auto">
+<span class="inline-block bg-[#FBBF24] text-[#0A0A0A] px-3 py-1 text-[12px] font-black tracking-[0.1em] mb-4 uppercase">EXECUTIVE LEADERSHIP</span>
+<h3 class="text-4xl font-black mb-12 tracking-tight uppercase">Company Leadership</h3>
+<div class="bg-white p-8 md:p-12 relative overflow-hidden border-l-8 border-[#FBBF24] shadow-xl hover:shadow-2xl transition-all duration-300">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
+<div>
+<h4 class="text-3xl md:text-4xl font-black mb-2 uppercase tracking-tight text-[#0A0A0A]">Lokesh Omprakash Arya</h4>
+<div class="inline-block bg-primary-container text-[#FBBF24] text-xs font-black tracking-widest uppercase px-4 py-1.5">
+                Director &amp; Managing Partner
             </div>
-<p class="text-sm leading-relaxed opacity-70 mb-4">Guiding the corporate vision and financial governance of Snap Marketing Private Limited for over three decades.</p>
-<p class="text-[#FBBF24] italic font-bold text-sm">"Integrity and quality are the cornerstones of our growth."</p>
 </div>
-<div class="group bg-white p-8 relative overflow-hidden border-l-4 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-black transition-all duration-300">
-<h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Lokesh Omparkash Arya</h4>
-<div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4 group-hover:bg-[#FBBF24] group-hover:text-[#0A0A0A] transition-colors duration-300">
-                Director
-            </div>
-<p class="text-sm leading-relaxed opacity-70 mb-4">Driving partnerships, business development, and distributor relationships with premium brands like Blue Star and Euronics.</p>
-<p class="text-[#FBBF24] italic font-bold text-sm">"We build partnerships that stand the test of time."</p>
+<div class="text-left md:text-right">
+<span class="bg-[#FBBF24] text-[#0A0A0A] text-xs font-black px-3 py-1.5 uppercase tracking-wider inline-block">35+ YRS INDUSTRY LEADERSHIP</span>
 </div>
-<div class="group bg-white p-8 relative overflow-hidden border-l-4 border-[#FBBF24] cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-black transition-all duration-300">
-<h4 class="text-2xl font-black mb-1 uppercase tracking-tight">Meena Parag Shah</h4>
-<div class="inline-block bg-primary-container text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 mb-4 group-hover:bg-[#FBBF24] group-hover:text-[#0A0A0A] transition-colors duration-300">
-                Director
-            </div>
-<p class="text-sm leading-relaxed opacity-70 mb-4">Overseeing operational standards and compliance, ensuring alignment with corporate governance records.</p>
-<p class="text-[#FBBF24] italic font-bold text-sm">"Operational rigor ensures we deliver on our promises."</p>
+</div>
+<p class="text-base md:text-lg leading-relaxed text-gray-700 font-medium mb-6">
+Qualified MBA from the Institute of Management Development and Research (IMDR), Pune. Guiding Snap Marketing Private Limited for over three decades with visionary enterprise leadership, establishing master distributor partnerships with industry giants including Blue Star Limited and Euronics, and driving institutional customer trust across Maharashtra and India.
+</p>
+<div class="border-l-4 border-[#1A56DB] pl-4 py-2 bg-blue-50/50">
+<p class="text-[#0A0A0A] italic font-bold text-base">"Integrity, technological authority, and dedicated long-term customer partnerships are the bedrock of our 35-year legacy."</p>
+</div>
 </div>
 </div>
 </section>
+
 
 <!-- CTA Section -->
 <section class=" bg-[#0A0A0A] py-32 px-8 md:px-24 text-center">

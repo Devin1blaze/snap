@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#FFFFFF"/>
+  <circle cx="100" cy="65" r="28" fill="#78350F"/>
+  <path d="M88 65 Q100 52 112 65 Q100 78 88 65 Z" fill="#FDE68A"/>
+  <text x="100" y="125" font-family="Arial, sans-serif" font-size="30" font-weight="900" fill="#451A03" text-anchor="middle">Nèttare</text>
+  <text x="100" y="150" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#92400E" text-anchor="middle" letter-spacing="2">ARTISAN COFFEE</text>
+</svg>

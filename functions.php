@@ -10,6 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Require the Mega Menu Walker
 require_once get_template_directory() . '/class-snap-mega-menu-walker.php';
 
+// Require Global SEO & Schema Structured Data Generator
+require_once get_template_directory() . '/inc/seo-schema.php';
+
+// Require Google Analytics 4 & Google Search Console Integration
+require_once get_template_directory() . '/inc/google-integration.php';
+
 // Disable WooCommerce's new Coming Soon mode for store pages
 update_option('woocommerce_coming_soon', 'no');
 update_option('woocommerce_store_pages_only', 'no');
@@ -272,31 +278,6 @@ function snap_get_category_link( $slug ) {
 
 
 
-/**
- * Add B2B Brochure PDF Custom Field to Product Data
- */
-add_action( 'woocommerce_product_options_general_product_data', 'snap_stitch_add_b2b_brochure_field' );
-function snap_stitch_add_b2b_brochure_field() {
-    echo '<div class="options_group">';
-    woocommerce_wp_text_input( array(
-        'id'          => '_brochure_url',
-        'label'       => __( 'Brochure PDF URL (B2B)', 'snap-stitch-theme' ),
-        'placeholder' => 'https://...',
-        'description' => __( 'Enter the URL for the product brochure PDF. This will show a "Download Brochure" button on the product page.', 'snap-stitch-theme' ),
-        'desc_tip'    => true,
-    ) );
-    echo '</div>';
-}
-
-/**
- * Save the B2B Brochure PDF Custom Field
- */
-add_action( 'woocommerce_process_product_meta', 'snap_stitch_save_b2b_brochure_field' );
-function snap_stitch_save_b2b_brochure_field( $post_id ) {
-    if ( isset( $_POST['_brochure_url'] ) ) {
-        update_post_meta( $post_id, '_brochure_url', sanitize_url( $_POST['_brochure_url'] ) );
-    }
-}
 
 /**
  * WooCommerce Customizations: Remove Downloads navigation link from My Account
@@ -468,26 +449,42 @@ function snap_stitch_get_menu_products() {
         wp_send_json_error( 'Invalid category ID' );
     }
 
-    $term = get_term_by( 'id', $cat_id, 'product_cat' );
+    $term = get_term( $cat_id, 'product_cat' );
     if ( ! $term || is_wp_error( $term ) ) {
         wp_send_json_error( 'Category not found' );
     }
 
+    // Use WP_Query with include_children => true so parent terms return child products
     $args = array(
-        'status' => 'publish',
-        'limit'  => 8,
-        'category' => array( $term->slug ),
+        'post_type'      => 'product',
+        'post_status'    => 'publish',
+        'posts_per_page' => 8,
+        'tax_query'      => array(
+            array(
+                'taxonomy'         => 'product_cat',
+                'field'            => 'term_id',
+                'terms'            => $cat_id,
+                'include_children' => true,
+            ),
+        ),
     );
     
-    $products = wc_get_products( $args );
+    $query = new WP_Query( $args );
     $results = array();
     
-    if ( ! empty( $products ) ) {
-        foreach ( $products as $product ) {
-            $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'large' ) ?: wc_placeholder_img_src();
+    if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) {
+            $query->the_post();
+            global $product;
+            if ( ! is_a( $product, 'WC_Product' ) ) {
+                $product = wc_get_product( get_the_ID() );
+            }
+            if ( ! $product ) continue;
+
+            $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'medium' ) ?: wc_placeholder_img_src();
             $terms = wc_get_product_terms( $product->get_id(), 'product_cat', array( 'fields' => 'names' ) );
-            $brand = !empty($terms) ? $terms[0] : 'SNAP STITCH';
-            $is_b2b = function_exists('snap_stitch_is_b2b_product') ? snap_stitch_is_b2b_product( $product->get_id() ) : false;
+            $brand = ! empty( $terms ) ? $terms[0] : 'BLUE STAR';
+            $is_b2b = function_exists( 'snap_stitch_is_b2b_product' ) ? snap_stitch_is_b2b_product( $product->get_id() ) : false;
 
             $results[] = array(
                 'id'    => $product->get_id(),
@@ -495,14 +492,20 @@ function snap_stitch_get_menu_products() {
                 'url'   => $product->get_permalink(),
                 'image' => $image_url,
                 'brand' => $brand,
-                'is_b2b'=> $is_b2b
+                'is_b2b'=> $is_b2b,
             );
         }
+        wp_reset_postdata();
     }
     
+    $term_link = get_term_link( $term );
+    if ( is_wp_error( $term_link ) ) {
+        $term_link = home_url( '/product-category/' . $term->slug . '/' );
+    }
+
     wp_send_json_success( array(
         'products' => $results,
-        'view_all' => get_term_link( $term )
+        'view_all' => $term_link,
     ) );
 }
 
@@ -570,3 +573,89 @@ function snap_ajax_search_callback() {
     
     wp_send_json_success($results);
 }
+
+/**
+ * Add SEO Meta Description Custom Field to Product Data
+ */
+add_action( 'woocommerce_product_options_general_product_data', 'snap_stitch_add_seo_meta_field' );
+function snap_stitch_add_seo_meta_field() {
+    echo '<div class="options_group">';
+    woocommerce_wp_textarea_input( array(
+        'id'          => '_seo_meta_description',
+        'label'       => __( 'SEO Meta Description', 'snap-stitch-theme' ),
+        'placeholder' => 'Enter SEO meta description here...',
+        'description' => __( 'This description will be added to the &lt;meta name="description"&gt; tag on the frontend for search engines.', 'snap-stitch-theme' ),
+        'desc_tip'    => true,
+    ) );
+    echo '</div>';
+}
+
+/**
+ * Save the SEO Meta Description Custom Field
+ */
+add_action( 'woocommerce_process_product_meta', 'snap_stitch_save_seo_meta_field' );
+function snap_stitch_save_seo_meta_field( $post_id ) {
+    if ( isset( $_POST['_seo_meta_description'] ) ) {
+        update_post_meta( $post_id, '_seo_meta_description', sanitize_textarea_field( wp_unslash( $_POST['_seo_meta_description'] ) ) );
+    }
+}
+
+/**
+ * Output SEO Meta Description to wp_head for single products
+ */
+add_action( 'wp_head', 'snap_stitch_output_seo_meta_description', 1 );
+function snap_stitch_output_seo_meta_description() {
+    if ( is_product() ) {
+        $meta_desc = get_post_meta( get_the_ID(), '_seo_meta_description', true );
+        
+        // Try fallback to Yoast or RankMath keys just in case
+        if ( empty( $meta_desc ) ) {
+            $meta_desc = get_post_meta( get_the_ID(), '_yoast_wpseo_metadesc', true );
+        }
+        if ( empty( $meta_desc ) ) {
+            $meta_desc = get_post_meta( get_the_ID(), 'rank_math_description', true );
+        }
+
+        if ( ! empty( $meta_desc ) ) {
+            echo '<meta name="description" content="' . esc_attr( wp_strip_all_tags( $meta_desc ) ) . '">' . "\n";
+        } else {
+            // Fallback to excerpt if no meta description is set
+            $excerpt = get_the_excerpt();
+            if ( ! empty( $excerpt ) ) {
+                $excerpt = wp_trim_words( $excerpt, 30, '' );
+                echo '<meta name="description" content="' . esc_attr( wp_strip_all_tags( $excerpt ) ) . '">' . "\n";
+            }
+        }
+    }
+}
+
+/**
+ * Auto-Provision Essential Pages (FAQ, etc.)
+ * Ensures that as soon as this theme is active on any server (local or live),
+ * the /faq page is automatically created, published, and assigned page-faq.php template.
+ * Eliminates the need for manual setup in WordPress Admin.
+ */
+function snap_stitch_auto_provision_essential_pages() {
+    // 1. FAQ Page (/faq)
+    $faq_page = get_page_by_path( 'faq' );
+    if ( ! $faq_page ) {
+        $page_id = wp_insert_post( array(
+            'post_title'     => 'Frequently Asked Questions',
+            'post_name'      => 'faq',
+            'post_status'    => 'publish',
+            'post_type'      => 'page',
+            'post_content'   => '',
+            'comment_status' => 'closed',
+        ) );
+        if ( $page_id && ! is_wp_error( $page_id ) ) {
+            update_post_meta( $page_id, '_wp_page_template', 'page-faq.php' );
+        }
+    } else {
+        $current_tpl = get_post_meta( $faq_page->ID, '_wp_page_template', true );
+        if ( 'page-faq.php' !== $current_tpl ) {
+            update_post_meta( $faq_page->ID, '_wp_page_template', 'page-faq.php' );
+        }
+    }
+}
+add_action( 'init', 'snap_stitch_auto_provision_essential_pages' );
+

@@ -124,7 +124,7 @@ get_header(); ?>
 <span class="material-symbols-outlined text-[#FBBF24] text-3xl">location_on</span>
 <div>
 <p class="text-white/60 font-bold text-xs uppercase tracking-widest mb-1">Office Address</p>
-<p class="text-white text-lg font-medium">Snap House, Plot No. 322/16, Ghorpade Peth, Shankar Sheth Road, Opp. Mira Housing Society, Pune - 411042, Maharashtra, India</p>
+<p class="text-white text-lg font-medium">Snap House, 322/16, Shankar Sheth Road, Near Indian Oil Petrol Pump, Hotel 7 Loves Chowk, Ghorpadi Peth, Pune - 411042, Maharashtra, India</p>
 </div>
 </div>
 <div class="flex flex-col gap-6">

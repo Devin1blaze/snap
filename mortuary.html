@@ -1,0 +1,743 @@
+<!DOCTYPE html><html class="js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths k-webkit k-webkit148" lang="en-GB"><!--<![endif]--><head runat="server"><meta http-equiv="origin-trial" content="A7vZI3v+Gz7JfuRolKNM4Aff6zaGuT7X0mf3wtoZTnKv6497cVMnhy03KDqX7kBz/q/iidW7srW31oQbBt4VhgoAAACUeyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGUuY29tOjQ0MyIsImZlYXR1cmUiOiJEaXNhYmxlVGhpcmRQYXJ0eVN0b3JhZ2VQYXJ0aXRpb25pbmczIiwiZXhwaXJ5IjoxNzU3OTgwODAwLCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ==">
+<!-- Google Tag Manager -->
+
+<script async="" src="https://scripts.clarity.ms/0.8.69/clarity.js"></script><script async="" src="https://snap.licdn.com/li.lms-analytics/insight.old.min.js"></script><script async="" src="https://www.clarity.ms/tag/ln72a79zvu"></script><script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-0HQG9F99G0&amp;cx=c&amp;gtm=4e68i0"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-C4XR9B5743&amp;cx=c&amp;gtm=4e68i0"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-REFXTN7M2Z&amp;cx=c&amp;gtm=4e68i0"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=AW-663602962&amp;cx=c&amp;gtm=4e68i0"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-TRBGD90XCN&amp;cx=c&amp;gtm=4e68i0"></script><script type="text/javascript" async="" charset="utf-8" src="https://www.gstatic.com/recaptcha/releases/xg_pWYS8-HRESiV6Rdg4aY_R/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-qWH0xCejb2gc1yqo8ob4TQrvIcQ9XjhOfGKbhFr/+LvFrJdTE3bA+FQP/FLAiQhz"></script><script src="https://connect.facebook.net/signals/config/733172096835860?v=2.9.380&amp;r=stable&amp;domain=www.bluestarindia.com&amp;hme=c50c23a73e1ec4606e74678f41b5d8ea0d42064a6916ad288a18c9a04f0ffe88&amp;ex_m=113%2C218%2C164%2C25%2C78%2C79%2C156%2C74%2C73%2C11%2C174%2C98%2C19%2C148%2C136%2C43%2C81%2C86%2C144%2C169%2C176%2C29%2C17%2C30%2C31%2C32%2C34%2C52%2C157%2C83%2C121%2C21%2C23%2C48%2C44%2C46%2C45%2C91%2C100%2C104%2C119%2C155%2C158%2C50%2C120%2C27%2C24%2C128%2C75%2C40%2C160%2C159%2C161%2C152%2C150%2C28%2C39%2C63%2C118%2C171%2C76%2C20%2C123%2C89%2C72%2C22%2C93%2C94%2C125%2C92%2C146%2C145%2C149%2C105%2C170%2C173%2C38%2C53%2C122%2C51%2C8%2C4%2C5%2C7%2C6%2C3%2C99%2C110%2C177%2C185%2C232%2C80%2C245%2C244%2C243%2C14%2C26%2C37%2C59%2C112%2C65%2C10%2C69%2C106%2C107%2C108%2C114%2C139%2C35%2C33%2C141%2C142%2C143%2C138%2C137%2C165%2C82%2C168%2C166%2C167%2C54%2C64%2C132%2C18%2C172%2C49%2C291%2C292%2C290%2C305%2C327%2C225%2C214%2C66%2C215%2C213%2C330%2C321%2C56%2C226%2C116%2C140%2C88%2C130%2C58%2C129%2C135%2C134%2C62%2C70%2C68%2C162%2C84%2C85%2C124%2C41%2C36%2C57%2C60%2C109%2C175%2C1%2C133%2C16%2C131%2C12%2C2%2C61%2C101%2C15%2C71%2C67%2C127%2C97%2C96%2C178%2C179%2C102%2C103%2C9%2C111%2C55%2C153%2C95%2C87%2C77%2C126%2C115%2C47%2C154%2C0%2C90%2C147%2C151%2C163%2C42%2C117%2C13%2C180" async=""></script><script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-KRFSVDM"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+
+})(window,document,'script','dataLayer','GTM-KRFSVDM');</script>
+
+<!-- End Google Tag Manager -->
+	
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Mortuary Chambers Suppliers - Mortuary Chambers at Best Price in India</title>
+<meta name="description" content="Blue Star, India's leading AC&amp;R company with over seven decades of experience, brings you mortuary chambers that are rugged, reliable and efficient. Cutting-edge technology and modern components from state-of-the-art factories go into each Blue Star mortuary chamber available at best price in India. Blue Star refrigeration equipment ensures maintenance of desired temperature and humidity at all times.">
+<meta name="keywords" content="Mortuary Chambers Price, Refrigeration Equipment Suppliers in India">	
+    <link rel="canonical" href="https://www.bluestarindia.com/products/speciality-products/mortuary-chambers">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" href="/img/favicon.ico">
+<style>
+	.slick-slide img.mob-hide {
+		display: block!important;
+	}
+	.slick-slide img.mob-show {
+		display: none!important;
+	}
+	@media only screen and (max-width: 640px) {
+		.homeSpotLight {
+			margin-top: 65px!important;
+		}
+		.slick-slide img.mob-hide {
+			display: none!important;
+		}
+		.slick-slide img.mob-show {
+			display: block!important;
+		}
+	}
+footer .footerband{margin-top:85px!important;}
+.container-800{max-width:800px;margin:0 auto;}
+.col-md-6{width:50%!important;}
+@media screen and (max-width:600px){
+	.container-800{padding:0 15px;}
+	.footeraddress .row{flex-direction:column;}
+	footer .footerband {
+		margin-top: 150px !important;}
+		.col-md-6{width:100%!important;}
+
+}
+</style>
+<link href="/css/kendo.common.min.css" rel="stylesheet">
+<link href="/css/kendo.default.min.css" rel="stylesheet">	
+<link rel="stylesheet" href="/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=2.1.5">
+<link rel="stylesheet" href="/css/slick-slider.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<link rel="stylesheet" href="/css/simplePagination.css">
+<script defer="" src="/js/vendor/modernizr-2.6.2.min.js"></script>
+<script defer="" src="/js/vendor/respond.js"></script>
+	
+	<script defer="">
+	    var ProductName = "";	
+	</script>	
+
+	<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '733172096835860');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=733172096835860&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+	
+	<script defer="" type="text/javascript">
+	    function search() {
+	        var searchText = document.getElementById('txtSearch').value;
+
+
+	        //alert(1 + searchText );
+	        if (searchText != '' && searchText != 'Search') {
+	            window.location.href = '/search?keywords=' + searchText;
+	            //alert(2 + searchText );
+	            document.getElementById("txtSearch").value = ""
+	            document.getElementById("txtPageSearch").value = ""
+	        }
+	        else {
+	            //alert("Please enter a keyword to search.");
+
+	        }
+	    }
+            
+        </script>	
+
+
+	<script src="https://www.google.com/recaptcha/api.js"></script>
+	
+	<meta name="facebook-domain-verification" content="g3rxjhayv2ysxtdhm7d526qyv828i7">		
+			
+<script async="" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent-code.js"></script><script async="" src="https://www.termsfeed.com/public-ping/cookie-consent/4.2.0/cookie-consent.js/www.bluestarindia.com"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/952010721/?random=1787164000201&amp;cv=9&amp;fst=1787164000201&amp;num=1&amp;guid=ON&amp;resp=GooglemKTybQhCsO&amp;eid=375603260%2C466465926%2C512247839%2C658953496&amp;u_h=720&amp;u_w=1280&amp;ig=1&amp;frm=0&amp;url=https%3A%2F%2Fwww.bluestarindia.com%2Fproducts%2Fspeciality-products%2Fmortuary-chambers&amp;tiba=Mortuary%20Chambers%20Suppliers%20-%20Mortuary%20Chambers%20at%20Best%20Price%20in%20India&amp;hn=www.googleadservices.com&amp;rfmt=3&amp;fmt=4"></script><style type="text/css">.fancybox-margin{margin-right:0px;}</style><style type="text/css"></style><style type="text/css">.termsfeed-com---reset{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-ms-overflow-style:scrollbar;-webkit-tap-highlight-color:rgba(0,0,0,0);margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}.termsfeed-com---reset *,.termsfeed-com---reset *::before,.termsfeed-com---reset *::after{box-sizing:border-box}.termsfeed-com---reset a,.termsfeed-com---reset li,.termsfeed-com---reset p,.termsfeed-com---reset h1,.termsfeed-com---reset h2,.termsfeed-com---reset input,.termsfeed-com---reset button,.termsfeed-com---reset select{border-style:none;box-shadow:none;margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;outline:none}@-ms-viewport{.termsfeed-com---reset{width:device-width}}.termsfeed-com---reset [tabindex="-1"]:focus{outline:0 !important}.termsfeed-com---reset h1,.termsfeed-com---reset h2,.termsfeed-com---reset h3,.termsfeed-com---reset h4,.termsfeed-com---reset h5,.termsfeed-com---reset h6{margin-top:0;margin-bottom:0;color:#000}.termsfeed-com---reset p{margin-top:0;margin-bottom:1rem}.termsfeed-com---reset div{display:block}.termsfeed-com---reset ol,.termsfeed-com---reset ul,.termsfeed-com---reset dl{margin-top:0;margin-bottom:1rem}.termsfeed-com---reset ol ol,.termsfeed-com---reset ul ul,.termsfeed-com---reset ol ul,.termsfeed-com---reset ul ol{margin-bottom:0}.termsfeed-com---reset b,.termsfeed-com---reset strong{font-weight:bolder}.termsfeed-com---reset small{font-size:80%}.termsfeed-com---reset a{color:#007bff;text-decoration:none;background-color:rgba(0,0,0,0);-webkit-text-decoration-skip:objects}.termsfeed-com---reset a:hover{color:#0056b3;text-decoration:underline}.termsfeed-com---reset a:not([href]):not([tabindex]){color:inherit;text-decoration:none}.termsfeed-com---reset a:not([href]):not([tabindex]):hover,.termsfeed-com---reset a:not([href]):not([tabindex]):focus{color:inherit;text-decoration:none}.termsfeed-com---reset a:not([href]):not([tabindex]):focus{outline:0}.termsfeed-com---reset label{display:inline-block;margin-bottom:.5rem}.termsfeed-com---reset button{border-radius:2px;padding:.5rem 1rem;outline:none;background:#dcdae5;color:#111;cursor:pointer;border:none}.termsfeed-com---reset button:focus{outline:none}.termsfeed-com---reset select{border-style:none;padding:.5rem 1rem}.termsfeed-com---reset input,.termsfeed-com---reset button,.termsfeed-com---reset select,.termsfeed-com---reset optgroup,.termsfeed-com---reset textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}.termsfeed-com---reset button,.termsfeed-com---reset input{overflow:visible}.termsfeed-com---reset button,.termsfeed-com---reset select{text-transform:none}.termsfeed-com---reset button,.termsfeed-com---reset html [type=button],.termsfeed-com---reset [type=reset],.termsfeed-com---reset [type=submit]{-webkit-appearance:button}.termsfeed-com---reset button::-moz-focus-inner,.termsfeed-com---reset [type=button]::-moz-focus-inner,.termsfeed-com---reset [type=reset]::-moz-focus-inner,.termsfeed-com---reset [type=submit]::-moz-focus-inner{padding:0;border-style:none}.termsfeed-com---reset input[type=radio],.termsfeed-com---reset input[type=checkbox]{box-sizing:border-box;padding:0}.termsfeed-com---reset [hidden]{display:none !important}</style><style type="text/css">.termsfeed-com---nb{overflow:auto;z-index:99999999999;font-size:16px}.termsfeed-com---nb .cc-nb-main-container{padding:3rem}.termsfeed-com---nb .cc-nb-title{font-size:24px;font-weight:600}.termsfeed-com---nb .cc-nb-text{font-size:16px;margin:0 0 1.25rem 0}.termsfeed-com---nb .cc-nb-okagree,.termsfeed-com---nb .cc-nb-reject,.termsfeed-com---nb .cc-nb-changep{font-weight:bold;font-size:14px;margin-right:.25rem !important;margin-bottom:.25rem !important}@media(max-width: 480px){.termsfeed-com---nb .cc-nb-okagree,.termsfeed-com---nb .cc-nb-reject,.termsfeed-com---nb .cc-nb-changep{display:block;width:100%}}.termsfeed-com---nb-headline{right:0;top:auto;bottom:0;left:0;max-width:100%;position:relative}@media(max-width: 320px),(max-height: 480px){.termsfeed-com---nb-headline{overflow:auto;height:200px;max-width:100%;right:0;top:auto;bottom:0;left:auto;position:fixed}}.termsfeed-com---nb-simple{right:0;top:auto;bottom:0;left:auto;max-width:50%;position:fixed}@media screen and (max-width: 600px){.termsfeed-com---nb-simple{max-width:80%}}@media(max-width: 320px),(max-height: 480px){.termsfeed-com---nb-simple{overflow:auto;height:200px;max-width:100%}}.termsfeed-com---nb-interstitial-overlay{position:fixed;top:0;left:0;height:100%;width:100%;background:rgba(0,0,0,.8);z-index:9999999999}.termsfeed-com---nb-interstitial{right:3vw;top:3vh;left:3vw;max-width:100%;position:fixed}@media(max-width: 320px),(max-height: 480px){.termsfeed-com---nb-interstitial{overflow:auto;height:200px;right:0;top:auto;bottom:0;left:auto;position:fixed}}.termsfeed-com---nb-standalone{position:fixed;top:0;left:0;height:100%;width:100%}@media(max-width: 320px),(max-height: 480px){.termsfeed-com---nb-standalone{overflow:auto;height:200px;max-width:100%;right:0;top:auto;bottom:0;left:auto;position:fixed}}.termsfeed-com---pc-overlay{width:100%;height:100%;position:fixed;background:rgba(0,0,0,.5);z-index:999999999999;top:0;left:0;display:none}@media screen and (max-width: 600px){.termsfeed-com---pc-overlay{overflow-y:scroll}}.termsfeed-com---pc-dialog{position:absolute;margin:30px auto;width:750px;max-width:90%;height:auto;left:0;right:0}.termsfeed-com---pc-dialog>div{width:100%}.termsfeed-com---pc-dialog .cc-pc-container{width:100%;display:flex;background:#fff;flex-direction:column}.termsfeed-com---pc-dialog .cc-pc-head{background:#fff;color:#111;display:flex;flex-direction:row;justify-content:space-between}@media screen and (max-width: 600px){.termsfeed-com---pc-dialog .cc-pc-head{flex-direction:column}}.termsfeed-com---pc-dialog .cc-pc-head-title{display:flex;padding-left:15px;flex-direction:column;justify-content:center;align-items:baseline}@media screen and (max-width: 600px){.termsfeed-com---pc-dialog .cc-pc-head-title{align-items:center;padding:15px 0 0 0}}.termsfeed-com---pc-dialog .cc-pc-head-title-text{font-size:16px;line-height:1.5;margin:0}.termsfeed-com---pc-dialog .cc-pc-head-title-headline{font-size:20px;font-weight:600;margin:0}.termsfeed-com---pc-dialog .cc-pc-head-lang{display:flex;align-items:center;padding-right:15px;min-height:80px;justify-content:center;flex-direction:row-reverse}@media screen and (max-width: 600px){.termsfeed-com---pc-dialog .cc-pc-head-lang{padding:15px 0;min-height:20px}}.termsfeed-com---pc-dialog .cc-pc-head-close{display:flex;align-items:center;justify-content:center;margin-left:15px}.termsfeed-com---pc-dialog .cc-cp-body{display:flex;flex-direction:row;align-items:stretch;background:#292929;color:#f5f5f5;border-bottom:none}@media screen and (max-width: 600px){.termsfeed-com---pc-dialog .cc-cp-body{flex-direction:column}}.termsfeed-com---pc-dialog .cc-cp-body-tabs{font-family:Arial,sans-serif !important;width:150px;margin:0;padding:0;background:#e6e6e6;min-width:150px}@media screen and (max-width: 600px){.termsfeed-com---pc-dialog .cc-cp-body-tabs{width:100%}}.termsfeed-com---pc-dialog .cc-cp-body-tabs-item{margin:0;padding:0;float:left;display:block;width:100%;color:#666;background:#e6e6e6;border-bottom:1px solid #ccc;border-right:1px solid #ccc;transition:all ease .1s;box-sizing:content-box}@media screen and (max-width: 600px){.termsfeed-com---pc-dialog .cc-cp-body-tabs-item{border-right:0}}.termsfeed-com---pc-dialog .cc-cp-body-tabs-item[active=true]{background:#292929;color:#f5f5f5}.termsfeed-com---pc-dialog .cc-cp-body-tabs-item-link{text-decoration:none;color:#666;display:block;padding:10px 5px 10px 10px;font-weight:700;font-size:12px;line-height:19px;position:relative;cursor:pointer;width:100%;text-align:left;background:none;word-wrap:break-word;white-space:break-spaces}.termsfeed-com---pc-dialog .cc-cp-body-content{background:#292929;color:#f5f5f5}.termsfeed-com---pc-dialog .cc-cp-body-content-entry{width:100%;display:none;padding:25px;box-sizing:border-box}.termsfeed-com---pc-dialog .cc-cp-body-content-entry[active=true]{display:block}.termsfeed-com---pc-dialog .cc-cp-body-content-entry-title{font-size:24px;font-weight:600}.termsfeed-com---pc-dialog .cc-cp-body-content-entry-text{font-size:16px;line-height:1.5}.termsfeed-com---pc-dialog .cc-cp-foot{background:#f2f2f2;display:flex;flex-direction:row;align-items:center;border-top:1px solid #ccc;justify-content:space-between}.termsfeed-com---pc-dialog .cc-cp-foot-byline{padding:20px 10px;font-size:14px;color:#333;display:block !important}.termsfeed-com---pc-dialog .cc-cp-foot-byline a{color:#999}.termsfeed-com---pc-dialog .cc-cp-foot-save{margin-right:10px;opacity:.9;transition:all ease .3s;font-size:14px;font-weight:bold;height:auto}.termsfeed-com---pc-dialog .cc-cp-foot-save:hover{opacity:1}.termsfeed-com---pc-dialog input[type=checkbox].cc-custom-checkbox{position:absolute;margin:2px 0 0 16px;cursor:pointer;appearance:none;border:0}.termsfeed-com---pc-dialog input[type=checkbox].cc-custom-checkbox+label{position:relative;padding:4px 0 0 50px;line-height:2em;cursor:pointer;display:inline;font-size:14px}.termsfeed-com---pc-dialog input[type=checkbox].cc-custom-checkbox+label:before{content:"";position:absolute;display:block;left:0;top:0;width:40px;height:24px;border-radius:16px;background:#fff;border:1px solid #d9d9d9;-webkit-transition:all .3s;transition:all .3s}.termsfeed-com---pc-dialog input[type=checkbox].cc-custom-checkbox+label:after{content:"";position:absolute;display:block;left:0px;top:0px;width:24px;height:24px;border-radius:16px;background:#fff;border:1px solid #d9d9d9;-webkit-transition:all .3s;transition:all .3s}.termsfeed-com---pc-dialog input[type=checkbox].cc-custom-checkbox+label:hover:after{box-shadow:0 0 5px rgba(0,0,0,.3)}.termsfeed-com---pc-dialog input[type=checkbox].cc-custom-checkbox:checked+label:after{margin-left:16px}.termsfeed-com---pc-dialog input[type=checkbox].cc-custom-checkbox:checked+label:before{background:#55d069}</style><style type="text/css">.termsfeed-com---palette-dark.termsfeed-com---nb{background-color:#111;color:#fff}.termsfeed-com---palette-dark .cc-nb-title{color:#fff}.termsfeed-com---palette-dark .cc-nb-text{color:#fff}.termsfeed-com---palette-dark .cc-nb-text a{color:#fff;text-decoration:underline}.termsfeed-com---palette-dark .cc-nb-text a:hover{text-decoration:none}.termsfeed-com---palette-dark .cc-nb-text a:focus{box-shadow:0 0 0 2px #3dd000}.termsfeed-com---palette-dark .cc-nb-okagree{color:#000;background-color:#ff0}.termsfeed-com---palette-dark .cc-nb-okagree:focus{box-shadow:0 0 0 2px #3dd000}.termsfeed-com---palette-dark .cc-nb-reject{color:#000;background-color:#ff0}.termsfeed-com---palette-dark .cc-nb-reject:focus{box-shadow:0 0 0 2px #3dd000}.termsfeed-com---palette-dark .cc-nb-changep{background-color:#eaeaea;color:#111}.termsfeed-com---palette-dark .cc-nb-changep:focus{box-shadow:0 0 0 2px #3dd000}.termsfeed-com---palette-dark .cc-pc-container{background:#212121}.termsfeed-com---palette-dark .cc-pc-head{background:#212121;color:#fff;border-bottom:1px solid #111}.termsfeed-com---palette-dark .cc-pc-head-title-headline{color:#fff}.termsfeed-com---palette-dark .cc-pc-head-title-text{color:#fff}.termsfeed-com---palette-dark .cc-pc-head-lang select{color:#212121}.termsfeed-com---palette-dark .cc-pc-head-lang select:focus{box-shadow:0 0 0 2px #ff0}.termsfeed-com---palette-dark .cc-pc-head-close{background:none;color:#e6e6e6}.termsfeed-com---palette-dark .cc-pc-head-close:active,.termsfeed-com---palette-dark .cc-pc-head-close:focus{border:2px solid #ff0}.termsfeed-com---palette-dark .cc-cp-body{background:#292929 !important;color:#f5f5f5}.termsfeed-com---palette-dark .cc-cp-body-tabs{color:#666;background:#e6e6e6}.termsfeed-com---palette-dark .cc-cp-body-tabs-item{border-right-color:#ccc;border-bottom-color:#ccc}.termsfeed-com---palette-dark .cc-cp-body-tabs-item-link{color:#666}.termsfeed-com---palette-dark .cc-cp-body-tabs-item-link:hover{color:#666}.termsfeed-com---palette-dark .cc-cp-body-tabs-item-link:focus{box-shadow:0 0 0 2px #292929}.termsfeed-com---palette-dark .cc-cp-body-tabs-item[active=true]{background:#292929 !important}.termsfeed-com---palette-dark .cc-cp-body-tabs-item[active=true] button{color:#f5f5f5}.termsfeed-com---palette-dark .cc-cp-body-content{background:#292929 !important;color:#f5f5f5}.termsfeed-com---palette-dark .cc-cp-body-content-entry-title{color:#fff}.termsfeed-com---palette-dark .cc-cp-body-content-entry-text{color:#fff}.termsfeed-com---palette-dark .cc-cp-body-content-entry a{color:#fff;text-decoration:underline}.termsfeed-com---palette-dark .cc-cp-body-content-entry a:hover{text-decoration:none}.termsfeed-com---palette-dark .cc-cp-body-content-entry a:focus{box-shadow:0 0 0 2px #ff0}.termsfeed-com---palette-dark .cc-cp-foot{background:#212121;border-top-color:#111}.termsfeed-com---palette-dark .cc-cp-foot-byline{color:#fff}.termsfeed-com---palette-dark .cc-cp-foot-byline a:focus{box-shadow:0 0 0 2px #ff0}.termsfeed-com---palette-dark .cc-cp-foot-save{background:#ff0;color:#000}.termsfeed-com---palette-dark .cc-cp-foot-save:focus{box-shadow:0 0 0 2px #3dd000}</style><style type="text/css">.termsfeed-com---palette-light.termsfeed-com---nb{background-color:#f2f2f2;color:#111}.termsfeed-com---palette-light .cc-nb-title{color:#111}.termsfeed-com---palette-light .cc-nb-text{color:#111}.termsfeed-com---palette-light .cc-nb-text a{color:#111;text-decoration:underline}.termsfeed-com---palette-light .cc-nb-text a:hover{text-decoration:none}.termsfeed-com---palette-light .cc-nb-text a:focus{box-shadow:0 0 0 2px #ff8d00}.termsfeed-com---palette-light .cc-nb-okagree{color:#fff;background-color:green}.termsfeed-com---palette-light .cc-nb-okagree:focus{box-shadow:0 0 0 2px #ff8d00}.termsfeed-com---palette-light .cc-nb-reject{color:#fff;background-color:green}.termsfeed-com---palette-light .cc-nb-reject:focus{box-shadow:0 0 0 2px #ff8d00}.termsfeed-com---palette-light .cc-nb-changep{background-color:#eaeaea;color:#111}.termsfeed-com---palette-light .cc-nb-changep:focus{box-shadow:0 0 0 2px #ff8d00}.termsfeed-com---palette-light .cc-pc-container{background:#fff}.termsfeed-com---palette-light .cc-pc-head{background:#fff;color:#111;border-bottom:1px solid #ccc}.termsfeed-com---palette-light .cc-pc-head-title-headline{color:#111}.termsfeed-com---palette-light .cc-pc-head-title-text{color:#111}.termsfeed-com---palette-light .cc-pc-head-lang select{color:#111}.termsfeed-com---palette-light .cc-pc-head-lang select:focus{box-shadow:0 0 0 2px green}.termsfeed-com---palette-light .cc-pc-head-close{background:none;color:#666}.termsfeed-com---palette-light .cc-pc-head-close:active,.termsfeed-com---palette-light .cc-pc-head-close:focus{border:2px solid green}.termsfeed-com---palette-light .cc-cp-body{background:#fbfbfb !important;color:#111}.termsfeed-com---palette-light .cc-cp-body-tabs{color:#666;background:#e6e6e6}.termsfeed-com---palette-light .cc-cp-body-tabs-item{border-right-color:#ccc;border-bottom-color:#ccc}.termsfeed-com---palette-light .cc-cp-body-tabs-item-link{color:#666}.termsfeed-com---palette-light .cc-cp-body-tabs-item-link:hover{color:#666}.termsfeed-com---palette-light .cc-cp-body-tabs-item-link:focus{box-shadow:0 0 0 2px #fbfbfb}.termsfeed-com---palette-light .cc-cp-body-tabs-item[active=true]{background:#fbfbfb !important}.termsfeed-com---palette-light .cc-cp-body-tabs-item[active=true] button{color:#111}.termsfeed-com---palette-light .cc-cp-body-content{background:#fbfbfb !important;color:#111}.termsfeed-com---palette-light .cc-cp-body-content-entry-title{color:#111}.termsfeed-com---palette-light .cc-cp-body-content-entry-text{color:#111}.termsfeed-com---palette-light .cc-cp-body-content-entry a{color:#111;text-decoration:underline}.termsfeed-com---palette-light .cc-cp-body-content-entry a:hover{text-decoration:none}.termsfeed-com---palette-light .cc-cp-body-content-entry a:focus{box-shadow:0 0 0 2px green}.termsfeed-com---palette-light .cc-cp-foot{background:#f2f2f2;border-top-color:#ccc}.termsfeed-com---palette-light .cc-cp-foot-byline{color:#111}.termsfeed-com---palette-light .cc-cp-foot-byline a:focus{box-shadow:0 0 0 2px green}.termsfeed-com---palette-light .cc-cp-foot-save{background:green;color:#fff}.termsfeed-com---palette-light .cc-cp-foot-save:focus{box-shadow:0 0 0 2px #ff8d00}</style><style type="text/css">.termsfeed-com---is-hidden{display:none}.termsfeed-com---is-visible{display:block}</style><style type="text/css">.termsfeed-com---nb.termsfeed-com---lang-ar,.termsfeed-com---pc-overlay.termsfeed-com---lang-ar{text-align:right}</style><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/663602962/?random=1787164003579&amp;cv=11&amp;fst=1787164003579&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=gtag.config&amp;gtm=45be68i0v9184682219z8841992034za20gzb841992034zd841992034xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=115938466~115938468~117776795~118131810~118897920~118897930~119367802~119367810~120213116~120385422&amp;u_w=1280&amp;u_h=720&amp;url=https%3A%2F%2Fwww.bluestarindia.com%2Fproducts%2Fspeciality-products%2Fmortuary-chambers&amp;rcb=17&amp;frm=0&amp;tiba=Mortuary%20Chambers%20Suppliers%20-%20Mortuary%20Chambers%20at%20Best%20Price%20in%20India&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=957210988.1787164002&amp;uaa=x86&amp;uab=64&amp;uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=10.0.0&amp;uaw=0&amp;data=event%3Dgtag.config&amp;ept=9&amp;rfmt=3&amp;fmt=4"></script></head>
+<body style=""><div class="termsfeed-com---reset termsfeed-com---nb termsfeed-com---palette-dark termsfeed-com---nb-simple termsfeed-com---lang-en" id="termsfeed-com---nb" role="dialog" aria-modal="true" aria-labelledby="cc-nb-title" aria-describedby="cc-nb-text"><div class="cc-nb-main-container"><div class="cc-nb-title-container"><p class="cc-nb-title" id="cc-nb-title">We use cookies</p></div><div class="cc-nb-text-container"><p class="cc-nb-text" id="cc-nb-text"><span class="cc-nb-text-content">This website uses cookies and other tracking technologies to improve your browsing experience for the following purposes: <span class="cc-nb-text-purposes"><span class="cc-nb-text-purposes-item">to enable basic functionality of the website</span><span class="cc-nb-text-purposes-separator">, </span><span class="cc-nb-text-purposes-item">to provide a better experience on the website</span><span class="cc-nb-text-purposes-separator">, </span><span class="cc-nb-text-purposes-item">to measure your interest in our products and services and to personalize marketing interactions</span><span class="cc-nb-text-purposes-separator">, </span><span class="cc-nb-text-purposes-item">to deliver ads that are more relevant to you</span></span>.</span></p></div><div class="cc-nb-buttons-container"><button class="cc-nb-okagree" role="button">I agree</button><button class="cc-nb-reject" role="button">I decline</button><button class="cc-nb-changep" role="button">Change my preferences</button></div></div></div> 
+
+    <!-- Cookie Consent by TermsFeed https://www.TermsFeed.com -->
+<script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"dark","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"Blue Star","website_privacy_policy_url":"https://www.bluestarindia.com/privacy-policy"});
+});
+</script>
+
+
+
+
+
+
+
+<!-- Below is the link that users can use to open Preferences Center to change their preferences. Do not modify the ID parameter. Place it where appropriate, style it as needed. -->
+
+<a href="#" id="open_preferences_center" style="display:none;">Update cookies preferences</a>
+
+
+
+
+<!-- Google Tag Manager (noscript) -->
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRFSVDM"
+
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="width100Per">
+<header>
+<div class="container">
+<div class="topSection">
+<div class="logo"><a href="/"><img src="/img/logo.png" width="146" height="30"></a>
+	<!--<img src="/img/platinum-logo.png" class="platinum-logo">-->
+	</div>
+<div class="rightNav">
+<div class="searchBox"><input type="text" id="txtSearch" onblur="this.value == ''? this.value =this.defaultValue : ''" onfocus="this.value == this.defaultValue ? this.value = '' : ''" title="Search" value="Search" name="txtSearch"><i class="fa fa-search" onclick="search(); return false;"></i></div>
+<ul>
+
+
+
+	
+
+	
+
+
+	
+<!--<li ><a href="javascript:;">Locations</a><span>/</span></li>
+<li ><a href="#">Customer Care</a><span>/</span></li> -->
+
+
+
+<li><a href="/locations">Locations</a></li><li><a href="/contact-us/dealer-locator">Dealers</a></li><li><a href="#" onclick="window.open('https://www.bluestarindia.com/apply-dealership/apply-dealership.aspx','name','width=630,height=660,toolbar=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes'); return false;">Dealership Request</a></li><li><a href="/careers/the-blue-star-way">Careers</a></li><li><a href="/contact-us/enquiries">Contact Us</a></li><li><a href="/about-us/our-company/tvcs">TVCs</a></li><li><a target="_blank" href="https://consumer.bluestarindia.com/" rel="noopener noreferrer">Consumers</a></li><li><a href="/resources">Resources</a></li></ul>
+</div>
+</div>
+</div>
+
+<a class="menu-link" href="#menu">
+<div class="navTrigger">
+<ul>
+<li class="frst"></li>
+<li class="scnd"></li>
+<li class="thrd"></li>
+</ul>
+</div>
+</a>
+<div class="navWrapper">
+<div class="container"> 
+<nav id="menu" class="menu">
+<ul>
+	
+<li class="has-submenu">
+	 <a href="javascript:;" id="aboutUs">About Us </a>
+	<ul class="sub-menu">
+				<li id="subItem"><a href="/about-us/our-company">Our Company</a> </li>
+				<li id="subItem"><a href="/about-us/governance-structure/corporate-management">Governance Structure</a></li>
+				<li id="subItem"><a href="/about-us/guiding-policies">Guiding Policies</a> </li>
+				<li id="subItem"><a href="/about-us/social-responsibility">Social Responsibility</a> </li>
+</ul>	
+</li>
+	
+<li class="has-submenu">
+		<a href="javascript:;" class="active">PRODUCTS</a>
+	
+	<ul class="sub-menu">
+	       <li id="subItem"><a href="/products/overview">Overview</a> </li>	
+		<li id="subItem" class="extlink"><a rel="noopener noreferrer" href="https://consumer.bluestarindia.com/air-conditioners.html" target="_blank">Room Air Conditioners</a> </li>
+		<li id="subItem" class="extlink"><a rel="noopener noreferrer" href="https://consumer.bluestarindia.com/air-coolers.html" target="_blank">Air Coolers</a> </li>
+		<li id="subItem" class="extlink"><a rel="noopener noreferrer" href="https://consumer.bluestarindia.com/air-purifiers.html" target="_blank">Air Purifiers</a> </li>
+		<li id="subItem" class="extlink"><a rel="noopener noreferrer" href="https://consumer.bluestarindia.com/water-purifiers.html" target="_blank">Water Purifiers</a> </li>
+	       <li id="subItem"><a href="/products/cassette-air-conditioners">Cassette Air Conditioners</a> </li>	
+	       <li id="subItem"><a href="/products/verticool-air-conditioners">Verticool Air Conditioners</a> </li>	
+	       <li id="subItem"><a href="/products/central-air-conditioning">Central Air Conditioning</a> </li>	
+	       <li id="subItem"><a href="/products/heat-pumps">Heat Pumps</a> </li>	
+	       <li id="subItem"><a href="/products/commercial-refrigeration">Commercial Refrigeration</a> </li>	
+	       <li id="subItem"><a href="/products/cold-storages">Cold Storages</a> </li>	
+	       <li id="subItem"><a href="/products/water-coolers">Water Coolers</a> </li>	
+		   <li id="subItem"><a href="/products/speciality-products" class="active">Speciality Products</a> </li>	   
+ 
+
+</ul>
+</li>
+<li class="has-submenu">
+	 <a href="/projects">PROJECTS </a> 
+		<ul class="sub-menu">
+			<li><a href="/projects/mep-and-more">MEP and More</a> </li>
+			<li><a href="/projects/buildings">Buildings​</a> </li>
+			<li><a href="/projects/data-centre">Data centre</a> </li>
+			<li><a href="/projects/industrial">Industrial</a> </li>
+			<li><a href="/projects/infrastructure">Infrastructure​​</a> </li>
+			<li><a href="/projects/projects-gallery">Projects Gallery</a> </li>
+			<li><a href="/projects/vendor-registration">Vendor Registration</a> </li>
+</ul>
+</li>
+<li class="has-submenu">
+	 <a href="javascript:;">Customer Service</a>
+	
+	
+	<ul class="sub-menu">
+	       	  <li id="subItem"><a href="/customer-service/service-solutions">Service Solutions</a> </li>	
+		   		<li id="subItem" class="active"><a href="/customer-service/certificates">Certificates</a> </li>
+	       	  <li id="subItem"><a href="/customer-service/warranty-registration">Warranty Registration</a> </li>	
+		   <li><a rel="noopener noreferrer" href="/customer-service/installation-and-service-costs" target="_blank">Installation and Service Costs</a> </li>
+		   <li><a rel="noopener noreferrer" href="https://ewamc.bluestarindia.com/" target="_blank">Buy Extended Warranty &amp; AMC</a> </li>
+			<li id="subItem" class="extlink"><a rel="noopener noreferrer" href="https://consumer.bluestarindia.com/pages/service-escalationmatrix-commercial" target="_blank">Service Escalation</a></li>
+</ul>	
+</li>
+<li class="has-submenu">
+	 <a href="javascript:;">Manufacturing and R&amp;D</a>
+	
+	<ul class="sub-menu">
+	       <li><a href="/manufacturing-and-rd/history-overview">History &amp; Overview</a> </li>	
+	       <li><a href="/manufacturing-and-rd/manufacturing-excellence">Manufacturing Excellence</a> </li>	
+	       <li><a href="/manufacturing-and-rd/manufacturing-facilities">Manufacturing Facilities</a> </li>	
+	       <li><a href="/manufacturing-and-rd/r-d">R &amp; D</a> </li>	
+</ul>
+</li>
+
+	<li class="has-submenu">
+	   <a href="javascript:;">International</a>
+	
+	<ul>
+	 
+		
+	<li>
+		   <a href="/international-business-group/overview">Overview</a>
+		
+		
+	</li>
+		
+		
+	<!--<li>
+			<a href="#" >Middle East & Africa</a>
+	</li>
+		
+		
+	<li>
+			<a href="#" >SAARC & ASEAN</a>
+	</li>-->
+		
+		
+	</ul>
+</li>
+		
+
+	<li class="has-submenu">
+	 <a href="javascript:;">group companies</a>
+	
+	<ul>
+	<li>
+			<a href="/about-us/group-companies/blue-star-climatech-limited">Blue Star Climatech Limited</a>
+	</li>
+	<li class="extlink"><a href="https://www.globalbluestar.com/eu" target="_blank" rel="noopener noreferrer">Blue Star Europe B.V.</a></li>
+	<li class="extlink"><a href="/e&amp;e" target="_blank" rel="noopener noreferrer">Blue Star Engineering &amp; Electronics Limited</a></li>	
+	<li><a href="https://www.bluestarindia.com/about-us/group-companies/blue-star-international-fzco" target="_self">Blue Star International FZCO</a>
+		
+	</li>	
+
+	<li>
+			<a href="/about-us/group-companies/blue-star-m-e-engineering-sdn-bhd">Blue Star M &amp; E Engineering (Sdn) Bhd</a>
+	</li>
+	<li class="extlink"><a href="https://www.globalbluestar.com/na" target="_blank" rel="noopener noreferrer">Blue Star North America Inc.</a></li>
+	
+	
+		
+		
+	 <li class="extlink"><a href="https://www.globalbluestar.com/me" target="_blank" rel="noopener noreferrer">Blue Star Qatar WLL</a></li>
+	<li>
+			<a href="/about-us/group-companies/blue-star-mea-airconditioning-llc">Blue Star MEA Airconditioning LLC</a>
+	</li>
+	
+		
+	</ul>
+</li>		
+	
+		
+<li class="has-submenu">
+	<a href="javascript:;">Press &amp; Investors</a>
+	
+	<ul>
+		<li>
+			   <a href="/media/press-releases">Press Releases</a>	
+		</li>
+		<!---<li>
+				<a href="#">Press Clippings</a>
+		</li>--->
+		<li>
+				<a href="/investors/disclosures-under-regulation-46-and-62-of-the-lodr">Investors</a>
+		</li>
+		<!--<li>
+				<a href="/investors/shareholder-information">Shareholder Information</a>
+		</li>-->
+	</ul>
+</li>
+</ul>
+</nav>
+</div> 
+</div>
+</header>
+<div>
+		<img src="/media/56198/products-banner.jpg" class="desktopImg">
+
+
+		<img src="/media/56199/products-banner-icon.jpg" class="mobileImg" width="320" height="306">
+
+	  
+</div>
+<script>
+
+        ProductName = "Mortuary Chambers";
+	
+	</script>
+
+
+<div class="spotlightMenu">
+    
+    <div class="container">
+        <div class="internalNav">
+            <div class="selectedHeading">
+               Speciality Products</div>
+            <div class="internalTrigger">
+                <ul>
+                    <li class="frst"></li>
+                    <li class="scnd"></li>
+                    <li class="thrd"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+	<div class="extended noDisplay">
+        <div class="container">					
+            <div class="col equalWidth1 equalWidth2">
+                <h2>
+                    <a href="/products/speciality-products/mortuary-chambers" class="active">Mortuary Chambers </a></h2>
+                <ul class="clearfix">
+                </ul>
+            </div> 
+	      </div>
+    </div>
+</div>
+<div class="width100Per">
+	<div class="container">
+		<div class="airConditionWrapper">
+			<h2>Speciality Products</h2>
+			<div class="screwCategory">
+				<div class="tab">
+					
+					<div class="resp-tabs-container">
+						<div class="tabContent">
+							<div class="aircooolScrew lhs-rhs-division">
+								<div class="thumbImage">
+									<img src="/media/78785/mortuary-cabinet-02.jpg" width="326" height="250" alt="Mortuary Chambers">
+									
+								 </div>
+								<div class="discription">
+									<h1>Mortuary Chambers</h1>
+									<p class="global-heading-blue">Built to Last</p>
+<p>Mortuary chambers are a vital part of the infrastructure at any leading hospital. They need to be effective and robust to ensure 24x7 operation despite the rough use they are subject to.</p>
+<p>Blue Star, India's leading AC&amp;R company with over seven decades of experience, brings you mortuary chambers that are rugged, reliable and efficient. Cutting-edge technology and modern components from state-of-the-art factories go into each Blue Star Mortuary Chamber. The use of cyclopentane in the manufacture of the high-efficiency insulation panels makes them eco-friendly as well. And Blue Star refrigeration equipment ensures maintenance of desired temperature and humidity at all times.</p>
+<div class="more noDisplay">
+<p class="global-heading-blue">Salient Features</p>
+<ul class="globalLi">
+<li>Pre-painted GI sheet for exterior and interior</li>
+<li>Vapour-proof incandescent lamp</li>
+<li>Electronic temperature indicator-cum-controller</li>
+<li>3-piece carriage assembly</li>
+<li>One-piece stainless steel tray</li>
+<li>Stainless steel front finish</li>
+<li>Simplified cadaver handling</li>
+<li>Flexibility of shifting</li>
+<li>Compacy and neat</li>
+<li>Hygienic and easy to maintain</li>
+</ul>
+</div>
+<div class="readMore"><a>Read More</a></div>
+									<div class="download">
+																			</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>	
+		</div>	
+	</div>	
+</div>	
+	
+</div>
+
+<footer>
+
+<div class="footerDescription">
+	
+	
+<div class="container marquee-copy">
+
+	
+
+</div>
+</div>
+<div class="footeraddress">
+<div class="container">
+	<div class="container-800">
+<div class="row" style="display:flex;justify-content:space-between;">
+<div class="col-md-6">
+	<ul style="list-style:none;color:#404040;line-height:1.6;font-size:12px;margin-top:10px;">
+	<li><strong>CIN</strong>: L28920MH1949PLC006870</li>
+	<li><strong>Telephone No.</strong>: +91 22 6654 4000</li>
+	<li><strong>Email</strong>: investors@bluestarindia.com</li>
+	</ul>
+
+
+</div>	
+<div class="col-md-6">
+	<p style="font-size:12px;margin-bottom:0px;"><strong>Registered Office:</strong></p>
+	<p style="font-size:12px;margin-top:0px;">Kasturi Buildings, Mohan T Advani Chowk, Jamshedji Tata Road, Mumbai, Maharashtra, 400020</p>
+	</div>	
+</div>	
+</div>
+	</div>
+	</div>
+<div class="footerband"></div>	
+<div class="footerMain">
+<div class="container">
+<div class="footerLeft">
+	Copyright © Blue Star Limited 2025. All Rights Reserved.
+</div>
+<div class="footerRight">
+
+  <div class="social-list">
+	  <ul>
+	    <li><a href="https://www.facebook.com/BlueStarLimited/" target="_blank" rel="noopener noreferrer" class="facebook"><img src="/media/241084/facebook.png" width="32" height="32"></a></li>		  
+	  	<li><a href="https://twitter.com/BlueStarLtd" target="_blank" rel="noopener noreferrer" class="twitter"><img src="/media/241081/x.png" width="32" height="32"></a></li>
+		<li><a href="https://www.linkedin.com/company/blue-star-limited/" target="_blank" rel="noopener noreferrer" class="in"><img src="/media/241082/linkedin.png" width="32" height="32"></a></li>		  
+	  	<li><a href="https://www.instagram.com/bluestar_ltd/" target="_blank" rel="noopener noreferrer" class="instagram"><img src="/media/241083/instagram.png" width="32" height="32"></a></li>
+		<li><a href="https://www.youtube.com/user/BlueStarIndia" target="_blank" rel="noopener noreferrer" class="youtube"><img src="/media/241080/youtube.png" width="32" height="32"></a></li>
+	  	</ul>
+ </div>
+
+	
+	
+<ul>
+
+
+	
+
+	
+	
+<li><a href="/e-waste-guidelines">E-Waste Guidelines</a></li>
+<!--<li><a href="/media/press-releases">Media</a></li>-->
+<li><a href="/sitemap">Sitemap</a></li>
+<li><a href="/terms-of-use-of-website">Terms of use of website</a></li>
+<li><a href="/privacy-policy">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+
+<div class="toplink hidden"><a href="#top">Go to Top</a></div>
+	
+<div class="getinTouch" style="top: 570px;">
+<div class="heading">Get In Touch <span></span></div>
+<div class="fillDetail">
+<form id="frm_Getintouch" name="frm_Getintouch">
+<div id="div_getInform" class="getInform">
+<label><input type="text" id="txt_name_main" name="txt_name_main" value="Name*" maxlength="100" onblur="this.value == ''? this.value =this.defaultValue : ''" onfocus="this.value == this.defaultValue ? this.value = '' : ''"><span id="span_txt_name_main"></span></label>
+<label><input type="text" id="txt_email_main" name="txt_email_main" value="Email*" maxlength="100" onblur="this.value == ''? this.value =this.defaultValue : ''" onfocus="this.value == this.defaultValue ? this.value = '' : ''"><span id="span_txt_email_main"></span></label>
+<label><input type="text" id="txt_mobile_main" name="txt_mobile_main" maxlength="10" value="Mobile No.*" onblur="this.value == ''? this.value =this.defaultValue : ''" onfocus="this.value == this.defaultValue ? this.value = '' : ''"><span id="span_txt_mobile_main"></span></label>
+<label><select id="ddl_Products_main" name="ddl_Products_main">
+<option value="">Product</option>
+<option value="Building Electrification">Building Electrification</option>
+<option value="Central Airconditioning">Central Air Conditioning</option>
+<option value="VRF Systems">VRF Systems</option>
+<option value="Ducted Systems">Ducted Systems</option>
+<option value="Chillers">Chillers</option>	
+<option value="Room Airconditioners">Room Air Conditioners</option>
+<option value="Air Purifiers">Air Purifiers</option>
+<option value="Air Coolers">Air Coolers</option>
+<option value="Commercial Refrigeration">Commercial Refrigeration</option>
+<option value="Cold Storages / Cold Rooms">Cold Storages / Cold Rooms</option>
+<option value="Water Coolers">Water Coolers</option>
+<option value="Freezers">Freezers</option>
+<option value="Bottled Water Dispensers">Bottled Water Dispensers</option>
+<option value="Ice Machines">Ice Machines</option>
+<option value="Kitchen Refrigeration">Kitchen Refrigeration</option>
+<option value="Medical Refrigeration">Medical Refrigeration</option>
+<option value="Bottle Coolers">Bottle Coolers</option>
+<option value="Visi Coolers / Visi Freezers">Visi Coolers / Visi Freezers</option>
+<option value="Mortuary Chambers">Mortuary Chambers</option>	
+
+<option value="Service Solutions">Service Solutions</option>
+<option value="Manufacturing">Manufacturing</option>	
+
+<option value="International Projects">International Projects</option>
+<option value="Product Exports">Product Exports</option>
+<option value="Investor Relations">Investor Relations</option>	
+</select><span id="span_ddl_Products_main"></span></label>	
+	<label>
+
+<select name="ddl_state_main" id="ddl_state_main">	
+  <option value="">State*</option>
+  <option value="Andaman &amp; Nicobar Islands">Andaman &amp; Nicobar Islands</option>
+  <option value="Andhra Pradesh">Andhra Pradesh</option>
+  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+  <option value="Assam">Assam</option>
+  <option value="Bihar">Bihar</option>
+  <option value="Chandigarh">Chandigarh</option>
+  <option value="Chattisgarh">Chattisgarh</option>
+  <option value="Dadra &amp; Nagar Haveli">Dadra &amp; Nagar Haveli</option>
+  <option value="Daman &amp; Diu">Daman &amp; Diu</option>
+  <option value="Delhi">Delhi</option>
+  <option value="Goa">Goa</option>
+  <option value="Gujarat">Gujarat</option>
+  <option value="Haryana">Haryana</option>
+  <option value="Himachal Pradesh">Himachal Pradesh</option>
+  <option value="Jammu &amp; Kashmir">Jammu &amp; Kashmir</option>
+  <option value="Jharkhand">Jharkhand</option>
+  <option value="Karnataka">Karnataka</option>
+  <option value="Kerala">Kerala</option>
+  <option value="Madhya Pradesh">Madhya Pradesh</option>
+  <option value="Maharashtra">Maharashtra</option>
+  <option value="Manipur">Manipur</option>
+  <option value="Meghalaya">Meghalaya</option>
+  <option value="Mizoram">Mizoram</option>
+  <option value="Nagaland">Nagaland</option>
+  <option value="Orissa">Orissa</option>
+  <option value="Puducherry">Puducherry</option>
+  <option value="Punjab">Punjab</option>
+  <option value="Rajasthan">Rajasthan</option>
+  <option value="Sikkim">Sikkim</option>
+  <option value="Tamil Nadu">Tamil Nadu</option>
+  <option value="Telangana">Telangana</option>
+  <option value="Tripura">Tripura</option>
+  <option value="Uttar Pradesh">Uttar Pradesh</option>
+  <option value="Uttarakhand">Uttarakhand</option>
+  <option value="West Bengal">West Bengal</option>
+</select><span id="span_ddl_state_main"></span></label>
+	 
+<label><input type="text" id="txt_City_main" name="txt_City_main" placeholder="City*" maxlength="50" onblur="this.value == ''? this.value =this.defaultValue : ''" onfocus="this.value == this.defaultValue ? this.value = '' : ''"><span id="span_txt_City_main"></span></label>
+	
+<label>
+	<input type="text" id="txt_company_name_main" name="txt_company_name_main" maxlength="50" value="Company Name" onblur="this.value == ''? this.value =this.defaultValue : ''" onfocus="this.value == this.defaultValue ? this.value = '' : ''">
+	<span id="span_txt_company_name_main"></span>
+	
+	</label>
+	<label>
+    					<input type="text" id="txt_pincode" name="txt_pincode" maxlength="6" placeholder="Pincode*" value="" onblur="this.value == '' ? this.value = this.defaultValue : ''" onfocus="this.value == this.defaultValue ? this.value = '' : ''" pattern="\d{6}" title="Please enter a 6-digit PIN code">
+    					<span id="span_txt_pincode"></span>
+					</label>
+	
+<label>
+ <div class="g-recaptcha" data-sitekey="6LfwfkYUAAAAAK1JDNNOV3mc-vUmz2kA5ZOe9NjI"><div style="width: 304px; height: 78px;"><div><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-qxdcqjshk0pe" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LfwfkYUAAAAAK1JDNNOV3mc-vUmz2kA5ZOe9NjI&amp;co=aHR0cHM6Ly93d3cuYmx1ZXN0YXJpbmRpYS5jb206NDQz&amp;hl=en&amp;v=xg_pWYS8-HRESiV6Rdg4aY_R&amp;size=normal&amp;anchor-ms=20000&amp;execute-ms=30000&amp;cb=d2npb81x4l8j"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div>	
+</label>
+<label><span id="span_cpt"></span></label>
+<div class="submit"><a href="javascript:;" onclick="fnGetInTouchsubmit();">Submit</a></div>
+<input type="hidden" id="product_name" name="product_name" value="Mortuary Chambers">
+</div>
+</form>
+	
+
+	
+</div>
+</div>
+
+
+<script defer="" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+<script defer="">    window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.2.min.js"><\/script>')</script><script src="/js/vendor/jquery-1.10.2.min.js"></script>
+<script defer="" src="/js/plugins.js"></script> 
+<script defer="" src="/js/main.js"></script> 
+	
+<script defer="" src="/js/codingFunctions.js?v=20250522-2"></script> 
+<script defer="" src="/js/jsonsql.js"></script> 
+
+<script>
+$(window).load(function() {
+	document.getElementById("product_name").value =ProductName;
+	
+	//if($(".spotlightMenu").length){
+		//var offset = $(".spotlightMenu").offset().top - 178;
+		//$("html, body").animate({'scrollTop':offset}, {duration:1000});
+	//}
+	
+	//if($(".internalTrigger").length){
+		//$(".internalTrigger").trigger("click");
+	//}	
+});
+
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+        //alert('You pressed enter!');
+		
+		search();
+		PageSearch();
+    }
+});	
+	 				
+</script>
+	
+<script src="/js/classie.min.js"></script>
+
+<script>
+    function init() {
+        window.addEventListener('scroll', function (e) {
+            var distanceY = window.pageYOffset || document.documentElement.scrollTop, showToplink = 100, toplink = document.querySelector(".toplink");
+            if (distanceY > showToplink) {
+                if (classie.has(toplink, "hidden")) {
+                    classie.remove(toplink, "hidden");
+                }
+            } else {
+                classie.add(toplink, "hidden");
+            }
+        });
+    } window.onload = init();
+</script>
+	
+<script>
+    $("a[href='#top']").click(function () {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+    });
+</script>
+	
+	
+						
+<script>
+	$(document).ready(function() {
+		$('#ddl_ProductType').change(function() {
+			var val = this.value;
+			if(val == "Room ACs") {
+				$('#txt_MachineSerialNo').hover(function() {
+					$('#roomacs-tooltip').css("display", "block");
+				});
+				$('#txt_MachineSerialNo').mouseleave(function() {
+					$('#roomacs-tooltip').css("display", "none");
+				});
+			}
+		});
+		var $lazyloadimages = $("div.categoryThumb>a>img");
+		$lazyloadimages.each(function () {
+			var $item = $(this);
+			$item.attr('loading', 'lazy');
+		});
+	});
+</script>
+	
+
+	
+<div id="dvJSONDealerData"></div>
+	
+
+	
+	<!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 952010721;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/952010721/?guid=ON&amp;script=0"/>
+</div>
+</noscript>
+<style>
+	.termsfeed-com---palette-dark.termsfeed-com---nb{max-width:100%;background:#005baa;color:#fff;}
+.termsfeed-com---palette-dark .cc-nb-okagree{background:#fff;border:1px solid #fff;color:#fff;background:#005baa;}
+.termsfeed-com---palette-dark .cc-nb-reject{background:#fff;border:1px solid #fff;color:#fff;background:#005baa;}
+.termsfeed-com---palette-dark .cc-nb-changep{color:#005baa;border:1px solid #fff;}
+.termsfeed-com---nb .cc-nb-main-container {
+    padding: 1rem;
+}
+.termsfeed-com---palette-dark .cc-pc-head{background:#005baa;}
+.termsfeed-com---palette-dark .cc-cp-body-content{background:#005baa!important;}
+.termsfeed-com---palette-dark .cc-cp-foot {background:#005baa!important;}
+.termsfeed-com---palette-dark .cc-cp-foot-save{background:#fff;}
+.termsfeed-com---palette-dark .cc-cp-body-tabs-item[active=true] {
+    background: #ffffff !important;color:#005baa;
+}
+.termsfeed-com---palette-dark .cc-cp-body-tabs-item[active=true] button {
+    color: #005baa;
+}
+.termsfeed-com---palette-dark .cc-pc-head {
+   
+    border-bottom: 1px solid #ffffff;
+}
+.termsfeed-com---palette-dark .cc-cp-foot {
+   
+    border-top-color: #ffffff;
+}
+.cc-pc-head-close{border:0!important;}
+.termsfeed-com---palette-dark .cc-cp-body-tabs-item-link:focus {
+    box-shadow: 0 ;border:0;
+}
+.termsfeed-com---pc-dialog .cc-cp-foot-byline{visibility:hidden;}
+</style>
+
+
+
+<script type="text/javascript" id="" charset="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","733172096835860");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=733172096835860&amp;ev=PageView&amp;noscript=1"></noscript>
+<script type="text/javascript" id="" charset="">(function(a,e,b,f,g,c,d){a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)};c=e.createElement(f);c.async=1;c.src="https://www.clarity.ms/tag/"+g;d=e.getElementsByTagName(f)[0];d.parentNode.insertBefore(c,d)})(window,document,"clarity","script","ln72a79zvu");</script></body></html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#FFFFFF"/>
+  <rect x="60" y="40" width="80" height="60" rx="6" fill="#002D72"/>
+  <path d="M78 55 L92 70 L78 85 M92 55 L106 70 L92 85" stroke="#00A3E0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="100" y="130" font-family="Arial, sans-serif" font-size="18" font-weight="900" fill="#002D72" text-anchor="middle">Kimberly-Clark</text>
+  <text x="100" y="152" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#00A3E0" text-anchor="middle" letter-spacing="2">PROFESSIONAL</text>
+</svg>

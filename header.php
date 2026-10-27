@@ -48,6 +48,11 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
             }
         }
     </script>
+    <!-- Performance Preconnects for Core Web Vitals -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -670,6 +675,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
 </header>
 
 <script>
+  window.snap_ajax_url = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
   const navIsland = document.getElementById('nav-island');
   const btnLogin = document.getElementById('btn-login');
   const btnSignup = document.getElementById('btn-signup');
@@ -739,7 +745,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
           fd.append('action', 'snap_get_menu_products');
           fd.append('cat_id', l3Btn.dataset.cat);
 
-          fetch(snap_ajax_obj.ajax_url, {
+          fetch(window.snap_ajax_url, {
               method: 'POST',
               body: fd
           }).then(r => r.json()).then(res => {
@@ -828,8 +834,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
               fd.append('action', 'snap_get_menu_products');
               fd.append('cat_id', catId);
               
-              // use global ajaxurl if available, fallback to /wp-admin/admin-ajax.php
-              const ajaxUrl = (typeof ajaxurl !== 'undefined') ? ajaxurl : '/wp-admin/admin-ajax.php';
+              const ajaxUrl = window.snap_ajax_url;
               
               fetch(ajaxUrl, {
                   method: 'POST',

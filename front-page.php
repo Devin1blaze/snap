@@ -366,14 +366,22 @@ get_header();
             <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col1 = [
-                ['name'=>'Euronics','icon'=>'sensor_occupied','color'=>'#1A56DB'],
-                ['name'=>'Blue Star','icon'=>'ac_unit','color'=>'#0369a1'],
-                ['name'=>'Aquaguard','icon'=>'water_drop','color'=>'#0891b2'],
+                ['name'=>'Blue Star', 'slug'=>'blue_star'],
+                ['name'=>'Euronics', 'slug'=>'euronics'],
+                ['name'=>'Aquaguard', 'slug'=>'aquaguard'],
+                ['name'=>'Eureka Forbes', 'slug'=>'eureka_forbes'],
+                ['name'=>'Voltas', 'slug'=>'voltas'],
+                ['name'=>'Usha', 'slug'=>'usha'],
+                ['name'=>'Haier', 'slug'=>'haier'],
               ];
-              foreach(array_merge($brands_col1,$brands_col1,$brands_col1) as $b): ?>
-              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-transparent hover:border-[#FBBF24] flex flex-col items-center justify-center gap-6 cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[64px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
+              foreach(array_merge($brands_col1, $brands_col1) as $b): ?>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-slate-100 hover:border-[#FBBF24] p-4 flex items-center justify-center cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
+                <img src="<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.svg' ) ?>" 
+                     alt="<?= esc_attr($b['name']) ?> Logo" 
+                     title="<?= esc_attr($b['name']) ?>" 
+                     loading="lazy" 
+                     class="max-w-[165px] max-h-28 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+                     onerror="this.onerror=null; this.src='<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.png' ) ?>';" />
               </div>
               <?php endforeach; ?>
             </div>
@@ -384,14 +392,22 @@ get_header();
             <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col2 = [
-                ['name'=>'Kimberly Clark','icon'=>'soap','color'=>'#1A56DB'],
-                ['name'=>'Dettol','icon'=>'sanitizer','color'=>'#dc2626'],
-                ['name'=>'Somany','icon'=>'door_front','color'=>'#7c3aed'],
+                ['name'=>'Kimberly-Clark', 'slug'=>'kimberly_clark'],
+                ['name'=>'Aquarius', 'slug'=>'aquarius_kimberly_clark'],
+                ['name'=>'Scott', 'slug'=>'scott'],
+                ['name'=>'Kleenex', 'slug'=>'kleenex'],
+                ['name'=>'WypAll', 'slug'=>'wypall'],
+                ['name'=>'Kimcare', 'slug'=>'kimcare'],
+                ['name'=>'Kimtech', 'slug'=>'kimtech'],
               ];
-              foreach(array_merge($brands_col2,$brands_col2,$brands_col2) as $b): ?>
-              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-transparent hover:border-[#FBBF24] flex flex-col items-center justify-center gap-6 cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[64px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
+              foreach(array_merge($brands_col2, $brands_col2) as $b): ?>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-slate-100 hover:border-[#FBBF24] p-4 flex items-center justify-center cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
+                <img src="<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.svg' ) ?>" 
+                     alt="<?= esc_attr($b['name']) ?> Logo" 
+                     title="<?= esc_attr($b['name']) ?>" 
+                     loading="lazy" 
+                     class="max-w-[165px] max-h-28 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+                     onerror="this.onerror=null; this.src='<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.png' ) ?>';" />
               </div>
               <?php endforeach; ?>
             </div>
@@ -402,14 +418,22 @@ get_header();
             <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col3 = [
-                ['name'=>'KENT','icon'=>'water_drop','color'=>'#059669'],
-                ['name'=>'Godrej','icon'=>'lock','color'=>'#d97706'],
-                ['name'=>'Finolex','icon'=>'electrical_services','color'=>'#dc2626'],
+                ['name'=>'Nestlé', 'slug'=>'nestle'],
+                ['name'=>'Nescafé', 'slug'=>'nescafe'],
+                ['name'=>'Nestea', 'slug'=>'nestea'],
+                ['name'=>'Everyday', 'slug'=>'everyday'],
+                ['name'=>'Tata', 'slug'=>'tata'],
+                ['name'=>'Tetley', 'slug'=>'tetley'],
+                ['name'=>'Nettare', 'slug'=>'nettare'],
               ];
-              foreach(array_merge($brands_col3,$brands_col3,$brands_col3) as $b): ?>
-              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-transparent hover:border-[#FBBF24] flex flex-col items-center justify-center gap-6 cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[64px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
+              foreach(array_merge($brands_col3, $brands_col3) as $b): ?>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-slate-100 hover:border-[#FBBF24] p-4 flex items-center justify-center cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
+                <img src="<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.svg' ) ?>" 
+                     alt="<?= esc_attr($b['name']) ?> Logo" 
+                     title="<?= esc_attr($b['name']) ?>" 
+                     loading="lazy" 
+                     class="max-w-[165px] max-h-28 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+                     onerror="this.onerror=null; this.src='<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.png' ) ?>';" />
               </div>
               <?php endforeach; ?>
             </div>
@@ -420,14 +444,22 @@ get_header();
             <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col4 = [
-                ['name'=>'Astral','icon'=>'plumbing','color'=>'#1A56DB'],
-                ['name'=>'Hafele','icon'=>'kitchen','color'=>'#1A56DB'],
-                ['name'=>'Honeywell','icon'=>'settings_remote','color'=>'#d97706'],
+                ['name'=>'Prima', 'slug'=>'prima'],
+                ['name'=>'Prisma', 'slug'=>'prisma'],
+                ['name'=>'Femmina', 'slug'=>'femmina'],
+                ['name'=>'EZ Care', 'slug'=>'ez_care'],
+                ['name'=>'Jonree', 'slug'=>'jonree'],
+                ['name'=>'Krysta', 'slug'=>'krysta'],
+                ['name'=>'Easy Wipe', 'slug'=>'easy_wipe'],
               ];
-              foreach(array_merge($brands_col4,$brands_col4,$brands_col4) as $b): ?>
-              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-transparent hover:border-[#FBBF24] flex flex-col items-center justify-center gap-6 cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[64px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
+              foreach(array_merge($brands_col4, $brands_col4) as $b): ?>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-slate-100 hover:border-[#FBBF24] p-4 flex items-center justify-center cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
+                <img src="<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.svg' ) ?>" 
+                     alt="<?= esc_attr($b['name']) ?> Logo" 
+                     title="<?= esc_attr($b['name']) ?>" 
+                     loading="lazy" 
+                     class="max-w-[165px] max-h-28 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+                     onerror="this.onerror=null; this.src='<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.png' ) ?>';" />
               </div>
               <?php endforeach; ?>
             </div>
@@ -438,14 +470,21 @@ get_header();
             <div class="animate-marquee-vertical" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col5 = [
-                ['name'=>'Johnson Controls','icon'=>'hvac','color'=>'#dc2626'],
-                ['name'=>'3M India','icon'=>'science','color'=>'#dc2626'],
-                ['name'=>'EBCO','icon'=>'inventory','color'=>'#059669'],
+                ['name'=>'Dedakj', 'slug'=>'dedakj'],
+                ['name'=>'Owgels', 'slug'=>'owgels'],
+                ['name'=>'Bio Tab', 'slug'=>'bio_tab'],
+                ['name'=>'Amway', 'slug'=>'amway'],
+                ['name'=>'Nutrilite', 'slug'=>'nutrilite'],
+                ['name'=>'Instafresh', 'slug'=>'instafresh'],
               ];
-              foreach(array_merge($brands_col5,$brands_col5,$brands_col5) as $b): ?>
-              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-transparent hover:border-[#FBBF24] flex flex-col items-center justify-center gap-6 cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[64px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
+              foreach(array_merge($brands_col5, $brands_col5) as $b): ?>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-slate-100 hover:border-[#FBBF24] p-4 flex items-center justify-center cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
+                <img src="<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.svg' ) ?>" 
+                     alt="<?= esc_attr($b['name']) ?> Logo" 
+                     title="<?= esc_attr($b['name']) ?>" 
+                     loading="lazy" 
+                     class="max-w-[165px] max-h-28 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+                     onerror="this.onerror=null; this.src='<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.png' ) ?>';" />
               </div>
               <?php endforeach; ?>
             </div>
@@ -456,14 +495,21 @@ get_header();
             <div class="animate-marquee-vertical-reverse" style="display:flex;flex-direction:column;gap:16px;">
               <?php
               $brands_col6 = [
-                ['name'=>'Schneider','icon'=>'bolt','color'=>'#059669'],
-                ['name'=>'Bosch','icon'=>'engineering','color'=>'#dc2626'],
-                ['name'=>'Siemens','icon'=>'settings','color'=>'#0891b2'],
+                ['name'=>'Aquagenie', 'slug'=>'aquagenie'],
+                ['name'=>'Cera', 'slug'=>'cera'],
+                ['name'=>'Hindware', 'slug'=>'hindware'],
+                ['name'=>'Parryware', 'slug'=>'parryware'],
+                ['name'=>'Kimsoft', 'slug'=>'kimsoft'],
+                ['name'=>'IndiaMART', 'slug'=>'indiamart'],
               ];
-              foreach(array_merge($brands_col6,$brands_col6,$brands_col6) as $b): ?>
-              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-transparent hover:border-[#FBBF24] flex flex-col items-center justify-center gap-6 cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
-                <span class="material-symbols-outlined text-[64px] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" style="color:<?= $b['color'] ?>"><?= $b['icon'] ?></span>
-                <span class="text-lg font-black text-gray-800 text-center uppercase tracking-wide leading-tight"><?= $b['name'] ?></span>
+              foreach(array_merge($brands_col6, $brands_col6) as $b): ?>
+              <div class="group brand-card bg-white shadow-xl shadow-blue-900/5 border-2 border-slate-100 hover:border-[#FBBF24] p-4 flex items-center justify-center cursor-pointer rounded-none hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style="width:200px;height:200px;flex-shrink:0;">
+                <img src="<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.svg' ) ?>" 
+                     alt="<?= esc_attr($b['name']) ?> Logo" 
+                     title="<?= esc_attr($b['name']) ?>" 
+                     loading="lazy" 
+                     class="max-w-[165px] max-h-28 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+                     onerror="this.onerror=null; this.src='<?= esc_url( get_template_directory_uri() . '/images/brands/' . $b['slug'] . '.png' ) ?>';" />
               </div>
               <?php endforeach; ?>
             </div>
@@ -582,27 +628,23 @@ $industries = [
                         </h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <?php
-                            // Fetch WooCommerce products for this industry
-                            $transient_key = 'snap_industry_products_' . $ind['id'];
-                            $products = get_transient($transient_key);
-                            
-                            if ( false === $products ) {
-                                $args = [
-                                    'limit'    => 2,
-                                    'status'   => 'publish',
-                                    'category' => $ind['cats'],
-                                ];
-                                $products = wc_get_products($args);
+                            // Fetch randomized WooCommerce products for this industry on each page load
+                            $args = [
+                                'limit'    => 2,
+                                'status'   => 'publish',
+                                'orderby'  => 'rand',
+                                'category' => $ind['cats'],
+                            ];
+                            $products = wc_get_products($args);
 
-                                // Fallback if no products in target categories
-                                if (empty($products)) {
-                                    $products = wc_get_products([
-                                        'limit'      => 2,
-                                        'status'     => 'publish',
-                                        'visibility' => 'catalog'
-                                    ]);
-                                }
-                                set_transient($transient_key, $products, DAY_IN_SECONDS);
+                            // Fallback if no products in target categories
+                            if (empty($products)) {
+                                $products = wc_get_products([
+                                    'limit'      => 2,
+                                    'status'     => 'publish',
+                                    'orderby'    => 'rand',
+                                    'visibility' => 'catalog'
+                                ]);
                             }
 
                             if (!empty($products)) {
@@ -719,107 +761,300 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 </style>
 
+<!-- Section: Process Management (How It Works – Industrial-Scale Order Fulfillment) -->
+<section class="bg-[#FFFFFF] py-24 overflow-hidden">
+    <div class="container mx-auto px-8 relative flex flex-col gap-6 xl:min-h-[2200px] w-full">
+        <div class="mx-auto text-center">
+            <p class="inline-block py-1.5 px-3.5 text-xs font-black uppercase tracking-widest border-2 border-[#1A56DB] bg-[#1A56DB]/10 text-[#1A56DB] mb-4">Process Management</p>
+            <h2 class="font-black uppercase tracking-tight lg:text-5xl text-3xl text-black">Industrial-Scale Order Fulfillment</h2>
+            <p class="text-zinc-600 font-medium max-w-2xl mx-auto mt-4 text-sm md:text-base">Experience Snap Marketing's streamlined corporate procurement process engineered for enterprise reliability, compliance, and guaranteed delivery.</p>
+        </div>
+
+        <div id="process-svg-container" class="relative w-full max-w-[320px] md:max-w-[744px] xl:max-w-[1110px] mt-16 mx-auto h-[908px] md:h-[2128px] xl:h-[1851px]">
+            
+            <!-- Desktop SVG -->
+            <div class="svg-container h-full xl:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
+                <svg data-hiw-svg="true" class="hiw-line-desktop" width="1110" height="1851" viewBox="0 0 1110 1851" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M293 245C293 245 982.532 152.487 1020 444.5C1059.34 751.135 307.651 427.758 284 736C259.284 1058.11 987.03 759.333 1037 1078.5C1096.32 1457.41 76.9361 971.376 94.4998 1354.5C111.046 1715.43 957.5 1688 957.5 1688" stroke="#1A56DB" stroke-width="8" stroke-linecap="square" style="stroke-dashoffset: 4766px; stroke-dasharray: 4766.23; transition: stroke-dashoffset 0.1s ease-out;"></path>
+                </svg>
+            </div>
+            
+            <!-- Tablet SVG -->
+            <div class="svg-container h-full xl:hidden md:flex hidden pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
+                <svg data-hiw-svg="true" class="hiw-line-tablet" width="744" height="2128" viewBox="0 0 744 2128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M155 168.5C155 168.5 599.832 241.232 621 453.5C643.654 680.676 167.935 578.564 155 806.5C143.871 1002.6 465.793 1008.11 462.5 1204.5C459.277 1396.74 156.671 1396.74 155 1589C153.492 1762.51 399.5 1960 399.5 1960" stroke="#1A56DB" stroke-width="6" stroke-linecap="square" style="stroke-dashoffset: 2718px; stroke-dasharray: 2718.54; transition: stroke-dashoffset 0.1s ease-out;"></path>
+                </svg>
+            </div>
+            
+            <!-- Mobile SVG -->
+            <div class="svg-container h-full md:hidden flex pointer-events-none w-full absolute top-0 left-0 justify-center items-center z-0">
+                <svg data-hiw-svg="true" class="hiw-line-mobile" width="320" height="908" viewBox="0 0 320 908" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M60.0003 69.5C60.0003 69.5 278.851 120.833 270.5 222C262.594 317.783 56.8652 253.442 60.0003 349.5C62.4685 425.123 195.269 410.369 197.5 486C199.635 558.372 89.0992 557.236 79.5003 629C67.9425 715.41 197.5 818.5 197.5 818.5" stroke="#1A56DB" stroke-width="4" stroke-linecap="square" style="stroke-dashoffset: 1178px; stroke-dasharray: 1178.73; transition: stroke-dashoffset 0.1s ease-out;"></path>
+                </svg>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="hiw-card z-10 absolute top-[2%] md:top-[3%] xl:top-[9%] left-[0%] md:left-[4%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">shopping_cart</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Order Placed</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">1</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Customer submits an enquiry through our platform, providing detailed specifications and requirements.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="hiw-card z-10 absolute top-[20%] md:top-[20%] xl:top-[22%] right-[0%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">assignment</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Account Work</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">2</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Order verification and account processing to ensure accuracy and enterprise satisfaction.</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="hiw-card z-10 absolute top-[33%] md:top-[35%] xl:top-[38%] left-[0%] md:left-[6%] xl:left-[12%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">precision_manufacturing</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Processing</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">3</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Order preparation with strict industrial quality checks and inventory management for optimal fulfillment.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="hiw-card z-10 absolute top-[50%] md:top-[54%] xl:top-[56%] right-[0%] md:right-[20%] xl:right-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">inventory_2</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Packaging</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">4</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Secure bulk packing with heavy-duty protective materials ensuring safe transit.</p>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="hiw-card z-10 absolute top-[65%] md:top-[70%] xl:top-[71%] left-[5%] md:left-[6%] xl:left-[3%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-zinc-200 bg-white p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#1A56DB] flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">local_shipping</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-black uppercase leading-tight">Logistics</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">5</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-600 leading-relaxed">Shipping coordination with trusted B2B carriers for reliable and timely delivery.</p>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="hiw-card z-10 absolute top-[85%] md:top-[88%] xl:top-[89%] left-[35%] md:left-[30%] xl:left-[60%] flex w-[152px] sm:w-[200px] md:w-[270px] lg:w-[340px] shadow-[8px_8px_0px_#1A56DB] border-2 border-[#1A56DB] bg-[#0A0A0A] p-4 lg:p-6 gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 translate-y-6 scale-95 blur-sm">
+                <div class="w-10 h-10 lg:w-16 lg:h-16 shrink-0 bg-[#FBBF24] flex items-center justify-center text-black">
+                    <span class="material-symbols-outlined text-2xl lg:text-4xl">task_alt</span>
+                </div>
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-sm md:text-lg lg:text-xl font-black text-white uppercase leading-tight">Dispatch</h3>
+                        <div class="h-6 w-6 lg:h-8 lg:w-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-xs lg:text-sm shrink-0">6</div>
+                    </div>
+                    <p class="text-xs lg:text-sm font-medium text-zinc-400 leading-relaxed">Delivery complete with tracking confirmation and institutional guarantee.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- SVG & Reveal Animation Logic -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const svgContainer = document.getElementById('process-svg-container');
+        const paths = document.querySelectorAll('.svg-container svg path');
+        const cards = document.querySelectorAll('.hiw-card');
+
+        let ticking = false;
+        const updatePaths = () => {
+            if(!svgContainer) return;
+            const rect = svgContainer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            let scrollPercentage = (windowHeight - rect.top) / (rect.height + windowHeight);
+            scrollPercentage = Math.min(Math.max(scrollPercentage * 1.5 - 0.2, 0), 1);
+            
+            paths.forEach(path => {
+                if (path.closest('.svg-container').offsetParent !== null) {
+                    let length = path.getTotalLength();
+                    if (!length || length === 0) {
+                        if (path.closest('.hiw-line-desktop')) length = 4766;
+                        else if (path.closest('.hiw-line-tablet')) length = 2718;
+                        else length = 1178;
+                    }
+                    path.style.strokeDasharray = length;
+                    path.style.strokeDashoffset = length * (1 - scrollPercentage);
+                }
+            });
+            ticking = false;
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updatePaths);
+                ticking = true;
+            }
+        };
+
+        if(paths.length > 0 && svgContainer) {
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
+            setTimeout(updatePaths, 100);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0', 'translate-y-6', 'scale-95', 'blur-sm');
+                    entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100', 'blur-0');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.2,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        cards.forEach(card => observer.observe(card));
+    });
+    </script>
+</section>
 
 <!-- Section 2: Shop by Category (Dynamic) -->
+<!-- Section 2: Shop by Category (Matched Blue Star Categories with Semi-Transparent Film) -->
 <section class="bg-[#0A0A0A] py-24 border-b-4 border-[#FBBF24]">
     <div class="container mx-auto px-8 max-w-[1536px]">
         <div class="mb-12 border-l-8 border-[#FBBF24] pl-6">
             <h2 class="text-white text-4xl font-black uppercase tracking-tight m-0">Shop by Category</h2>
+            <p class="text-[#FBBF24] font-bold mt-2 uppercase tracking-widest text-sm">Engineered Air Conditioning, Refrigeration & Pure Water Systems</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
-            <?php
-            // Get root B2B category ID to filter only its direct children
-            $b2b_term = get_term_by('slug', 'b2b', 'product_cat');
-            $parent_ids = [];
-            if ($b2b_term) $parent_ids[] = (int) $b2b_term->term_id;
 
-            $all_cats = get_terms([
-                'taxonomy' => 'product_cat',
-                'hide_empty' => false,
-            ]);
+        <?php
+        $curated_categories = [
+            [
+                'title'         => 'Room Air Conditioners',
+                'desc'          => 'The most technologically advanced and energy efficient air conditioning solutions for small spaces.',
+                'slug'          => 'b2b-room-air-conditioners',
+                'fallback_slug' => 'air-conditioners-2',
+                'image'         => get_template_directory_uri() . '/images/bluestar/room-ac.jpg',
+                'badge'         => 'Commercial & Home',
+            ],
+            [
+                'title'         => 'Central Air Conditioning Products',
+                'desc'          => 'End-to-end solutions with a comprehensive range of VRF systems, ducted and packaged ACs, and chillers.',
+                'slug'          => 'central-air-conditioning',
+                'fallback_slug' => 'central-air-conditioning',
+                'image'         => get_template_directory_uri() . '/images/bluestar/central-ac.jpg',
+                'badge'         => 'B2B Enterprise',
+            ],
+            [
+                'title'         => 'Commercial Refrigeration',
+                'desc'          => 'Leaders in commercial refrigeration providing freezers, display coolers, and dispensers to industries.',
+                'slug'          => 'b2b-commercial-refrigeration',
+                'fallback_slug' => 'refrigeration-2',
+                'image'         => get_template_directory_uri() . '/images/bluestar/commercial-ref.jpg',
+                'badge'         => 'Heavy Duty',
+            ],
+            [
+                'title'         => 'Air Coolers',
+                'desc'          => 'Sleek and elegant air coolers packed with smart features to provide efficient industrial and commercial cooling.',
+                'slug'          => 'b2b-air-coolers',
+                'fallback_slug' => 'air-coolers-2',
+                'image'         => get_template_directory_uri() . '/images/bluestar/air-cooler.jpg',
+                'badge'         => 'Energy Efficient',
+            ],
+            [
+                'title'         => 'Water Purifiers',
+                'desc'          => 'Presenting an advanced range of commercial and institutional water purifiers, obsessed with purity.',
+                'slug'          => 'b2b-water-purifiers',
+                'fallback_slug' => 'water-purifiers',
+                'image'         => get_template_directory_uri() . '/images/bluestar/water-purifier.jpg',
+                'badge'         => 'Pure Water Tech',
+            ],
+            [
+                'title'         => 'Air Purifiers',
+                'desc'          => 'An array of purifiers built with superior multi-stage technology for clean and healthy indoor air quality.',
+                'slug'          => 'b2b-air-purifiers',
+                'fallback_slug' => 'air-purifiers-2',
+                'image'         => get_template_directory_uri() . '/images/bluestar/air-purifier.jpg',
+                'badge'         => 'Clean Air',
+            ],
+            [
+                'title'         => 'Water Coolers',
+                'desc'          => 'Get fast, cool water with this range of durable, value-for-money and eco-friendly coolers for commercial spaces.',
+                'slug'          => 'water-coolers',
+                'fallback_slug' => 'water-coolers',
+                'image'         => get_template_directory_uri() . '/images/bluestar/water-coolers.png',
+                'badge'         => 'Instant Cooling',
+            ],
+            [
+                'title'         => 'Cold Storages',
+                'desc'          => 'Modular cold rooms and walk-in chillers engineered for pharmaceuticals, agriculture, and supply chain logistics.',
+                'slug'          => 'cold-storages',
+                'fallback_slug' => 'cold-storages-2',
+                'image'         => get_template_directory_uri() . '/images/bluestar/empg-tile.jpg',
+                'badge'         => 'Cold Chain',
+            ],
+        ];
+        ?>
 
-            $shop_cats = [];
-            if (!is_wp_error($all_cats)) {
-                foreach ($all_cats as $cat) {
-                    if (in_array((int)$cat->parent, $parent_ids, true)) {
-                        $shop_cats[] = $cat;
-                    }
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <?php foreach ($curated_categories as $item): 
+                // Resolve existing WooCommerce term
+                $cat_term = get_term_by('slug', $item['slug'], 'product_cat');
+                if (!$cat_term && !empty($item['fallback_slug'])) {
+                    $cat_term = get_term_by('slug', $item['fallback_slug'], 'product_cat');
                 }
-            }
-
-            // Deduplicate categories by name
-            $seen_names = [];
-            $unique_cats = [];
-            foreach ($shop_cats as $cat) {
-                if (!in_array(strtolower($cat->name), $seen_names)) {
-                    $seen_names[] = strtolower($cat->name);
-                    $unique_cats[] = $cat;
-                }
-            }
-            
-            // Slice to exactly 8 categories for the 2x4 grid
-            $shop_cats = array_slice($unique_cats, 0, 8);
-
-            $bg_classes = [
-                'bg-[#1A56DB]/20', 'bg-[#1A56DB]/40', 'bg-zinc-900', 'bg-zinc-800/80',
-                'bg-zinc-800/50', 'bg-[#1A56DB]/30'
-            ];
-
-            // Exact category image mapping as requested
-                        $image_map = [
-                'air-conditioners'             => get_template_directory_uri() . '/images/ind_ac_1781898513191.jpg',
-                'b2b-room-air-conditioners'    => get_template_directory_uri() . '/images/ind_ac_1781898513191.jpg',
-                'cassette-air-conditioners'    => get_template_directory_uri() . '/images/ind_ac_1781898513191.jpg',
-                'verticool-air-conditioners'   => get_template_directory_uri() . '/images/ind_ac_1781898513191.jpg',
-                'central-air-conditioning'     => get_template_directory_uri() . '/images/ind_ac_1781898513191.jpg',
-                'air-coolers'                  => get_template_directory_uri() . '/images/ind_factory_1781898524001.jpg',
-                'b2b-air-coolers'              => get_template_directory_uri() . '/images/ind_factory_1781898524001.jpg',
-                'water-purifiers'              => get_template_directory_uri() . '/images/ind_hospital_1781898535090.jpg',
-                'b2b-water-purifiers'          => get_template_directory_uri() . '/images/ind_hospital_1781898535090.jpg',
-                'water-coolers'                => get_template_directory_uri() . '/images/ind_factory_1781898524001.jpg',
-                'air-purifiers'                => get_template_directory_uri() . '/images/ind_hospital_1781898535090.jpg',
-                'b2b-air-purifiers'            => get_template_directory_uri() . '/images/ind_hospital_1781898535090.jpg',
-                'refrigeration'                => get_template_directory_uri() . '/images/ind_hotel_1781898547449.jpg',
-                'b2b-commercial-refrigeration' => get_template_directory_uri() . '/images/ind_hotel_1781898547449.jpg',
-                'cold-storages'                => get_template_directory_uri() . '/images/ind_warehouse_1781898561090.jpg',
-                'heat-pumps'                   => get_template_directory_uri() . '/images/ind_factory_1781898524001.jpg',
-            ];
-
-            if (!empty($shop_cats)) {
-                foreach($shop_cats as $i => $cat) {
-                    $type_label = ($b2b_term && (int)$cat->parent === (int)$b2b_term->term_id) ? 'B2B Equipment' : 'B2C Appliances';
-                    
-                    // Try to get WooCommerce thumbnail first
-                    $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
-                    $cat_img_url = false;
-                    if ($thumbnail_id) {
-                        $cat_img_src = wp_get_attachment_image_src($thumbnail_id, 'large');
-                        $cat_img_url = $cat_img_src ? $cat_img_src[0] : false;
-                    }
-                    
-                    // Fallback to exact mapped images
-                    if (!$cat_img_url) {
-                        $cat_img_url = isset($image_map[$cat->slug]) ? $image_map[$cat->slug] : get_template_directory_uri() . '/images/ind_ac_1781898513191.jpg';
-                    }
-                    ?>
-                    <a class="group relative bg-zinc-900 aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-300 flex flex-col" href="<?php echo esc_url(get_term_link($cat)); ?>">
-                        <img src="<?php echo esc_url($cat_img_url); ?>" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="<?php echo esc_attr($cat->name); ?>" />
-                        <!-- Dark-to-gold gradient overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-transparent to-transparent"></div>
-                        <!-- Gold accent top-left corner bar -->
-                        <div class="absolute top-0 left-0 w-12 h-1 bg-[#FBBF24]"></div>
-                        <!-- Card content -->
-                        <div class="relative z-10 h-full p-8 flex flex-col justify-end">
-                            <div>
-                                <span class="text-[#FBBF24] font-black text-xs uppercase tracking-widest block mb-1"><?php echo esc_html($type_label); ?></span>
-                                <h3 class="text-white text-2xl font-black leading-tight"><?php echo esc_html($cat->name); ?></h3>
-                            </div>
-                        </div>
-                    </a>
-                    <?php
-                }
-            }
+                $cat_url = ($cat_term && !is_wp_error($cat_term)) ? get_term_link($cat_term) : '/shop';
             ?>
+            <a class="group relative bg-zinc-950 aspect-[4/3] sm:aspect-square overflow-hidden border border-zinc-800 hover:border-[#FBBF24] transition-all duration-500 flex flex-col justify-end p-6 lg:p-8 rounded-none block" href="<?php echo esc_url($cat_url); ?>">
+                <!-- Background Image from Blue Star -->
+                <img src="<?php echo esc_url($item['image']); ?>" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="<?php echo esc_attr($item['title']); ?>" loading="lazy" />
+                
+                <!-- Black Semi-Transparent Film Overlay -->
+                <div class="absolute inset-0 bg-black/60 group-hover:bg-black/45 transition-colors duration-300 z-[2]"></div>
+                
+                <!-- Gradient Film for Content Readability -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent z-[3]"></div>
+                
+                <!-- Gold Accent Top-Left Bar -->
+                <div class="absolute top-0 left-0 w-12 h-1 bg-[#FBBF24] z-[4]"></div>
+                
+                <!-- Card Content -->
+                <div class="relative z-10 flex flex-col justify-end h-full">
+                    <span class="inline-block bg-[#FBBF24] text-black font-black text-[10px] px-2.5 py-1 mb-2 uppercase tracking-widest w-fit rounded-none"><?php echo esc_html($item['badge']); ?></span>
+                    <h3 class="text-white text-xl sm:text-2xl font-black leading-tight mb-2 group-hover:text-[#FBBF24] transition-colors"><?php echo esc_html($item['title']); ?></h3>
+                    <p class="text-zinc-300 text-xs line-clamp-2 leading-relaxed mb-4 font-normal"><?php echo esc_html($item['desc']); ?></p>
+                    <div class="flex items-center gap-1.5 text-[#FBBF24] font-black text-xs uppercase tracking-widest group-hover:translate-x-1 transition-transform">
+                        <span>View Products</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </div>
+                </div>
+            </a>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -833,61 +1068,77 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <?php
-        // Fetch B2B root category
+        // Fetch top-level and main B2B categories with products
         $b2b_term = get_term_by('slug', 'b2b', 'product_cat');
-        
-        $root_cats = [];
-        if ($b2b_term) $root_cats[] = $b2b_term;
-        
-        $layer_data = [];
-        foreach ($root_cats as $root_cat) {
-            $children = get_terms([
-                'taxonomy' => 'product_cat',
-                'hide_empty' => false,
-                'parent' => $root_cat->term_id
+        $b2b_id = $b2b_term ? (int) $b2b_term->term_id : 0;
+
+        $candidate_terms = get_terms([
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => true,
+            'parent'     => 0,
+        ]);
+
+        if ($b2b_id) {
+            $b2b_children = get_terms([
+                'taxonomy'   => 'product_cat',
+                'hide_empty' => true,
+                'parent'     => $b2b_id,
             ]);
-            
-            $child_data = [];
-            foreach ($children as $child) {
-                $child_data[] = [
-                    'id' => $child->term_id,
-                    'name' => html_entity_decode($child->name),
-                    'slug' => $child->slug
-                ];
-            }
-            if (!empty($child_data)) {
-                $layer_data[$root_cat->term_id] = $child_data;
+            if (!is_wp_error($b2b_children) && !empty($b2b_children)) {
+                $candidate_terms = array_merge($b2b_children, $candidate_terms);
             }
         }
+
+        $excluded_names = [
+            'uncategorized', 'b2b products', 'b2c products', 'b2b', 'b2c',
+            'exclude-from-search', 'exclude-from-search-2', 'field trial', 'specifications',
+            'video', '3 star', '5 star', 'star smart enabled', 'entire range acs', 'best seller',
+            'season sale', 'flagship range', 'premium range', 'classic range', 'special edition ac',
+            'super energy efficient acs'
+        ];
+
+        $clean_cats = [];
+        $seen = [];
+        if (!is_wp_error($candidate_terms)) {
+            foreach ($candidate_terms as $cat) {
+                $n = strtolower(trim(html_entity_decode($cat->name)));
+                if (!in_array($n, $excluded_names, true) && !in_array($n, $seen, true) && $cat->count > 0) {
+                    $seen[] = $n;
+                    $clean_cats[] = $cat;
+                }
+            }
+        }
+        $carousel_cats = $clean_cats;
         ?>
 
-        <!-- Layer 1: Main Categories -->
-        <div class="mb-4 overflow-x-auto no-scrollbar">
-            <ul id="layer1-tabs" class="flex gap-2 border-b-2 border-gray-200 w-max pb-[2px]">
-                <?php foreach ($root_cats as $index => $cat): 
-                    $is_active = ($index === 0);
-                    $active_classes = $is_active ? 'text-[#0A0A0A] bg-[#FBBF24] border-[#1A56DB]' : 'text-gray-500 hover:text-[#1A56DB] hover:bg-blue-50 border-transparent hover:border-gray-300';
-                ?>
-                <li role="tab">
-                    <button data-cat-id="<?php echo esc_attr($cat->term_id); ?>" class="layer1-btn inline-block px-6 py-3 font-bold text-sm uppercase tracking-wider border-b-4 transition-all <?php echo $active_classes; ?>">
-                        <?php echo esc_html($cat->name); ?>
-                    </button>
-                </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        
-        <!-- Layer 2: Sub-Categories -->
-        <div class="mb-12 overflow-x-auto no-scrollbar">
-            <ul id="layer2-tabs" class="flex gap-2 w-full pb-[2px] overflow-x-auto custom-scrollbar">
-                <!-- Populated via JS -->
-            </ul>
-        </div>
+        <!-- Category Tabs Navigation with Left/Right Scroll Arrows -->
+        <div class="mb-12 relative flex items-center gap-2">
+            <!-- Left Arrow Button -->
+            <button id="cat-tabs-prev" class="shrink-0 w-11 h-11 bg-[#0A0A0A] hover:bg-[#FBBF24] hover:text-black text-white flex items-center justify-center transition-all shadow-md z-10 border border-zinc-800 rounded-none cursor-pointer active:scale-95" aria-label="Scroll Categories Left">
+                <span class="material-symbols-outlined text-xl">chevron_left</span>
+            </button>
 
-        <script>
-            // Store the PHP generated category structure in JS
-            window.snapCategoryData = <?php echo json_encode($layer_data); ?>;
-        </script>
+            <!-- Scrollable Tab Container -->
+            <div id="featured-cat-tabs-scroll" class="overflow-x-auto no-scrollbar scroll-smooth flex-grow">
+                <ul id="featured-cat-tabs" class="flex gap-2 w-max pb-[2px]">
+                    <?php foreach ($carousel_cats as $index => $cat): 
+                        $is_active = ($index === 0);
+                        $active_classes = $is_active ? 'text-[#0A0A0A] bg-[#FBBF24] border-[#1A56DB]' : 'text-gray-600 bg-gray-100 hover:bg-gray-200 border-transparent';
+                    ?>
+                    <li class="shrink-0">
+                        <button data-cat-id="<?php echo esc_attr($cat->term_id); ?>" class="feat-cat-btn inline-block px-5 py-3 font-bold text-xs uppercase tracking-wider rounded-none border-b-4 transition-all <?php echo $active_classes; ?>">
+                            <?php echo esc_html($cat->name); ?>
+                        </button>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+
+            <!-- Right Arrow Button -->
+            <button id="cat-tabs-next" class="shrink-0 w-11 h-11 bg-[#1A56DB] hover:bg-[#FBBF24] hover:text-black text-white flex items-center justify-center transition-all shadow-md z-10 border border-[#1A56DB] rounded-none cursor-pointer active:scale-95" aria-label="Scroll Categories Right">
+                <span class="material-symbols-outlined text-xl">chevron_right</span>
+            </button>
+        </div>
         
         <!-- Loading State -->
         <div id="feat-products-loader" class="hidden flex justify-center items-center py-24">
@@ -948,60 +1199,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const layer1Btns = document.querySelectorAll('.layer1-btn');
-    const layer2Container = document.getElementById('layer2-tabs');
+    const catBtns = document.querySelectorAll('.feat-cat-btn');
     const productsContainer = document.getElementById('featured-carousel');
     const loader = document.getElementById('feat-products-loader');
     const carouselWrapper = document.getElementById('feat-products-container');
-    const catData = window.snapCategoryData || {};
-
-    function renderLayer2(parentId) {
-        if(!layer2Container) return;
-        layer2Container.innerHTML = '';
-        const children = catData[parentId] || [];
-        
-        if (children.length === 0) {
-            layer2Container.innerHTML = '<li class="text-gray-500 italic text-sm py-2">No sub-categories available</li>';
-            productsContainer.innerHTML = '';
-            return;
-        }
-
-        children.forEach((child, idx) => {
-            const isFirst = idx === 0;
-            const activeClasses = isFirst ? 'text-white bg-[#1A56DB] border-transparent' : 'text-gray-600 bg-gray-100 hover:bg-gray-200 border-transparent';
-            
-            const li = document.createElement('li');
-            li.className = 'shrink-0';
-            li.innerHTML = `<button data-child-id="${child.id}" class="layer2-btn inline-block px-5 py-2 font-bold text-xs uppercase tracking-wider rounded-none transition-all ${activeClasses}">${child.name}</button>`;
-            layer2Container.appendChild(li);
-        });
-
-        // Add click events to new Layer 2 buttons
-        const layer2Btns = layer2Container.querySelectorAll('.layer2-btn');
-        layer2Btns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remove active from all L2
-                layer2Btns.forEach(b => {
-                    b.classList.remove('text-white', 'bg-[#1A56DB]');
-                    b.classList.add('text-gray-600', 'bg-gray-100');
-                });
-                // Set active to clicked
-                this.classList.remove('text-gray-600', 'bg-gray-100');
-                this.classList.add('text-white', 'bg-[#1A56DB]');
-                
-                // Fetch products
-                fetchProducts(this.getAttribute('data-child-id'));
-            });
-        });
-
-        // Fetch products for the first sub-category by default
-        if (children.length > 0) {
-            fetchProducts(children[0].id);
-        } else {
-            // If no children, clear products
-            productsContainer.innerHTML = '';
-        }
-    }
 
     function fetchProducts(categoryId) {
         if(!categoryId || !carouselWrapper || !loader) return;
@@ -1072,28 +1273,37 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Initialize Layer 1 clicks
-    if (layer1Btns) {
-        layer1Btns.forEach(btn => {
+    // Category tab scrolling arrows
+    const tabsScrollContainer = document.getElementById('featured-cat-tabs-scroll');
+    const tabsPrevBtn = document.getElementById('cat-tabs-prev');
+    const tabsNextBtn = document.getElementById('cat-tabs-next');
+
+    if (tabsScrollContainer && tabsPrevBtn && tabsNextBtn) {
+        tabsPrevBtn.addEventListener('click', () => {
+            tabsScrollContainer.scrollBy({ left: -250, behavior: 'smooth' });
+        });
+        tabsNextBtn.addEventListener('click', () => {
+            tabsScrollContainer.scrollBy({ left: 250, behavior: 'smooth' });
+        });
+    }
+
+    // Initialize category tab clicks
+    if (catBtns && catBtns.length > 0) {
+        catBtns.forEach(btn => {
             btn.addEventListener('click', function() {
-                // Remove active state from all L1
-                layer1Btns.forEach(b => {
+                catBtns.forEach(b => {
                     b.classList.remove('text-[#0A0A0A]', 'bg-[#FBBF24]', 'border-[#1A56DB]');
-                    b.classList.add('text-gray-500', 'border-transparent');
+                    b.classList.add('text-gray-600', 'bg-gray-100', 'border-transparent');
                 });
-                // Add active state to clicked L1
-                this.classList.remove('text-gray-500', 'border-transparent');
+                this.classList.remove('text-gray-600', 'bg-gray-100', 'border-transparent');
                 this.classList.add('text-[#0A0A0A]', 'bg-[#FBBF24]', 'border-[#1A56DB]');
                 
-                // Render corresponding L2
-                renderLayer2(this.getAttribute('data-cat-id'));
+                fetchProducts(this.getAttribute('data-cat-id'));
             });
         });
 
-        // Initialize first L1 category
-        if (layer1Btns.length > 0) {
-            layer1Btns[0].click();
-        }
+        // Initialize first category tab
+        catBtns[0].click();
     }
 
     // Carousel script
@@ -1174,6 +1384,256 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
     </div>
 </section>
+
+<!-- Section 7.5: Frequently Asked Questions (Homepage FAQ Section) -->
+<section id="faq-section" class="bg-[#F4F4F5] py-24 px-6 md:px-8 border-t-4 border-[#1A56DB] relative overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            <!-- Left Column: Title & CTA -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="inline-block bg-[#FBBF24] text-[#0A0A0A] text-xs font-black uppercase tracking-[0.2em] px-4 py-1.5">
+                    Clear Answers & Expert Support
+                </div>
+                <h2 class="text-[#0A0A0A] text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight">
+                    Frequently Asked <span class="text-[#1A56DB]">Questions</span>
+                </h2>
+                <p class="text-zinc-600 text-lg font-medium leading-relaxed">
+                    Have questions about authorized Blue Star dealership, AC tonnage selection, bulk institutional discounts, or warranty service? Here are quick answers to the most common inquiries.
+                </p>
+
+                <!-- Knowledge Base Promotion Card -->
+                <div class="bg-white p-8 border-t-4 border-[#FBBF24] shadow-xl space-y-4">
+                    <span class="text-xs font-black text-[#1A56DB] uppercase tracking-widest block">Need More Information?</span>
+                    <h3 class="text-2xl font-black text-[#0A0A0A] uppercase tracking-tight">Visit Our Full Help Center</h3>
+                    <p class="text-zinc-500 text-sm font-medium leading-relaxed">
+                        Browse our comprehensive FAQ library covering residential split ACs, commercial refrigeration, touchless washroom automations, and corporate procurement.
+                    </p>
+                    <div class="pt-2">
+                        <a href="<?php echo esc_url(home_url('/faq/')); ?>" class="inline-flex items-center gap-3 bg-[#0A0A0A] text-[#FBBF24] hover:bg-[#1A56DB] hover:text-white px-8 py-4 font-black uppercase text-xs tracking-widest transition-all duration-300 shadow-md">
+                            <span>Explore Full FAQ Page</span>
+                            <span class="material-symbols-outlined text-base">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 text-sm font-bold text-zinc-700 pt-2">
+                    <span class="material-symbols-outlined text-[#1A56DB]">support_agent</span>
+                    <span>Direct WhatsApp Assistance: <a href="https://wa.me/919823012724" target="_blank" rel="noopener noreferrer" class="text-[#1A56DB] hover:underline font-black">+91 98230 12724</a></span>
+                </div>
+            </div>
+
+            <!-- Right Column: Accordion Items -->
+            <div class="lg:col-span-7 space-y-4">
+                
+                <!-- Q1 -->
+                <div class="home-faq-item bg-white border-l-4 border-[#1A56DB] shadow-md transition-all hover:shadow-lg">
+                    <button type="button" class="home-faq-toggle w-full text-left p-6 flex justify-between items-center gap-4 focus:outline-none focus:ring-2 focus:ring-[#1A56DB]" aria-expanded="false">
+                        <span class="text-lg md:text-xl font-black text-[#0A0A0A] tracking-tight">
+                            Is Snap Marketing an authorized Blue Star dealer in Pune?
+                        </span>
+                        <span class="home-faq-icon-wrapper w-8 h-8 rounded-full bg-[#1A56DB]/10 text-[#1A56DB] flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-2xl font-bold">expand_more</span>
+                        </span>
+                    </button>
+                    <div class="home-faq-content hidden px-6 pb-6 text-gray-700 font-medium leading-relaxed border-t border-gray-100 pt-4">
+                        <p>
+                            <strong>Yes, absolutely.</strong> Snap Marketing is an authorized channel partner and wholesale distributor for Blue Star Limited with over 35 years of industry leadership in Pune, Maharashtra. Every residential and commercial unit carries 100% genuine manufacturer warranties, certified serial numbers, and authorized brand technician installation.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="home-faq-item bg-white border-l-4 border-[#1A56DB] shadow-md transition-all hover:shadow-lg">
+                    <button type="button" class="home-faq-toggle w-full text-left p-6 flex justify-between items-center gap-4 focus:outline-none focus:ring-2 focus:ring-[#1A56DB]" aria-expanded="false">
+                        <span class="text-lg md:text-xl font-black text-[#0A0A0A] tracking-tight">
+                            How do I choose the correct AC tonnage for my room?
+                        </span>
+                        <span class="home-faq-icon-wrapper w-8 h-8 rounded-full bg-[#1A56DB]/10 text-[#1A56DB] flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-2xl font-bold">expand_more</span>
+                        </span>
+                    </button>
+                    <div class="home-faq-content hidden px-6 pb-6 text-gray-700 font-medium leading-relaxed border-t border-gray-100 pt-4">
+                        <p class="mb-2">General sizing guideline for standard 10-foot ceilings:</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm mb-2">
+                            <li><strong>Up to 120 sq. ft.:</strong> 0.8 Ton to 1.0 Ton AC</li>
+                            <li><strong>120 to 180 sq. ft.:</strong> 1.5 Ton AC (most popular bedroom size)</li>
+                            <li><strong>180 to 260 sq. ft.:</strong> 2.0 Ton AC (living rooms, conference rooms)</li>
+                        </ul>
+                        <p class="text-xs text-gray-500 italic">For top-floor rooms under direct terrace heat or heavy western sunlight exposure, add +0.5 Ton to guarantee quick pulldown cooling.</p>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="home-faq-item bg-white border-l-4 border-[#1A56DB] shadow-md transition-all hover:shadow-lg">
+                    <button type="button" class="home-faq-toggle w-full text-left p-6 flex justify-between items-center gap-4 focus:outline-none focus:ring-2 focus:ring-[#1A56DB]" aria-expanded="false">
+                        <span class="text-lg md:text-xl font-black text-[#0A0A0A] tracking-tight">
+                            What is the saving difference between 3-Star and 5-Star Inverter ACs?
+                        </span>
+                        <span class="home-faq-icon-wrapper w-8 h-8 rounded-full bg-[#1A56DB]/10 text-[#1A56DB] flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-2xl font-bold">expand_more</span>
+                        </span>
+                    </button>
+                    <div class="home-faq-content hidden px-6 pb-6 text-gray-700 font-medium leading-relaxed border-t border-gray-100 pt-4">
+                        <p>
+                            A <strong>5-Star Inverter AC consumes 20% to 25% less power</strong> than a comparable 3-Star unit. If you operate your air conditioner for 6 to 12 hours daily (especially in master bedrooms or offices), a 5-Star AC saves enough on monthly electric bills to fully offset its higher purchase price within 12 to 18 months.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="home-faq-item bg-white border-l-4 border-[#1A56DB] shadow-md transition-all hover:shadow-lg">
+                    <button type="button" class="home-faq-toggle w-full text-left p-6 flex justify-between items-center gap-4 focus:outline-none focus:ring-2 focus:ring-[#1A56DB]" aria-expanded="false">
+                        <span class="text-lg md:text-xl font-black text-[#0A0A0A] tracking-tight">
+                            How can companies request bulk B2B pricing for commercial refrigeration?
+                        </span>
+                        <span class="home-faq-icon-wrapper w-8 h-8 rounded-full bg-[#1A56DB]/10 text-[#1A56DB] flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-2xl font-bold">expand_more</span>
+                        </span>
+                    </button>
+                    <div class="home-faq-content hidden px-6 pb-6 text-gray-700 font-medium leading-relaxed border-t border-gray-100 pt-4">
+                        <p>
+                            Enterprises, hospitals, and dairy units can submit requirements via our <a href="<?php echo esc_url(home_url('/request-a-quote')); ?>" class="text-[#1A56DB] font-bold underline">Request a Quote</a> form. Our commercial procurement desk calculates tiered institutional discounts and responds with formal GST quotations and delivery timelines within <strong>2 to 4 business hours</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="home-faq-item bg-white border-l-4 border-[#1A56DB] shadow-md transition-all hover:shadow-lg">
+                    <button type="button" class="home-faq-toggle w-full text-left p-6 flex justify-between items-center gap-4 focus:outline-none focus:ring-2 focus:ring-[#1A56DB]" aria-expanded="false">
+                        <span class="text-lg md:text-xl font-black text-[#0A0A0A] tracking-tight">
+                            What warranty coverage is included with Blue Star appliances?
+                        </span>
+                        <span class="home-faq-icon-wrapper w-8 h-8 rounded-full bg-[#1A56DB]/10 text-[#1A56DB] flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-2xl font-bold">expand_more</span>
+                        </span>
+                    </button>
+                    <div class="home-faq-content hidden px-6 pb-6 text-gray-700 font-medium leading-relaxed border-t border-gray-100 pt-4">
+                        <p>
+                            All units include 100% manufacturer warranty: <strong>1 Year Comprehensive + up to 10 Years on Inverter Compressors</strong> for residential ACs, and 1 Year Comprehensive on commercial deep freezers, visi coolers, and water coolers, supported by Blue Star certified pan-India service centers.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="home-faq-item bg-white border-l-4 border-[#1A56DB] shadow-md transition-all hover:shadow-lg">
+                    <button type="button" class="home-faq-toggle w-full text-left p-6 flex justify-between items-center gap-4 focus:outline-none focus:ring-2 focus:ring-[#1A56DB]" aria-expanded="false">
+                        <span class="text-lg md:text-xl font-black text-[#0A0A0A] tracking-tight">
+                            What are the delivery and dispatch timelines?
+                        </span>
+                        <span class="home-faq-icon-wrapper w-8 h-8 rounded-full bg-[#1A56DB]/10 text-[#1A56DB] flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <span class="material-symbols-outlined text-2xl font-bold">expand_more</span>
+                        </span>
+                    </button>
+                    <div class="home-faq-content hidden px-6 pb-6 text-gray-700 font-medium leading-relaxed border-t border-gray-100 pt-4">
+                        <p>
+                            We dispatch directly from our central warehouse at Ghorpadi Peth (Shankar Sheth Road), Pune. Deliveries across Pune Municipal Corporation (PMC) and PCMC are completed within <strong>24 to 48 hours</strong>. Outstation deliveries across Maharashtra are completed within 2 to 4 business days with insured freight logistics.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Homepage FAQ Vanilla JS Accordion Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const homeFaqItems = document.querySelectorAll('.home-faq-item');
+    homeFaqItems.forEach(item => {
+        const toggle = item.querySelector('.home-faq-toggle');
+        const content = item.querySelector('.home-faq-content');
+        const iconWrapper = item.querySelector('.home-faq-icon-wrapper');
+
+        toggle.addEventListener('click', () => {
+            const isOpen = !content.classList.contains('hidden');
+
+            // Close others for clean accordion experience
+            homeFaqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.querySelector('.home-faq-content').classList.add('hidden');
+                    otherItem.querySelector('.home-faq-toggle').setAttribute('aria-expanded', 'false');
+                    const otherIcon = otherItem.querySelector('.home-faq-icon-wrapper');
+                    otherIcon.classList.remove('rotate-180', 'bg-[#FBBF24]', 'text-black');
+                    otherIcon.classList.add('bg-[#1A56DB]/10', 'text-[#1A56DB]');
+                }
+            });
+
+            if (isOpen) {
+                content.classList.add('hidden');
+                toggle.setAttribute('aria-expanded', 'false');
+                iconWrapper.classList.remove('rotate-180', 'bg-[#FBBF24]', 'text-black');
+                iconWrapper.classList.add('bg-[#1A56DB]/10', 'text-[#1A56DB]');
+            } else {
+                content.classList.remove('hidden');
+                toggle.setAttribute('aria-expanded', 'true');
+                iconWrapper.classList.add('rotate-180', 'bg-[#FBBF24]', 'text-black');
+                iconWrapper.classList.remove('bg-[#1A56DB]/10', 'text-[#1A56DB]');
+            }
+        });
+    });
+});
+</script>
+
+<!-- Homepage Rich FAQPage JSON-LD Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Snap Marketing an authorized Blue Star dealer in Pune?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, absolutely. Snap Marketing is an authorized channel partner and wholesale distributor for Blue Star Limited with over 35 years of industry leadership in Pune, Maharashtra. Every unit carries 100% genuine manufacturer warranties and certified serial numbers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I choose the correct AC tonnage for my room?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For rooms up to 120 sq. ft., select a 0.8 to 1.0 Ton AC. For 120 to 180 sq. ft., select a 1.5 Ton AC. For 180 to 260 sq. ft., choose a 2.0 Ton AC. Top-floor rooms or rooms with direct western sun exposure should add +0.5 Ton."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the saving difference between 3-Star and 5-Star Inverter ACs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 5-Star Inverter AC consumes 20% to 25% less power than a comparable 3-Star unit. If running 6 to 12 hours daily, the 5-Star model pays for its higher upfront cost within 12 to 18 months via lower electricity bills."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can companies request bulk B2B pricing for commercial refrigeration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enterprises can submit requirements via our Request a Quote form. Our commercial procurement team calculates tiered institutional discounts and issues formal GST quotations within 2 to 4 business hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What warranty coverage is included with Blue Star appliances?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All appliances include 100% official manufacturer warranty: 1 Year Comprehensive plus up to 10 Years on Inverter Compressors for residential ACs, and 1 Year Comprehensive on commercial refrigeration."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the delivery and dispatch timelines?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Deliveries across Pune Municipal Corporation (PMC) and PCMC take 24 to 48 hours from our central warehouse at Ghorpadi Peth (Shankar Sheth Road). Outstation Maharashtra orders are delivered within 2 to 4 business days."
+      }
+    }
+  ]
+}
+</script>
 
 <!-- Section 8: Request a Quote Banner -->
 <section class="bg-[#0A0A0A] py-24 relative overflow-hidden">

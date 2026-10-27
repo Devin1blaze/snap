@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#FFFFFF"/>
+  <polygon points="100,35 130,95 70,95" fill="#2563EB"/>
+  <text x="100" y="135" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#1E293B" text-anchor="middle" letter-spacing="2">PRISMA</text>
+  <text x="100" y="158" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#2563EB" text-anchor="middle" letter-spacing="2">DISPENSERS</text>
+</svg>
