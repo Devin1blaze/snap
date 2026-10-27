@@ -198,6 +198,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                 data-custom-message="<?php echo esc_attr( "Bulk Inquiry for {$category_name} Series:\nPlease provide complete pricing catalogue, MOQ, and technical specification sheets." ); ?>">
                             Request Category RFQ
                         </button>
+                        <a href="tel:+919823012724" class="bg-white hover:bg-zinc-100 text-black px-6 py-4 font-black uppercase text-xs md:text-sm tracking-widest flex items-center gap-2 active:scale-95 transition-all shadow-xl">
+                            <span class="material-symbols-outlined text-base">call</span> Call +91 98230 12724
+                        </a>
                         <a href="#spec-matrix" class="border-2 border-white/30 text-white px-8 py-4 font-black uppercase text-xs md:text-sm tracking-widest hover:bg-white hover:text-black hover:border-white active:scale-95 transition-all bg-black/40 backdrop-blur-sm flex items-center gap-2">
                             Compare All Models (<?php echo esc_html( $total_models ); ?>) <span class="material-symbols-outlined text-base">arrow_downward</span>
                         </a>
@@ -224,6 +227,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     <span id="sticky-counter" class="text-[#FBBF24] font-black text-xs uppercase tracking-widest hidden sm:inline">
                         <span id="sticky-counter-num">0</span> Selected
                     </span>
+                    <a href="tel:+919823012724" class="border-2 border-white/30 hover:border-white text-white hover:bg-white hover:text-black text-[11px] font-black uppercase px-3 py-2 flex items-center gap-1 transition-all">
+                        <span class="material-symbols-outlined text-sm">call</span> <span class="hidden sm:inline">Call Sales</span>
+                    </a>
                     <button class="bg-[#FBBF24] text-black text-[11px] font-black uppercase px-4 py-2 hover:bg-yellow-400 transition-all js-open-quote-modal" 
                             data-product="<?php echo esc_attr( $category_name ); ?>" 
                             data-sku="SERIES-QUOTE">
@@ -327,6 +333,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                         Request Bulk Quote
                                     </button>
 
+                                    <a href="tel:+919823012724" 
+                                       class="flex items-center justify-center gap-1.5 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white font-bold uppercase text-xs tracking-wider py-3.5 px-4 transition-all">
+                                        <span class="material-symbols-outlined text-sm">call</span>
+                                        Call
+                                    </a>
+
                                     <a href="https://wa.me/919823012724?text=<?php echo rawurlencode( "Hi Snap Marketing, I would like to inquire about {$item['title']} (Model: {$item['sku']})." ); ?>" 
                                        target="_blank" 
                                        rel="noopener noreferrer" 
@@ -409,11 +421,16 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     <span class="text-[10px] font-black uppercase text-zinc-500 tracking-wider">Institutional</span>
                                 </td>
                                 <td class="p-3.5 text-center">
-                                    <button class="w-full bg-[#0A0A0A] hover:bg-[#1A56DB] text-white font-bold uppercase text-[10px] tracking-wider py-2 px-2.5 transition-colors js-open-quote-modal" 
-                                            data-product="<?php echo esc_attr( $row['title'] ); ?>" 
-                                            data-sku="<?php echo esc_attr( $row['sku'] ); ?>">
-                                        Quote
-                                    </button>
+                                    <div class="flex items-center justify-center gap-1.5">
+                                        <button class="flex-1 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white font-bold uppercase text-[10px] tracking-wider py-2 px-2.5 transition-colors js-open-quote-modal" 
+                                                data-product="<?php echo esc_attr( $row['title'] ); ?>" 
+                                                data-sku="<?php echo esc_attr( $row['sku'] ); ?>">
+                                            Quote
+                                        </button>
+                                        <a href="tel:+919823012724" class="p-2 bg-zinc-100 hover:bg-[#FBBF24] hover:text-black text-[#0A0A0A] border border-zinc-300 transition-colors flex items-center justify-center shrink-0" title="Call Sales">
+                                            <span class="material-symbols-outlined text-xs">call</span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -469,6 +486,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             </div>
 
             <div class="flex items-center gap-3 shrink-0">
+                <a href="tel:+919823012724" class="hidden sm:flex items-center gap-1.5 border border-white/40 hover:border-white text-white hover:bg-white hover:text-black font-bold uppercase text-xs px-3.5 py-3 transition-all">
+                    <span class="material-symbols-outlined text-sm">call</span> Call
+                </a>
                 <button id="rfq-clear-all" class="text-zinc-400 hover:text-white text-xs uppercase font-bold underline px-2 py-1">
                     Clear
                 </button>
