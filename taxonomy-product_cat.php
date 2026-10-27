@@ -4,8 +4,12 @@
  *
  * Implements the Chai Point + Snap Marketing hybrid layout:
  * - Alternating split-block showcase for flagship/featured models
- * - Comprehensive interactive technical comparison matrix for all category SKUs
- * - Multi-select floating RFQ batch drawer + individual instant quote triggers
+ * - Dual-tab switcher (Machine Hardware vs Touchscreen Menu UI with zoom modal)
+ * - Visual beverage chip palette beneath title
+ * - Salient features 4-bullet grid + expandable operational accordion
+ * - 5-row quick specs table in the card
+ * - Comprehensive 48-row interactive technical comparison matrix across 7 categories
+ * - Multi-select floating RFQ batch drawer + CF7 quote modal injection
  * - Retains standard retail catalog grid fallback for consumer categories
  *
  * @package SnapStitchTheme
@@ -17,9 +21,18 @@ get_header( 'shop' );
 
 $term = get_queried_object();
 $category_name = woocommerce_page_title( false );
-$category_desc = ( $term && isset( $term->description ) ) ? $term->description : '';
-if ( ! $category_desc && $term && isset( $term->post_content ) ) {
-    $category_desc = $term->post_content;
+$category_desc = ( $term && isset( $term->description ) ) ? $term->description : ( ( $term && isset( $term->post_content ) ) ? $term->post_content : '' );
+
+if ( ! function_exists( 'snap_b2b_beverage_icon' ) ) {
+    function snap_b2b_beverage_icon( $drink ) {
+        $d = strtolower( $drink );
+        if ( strpos( $d, 'tea' ) !== false || strpos( $d, 'chai' ) !== false ) return '🍵';
+        if ( strpos( $d, 'choc' ) !== false || strpos( $d, 'milo' ) !== false ) return '🍫';
+        if ( strpos( $d, 'water' ) !== false ) return '💧';
+        if ( strpos( $d, 'frappe' ) !== false || strpos( $d, 'cold' ) !== false || strpos( $d, 'iced' ) !== false ) return '🧊';
+        if ( strpos( $d, 'latte' ) !== false || strpos( $d, 'cappuccino' ) !== false || strpos( $d, 'milk' ) !== false ) return '🥛';
+        return '☕';
+    }
 }
 
 // -----------------------------------------------------------------------------
@@ -27,11 +40,9 @@ if ( ! $category_desc && $term && isset( $term->post_content ) ) {
 // -----------------------------------------------------------------------------
 $is_b2b_category = false;
 if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
-    // 1. Direct slug or b2b prefix
     if ( $term->slug === 'b2b' || strpos( $term->slug, 'b2b' ) !== false ) {
         $is_b2b_category = true;
     }
-    // 2. Term ancestry
     if ( ! $is_b2b_category && isset( $term->term_id ) ) {
         $ancestors = get_ancestors( $term->term_id, 'product_cat' );
         foreach ( $ancestors as $anc_id ) {
@@ -42,13 +53,13 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             }
         }
     }
-    // 3. Known commercial B2B categories
     $b2b_commercial_slugs = array(
         'commercial-refrigeration', 'b2b-commercial-refrigeration', 'refrigeration', 'refrigeration-2',
         'cold-storages', 'cold-storages-2', 'chillers', 'chillers-central-air-conditioning',
         'deep-freezers', 'deep-freezers-2', 'water-coolers', 'storage-water-coolers',
         'bottled-water-dispensers', 'bottled-water-dispensers-2', 'visi-coolers', 'visi-coolers-2',
-        'washroom-automations', 'hygiene-ppe', 'entrance-solutions', 'vending-machines', 'brewing-bots',
+        'washroom-automations', 'hygiene-ppe', 'entrance-solutions', 'vending-machines',
+        'coffee-vending-machines', 'commercial-coffee-vending-machines', 'brewing-bots',
         'central-air-conditioning', 'ducted-systems', 'vrf-systems', 'air-coolers', 'air-coolers-2',
         'desert-air-coolers', 'desert-air-coolers-2', 'b2b-air-coolers', 'b2b-water-purifiers',
         'ice-machines', 'kitchen-refrigeration-products', 'medical-refrigeration-products',
@@ -58,14 +69,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
     if ( ! $is_b2b_category && in_array( $term->slug, $b2b_commercial_slugs, true ) ) {
         $is_b2b_category = true;
     }
-    // 4. Sample check in current query
     if ( ! $is_b2b_category && have_posts() ) {
         global $wp_query;
         if ( ! empty( $wp_query->posts ) ) {
             $sample_limit = min( 6, count( $wp_query->posts ) );
             for ( $i = 0; $i < $sample_limit; $i++ ) {
-                $check_id = $wp_query->posts[ $i ]->ID;
-                if ( function_exists( 'snap_stitch_is_b2b_product' ) && snap_stitch_is_b2b_product( $check_id ) ) {
+                if ( function_exists( 'snap_stitch_is_b2b_product' ) && snap_stitch_is_b2b_product( $wp_query->posts[ $i ]->ID ) ) {
                     $is_b2b_category = true;
                     break;
                 }
@@ -79,23 +88,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
     <?php do_action( 'woocommerce_before_main_content' ); ?>
 
     <?php if ( $is_b2b_category ) : ?>
-        <!-- ===================================================================
-             B2B MULTI-PRODUCT FAMILY SHOWCASE
-             =================================================================== -->
         <?php
-        // Fetch full family products (up to 50 SKUs) for single-page showcase
         $family_args = array(
             'post_type'      => 'product',
             'post_status'    => 'publish',
             'posts_per_page' => 50,
-            'tax_query'      => array(
-                array(
-                    'taxonomy'         => 'product_cat',
-                    'field'            => 'term_id',
-                    'terms'            => $term->term_id,
-                    'include_children' => true,
-                ),
-            ),
+            'tax_query'      => array( array( 'taxonomy' => 'product_cat', 'field' => 'term_id', 'terms' => $term->term_id, 'include_children' => true ) ),
             'orderby'        => 'menu_order title',
             'order'          => 'ASC',
         );
@@ -106,31 +104,35 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             while ( $family_query->have_posts() ) {
                 $family_query->the_post();
                 global $product;
-                if ( ! is_a( $product, 'WC_Product' ) ) {
-                    $product = wc_get_product( get_the_ID() );
-                }
+                if ( ! is_a( $product, 'WC_Product' ) ) $product = wc_get_product( get_the_ID() );
                 if ( ! $product ) continue;
 
                 $p_id = $product->get_id();
                 $specs_meta = get_post_meta( $p_id, '_technical_specs', true );
-                $specs_array = is_array( $specs_meta ) ? $specs_meta : array();
+                $salient_meta = get_post_meta( $p_id, '_salient_features', true );
+                $bev_meta = get_post_meta( $p_id, '_beverage_menu', true ) ?: get_post_meta( $p_id, '_menu_items', true );
+                $bev_array = is_array( $bev_meta ) ? $bev_meta : ( ! empty( $bev_meta ) ? array_map( 'trim', explode( ',', $bev_meta ) ) : array() );
 
                 $all_products[] = array(
-                    'id'           => $p_id,
-                    'title'        => $product->get_name(),
-                    'sku'          => $product->get_sku() ? $product->get_sku() : 'SNAP-' . $p_id,
-                    'permalink'    => $product->get_permalink(),
-                    'image_url'    => wp_get_attachment_image_url( $product->get_image_id(), 'large' ) ?: wc_placeholder_img_src(),
-                    'thumb_url'    => wp_get_attachment_image_url( $product->get_image_id(), 'thumbnail' ) ?: wc_placeholder_img_src(),
-                    'specs'        => $specs_array,
-                    'brochure_url' => get_post_meta( $p_id, '_brochure_url', true ),
-                    'is_featured'  => $product->is_featured(),
-                    'excerpt'      => wp_strip_all_tags( $product->get_short_description() ),
+                    'id'               => $p_id,
+                    'title'            => $product->get_name(),
+                    'sku'              => $product->get_sku() ? $product->get_sku() : 'SNAP-' . $p_id,
+                    'permalink'        => $product->get_permalink(),
+                    'image_url'        => wp_get_attachment_image_url( $product->get_image_id(), 'large' ) ?: wc_placeholder_img_src(),
+                    'thumb_url'        => wp_get_attachment_image_url( $product->get_image_id(), 'thumbnail' ) ?: wc_placeholder_img_src(),
+                    'specs'            => is_array( $specs_meta ) ? $specs_meta : array(),
+                    'salient_features' => is_array( $salient_meta ) ? $salient_meta : array(),
+                    'beverage_menu'    => $bev_array,
+                    'menu_image_url'   => get_post_meta( $p_id, '_menu_image_url', true ),
+                    'brochure_url'     => get_post_meta( $p_id, '_brochure_url', true ),
+                    'is_featured'      => $product->is_featured(),
+                    'excerpt'          => wp_strip_all_tags( $product->get_short_description() ),
                 );
             }
             wp_reset_postdata();
         }
         $total_models = count( $all_products );
+        $is_coffee_family = ( ( $term && in_array( $term->slug, array( 'coffee-vending-machines', 'commercial-coffee-vending-machines', 'vending-machines' ), true ) ) || ( ! empty( $all_products ) && strpos( $all_products[0]['sku'], 'NESTLE' ) !== false ) );
         ?>
 
         <!-- 1. Architectural Solution Hero -->
@@ -154,60 +156,44 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         <?php echo esc_html( $category_name ); ?>
                     </h1>
                     <p class="text-sm sm:text-base md:text-lg text-zinc-300 leading-relaxed font-medium mb-6 sm:mb-8 max-w-3xl">
-                        <?php
-                        if ( $category_desc ) {
-                            echo wp_kses_post( $category_desc );
-                        } else {
-                            echo "Complete commercial brewing &amp; beverage automation fleet engineered for high-volume corporate and institutional campuses. Review technical throughput, compare engineering specifications, and generate consolidated multi-model Request for Quotations (RFQ) with verified GST input credit and factory warranty.";
-                        }
-                        ?>
+                        <?php echo $category_desc ? wp_kses_post( $category_desc ) : "Complete commercial brewing &amp; beverage automation fleet engineered for continuous multi-shift corporate and institutional operation. Review engineering throughput, compare specifications, and generate consolidated multi-model Request for Quotations (RFQ) with verified GST input credit."; ?>
                     </p>
 
                     <!-- Trust Pillars -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-white/10 mb-6 sm:mb-8">
                         <div class="bg-zinc-900/60 p-3 border border-white/10">
-                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-base">verified</span> Direct OEM Supply
-                            </div>
+                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5"><span class="material-symbols-outlined text-base">verified</span> Direct OEM Supply</div>
                             <div class="text-zinc-400 text-[10px] sm:text-xs font-bold uppercase mt-1">Tiered Volume Pricing</div>
                         </div>
                         <div class="bg-zinc-900/60 p-3 border border-white/10">
-                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-base">local_shipping</span> Pan-India Logistics
-                            </div>
+                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5"><span class="material-symbols-outlined text-base">local_shipping</span> Pan-India Logistics</div>
                             <div class="text-zinc-400 text-[10px] sm:text-xs font-bold uppercase mt-1">Insured Dock Delivery</div>
                         </div>
                         <div class="bg-zinc-900/60 p-3 border border-white/10">
-                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-base">engineering</span> Factory QA Certified
-                            </div>
+                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5"><span class="material-symbols-outlined text-base">engineering</span> Factory QA Certified</div>
                             <div class="text-zinc-400 text-[10px] sm:text-xs font-bold uppercase mt-1">100% Pre-Dispatch Inspected</div>
                         </div>
                         <div class="bg-zinc-900/60 p-3 border border-white/10">
-                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-base">receipt_long</span> Corporate GST Invoicing
-                            </div>
+                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5"><span class="material-symbols-outlined text-base">receipt_long</span> Corporate GST Invoicing</div>
                             <div class="text-zinc-400 text-[10px] sm:text-xs font-bold uppercase mt-1">Verified Input Tax Credit</div>
                         </div>
                     </div>
 
-                    <!-- Dual Action CTAs (Uniform 52px Height, Fully Adaptive Mobile & Desktop) -->
+                    <!-- Dual Action CTAs -->
                     <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
                         <button class="h-[52px] w-full sm:w-auto bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black px-6 sm:px-7 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all js-open-quote-modal" 
                                 data-product="<?php echo esc_attr( $category_name ); ?>" 
                                 data-sku="SERIES-ALL" 
                                 data-custom-message="<?php echo esc_attr( "Bulk Price Inquiry for {$category_name} Series:\nPlease provide complete price schedule, MOQ tiers, and technical specification submittals for our facility." ); ?>"
-                                title="Request comprehensive price catalogue and volume tiers for the entire series">
+                                title="Request comprehensive price catalogue">
                             <span class="material-symbols-outlined text-lg">request_quote</span>
                             <span>Request Category Price List</span>
                         </button>
-                        <a href="tel:+919823012724" class="h-[52px] w-full sm:w-auto bg-white hover:bg-zinc-100 active:scale-95 text-black px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all"
-                           title="Speak directly with an enterprise equipment specialist">
+                        <a href="tel:+919823012724" class="h-[52px] w-full sm:w-auto bg-white hover:bg-zinc-100 active:scale-95 text-black px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all">
                             <span class="material-symbols-outlined text-lg">call</span>
                             <span>Call Technical Sales: +91 98230 12724</span>
                         </a>
-                        <a href="#spec-matrix" class="h-[52px] w-full sm:w-auto border-2 border-white/40 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 bg-black/30 backdrop-blur-sm transition-all"
-                           title="Scroll down to the 48-row interactive specification comparison matrix">
+                        <a href="#spec-matrix" class="h-[52px] w-full sm:w-auto border-2 border-white/40 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 bg-black/30 backdrop-blur-sm transition-all">
                             <span>Compare Technical Specs (<?php echo esc_html( $total_models ); ?>)</span>
                             <span class="material-symbols-outlined text-lg">arrow_downward</span>
                         </a>
@@ -216,7 +202,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             </div>
         </section>
 
-        <!-- 2. Sticky Subnav Bar (Adaptive & Clarified) -->
+        <!-- 2. Sticky Subnav Bar -->
         <div class="sticky top-20 z-40 bg-[#0A0A0A]/95 backdrop-blur-md border-b-2 border-[#1A56DB] px-4 sm:px-6 md:px-12 py-3 shadow-xl">
             <div class="container mx-auto flex items-center justify-between gap-3">
                 <div class="flex items-center gap-4 sm:gap-6 overflow-x-auto no-scrollbar text-xs font-bold uppercase tracking-wider py-1">
@@ -234,14 +220,13 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     <span id="sticky-counter" class="text-[#FBBF24] font-black text-[11px] uppercase tracking-wider hidden sm:inline mr-1">
                         <span id="sticky-counter-num">0</span> Models Selected
                     </span>
-                    <a href="tel:+919823012724" class="h-[38px] border-2 border-white/30 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white text-[11px] font-black uppercase px-3 flex items-center justify-center gap-1.5 transition-all" title="Call technical sales directly">
+                    <a href="tel:+919823012724" class="h-[38px] border-2 border-white/30 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white text-[11px] font-black uppercase px-3 flex items-center justify-center gap-1.5 transition-all">
                         <span class="material-symbols-outlined text-sm">call</span>
                         <span class="hidden md:inline">Call Sales</span>
                     </a>
                     <button class="h-[38px] bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black text-[11px] font-black uppercase px-3.5 flex items-center justify-center gap-1.5 transition-all shadow-md js-open-quote-modal" 
                             data-product="<?php echo esc_attr( $category_name ); ?>" 
-                            data-sku="SERIES-QUOTE"
-                            title="Request a custom bulk quotation for this series">
+                            data-sku="SERIES-QUOTE">
                         <span class="material-symbols-outlined text-sm">request_quote</span>
                         <span>Series RFQ</span>
                     </button>
@@ -250,7 +235,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         </div>
 
         <main class="container mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16">
-            <!-- 3. Flagship Alternating Split Blocks (Chai Point Style) -->
+            <!-- 3. Flagship Alternating Split Blocks -->
             <section id="flagship-showcase" class="mb-20 sm:mb-24">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12 border-b-4 border-[#1A56DB] pb-4">
                     <div>
@@ -263,7 +248,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         </h2>
                     </div>
                     <p class="text-zinc-600 font-medium text-xs sm:text-sm max-w-md">
-                        Review high-capacity models with detailed engineering specs. Select multiple items using checkboxes to request a consolidated institutional quotation.
+                        Review high-capacity commercial models with hardware cutouts and touchscreen menu interfaces. Select multiple items to build an institutional consolidated quote.
                     </p>
                 </div>
 
@@ -274,51 +259,163 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         for ( $idx = 0; $idx < $display_limit; $idx++ ) :
                             $item = $all_products[ $idx ];
                             $is_even = ( $idx % 2 === 0 );
+                            $card_uid = 'card-' . $item['id'] . '-' . $idx;
+                            $has_menu_img = ! empty( $item['menu_image_url'] );
                         ?>
                         <article class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center bg-white border-2 border-zinc-200 p-5 sm:p-8 md:p-10 relative transition-all duration-300 hover:border-black" style="box-shadow: 6px 6px 0px 0px #1A56DB;">
                             
-                            <!-- Visual Column (Adaptive Aspect Ratio & Lazy Loaded) -->
+                            <!-- Visual Column: Dual-Tab Switcher (lg:col-span-5) -->
                             <div class="lg:col-span-5 <?php echo $is_even ? 'lg:order-1' : 'lg:order-2'; ?> flex flex-col justify-center">
-                                <div class="relative aspect-[4/3] sm:aspect-square bg-zinc-50 border border-zinc-200 flex items-center justify-center p-6 sm:p-8 overflow-hidden group">
-                                    <span class="absolute top-3 left-3 bg-[#FBBF24] text-black font-black text-[10px] uppercase px-2.5 py-1 tracking-wider z-10">
-                                        MODEL: <?php echo esc_html( $item['sku'] ); ?>
-                                    </span>
+                                <div class="relative bg-zinc-50 border border-zinc-200 p-4 sm:p-6 overflow-hidden group">
+                                    <div class="flex items-center gap-1.5 mb-3 z-20 relative">
+                                        <button type="button" 
+                                                class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95"
+                                                data-card="<?php echo esc_attr( $card_uid ); ?>"
+                                                data-tab-target="hardware">
+                                            <span>☕ Machine Hardware</span>
+                                        </button>
+                                        <?php if ( $has_menu_img ) : ?>
+                                        <button type="button" 
+                                                class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95"
+                                                data-card="<?php echo esc_attr( $card_uid ); ?>"
+                                                data-tab-target="menu">
+                                            <span>📱 Touchscreen Menu UI</span>
+                                        </button>
+                                        <?php endif; ?>
+                                    </div>
 
-                                    <!-- Quick Batch Select Checkbox with High-Clarity Label & Touch Hit-Area -->
-                                    <label class="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-[#0A0A0A] text-white text-[10px] font-black uppercase px-2.5 py-1.5 cursor-pointer border border-zinc-700 hover:border-[#FBBF24] transition-all"
-                                           title="Check this box to include this model in your combined bulk RFQ">
-                                        <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" 
-                                               data-id="<?php echo esc_attr( $item['id'] ); ?>" 
-                                               data-title="<?php echo esc_attr( $item['title'] ); ?>" 
-                                               data-sku="<?php echo esc_attr( $item['sku'] ); ?>">
-                                        <span class="tracking-wider">Add to Batch RFQ</span>
-                                    </label>
+                                    <!-- Tab 1: Machine Hardware Cutout -->
+                                    <div class="js-tab-pane relative aspect-[4/3] sm:aspect-square flex items-center justify-center overflow-hidden"
+                                         data-card="<?php echo esc_attr( $card_uid ); ?>"
+                                         data-tab-content="hardware">
+                                        <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] uppercase px-2 py-0.5 tracking-wider z-10">
+                                            MODEL: <?php echo esc_html( $item['sku'] ); ?>
+                                        </span>
 
-                                    <img src="<?php echo esc_url( $item['image_url'] ); ?>" 
-                                         alt="<?php echo esc_attr( $item['title'] ); ?>" 
-                                         class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
-                                         loading="lazy">
+                                        <label class="absolute top-0 right-0 z-10 flex items-center gap-1.5 bg-[#0A0A0A] text-white text-[10px] font-black uppercase px-2.5 py-1.5 cursor-pointer border border-zinc-700 hover:border-[#FBBF24] transition-all"
+                                               title="Check to include model in consolidated batch RFQ">
+                                            <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" 
+                                                   data-id="<?php echo esc_attr( $item['id'] ); ?>" 
+                                                   data-title="<?php echo esc_attr( $item['title'] ); ?>" 
+                                                   data-sku="<?php echo esc_attr( $item['sku'] ); ?>">
+                                            <span class="tracking-wider">Add to Batch RFQ</span>
+                                        </label>
+
+                                        <img src="<?php echo esc_url( $item['image_url'] ); ?>" 
+                                             alt="<?php echo esc_attr( $item['title'] ); ?>" 
+                                             class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+                                             loading="lazy">
+                                    </div>
+
+                                    <!-- Tab 2: Touchscreen Menu UI Screenshot -->
+                                    <?php if ( $has_menu_img ) : ?>
+                                    <div class="js-tab-pane hidden relative aspect-[4/3] sm:aspect-square flex items-center justify-center bg-zinc-900/5 p-2 overflow-hidden"
+                                         data-card="<?php echo esc_attr( $card_uid ); ?>"
+                                         data-tab-content="menu">
+                                        <span class="absolute top-0 left-0 bg-[#1A56DB] text-white font-black text-[10px] uppercase px-2 py-0.5 tracking-wider z-10">
+                                            UI INTERFACE PREVIEW
+                                        </span>
+                                        <img src="<?php echo esc_url( $item['menu_image_url'] ); ?>" 
+                                             alt="<?php echo esc_attr( $item['title'] . ' Menu Interface' ); ?>" 
+                                             class="w-full h-full object-contain cursor-pointer hover:scale-105 transition-transform duration-300 js-open-zoom-modal"
+                                             data-zoom-src="<?php echo esc_url( $item['menu_image_url'] ); ?>"
+                                             data-zoom-title="<?php echo esc_attr( $item['title'] . ' — Touchscreen Menu UI' ); ?>"
+                                             loading="lazy">
+                                        <button type="button" 
+                                                class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white text-[10px] font-black uppercase px-3 py-1.5 tracking-wider border border-white/20 shadow-lg flex items-center gap-1.5 js-open-zoom-modal transition-colors"
+                                                data-zoom-src="<?php echo esc_url( $item['menu_image_url'] ); ?>"
+                                                data-zoom-title="<?php echo esc_attr( $item['title'] . ' — Touchscreen Menu UI' ); ?>">
+                                            <span class="material-symbols-outlined text-xs">zoom_in</span>
+                                            <span>🔍 Tap to Zoom Menu</span>
+                                        </button>
+                                    </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
-                            <!-- Specification & Action Column -->
+                            <!-- Specification & Action Column (lg:col-span-7) -->
                             <div class="lg:col-span-7 <?php echo $is_even ? 'lg:order-2' : 'lg:order-1'; ?> flex flex-col justify-between">
                                 <div>
                                     <div class="flex flex-wrap items-center gap-2 mb-2">
                                         <span class="bg-[#1A56DB] text-white font-black text-[9px] uppercase px-2 py-0.5 tracking-widest">Commercial Heavy Duty</span>
-                                        <span class="text-zinc-500 text-[11px] font-bold uppercase tracking-wider">Institutional &amp; Fleet Pricing Only</span>
+                                        <span class="text-zinc-500 text-[11px] font-bold uppercase tracking-wider">SKU: <?php echo esc_html( $item['sku'] ); ?></span>
                                     </div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold uppercase text-[#0A0A0A] tracking-tight mb-2">
                                         <?php echo esc_html( $item['title'] ); ?>
                                     </h3>
+
+                                    <!-- Visual Beverage Chip Palette Directly Beneath Title -->
+                                    <?php if ( ! empty( $item['beverage_menu'] ) ) : ?>
+                                    <div class="mb-4">
+                                        <div class="text-[10px] font-black uppercase text-zinc-500 tracking-wider mb-1.5 flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 bg-[#1A56DB] inline-block"></span>
+                                            <span>Beverage Menu Capability (<?php echo count( $item['beverage_menu'] ); ?> Selections):</span>
+                                        </div>
+                                        <div class="flex flex-wrap gap-1.5">
+                                            <?php foreach ( $item['beverage_menu'] as $bev ) : 
+                                                $bev_icon = snap_b2b_beverage_icon( $bev );
+                                            ?>
+                                                <span class="inline-flex items-center gap-1 bg-zinc-100 border border-zinc-300 text-[#0A0A0A] text-[10px] font-bold px-2 py-0.5 uppercase tracking-wide hover:border-black transition-colors">
+                                                    <span><?php echo $bev_icon; ?></span>
+                                                    <span><?php echo esc_html( $bev ); ?></span>
+                                                </span>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
+
                                     <?php if ( ! empty( $item['excerpt'] ) ) : ?>
-                                        <p class="text-zinc-600 text-xs sm:text-sm font-medium mb-5 leading-relaxed">
+                                        <p class="text-zinc-600 text-xs sm:text-sm font-medium mb-4 leading-relaxed">
                                             <?php echo esc_html( $item['excerpt'] ); ?>
                                         </p>
                                     <?php endif; ?>
 
-                                    <!-- Technical Specs Table with Clear Parameter Headers -->
-                                    <div class="border border-zinc-200 mb-6 overflow-hidden">
+                                    <!-- Salient Features: 4-Bullet Grid + Expandable Accordion -->
+                                    <div class="mb-5 bg-zinc-50 border border-zinc-200 p-3.5 sm:p-4">
+                                        <div class="text-[10px] font-black uppercase text-zinc-500 tracking-wider mb-2 flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 bg-[#FBBF24] inline-block"></span>
+                                            <span>Salient Operational Features:</span>
+                                        </div>
+                                        
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#0A0A0A]">
+                                            <?php 
+                                            $features = ! empty( $item['salient_features'] ) ? $item['salient_features'] : array(
+                                                'Heavy-Duty Continuous 24/7 Commercial Duty Cycle',
+                                                'Full GST Input Tax Credit Invoicing (HSN 8476)',
+                                                'Factory Certified Quality Assurance & Inspection',
+                                                'Pan-India Maintenance & Direct OEM Spare Parts'
+                                            );
+                                            $top_features = array_slice( $features, 0, 4 );
+                                            $more_features = array_slice( $features, 4 );
+                                            
+                                            foreach ( $top_features as $feat ) : ?>
+                                                <div class="flex items-start gap-1.5">
+                                                    <span class="material-symbols-outlined text-sm text-[#1A56DB] shrink-0 font-bold mt-0.5">check_circle</span>
+                                                    <span class="leading-snug"><?php echo esc_html( $feat ); ?></span>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+
+                                        <?php if ( ! empty( $more_features ) ) : ?>
+                                        <div id="features-drawer-<?php echo esc_attr( $card_uid ); ?>" class="hidden mt-3 pt-3 border-t border-zinc-200 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-zinc-700">
+                                            <?php foreach ( $more_features as $m_feat ) : ?>
+                                                <div class="flex items-start gap-1.5">
+                                                    <span class="material-symbols-outlined text-sm text-[#1A56DB] shrink-0 font-bold mt-0.5">check_circle</span>
+                                                    <span class="leading-snug"><?php echo esc_html( $m_feat ); ?></span>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+
+                                        <button type="button" 
+                                                class="text-[11px] font-black uppercase text-[#1A56DB] hover:text-[#0A0A0A] flex items-center gap-1 mt-2.5 js-toggle-features transition-colors"
+                                                data-target="features-drawer-<?php echo esc_attr( $card_uid ); ?>">
+                                            <span>+ View Full Operational Highlights</span>
+                                        </button>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <!-- 5-Row Quick-Specs Table with Clear Headers -->
+                                    <div class="border border-zinc-200 mb-5 overflow-hidden">
                                         <table class="w-full text-left text-xs">
                                             <thead class="bg-zinc-100 text-[10px] font-black uppercase text-zinc-600 border-b border-zinc-200">
                                                 <tr>
@@ -328,26 +425,29 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                             </thead>
                                             <tbody class="divide-y divide-zinc-200">
                                                 <?php
-                                                if ( ! empty( $item['specs'] ) ) {
-                                                    $spec_rows = array_slice( $item['specs'], 0, 5 );
-                                                    foreach ( $spec_rows as $spec ) {
-                                                        echo '<tr class="odd:bg-zinc-50 even:bg-white">';
-                                                        echo '<td class="py-2.5 px-3 sm:px-3.5 font-bold uppercase text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200">' . esc_html( $spec['name'] ) . '</td>';
-                                                        echo '<td class="py-2.5 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]">' . esc_html( $spec['value'] ) . '</td>';
-                                                        echo '</tr>';
-                                                    }
-                                                } else {
-                                                    echo '<tr class="bg-zinc-50"><td class="py-2.5 px-3 sm:px-3.5 font-bold text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200">DUTY CYCLE</td><td class="py-2.5 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]">Continuous 24/7 Heavy Duty</td></tr>';
-                                                    echo '<tr class="bg-white"><td class="py-2.5 px-3 sm:px-3.5 font-bold text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200">WARRANTY &amp; AMC</td><td class="py-2.5 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]">Comprehensive Pan-India AMC Available</td></tr>';
+                                                $quick_specs = ! empty( $item['specs'] ) ? array_slice( $item['specs'], 0, 5 ) : array();
+                                                if ( empty( $quick_specs ) ) {
+                                                    $quick_specs = array(
+                                                        array( 'name' => 'Duty Cycle', 'value' => 'Continuous 24/7 Heavy Duty' ),
+                                                        array( 'name' => 'Power Supply', 'value' => '230V AC / 50 Hz Standard' ),
+                                                        array( 'name' => 'Compliance', 'value' => 'FSSAI & CE Industrial Standard' ),
+                                                        array( 'name' => 'Invoicing', 'value' => '100% GST Input Credit Verified' ),
+                                                        array( 'name' => 'Warranty & AMC', 'value' => 'Comprehensive Pan-India AMC Available' ),
+                                                    );
                                                 }
-                                                ?>
+                                                foreach ( $quick_specs as $spec ) : ?>
+                                                    <tr class="odd:bg-zinc-50 even:bg-white">
+                                                        <td class="py-2 px-3 sm:px-3.5 font-bold uppercase text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200"><?php echo esc_html( $spec['name'] ); ?></td>
+                                                        <td class="py-2 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]"><?php echo esc_html( $spec['value'] ); ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
 
-                                <!-- Action Button Bar (Equal Width & Equal 48px Height Grid Across All Viewports) -->
-                                <div class="grid grid-cols-2 <?php echo ! empty( $item['brochure_url'] ) ? 'sm:grid-cols-4' : 'sm:grid-cols-3'; ?> gap-2 sm:gap-2.5 pt-2 w-full">
+                                <!-- Action Button Bar: Normalized 4-Button Grid (Uniform 48px Height) -->
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 pt-2 w-full">
                                     <button class="h-[48px] w-full bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black font-black uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-md transition-all js-open-quote-modal"
                                             data-product="<?php echo esc_attr( $item['title'] ); ?>" 
                                             data-sku="<?php echo esc_attr( $item['sku'] ); ?>"
@@ -357,8 +457,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     </button>
 
                                     <a href="tel:+919823012724" 
-                                       class="h-[48px] w-full bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"
-                                       title="Call technical sales directly: +91 98230 12724">
+                                       class="h-[48px] w-full bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md">
                                         <span class="material-symbols-outlined text-base">call</span>
                                         <span>Call</span>
                                     </a>
@@ -366,19 +465,25 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     <a href="https://wa.me/919823012724?text=<?php echo rawurlencode( "Hi Snap Marketing, I would like to inquire about {$item['title']} (Model: {$item['sku']})." ); ?>" 
                                        target="_blank" 
                                        rel="noopener noreferrer" 
-                                       class="h-[48px] w-full bg-[#25D366] hover:bg-[#128C7E] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"
-                                       title="Inquire via WhatsApp with an equipment specialist">
+                                       class="h-[48px] w-full bg-[#25D366] hover:bg-[#128C7E] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md">
                                         <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                                         <span>WhatsApp</span>
                                     </a>
 
                                     <?php if ( ! empty( $item['brochure_url'] ) ) : ?>
                                         <a href="<?php echo esc_url( $item['brochure_url'] ); ?>" target="_blank" rel="noopener noreferrer" 
-                                           class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"
-                                           title="Download the full engineering datasheet in PDF format">
+                                           class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md">
                                             <span class="material-symbols-outlined text-base">download</span>
                                             <span>Brochure</span>
                                         </a>
+                                    <?php else : ?>
+                                        <button class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md js-open-quote-modal"
+                                                data-product="<?php echo esc_attr( $item['title'] ); ?>"
+                                                data-sku="<?php echo esc_attr( $item['sku'] ); ?>"
+                                                data-custom-message="<?php echo esc_attr( "Requesting Engineering Datasheet & Price Schedule for {$item['title']} (Model: {$item['sku']})" ); ?>">
+                                            <span class="material-symbols-outlined text-base">description</span>
+                                            <span>Datasheet</span>
+                                        </button>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -388,7 +493,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 <?php endif; ?>
             </section>
 
-            <!-- 4. Comprehensive Technical Comparison Matrix (All SKUs) -->
+            <!-- 4. Exhaustive Technical Comparison Matrix (48-Row Across 7 Categories) -->
             <section id="spec-matrix" class="mb-20 sm:mb-24 pt-6 sm:pt-8">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 border-b-4 border-[#1A56DB] pb-4">
                     <div>
@@ -406,83 +511,221 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 </div>
 
                 <!-- Adaptive Mobile Swipe Banner -->
-                <div class="lg:hidden flex items-center justify-between text-[11px] font-bold text-zinc-700 bg-yellow-50/90 px-3.5 py-2.5 border-2 border-b-0 border-[#0A0A0A]">
+                <div class="lg:hidden flex items-center justify-between text-[11px] font-bold text-zinc-800 bg-yellow-50 px-3.5 py-2.5 border-2 border-b-0 border-[#0A0A0A]">
                     <div class="flex items-center gap-1.5">
                         <span class="material-symbols-outlined text-sm text-[#1A56DB]">swipe</span>
-                        <span>Swipe horizontally to compare full specifications</span>
+                        <span>Swipe horizontally to compare 48 specifications across 7 categories</span>
                     </div>
-                    <span class="text-[10px] uppercase font-black text-[#1A56DB] shrink-0">7 Columns &rarr;</span>
+                    <span class="text-[10px] uppercase font-black text-[#1A56DB] shrink-0">&larr; Scroll &rarr;</span>
                 </div>
 
                 <div class="overflow-x-auto border-2 border-[#0A0A0A] bg-white shadow-2xl">
-                    <table class="w-full text-left text-xs border-collapse min-w-[700px]">
-                        <thead>
-                            <tr class="bg-[#1A56DB] text-white font-black uppercase tracking-wider text-[11px]">
-                                <th class="p-3 text-center w-14 border-r border-blue-600" title="Check to include model in consolidated RFQ">RFQ [✓]</th>
-                                <th class="p-3 border-r border-blue-600">Model Name &amp; SKU</th>
-                                <th class="p-3 border-r border-blue-600">Throughput / Staff Capacity</th>
-                                <th class="p-3 border-r border-blue-600">Brewing &amp; Duty Cycle</th>
-                                <th class="p-3 border-r border-blue-600">Target Deployment</th>
-                                <th class="p-3 border-r border-blue-600">Commercial Terms</th>
-                                <th class="p-3 text-center w-36">Quick Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-zinc-200">
-                            <?php foreach ( $all_products as $row ) : 
-                                $spec1 = ! empty( $row['specs'][0] ) ? $row['specs'][0]['value'] : 'Industrial Grade';
-                                $spec2 = ! empty( $row['specs'][1] ) ? $row['specs'][1]['value'] : 'Standard 230V / 50Hz';
-                                $spec3 = ! empty( $row['specs'][2] ) ? $row['specs'][2]['value'] : 'Commercial Use';
-                            ?>
-                            <tr class="odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors">
-                                <td class="p-3 text-center border-r border-zinc-200">
-                                    <label class="cursor-pointer inline-flex items-center justify-center p-1" title="Select for combined batch quote">
-                                        <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" 
-                                               data-id="<?php echo esc_attr( $row['id'] ); ?>" 
-                                               data-title="<?php echo esc_attr( $row['title'] ); ?>" 
-                                               data-sku="<?php echo esc_attr( $row['sku'] ); ?>">
-                                    </label>
-                                </td>
-                                <td class="p-3 border-r border-zinc-200">
-                                    <div class="flex items-center gap-3">
-                                        <img src="<?php echo esc_url( $row['thumb_url'] ); ?>" 
-                                             alt="<?php echo esc_attr( $row['title'] ); ?>" 
-                                             class="w-10 h-10 object-contain bg-white border border-zinc-200 p-0.5 shrink-0"
-                                             loading="lazy">
-                                        <div>
-                                            <div class="font-black text-[#0A0A0A] uppercase leading-tight"><?php echo esc_html( $row['title'] ); ?></div>
-                                            <span class="inline-block text-[10px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.5 mt-0.5">
-                                                SKU: <?php echo esc_html( $row['sku'] ); ?>
-                                            </span>
+                    <?php if ( $is_coffee_family ) : 
+                        $matrix_categories = array(
+                            '1. Core Brewing & Thermal Architecture' => array(
+                                'Technology Type'         => array( 'NESTLE-PREMIO-PRO' => 'Super-Automatic Bean-to-Cup', 'NESTLE-AMIGO-20' => 'Compact Bean-to-Cup', 'NESTLE-DUO-GUSTO' => 'Dual Hot & Cold Hybrid', 'NESTLE-SOLUTION-20' => 'High-Throughput Soluble', 'NESTLE-SPECTRA-30' => 'Compact 3-in-1 Premix', 'NESTLE-FRIO-COLD' => 'Flash-Chilled Cold Station' ),
+                                'Daily Duty Cycle'        => array( 'NESTLE-PREMIO-PRO' => 'Up to 200 Cups / Day', 'NESTLE-AMIGO-20' => 'Up to 200 Cups / Day', 'NESTLE-DUO-GUSTO' => '300+ Cups / Day', 'NESTLE-SOLUTION-20' => '200+ Cups / Day (Burst 6/min)', 'NESTLE-SPECTRA-30' => '100–150 Cups / Day', 'NESTLE-FRIO-COLD' => 'Continuous Chilled Service' ),
+                                'Boiler / Heating System' => array( 'NESTLE-PREMIO-PRO' => 'Dual Thermoblock Architecture', 'NESTLE-AMIGO-20' => 'Dedicated High-Recovery Boiler', 'NESTLE-DUO-GUSTO' => 'Dual Temp (88°C Hot + 4°C Cold)', 'NESTLE-SOLUTION-20' => 'Insulated 3000W Heavy-Duty Boiler', 'NESTLE-SPECTRA-30' => '1750W Rapid Recovery Tank', 'NESTLE-FRIO-COLD' => '1000W R134a Chiller Circuit' ),
+                                'Grinder Mechanism'       => array( 'NESTLE-PREMIO-PRO' => '15-Bar Conical Steel Burr', 'NESTLE-AMIGO-20' => 'Conical Steel Burr Grinder', 'NESTLE-DUO-GUSTO' => 'N/A (Multi-Canister Soluble)', 'NESTLE-SOLUTION-20' => 'N/A (Soluble Instant)', 'NESTLE-SPECTRA-30' => 'N/A (Dry Premix)', 'NESTLE-FRIO-COLD' => 'N/A (Cold Emulsion Impeller)' ),
+                                'Extraction Pressure'     => array( 'NESTLE-PREMIO-PRO' => '15 Bar High Pressure', 'NESTLE-AMIGO-20' => '15 Bar High Pressure', 'NESTLE-DUO-GUSTO' => 'Atmospheric Fast Flow', 'NESTLE-SOLUTION-20' => 'Atmospheric Fast Flow', 'NESTLE-SPECTRA-30' => 'Atmospheric Gravity Flow', 'NESTLE-FRIO-COLD' => 'High-Shear Emulsion Flow' ),
+                                'Dispense Velocity'       => array( 'NESTLE-PREMIO-PRO' => '35–45 sec / cup', 'NESTLE-AMIGO-20' => '35–45 sec / cup', 'NESTLE-DUO-GUSTO' => '15–20 sec / cup', 'NESTLE-SOLUTION-20' => '10–15 sec / cup (Rapid Burst)', 'NESTLE-SPECTRA-30' => '15–20 sec / cup', 'NESTLE-FRIO-COLD' => '12–18 sec / cup' ),
+                                'Target Deployment'       => array( 'NESTLE-PREMIO-PRO' => 'Executive Suites & Boardrooms', 'NESTLE-AMIGO-20' => 'Mid-Size Corporate Offices', 'NESTLE-DUO-GUSTO' => 'Large Cafeterias & Hubs', 'NESTLE-SOLUTION-20' => 'High-Traffic Floor Pantries', 'NESTLE-SPECTRA-30' => 'Boutique Offices & Receptions', 'NESTLE-FRIO-COLD' => 'Summer Cafeterias & Lounges' ),
+                            ),
+                            '2. Beverage Capabilities & Menu Cross-Check' => array(
+                                'Espresso / Double Espresso'     => array( 'NESTLE-PREMIO-PRO' => '✓ Bean-to-Cup', 'NESTLE-AMIGO-20' => '✓ Bean-to-Cup', 'NESTLE-DUO-GUSTO' => '✗ (Hot Coffee Blend)', 'NESTLE-SOLUTION-20' => '✗ (Soluble Classic)', 'NESTLE-SPECTRA-30' => '✗ (Premix Coffee)', 'NESTLE-FRIO-COLD' => '✗' ),
+                                'Americano / Long Black'         => array( 'NESTLE-PREMIO-PRO' => '✓ Standard', 'NESTLE-AMIGO-20' => '✓ Standard', 'NESTLE-DUO-GUSTO' => '✓ Hot Blend', 'NESTLE-SOLUTION-20' => '✓ Nescafé Classic', 'NESTLE-SPECTRA-30' => '✗', 'NESTLE-FRIO-COLD' => '✗' ),
+                                'Cappuccino & Café Latte'        => array( 'NESTLE-PREMIO-PRO' => '✓ Fresh Real Milk', 'NESTLE-AMIGO-20' => '✓ Fresh Milk Cooler', 'NESTLE-DUO-GUSTO' => '✓ Hot Cappuccino & Latte', 'NESTLE-SOLUTION-20' => '✓ Cappuccino', 'NESTLE-SPECTRA-30' => '✗ (Premix Coffee)', 'NESTLE-FRIO-COLD' => '✗' ),
+                                'Hot Chocolate & Malt'           => array( 'NESTLE-PREMIO-PRO' => '✓ Chococcino', 'NESTLE-AMIGO-20' => '✓ Hot Choc & Milo Malt', 'NESTLE-DUO-GUSTO' => '✓ Hot Chocolate', 'NESTLE-SOLUTION-20' => '✓ Hot Chocolate', 'NESTLE-SPECTRA-30' => '✓ Premix Chocolate', 'NESTLE-FRIO-COLD' => '✗' ),
+                                'Iced Café Frappe & Cold Coffee' => array( 'NESTLE-PREMIO-PRO' => '✗', 'NESTLE-AMIGO-20' => '✗', 'NESTLE-DUO-GUSTO' => '✓ Iced Frappe & Cold Coffee', 'NESTLE-SOLUTION-20' => '✗', 'NESTLE-SPECTRA-30' => '✗', 'NESTLE-FRIO-COLD' => '✓ Café Frappe & Mocha' ),
+                                'Nestea Iced Lemon / Peach'      => array( 'NESTLE-PREMIO-PRO' => '✗', 'NESTLE-AMIGO-20' => '✗', 'NESTLE-DUO-GUSTO' => '✓ Nestea Iced Lemon', 'NESTLE-SOLUTION-20' => '✗', 'NESTLE-SPECTRA-30' => '✗', 'NESTLE-FRIO-COLD' => '✓ Iced Lemon & Peach' ),
+                                'Cardamom / Ginger / Tapri Tea'  => array( 'NESTLE-PREMIO-PRO' => '✗', 'NESTLE-AMIGO-20' => '✓ Cardamom Tea', 'NESTLE-DUO-GUSTO' => '✓ Tapri Chai', 'NESTLE-SOLUTION-20' => '✓ Cardamom & Ginger', 'NESTLE-SPECTRA-30' => '✓ Premix Cardamom', 'NESTLE-FRIO-COLD' => '✗' ),
+                                'Dedicated Hot Water Bypass'     => array( 'NESTLE-PREMIO-PRO' => '✓ Dedicated Spout', 'NESTLE-AMIGO-20' => '✓ Dedicated Spout', 'NESTLE-DUO-GUSTO' => '✓ Integrated', 'NESTLE-SOLUTION-20' => '✓ High-Speed Hot Water', 'NESTLE-SPECTRA-30' => '✓ Manual Hot Water', 'NESTLE-FRIO-COLD' => '✗ (Cold System)' ),
+                            ),
+                            '3. Canister & Capacity Engineering' => array(
+                                'Bean Hopper Capacity'      => array( 'NESTLE-PREMIO-PRO' => '1.5 kg Bean Hopper', 'NESTLE-AMIGO-20' => '1.5 kg Bean Hopper', 'NESTLE-DUO-GUSTO' => 'N/A', 'NESTLE-SOLUTION-20' => 'N/A', 'NESTLE-SPECTRA-30' => 'N/A', 'NESTLE-FRIO-COLD' => 'N/A' ),
+                                'Powder Canister Payload'   => array( 'NESTLE-PREMIO-PRO' => '4 Canisters (Total 3 kg)', 'NESTLE-AMIGO-20' => '3 Canisters (Total 2.25 kg)', 'NESTLE-DUO-GUSTO' => '6 Canisters (Multi-Blend)', 'NESTLE-SOLUTION-20' => '4 Canisters (Total 4 kg)', 'NESTLE-SPECTRA-30' => '3 Canisters (Total 3 kg)', 'NESTLE-FRIO-COLD' => '3 Canisters (Total 3 kg)' ),
+                                'Fresh Milk Refrigerator'   => array( 'NESTLE-PREMIO-PRO' => 'External 4L Chilled Unit', 'NESTLE-AMIGO-20' => 'External Chilled Cooler', 'NESTLE-DUO-GUSTO' => 'Dual Liquid / Powder', 'NESTLE-SOLUTION-20' => 'Liquid Milk Capable', 'NESTLE-SPECTRA-30' => 'N/A (Dry Premix)', 'NESTLE-FRIO-COLD' => 'N/A' ),
+                                'Cold Chiller Tank'         => array( 'NESTLE-PREMIO-PRO' => 'N/A', 'NESTLE-AMIGO-20' => 'N/A', 'NESTLE-DUO-GUSTO' => 'Integrated Chiller Tank', 'NESTLE-SOLUTION-20' => 'N/A', 'NESTLE-SPECTRA-30' => 'N/A', 'NESTLE-FRIO-COLD' => '8L Continuous Chiller Tank' ),
+                                'Grounds Waste Container'   => array( 'NESTLE-PREMIO-PRO' => '40–50 Coffee Pucks', 'NESTLE-AMIGO-20' => '35-Puck Grounds Drawer', 'NESTLE-DUO-GUSTO' => 'Zero Solid Waste', 'NESTLE-SOLUTION-20' => 'Zero Solid Waste', 'NESTLE-SPECTRA-30' => 'Zero Solid Waste', 'NESTLE-FRIO-COLD' => 'Zero Solid Waste' ),
+                                'Drip Tray Volume & Sensor' => array( 'NESTLE-PREMIO-PRO' => '1,500 ml Float Sensor', 'NESTLE-AMIGO-20' => '900 ml Removable Basin', 'NESTLE-DUO-GUSTO' => '1,200 ml Stainless Grate', 'NESTLE-SOLUTION-20' => '1,200 ml Plumbed Capable', 'NESTLE-SPECTRA-30' => '800 ml Snap-Fit Tray', 'NESTLE-FRIO-COLD' => '1,500 ml High-Capacity' ),
+                            ),
+                            '4. Touchscreen UI, Payments & IoT' => array(
+                                'Display Interface'          => array( 'NESTLE-PREMIO-PRO' => '7-Inch Colour Touchscreen', 'NESTLE-AMIGO-20' => 'Proximity Touch Glass', 'NESTLE-DUO-GUSTO' => '10-Inch Interactive HD', 'NESTLE-SOLUTION-20' => '9-Inch IR Touch-Free Panel', 'NESTLE-SPECTRA-30' => 'Tactile Push + LCD', 'NESTLE-FRIO-COLD' => '9-Inch Touch Glass' ),
+                                'Touch-Free / Proximity'     => array( 'NESTLE-PREMIO-PRO' => 'Optional QR Scan', 'NESTLE-AMIGO-20' => 'Proximity Capacitive', 'NESTLE-DUO-GUSTO' => 'Dynamic QR Touchless', 'NESTLE-SOLUTION-20' => '✓ 100% IR Hover (2cm)', 'NESTLE-SPECTRA-30' => '✗ Push-Button', 'NESTLE-FRIO-COLD' => 'Proximity Touch' ),
+                                'Dynamic UPI / QR Payments'  => array( 'NESTLE-PREMIO-PRO' => '✓ BharatQR / UPI / Paytm', 'NESTLE-AMIGO-20' => 'Optional Payment Box', 'NESTLE-DUO-GUSTO' => '✓ Dynamic Screen QR', 'NESTLE-SOLUTION-20' => 'Optional External Reader', 'NESTLE-SPECTRA-30' => 'N/A (Free Vend)', 'NESTLE-FRIO-COLD' => 'Optional QR Interface' ),
+                                'RFID Employee Card Reader'  => array( 'NESTLE-PREMIO-PRO' => 'Supported (Mifare / NFC)', 'NESTLE-AMIGO-20' => 'Supported', 'NESTLE-DUO-GUSTO' => 'Built-In Reader', 'NESTLE-SOLUTION-20' => 'External Add-On', 'NESTLE-SPECTRA-30' => 'N/A', 'NESTLE-FRIO-COLD' => 'External Add-On' ),
+                                'IoT Cloud Telemetry'        => array( 'NESTLE-PREMIO-PRO' => 'Real-Time Level & Usage', 'NESTLE-AMIGO-20' => 'Cloud Telemetry Enabled', 'NESTLE-DUO-GUSTO' => 'Real-Time Telemetry & Ads', 'NESTLE-SOLUTION-20' => 'Usage Counter & Logs', 'NESTLE-SPECTRA-30' => 'Digital LCD Audit', 'NESTLE-FRIO-COLD' => 'Real-Time Diagnostics' ),
+                                'Video / Ad Display'         => array( 'NESTLE-PREMIO-PRO' => 'Standby Video', 'NESTLE-AMIGO-20' => 'N/A', 'NESTLE-DUO-GUSTO' => '10-Inch HD Video Ads', 'NESTLE-SOLUTION-20' => 'N/A', 'NESTLE-SPECTRA-30' => 'N/A', 'NESTLE-FRIO-COLD' => 'N/A' ),
+                                'Multilingual Guidance'      => array( 'NESTLE-PREMIO-PRO' => 'English + Hindi Audio/UI', 'NESTLE-AMIGO-20' => 'Visual Icon Guidance', 'NESTLE-DUO-GUSTO' => 'Audio-Visual Prompts', 'NESTLE-SOLUTION-20' => 'Status LED & Beeper', 'NESTLE-SPECTRA-30' => 'Dual-Line English LCD', 'NESTLE-FRIO-COLD' => 'Backlit Visual Icons' ),
+                            ),
+                            '5. Water Supply, Plumbing & Drainage' => array(
+                                'Water Supply Source'     => array( 'NESTLE-PREMIO-PRO' => 'Mains Plumbing + 20L Bottle', 'NESTLE-AMIGO-20' => 'Mains Plumbing + Pump', 'NESTLE-DUO-GUSTO' => 'Direct Mains Plumbing', 'NESTLE-SOLUTION-20' => 'Mains Plumbing + Bottle', 'NESTLE-SPECTRA-30' => 'Mains + 5L Tank / Bottle', 'NESTLE-FRIO-COLD' => 'Mains Plumbing + 20L Bottle' ),
+                                'Inlet Water Pressure'    => array( 'NESTLE-PREMIO-PRO' => '0.1–0.6 MPa (1–6 bar)', 'NESTLE-AMIGO-20' => '0.1–0.6 MPa (1–6 bar)', 'NESTLE-DUO-GUSTO' => '0.15–0.6 MPa', 'NESTLE-SOLUTION-20' => '0.1–0.6 MPa', 'NESTLE-SPECTRA-30' => '0.05–0.4 MPa', 'NESTLE-FRIO-COLD' => '0.1–0.5 MPa' ),
+                                'Internal Water Buffer'   => array( 'NESTLE-PREMIO-PRO' => '4.0 Liter Buffer Tank', 'NESTLE-AMIGO-20' => '3.5 Liter Buffer Tank', 'NESTLE-DUO-GUSTO' => '6.0 Liter Dual Buffer', 'NESTLE-SOLUTION-20' => '5.0 Liter High-Output', 'NESTLE-SPECTRA-30' => '3.0 Liter Tank', 'NESTLE-FRIO-COLD' => '8.0 Liter Continuous' ),
+                                'Filtration Cartridge'    => array( 'NESTLE-PREMIO-PRO' => '3M / Brita Purity C', 'NESTLE-AMIGO-20' => '3M Water Filtration', 'NESTLE-DUO-GUSTO' => 'Dual Inline Scale Filter', 'NESTLE-SOLUTION-20' => 'Inline Sediment & Carbon', 'NESTLE-SPECTRA-30' => 'Standard Inline Cartridge', 'NESTLE-FRIO-COLD' => 'Multi-Stage Carbon Filter' ),
+                                'Waste Drain Connection'  => array( 'NESTLE-PREMIO-PRO' => 'Direct Drain Hose Kit', 'NESTLE-AMIGO-20' => 'Direct Drain Hose Kit', 'NESTLE-DUO-GUSTO' => 'Direct Drain Included', 'NESTLE-SOLUTION-20' => 'Direct Drain Included', 'NESTLE-SPECTRA-30' => 'Manual Drip Empty', 'NESTLE-FRIO-COLD' => 'Direct Drain Included' ),
+                                'Descaling Reminder'      => array( 'NESTLE-PREMIO-PRO' => 'Smart Flow Alert on Screen', 'NESTLE-AMIGO-20' => 'Automated Descale Alert', 'NESTLE-DUO-GUSTO' => 'Automated Descale Alert', 'NESTLE-SOLUTION-20' => 'Litre-Based Warning', 'NESTLE-SPECTRA-30' => 'LCD Service Alert', 'NESTLE-FRIO-COLD' => 'Sanitation Timer Alert' ),
+                            ),
+                            '6. Electrical & Mechanical Dimensions' => array(
+                                'Supply Voltage'          => array( 'NESTLE-PREMIO-PRO' => '230V AC / 50 Hz Single-Phase', 'NESTLE-AMIGO-20' => '230V AC / 50 Hz Single-Phase', 'NESTLE-DUO-GUSTO' => '230V AC / 50 Hz Single-Phase', 'NESTLE-SOLUTION-20' => '230V AC / 50 Hz Single-Phase', 'NESTLE-SPECTRA-30' => '230V AC / 50 Hz Single-Phase', 'NESTLE-FRIO-COLD' => '230V AC / 50 Hz Single-Phase' ),
+                                'Connected Load (Watts)'  => array( 'NESTLE-PREMIO-PRO' => '3000W', 'NESTLE-AMIGO-20' => '3000W', 'NESTLE-DUO-GUSTO' => '2850W (Dual Circuit)', 'NESTLE-SOLUTION-20' => '3000W', 'NESTLE-SPECTRA-30' => '1750W', 'NESTLE-FRIO-COLD' => '1000W' ),
+                                'Circuit Breaker'         => array( 'NESTLE-PREMIO-PRO' => '16A Dedicated MCB', 'NESTLE-AMIGO-20' => '16A Dedicated MCB', 'NESTLE-DUO-GUSTO' => '16A Dedicated MCB', 'NESTLE-SOLUTION-20' => '16A Dedicated MCB', 'NESTLE-SPECTRA-30' => '10A / 16A Standard', 'NESTLE-FRIO-COLD' => '10A Dedicated MCB' ),
+                                'Width × Depth (mm)'      => array( 'NESTLE-PREMIO-PRO' => '365 × 610 mm (+Fridge)', 'NESTLE-AMIGO-20' => '330 × 570 mm (+Fridge)', 'NESTLE-DUO-GUSTO' => '380 × 675 mm (+Cooler)', 'NESTLE-SOLUTION-20' => '330 × 570 mm (+Fridge)', 'NESTLE-SPECTRA-30' => '285 × 490 mm', 'NESTLE-FRIO-COLD' => '335 × 655 mm' ),
+                                'Height (mm)'             => array( 'NESTLE-PREMIO-PRO' => '760 mm', 'NESTLE-AMIGO-20' => '730 mm', 'NESTLE-DUO-GUSTO' => '645 mm', 'NESTLE-SOLUTION-20' => '650 mm', 'NESTLE-SPECTRA-30' => '600 mm', 'NESTLE-FRIO-COLD' => '655 mm' ),
+                                'Net Dry Weight'          => array( 'NESTLE-PREMIO-PRO' => '42 kg + 18 kg Fridge', 'NESTLE-AMIGO-20' => '38 kg + 18 kg Fridge', 'NESTLE-DUO-GUSTO' => '48 kg (Dual Unit)', 'NESTLE-SOLUTION-20' => '34 kg', 'NESTLE-SPECTRA-30' => '22 kg', 'NESTLE-FRIO-COLD' => '36 kg' ),
+                                'Countertop Clearance'    => array( 'NESTLE-PREMIO-PRO' => '750 mm Min Width', 'NESTLE-AMIGO-20' => '700 mm Min Width', 'NESTLE-DUO-GUSTO' => '800 mm Min Width', 'NESTLE-SOLUTION-20' => '650 mm Min Width', 'NESTLE-SPECTRA-30' => '350 mm Compact Desk', 'NESTLE-FRIO-COLD' => '450 mm Dedicated' ),
+                                'Cabinet Construction'    => array( 'NESTLE-PREMIO-PRO' => 'Commercial Brushed SS', 'NESTLE-AMIGO-20' => 'Matte Steel & ABS', 'NESTLE-DUO-GUSTO' => 'Heavy-Duty Steel Chassis', 'NESTLE-SOLUTION-20' => 'Stainless Steel Front', 'NESTLE-SPECTRA-30' => 'Reinforced Polymer Shell', 'NESTLE-FRIO-COLD' => 'Epoxy-Coated Galvanized' ),
+                            ),
+                            '7. Hygiene, Maintenance & Warranty' => array(
+                                'CIP Automated Sanitation' => array( 'NESTLE-PREMIO-PRO' => 'Steam Purge & Chemical Cycle', 'NESTLE-AMIGO-20' => 'Auto-Rinse Boot & Shut', 'NESTLE-DUO-GUSTO' => 'High-Temp Auto Flushing', 'NESTLE-SOLUTION-20' => 'High-Temp Self-Cleaning', 'NESTLE-SPECTRA-30' => 'One-Touch Hot Flush', 'NESTLE-FRIO-COLD' => 'Closed-Circuit Sanitizing' ),
+                                'Daily Maintenance Time'  => array( 'NESTLE-PREMIO-PRO' => 'Under 10 Minutes', 'NESTLE-AMIGO-20' => 'Under 10 Minutes', 'NESTLE-DUO-GUSTO' => 'Under 8 Minutes', 'NESTLE-SOLUTION-20' => 'Under 5 Minutes', 'NESTLE-SPECTRA-30' => 'Under 3 Minutes', 'NESTLE-FRIO-COLD' => 'Under 5 Minutes' ),
+                                'Food Safety Compliance'  => array( 'NESTLE-PREMIO-PRO' => 'FSSAI Compliant, CE, ISO 9001', 'NESTLE-AMIGO-20' => 'FSSAI Compliant, CE, ISO 9001', 'NESTLE-DUO-GUSTO' => 'FSSAI Compliant, CE, RoHS', 'NESTLE-SOLUTION-20' => 'FSSAI Compliant, CE', 'NESTLE-SPECTRA-30' => 'FSSAI Compliant, CE', 'NESTLE-FRIO-COLD' => 'FSSAI Compliant, CE, RoHS' ),
+                                'Standard OEM Warranty'   => array( 'NESTLE-PREMIO-PRO' => '1 Year Comprehensive On-Site', 'NESTLE-AMIGO-20' => '1 Year Comprehensive On-Site', 'NESTLE-DUO-GUSTO' => '1 Year Comprehensive On-Site', 'NESTLE-SOLUTION-20' => '1 Year Comprehensive On-Site', 'NESTLE-SPECTRA-30' => '1 Year Comprehensive On-Site', 'NESTLE-FRIO-COLD' => '1 Year Comprehensive On-Site' ),
+                                'Pan-India AMC SLA'       => array( 'NESTLE-PREMIO-PRO' => '4-Hour Enterprise Metro SLA', 'NESTLE-AMIGO-20' => 'Pan-India Preventive AMC', 'NESTLE-DUO-GUSTO' => 'Pan-India Preventive AMC', 'NESTLE-SOLUTION-20' => 'Pan-India Preventive AMC', 'NESTLE-SPECTRA-30' => 'Standard Annual AMC', 'NESTLE-FRIO-COLD' => 'Pan-India Refrigeration AMC' ),
+                                'GST Input Tax Credit'    => array( 'NESTLE-PREMIO-PRO' => '100% Eligible (HSN 8476)', 'NESTLE-AMIGO-20' => '100% Eligible (HSN 8476)', 'NESTLE-DUO-GUSTO' => '100% Eligible (HSN 8476)', 'NESTLE-SOLUTION-20' => '100% Eligible (HSN 8476)', 'NESTLE-SPECTRA-30' => '100% Eligible (HSN 8476)', 'NESTLE-FRIO-COLD' => '100% Eligible (HSN 8476)' ),
+                            ),
+                        );
+                    ?>
+                        <table class="w-full text-left text-xs border-collapse min-w-[900px]">
+                            <thead>
+                                <tr class="bg-[#1A56DB] text-white font-black uppercase tracking-wider text-[11px]">
+                                    <th class="p-3 sticky left-0 bg-[#1A56DB] z-20 w-64 min-w-[220px] border-r border-blue-600">
+                                        Engineering Parameter / Model
+                                    </th>
+                                    <?php foreach ( $all_products as $col_prod ) : ?>
+                                        <th class="p-3 border-r border-blue-600 text-center min-w-[150px]">
+                                            <div class="flex flex-col items-center gap-1.5">
+                                                <label class="cursor-pointer inline-flex items-center justify-center p-0.5" title="Select for batch RFQ">
+                                                    <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" 
+                                                           data-id="<?php echo esc_attr( $col_prod['id'] ); ?>" 
+                                                           data-title="<?php echo esc_attr( $col_prod['title'] ); ?>" 
+                                                           data-sku="<?php echo esc_attr( $col_prod['sku'] ); ?>">
+                                                </label>
+                                                <img src="<?php echo esc_url( $col_prod['thumb_url'] ); ?>" 
+                                                     alt="<?php echo esc_attr( $col_prod['title'] ); ?>" 
+                                                     class="w-12 h-12 object-contain bg-white border border-zinc-200 p-1"
+                                                     loading="lazy">
+                                                <span class="font-extrabold uppercase text-[10px] leading-tight text-white line-clamp-1"><?php echo esc_html( $col_prod['title'] ); ?></span>
+                                                <span class="inline-block text-[9px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.2">
+                                                    <?php echo esc_html( $col_prod['sku'] ); ?>
+                                                </span>
+                                                <button class="h-[28px] w-full bg-[#0A0A0A] hover:bg-black active:scale-95 text-[#FBBF24] font-bold uppercase text-[9px] tracking-wider px-2 flex items-center justify-center border border-white/20 transition-colors js-open-quote-modal" 
+                                                        data-product="<?php echo esc_attr( $col_prod['title'] ); ?>" 
+                                                        data-sku="<?php echo esc_attr( $col_prod['sku'] ); ?>"
+                                                        title="Request model quote">
+                                                    Quote
+                                                </button>
+                                            </div>
+                                        </th>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-zinc-200">
+                                <?php foreach ( $matrix_categories as $cat_title => $cat_specs ) : ?>
+                                    <tr class="bg-[#0A0A0A] text-[#FBBF24] font-black text-xs uppercase tracking-wider">
+                                        <td colspan="<?php echo count( $all_products ) + 1; ?>" class="py-2.5 px-4">
+                                            <div class="flex items-center gap-2">
+                                                <span class="w-2 h-2 bg-[#1A56DB] inline-block"></span>
+                                                <span><?php echo esc_html( $cat_title ); ?></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php foreach ( $cat_specs as $spec_title => $spec_row ) : ?>
+                                    <tr class="odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors">
+                                        <td class="sticky left-0 bg-zinc-100 z-10 w-64 min-w-[220px] font-bold text-[11px] uppercase text-zinc-700 py-2.5 px-3.5 border-r border-b border-zinc-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]">
+                                            <?php echo esc_html( $spec_title ); ?>
+                                        </td>
+                                        <?php foreach ( $all_products as $col_idx => $prod_col ) : 
+                                            $sku = $prod_col['sku'];
+                                            $val = isset( $spec_row[ $sku ] ) ? $spec_row[ $sku ] : ( isset( $spec_row[ $col_idx ] ) ? $spec_row[ $col_idx ] : 'Standard' );
+                                            $is_check = ( strpos( $val, '✓' ) !== false );
+                                            $is_cross = ( strpos( $val, '✗' ) !== false );
+                                        ?>
+                                        <td class="py-2.5 px-3 border-r border-b border-zinc-200 text-xs text-center">
+                                            <?php if ( $is_check ) : ?>
+                                                <span class="inline-flex items-center gap-1 text-green-700 font-extrabold bg-green-50 px-2 py-0.5 border border-green-200 rounded text-[11px]"><?php echo esc_html( $val ); ?></span>
+                                            <?php elseif ( $is_cross ) : ?>
+                                                <span class="inline-flex items-center gap-1 text-zinc-400 font-medium text-[11px]"><?php echo esc_html( $val ); ?></span>
+                                            <?php else : ?>
+                                                <span class="font-extrabold text-[#0A0A0A] text-[11px]"><?php echo esc_html( $val ); ?></span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <?php endforeach; ?>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php else : ?>
+                        <!-- Universal Fallback Matrix for Other Commercial B2B Categories -->
+                        <table class="w-full text-left text-xs border-collapse min-w-[700px]">
+                            <thead>
+                                <tr class="bg-[#1A56DB] text-white font-black uppercase tracking-wider text-[11px]">
+                                    <th class="p-3 text-center w-14 border-r border-blue-600">RFQ [✓]</th>
+                                    <th class="p-3 border-r border-blue-600">Model Name &amp; SKU</th>
+                                    <th class="p-3 border-r border-blue-600">Throughput / Capacity</th>
+                                    <th class="p-3 border-r border-blue-600">Duty Cycle / Power</th>
+                                    <th class="p-3 border-r border-blue-600">Target Deployment</th>
+                                    <th class="p-3 border-r border-blue-600">Commercial Terms</th>
+                                    <th class="p-3 text-center w-36">Quick Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-zinc-200">
+                                <?php foreach ( $all_products as $row ) : 
+                                    $spec1 = ! empty( $row['specs'][0] ) ? $row['specs'][0]['value'] : 'Industrial Grade';
+                                    $spec2 = ! empty( $row['specs'][1] ) ? $row['specs'][1]['value'] : 'Standard 230V / 50Hz';
+                                    $spec3 = ! empty( $row['specs'][2] ) ? $row['specs'][2]['value'] : 'Commercial Use';
+                                ?>
+                                <tr class="odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors">
+                                    <td class="p-3 text-center border-r border-zinc-200">
+                                        <label class="cursor-pointer inline-flex items-center justify-center p-1">
+                                            <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" 
+                                                   data-id="<?php echo esc_attr( $row['id'] ); ?>" 
+                                                   data-title="<?php echo esc_attr( $row['title'] ); ?>" 
+                                                   data-sku="<?php echo esc_attr( $row['sku'] ); ?>">
+                                        </label>
+                                    </td>
+                                    <td class="p-3 border-r border-zinc-200">
+                                        <div class="flex items-center gap-3">
+                                            <img src="<?php echo esc_url( $row['thumb_url'] ); ?>" 
+                                                 alt="<?php echo esc_attr( $row['title'] ); ?>" 
+                                                 class="w-10 h-10 object-contain bg-white border border-zinc-200 p-0.5 shrink-0"
+                                                 loading="lazy">
+                                            <div>
+                                                <div class="font-black text-[#0A0A0A] uppercase leading-tight"><?php echo esc_html( $row['title'] ); ?></div>
+                                                <span class="inline-block text-[10px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.5 mt-0.5">
+                                                    SKU: <?php echo esc_html( $row['sku'] ); ?>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="p-3 font-bold text-zinc-800 border-r border-zinc-200"><?php echo esc_html( $spec1 ); ?></td>
-                                <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec2 ); ?></td>
-                                <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec3 ); ?></td>
-                                <td class="p-3 border-r border-zinc-200">
-                                    <span class="text-[10px] font-black uppercase text-zinc-600 tracking-wider bg-zinc-200/70 px-1.5 py-0.5">Institutional</span>
-                                </td>
-                                <td class="p-3 text-center">
-                                    <div class="flex items-center justify-center gap-1.5">
-                                        <button class="h-[34px] flex-1 min-w-[65px] bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-[10px] tracking-wider px-2.5 flex items-center justify-center transition-colors js-open-quote-modal" 
-                                                data-product="<?php echo esc_attr( $row['title'] ); ?>" 
-                                                data-sku="<?php echo esc_attr( $row['sku'] ); ?>"
-                                                title="Request single model quotation">
-                                            Quote
-                                        </button>
-                                        <a href="tel:+919823012724" class="h-[34px] w-[34px] bg-zinc-100 hover:bg-[#FBBF24] hover:text-black text-[#0A0A0A] border border-zinc-300 transition-colors flex items-center justify-center shrink-0" title="Call Technical Sales: +91 98230 12724">
-                                            <span class="material-symbols-outlined text-xs">call</span>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                                    </td>
+                                    <td class="p-3 font-bold text-zinc-800 border-r border-zinc-200"><?php echo esc_html( $spec1 ); ?></td>
+                                    <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec2 ); ?></td>
+                                    <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec3 ); ?></td>
+                                    <td class="p-3 border-r border-zinc-200">
+                                        <span class="text-[10px] font-black uppercase text-zinc-600 tracking-wider bg-zinc-200/70 px-1.5 py-0.5">Institutional</span>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <div class="flex items-center justify-center gap-1.5">
+                                            <button class="h-[34px] flex-1 min-w-[65px] bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-[10px] tracking-wider px-2.5 flex items-center justify-center transition-colors js-open-quote-modal" 
+                                                    data-product="<?php echo esc_attr( $row['title'] ); ?>" 
+                                                    data-sku="<?php echo esc_attr( $row['sku'] ); ?>"
+                                                    title="Request model quote">
+                                                Quote
+                                            </button>
+                                            <a href="tel:+919823012724" class="h-[34px] w-[34px] bg-zinc-100 hover:bg-[#FBBF24] hover:text-black text-[#0A0A0A] border border-zinc-300 transition-colors flex items-center justify-center shrink-0">
+                                                <span class="material-symbols-outlined text-xs">call</span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
                     
-                    <!-- Matrix Table Footer Engineering Note -->
                     <div class="p-3.5 sm:p-4 bg-zinc-50 border-t-2 border-zinc-200 text-[11px] text-zinc-600 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                        <p><strong>Engineering Note:</strong> Custom 3-phase 415V electrical power supply, direct plumbing lines, and institutional AMC packages available upon request.</p>
+                        <p><strong>Engineering Note:</strong> Custom plumbing hookups, electrical breakers, water filtration, and pan-India turnkey AMC service packages provided with all corporate fleet quotes.</p>
                         <a href="tel:+919823012724" class="text-[#1A56DB] hover:underline font-bold whitespace-nowrap flex items-center gap-1">
                             <span class="material-symbols-outlined text-sm">call</span> Speak with an Application Engineer &rarr;
                         </a>
@@ -541,7 +784,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             </section>
         </main>
 
-        <!-- 6. Floating Multi-SKU RFQ Batch Drawer (Fully Adaptive Mobile & Desktop) -->
+        <!-- 6. Floating Multi-SKU RFQ Batch Drawer -->
         <div id="b2b-floating-rfq-bar" class="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-[95%] max-w-4xl bg-[#0A0A0A] text-white border-2 border-[#FBBF24] p-3.5 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 transition-all duration-300 transform translate-y-32 opacity-0 pointer-events-none shadow-[0_10px_40px_rgba(0,0,0,0.85)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
             <div class="flex items-center gap-3 overflow-hidden">
                 <span class="w-8 h-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-sm shrink-0" id="rfq-badge-count">0</span>
@@ -569,8 +812,118 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             </div>
         </div>
 
+        <!-- 7. Touchscreen Menu Zoom Modal -->
+        <div id="menu-zoom-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="relative max-w-4xl w-full bg-[#0A0A0A] border-2 border-[#1A56DB] shadow-2xl p-4 sm:p-6 overflow-hidden">
+                <div class="flex items-center justify-between pb-3 border-b border-zinc-800 mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-[#FBBF24]"></span>
+                        <h4 id="menu-zoom-title" class="text-sm sm:text-base font-extrabold uppercase text-white tracking-wide">Touchscreen Menu UI</h4>
+                    </div>
+                    <button id="menu-zoom-close" class="text-zinc-400 hover:text-white p-1 text-xl font-bold transition-colors">
+                        ✕
+                    </button>
+                </div>
+                <div class="relative aspect-video max-h-[70vh] flex items-center justify-center bg-zinc-950 overflow-hidden">
+                    <img id="menu-zoom-img" src="" alt="Menu UI Zoom" class="max-w-full max-h-[70vh] object-contain">
+                </div>
+                <div class="pt-3 text-center text-xs text-zinc-400 flex items-center justify-between">
+                    <span>High-definition interface preview</span>
+                    <span class="text-[11px] text-[#FBBF24] font-mono font-bold">Press ESC or click anywhere outside to close</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inline Zero-Dependency Vanilla JS Engine -->
         <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // 1. Dual-Tab Switcher (Hardware vs Touchscreen Menu UI)
+            document.querySelectorAll('.js-card-tab-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var cardId = this.getAttribute('data-card');
+                    var target = this.getAttribute('data-tab-target');
+
+                    document.querySelectorAll('.js-card-tab-btn[data-card="' + cardId + '"]').forEach(function(b) {
+                        if (b.getAttribute('data-tab-target') === target) {
+                            b.className = 'js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95';
+                        } else {
+                            b.className = 'js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95';
+                        }
+                    });
+
+                    document.querySelectorAll('.js-tab-pane[data-card="' + cardId + '"]').forEach(function(pane) {
+                        if (pane.getAttribute('data-tab-content') === target) {
+                            pane.classList.remove('hidden');
+                        } else {
+                            pane.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // 2. Salient Features Accordion Drawer Toggle
+            document.querySelectorAll('.js-toggle-features').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var targetId = this.getAttribute('data-target');
+                    var drawer = document.getElementById(targetId);
+                    if (!drawer) return;
+                    var isHidden = drawer.classList.contains('hidden');
+                    if (isHidden) {
+                        drawer.classList.remove('hidden');
+                        this.innerHTML = '<span>− Hide Full Operational Highlights</span>';
+                    } else {
+                        drawer.classList.add('hidden');
+                        this.innerHTML = '<span>+ View Full Operational Highlights</span>';
+                    }
+                });
+            });
+
+            // 3. Touchscreen Menu Zoom Modal
+            var zoomModal = document.getElementById('menu-zoom-modal');
+            var zoomImg = document.getElementById('menu-zoom-img');
+            var zoomTitle = document.getElementById('menu-zoom-title');
+            var zoomClose = document.getElementById('menu-zoom-close');
+
+            function openZoomModal(src, title) {
+                if (!zoomModal || !zoomImg) return;
+                zoomImg.src = src;
+                if (zoomTitle) zoomTitle.textContent = title || 'Touchscreen Menu UI';
+                zoomModal.classList.remove('opacity-0', 'pointer-events-none');
+                zoomModal.classList.add('opacity-100', 'pointer-events-auto');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeZoomModal() {
+                if (!zoomModal) return;
+                zoomModal.classList.add('opacity-0', 'pointer-events-none');
+                zoomModal.classList.remove('opacity-100', 'pointer-events-auto');
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('.js-open-zoom-modal').forEach(function(el) {
+                el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var src = this.getAttribute('data-zoom-src');
+                    var title = this.getAttribute('data-zoom-title');
+                    if (src) openZoomModal(src, title);
+                });
+            });
+
+            if (zoomClose) zoomClose.addEventListener('click', closeZoomModal);
+            if (zoomModal) {
+                zoomModal.addEventListener('click', function(e) {
+                    if (e.target === zoomModal) closeZoomModal();
+                });
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && zoomModal && !zoomModal.classList.contains('pointer-events-none')) {
+                    closeZoomModal();
+                }
+            });
+
+            // 4. Floating Multi-SKU RFQ Drawer & Live Counter
             var selectedSKUs = [];
             var floatingBar = document.getElementById('b2b-floating-rfq-bar');
             var badgeCount = document.getElementById('rfq-badge-count');
@@ -593,14 +946,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     floatingBar.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
                     if (stickyCounter) stickyCounter.classList.remove('hidden');
 
-                    // Render selected chips
                     if (chipContainer) {
                         chipContainer.innerHTML = selectedSKUs.slice(0, 4).map(function(s) {
                             return '<span class="bg-zinc-800 border border-zinc-700 px-1.5 py-0.5">' + s.sku + '</span>';
                         }).join('') + (count > 4 ? '<span class="text-zinc-400">+' + (count - 4) + ' more</span>' : '');
                     }
 
-                    // Format batch payload for quote modal
                     var msg = "Multi-Model B2B Inquiry (<?php echo esc_js( $category_name ); ?> Series):\n";
                     selectedSKUs.forEach(function(item, i) {
                         msg += (i + 1) + ". Model: " + item.sku + " - " + item.title + "\n";
@@ -627,7 +978,6 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
                     if (this.checked) {
                         selectedSKUs.push({ id: id, title: title, sku: sku });
-                        // Synchronize any matching checkboxes on the page
                         document.querySelectorAll('.b2b-sku-checkbox[data-id="' + id + '"]').forEach(function(c) {
                             c.checked = true;
                         });
@@ -656,7 +1006,6 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         <!-- ===================================================================
              RETAIL CATEGORY FALLBACK (STANDARD CATALOG GRID)
              =================================================================== -->
-        <!-- Dynamic Category Hero -->
         <section class="bg-[#0A0A0A] relative overflow-hidden flex items-center border-b-4 border-[#1A56DB] pt-36 md:pt-44 pb-16">
             <div class="absolute inset-0 industrial-diagonal bg-[#1A56DB] opacity-10 w-2/3 pointer-events-none"></div>
             <div class="container mx-auto px-6 md:px-12 relative z-10">
@@ -685,14 +1034,11 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     <?php if ( have_posts() ) : ?>
                         <?php while ( have_posts() ) : the_post(); 
                             global $product; 
-                            if ( ! is_a( $product, 'WC_Product' ) ) {
-                                $product = wc_get_product( get_the_ID() );
-                            }
+                            if ( ! is_a( $product, 'WC_Product' ) ) $product = wc_get_product( get_the_ID() );
                             if ( ! $product ) continue;
                             $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'large' ) ?: wc_placeholder_img_src();
                             $title = $product->get_name();
                             $sku = $product->get_sku() ?: 'N/A';
-                            $permalink = $product->get_permalink();
                         ?>
                             <article class="bg-white p-6 flex flex-col group relative cursor-pointer border-b border-r border-[#1A56DB]">
                                 <div class="relative aspect-square mb-6 bg-surface-container-low overflow-hidden">
@@ -713,7 +1059,6 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     <?php endif; ?>
                     </div>
 
-                    <!-- Pagination -->
                     <div class="mt-12 w-full flex justify-center custom-pagination">
                         <?php woocommerce_pagination(); ?>
                     </div>
