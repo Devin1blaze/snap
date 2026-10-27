@@ -1,0 +1,652 @@
+{
+  "hardware_images": {
+    "premio-primary.png": {
+      "success": true,
+      "info": 20491,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\premio-primary.png"
+    },
+    "premio-front.png": {
+      "success": true,
+      "info": 44543,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\premio-front.png"
+    },
+    "premio-left.png": {
+      "success": true,
+      "info": 77010,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\premio-left.png"
+    },
+    "premio-right.png": {
+      "success": true,
+      "info": 59964,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\premio-right.png"
+    },
+    "amigo-primary.png": {
+      "success": true,
+      "info": 22908,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\amigo-primary.png"
+    },
+    "amigo-front.png": {
+      "success": true,
+      "info": 47416,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\amigo-front.png"
+    },
+    "amigo-left.png": {
+      "success": true,
+      "info": 75927,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\amigo-left.png"
+    },
+    "amigo-right.png": {
+      "success": true,
+      "info": 60283,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\amigo-right.png"
+    },
+    "duo-gusto-primary.png": {
+      "success": true,
+      "info": 20186,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\duo-gusto-primary.png"
+    },
+    "duo-gusto-front.png": {
+      "success": true,
+      "info": 20186,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\duo-gusto-front.png"
+    },
+    "duo-gusto-left.png": {
+      "success": true,
+      "info": 41568,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\duo-gusto-left.png"
+    },
+    "duo-gusto-right.png": {
+      "success": true,
+      "info": 39828,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\duo-gusto-right.png"
+    },
+    "solution-primary.png": {
+      "success": true,
+      "info": 18722,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\solution-primary.png"
+    },
+    "solution-front.webp": {
+      "success": true,
+      "info": 33704,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\solution-front.webp"
+    },
+    "solution-left.webp": {
+      "success": true,
+      "info": 56066,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\solution-left.webp"
+    },
+    "solution-right.webp": {
+      "success": true,
+      "info": 57026,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\solution-right.webp"
+    },
+    "spectra-primary.png": {
+      "success": true,
+      "info": 17456,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\spectra-primary.png"
+    },
+    "spectra-front.png": {
+      "success": true,
+      "info": 17456,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\spectra-front.png"
+    },
+    "spectra-left.png": {
+      "success": true,
+      "info": 5605,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\spectra-left.png"
+    },
+    "spectra-right.jpg": {
+      "success": true,
+      "info": 27684,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\spectra-right.jpg"
+    },
+    "frio-primary.png": {
+      "success": true,
+      "info": 30209,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\frio-primary.png"
+    },
+    "frio-front.webp": {
+      "success": true,
+      "info": 69848,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\frio-front.webp"
+    },
+    "frio-left.png": {
+      "success": true,
+      "info": 58402,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\frio-left.png"
+    },
+    "frio-right.png": {
+      "success": true,
+      "info": 48833,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/hardware\\frio-right.png"
+    }
+  },
+  "beverage_images": {
+    "ristretto.png": {
+      "success": true,
+      "info": 2191,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\ristretto.png",
+      "name": "Ristretto"
+    },
+    "espresso.png": {
+      "success": true,
+      "info": 2223,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\espresso.png",
+      "name": "Espresso"
+    },
+    "doppio.png": {
+      "success": true,
+      "info": 2157,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\doppio.png",
+      "name": "Doppio"
+    },
+    "lungo.png": {
+      "success": true,
+      "info": 1925,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\lungo.png",
+      "name": "Lungo"
+    },
+    "americano.png": {
+      "success": true,
+      "info": 1785,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\americano.png",
+      "name": "Americano"
+    },
+    "espresso-macchiato.png": {
+      "success": true,
+      "info": 1720,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\espresso-macchiato.png",
+      "name": "Espresso Macchiato"
+    },
+    "cappuccino.png": {
+      "success": true,
+      "info": 1641,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cappuccino.png",
+      "name": "Cappuccino"
+    },
+    "tapri-coffee.png": {
+      "success": true,
+      "info": 1501,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\tapri-coffee.png",
+      "name": "Tapri Coffee"
+    },
+    "anna-style-kaapi.png": {
+      "success": true,
+      "info": 2426,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\anna-style-kaapi.png",
+      "name": "Anna Style Kaapi"
+    },
+    "flat-white.png": {
+      "success": true,
+      "info": 1643,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\flat-white.png",
+      "name": "Flat White"
+    },
+    "cafe-latte.png": {
+      "success": true,
+      "info": 1675,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cafe-latte.png",
+      "name": "Caf\u00e9 Latte"
+    },
+    "galao.png": {
+      "success": true,
+      "info": 1751,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\galao.png",
+      "name": "Galao"
+    },
+    "chococcino.png": {
+      "success": true,
+      "info": 1747,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\chococcino.png",
+      "name": "Chococcino"
+    },
+    "cafe-mocha.png": {
+      "success": true,
+      "info": 1741,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cafe-mocha.png",
+      "name": "Caf\u00e9 Mocha"
+    },
+    "cocoa-macchiato.png": {
+      "success": true,
+      "info": 1970,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cocoa-macchiato.png",
+      "name": "Cocoa Macchiato"
+    },
+    "vanillaccino.png": {
+      "success": true,
+      "info": 1796,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\vanillaccino.png",
+      "name": "Vanillaccino"
+    },
+    "hot-chocolate.png": {
+      "success": true,
+      "info": 1845,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\hot-chocolate.png",
+      "name": "Hot Chocolate"
+    },
+    "elaichi-chai.png": {
+      "success": true,
+      "info": 2223,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\elaichi-chai.png",
+      "name": "Elaichi Chai"
+    },
+    "masala-chai.png": {
+      "success": true,
+      "info": 2194,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\masala-chai.png",
+      "name": "Masala Chai"
+    },
+    "cappuccino-strong.png": {
+      "success": true,
+      "info": 1640,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cappuccino-strong.png",
+      "name": "Cappuccino Strong"
+    },
+    "espresso.jpg": {
+      "success": true,
+      "info": 1191,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\espresso.jpg",
+      "name": "Espresso"
+    },
+    "americano.jpg": {
+      "success": true,
+      "info": 990,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\americano.jpg",
+      "name": "Americano"
+    },
+    "cafe-mocha.jpg": {
+      "success": true,
+      "info": 1060,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cafe-mocha.jpg",
+      "name": "Cafe Mocha"
+    },
+    "cappuccino.jpg": {
+      "success": true,
+      "info": 967,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cappuccino.jpg",
+      "name": "Cappuccino"
+    },
+    "cafe-latte.jpg": {
+      "success": true,
+      "info": 939,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cafe-latte.jpg",
+      "name": "Cafe Latte"
+    },
+    "tapri-coffee.jpg": {
+      "success": true,
+      "info": 922,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\tapri-coffee.jpg",
+      "name": "Tapri Coffee"
+    },
+    "masala-chai.jpg": {
+      "success": true,
+      "info": 1406,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\masala-chai.jpg",
+      "name": "Masala Chai"
+    },
+    "hot-chocolate.jpg": {
+      "success": true,
+      "info": 1026,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\hot-chocolate.jpg",
+      "name": "Hot chocolate"
+    },
+    "cafe-frappe.jpg": {
+      "success": true,
+      "info": 1116,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cafe-frappe.jpg",
+      "name": "Cafe Frappe"
+    },
+    "cold-coffee.jpg": {
+      "success": true,
+      "info": 967,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cold-coffee.jpg",
+      "name": "Cold Coffee"
+    },
+    "frappe-mocha.jpg": {
+      "success": true,
+      "info": 732,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\frappe-mocha.jpg",
+      "name": "Frappe Mocha"
+    },
+    "iced-tea.jpg": {
+      "success": true,
+      "info": 1185,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\iced-tea.jpg",
+      "name": "Iced Tea"
+    },
+    "plain-tea.png": {
+      "success": true,
+      "info": 2027,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\plain-tea.png",
+      "name": "Plain Tea"
+    },
+    "hot-lemon-tea.png": {
+      "success": true,
+      "info": 1971,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\hot-lemon-tea.png",
+      "name": "Hot Lemon Tea"
+    },
+    "other-teas-with-tea-bags.png": {
+      "success": true,
+      "info": 672,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\other-teas-with-tea-bags.png",
+      "name": "Other Teas (with tea bags)"
+    },
+    "coffee.png": {
+      "success": true,
+      "info": 1738,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\coffee.png",
+      "name": "Coffee"
+    },
+    "cafe-frappe.png": {
+      "success": true,
+      "info": 1984,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\cafe-frappe.png",
+      "name": "Caf\u00e9 Frappe"
+    },
+    "iced-lemon-tea.png": {
+      "success": true,
+      "info": 2175,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\iced-lemon-tea.png",
+      "name": "Iced Lemon Tea"
+    },
+    "iced-chocolate.png": {
+      "success": true,
+      "info": 1956,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\iced-chocolate.png",
+      "name": "Iced Chocolate"
+    },
+    "frappe-mocha.png": {
+      "success": true,
+      "info": 1652,
+      "path": "d:/projects/pro/snpmarketing without divi/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages\\frappe-mocha.png",
+      "name": "Frappe Mocha"
+    }
+  },
+  "machine_beverages_map": {
+    "premio": [
+      {
+        "name": "Ristretto",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/ristretto.png"
+      },
+      {
+        "name": "Espresso",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/espresso.png"
+      },
+      {
+        "name": "Doppio",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/doppio.png"
+      },
+      {
+        "name": "Lungo",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/lungo.png"
+      },
+      {
+        "name": "Americano",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/americano.png"
+      },
+      {
+        "name": "Espresso Macchiato",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/espresso-macchiato.png"
+      },
+      {
+        "name": "Cappuccino",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cappuccino.png"
+      },
+      {
+        "name": "Tapri Coffee",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/tapri-coffee.png"
+      },
+      {
+        "name": "Anna Style Kaapi",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/anna-style-kaapi.png"
+      },
+      {
+        "name": "Flat White",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/flat-white.png"
+      },
+      {
+        "name": "Caf\u00e9 Latte",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-latte.png"
+      },
+      {
+        "name": "Galao",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/galao.png"
+      },
+      {
+        "name": "Chococcino",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/chococcino.png"
+      },
+      {
+        "name": "Caf\u00e9 Mocha",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-mocha.png"
+      },
+      {
+        "name": "Cocoa Macchiato",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cocoa-macchiato.png"
+      },
+      {
+        "name": "Vanillaccino",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/vanillaccino.png"
+      },
+      {
+        "name": "Hot Chocolate",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/hot-chocolate.png"
+      },
+      {
+        "name": "Elaichi Chai",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/elaichi-chai.png"
+      },
+      {
+        "name": "Masala Chai",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/masala-chai.png"
+      }
+    ],
+    "amigo": [
+      {
+        "name": "Ristretto",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/ristretto.png"
+      },
+      {
+        "name": "Espresso",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/espresso.png"
+      },
+      {
+        "name": "Americano",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/americano.png"
+      },
+      {
+        "name": "Espresso Macchiato",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/espresso-macchiato.png"
+      },
+      {
+        "name": "Cappuccino",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cappuccino.png"
+      },
+      {
+        "name": "Cappuccino Strong",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cappuccino-strong.png"
+      },
+      {
+        "name": "Tapri Coffee",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/tapri-coffee.png"
+      },
+      {
+        "name": "Anna Style Kaapi",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/anna-style-kaapi.png"
+      },
+      {
+        "name": "Flat White",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/flat-white.png"
+      },
+      {
+        "name": "Caf\u00e9 Latte",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-latte.png"
+      },
+      {
+        "name": "Chococcino",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/chococcino.png"
+      },
+      {
+        "name": "Caf\u00e9 Mocha",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-mocha.png"
+      },
+      {
+        "name": "Hot Chocolate",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/hot-chocolate.png"
+      },
+      {
+        "name": "Elaichi Chai",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/elaichi-chai.png"
+      },
+      {
+        "name": "Masala Chai",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/masala-chai.png"
+      }
+    ],
+    "duo_gusto": [
+      {
+        "name": "Espresso",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/espresso.jpg"
+      },
+      {
+        "name": "Americano",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/americano.jpg"
+      },
+      {
+        "name": "Cafe Mocha",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-mocha.jpg"
+      },
+      {
+        "name": "Cappuccino",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cappuccino.jpg"
+      },
+      {
+        "name": "Cafe Latte",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-latte.jpg"
+      },
+      {
+        "name": "Tapri Coffee",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/tapri-coffee.jpg"
+      },
+      {
+        "name": "Masala Chai",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/masala-chai.jpg"
+      },
+      {
+        "name": "Hot chocolate",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/hot-chocolate.jpg"
+      },
+      {
+        "name": "Cafe Frappe",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-frappe.jpg"
+      },
+      {
+        "name": "Cold Coffee",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cold-coffee.jpg"
+      },
+      {
+        "name": "Frappe Mocha",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/frappe-mocha.jpg"
+      },
+      {
+        "name": "Iced Tea",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/iced-tea.jpg"
+      }
+    ],
+    "solution": [
+      {
+        "name": "Espresso",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/espresso.png"
+      },
+      {
+        "name": "Espresso Macchiato",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/espresso-macchiato.png"
+      },
+      {
+        "name": "Cappuccino",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cappuccino.png"
+      },
+      {
+        "name": "Caf\u00e9 Latte",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-latte.png"
+      },
+      {
+        "name": "Caf\u00e9 Mocha",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-mocha.png"
+      },
+      {
+        "name": "Hot Chocolate",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/hot-chocolate.png"
+      },
+      {
+        "name": "Elaichi Chai",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/elaichi-chai.png"
+      },
+      {
+        "name": "Masala Chai",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/masala-chai.png"
+      },
+      {
+        "name": "Plain Tea",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/plain-tea.png"
+      },
+      {
+        "name": "Hot Lemon Tea",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/hot-lemon-tea.png"
+      },
+      {
+        "name": "Other Teas (with tea bags)",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/other-teas-with-tea-bags.png"
+      }
+    ],
+    "spectra": [
+      {
+        "name": "Coffee",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/coffee.png"
+      },
+      {
+        "name": "Hot Chocolate",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/hot-chocolate.png"
+      },
+      {
+        "name": "Elaichi Chai",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/elaichi-chai.png"
+      },
+      {
+        "name": "Masala Chai",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/masala-chai.png"
+      },
+      {
+        "name": "Plain Tea",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/plain-tea.png"
+      },
+      {
+        "name": "Hot Lemon Tea",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/hot-lemon-tea.png"
+      },
+      {
+        "name": "Other Teas (with tea bags)",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/other-teas-with-tea-bags.png"
+      }
+    ],
+    "frio": [
+      {
+        "name": "Caf\u00e9 Frappe",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/cafe-frappe.png"
+      },
+      {
+        "name": "Iced Lemon Tea",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/iced-lemon-tea.png"
+      },
+      {
+        "name": "Iced Chocolate",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/iced-chocolate.png"
+      },
+      {
+        "name": "Frappe Mocha",
+        "image": "/wp-content/themes/snap-stitch-theme/images/nestle-machines/beverages/frappe-mocha.png"
+      }
+    ]
+  }
+}
