@@ -244,6 +244,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             if ( empty( $item['beverage_menu'] ) && ! empty( $bev_gallery ) ) {
                                 $item['beverage_menu'] = array_column( $bev_gallery, 'name' );
                             }
+                            $recipes_list = ! empty( $bev_gallery ) ? $bev_gallery : ( ! empty( $item['beverage_menu'] ) ? $item['beverage_menu'] : array() );
+                            $recipe_count = count( $recipes_list );
+                            $has_bev_menu = ( $recipe_count > 0 );
                         ?>
                         <article class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center bg-white border-2 border-zinc-200 p-5 sm:p-8 md:p-10 relative transition-all duration-300 hover:border-black" style="box-shadow: 6px 6px 0px 0px #1A56DB;">
                             <!-- Visual Column: Dual-Tab Switcher (lg:col-span-5) -->
@@ -251,8 +254,8 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                 <div class="relative bg-zinc-50 border border-zinc-200 p-4 sm:p-5 overflow-hidden group">
                                     <div class="flex items-center gap-1.5 mb-3 z-20 relative">
                                         <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="hardware"><span class="material-symbols-outlined text-xs">precision_manufacturing</span><span>Machine Hardware</span></button>
-                                        <?php if ( $has_menu_img ) : ?>
-                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="menu"><span class="material-symbols-outlined text-xs">touch_app</span><span>Touchscreen Menu UI</span></button>
+                                        <?php if ( $has_bev_menu ) : ?>
+                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="menu"><span class="material-symbols-outlined text-xs">touch_app</span><span>Touchscreen Menu</span></button>
                                         <?php endif; ?>
                                     </div>
                                     <!-- Tab 1: Machine Hardware Cutout + Multi-Angle Strip -->
@@ -277,40 +280,41 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Tab 2: Touchscreen Menu UI + Interactive Beverage Gallery -->
-                                    <?php if ( $has_menu_img ) : ?>
+                                    <!-- Tab 2: Authentic Touchscreen Menu Kiosk Display -->
+                                    <?php if ( $has_bev_menu ) : ?>
                                     <div class="js-tab-pane hidden flex flex-col justify-between" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-content="menu">
-                                        <div class="relative aspect-video sm:aspect-[4/3] flex items-center justify-center bg-zinc-950 p-2 overflow-hidden border border-zinc-200">
-                                            <span class="absolute top-2 left-2 bg-[#1A56DB] text-white font-black text-[9px] uppercase px-2 py-0.5 tracking-wider z-10 shadow-sm">UI INTERFACE PREVIEW</span>
-                                            <img src="<?php echo esc_url( $menu_img ); ?>" alt="<?php echo esc_attr( $item['title'] . ' Menu Interface' ); ?>" class="w-full h-full object-contain cursor-pointer hover:scale-105 transition-transform duration-300 js-open-zoom-modal" data-zoom-src="<?php echo esc_url( $menu_img ); ?>" data-zoom-title="<?php echo esc_attr( $item['title'] . ' — High-Definition Touchscreen Menu UI' ); ?>" loading="lazy">
-                                            <button type="button" class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-[#0A0A0A]/90 hover:bg-[#1A56DB] text-white text-[10px] font-black uppercase px-3 py-1.5 tracking-wider border border-white/20 shadow-lg flex items-center gap-1.5 js-open-zoom-modal transition-colors whitespace-nowrap" data-zoom-src="<?php echo esc_url( $menu_img ); ?>" data-zoom-title="<?php echo esc_attr( $item['title'] . ' — High-Definition Touchscreen Menu UI' ); ?>"><span class="material-symbols-outlined text-xs">zoom_in</span><span>Tap to Zoom Menu</span></button>
-                                        </div>
-                                        <?php if ( ! empty( $bev_gallery ) ) : ?>
-                                        <div class="mt-2.5 pt-2 border-t border-zinc-200">
-                                            <div class="flex items-center justify-between mb-1.5">
-                                                <span class="text-[10px] font-black uppercase tracking-wider text-zinc-700 flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-[#FBBF24] inline-block"></span><span>Beverage Menu Gallery (<?php echo count( $bev_gallery ); ?> Recipes):</span></span>
-                                                <span class="text-[9px] font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">Tap cup to inspect</span>
+                                        <div class="relative aspect-[4/3] sm:aspect-square flex flex-col bg-white border border-zinc-200 p-3 sm:p-4 overflow-hidden">
+                                            <div class="flex items-center justify-between pb-2 mb-2 border-b border-zinc-200 shrink-0">
+                                                <span class="inline-flex items-center gap-1.5 bg-[#1A56DB] text-white text-[9px] sm:text-[10px] font-black uppercase px-2 py-0.5 tracking-wider">
+                                                    <span class="material-symbols-outlined text-xs">touch_app</span>
+                                                    <span>Touchscreen Selections (<?php echo esc_html( $recipe_count ); ?> Recipes)</span>
+                                                </span>
+                                                <span class="text-[9px] font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">Tap Recipe to Inspect</span>
                                             </div>
-                                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1.5 max-h-52 overflow-y-auto pr-1">
-                                                <?php foreach ( $bev_gallery as $b_item ) :
+                                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 overflow-y-auto pr-1 flex-1 no-scrollbar">
+                                                <?php foreach ( $recipes_list as $b_item ) :
                                                     $b_name = is_array( $b_item ) ? $b_item['name'] : $b_item;
                                                     $b_img_rel = ( is_array( $b_item ) && ! empty( $b_item['image'] ) ) ? basename( $b_item['image'] ) : '';
                                                     $b_img_url = $b_img_rel ? ( $theme_uri . '/images/nestle-machines/beverages/' . $b_img_rel ) : '';
                                                 ?>
-                                                <div class="group bg-white hover:bg-yellow-50/50 border border-zinc-200 hover:border-[#1A56DB] p-1.5 flex flex-col items-center justify-between text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm cursor-pointer js-open-zoom-modal" data-zoom-src="<?php echo esc_url( $b_img_url ?: $menu_img ); ?>" data-zoom-title="<?php echo esc_attr( $item['title'] . ' — ' . $b_name ); ?>">
-                                                    <div class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center p-0.5 overflow-hidden">
+                                                <div class="group bg-zinc-50 hover:bg-[#FBBF24]/10 border border-zinc-200 hover:border-[#1A56DB] p-2 flex flex-col items-center justify-center text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm cursor-pointer js-open-zoom-modal" data-zoom-src="<?php echo esc_url( $b_img_url ?: $front_img ); ?>" data-zoom-title="<?php echo esc_attr( $item['title'] . ' — ' . $b_name ); ?>">
+                                                    <div class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center p-0.5 overflow-hidden">
                                                         <?php if ( $b_img_url ) : ?>
                                                             <img src="<?php echo esc_url( $b_img_url ); ?>" alt="<?php echo esc_attr( $b_name ); ?>" class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy">
                                                         <?php else : ?>
                                                             <?php echo snap_b2b_beverage_icon( $b_name ); ?>
                                                         <?php endif; ?>
                                                     </div>
-                                                    <div class="text-[9px] sm:text-[10px] font-bold uppercase tracking-tight text-[#0A0A0A] group-hover:text-[#1A56DB] line-clamp-1 w-full mt-1"><?php echo esc_html( $b_name ); ?></div>
+                                                    <div class="text-[9px] sm:text-[10px] font-bold uppercase tracking-tight text-[#0A0A0A] group-hover:text-[#1A56DB] line-clamp-1 w-full mt-1.5"><?php echo esc_html( $b_name ); ?></div>
                                                 </div>
                                                 <?php endforeach; ?>
                                             </div>
                                         </div>
-                                        <?php endif; ?>
+                                        <!-- Footer strip matching Tab 1 height and spacing -->
+                                        <div class="mt-2.5 pt-2 border-t border-zinc-200 flex items-center justify-between gap-1.5 text-zinc-500 text-[9px] font-black uppercase tracking-wider">
+                                            <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-[#FBBF24] inline-block"></span> Digital Touch Dispense</span>
+                                            <span class="text-zinc-400 font-mono">100% Calibrated Dosing</span>
+                                        </div>
                                     </div>
                                     <?php endif; ?>
                                 </div>
