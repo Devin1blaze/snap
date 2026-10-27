@@ -48,7 +48,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         'cold-storages', 'cold-storages-2', 'chillers', 'chillers-central-air-conditioning',
         'deep-freezers', 'deep-freezers-2', 'water-coolers', 'storage-water-coolers',
         'bottled-water-dispensers', 'bottled-water-dispensers-2', 'visi-coolers', 'visi-coolers-2',
-        'washroom-automations', 'hygiene-ppe', 'entrance-solutions', 'vending-machines',
+        'washroom-automations', 'hygiene-ppe', 'entrance-solutions', 'vending-machines', 'brewing-bots',
         'central-air-conditioning', 'ducted-systems', 'vrf-systems', 'air-coolers', 'air-coolers-2',
         'desert-air-coolers', 'desert-air-coolers-2', 'b2b-air-coolers', 'b2b-water-purifiers',
         'ice-machines', 'kitchen-refrigeration-products', 'medical-refrigeration-products',
