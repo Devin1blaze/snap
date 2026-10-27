@@ -26,12 +26,12 @@ $category_desc = ( $term && isset( $term->description ) ) ? $term->description :
 if ( ! function_exists( 'snap_b2b_beverage_icon' ) ) {
     function snap_b2b_beverage_icon( $drink ) {
         $d = strtolower( $drink );
-        if ( strpos( $d, 'tea' ) !== false || strpos( $d, 'chai' ) !== false ) return '🍵';
-        if ( strpos( $d, 'choc' ) !== false || strpos( $d, 'milo' ) !== false ) return '🍫';
-        if ( strpos( $d, 'water' ) !== false ) return '💧';
-        if ( strpos( $d, 'frappe' ) !== false || strpos( $d, 'cold' ) !== false || strpos( $d, 'iced' ) !== false ) return '🧊';
-        if ( strpos( $d, 'latte' ) !== false || strpos( $d, 'cappuccino' ) !== false || strpos( $d, 'milk' ) !== false ) return '🥛';
-        return '☕';
+        $icon = 'local_cafe';
+        if ( strpos( $d, 'tea' ) !== false || strpos( $d, 'chai' ) !== false ) $icon = 'emoji_food_beverage';
+        elseif ( strpos( $d, 'choc' ) !== false || strpos( $d, 'milo' ) !== false ) $icon = 'restaurant';
+        elseif ( strpos( $d, 'water' ) !== false ) $icon = 'water_drop';
+        elseif ( strpos( $d, 'frappe' ) !== false || strpos( $d, 'cold' ) !== false || strpos( $d, 'iced' ) !== false ) $icon = 'ac_unit';
+        return '<span class="material-symbols-outlined text-xs text-[#1A56DB] align-middle">' . $icon . '</span>';
     }
 }
 
@@ -214,9 +214,21 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 <?php if ( ! empty( $all_products ) ) : ?>
                     <div class="space-y-12 sm:space-y-16">
                         <?php
-                        $display_limit = min( 6, count( $all_products ) );
-                        for ( $idx = 0; $idx < $display_limit; $idx++ ) :
-                            $item = $all_products[ $idx ];
+                        $canonical_models = array();
+                        $seen_fams = array();
+                        foreach ( $all_products as $p_item ) {
+                            $f_k = '';
+                            foreach ( array('PREMIO'=>'premio','AMIGO'=>'amigo','DUO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOL'=>'solution','SPEC'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
+                                if ( stripos( $p_item['sku'], $nd ) !== false || stripos( $p_item['title'], $nd ) !== false ) { $f_k = $k; break; }
+                            }
+                            if ( $f_k ) {
+                                if ( isset( $seen_fams[ $f_k ] ) ) continue;
+                                $seen_fams[ $f_k ] = true;
+                            }
+                            $canonical_models[] = $p_item;
+                            if ( count( $canonical_models ) >= 6 ) break;
+                        }
+                        foreach ( $canonical_models as $idx => $item ) :
                             $is_even = ( $idx % 2 === 0 );
                             $card_uid = 'card-' . $item['id'] . '-' . $idx;
                             $m_key = '';
@@ -238,20 +250,20 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             <div class="lg:col-span-5 <?php echo $is_even ? 'lg:order-1' : 'lg:order-2'; ?> flex flex-col justify-center">
                                 <div class="relative bg-zinc-50 border border-zinc-200 p-4 sm:p-5 overflow-hidden group">
                                     <div class="flex items-center gap-1.5 mb-3 z-20 relative">
-                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="hardware"><span>☕ Machine Hardware</span></button>
+                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="hardware"><span class="material-symbols-outlined text-xs">precision_manufacturing</span><span>Machine Hardware</span></button>
                                         <?php if ( $has_menu_img ) : ?>
-                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="menu"><span>📱 Touchscreen Menu UI</span></button>
+                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="menu"><span class="material-symbols-outlined text-xs">touch_app</span><span>Touchscreen Menu UI</span></button>
                                         <?php endif; ?>
                                     </div>
                                     <!-- Tab 1: Machine Hardware Cutout + Multi-Angle Strip -->
                                     <div class="js-tab-pane flex flex-col justify-between" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-content="hardware">
-                                        <div class="relative aspect-[4/3] sm:aspect-square flex items-center justify-center overflow-hidden bg-white border border-zinc-200">
+                                        <div class="relative aspect-[4/3] sm:aspect-square flex items-center justify-center overflow-hidden bg-white border border-zinc-200 p-4 sm:p-6">
                                             <span class="absolute top-0 left-0 bg-[#FBBF24] text-black font-black text-[10px] uppercase px-2 py-0.5 tracking-wider z-10">MODEL: <?php echo esc_html( $item['sku'] ); ?></span>
                                             <label class="absolute top-0 right-0 z-10 flex items-center gap-1.5 bg-[#0A0A0A] text-white text-[10px] font-black uppercase px-2.5 py-1.5 cursor-pointer border border-zinc-700 hover:border-[#FBBF24] transition-all" title="Add to batch quote">
                                                 <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" data-id="<?php echo esc_attr( $item['id'] ); ?>" data-title="<?php echo esc_attr( $item['title'] ); ?>" data-sku="<?php echo esc_attr( $item['sku'] ); ?>">
                                                 <span class="tracking-wider">Add to Batch RFQ</span>
                                             </label>
-                                            <img id="main-img-<?php echo esc_attr( $card_uid ); ?>" src="<?php echo esc_url( $front_img ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" class="w-full h-full object-contain mix-blend-multiply transition-all duration-300" loading="lazy">
+                                            <img id="main-img-<?php echo esc_attr( $card_uid ); ?>" src="<?php echo esc_url( $front_img ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" class="w-full h-full max-h-[260px] sm:max-h-[320px] md:max-h-[360px] object-contain mix-blend-multiply transition-all duration-300 p-2 sm:p-3" loading="lazy">
                                         </div>
                                         <!-- Multi-Angle Thumbnail Strip -->
                                         <div class="mt-2.5 pt-2 border-t border-zinc-200 flex items-center justify-between gap-1.5">
@@ -290,7 +302,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                                         <?php if ( $b_img_url ) : ?>
                                                             <img src="<?php echo esc_url( $b_img_url ); ?>" alt="<?php echo esc_attr( $b_name ); ?>" class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy">
                                                         <?php else : ?>
-                                                            <span class="text-xl"><?php echo snap_b2b_beverage_icon( $b_name ); ?></span>
+                                                            <?php echo snap_b2b_beverage_icon( $b_name ); ?>
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="text-[9px] sm:text-[10px] font-bold uppercase tracking-tight text-[#0A0A0A] group-hover:text-[#1A56DB] line-clamp-1 w-full mt-1"><?php echo esc_html( $b_name ); ?></div>
@@ -388,7 +400,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                 </div>
                             </div>
                         </article>
-                        <?php endfor; ?>
+                        <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
             </section>
