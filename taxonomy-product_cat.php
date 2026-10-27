@@ -134,10 +134,10 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         ?>
 
         <!-- 1. Architectural Solution Hero -->
-        <section class="bg-[#0A0A0A] text-white relative overflow-hidden border-b-4 border-[#1A56DB] pt-36 md:pt-44 pb-16">
+        <section class="bg-[#0A0A0A] text-white relative overflow-hidden border-b-4 border-[#1A56DB] pt-32 sm:pt-36 md:pt-44 pb-12 sm:pb-16">
             <div class="absolute inset-0 industrial-diagonal bg-[#1A56DB] opacity-10 w-2/3 pointer-events-none"></div>
-            <div class="container mx-auto px-6 md:px-12 relative z-10">
-                <nav class="flex mb-6 space-x-2 text-[10px] md:text-xs font-black uppercase tracking-widest text-[#FBBF24]">
+            <div class="container mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+                <nav class="flex mb-4 sm:mb-6 space-x-2 text-[10px] md:text-xs font-black uppercase tracking-widest text-[#FBBF24]">
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="hover:text-white transition-colors">Home</a>
                     <span class="text-white/30">/</span>
                     <a href="<?php echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ); ?>" class="hover:text-white transition-colors">B2B Solutions</a>
@@ -146,65 +146,69 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 </nav>
 
                 <div class="max-w-4xl">
-                    <span class="inline-block bg-[#FBBF24] text-black font-black text-[11px] px-3.5 py-1 uppercase tracking-widest mb-4">
-                        Enterprise Solutions · Multi-Product Family Showcase
+                    <span class="inline-flex items-center gap-2 bg-[#FBBF24] text-black font-black text-[10px] sm:text-[11px] px-3.5 py-1.5 uppercase tracking-widest mb-4">
+                        <span class="w-2 h-2 bg-black inline-block"></span>
+                        Enterprise Fleet &amp; Facility Procurement · Complete Series Overview
                     </span>
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight uppercase leading-none mb-6">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight uppercase leading-[1.08] mb-5 sm:mb-6 break-words">
                         <?php echo esc_html( $category_name ); ?>
                     </h1>
-                    <p class="text-base sm:text-lg text-zinc-300 leading-relaxed font-medium mb-8 max-w-3xl">
+                    <p class="text-sm sm:text-base md:text-lg text-zinc-300 leading-relaxed font-medium mb-6 sm:mb-8 max-w-3xl">
                         <?php
                         if ( $category_desc ) {
                             echo wp_kses_post( $category_desc );
                         } else {
-                            echo "Complete industrial range engineered for heavy continuous operation. Standardized mounting, institutional volume pricing, and dedicated MEP technical support across India.";
+                            echo "Complete commercial brewing &amp; beverage automation fleet engineered for high-volume corporate and institutional campuses. Review technical throughput, compare engineering specifications, and generate consolidated multi-model Request for Quotations (RFQ) with verified GST input credit and factory warranty.";
                         }
                         ?>
                     </p>
 
                     <!-- Trust Pillars -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/10 mb-8">
-                        <div>
-                            <div class="text-[#FBBF24] font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-base">verified</span> Factory Direct
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-white/10 mb-6 sm:mb-8">
+                        <div class="bg-zinc-900/60 p-3 border border-white/10">
+                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-base">verified</span> Direct OEM Supply
                             </div>
-                            <div class="text-zinc-400 text-xs font-bold uppercase mt-1">Institutional Pricing</div>
+                            <div class="text-zinc-400 text-[10px] sm:text-xs font-bold uppercase mt-1">Tiered Volume Pricing</div>
                         </div>
-                        <div>
-                            <div class="text-[#FBBF24] font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-base">local_shipping</span> Pan-India
+                        <div class="bg-zinc-900/60 p-3 border border-white/10">
+                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-base">local_shipping</span> Pan-India Logistics
                             </div>
-                            <div class="text-zinc-400 text-xs font-bold uppercase mt-1">Insured Logistics</div>
+                            <div class="text-zinc-400 text-[10px] sm:text-xs font-bold uppercase mt-1">Insured Dock Delivery</div>
                         </div>
-                        <div>
-                            <div class="text-[#FBBF24] font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-base">engineering</span> ISO 9001:2015
+                        <div class="bg-zinc-900/60 p-3 border border-white/10">
+                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-base">engineering</span> Factory QA Certified
                             </div>
-                            <div class="text-zinc-400 text-xs font-bold uppercase mt-1">Quality Tested</div>
+                            <div class="text-zinc-400 text-[10px] sm:text-xs font-bold uppercase mt-1">100% Pre-Dispatch Inspected</div>
                         </div>
-                        <div>
-                            <div class="text-[#FBBF24] font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-base">receipt_long</span> 100% Compliant
+                        <div class="bg-zinc-900/60 p-3 border border-white/10">
+                            <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-base">receipt_long</span> Corporate GST Invoicing
                             </div>
-                            <div class="text-zinc-400 text-xs font-bold uppercase mt-1">GST Input Credit</div>
+                            <div class="text-zinc-400 text-[10px] sm:text-xs font-bold uppercase mt-1">Verified Input Tax Credit</div>
                         </div>
                     </div>
 
-                    <!-- Dual Action CTAs (Uniform 52px Height) -->
-                    <div class="flex flex-wrap items-center gap-3">
-                        <button class="h-[52px] bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black px-7 font-black uppercase text-xs md:text-sm tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all js-open-quote-modal" 
+                    <!-- Dual Action CTAs (Uniform 52px Height, Fully Adaptive Mobile & Desktop) -->
+                    <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
+                        <button class="h-[52px] w-full sm:w-auto bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black px-6 sm:px-7 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all js-open-quote-modal" 
                                 data-product="<?php echo esc_attr( $category_name ); ?>" 
-                                data-sku="CATEGORY-ALL" 
-                                data-custom-message="<?php echo esc_attr( "Bulk Inquiry for {$category_name} Series:\nPlease provide complete pricing catalogue, MOQ, and technical specification sheets." ); ?>">
+                                data-sku="SERIES-ALL" 
+                                data-custom-message="<?php echo esc_attr( "Bulk Price Inquiry for {$category_name} Series:\nPlease provide complete price schedule, MOQ tiers, and technical specification submittals for our facility." ); ?>"
+                                title="Request comprehensive price catalogue and volume tiers for the entire series">
                             <span class="material-symbols-outlined text-lg">request_quote</span>
-                            <span>Request Category RFQ</span>
+                            <span>Request Category Price List</span>
                         </button>
-                        <a href="tel:+919823012724" class="h-[52px] bg-white hover:bg-zinc-100 active:scale-95 text-black px-6 font-black uppercase text-xs md:text-sm tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all">
+                        <a href="tel:+919823012724" class="h-[52px] w-full sm:w-auto bg-white hover:bg-zinc-100 active:scale-95 text-black px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all"
+                           title="Speak directly with an enterprise equipment specialist">
                             <span class="material-symbols-outlined text-lg">call</span>
-                            <span>Call +91 98230 12724</span>
+                            <span>Call Technical Sales: +91 98230 12724</span>
                         </a>
-                        <a href="#spec-matrix" class="h-[52px] border-2 border-white/40 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-6 font-black uppercase text-xs md:text-sm tracking-widest flex items-center justify-center gap-2 bg-black/30 backdrop-blur-sm transition-all">
-                            <span>Compare All Models (<?php echo esc_html( $total_models ); ?>)</span>
+                        <a href="#spec-matrix" class="h-[52px] w-full sm:w-auto border-2 border-white/40 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 bg-black/30 backdrop-blur-sm transition-all"
+                           title="Scroll down to the 48-row interactive specification comparison matrix">
+                            <span>Compare Technical Specs (<?php echo esc_html( $total_models ); ?>)</span>
                             <span class="material-symbols-outlined text-lg">arrow_downward</span>
                         </a>
                     </div>
@@ -212,117 +216,129 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             </div>
         </section>
 
-        <!-- 2. Sticky Subnav Bar -->
-        <div class="sticky top-20 z-40 bg-[#0A0A0A]/95 backdrop-blur-md border-b-2 border-[#1A56DB] px-6 md:px-12 py-3.5 shadow-xl">
-            <div class="container mx-auto flex items-center justify-between gap-4">
-                <div class="flex items-center gap-6 overflow-x-auto no-scrollbar text-xs font-bold uppercase tracking-widest">
-                    <a href="#flagship-showcase" class="text-white hover:text-[#FBBF24] transition-colors whitespace-nowrap flex items-center gap-1.5">
-                        <span class="w-2 h-2 bg-[#FBBF24] inline-block"></span> Featured Models
+        <!-- 2. Sticky Subnav Bar (Adaptive & Clarified) -->
+        <div class="sticky top-20 z-40 bg-[#0A0A0A]/95 backdrop-blur-md border-b-2 border-[#1A56DB] px-4 sm:px-6 md:px-12 py-3 shadow-xl">
+            <div class="container mx-auto flex items-center justify-between gap-3">
+                <div class="flex items-center gap-4 sm:gap-6 overflow-x-auto no-scrollbar text-xs font-bold uppercase tracking-wider py-1">
+                    <a href="#flagship-showcase" class="text-white hover:text-[#FBBF24] transition-colors whitespace-nowrap flex items-center gap-1.5 shrink-0">
+                        <span class="w-2 h-2 bg-[#FBBF24] inline-block"></span> Flagship Series (<?php echo esc_html( min( 6, $total_models ) ); ?>)
                     </a>
-                    <a href="#spec-matrix" class="text-zinc-400 hover:text-white transition-colors whitespace-nowrap">
-                        Technical Comparison Matrix (<?php echo esc_html( $total_models ); ?>)
+                    <a href="#spec-matrix" class="text-zinc-400 hover:text-white transition-colors whitespace-nowrap shrink-0">
+                        Spec Matrix (<?php echo esc_html( $total_models ); ?>)
                     </a>
-                    <a href="#procurement-faq" class="text-zinc-400 hover:text-white transition-colors whitespace-nowrap hidden sm:inline">
-                        Procurement &amp; Warranty
+                    <a href="#procurement-faq" class="text-zinc-400 hover:text-white transition-colors whitespace-nowrap shrink-0 hidden md:inline">
+                        Procurement &amp; Warranty Terms
                     </a>
                 </div>
-                <div class="flex items-center gap-2.5 shrink-0">
-                    <span id="sticky-counter" class="text-[#FBBF24] font-black text-xs uppercase tracking-widest hidden sm:inline mr-1">
-                        <span id="sticky-counter-num">0</span> Selected
+                <div class="flex items-center gap-2 shrink-0">
+                    <span id="sticky-counter" class="text-[#FBBF24] font-black text-[11px] uppercase tracking-wider hidden sm:inline mr-1">
+                        <span id="sticky-counter-num">0</span> Models Selected
                     </span>
-                    <a href="tel:+919823012724" class="h-[38px] border-2 border-white/30 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white text-[11px] font-black uppercase px-3.5 flex items-center justify-center gap-1.5 transition-all">
+                    <a href="tel:+919823012724" class="h-[38px] border-2 border-white/30 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white text-[11px] font-black uppercase px-3 flex items-center justify-center gap-1.5 transition-all" title="Call technical sales directly">
                         <span class="material-symbols-outlined text-sm">call</span>
-                        <span class="hidden sm:inline">Call Sales</span>
+                        <span class="hidden md:inline">Call Sales</span>
                     </a>
-                    <button class="h-[38px] bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black text-[11px] font-black uppercase px-4 flex items-center justify-center gap-1.5 transition-all shadow-md js-open-quote-modal" 
+                    <button class="h-[38px] bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black text-[11px] font-black uppercase px-3.5 flex items-center justify-center gap-1.5 transition-all shadow-md js-open-quote-modal" 
                             data-product="<?php echo esc_attr( $category_name ); ?>" 
-                            data-sku="SERIES-QUOTE">
+                            data-sku="SERIES-QUOTE"
+                            title="Request a custom bulk quotation for this series">
                         <span class="material-symbols-outlined text-sm">request_quote</span>
-                        <span>Request Quote</span>
+                        <span>Series RFQ</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <main class="container mx-auto px-6 md:px-12 py-16">
+        <main class="container mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16">
             <!-- 3. Flagship Alternating Split Blocks (Chai Point Style) -->
-            <section id="flagship-showcase" class="mb-24">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 border-b-4 border-[#1A56DB] pb-4">
+            <section id="flagship-showcase" class="mb-20 sm:mb-24">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12 border-b-4 border-[#1A56DB] pb-4">
                     <div>
-                        <span class="text-[#1A56DB] font-black uppercase tracking-widest text-xs">Flagship Industrial Series</span>
-                        <h2 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tight text-[#0A0A0A]">
-                            Engineered For Continuous Operation
+                        <span class="text-[#1A56DB] font-black uppercase tracking-widest text-xs flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 bg-[#1A56DB] inline-block"></span>
+                            Flagship Commercial Fleet
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase tracking-tight text-[#0A0A0A] mt-1">
+                            Engineered For Continuous Multi-Shift Operation
                         </h2>
                     </div>
-                    <p class="text-zinc-500 font-medium text-xs md:text-sm max-w-md">
-                        Review high-capacity models with detailed engineering specs. Select multiple items to request combined institutional pricing.
+                    <p class="text-zinc-600 font-medium text-xs sm:text-sm max-w-md">
+                        Review high-capacity models with detailed engineering specs. Select multiple items using checkboxes to request a consolidated institutional quotation.
                     </p>
                 </div>
 
                 <?php if ( ! empty( $all_products ) ) : ?>
-                    <div class="space-y-16">
+                    <div class="space-y-12 sm:space-y-16">
                         <?php
                         $display_limit = min( 6, count( $all_products ) );
                         for ( $idx = 0; $idx < $display_limit; $idx++ ) :
                             $item = $all_products[ $idx ];
                             $is_even = ( $idx % 2 === 0 );
                         ?>
-                        <article class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white border-2 border-zinc-200 p-6 sm:p-10 relative transition-all duration-300 hover:border-black" style="box-shadow: 6px 6px 0px 0px #1A56DB;">
+                        <article class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center bg-white border-2 border-zinc-200 p-5 sm:p-8 md:p-10 relative transition-all duration-300 hover:border-black" style="box-shadow: 6px 6px 0px 0px #1A56DB;">
                             
-                            <!-- Visual Column -->
+                            <!-- Visual Column (Adaptive Aspect Ratio & Lazy Loaded) -->
                             <div class="lg:col-span-5 <?php echo $is_even ? 'lg:order-1' : 'lg:order-2'; ?> flex flex-col justify-center">
-                                <div class="relative aspect-square bg-zinc-50 border border-zinc-200 flex items-center justify-center p-8 overflow-hidden group">
+                                <div class="relative aspect-[4/3] sm:aspect-square bg-zinc-50 border border-zinc-200 flex items-center justify-center p-6 sm:p-8 overflow-hidden group">
                                     <span class="absolute top-3 left-3 bg-[#FBBF24] text-black font-black text-[10px] uppercase px-2.5 py-1 tracking-wider z-10">
                                         MODEL: <?php echo esc_html( $item['sku'] ); ?>
                                     </span>
 
-                                    <!-- Quick Batch Select Checkbox -->
-                                    <label class="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-[#0A0A0A] text-white text-[10px] font-black uppercase px-2.5 py-1 cursor-pointer border border-zinc-700 hover:border-[#FBBF24] transition-all">
-                                        <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-3.5 h-3.5 cursor-pointer" 
+                                    <!-- Quick Batch Select Checkbox with High-Clarity Label & Touch Hit-Area -->
+                                    <label class="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-[#0A0A0A] text-white text-[10px] font-black uppercase px-2.5 py-1.5 cursor-pointer border border-zinc-700 hover:border-[#FBBF24] transition-all"
+                                           title="Check this box to include this model in your combined bulk RFQ">
+                                        <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" 
                                                data-id="<?php echo esc_attr( $item['id'] ); ?>" 
                                                data-title="<?php echo esc_attr( $item['title'] ); ?>" 
                                                data-sku="<?php echo esc_attr( $item['sku'] ); ?>">
-                                        <span>Select for Quote</span>
+                                        <span class="tracking-wider">Add to Batch RFQ</span>
                                     </label>
 
                                     <img src="<?php echo esc_url( $item['image_url'] ); ?>" 
                                          alt="<?php echo esc_attr( $item['title'] ); ?>" 
-                                         class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500">
+                                         class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+                                         loading="lazy">
                                 </div>
                             </div>
 
                             <!-- Specification & Action Column -->
                             <div class="lg:col-span-7 <?php echo $is_even ? 'lg:order-2' : 'lg:order-1'; ?> flex flex-col justify-between">
                                 <div>
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <span class="bg-[#1A56DB] text-white font-black text-[9px] uppercase px-2 py-0.5 tracking-widest">B2B Heavy Duty</span>
-                                        <span class="text-zinc-500 text-xs font-bold uppercase tracking-wider">Institutional Pricing Only</span>
+                                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                                        <span class="bg-[#1A56DB] text-white font-black text-[9px] uppercase px-2 py-0.5 tracking-widest">Commercial Heavy Duty</span>
+                                        <span class="text-zinc-500 text-[11px] font-bold uppercase tracking-wider">Institutional &amp; Fleet Pricing Only</span>
                                     </div>
-                                    <h3 class="text-2xl sm:text-3xl font-extrabold uppercase text-[#0A0A0A] tracking-tight mb-3">
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold uppercase text-[#0A0A0A] tracking-tight mb-2">
                                         <?php echo esc_html( $item['title'] ); ?>
                                     </h3>
                                     <?php if ( ! empty( $item['excerpt'] ) ) : ?>
-                                        <p class="text-zinc-600 text-sm font-medium mb-6 leading-relaxed">
+                                        <p class="text-zinc-600 text-xs sm:text-sm font-medium mb-5 leading-relaxed">
                                             <?php echo esc_html( $item['excerpt'] ); ?>
                                         </p>
                                     <?php endif; ?>
 
-                                    <!-- Technical Specs Table -->
+                                    <!-- Technical Specs Table with Clear Parameter Headers -->
                                     <div class="border border-zinc-200 mb-6 overflow-hidden">
                                         <table class="w-full text-left text-xs">
+                                            <thead class="bg-zinc-100 text-[10px] font-black uppercase text-zinc-600 border-b border-zinc-200">
+                                                <tr>
+                                                    <th class="py-2 px-3 sm:px-3.5 border-r border-zinc-200 w-2/5 sm:w-1/3">Engineering Parameter</th>
+                                                    <th class="py-2 px-3 sm:px-3.5">Verified Specification</th>
+                                                </tr>
+                                            </thead>
                                             <tbody class="divide-y divide-zinc-200">
                                                 <?php
                                                 if ( ! empty( $item['specs'] ) ) {
                                                     $spec_rows = array_slice( $item['specs'], 0, 5 );
                                                     foreach ( $spec_rows as $spec ) {
                                                         echo '<tr class="odd:bg-zinc-50 even:bg-white">';
-                                                        echo '<td class="py-2.5 px-3.5 font-bold uppercase text-zinc-500 w-1/3 border-r border-zinc-200">' . esc_html( $spec['name'] ) . '</td>';
-                                                        echo '<td class="py-2.5 px-3.5 font-extrabold text-[#0A0A0A]">' . esc_html( $spec['value'] ) . '</td>';
+                                                        echo '<td class="py-2.5 px-3 sm:px-3.5 font-bold uppercase text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200">' . esc_html( $spec['name'] ) . '</td>';
+                                                        echo '<td class="py-2.5 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]">' . esc_html( $spec['value'] ) . '</td>';
                                                         echo '</tr>';
                                                     }
                                                 } else {
-                                                    echo '<tr class="bg-zinc-50"><td class="py-2.5 px-3.5 font-bold text-zinc-500 w-1/3 border-r border-zinc-200">DUTY CYCLE</td><td class="py-2.5 px-3.5 font-extrabold text-[#0A0A0A]">Continuous 24/7 Heavy Duty</td></tr>';
-                                                    echo '<tr class="bg-white"><td class="py-2.5 px-3.5 font-bold text-zinc-500 w-1/3 border-r border-zinc-200">WARRANTY</td><td class="py-2.5 px-3.5 font-extrabold text-[#0A0A0A]">Comprehensive Pan-India AMC Available</td></tr>';
+                                                    echo '<tr class="bg-zinc-50"><td class="py-2.5 px-3 sm:px-3.5 font-bold text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200">DUTY CYCLE</td><td class="py-2.5 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]">Continuous 24/7 Heavy Duty</td></tr>';
+                                                    echo '<tr class="bg-white"><td class="py-2.5 px-3 sm:px-3.5 font-bold text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200">WARRANTY &amp; AMC</td><td class="py-2.5 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]">Comprehensive Pan-India AMC Available</td></tr>';
                                                 }
                                                 ?>
                                             </tbody>
@@ -330,17 +346,19 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     </div>
                                 </div>
 
-                                <!-- Action Button Bar (Equal Width & Equal 48px Height Grid) -->
-                                <div class="grid grid-cols-2 <?php echo ! empty( $item['brochure_url'] ) ? 'sm:grid-cols-4' : 'sm:grid-cols-3'; ?> gap-2.5 pt-3 w-full">
+                                <!-- Action Button Bar (Equal Width & Equal 48px Height Grid Across All Viewports) -->
+                                <div class="grid grid-cols-2 <?php echo ! empty( $item['brochure_url'] ) ? 'sm:grid-cols-4' : 'sm:grid-cols-3'; ?> gap-2 sm:gap-2.5 pt-2 w-full">
                                     <button class="h-[48px] w-full bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black font-black uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-md transition-all js-open-quote-modal"
                                             data-product="<?php echo esc_attr( $item['title'] ); ?>" 
-                                            data-sku="<?php echo esc_attr( $item['sku'] ); ?>">
+                                            data-sku="<?php echo esc_attr( $item['sku'] ); ?>"
+                                            title="Request an official quotation for this specific model">
                                         <span class="material-symbols-outlined text-base">request_quote</span>
                                         <span>Quote</span>
                                     </button>
 
                                     <a href="tel:+919823012724" 
-                                       class="h-[48px] w-full bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md">
+                                       class="h-[48px] w-full bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"
+                                       title="Call technical sales directly: +91 98230 12724">
                                         <span class="material-symbols-outlined text-base">call</span>
                                         <span>Call</span>
                                     </a>
@@ -348,14 +366,16 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     <a href="https://wa.me/919823012724?text=<?php echo rawurlencode( "Hi Snap Marketing, I would like to inquire about {$item['title']} (Model: {$item['sku']})." ); ?>" 
                                        target="_blank" 
                                        rel="noopener noreferrer" 
-                                       class="h-[48px] w-full bg-[#25D366] hover:bg-[#128C7E] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md">
+                                       class="h-[48px] w-full bg-[#25D366] hover:bg-[#128C7E] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"
+                                       title="Inquire via WhatsApp with an equipment specialist">
                                         <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                                         <span>WhatsApp</span>
                                     </a>
 
                                     <?php if ( ! empty( $item['brochure_url'] ) ) : ?>
                                         <a href="<?php echo esc_url( $item['brochure_url'] ); ?>" target="_blank" rel="noopener noreferrer" 
-                                           class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md">
+                                           class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"
+                                           title="Download the full engineering datasheet in PDF format">
                                             <span class="material-symbols-outlined text-base">download</span>
                                             <span>Brochure</span>
                                         </a>
@@ -369,12 +389,15 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             </section>
 
             <!-- 4. Comprehensive Technical Comparison Matrix (All SKUs) -->
-            <section id="spec-matrix" class="mb-24 pt-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b-4 border-[#1A56DB] pb-4">
+            <section id="spec-matrix" class="mb-20 sm:mb-24 pt-6 sm:pt-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 border-b-4 border-[#1A56DB] pb-4">
                     <div>
-                        <span class="text-[#1A56DB] font-black uppercase tracking-widest text-xs">Technical Comparison</span>
-                        <h2 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tight text-[#0A0A0A]">
-                            Complete Family Comparison Matrix
+                        <span class="text-[#1A56DB] font-black uppercase tracking-widest text-xs flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 bg-[#1A56DB] inline-block"></span>
+                            Technical Comparison Matrix
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase tracking-tight text-[#0A0A0A] mt-1">
+                            Complete Family Comparison &amp; Engineering Specs
                         </h2>
                     </div>
                     <div class="text-xs font-bold uppercase text-zinc-500">
@@ -382,17 +405,26 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     </div>
                 </div>
 
+                <!-- Adaptive Mobile Swipe Banner -->
+                <div class="lg:hidden flex items-center justify-between text-[11px] font-bold text-zinc-700 bg-yellow-50/90 px-3.5 py-2.5 border-2 border-b-0 border-[#0A0A0A]">
+                    <div class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm text-[#1A56DB]">swipe</span>
+                        <span>Swipe horizontally to compare full specifications</span>
+                    </div>
+                    <span class="text-[10px] uppercase font-black text-[#1A56DB] shrink-0">7 Columns &rarr;</span>
+                </div>
+
                 <div class="overflow-x-auto border-2 border-[#0A0A0A] bg-white shadow-2xl">
-                    <table class="w-full text-left text-xs border-collapse">
+                    <table class="w-full text-left text-xs border-collapse min-w-[700px]">
                         <thead>
                             <tr class="bg-[#1A56DB] text-white font-black uppercase tracking-wider text-[11px]">
-                                <th class="p-3.5 text-center w-12 border-r border-blue-600">Select</th>
-                                <th class="p-3.5 border-r border-blue-600">Model &amp; SKU</th>
-                                <th class="p-3.5 border-r border-blue-600">Primary Capacity</th>
-                                <th class="p-3.5 border-r border-blue-600">Operating Spec</th>
-                                <th class="p-3.5 border-r border-blue-600">Application</th>
-                                <th class="p-3.5 border-r border-blue-600">Pricing</th>
-                                <th class="p-3.5 text-center w-36">Action</th>
+                                <th class="p-3 text-center w-14 border-r border-blue-600" title="Check to include model in consolidated RFQ">RFQ [✓]</th>
+                                <th class="p-3 border-r border-blue-600">Model Name &amp; SKU</th>
+                                <th class="p-3 border-r border-blue-600">Throughput / Staff Capacity</th>
+                                <th class="p-3 border-r border-blue-600">Brewing &amp; Duty Cycle</th>
+                                <th class="p-3 border-r border-blue-600">Target Deployment</th>
+                                <th class="p-3 border-r border-blue-600">Commercial Terms</th>
+                                <th class="p-3 text-center w-36">Quick Actions</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-zinc-200">
@@ -401,18 +433,21 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                 $spec2 = ! empty( $row['specs'][1] ) ? $row['specs'][1]['value'] : 'Standard 230V / 50Hz';
                                 $spec3 = ! empty( $row['specs'][2] ) ? $row['specs'][2]['value'] : 'Commercial Use';
                             ?>
-                            <tr class="odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/50 transition-colors">
-                                <td class="p-3.5 text-center border-r border-zinc-200">
-                                    <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" 
-                                           data-id="<?php echo esc_attr( $row['id'] ); ?>" 
-                                           data-title="<?php echo esc_attr( $row['title'] ); ?>" 
-                                           data-sku="<?php echo esc_attr( $row['sku'] ); ?>">
+                            <tr class="odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors">
+                                <td class="p-3 text-center border-r border-zinc-200">
+                                    <label class="cursor-pointer inline-flex items-center justify-center p-1" title="Select for combined batch quote">
+                                        <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" 
+                                               data-id="<?php echo esc_attr( $row['id'] ); ?>" 
+                                               data-title="<?php echo esc_attr( $row['title'] ); ?>" 
+                                               data-sku="<?php echo esc_attr( $row['sku'] ); ?>">
+                                    </label>
                                 </td>
-                                <td class="p-3.5 border-r border-zinc-200">
+                                <td class="p-3 border-r border-zinc-200">
                                     <div class="flex items-center gap-3">
                                         <img src="<?php echo esc_url( $row['thumb_url'] ); ?>" 
                                              alt="<?php echo esc_attr( $row['title'] ); ?>" 
-                                             class="w-10 h-10 object-contain bg-white border border-zinc-200 p-0.5 shrink-0">
+                                             class="w-10 h-10 object-contain bg-white border border-zinc-200 p-0.5 shrink-0"
+                                             loading="lazy">
                                         <div>
                                             <div class="font-black text-[#0A0A0A] uppercase leading-tight"><?php echo esc_html( $row['title'] ); ?></div>
                                             <span class="inline-block text-[10px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.5 mt-0.5">
@@ -421,20 +456,21 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                         </div>
                                     </div>
                                 </td>
-                                <td class="p-3.5 font-bold text-zinc-700 border-r border-zinc-200"><?php echo esc_html( $spec1 ); ?></td>
-                                <td class="p-3.5 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec2 ); ?></td>
-                                <td class="p-3.5 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec3 ); ?></td>
-                                <td class="p-3.5 border-r border-zinc-200">
-                                    <span class="text-[10px] font-black uppercase text-zinc-500 tracking-wider">Institutional</span>
+                                <td class="p-3 font-bold text-zinc-800 border-r border-zinc-200"><?php echo esc_html( $spec1 ); ?></td>
+                                <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec2 ); ?></td>
+                                <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec3 ); ?></td>
+                                <td class="p-3 border-r border-zinc-200">
+                                    <span class="text-[10px] font-black uppercase text-zinc-600 tracking-wider bg-zinc-200/70 px-1.5 py-0.5">Institutional</span>
                                 </td>
-                                <td class="p-3.5 text-center">
+                                <td class="p-3 text-center">
                                     <div class="flex items-center justify-center gap-1.5">
                                         <button class="h-[34px] flex-1 min-w-[65px] bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-[10px] tracking-wider px-2.5 flex items-center justify-center transition-colors js-open-quote-modal" 
                                                 data-product="<?php echo esc_attr( $row['title'] ); ?>" 
-                                                data-sku="<?php echo esc_attr( $row['sku'] ); ?>">
+                                                data-sku="<?php echo esc_attr( $row['sku'] ); ?>"
+                                                title="Request single model quotation">
                                             Quote
                                         </button>
-                                        <a href="tel:+919823012724" class="h-[34px] w-[34px] bg-zinc-100 hover:bg-[#FBBF24] hover:text-black text-[#0A0A0A] border border-zinc-300 transition-colors flex items-center justify-center shrink-0" title="Call Sales">
+                                        <a href="tel:+919823012724" class="h-[34px] w-[34px] bg-zinc-100 hover:bg-[#FBBF24] hover:text-black text-[#0A0A0A] border border-zinc-300 transition-colors flex items-center justify-center shrink-0" title="Call Technical Sales: +91 98230 12724">
                                             <span class="material-symbols-outlined text-xs">call</span>
                                         </a>
                                     </div>
@@ -443,38 +479,61 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    
+                    <!-- Matrix Table Footer Engineering Note -->
+                    <div class="p-3.5 sm:p-4 bg-zinc-50 border-t-2 border-zinc-200 text-[11px] text-zinc-600 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <p><strong>Engineering Note:</strong> Custom 3-phase 415V electrical power supply, direct plumbing lines, and institutional AMC packages available upon request.</p>
+                        <a href="tel:+919823012724" class="text-[#1A56DB] hover:underline font-bold whitespace-nowrap flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">call</span> Speak with an Application Engineer &rarr;
+                        </a>
+                    </div>
                 </div>
             </section>
 
             <!-- 5. Procurement FAQ & Trust Section -->
-            <section id="procurement-faq" class="bg-zinc-100 border-2 border-zinc-300 p-8 md:p-12 mb-16">
+            <section id="procurement-faq" class="bg-zinc-100 border-2 border-zinc-300 p-6 sm:p-8 md:p-12 mb-16">
                 <div class="max-w-4xl mx-auto">
-                    <span class="text-[#1A56DB] font-black uppercase tracking-widest text-xs">Procurement Guidelines</span>
-                    <h2 class="text-2xl md:text-3xl font-extrabold uppercase text-[#0A0A0A] mb-8">
-                        Institutional Supply &amp; Technical Support
+                    <span class="text-[#1A56DB] font-black uppercase tracking-widest text-xs flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 bg-[#1A56DB] inline-block"></span>
+                        Procurement Guidelines
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold uppercase text-[#0A0A0A] mt-1 mb-8">
+                        Institutional Supply, GST Compliance &amp; Support
                     </h2>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-zinc-700 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-xs text-zinc-700 mb-8">
                         <div class="bg-white p-5 border border-zinc-200">
                             <h4 class="font-black text-sm uppercase text-[#0A0A0A] mb-2 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-[#1A56DB]">verified_user</span> Warranty &amp; AMC
+                                <span class="material-symbols-outlined text-[#1A56DB]">verified_user</span> Warranty &amp; Pan-India AMC
                             </h4>
-                            <p class="leading-relaxed">All commercial equipment carries 1 to 5 years manufacturer warranty backed by factory certified engineers pan-India. Annual Maintenance Contracts (AMC) available.</p>
+                            <p class="leading-relaxed">All commercial equipment carries 1 to 5 years manufacturer warranty backed by factory certified engineers across India. Annual Maintenance Contracts (AMC) with guaranteed SLA response times available.</p>
                         </div>
                         <div class="bg-white p-5 border border-zinc-200">
                             <h4 class="font-black text-sm uppercase text-[#0A0A0A] mb-2 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-[#1A56DB]">payments</span> Invoicing &amp; Taxes
                             </h4>
-                            <p class="leading-relaxed">100% compliant GST invoices issued for corporate input tax credit. Formal purchase orders (PO) accepted for verified corporate accounts.</p>
+                            <p class="leading-relaxed">100% compliant GST invoices issued with standard HSN codes for corporate input tax credit (ITC). Formal corporate Purchase Orders (PO) accepted for verified accounts.</p>
+                        </div>
+                        <div class="bg-white p-5 border border-zinc-200">
+                            <h4 class="font-black text-sm uppercase text-[#0A0A0A] mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[#1A56DB]">local_shipping</span> Pan-India Logistics &amp; Offloading
+                            </h4>
+                            <p class="leading-relaxed">Insured freight delivery directly to your facility or loading dock. Turnkey positioning and MEP hookup coordination available across major metro regions.</p>
+                        </div>
+                        <div class="bg-white p-5 border border-zinc-200">
+                            <h4 class="font-black text-sm uppercase text-[#0A0A0A] mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[#1A56DB]">architecture</span> Technical MEP Drawings &amp; CAD Blocks
+                            </h4>
+                            <p class="leading-relaxed">Architectural floor plan CAD blocks, water pressure requirements, and electrical single-line diagrams (SLD) provided to consulting engineers upon RFQ.</p>
                         </div>
                     </div>
 
                     <div class="bg-[#1A56DB] text-white p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
                         <div>
                             <h3 class="text-xl font-black uppercase tracking-tight">Need A Turnkey Bill of Quantities (BOQ)?</h3>
-                            <p class="text-zinc-200 text-xs mt-1">Upload your architectural drawing or equipment schedule for instant engineering appraisal.</p>
+                            <p class="text-zinc-200 text-xs mt-1">Upload your architectural drawing or equipment schedule for instant engineering appraisal and volume discount schedule.</p>
                         </div>
-                        <a href="<?php echo esc_url( home_url( '/request-a-quote/' ) ); ?>" class="bg-[#FBBF24] text-black font-black uppercase text-xs tracking-widest py-3.5 px-6 hover:bg-yellow-400 shrink-0 transition-all">
+                        <a href="<?php echo esc_url( home_url( '/request-a-quote/' ) ); ?>" class="bg-[#FBBF24] text-black font-black uppercase text-xs tracking-widest py-3.5 px-6 hover:bg-yellow-400 shrink-0 transition-all shadow-md">
                             Submit BOQ Schedule
                         </a>
                     </div>
@@ -482,26 +541,29 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             </section>
         </main>
 
-        <!-- 6. Floating Multi-SKU RFQ Batch Drawer (Client-side interactive) -->
-        <div id="b2b-floating-rfq-bar" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl bg-[#0A0A0A] text-white border-2 border-[#FBBF24] p-4 flex flex-col sm:flex-row items-center justify-between gap-4 transition-all duration-300 transform translate-y-32 opacity-0 pointer-events-none shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+        <!-- 6. Floating Multi-SKU RFQ Batch Drawer (Fully Adaptive Mobile & Desktop) -->
+        <div id="b2b-floating-rfq-bar" class="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-[95%] max-w-4xl bg-[#0A0A0A] text-white border-2 border-[#FBBF24] p-3.5 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 transition-all duration-300 transform translate-y-32 opacity-0 pointer-events-none shadow-[0_10px_40px_rgba(0,0,0,0.85)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
             <div class="flex items-center gap-3 overflow-hidden">
                 <span class="w-8 h-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-sm shrink-0" id="rfq-badge-count">0</span>
                 <div>
-                    <div class="font-black text-xs uppercase tracking-wider text-white">Models Selected for Batch Quote</div>
+                    <div class="font-black text-xs uppercase tracking-wider text-white flex items-center gap-2">
+                        <span>Consolidated Multi-Model RFQ Builder</span>
+                        <span class="text-[9px] bg-[#1A56DB] text-white px-1.5 py-0.5 uppercase tracking-widest hidden sm:inline">Volume Pricing</span>
+                    </div>
                     <div id="rfq-chip-container" class="flex flex-wrap gap-1.5 mt-1 text-[10px] text-zinc-300 font-mono"></div>
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 shrink-0">
-                <a href="tel:+919823012724" class="h-[46px] hidden sm:flex items-center justify-center gap-1.5 border-2 border-white/40 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white font-bold uppercase text-xs px-4 transition-all">
+            <div class="flex items-center justify-end gap-2.5 sm:gap-3 shrink-0">
+                <a href="tel:+919823012724" class="h-[44px] sm:h-[46px] hidden md:flex items-center justify-center gap-1.5 border-2 border-white/40 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white font-bold uppercase text-xs px-3.5 transition-all">
                     <span class="material-symbols-outlined text-sm">call</span>
                     <span>Call Sales</span>
                 </a>
                 <button id="rfq-clear-all" class="text-zinc-400 hover:text-white text-xs uppercase font-bold underline px-2 py-1">
                     Clear
                 </button>
-                <button id="rfq-request-batch-btn" class="h-[46px] bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black font-black uppercase text-xs tracking-widest px-6 flex items-center justify-center gap-2 shadow-lg transition-all js-open-quote-modal">
-                    <span>Request Batch Quote</span>
+                <button id="rfq-request-batch-btn" class="h-[44px] sm:h-[46px] bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black font-black uppercase text-xs tracking-widest px-5 sm:px-6 flex items-center justify-center gap-2 shadow-lg transition-all js-open-quote-modal">
+                    <span id="rfq-btn-text">Request Batch Quote</span>
                     <span class="material-symbols-outlined text-base">arrow_forward</span>
                 </button>
             </div>
@@ -516,6 +578,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             var stickyCounter = document.getElementById('sticky-counter');
             var stickyCounterNum = document.getElementById('sticky-counter-num');
             var batchBtn = document.getElementById('rfq-request-batch-btn');
+            var btnText = document.getElementById('rfq-btn-text');
             var clearBtn = document.getElementById('rfq-clear-all');
             var checkboxes = document.querySelectorAll('.b2b-sku-checkbox');
 
@@ -523,6 +586,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 var count = selectedSKUs.length;
                 if (badgeCount) badgeCount.textContent = count;
                 if (stickyCounterNum) stickyCounterNum.textContent = count;
+                if (btnText) btnText.textContent = count > 0 ? 'Request Batch Quote (' + count + (count === 1 ? ' Model' : ' Models') + ')' : 'Request Batch Quote';
 
                 if (count > 0) {
                     floatingBar.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
