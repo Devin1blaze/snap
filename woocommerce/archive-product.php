@@ -136,9 +136,23 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             'amigo'     => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/amigo-front.png', 'left' => $theme_uri . '/images/nestle-machines/hardware/amigo-left.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/amigo-right.png', 'menu' => $theme_uri . '/images/nestle-machines/amigo-menu.webp' ),
             'duo_gusto' => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/duo-gusto-front.png', 'left' => $theme_uri . '/images/nestle-machines/hardware/duo-gusto-left.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/duo-gusto-right.png', 'menu' => $theme_uri . '/images/nestle-machines/duo-gusto-menu.webp' ),
             'solution'  => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/solution-front.webp', 'left' => $theme_uri . '/images/nestle-machines/hardware/solution-left.webp', 'right' => $theme_uri . '/images/nestle-machines/hardware/solution-right.webp', 'menu' => $theme_uri . '/images/nestle-machines/solution-menu.webp' ),
-            'spectra'   => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/spectra-front.png', 'left' => $theme_uri . '/images/nestle-machines/hardware/spectra-left.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/spectra-right.jpg', 'menu' => $theme_uri . '/images/nestle-machines/spectra-menu.webp' ),
+            'spectra'   => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/spectra-front.png', 'left' => $theme_uri . '/images/nestle-machines/hardware/spectra-front.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/spectra-front.png', 'menu' => $theme_uri . '/images/nestle-machines/spectra-menu.webp' ),
             'frio'      => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/frio-front.webp', 'left' => $theme_uri . '/images/nestle-machines/hardware/frio-left.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/frio-right.png', 'menu' => $theme_uri . '/images/nestle-machines/frio-menu.webp' ),
         );
+        $canonical_models = array();
+        $seen_fams = array();
+        foreach ( $all_products as $p_item ) {
+            $f_k = '';
+            foreach ( array('PREMIO'=>'premio','AMIGO'=>'amigo','DUO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOL'=>'solution','SPEC'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
+                if ( stripos( $p_item['sku'], $nd ) !== false || stripos( $p_item['title'], $nd ) !== false ) { $f_k = $k; break; }
+            }
+            if ( $f_k && isset( $seen_fams[ $f_k ] ) ) continue;
+            if ( $f_k ) $seen_fams[ $f_k ] = true;
+            $p_item['model_key'] = $f_k;
+            $canonical_models[] = $p_item;
+            if ( count( $canonical_models ) >= 6 ) break;
+        }
+        if ( empty( $canonical_models ) ) $canonical_models = $all_products;
         ?>
 
         <!-- 1. Architectural Solution Hero -->
@@ -214,27 +228,10 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 <?php if ( ! empty( $all_products ) ) : ?>
                     <div class="space-y-12 sm:space-y-16">
                         <?php
-                        $canonical_models = array();
-                        $seen_fams = array();
-                        foreach ( $all_products as $p_item ) {
-                            $f_k = '';
-                            foreach ( array('PREMIO'=>'premio','AMIGO'=>'amigo','DUO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOL'=>'solution','SPEC'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
-                                if ( stripos( $p_item['sku'], $nd ) !== false || stripos( $p_item['title'], $nd ) !== false ) { $f_k = $k; break; }
-                            }
-                            if ( $f_k ) {
-                                if ( isset( $seen_fams[ $f_k ] ) ) continue;
-                                $seen_fams[ $f_k ] = true;
-                            }
-                            $canonical_models[] = $p_item;
-                            if ( count( $canonical_models ) >= 6 ) break;
-                        }
                         foreach ( $canonical_models as $idx => $item ) :
                             $is_even = ( $idx % 2 === 0 );
                             $card_uid = 'card-' . $item['id'] . '-' . $idx;
-                            $m_key = '';
-                            foreach ( array('PREMIO'=>'premio','AMIGO'=>'amigo','DUO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOL'=>'solution','SPEC'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
-                                if ( stripos( $item['sku'], $nd ) !== false || stripos( $item['title'], $nd ) !== false ) { $m_key = $k; break; }
-                            }
+                            $m_key = ! empty( $item['model_key'] ) ? $item['model_key'] : '';
                             $m_data = ( $m_key && isset( $nestle_hardware[ $m_key ] ) ) ? $nestle_hardware[ $m_key ] : null;
                             $front_img = $m_data ? $m_data['front'] : $item['image_url'];
                             $menu_img = $m_data ? $m_data['menu'] : ( ! empty( $item['menu_image_url'] ) ? $item['menu_image_url'] : '' );
@@ -289,7 +286,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                                     <span class="material-symbols-outlined text-xs">touch_app</span>
                                                     <span>Touchscreen Selections (<?php echo esc_html( $recipe_count ); ?> Recipes)</span>
                                                 </span>
-                                                <span class="text-[9px] font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">Tap Recipe to Inspect</span>
+                                                <span class="text-[9px] font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">Pre-Calibrated Selections</span>
                                             </div>
                                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 overflow-y-auto pr-1 flex-1 no-scrollbar">
                                                 <?php foreach ( $recipes_list as $b_item ) :
@@ -297,7 +294,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                                     $b_img_rel = ( is_array( $b_item ) && ! empty( $b_item['image'] ) ) ? basename( $b_item['image'] ) : '';
                                                     $b_img_url = $b_img_rel ? ( $theme_uri . '/images/nestle-machines/beverages/' . $b_img_rel ) : '';
                                                 ?>
-                                                <div class="group bg-zinc-50 hover:bg-[#FBBF24]/10 border border-zinc-200 hover:border-[#1A56DB] p-2 flex flex-col items-center justify-center text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm cursor-pointer js-open-zoom-modal" data-zoom-src="<?php echo esc_url( $b_img_url ?: $front_img ); ?>" data-zoom-title="<?php echo esc_attr( $item['title'] . ' — ' . $b_name ); ?>">
+                                                <div class="group bg-zinc-50 hover:bg-[#FBBF24]/10 border border-zinc-200 hover:border-[#1A56DB] p-2 flex flex-col items-center justify-center text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm">
                                                     <div class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center p-0.5 overflow-hidden">
                                                         <?php if ( $b_img_url ) : ?>
                                                             <img src="<?php echo esc_url( $b_img_url ); ?>" alt="<?php echo esc_attr( $b_name ); ?>" class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-200" loading="lazy">
@@ -419,7 +416,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     <div class="text-xs font-bold uppercase text-zinc-500">Total <?php echo esc_html( $total_models ); ?> models cataloged in this family</div>
                 </div>
 
-                <div class="lg:hidden flex items-center justify-between text-[11px] font-bold text-zinc-800 bg-yellow-50 px-3.5 py-2.5 border-2 border-b-0 border-[#0A0A0A]">
+                <div class="lg:hidden flex items-center justify-between text-[11px] font-bold text-zinc-900 bg-zinc-100 px-3.5 py-2.5 border-2 border-b-0 border-[#0A0A0A]">
                     <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-[#1A56DB]">swipe</span><span>Swipe horizontally to compare 48 specifications across 7 categories</span></div>
                     <span class="text-[10px] uppercase font-black text-[#1A56DB] shrink-0">&larr; Scroll &rarr;</span>
                 </div>
@@ -494,16 +491,19 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     ?>
                         <table class="w-full text-left text-xs border-collapse min-w-[900px]">
                             <thead>
-                                <tr class="bg-[#1A56DB] text-white font-black uppercase tracking-wider text-[11px]">
-                                    <th class="p-3 sticky left-0 bg-[#1A56DB] z-20 w-64 min-w-[220px] border-r border-blue-600">Engineering Parameter / Model</th>
-                                    <?php foreach ( $all_products as $col_prod ) : ?>
-                                        <th class="p-3 border-r border-blue-600 text-center min-w-[150px]">
+                                <tr class="bg-[#0A0A0A] text-white font-black uppercase tracking-wider text-[11px]">
+                                    <th class="p-3 sticky left-0 bg-[#0A0A0A] z-20 w-64 min-w-[220px] border-r border-zinc-800">Engineering Parameter / Model</th>
+                                    <?php foreach ( $canonical_models as $col_prod ) : 
+                                        $col_m_key = ! empty( $col_prod['model_key'] ) ? $col_prod['model_key'] : '';
+                                        $col_img = ( $col_m_key && isset( $nestle_hardware[ $col_m_key ]['front'] ) ) ? $nestle_hardware[ $col_m_key ]['front'] : $col_prod['thumb_url'];
+                                    ?>
+                                        <th class="p-3 border-r border-zinc-800 text-center min-w-[150px]">
                                             <div class="flex flex-col items-center gap-1.5">
                                                 <label class="cursor-pointer inline-flex items-center justify-center p-0.5" title="Select for batch RFQ"><input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" data-id="<?php echo esc_attr( $col_prod['id'] ); ?>" data-title="<?php echo esc_attr( $col_prod['title'] ); ?>" data-sku="<?php echo esc_attr( $col_prod['sku'] ); ?>"></label>
-                                                <img src="<?php echo esc_url( $col_prod['thumb_url'] ); ?>" alt="<?php echo esc_attr( $col_prod['title'] ); ?>" class="w-12 h-12 object-contain bg-white border border-zinc-200 p-1" loading="lazy">
+                                                <div class="w-14 h-14 bg-white border border-zinc-300 p-1 flex items-center justify-center"><img src="<?php echo esc_url( $col_img ); ?>" alt="<?php echo esc_attr( $col_prod['title'] ); ?>" class="max-w-full max-h-full object-contain" loading="lazy"></div>
                                                 <span class="font-extrabold uppercase text-[10px] leading-tight text-white line-clamp-1"><?php echo esc_html( $col_prod['title'] ); ?></span>
                                                 <span class="inline-block text-[9px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.2"><?php echo esc_html( $col_prod['sku'] ); ?></span>
-                                                <button class="h-[28px] w-full bg-[#0A0A0A] hover:bg-black active:scale-95 text-[#FBBF24] font-bold uppercase text-[9px] tracking-wider px-2 flex items-center justify-center border border-white/20 transition-colors js-open-quote-modal" data-product="<?php echo esc_attr( $col_prod['title'] ); ?>" data-sku="<?php echo esc_attr( $col_prod['sku'] ); ?>">Quote</button>
+                                                <button class="h-[28px] w-full bg-[#1A56DB] hover:bg-blue-600 active:scale-95 text-white font-bold uppercase text-[9px] tracking-wider px-2 flex items-center justify-center border border-white/20 transition-colors js-open-quote-modal" data-product="<?php echo esc_attr( $col_prod['title'] ); ?>" data-sku="<?php echo esc_attr( $col_prod['sku'] ); ?>">Quote</button>
                                             </div>
                                         </th>
                                     <?php endforeach; ?>
@@ -512,12 +512,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             <tbody class="divide-y divide-zinc-200">
                                 <?php foreach ( $matrix_categories as $cat_title => $cat_specs ) : ?>
                                     <tr class="bg-[#0A0A0A] text-[#FBBF24] font-black text-xs uppercase tracking-wider">
-                                        <td colspan="<?php echo count( $all_products ) + 1; ?>" class="py-2.5 px-4"><div class="flex items-center gap-2"><span class="w-2 h-2 bg-[#1A56DB] inline-block"></span><span><?php echo esc_html( $cat_title ); ?></span></div></td>
+                                        <td colspan="<?php echo count( $canonical_models ) + 1; ?>" class="py-2.5 px-4"><div class="flex items-center gap-2"><span class="w-2 h-2 bg-[#1A56DB] inline-block"></span><span><?php echo esc_html( $cat_title ); ?></span></div></td>
                                     </tr>
                                     <?php foreach ( $cat_specs as $spec_title => $spec_row ) : ?>
                                     <tr class="odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors">
                                         <td class="sticky left-0 bg-zinc-100 z-10 w-64 min-w-[220px] font-bold text-[11px] uppercase text-zinc-700 py-2.5 px-3.5 border-r border-b border-zinc-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]"><?php echo esc_html( $spec_title ); ?></td>
-                                        <?php foreach ( $all_products as $col_idx => $prod_col ) : 
+                                        <?php foreach ( $canonical_models as $col_idx => $prod_col ) : 
                                             $col_sku = $prod_col['sku'];
                                             $target_idx = isset( $coffee_sku_map[ $col_sku ] ) ? $coffee_sku_map[ $col_sku ] : $col_idx;
                                             $val = isset( $spec_row[ $target_idx ] ) ? $spec_row[ $target_idx ] : 'Standard';
