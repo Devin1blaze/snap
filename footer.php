@@ -195,13 +195,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
-    // Robust selector for all quote triggers
-    const quoteButtons = document.querySelectorAll('.js-open-quote-modal');
-    quoteButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+    // Event delegation for all quote triggers (supports dynamic and multi-SKU prefill)
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.js-open-quote-modal');
+        if (btn) {
             e.preventDefault();
+            const prodName = btn.dataset.productName || btn.getAttribute('data-product') || '';
+            const prodSku = btn.dataset.productSku || btn.getAttribute('data-sku') || '';
+            const customMsg = btn.dataset.customMessage || '';
+            const msgField = modal.querySelector('textarea[name="your-message"]');
+            if (msgField) {
+                if (customMsg) {
+                    msgField.value = customMsg;
+                } else if (prodName || prodSku) {
+                    msgField.value = "Bulk Inquiry for Model:\nProduct: " + prodName + "\nModel/SKU: " + prodSku + "\nEstimated Quantity:\nDelivery City / Location:";
+                }
+            }
             openModal();
-        });
+        }
     });
 
     if(closeBtn) closeBtn.addEventListener('click', closeModal);
