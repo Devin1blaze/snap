@@ -171,7 +171,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     <span class="inline-flex items-center gap-2 bg-[#FBBF24] text-black font-black text-[10px] sm:text-[11px] px-3.5 py-1.5 uppercase tracking-widest mb-4">
                         <span class="w-2 h-2 bg-black inline-block"></span> Enterprise Fleet &amp; Facility Procurement · Complete Series Overview
                     </span>
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight uppercase leading-[1.08] mb-5 sm:mb-6 break-words">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight uppercase leading-[1.08] mb-5 sm:mb-6 break-words [text-wrap:balance]">
                         <?php echo esc_html( $category_name ); ?>
                     </h1>
                     <p class="text-sm sm:text-base md:text-lg text-zinc-300 leading-relaxed font-medium mb-6 sm:mb-8 max-w-3xl">
@@ -250,9 +250,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             <div class="lg:col-span-5 <?php echo $is_even ? 'lg:order-1' : 'lg:order-2'; ?> flex flex-col justify-center">
                                 <div class="relative bg-zinc-50 border border-zinc-200 p-4 sm:p-5 overflow-hidden group">
                                     <div class="flex items-center gap-1.5 mb-3 z-20 relative">
-                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="hardware"><span class="material-symbols-outlined text-xs">precision_manufacturing</span><span>Machine Hardware</span></button>
+                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95 focus-visible:ring-2 focus-visible:ring-[#1A56DB] focus-visible:outline-none" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="hardware"><span class="material-symbols-outlined text-xs">precision_manufacturing</span><span>Machine Hardware</span></button>
                                         <?php if ( $has_bev_menu ) : ?>
-                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="menu"><span class="material-symbols-outlined text-xs">touch_app</span><span>Touchscreen Menu</span></button>
+                                        <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95 focus-visible:ring-2 focus-visible:ring-[#1A56DB] focus-visible:outline-none" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="menu"><span class="material-symbols-outlined text-xs">touch_app</span><span>Touchscreen Menu</span></button>
                                         <?php endif; ?>
                                     </div>
                                     <!-- Tab 1: Machine Hardware Cutout + Multi-Angle Strip -->
@@ -270,7 +270,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                             <span class="text-[9px] font-black uppercase tracking-wider text-zinc-500 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-[#1A56DB] inline-block"></span> View Angle:</span>
                                             <div class="flex items-center gap-1">
                                                 <?php foreach ( $angles as $ang_label => $ang_src ) : $is_first = ( $ang_label === 'Front' ); ?>
-                                                <button type="button" class="js-angle-btn px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider border transition-all flex items-center gap-1 <?php echo $is_first ? 'border-[#0A0A0A] bg-[#0A0A0A] text-[#FBBF24] shadow-sm' : 'border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700'; ?>" data-card="<?php echo esc_attr( $card_uid ); ?>" data-src="<?php echo esc_url( $ang_src ); ?>">
+                                                <button type="button" class="js-angle-btn px-2 py-0.5 sm:px-2.5 sm:py-1 min-h-[30px] sm:min-h-[28px] text-[9px] sm:text-[10px] font-black uppercase tracking-wider border transition-all flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-[#1A56DB] focus-visible:outline-none <?php echo $is_first ? 'border-[#0A0A0A] bg-[#0A0A0A] text-[#FBBF24] shadow-sm' : 'border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700'; ?>" data-card="<?php echo esc_attr( $card_uid ); ?>" data-src="<?php echo esc_url( $ang_src ); ?>">
                                                     <span><?php echo esc_html( $ang_label ); ?></span>
                                                 </button>
                                                 <?php endforeach; ?>
@@ -324,7 +324,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                         <span class="bg-[#1A56DB] text-white font-black text-[9px] uppercase px-2 py-0.5 tracking-widest">Commercial Heavy Duty</span>
                                         <span class="text-zinc-500 text-[11px] font-bold uppercase tracking-wider">SKU: <?php echo esc_html( $item['sku'] ); ?></span>
                                     </div>
-                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold uppercase text-[#0A0A0A] tracking-tight mb-2"><?php echo esc_html( $item['title'] ); ?></h3>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold uppercase text-[#0A0A0A] tracking-tight mb-2 [text-wrap:balance]"><?php echo esc_html( $item['title'] ); ?></h3>
 
                                     <!-- Visual Beverage Chip Palette Directly Beneath Title -->
                                     <?php if ( ! empty( $item['beverage_menu'] ) ) : ?>
@@ -595,7 +595,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         </main>
 
         <!-- 6. Floating Multi-SKU RFQ Batch Drawer -->
-        <div id="b2b-floating-rfq-bar" class="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-[95%] max-w-4xl bg-[#0A0A0A] text-white border-2 border-[#FBBF24] p-3.5 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 transition-all duration-300 transform translate-y-32 opacity-0 pointer-events-none shadow-[0_10px_40px_rgba(0,0,0,0.85)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <div id="b2b-floating-rfq-bar" class="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-[95%] max-w-4xl bg-[#0A0A0A]/95 backdrop-blur-md text-white border-2 border-[#FBBF24] p-3.5 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 transition-all duration-300 transform translate-y-32 opacity-0 pointer-events-none shadow-[0_10px_40px_rgba(0,0,0,0.85)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
             <div class="flex items-center gap-3 overflow-hidden">
                 <span class="w-8 h-8 bg-[#FBBF24] text-black font-black flex items-center justify-center text-sm shrink-0" id="rfq-badge-count">0</span>
                 <div>
@@ -642,8 +642,8 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     var cardId = this.getAttribute('data-card'), target = this.getAttribute('data-tab-target');
                     document.querySelectorAll('.js-card-tab-btn[data-card="' + cardId + '"]').forEach(function(b) {
                         b.className = (b.getAttribute('data-tab-target') === target)
-                            ? 'js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95'
-                            : 'js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95';
+                            ? 'js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95 focus-visible:ring-2 focus-visible:ring-[#1A56DB] focus-visible:outline-none'
+                            : 'js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95 focus-visible:ring-2 focus-visible:ring-[#1A56DB] focus-visible:outline-none';
                     });
                     document.querySelectorAll('.js-tab-pane[data-card="' + cardId + '"]').forEach(function(p) { p.classList.toggle('hidden', p.getAttribute('data-tab-content') !== target); });
                 });
@@ -656,7 +656,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     var cId = this.getAttribute('data-card'), src = this.getAttribute('data-src'), img = document.getElementById('main-img-' + cId);
                     if (img && src) img.src = src;
                     document.querySelectorAll('.js-angle-btn[data-card="' + cId + '"]').forEach(function(b) {
-                        b.className = (b === btn) ? 'js-angle-btn px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider border transition-all flex items-center gap-1 border-[#0A0A0A] bg-[#0A0A0A] text-[#FBBF24] shadow-sm' : 'js-angle-btn px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider border transition-all flex items-center gap-1 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700';
+                        b.className = (b === btn) ? 'js-angle-btn px-2 py-0.5 sm:px-2.5 sm:py-1 min-h-[30px] sm:min-h-[28px] text-[9px] sm:text-[10px] font-black uppercase tracking-wider border transition-all flex items-center gap-1 border-[#0A0A0A] bg-[#0A0A0A] text-[#FBBF24] shadow-sm focus-visible:ring-2 focus-visible:ring-[#1A56DB] focus-visible:outline-none' : 'js-angle-btn px-2 py-0.5 sm:px-2.5 sm:py-1 min-h-[30px] sm:min-h-[28px] text-[9px] sm:text-[10px] font-black uppercase tracking-wider border transition-all flex items-center gap-1 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 focus-visible:ring-2 focus-visible:ring-[#1A56DB] focus-visible:outline-none';
                     });
                 });
             });
