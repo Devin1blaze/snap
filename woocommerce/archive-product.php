@@ -52,15 +52,21 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
     $b2b_commercial_slugs = array(
         'commercial-refrigeration', 'b2b-commercial-refrigeration', 'refrigeration', 'refrigeration-2',
         'cold-storages', 'cold-storages-2', 'chillers', 'chillers-central-air-conditioning',
-        'deep-freezers', 'deep-freezers-2', 'water-coolers', 'storage-water-coolers',
-        'bottled-water-dispensers', 'bottled-water-dispensers-2', 'visi-coolers', 'visi-coolers-2',
+        'deep-freezers', 'deep-freezers-2', 'freezers-b2b', 'glass-top-freezers-b2b',
+        'water-coolers', 'storage-water-coolers', 'storage-water-coolers-b2b',
+        'bottled-water-dispensers', 'bottled-water-dispensers-2', 'bottled-water-dispensers-b2b', 'top-loading-dispensers-b2b',
+        'visi-coolers', 'visi-coolers-2', 'visi-coolers-b2b',
         'washroom-automations', 'hygiene-ppe', 'entrance-solutions', 'vending-machines',
         'coffee-vending-machines', 'commercial-coffee-vending-machines', 'brewing-bots',
         'central-air-conditioning', 'ducted-systems', 'vrf-systems', 'air-coolers', 'air-coolers-2',
-        'desert-air-coolers', 'desert-air-coolers-2', 'b2b-air-coolers', 
-        'ice-machines', 'kitchen-refrigeration-products', 'medical-refrigeration-products',
-        'supermarket-refrigeration', 'reach-in-chillers-and-freezers', 'undercounter-chillers-and-freezers',
-        'vaccine-storage-products', 'b2b-room-air-conditioners'
+        'desert-air-coolers', 'desert-air-coolers-2', 'b2b-air-coolers', 'b2b-air-purifiers',
+        'ice-machines', 'ice-machines-b2b', 'kitchen-refrigeration-products', 'kitchen-refrigeration-products-b2b',
+        'medical-refrigeration-products', 'medical-refrigeration-products-b2b',
+        'supermarket-refrigeration', 'supermarket-refrigeration-b2b',
+        'reach-in-chillers-and-freezers', 'reach-in-chillers-and-freezers-b2b',
+        'undercounter-chillers-and-freezers', 'undercounter-chillers-and-freezers-b2b',
+        'vaccine-storage-products', 'vaccine-storage-products-b2b',
+        'speciality-products', 'b2b-room-air-conditioners'
     );
     if ( ! $is_b2b_category && in_array( $term->slug, $b2b_commercial_slugs, true ) ) {
         $is_b2b_category = true;
