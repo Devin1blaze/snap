@@ -57,7 +57,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         'washroom-automations', 'hygiene-ppe', 'entrance-solutions', 'vending-machines',
         'coffee-vending-machines', 'commercial-coffee-vending-machines', 'brewing-bots',
         'central-air-conditioning', 'ducted-systems', 'vrf-systems', 'air-coolers', 'air-coolers-2',
-        'desert-air-coolers', 'desert-air-coolers-2', 'b2b-air-coolers', 'b2b-water-purifiers',
+        'desert-air-coolers', 'desert-air-coolers-2', 'b2b-air-coolers', 
         'ice-machines', 'kitchen-refrigeration-products', 'medical-refrigeration-products',
         'supermarket-refrigeration', 'reach-in-chillers-and-freezers', 'undercounter-chillers-and-freezers',
         'vaccine-storage-products', 'b2b-room-air-conditioners'

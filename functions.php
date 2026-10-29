@@ -659,3 +659,18 @@ function snap_stitch_auto_provision_essential_pages() {
 }
 add_action( 'init', 'snap_stitch_auto_provision_essential_pages' );
 
+
+/**
+ * Redirect deprecated water purifier categories to B2B commercial catalog.
+ */
+function snap_stitch_redirect_deprecated_categories() {
+    if ( is_admin() || wp_doing_ajax() ) {
+        return;
+    }
+    $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+    if ( preg_match( '#/product-category/(?:b2b/)?(?:b2b-)?water-?purifiers/?#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/' ), 301 );
+        exit;
+    }
+}
+add_action( 'template_redirect', 'snap_stitch_redirect_deprecated_categories', 5 );

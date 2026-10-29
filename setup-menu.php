@@ -40,7 +40,6 @@ function snap_stitch_auto_provision_menu() {
         $categories = array(
             'Washroom Automations' => 'washroom-automations',
             'Commercial Refrigeration' => 'commercial-refrigeration',
-            'Water Purifiers' => 'water-purifiers',
             'Vending Machines' => 'vending-machines',
             'Hygiene & PPE' => 'hygiene-ppe',
             'Entrance Solutions' => 'entrance-solutions'

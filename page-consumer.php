@@ -277,7 +277,7 @@ get_header(); ?>
                         array(
                             'taxonomy' => 'product_cat',
                             'field'    => 'slug',
-                            'terms'    => array('room-air-conditioners', 'air-coolers', 'air-purifiers', 'water-purifiers'),
+                            'terms'    => array('room-air-conditioners', 'air-coolers', 'air-purifiers'),
                             'operator' => 'IN',
                         ),
                     ),

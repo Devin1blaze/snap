@@ -163,10 +163,6 @@
             ]
         },
         {
-            "name": "Water Purifiers",
-            "slug": "water-purifiers"
-        },
-        {
             "name": "Air Purifiers",
             "slug": "air-purifiers"
         }
@@ -185,11 +181,6 @@
         {
             "name": "Air Purifiers",
             "slug": "b2b-air-purifiers",
-            "has_pdf": true
-        },
-        {
-            "name": "Water Purifiers",
-            "slug": "b2b-water-purifiers",
             "has_pdf": true
         },
         {
