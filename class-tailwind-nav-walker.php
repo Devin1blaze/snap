@@ -152,13 +152,17 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
                     $data_attr = $cat_id ? ' data-cat-id="' . $cat_id . '"' : '';
 
                     $html .= '<div class="mega-sub-container">';
-                    $html .= '<a href="' . $l3['url'] . '" class="mega-sub-link js-mega-accordion-trigger"' . $data_attr . '>';
+                    $html .= '<div class="mega-sub-row">';
+                    $html .= '<a href="' . esc_url( $l3['url'] ) . '" class="mega-sub-link">';
                     $html .= '<span class="mega-sub-dot"></span>';
-                    $html .= esc_html( $l3['title'] );
-                    if ( $cat_id ) {
-                        $html .= '<span class="material-symbols-outlined mega-sub-caret">expand_more</span>';
-                    }
+                    $html .= '<span>' . esc_html( $l3['title'] ) . '</span>';
                     $html .= '</a>';
+                    if ( $cat_id ) {
+                        $html .= '<button type="button" class="js-mega-accordion-btn" ' . $data_attr . ' aria-label="Toggle preview for ' . esc_attr( $l3['title'] ) . '" title="Preview models">';
+                        $html .= '<span class="material-symbols-outlined mega-sub-caret">expand_more</span>';
+                        $html .= '</button>';
+                    }
+                    $html .= '</div>';
 
                     if ( $cat_id ) {
                         $html .= '<div class="mega-accordion-content" id="mega-acc-' . $cat_id . '">';

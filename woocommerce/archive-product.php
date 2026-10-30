@@ -268,7 +268,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         }
         $total_models = count( $all_products );
         $active_subcat_slug = ( $root_brand_term && $term->term_id !== $root_brand_term->term_id ) ? $term->slug : 'all';
-        $is_coffee_family = ( ( $term && in_array( $term->slug, array( 'coffee-vending-machines', 'commercial-coffee-vending-machines', 'vending-machines' ), true ) ) || ( ! empty( $all_products ) && strpos( $all_products[0]['sku'], 'NESTLE' ) !== false ) );
+        $is_coffee_family = ( ( $term && in_array( $term->slug, array( 'coffee-vending-machines', 'commercial-coffee-vending-machines', 'vending-machines' ), true ) ) || ( $active_subcat_slug === 'coffee-vending-machines' ) );
         $theme_uri = get_template_directory_uri();
         $manifest_path = get_template_directory() . '/images/nestle-machines/download_manifest.json';
         $nestle_manifest = file_exists( $manifest_path ) ? json_decode( file_get_contents( $manifest_path ), true ) : array();
@@ -302,9 +302,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     $subcat_prods[] = $ap;
                 }
             }
-            $canonical_models = ! empty( $subcat_prods ) ? array_slice( $subcat_prods, 0, 8 ) : array_slice( $all_products, 0, 8 );
+            $canonical_models = ! empty( $subcat_prods ) ? $subcat_prods : $all_products;
         } else {
-            $canonical_models = array_slice( $all_products, 0, 8 );
+            $canonical_models = ! empty( $all_products ) ? $all_products : array();
         }
         ?>
 
@@ -1188,93 +1188,21 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 });
             }
 
-            // Client-Side Subcategory Fleet Filter Engine
+            // Subcategory Fleet Navigation Pills
             var filterBtns = document.querySelectorAll('.js-fleet-filter-btn');
-            var modelCards = document.querySelectorAll('.js-b2b-model-card');
-            var matrixRows = document.querySelectorAll('.js-b2b-matrix-row');
-            var showAllLink = document.querySelector('.js-fleet-show-all-link');
-
-            function applyCategoryFilter(filterSlug) {
-                if (!filterSlug) return;
-                modelCards.forEach(function(card) {
-                    var slugs = card.getAttribute('data-cat-slugs') || '';
-                    if (filterSlug === 'all' || slugs.indexOf(filterSlug) !== -1) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-                matrixRows.forEach(function(row) {
-                    var slugs = row.getAttribute('data-cat-slugs') || '';
-                    if (filterSlug === 'all' || slugs.indexOf(filterSlug) !== -1) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            }
-
             filterBtns.forEach(function(btn) {
                 btn.addEventListener('click', function(e) {
-                    var filter = this.getAttribute('data-filter');
-                    var targetUrl = this.getAttribute('data-target-url');
-                    
-                    e.preventDefault();
-                    if (history.pushState && targetUrl) {
-                        history.pushState(null, '', targetUrl);
-                    }
-
-                    filterBtns.forEach(function(b) {
-                        b.setAttribute('data-active', 'false');
-                        b.classList.remove('is-active');
-                        b.classList.remove('bg-[#FBBF24]', 'text-black', 'font-black', 'border-black', 'shadow-[2px_2px_0px_0px_#0A0A0A]');
-                        b.classList.add('bg-zinc-50', 'text-zinc-800', 'font-extrabold', 'border-zinc-300');
-                        var icon = b.querySelector('.material-symbols-outlined');
-                        if (icon) { icon.classList.remove('text-black'); icon.classList.add('text-[#1A56DB]'); }
-                        var badge = b.querySelector('span:last-child');
-                        if (badge) { badge.classList.remove('bg-black', 'text-[#FBBF24]'); badge.classList.add('bg-zinc-200', 'text-zinc-700'); }
-                    });
-                    this.classList.remove('bg-zinc-50', 'text-zinc-800', 'font-extrabold', 'border-zinc-300');
-                    this.setAttribute('data-active', 'true');
-                    this.classList.add('is-active');
-                    this.classList.add('bg-[#FBBF24]', 'text-black', 'font-black', 'border-black', 'shadow-[2px_2px_0px_0px_#0A0A0A]');
-                    var activeIcon = this.querySelector('.material-symbols-outlined');
-                    if (activeIcon) { activeIcon.classList.remove('text-[#1A56DB]'); activeIcon.classList.add('text-black'); }
-                    var activeBadge = this.querySelector('span:last-child');
-                    if (activeBadge) { activeBadge.classList.remove('bg-zinc-200', 'text-zinc-700'); activeBadge.classList.add('bg-black', 'text-[#FBBF24]'); }
-
-                    applyCategoryFilter(filter);
-                    var banner = document.getElementById('subcat-filtered-banner');
-                    if (banner) {
-                        if (filter === 'all') {
-                            banner.style.display = 'none';
-                        } else {
-                            banner.style.display = '';
+                    // If clicking the currently active category pill, smooth-scroll to models showcase
+                    if (this.getAttribute('data-active') === 'true') {
+                        e.preventDefault();
+                        var target = document.getElementById('flagship-showcase');
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
                     }
+                    // Otherwise, allow standard native browser navigation to target canonical URL
                 });
             });
-
-            if (showAllLink) {
-                showAllLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    var allBtn = document.querySelector('.js-fleet-filter-btn[data-filter="all"]');
-                    if (allBtn) {
-                        allBtn.click();
-                    } else {
-                        applyCategoryFilter('all');
-                    }
-                });
-            }
-
-            // On initial load: if a subcategory is active in pills, filter immediately
-            var initialActive = document.querySelector('.js-fleet-filter-btn[data-active="true"]');
-            if (initialActive) {
-                var initialFilter = initialActive.getAttribute('data-filter');
-                if (initialFilter && initialFilter !== 'all') {
-                    applyCategoryFilter(initialFilter);
-                }
-            }
 
             // Horizontal scroll navigation and auto-centering for category pills
             var pillsContainer = document.getElementById('pills-scroll-container');

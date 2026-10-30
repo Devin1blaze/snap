@@ -372,14 +372,47 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
             break-inside: avoid;
             margin-bottom: 2px;
         }
-        .mega-sub-caret {
-            margin-left: auto;
-            font-size: 16px;
-            opacity: 0.5;
-            transition: transform 0.2s;
+        .mega-sub-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 99px;
+            transition: all 0.15s ease;
         }
-        .mega-sub-link.is-open .mega-sub-caret {
+        .mega-sub-row:hover {
+            background: rgba(255,255,255,0.06);
+        }
+        .mega-sub-row:hover a.mega-sub-link {
+            color: #fff;
+        }
+        .mega-sub-row:hover .mega-sub-dot {
+            background: #FBBF24;
+        }
+        button.js-mega-accordion-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 4px 10px;
+            margin-right: 4px;
+            border-radius: 99px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.4);
+            transition: all 0.15s ease;
+        }
+        button.js-mega-accordion-btn:hover {
+            color: #FBBF24;
+            background: rgba(255,255,255,0.08);
+        }
+        button.js-mega-accordion-btn.is-open .mega-sub-caret {
             transform: rotate(180deg);
+            color: #FBBF24;
+        }
+        .mega-sub-caret {
+            font-size: 16px;
+            opacity: 0.7;
+            transition: transform 0.2s;
         }
         .mega-accordion-content {
             display: grid;
@@ -426,6 +459,8 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
             font-size: 13px;
             font-weight: 500;
             transition: all 0.15s ease;
+            flex: 1;
+            min-width: 0;
         }
         a.mega-sub-link:hover {
             color: #fff;
@@ -648,16 +683,20 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
                           }
 
                       } elseif ( $level === 3 ) {
-                          // ── L3 item (AJAX Accordion) ─────────────
+                          // ── L3 item (Direct link + optional preview accordion) ──
                           $cat_id = $mi->object_id;
                           echo '<div class="mobile-l3-accordion mt-1">';
-                          echo '<button class="mobile-l3-toggle w-full flex items-center justify-between py-2 pl-2 text-white/40 hover:text-yellow-400 text-xs font-medium tracking-wide rounded hover:bg-white/3 transition-all js-mobile-product-toggle" data-cat="' . $cat_id . '" aria-expanded="false" style="background:none; border:none; cursor:pointer;">';
-                          echo '<div class="flex items-center gap-2">';
+                          echo '<div class="flex items-center justify-between py-1.5 pl-2 pr-1 rounded hover:bg-white/5">';
+                          echo '<a href="' . esc_url( $url ) . '" class="flex items-center gap-2 text-white/70 hover:text-[#FBBF24] text-xs font-semibold uppercase tracking-wider flex-1">';
                           echo '<span style="width:4px; height:4px; background: rgba(251,191,36,0.5); border-radius:50%; flex-shrink:0; display:inline-block;"></span>';
                           echo '<span>' . $title . '</span>';
+                          echo '</a>';
+                          if ( $cat_id ) {
+                              echo '<button type="button" class="mobile-l3-toggle p-1.5 text-white/40 hover:text-yellow-400 js-mobile-product-toggle" data-cat="' . esc_attr( $cat_id ) . '" aria-expanded="false" style="background:none; border:none; cursor:pointer;" aria-label="Toggle preview for ' . esc_attr( $title ) . '">';
+                              echo '<span class="material-symbols-outlined mobile-l3-caret" style="font-size:16px">expand_more</span>';
+                              echo '</button>';
+                          }
                           echo '</div>';
-                          echo '<span class="material-symbols-outlined mobile-l3-caret" style="font-size:14px">expand_more</span>';
-                          echo '</button>';
                           echo '<div class="mobile-l3-acc-content pl-6 mt-1 flex-col gap-2"></div>';
                           echo '</div>';
                       }
@@ -732,7 +771,9 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
     // ── Mobile Accordion (L3 / Products AJAX) ──────────────────
     const l3Btn = e.target.closest('.js-mobile-product-toggle');
     if (l3Btn) {
-      const content = l3Btn.nextElementSibling;
+      const acc = l3Btn.closest('.mobile-l3-accordion');
+      const content = acc ? acc.querySelector('.mobile-l3-acc-content') : l3Btn.nextElementSibling;
+      if (!content) return;
       const isOpen  = content.classList.contains('is-open');
       content.classList.toggle('is-open', !isOpen);
       l3Btn.setAttribute('aria-expanded', String(!isOpen));
@@ -794,7 +835,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
       });
 
       // AJAX Mega Menu Accordion
-      document.querySelectorAll('.js-mega-accordion-trigger').forEach(function(link) {
+      document.querySelectorAll('.js-mega-accordion-btn, .js-mega-accordion-trigger').forEach(function(link) {
         link.addEventListener('click', function(e) {
           const catId = this.dataset.catId;
           if (!catId) return; // normal navigation
@@ -812,7 +853,7 @@ require_once get_template_directory() . '/class-tailwind-nav-walker.php';
               wrapper.querySelectorAll('.mega-accordion-content.is-open').forEach(el => {
                   if(el !== content) el.classList.remove('is-open');
               });
-              wrapper.querySelectorAll('.js-mega-accordion-trigger.is-open').forEach(el => {
+              wrapper.querySelectorAll('.js-mega-accordion-btn.is-open, .js-mega-accordion-trigger.is-open').forEach(el => {
                   if(el !== this) el.classList.remove('is-open');
               });
           }
