@@ -66,7 +66,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         'reach-in-chillers-and-freezers', 'reach-in-chillers-and-freezers-b2b',
         'undercounter-chillers-and-freezers', 'undercounter-chillers-and-freezers-b2b',
         'vaccine-storage-products', 'vaccine-storage-products-b2b',
-        'speciality-products', 'b2b-room-air-conditioners',
+        'speciality-products', 'b2b-room-air-conditioners', 'room-air-conditioners',
+        'light-commercial-acs', 'cassette-air-conditioners', 'verticool-air-conditioners', 'concealed-splits',
+        'cold-storage-solutions',
         'blue-star-commercial',
         'usha-water-solutions', 'usha-water-dispensers', 'usha-water-coolers', 'usha-instant-coolers',
         'eureka-forbes-commercial', 'eureka-forbes-commercial-ro', 'eureka-forbes-commercial-uv', 'eureka-forbes-cooler-cum-purifiers', 'eureka-forbes-industrial-ro-plants',
@@ -120,6 +122,14 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
                 }
 
+                if ( strpos( $u_sku, 'BS-LC' ) !== false || strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'CASS' ) !== false || strpos( $u_sku, 'CONC' ) !== false ) {
+                    if ( strpos( $u_sku, 'VERT' ) !== false ) return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+                    if ( strpos( $u_sku, 'CASS-4W' ) !== false ) return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
+                    if ( strpos( $u_sku, 'CASS-1W' ) !== false ) return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
+                    if ( strpos( $u_sku, 'CONC' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
+                    return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+                }
+
                 if ( strpos( $u_sku, 'TET-' ) !== false ) {
                     if ( strpos( $u_sku, 'CLASSIC' ) !== false ) return $theme_uri . '/images/tetley/tetley-classic.jpg';
                     if ( strpos( $u_sku, 'ELAICHI' ) !== false ) return $theme_uri . '/images/tetley/tetley-elaichi.png';
@@ -163,7 +173,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         $family_args = array(
             'post_type'      => 'product',
             'post_status'    => 'publish',
-            'posts_per_page' => 100,
+            'posts_per_page' => -1,
             'tax_query'      => array(
                 array(
                     'taxonomy'         => 'product_cat',
@@ -194,6 +204,10 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 $p_sku = $product->get_sku() ? $product->get_sku() : 'SNAP-' . $p_id;
                 $raw_img = wp_get_attachment_image_url( $product->get_image_id(), 'large' );
                 $raw_thumb = wp_get_attachment_image_url( $product->get_image_id(), 'thumbnail' );
+                if ( empty( $raw_img ) ) {
+                    $ext_url = get_post_meta( $p_id, '_thumbnail_ext_url', true );
+                    if ( ! empty( $ext_url ) ) { $raw_img = $ext_url; $raw_thumb = $ext_url; }
+                }
 
                 $resolved_img = snap_stitch_resolve_b2b_image( $p_sku, $raw_img );
                 $resolved_thumb = snap_stitch_resolve_b2b_image( $p_sku, $raw_thumb );
@@ -257,7 +271,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             }
             if ( empty( $canonical_models ) ) $canonical_models = $all_products;
         } else {
-            $canonical_models = $all_products;
+            $canonical_models = array_slice( $all_products, 0, 8 );
         }
         ?>
 
@@ -318,7 +332,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         <div class="sticky top-20 z-40 bg-[#0A0A0A]/95 backdrop-blur-md border-b-2 border-[#1A56DB] px-4 sm:px-6 md:px-12 py-3 shadow-xl">
             <div class="container mx-auto flex items-center justify-between gap-3">
                 <div class="flex items-center gap-4 sm:gap-6 overflow-x-auto no-scrollbar text-xs font-bold uppercase tracking-wider py-1">
-                    <a href="#flagship-showcase" class="text-white hover:text-[#FBBF24] transition-colors whitespace-nowrap flex items-center gap-1.5 shrink-0"><span class="w-2 h-2 bg-[#FBBF24] inline-block"></span> Flagship Series (<?php echo esc_html( min( 6, $total_models ) ); ?>)</a>
+                    <a href="#flagship-showcase" class="text-white hover:text-[#FBBF24] transition-colors whitespace-nowrap flex items-center gap-1.5 shrink-0"><span class="w-2 h-2 bg-[#FBBF24] inline-block"></span> Flagship Series (<?php echo esc_html( count( $canonical_models ) ); ?>)</a>
                     <a href="#spec-matrix" class="text-zinc-400 hover:text-white transition-colors whitespace-nowrap shrink-0">Spec Matrix (<?php echo esc_html( $total_models ); ?>)</a>
                     <a href="#procurement-faq" class="text-zinc-400 hover:text-white transition-colors whitespace-nowrap shrink-0 hidden md:inline">Procurement &amp; Warranty Terms</a>
                 </div>
@@ -357,10 +371,15 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     foreach ( $child_terms as $ct ) {
                         $icon = 'precision_manufacturing';
                         $cn = strtolower( $ct->name );
-                        if ( strpos( $cn, 'dispenser' ) !== false ) $icon = 'local_drink';
+                        if ( strpos( $cn, 'room air conditioner' ) !== false || strpos( $cn, 'room ac' ) !== false ) $icon = 'mode_fan';
+                        elseif ( strpos( $cn, 'light commercial' ) !== false || strpos( $cn, 'cassette' ) !== false || strpos( $cn, 'verticool' ) !== false ) $icon = 'grid_view';
+                        elseif ( strpos( $cn, 'central air' ) !== false || strpos( $cn, 'vrf' ) !== false || strpos( $cn, 'chiller' ) !== false ) $icon = 'apartment';
+                        elseif ( strpos( $cn, 'cold storage' ) !== false ) $icon = 'warehouse';
+                        elseif ( strpos( $cn, 'refrigeration' ) !== false || strpos( $cn, 'freezer' ) !== false ) $icon = 'kitchen';
+                        elseif ( strpos( $cn, 'dispenser' ) !== false ) $icon = 'local_drink';
                         elseif ( strpos( $cn, 'cooler' ) !== false && strpos( $cn, 'instant' ) === false ) $icon = 'ac_unit';
                         elseif ( strpos( $cn, 'instant' ) !== false || strpos( $cn, 'inline' ) !== false ) $icon = 'bolt';
-                        elseif ( strpos( $cn, 'ro' ) !== false && strpos( $cn, 'skid' ) === false ) $icon = 'water_damage';
+                        elseif ( ( strpos( $cn, 'ro ' ) !== false || strpos( $cn, ' ro' ) !== false || strpos( $cn, 'purifier' ) !== false ) && strpos( $cn, 'skid' ) === false ) $icon = 'water_damage';
                         elseif ( strpos( $cn, 'uv' ) !== false ) $icon = 'wb_iridescent';
                         elseif ( strpos( $cn, 'skid' ) !== false || strpos( $cn, 'plant' ) !== false ) $icon = 'factory';
                         elseif ( strpos( $cn, 'tea' ) !== false || strpos( $cn, 'chai' ) !== false ) $icon = 'emoji_food_beverage';
@@ -776,7 +795,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     $spec2 = isset( $row_vals[1] ) ? $row_vals[1] : 'Standard 230V / 50Hz';
                                     $spec3 = isset( $row_vals[2] ) ? $row_vals[2] : 'Commercial Use';
                                 ?>
-                                <tr class="odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors">
+                                <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>">
                                     <td class="p-3 text-center border-r border-zinc-200"><label class="cursor-pointer inline-flex items-center justify-center p-1"><input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" data-id="<?php echo esc_attr( $row['id'] ); ?>" data-title="<?php echo esc_attr( $row['title'] ); ?>" data-sku="<?php echo esc_attr( $row['sku'] ); ?>"></label></td>
                                     <td class="p-3 border-r border-zinc-200"><div class="flex items-center gap-3"><img src="<?php echo esc_url( $row['thumb_url'] ); ?>" alt="<?php echo esc_attr( $row['title'] ); ?>" class="w-10 h-10 object-contain bg-white border border-zinc-200 p-0.5 shrink-0" loading="lazy"><div><div class="font-black text-[#0A0A0A] uppercase leading-tight"><?php echo esc_html( $row['title'] ); ?></div><span class="inline-block text-[10px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.5 mt-0.5">SKU: <?php echo esc_html( $row['sku'] ); ?></span></div></div></td>
                                     <td class="p-3 font-bold text-zinc-800 border-r border-zinc-200"><?php echo esc_html( $spec1 ); ?></td>
