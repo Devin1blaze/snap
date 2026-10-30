@@ -94,6 +94,52 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
     <?php if ( $is_b2b_category ) : ?>
         <?php
+        if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
+            function snap_stitch_resolve_b2b_image( $sku, $existing_url = '' ) {
+                $theme_uri = get_template_directory_uri();
+                $u_sku = strtoupper( (string) $sku );
+
+                if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
+                    $is_old_generic = (
+                        ( strpos( $u_sku, 'USHA' ) !== false && strpos( $u_sku, 'AQUAGENIE' ) === false && strpos( $existing_url, 'usha-aquagenie' ) !== false ) ||
+                        ( strpos( $u_sku, 'EF-' ) !== false && strpos( $existing_url, 'aquaguard-commercial.jpg' ) !== false )
+                    );
+                    if ( ! $is_old_generic ) {
+                        return $existing_url;
+                    }
+                }
+
+                if ( strpos( $u_sku, 'USHA' ) !== false ) {
+                    if ( strpos( $u_sku, 'INSTAFRESH-CB' ) !== false || strpos( $u_sku, 'CABINET' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-cb.jpg';
+                    if ( strpos( $u_sku, 'INSTAFRESH-TT' ) !== false || strpos( $u_sku, 'TABLE' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-tt.png';
+                    if ( strpos( $u_sku, '40/80' ) !== false || strpos( $u_sku, '40-80' ) !== false ) return $theme_uri . '/images/usha/usha-swc-40-80.jpg';
+                    if ( strpos( $u_sku, '150/150' ) !== false || strpos( $u_sku, '150-150' ) !== false ) return $theme_uri . '/images/usha/usha-swc-150-150.jpg';
+                    if ( strpos( $u_sku, '300/400' ) !== false || strpos( $u_sku, '300-400' ) !== false || strpos( $u_sku, 'XXL' ) !== false ) return $theme_uri . '/images/usha/usha-swc-300-400.jpg';
+                    if ( strpos( $u_sku, 'INLINE' ) !== false || strpos( $u_sku, 'IC-' ) !== false ) return $theme_uri . '/images/usha/usha-inline-60.jpg';
+                    return $theme_uri . '/images/usha/usha-aquagenie.jpg';
+                }
+
+                if ( strpos( $u_sku, 'EF-' ) !== false ) {
+                    if ( strpos( $u_sku, 'PRIMA' ) !== false || strpos( $u_sku, '50B' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
+                    if ( strpos( $u_sku, 'COMM-200' ) !== false || strpos( $u_sku, '200' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-200.png';
+                    if ( strpos( $u_sku, 'UV' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-uv-ss.png';
+                    if ( strpos( $u_sku, 'PURECHILL' ) !== false || strpos( $u_sku, '80/120' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-purechill-80-120.jpg';
+                    if ( strpos( $u_sku, 'HOT-COLD' ) !== false || strpos( $u_sku, 'PRO-' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-pro-hot-cold.jpg';
+                    if ( strpos( $u_sku, 'SKID' ) !== false || strpos( $u_sku, '500' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-skid-ro-500.jpg';
+                    return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
+                }
+
+                if ( strpos( $u_sku, 'TET-' ) !== false ) {
+                    if ( strpos( $u_sku, 'CLASSIC' ) !== false ) return $theme_uri . '/images/tetley/tetley-classic.jpg';
+                    if ( strpos( $u_sku, 'ELAICHI' ) !== false ) return $theme_uri . '/images/tetley/tetley-elaichi.png';
+                    if ( strpos( $u_sku, 'GINGER' ) !== false ) return $theme_uri . '/images/tetley/tetley-ginger.png';
+                    return $theme_uri . '/images/tetley/tetley-plain.png';
+                }
+
+                return ! empty( $existing_url ) ? $existing_url : wc_placeholder_img_src();
+            }
+        }
+
         $family_args = array(
             'post_type'      => 'product',
             'post_status'    => 'publish',
@@ -118,13 +164,20 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 $bev_meta = get_post_meta( $p_id, '_beverage_menu', true ) ?: get_post_meta( $p_id, '_menu_items', true );
                 $bev_array = is_array( $bev_meta ) ? $bev_meta : ( ! empty( $bev_meta ) ? array_map( 'trim', explode( ',', $bev_meta ) ) : array() );
 
+                $p_sku = $product->get_sku() ? $product->get_sku() : 'SNAP-' . $p_id;
+                $raw_img = wp_get_attachment_image_url( $product->get_image_id(), 'large' );
+                $raw_thumb = wp_get_attachment_image_url( $product->get_image_id(), 'thumbnail' );
+
+                $resolved_img = snap_stitch_resolve_b2b_image( $p_sku, $raw_img );
+                $resolved_thumb = snap_stitch_resolve_b2b_image( $p_sku, $raw_thumb );
+
                 $all_products[] = array(
                     'id'               => $p_id,
                     'title'            => $product->get_name(),
-                    'sku'              => $product->get_sku() ? $product->get_sku() : 'SNAP-' . $p_id,
+                    'sku'              => $p_sku,
                     'permalink'        => $product->get_permalink(),
-                    'image_url'        => wp_get_attachment_image_url( $product->get_image_id(), 'large' ) ?: wc_placeholder_img_src(),
-                    'thumb_url'        => wp_get_attachment_image_url( $product->get_image_id(), 'thumbnail' ) ?: wc_placeholder_img_src(),
+                    'image_url'        => $resolved_img,
+                    'thumb_url'        => $resolved_thumb,
                     'specs'            => is_array( $specs_meta ) ? $specs_meta : array(),
                     'salient_features' => is_array( $salient_meta ) ? $salient_meta : array(),
                     'beverage_menu'    => $bev_array,
@@ -229,6 +282,83 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         </div>
 
         <main class="container mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16">
+            <?php
+            // Subcategory / Brand Fleet Navigation Pills
+            $fleet_pills = array();
+            if ( $term && ! is_wp_error( $term ) ) {
+                $cur_id = $term->term_id;
+                $root_term = null;
+                if ( $term->parent && (int) $term->parent !== 72 ) {
+                    $p_obj = get_term( $term->parent, 'product_cat' );
+                    if ( $p_obj && ! is_wp_error( $p_obj ) ) {
+                        $root_term = $p_obj;
+                    }
+                } else {
+                    $root_term = $term;
+                }
+
+                if ( $root_term ) {
+                    $child_terms = get_terms( array(
+                        'taxonomy'   => 'product_cat',
+                        'parent'     => $root_term->term_id,
+                        'hide_empty' => false,
+                        'orderby'    => 'term_id',
+                        'order'      => 'ASC',
+                    ) );
+
+                    if ( ! empty( $child_terms ) && ! is_wp_error( $child_terms ) ) {
+                        $root_count = (int) $root_term->count > 0 ? (int) $root_term->count : array_sum( wp_list_pluck( $child_terms, 'count' ) );
+                        $fleet_pills[] = array(
+                            'name'      => 'All ' . $root_term->name,
+                            'count'     => $root_count,
+                            'url'       => get_term_link( $root_term ),
+                            'is_active' => ( $cur_id === $root_term->term_id ),
+                            'icon'      => 'apps',
+                        );
+                        foreach ( $child_terms as $ct ) {
+                            $icon = 'precision_manufacturing';
+                            $cn = strtolower( $ct->name );
+                            if ( strpos( $cn, 'dispenser' ) !== false ) $icon = 'local_drink';
+                            elseif ( strpos( $cn, 'cooler' ) !== false && strpos( $cn, 'instant' ) === false ) $icon = 'ac_unit';
+                            elseif ( strpos( $cn, 'instant' ) !== false || strpos( $cn, 'inline' ) !== false ) $icon = 'bolt';
+                            elseif ( strpos( $cn, 'ro' ) !== false && strpos( $cn, 'skid' ) === false ) $icon = 'water_damage';
+                            elseif ( strpos( $cn, 'uv' ) !== false ) $icon = 'wb_iridescent';
+                            elseif ( strpos( $cn, 'skid' ) !== false || strpos( $cn, 'plant' ) !== false ) $icon = 'factory';
+                            elseif ( strpos( $cn, 'tea' ) !== false || strpos( $cn, 'chai' ) !== false ) $icon = 'emoji_food_beverage';
+
+                            $fleet_pills[] = array(
+                                'name'      => $ct->name,
+                                'count'     => $ct->count,
+                                'url'       => get_term_link( $ct ),
+                                'is_active' => ( $cur_id === $ct->term_id ),
+                                'icon'      => $icon,
+                            );
+                        }
+                    }
+                }
+            }
+            ?>
+            <?php if ( ! empty( $fleet_pills ) ) : ?>
+                <div class="mb-10 sm:mb-12 bg-white border-2 border-black p-4 sm:p-5 shadow-[4px_4px_0px_0px_#0A0A0A]">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-3 pb-2.5 border-b-2 border-zinc-200">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-[#1A56DB] inline-block"></span>
+                            <span class="text-xs font-black uppercase tracking-wider text-[#0A0A0A]">Product Categories &amp; Model Families</span>
+                        </div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Select a subcategory to filter or review all models below</span>
+                    </div>
+                    <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
+                        <?php foreach ( $fleet_pills as $pill ) : ?>
+                            <a href="<?php echo esc_url( $pill['url'] ); ?>" class="h-[42px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all <?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black border-2 border-black shadow-[2px_2px_0px_0px_#0A0A0A]' : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>">
+                                <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-black' : 'text-[#1A56DB]'; ?>"><?php echo esc_html( $pill['icon'] ); ?></span>
+                                <span><?php echo esc_html( $pill['name'] ); ?></span>
+                                <span class="<?php echo $pill['is_active'] ? 'bg-black text-[#FBBF24]' : 'bg-zinc-200 text-zinc-700'; ?> text-[10px] font-mono font-bold px-1.5 py-0.5 ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <!-- 3. Flagship Alternating Split Blocks -->
             <section id="flagship-showcase" class="mb-20 sm:mb-24">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12 border-b-4 border-[#1A56DB] pb-4">
@@ -249,28 +379,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             $m_data = ( $m_key && isset( $nestle_hardware[ $m_key ] ) ) ? $nestle_hardware[ $m_key ] : null;
                             $front_img = $m_data ? $m_data['front'] : $item['image_url'];
                             if ( empty( $front_img ) || strpos( $front_img, 'placeholder' ) !== false ) {
-                                $u_sku = strtoupper( $item['sku'] );
-                                if ( strpos( $u_sku, 'USHA' ) !== false ) {
-                                    $front_img = file_exists( get_template_directory() . '/images/usha/usha-aquagenie.jpg' ) ? ( $theme_uri . '/images/usha/usha-aquagenie.jpg' ) : ( $theme_uri . '/images/brands/usha.png' );
-                                } elseif ( strpos( $u_sku, 'EF-' ) !== false ) {
-                                    if ( strpos( $u_sku, 'SKID' ) !== false && file_exists( get_template_directory() . '/images/eureka-forbes/skid-ro-500.webp' ) ) {
-                                        $front_img = $theme_uri . '/images/eureka-forbes/skid-ro-500.webp';
-                                    } elseif ( strpos( $u_sku, 'UV' ) !== false && file_exists( get_template_directory() . '/images/eureka-forbes/comm-uv.png' ) ) {
-                                        $front_img = $theme_uri . '/images/eureka-forbes/comm-uv.png';
-                                    } else {
-                                        $front_img = file_exists( get_template_directory() . '/images/eureka-forbes/aquaguard-commercial.jpg' ) ? ( $theme_uri . '/images/eureka-forbes/aquaguard-commercial.jpg' ) : ( $theme_uri . '/images/brands/eureka_forbes.png' );
-                                    }
-                                } elseif ( strpos( $u_sku, 'TET-' ) !== false ) {
-                                    if ( strpos( $u_sku, 'GINGER' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-ginger.png' ) ) {
-                                        $front_img = $theme_uri . '/images/tetley/tetley-ginger.png';
-                                    } elseif ( strpos( $u_sku, 'ELAICHI' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-elaichi.png' ) ) {
-                                        $front_img = $theme_uri . '/images/tetley/tetley-elaichi.png';
-                                    } elseif ( strpos( $u_sku, 'CLASSIC' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-classic.jpg' ) ) {
-                                        $front_img = $theme_uri . '/images/tetley/tetley-classic.jpg';
-                                    } else {
-                                        $front_img = file_exists( get_template_directory() . '/images/tetley/tetley-plain.png' ) ? ( $theme_uri . '/images/tetley/tetley-plain.png' ) : ( $theme_uri . '/images/brands/tetley.png' );
-                                    }
-                                }
+                                $front_img = snap_stitch_resolve_b2b_image( $item['sku'], $front_img );
                             }
                             $menu_img = $m_data ? $m_data['menu'] : ( ! empty( $item['menu_image_url'] ) ? $item['menu_image_url'] : '' );
                             $has_menu_img = ! empty( $menu_img );
