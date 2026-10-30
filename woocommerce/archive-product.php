@@ -466,7 +466,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             <span class="text-xs font-black uppercase tracking-wider text-[#0A0A0A]">Product Categories &amp; Model Families</span>
                         </div>
                         <div class="flex items-center justify-between sm:justify-end gap-3">
-                            <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hidden md:inline">Select any category pill to filter instantly, or use arrows to view all</span>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hidden md:inline">Select any category pill to explore models, or use arrows to view all</span>
                             <div class="flex items-center gap-1.5 shrink-0">
                                 <button type="button" id="pills-scroll-left" class="w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll subcategories left" title="Scroll left">
                                     <span class="material-symbols-outlined text-base">chevron_left</span>
@@ -838,9 +838,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                         ?>
                                         <td class="py-2.5 px-3 border-r border-b border-zinc-200 text-xs text-center">
                                             <?php if ( $is_check ) : ?>
-                                                <span class="inline-flex items-center gap-1 text-green-700 font-extrabold bg-green-50 px-2 py-0.5 border border-green-200 rounded text-[11px]"><?php echo esc_html( $val ); ?></span>
+                                                <span class="inline-flex items-center justify-center gap-1 text-green-700 font-extrabold bg-green-50 px-2 py-0.5 border border-green-200 rounded text-[11px]"><span class="material-symbols-outlined text-xs">check</span><span><?php echo esc_html( trim( str_replace( '✓', '', $val ) ) ); ?></span></span>
                                             <?php elseif ( $is_cross ) : ?>
-                                                <span class="inline-flex items-center gap-1 text-zinc-400 font-medium text-[11px]"><?php echo esc_html( $val ); ?></span>
+                                                <span class="inline-flex items-center justify-center gap-1 text-zinc-400 font-medium text-[11px]"><span class="material-symbols-outlined text-xs text-zinc-400">close</span><span><?php echo esc_html( trim( str_replace( '✗', '', $val ) ) ?: '—' ); ?></span></span>
                                             <?php else : ?>
                                                 <span class="font-extrabold text-[#0A0A0A] text-[11px]"><?php echo esc_html( $val ); ?></span>
                                             <?php endif; ?>
@@ -854,7 +854,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     <?php else : ?>
                         <!-- Universal Fallback Matrix for Other Commercial B2B Categories -->
                         <table class="w-full text-left text-xs border-collapse min-w-[700px]">
-                            <thead><tr class="bg-[#1A56DB] text-white font-black uppercase tracking-wider text-[11px]"><th class="p-3 text-center w-14 border-r border-blue-600">RFQ [✓]</th><th class="p-3 border-r border-blue-600">Model Name &amp; SKU</th><th class="p-3 border-r border-blue-600">Throughput / Capacity</th><th class="p-3 border-r border-blue-600">Duty Cycle / Power</th><th class="p-3 border-r border-blue-600">Target Deployment</th><th class="p-3 border-r border-blue-600">Commercial Terms</th><th class="p-3 text-center w-36">Quick Actions</th></tr></thead>
+                            <thead><tr class="bg-[#1A56DB] text-white font-black uppercase tracking-wider text-[11px]"><th class="p-3 text-center w-14 border-r border-blue-600"><span class="inline-flex items-center justify-center gap-1"><span>RFQ</span><span class="material-symbols-outlined text-[13px]">check_box</span></span></th><th class="p-3 border-r border-blue-600">Model Name &amp; SKU</th><th class="p-3 border-r border-blue-600">Throughput / Capacity</th><th class="p-3 border-r border-blue-600">Duty Cycle / Power</th><th class="p-3 border-r border-blue-600">Target Deployment</th><th class="p-3 border-r border-blue-600">Commercial Terms</th><th class="p-3 text-center w-36">Quick Actions</th></tr></thead>
                             <tbody class="divide-y divide-zinc-200">
                                 <?php foreach ( $all_products as $row ) : 
                                     $row_vals = array();
@@ -871,12 +871,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     $spec1 = isset( $row_vals[0] ) ? $row_vals[0] : 'Industrial Grade';
                                     $spec2 = isset( $row_vals[1] ) ? $row_vals[1] : 'Standard 230V / 50Hz';
                                     $spec3 = isset( $row_vals[2] ) ? $row_vals[2] : 'Commercial Use';
-                                ?>
-                                <?php 
                                     $is_row_match = ( empty( $active_subcat_slug ) || $active_subcat_slug === 'all' || in_array( $active_subcat_slug, $row['cat_slugs'], true ) );
-                                    $row_prefilter_style = $is_row_match ? '' : 'style="display: none;"';
+                                    if ( ! $is_row_match ) {
+                                        continue;
+                                    }
                                 ?>
-                                <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>" <?php echo $row_prefilter_style; ?>>
+                                <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>">
                                     <td class="p-3 text-center border-r border-zinc-200"><label class="cursor-pointer inline-flex items-center justify-center p-1"><input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" data-id="<?php echo esc_attr( $row['id'] ); ?>" data-title="<?php echo esc_attr( $row['title'] ); ?>" data-sku="<?php echo esc_attr( $row['sku'] ); ?>"></label></td>
                                     <td class="p-3 border-r border-zinc-200"><div class="flex items-center gap-3"><img src="<?php echo esc_url( $row['thumb_url'] ); ?>" alt="<?php echo esc_attr( $row['title'] ); ?>" class="w-10 h-10 object-contain bg-white border border-zinc-200 p-0.5 shrink-0" loading="lazy"><div><div class="font-black text-[#0A0A0A] uppercase leading-tight"><?php echo esc_html( $row['title'] ); ?></div><span class="inline-block text-[10px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.5 mt-0.5">SKU: <?php echo esc_html( $row['sku'] ); ?></span></div></div></td>
                                     <td class="p-3 font-bold text-zinc-800 border-r border-zinc-200"><?php echo esc_html( $spec1 ); ?></td>
@@ -965,7 +965,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     <table class="w-full text-left text-xs border-collapse min-w-[700px]">
                         <thead>
                             <tr class="bg-[#0A0A0A] text-white font-black uppercase tracking-wider text-[11px]">
-                                <th class="p-3 text-center w-14 border-r border-zinc-800">RFQ [✓]</th>
+                                <th class="p-3 text-center w-14 border-r border-zinc-800"><span class="inline-flex items-center justify-center gap-1"><span>RFQ</span><span class="material-symbols-outlined text-[13px]">check_box</span></span></th>
                                 <th class="p-3 border-r border-zinc-800">Accessory / Equipment Name &amp; SKU</th>
                                 <th class="p-3 border-r border-zinc-800">Technical Capacity / Material</th>
                                 <th class="p-3 border-r border-zinc-800">Corporate Pantry Application</th>
