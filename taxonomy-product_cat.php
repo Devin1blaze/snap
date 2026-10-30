@@ -103,9 +103,20 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 $u_sku = strtoupper( (string) $sku );
 
                 // Direct mapping to high-resolution authentic local images
+                if ( strpos( $u_sku, 'NES-' ) !== false || strpos( $u_sku, 'NESTLE' ) !== false || strpos( $u_sku, 'AMIGO' ) !== false || strpos( $u_sku, 'PREMIO' ) !== false || strpos( $u_sku, 'FRIO' ) !== false ) {
+                    if ( strpos( $u_sku, 'PREMIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
+                    if ( strpos( $u_sku, 'AMIGO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/amigo-front.png';
+                    if ( strpos( $u_sku, 'DUO' ) !== false || strpos( $u_sku, 'GUSTO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/duo-gusto-front.png';
+                    if ( strpos( $u_sku, 'SOL' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/solution-front.webp';
+                    if ( strpos( $u_sku, 'SPEC' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/spectra-front.png';
+                    if ( strpos( $u_sku, 'FRIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/frio-front.webp';
+                    return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
+                }
+
                 if ( strpos( $u_sku, 'USHA' ) !== false ) {
                     if ( strpos( $u_sku, 'INSTAFRESH-CB' ) !== false || strpos( $u_sku, 'CABINET' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-cb.jpg';
                     if ( strpos( $u_sku, 'INSTAFRESH-TT' ) !== false || strpos( $u_sku, 'TABLE' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-tt.png';
+                    if ( strpos( $u_sku, 'AQUAGENIE' ) !== false || strpos( $u_sku, 'PLUS' ) !== false ) return $theme_uri . '/images/usha/usha-aquagenie.jpg';
                     if ( strpos( $u_sku, '40/80' ) !== false || strpos( $u_sku, '40-80' ) !== false ) return $theme_uri . '/images/usha/usha-swc-40-80.jpg';
                     if ( strpos( $u_sku, '150/150' ) !== false || strpos( $u_sku, '150-150' ) !== false ) return $theme_uri . '/images/usha/usha-swc-150-150.jpg';
                     if ( strpos( $u_sku, '300/400' ) !== false || strpos( $u_sku, '300-400' ) !== false || strpos( $u_sku, 'XXL' ) !== false ) return $theme_uri . '/images/usha/usha-swc-300-400.jpg';
@@ -246,6 +257,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     'is_featured'      => $product->is_featured(),
                     'excerpt'          => wp_strip_all_tags( $product->get_short_description() ),
                 );
+                // Assign model_key for Nestle machines
+                $f_k = '';
+                foreach ( array('PREMIO'=>'premio','AMIGO'=>'amigo','DUO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOL'=>'solution','SPEC'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
+                    if ( stripos( $product->get_sku(), $nd ) !== false || stripos( get_the_title(), $nd ) !== false ) { $f_k = $k; break; }
+                }
+                $all_products[ count( $all_products ) - 1 ]['model_key'] = $f_k;
             }
             wp_reset_postdata();
         }
@@ -810,11 +827,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                         <td colspan="<?php echo count( $canonical_models ) + 1; ?>" class="py-2.5 px-4"><div class="flex items-center gap-2"><span class="w-2 h-2 bg-[#1A56DB] inline-block"></span><span><?php echo esc_html( $cat_title ); ?></span></div></td>
                                     </tr>
                                     <?php foreach ( $cat_specs as $spec_title => $spec_row ) : ?>
-                                    <?php 
-                                    $is_row_match = ( $active_subcat_slug === 'all' || in_array( $active_subcat_slug, $row['cat_slugs'], true ) );
-                                    $row_style = $is_row_match ? '' : 'style="display: none;"';
-                                ?>
-                                <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>" <?php echo $row_style; ?>>
+                                    <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="coffee-vending-machines commercial-coffee-vending-machines corporate-pantry">
                                         <td class="sticky left-0 bg-zinc-100 z-10 w-64 min-w-[220px] font-bold text-[11px] uppercase text-zinc-700 py-2.5 px-3.5 border-r border-b border-zinc-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]"><?php echo esc_html( $spec_title ); ?></td>
                                         <?php foreach ( $canonical_models as $col_idx => $prod_col ) : 
                                             $col_sku = $prod_col['sku'];

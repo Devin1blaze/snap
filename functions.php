@@ -760,3 +760,77 @@ function snap_stitch_route_b2b_single_products() {
     }
 }
 add_action( 'template_redirect', 'snap_stitch_route_b2b_single_products', 10 );
+
+/**
+ * Canonical B2B product image resolver
+ */
+if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
+    function snap_stitch_resolve_b2b_image( $sku, $existing_url = '' ) {
+        $theme_uri = get_template_directory_uri();
+        $u_sku = strtoupper( (string) $sku );
+
+        // Nestlé Professional Commercial Coffee Machines
+        if ( strpos( $u_sku, 'NES-' ) !== false || strpos( $u_sku, 'NESTLE' ) !== false || strpos( $u_sku, 'AMIGO' ) !== false || strpos( $u_sku, 'PREMIO' ) !== false || strpos( $u_sku, 'FRIO' ) !== false ) {
+            if ( strpos( $u_sku, 'PREMIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
+            if ( strpos( $u_sku, 'AMIGO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/amigo-front.png';
+            if ( strpos( $u_sku, 'DUO' ) !== false || strpos( $u_sku, 'GUSTO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/duo-gusto-front.png';
+            if ( strpos( $u_sku, 'SOL' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/solution-front.webp';
+            if ( strpos( $u_sku, 'SPEC' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/spectra-front.png';
+            if ( strpos( $u_sku, 'FRIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/frio-front.webp';
+            return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
+        }
+
+        // Usha Water Solutions
+        if ( strpos( $u_sku, 'USHA' ) !== false ) {
+            if ( strpos( $u_sku, 'INSTAFRESH-CB' ) !== false || strpos( $u_sku, 'CABINET' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-cb.jpg';
+            if ( strpos( $u_sku, 'INSTAFRESH-TT' ) !== false || strpos( $u_sku, 'TABLE' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-tt.png';
+            if ( strpos( $u_sku, 'AQUAGENIE' ) !== false || strpos( $u_sku, 'PLUS' ) !== false ) return $theme_uri . '/images/usha/usha-aquagenie.jpg';
+            if ( strpos( $u_sku, '40/80' ) !== false || strpos( $u_sku, '40-80' ) !== false ) return $theme_uri . '/images/usha/usha-swc-40-80.jpg';
+            if ( strpos( $u_sku, '150/150' ) !== false || strpos( $u_sku, '150-150' ) !== false ) return $theme_uri . '/images/usha/usha-swc-150-150.jpg';
+            if ( strpos( $u_sku, '300/400' ) !== false || strpos( $u_sku, '300-400' ) !== false || strpos( $u_sku, 'XXL' ) !== false ) return $theme_uri . '/images/usha/usha-swc-300-400.jpg';
+            if ( strpos( $u_sku, 'INLINE' ) !== false || strpos( $u_sku, 'IC-' ) !== false ) return $theme_uri . '/images/usha/usha-inline-60.jpg';
+            return $theme_uri . '/images/usha/usha-aquagenie.jpg';
+        }
+
+        // Eureka Forbes Commercial
+        if ( strpos( $u_sku, 'EF-' ) !== false ) {
+            if ( strpos( $u_sku, 'PRIMA' ) !== false || strpos( $u_sku, '50B' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
+            if ( strpos( $u_sku, 'COMM-200' ) !== false || strpos( $u_sku, '200' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-200.png';
+            if ( strpos( $u_sku, 'UV' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-uv-ss.png';
+            if ( strpos( $u_sku, 'PURECHILL' ) !== false || strpos( $u_sku, '80/120' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-purechill-80-120.jpg';
+            if ( strpos( $u_sku, 'HOT-COLD' ) !== false || strpos( $u_sku, 'PRO-' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-pro-hot-cold.jpg';
+            if ( strpos( $u_sku, 'SKID' ) !== false || strpos( $u_sku, '500' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-skid-ro-500.jpg';
+            return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
+        }
+
+        // Blue Star Commercial
+        if ( strpos( $u_sku, 'BS-LC' ) !== false || strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'CASS' ) !== false || strpos( $u_sku, 'CONC' ) !== false ) {
+            if ( strpos( $u_sku, 'VERT' ) !== false ) return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+            if ( strpos( $u_sku, 'CASS-4W' ) !== false ) return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
+            if ( strpos( $u_sku, 'CASS-1W' ) !== false ) return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
+            if ( strpos( $u_sku, 'CONC' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
+            return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+        }
+
+        // Euronics Commercial Washroom Automation
+        if ( strpos( $u_sku, 'EUR-' ) !== false ) {
+            if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
+                return $existing_url;
+            }
+        }
+
+        // Tetley Corporate Teas
+        if ( strpos( $u_sku, 'TET-' ) !== false ) {
+            if ( strpos( $u_sku, 'CLASSIC' ) !== false ) return $theme_uri . '/images/tetley/tetley-classic.jpg';
+            if ( strpos( $u_sku, 'ELAICHI' ) !== false ) return $theme_uri . '/images/tetley/tetley-elaichi.png';
+            if ( strpos( $u_sku, 'GINGER' ) !== false ) return $theme_uri . '/images/tetley/tetley-ginger.png';
+            return $theme_uri . '/images/tetley/tetley-plain.png';
+        }
+
+        if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
+            return $existing_url;
+        }
+
+        return wc_placeholder_img_src();
+    }
+}

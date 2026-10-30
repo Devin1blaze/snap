@@ -47,7 +47,12 @@ get_header( 'shop' ); ?>
                 <div class="relative aspect-square bg-zinc-50 flex items-center justify-center p-12 overflow-hidden">
                     <?php 
                         $image_id = $product->get_image_id();
-                        if ( $image_id ) {
+                        $sku = $product->get_sku();
+                        $existing_src = $image_id ? wp_get_attachment_image_url( $image_id, 'full' ) : '';
+                        $resolved_src = function_exists( 'snap_stitch_resolve_b2b_image' ) ? snap_stitch_resolve_b2b_image( $sku, $existing_src ) : $existing_src;
+                        if ( ! empty( $resolved_src ) && strpos( $resolved_src, 'placeholder' ) === false ) {
+                            echo '<img src="' . esc_url( $resolved_src ) . '" alt="' . esc_attr( get_the_title() ) . '" class="w-full h-full object-contain hover:scale-105 transition-all duration-500 mix-blend-multiply" id="snap-main-image" />';
+                        } elseif ( $image_id ) {
                             echo wp_get_attachment_image( $image_id, 'full', false, array( 'class' => 'w-full h-full object-contain hover:scale-105 transition-all duration-500 mix-blend-multiply', 'id' => 'snap-main-image' ) );
                         } else {
                             echo '<span class="material-symbols-outlined text-white text-9xl opacity-20">inventory_2</span>';
