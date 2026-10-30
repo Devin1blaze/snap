@@ -72,7 +72,8 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         'blue-star-commercial',
         'usha-water-solutions', 'usha-water-dispensers', 'usha-water-coolers', 'usha-instant-coolers',
         'eureka-forbes-commercial', 'eureka-forbes-commercial-ro', 'eureka-forbes-commercial-uv', 'eureka-forbes-cooler-cum-purifiers', 'eureka-forbes-industrial-ro-plants',
-        'corporate-pantry', 'tetley-teas'
+        'corporate-pantry', 'tetley-teas',
+        'euronics-commercial', 'euronics-hand-dryers', 'euronics-sensor-taps', 'euronics-soap-dispensers', 'euronics-urinal-sensors', 'euronics-paper-dispensers', 'euronics-air-curtains'
     );
     if ( ! $is_b2b_category && in_array( $term->slug, $b2b_commercial_slugs, true ) ) {
         $is_b2b_category = true;
@@ -128,6 +129,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     if ( strpos( $u_sku, 'CASS-1W' ) !== false ) return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
                     if ( strpos( $u_sku, 'CONC' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
                     return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+                }
+
+                if ( strpos( $u_sku, 'EUR-' ) !== false ) {
+                    if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
+                        return $existing_url;
+                    }
                 }
 
                 if ( strpos( $u_sku, 'TET-' ) !== false ) {
@@ -243,6 +250,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             wp_reset_postdata();
         }
         $total_models = count( $all_products );
+        $active_subcat_slug = ( $root_brand_term && $term->term_id !== $root_brand_term->term_id ) ? $term->slug : 'all';
         $is_coffee_family = ( ( $term && in_array( $term->slug, array( 'coffee-vending-machines', 'commercial-coffee-vending-machines', 'vending-machines' ), true ) ) || ( ! empty( $all_products ) && strpos( $all_products[0]['sku'], 'NESTLE' ) !== false ) );
         $theme_uri = get_template_directory_uri();
         $manifest_path = get_template_directory() . '/images/nestle-machines/download_manifest.json';
@@ -270,6 +278,14 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 if ( count( $canonical_models ) >= 6 ) break;
             }
             if ( empty( $canonical_models ) ) $canonical_models = $all_products;
+        } elseif ( ! empty( $active_subcat_slug ) && $active_subcat_slug !== 'all' ) {
+            $subcat_prods = array();
+            foreach ( $all_products as $ap ) {
+                if ( in_array( $active_subcat_slug, $ap['cat_slugs'], true ) ) {
+                    $subcat_prods[] = $ap;
+                }
+            }
+            $canonical_models = ! empty( $subcat_prods ) ? array_slice( $subcat_prods, 0, 8 ) : array_slice( $all_products, 0, 8 );
         } else {
             $canonical_models = array_slice( $all_products, 0, 8 );
         }
@@ -371,7 +387,13 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     foreach ( $child_terms as $ct ) {
                         $icon = 'precision_manufacturing';
                         $cn = strtolower( $ct->name );
-                        if ( strpos( $cn, 'room air conditioner' ) !== false || strpos( $cn, 'room ac' ) !== false ) $icon = 'mode_fan';
+                        if ( strpos( $cn, 'hand dryer' ) !== false || strpos( $cn, 'dryer' ) !== false ) $icon = 'air';
+                        elseif ( strpos( $cn, 'sensor tap' ) !== false || strpos( $cn, 'faucet' ) !== false ) $icon = 'faucet';
+                        elseif ( strpos( $cn, 'soap' ) !== false ) $icon = 'sanitizer';
+                        elseif ( strpos( $cn, 'urinal' ) !== false || strpos( $cn, 'smartflush' ) !== false ) $icon = 'sensor_occupied';
+                        elseif ( strpos( $cn, 'paper' ) !== false || strpos( $cn, 'towel' ) !== false || strpos( $cn, 'receptacle' ) !== false ) $icon = 'description';
+                        elseif ( strpos( $cn, 'air curtain' ) !== false ) $icon = 'wind_power';
+                        elseif ( strpos( $cn, 'room air conditioner' ) !== false || strpos( $cn, 'room ac' ) !== false ) $icon = 'mode_fan';
                         elseif ( strpos( $cn, 'light commercial' ) !== false || strpos( $cn, 'cassette' ) !== false || strpos( $cn, 'verticool' ) !== false ) $icon = 'grid_view';
                         elseif ( strpos( $cn, 'central air' ) !== false || strpos( $cn, 'vrf' ) !== false || strpos( $cn, 'chiller' ) !== false ) $icon = 'apartment';
                         elseif ( strpos( $cn, 'cold storage' ) !== false ) $icon = 'warehouse';
@@ -414,7 +436,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     </div>
                     <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
                         <?php foreach ( $fleet_pills as $pill ) : ?>
-                            <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-fleet-filter-btn h-[42px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all <?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black border-2 border-black shadow-[2px_2px_0px_0px_#0A0A0A]' : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>" data-filter="<?php echo esc_attr( $pill['filter_slug'] ); ?>" data-target-url="<?php echo esc_url( $pill['url'] ); ?>">
+                            <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-fleet-filter-btn <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>h-[42px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all <?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black border-2 border-black shadow-[2px_2px_0px_0px_#0A0A0A]' : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>" data-filter="<?php echo esc_attr( $pill['filter_slug'] ); ?>" data-target-url="<?php echo esc_url( $pill['url'] ); ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
                                 <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-black' : 'text-[#1A56DB]'; ?>"><?php echo esc_html( $pill['icon'] ); ?></span>
                                 <span><?php echo esc_html( $pill['name'] ); ?></span>
                                 <span class="<?php echo $pill['is_active'] ? 'bg-black text-[#FBBF24]' : 'bg-zinc-200 text-zinc-700'; ?> text-[10px] font-mono font-bold px-1.5 py-0.5 ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
@@ -467,7 +489,11 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             $recipe_count = count( $recipes_list );
                             $has_bev_menu = ( $recipe_count > 0 );
                         ?>
-                        <article id="model-<?php echo esc_attr( $item['id'] ); ?>" class="js-b2b-model-card grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center bg-white border-2 border-zinc-200 p-5 sm:p-8 md:p-10 relative transition-all duration-300 hover:border-black scroll-mt-28" data-cat-slugs="<?php echo esc_attr( implode( ' ', $item['cat_slugs'] ) ); ?>" style="box-shadow: 6px 6px 0px 0px #1A56DB;">
+                        <?php 
+                        $is_card_match = ( $active_subcat_slug === 'all' || in_array( $active_subcat_slug, $item['cat_slugs'], true ) );
+                        $card_style = $is_card_match ? 'box-shadow: 6px 6px 0px 0px #1A56DB;' : 'box-shadow: 6px 6px 0px 0px #1A56DB; display: none;';
+                        ?>
+                        <article id="model-<?php echo esc_attr( $item['id'] ); ?>" class="js-b2b-model-card grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center bg-white border-2 border-zinc-200 p-5 sm:p-8 md:p-10 relative transition-all duration-300 hover:border-black scroll-mt-28" data-cat-slugs="<?php echo esc_attr( implode( ' ', $item['cat_slugs'] ) ); ?>" style="<?php echo esc_attr( $card_style ); ?>">
                             <!-- Visual Column: Dual-Tab Switcher (lg:col-span-5) -->
                             <div class="lg:col-span-5 <?php echo $is_even ? 'lg:order-1' : 'lg:order-2'; ?> flex flex-col justify-center">
                                 <div class="relative bg-zinc-50 border border-zinc-200 p-4 sm:p-5 overflow-hidden group">
@@ -750,7 +776,11 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                         <td colspan="<?php echo count( $canonical_models ) + 1; ?>" class="py-2.5 px-4"><div class="flex items-center gap-2"><span class="w-2 h-2 bg-[#1A56DB] inline-block"></span><span><?php echo esc_html( $cat_title ); ?></span></div></td>
                                     </tr>
                                     <?php foreach ( $cat_specs as $spec_title => $spec_row ) : ?>
-                                    <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>">
+                                    <?php 
+                                    $is_row_match = ( $active_subcat_slug === 'all' || in_array( $active_subcat_slug, $row['cat_slugs'], true ) );
+                                    $row_style = $is_row_match ? '' : 'style="display: none;"';
+                                ?>
+                                <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>" <?php echo $row_style; ?>>
                                         <td class="sticky left-0 bg-zinc-100 z-10 w-64 min-w-[220px] font-bold text-[11px] uppercase text-zinc-700 py-2.5 px-3.5 border-r border-b border-zinc-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.08)]"><?php echo esc_html( $spec_title ); ?></td>
                                         <?php foreach ( $canonical_models as $col_idx => $prod_col ) : 
                                             $col_sku = $prod_col['sku'];
@@ -795,7 +825,11 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     $spec2 = isset( $row_vals[1] ) ? $row_vals[1] : 'Standard 230V / 50Hz';
                                     $spec3 = isset( $row_vals[2] ) ? $row_vals[2] : 'Commercial Use';
                                 ?>
-                                <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>">
+                                <?php 
+                                    $is_row_match = ( empty( $active_subcat_slug ) || $active_subcat_slug === 'all' || in_array( $active_subcat_slug, $row['cat_slugs'], true ) );
+                                    $row_prefilter_style = $is_row_match ? '' : 'style="display: none;"';
+                                ?>
+                                <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>" <?php echo $row_prefilter_style; ?>>
                                     <td class="p-3 text-center border-r border-zinc-200"><label class="cursor-pointer inline-flex items-center justify-center p-1"><input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" data-id="<?php echo esc_attr( $row['id'] ); ?>" data-title="<?php echo esc_attr( $row['title'] ); ?>" data-sku="<?php echo esc_attr( $row['sku'] ); ?>"></label></td>
                                     <td class="p-3 border-r border-zinc-200"><div class="flex items-center gap-3"><img src="<?php echo esc_url( $row['thumb_url'] ); ?>" alt="<?php echo esc_attr( $row['title'] ); ?>" class="w-10 h-10 object-contain bg-white border border-zinc-200 p-0.5 shrink-0" loading="lazy"><div><div class="font-black text-[#0A0A0A] uppercase leading-tight"><?php echo esc_html( $row['title'] ); ?></div><span class="inline-block text-[10px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.5 mt-0.5">SKU: <?php echo esc_html( $row['sku'] ); ?></span></div></div></td>
                                     <td class="p-3 font-bold text-zinc-800 border-r border-zinc-200"><?php echo esc_html( $spec1 ); ?></td>
@@ -1144,6 +1178,8 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     }
 
                     filterBtns.forEach(function(b) {
+                        b.setAttribute('data-active', 'false');
+                        b.classList.remove('is-active');
                         b.classList.remove('bg-[#FBBF24]', 'text-black', 'font-black', 'border-black', 'shadow-[2px_2px_0px_0px_#0A0A0A]');
                         b.classList.add('bg-zinc-50', 'text-zinc-800', 'font-extrabold', 'border-zinc-300');
                         var icon = b.querySelector('.material-symbols-outlined');
@@ -1152,6 +1188,8 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         if (badge) { badge.classList.remove('bg-black', 'text-[#FBBF24]'); badge.classList.add('bg-zinc-200', 'text-zinc-700'); }
                     });
                     this.classList.remove('bg-zinc-50', 'text-zinc-800', 'font-extrabold', 'border-zinc-300');
+                    this.setAttribute('data-active', 'true');
+                    this.classList.add('is-active');
                     this.classList.add('bg-[#FBBF24]', 'text-black', 'font-black', 'border-black', 'shadow-[2px_2px_0px_0px_#0A0A0A]');
                     var activeIcon = this.querySelector('.material-symbols-outlined');
                     if (activeIcon) { activeIcon.classList.remove('text-[#1A56DB]'); activeIcon.classList.add('text-black'); }
@@ -1183,7 +1221,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             }
 
             // On initial load: if a subcategory is active in pills, filter immediately
-            var initialActive = document.querySelector('.js-fleet-filter-btn.bg-\[\#FBBF24\]');
+            var initialActive = document.querySelector('.js-fleet-filter-btn[data-active="true"]');
             if (initialActive) {
                 var initialFilter = initialActive.getAttribute('data-filter');
                 if (initialFilter && initialFilter !== 'all') {
