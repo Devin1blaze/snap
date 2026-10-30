@@ -426,22 +426,56 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             }
             ?>
             <?php if ( ! empty( $fleet_pills ) ) : ?>
+                <style>
+                #pills-scroll-container::-webkit-scrollbar {
+                    height: 6px;
+                }
+                #pills-scroll-container::-webkit-scrollbar-track {
+                    background: #F4F4F5;
+                    border: 1px solid #E4E4E7;
+                }
+                #pills-scroll-container::-webkit-scrollbar-thumb {
+                    background: #71717A;
+                    border: 1px solid #0A0A0A;
+                }
+                #pills-scroll-container::-webkit-scrollbar-thumb:hover {
+                    background: #FBBF24;
+                }
+                </style>
                 <div class="mb-8 bg-white border-2 border-black p-4 sm:p-5 shadow-[4px_4px_0px_0px_#0A0A0A]">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-3 pb-2.5 border-b-2 border-zinc-200">
                         <div class="flex items-center gap-2">
                             <span class="w-2 h-2 bg-[#1A56DB] inline-block"></span>
                             <span class="text-xs font-black uppercase tracking-wider text-[#0A0A0A]">Product Categories &amp; Model Families</span>
                         </div>
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Select any category pill to filter instantly, or view all models below</span>
+                        <div class="flex items-center justify-between sm:justify-end gap-3">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hidden md:inline">Select any category pill to filter instantly, or use arrows to view all</span>
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                <button type="button" id="pills-scroll-left" class="w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll subcategories left" title="Scroll left">
+                                    <span class="material-symbols-outlined text-base">chevron_left</span>
+                                </button>
+                                <button type="button" id="pills-scroll-right" class="w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll subcategories right" title="Scroll right">
+                                    <span class="material-symbols-outlined text-base">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
-                        <?php foreach ( $fleet_pills as $pill ) : ?>
-                            <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-fleet-filter-btn <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>h-[42px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all <?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black border-2 border-black shadow-[2px_2px_0px_0px_#0A0A0A]' : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>" data-filter="<?php echo esc_attr( $pill['filter_slug'] ); ?>" data-target-url="<?php echo esc_url( $pill['url'] ); ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
-                                <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-black' : 'text-[#1A56DB]'; ?>"><?php echo esc_html( $pill['icon'] ); ?></span>
-                                <span><?php echo esc_html( $pill['name'] ); ?></span>
-                                <span class="<?php echo $pill['is_active'] ? 'bg-black text-[#FBBF24]' : 'bg-zinc-200 text-zinc-700'; ?> text-[10px] font-mono font-bold px-1.5 py-0.5 ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
-                            </a>
-                        <?php endforeach; ?>
+                    <div class="relative flex items-center gap-2">
+                        <button type="button" id="pills-scroll-prev" class="hidden sm:flex shrink-0 w-9 h-[42px] items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Previous subcategories" title="Previous subcategories">
+                            <span class="material-symbols-outlined text-lg">chevron_left</span>
+                        </button>
+                        <div id="pills-scroll-container" class="flex-1 flex items-center gap-2 sm:gap-3 overflow-x-auto scroll-smooth py-1 pb-2 focus:outline-none" style="scrollbar-width: thin; scrollbar-color: #71717A #F4F4F5;">
+                            <?php foreach ( $fleet_pills as $pill ) : ?>
+                                <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-fleet-filter-btn <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>h-[42px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all <?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black border-2 border-black shadow-[2px_2px_0px_0px_#0A0A0A]' : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>" data-filter="<?php echo esc_attr( $pill['filter_slug'] ); ?>" data-target-url="<?php echo esc_url( $pill['url'] ); ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
+                                    <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-black' : 'text-[#1A56DB]'; ?>"><?php echo esc_html( $pill['icon'] ); ?></span>
+                                    <span><?php echo esc_html( $pill['name'] ); ?></span>
+                                    <span class="<?php echo $pill['is_active'] ? 'bg-black text-[#FBBF24]' : 'bg-zinc-200 text-zinc-700'; ?> text-[10px] font-mono font-bold px-1.5 py-0.5 ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                        <button type="button" id="pills-scroll-next" class="hidden sm:flex shrink-0 w-9 h-[42px] items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Next subcategories" title="Next subcategories">
+                            <span class="material-symbols-outlined text-lg">chevron_right</span>
+                        </button>
                     </div>
                 </div>
 
@@ -1227,6 +1261,56 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 if (initialFilter && initialFilter !== 'all') {
                     applyCategoryFilter(initialFilter);
                 }
+            }
+
+            // Horizontal scroll navigation and auto-centering for category pills
+            var pillsContainer = document.getElementById('pills-scroll-container');
+            var prevBtns = [document.getElementById('pills-scroll-left'), document.getElementById('pills-scroll-prev')].filter(Boolean);
+            var nextBtns = [document.getElementById('pills-scroll-right'), document.getElementById('pills-scroll-next')].filter(Boolean);
+
+            function updatePillsScrollState() {
+                if (!pillsContainer) return;
+                var maxScroll = pillsContainer.scrollWidth - pillsContainer.clientWidth;
+                var canScroll = maxScroll > 4;
+                var atStart = pillsContainer.scrollLeft <= 4;
+                var atEnd = pillsContainer.scrollLeft >= maxScroll - 4;
+
+                prevBtns.forEach(function(btn) {
+                    btn.disabled = atStart || !canScroll;
+                });
+                nextBtns.forEach(function(btn) {
+                    btn.disabled = atEnd || !canScroll;
+                });
+            }
+
+            if (pillsContainer) {
+                pillsContainer.addEventListener('scroll', updatePillsScrollState, { passive: true });
+                window.addEventListener('resize', updatePillsScrollState, { passive: true });
+
+                prevBtns.forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        pillsContainer.scrollBy({ left: -320, behavior: 'smooth' });
+                        setTimeout(updatePillsScrollState, 350);
+                    });
+                });
+
+                nextBtns.forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        pillsContainer.scrollBy({ left: 320, behavior: 'smooth' });
+                        setTimeout(updatePillsScrollState, 350);
+                    });
+                });
+
+                // Auto-scroll active pill into view on page load
+                var activePill = pillsContainer.querySelector('.js-fleet-filter-btn[data-active="true"]');
+                if (activePill) {
+                    var scrollOffset = activePill.offsetLeft - (pillsContainer.clientWidth / 2) + (activePill.clientWidth / 2);
+                    pillsContainer.scrollTo({ left: Math.max(0, scrollOffset), behavior: 'smooth' });
+                }
+
+                setTimeout(updatePillsScrollState, 150);
             }
         });
         </script>
