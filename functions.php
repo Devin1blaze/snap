@@ -100,9 +100,33 @@ function snap_stitch_woocommerce_customizations() {
  * Logic: Product belongs to 'B2B' category or has a 'b2b' attribute or the custom meta box is set to B2B
  */
 function snap_stitch_is_b2b_product( $product_id ) {
+    if ( ! $product_id ) {
+        return false;
+    }
     $meta_b2b = get_post_meta( $product_id, '_is_b2b', true );
     $meta_design = get_post_meta( $product_id, '_product_design_type', true );
-    return has_term( 'b2b', 'product_cat', $product_id ) || $meta_b2b === 'yes' || $meta_design === 'b2b';
+    if ( $meta_b2b === 'yes' || $meta_design === 'b2b' ) {
+        return true;
+    }
+    if ( has_term( 'b2b', 'product_cat', $product_id ) ) {
+        return true;
+    }
+    $terms = get_the_terms( $product_id, 'product_cat' );
+    if ( $terms && ! is_wp_error( $terms ) ) {
+        foreach ( $terms as $t ) {
+            if ( $t->slug === 'b2b' || strpos( $t->slug, 'b2b' ) !== false ) {
+                return true;
+            }
+            $ancs = get_ancestors( $t->term_id, 'product_cat' );
+            foreach ( $ancs as $anc_id ) {
+                $anc = get_term( $anc_id, 'product_cat' );
+                if ( $anc && ( $anc->slug === 'b2b' || strpos( $anc->slug, 'b2b' ) !== false ) ) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 /**
@@ -674,3 +698,65 @@ function snap_stitch_redirect_deprecated_categories() {
     }
 }
 add_action( 'template_redirect', 'snap_stitch_redirect_deprecated_categories', 5 );
+
+/**
+ * Route B2B single product requests to the unified multi-model category showcase page.
+ * Enforces single-page presentation for all models in the same category/brand.
+ */
+function snap_stitch_route_b2b_single_products() {
+    if ( is_admin() || wp_doing_ajax() ) {
+        return;
+    }
+    if ( ! is_singular( 'product' ) && ! is_product() ) {
+        return;
+    }
+    $product_id = get_queried_object_id();
+    if ( ! $product_id ) {
+        $product_id = get_the_ID();
+    }
+    if ( ! $product_id || ! function_exists( 'snap_stitch_is_b2b_product' ) || ! snap_stitch_is_b2b_product( $product_id ) ) {
+        return;
+    }
+    
+    // Find the product's primary commercial category
+    $terms = get_the_terms( $product_id, 'product_cat' );
+    if ( ! $terms || is_wp_error( $terms ) ) {
+        return;
+    }
+    
+    $target_term = null;
+    $parents = wp_list_pluck( $terms, 'parent' );
+    
+    // Select the deepest leaf category (not a parent of any other term in the list, and not the root 'b2b')
+    $candidates = array();
+    foreach ( $terms as $term ) {
+        if ( $term->slug === 'b2b' ) {
+            continue;
+        }
+        if ( ! in_array( $term->term_id, $parents, true ) ) {
+            $candidates[] = $term;
+        }
+    }
+    if ( ! empty( $candidates ) ) {
+        $target_term = $candidates[0];
+    } else {
+        foreach ( $terms as $term ) {
+            if ( $term->slug !== 'b2b' && $term->parent !== 0 ) {
+                $target_term = $term;
+                break;
+            }
+        }
+    }
+    if ( ! $target_term && ! empty( $terms ) ) {
+        $target_term = $terms[0];
+    }
+    
+    if ( $target_term ) {
+        $cat_url = get_term_link( $target_term );
+        if ( ! is_wp_error( $cat_url ) ) {
+            wp_safe_redirect( $cat_url . '#model-' . $product_id, 301 );
+            exit;
+        }
+    }
+}
+add_action( 'template_redirect', 'snap_stitch_route_b2b_single_products', 10 );

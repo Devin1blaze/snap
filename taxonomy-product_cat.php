@@ -66,7 +66,11 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         'reach-in-chillers-and-freezers', 'reach-in-chillers-and-freezers-b2b',
         'undercounter-chillers-and-freezers', 'undercounter-chillers-and-freezers-b2b',
         'vaccine-storage-products', 'vaccine-storage-products-b2b',
-        'speciality-products', 'b2b-room-air-conditioners'
+        'speciality-products', 'b2b-room-air-conditioners',
+        'blue-star-commercial',
+        'usha-water-solutions', 'usha-water-dispensers', 'usha-water-coolers', 'usha-instant-coolers',
+        'eureka-forbes-commercial', 'eureka-forbes-commercial-ro', 'eureka-forbes-commercial-uv', 'eureka-forbes-cooler-cum-purifiers', 'eureka-forbes-industrial-ro-plants',
+        'corporate-pantry', 'tetley-teas'
     );
     if ( ! $is_b2b_category && in_array( $term->slug, $b2b_commercial_slugs, true ) ) {
         $is_b2b_category = true;
@@ -146,19 +150,23 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             'frio'      => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/frio-front.webp', 'left' => $theme_uri . '/images/nestle-machines/hardware/frio-left.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/frio-right.png', 'menu' => $theme_uri . '/images/nestle-machines/frio-menu.webp' ),
         );
         $canonical_models = array();
-        $seen_fams = array();
-        foreach ( $all_products as $p_item ) {
-            $f_k = '';
-            foreach ( array('PREMIO'=>'premio','AMIGO'=>'amigo','DUO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOL'=>'solution','SPEC'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
-                if ( stripos( $p_item['sku'], $nd ) !== false || stripos( $p_item['title'], $nd ) !== false ) { $f_k = $k; break; }
+        if ( $is_coffee_family ) {
+            $seen_fams = array();
+            foreach ( $all_products as $p_item ) {
+                $f_k = '';
+                foreach ( array('PREMIO'=>'premio','AMIGO'=>'amigo','DUO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOL'=>'solution','SPEC'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
+                    if ( stripos( $p_item['sku'], $nd ) !== false || stripos( $p_item['title'], $nd ) !== false ) { $f_k = $k; break; }
+                }
+                if ( $f_k && isset( $seen_fams[ $f_k ] ) ) continue;
+                if ( $f_k ) $seen_fams[ $f_k ] = true;
+                $p_item['model_key'] = $f_k;
+                $canonical_models[] = $p_item;
+                if ( count( $canonical_models ) >= 6 ) break;
             }
-            if ( $f_k && isset( $seen_fams[ $f_k ] ) ) continue;
-            if ( $f_k ) $seen_fams[ $f_k ] = true;
-            $p_item['model_key'] = $f_k;
-            $canonical_models[] = $p_item;
-            if ( count( $canonical_models ) >= 6 ) break;
+            if ( empty( $canonical_models ) ) $canonical_models = $all_products;
+        } else {
+            $canonical_models = $all_products;
         }
-        if ( empty( $canonical_models ) ) $canonical_models = $all_products;
         ?>
 
         <!-- 1. Architectural Solution Hero -->
@@ -240,6 +248,30 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             $m_key = ! empty( $item['model_key'] ) ? $item['model_key'] : '';
                             $m_data = ( $m_key && isset( $nestle_hardware[ $m_key ] ) ) ? $nestle_hardware[ $m_key ] : null;
                             $front_img = $m_data ? $m_data['front'] : $item['image_url'];
+                            if ( empty( $front_img ) || strpos( $front_img, 'placeholder' ) !== false ) {
+                                $u_sku = strtoupper( $item['sku'] );
+                                if ( strpos( $u_sku, 'USHA' ) !== false ) {
+                                    $front_img = file_exists( get_template_directory() . '/images/usha/usha-aquagenie.jpg' ) ? ( $theme_uri . '/images/usha/usha-aquagenie.jpg' ) : ( $theme_uri . '/images/brands/usha.png' );
+                                } elseif ( strpos( $u_sku, 'EF-' ) !== false ) {
+                                    if ( strpos( $u_sku, 'SKID' ) !== false && file_exists( get_template_directory() . '/images/eureka-forbes/skid-ro-500.webp' ) ) {
+                                        $front_img = $theme_uri . '/images/eureka-forbes/skid-ro-500.webp';
+                                    } elseif ( strpos( $u_sku, 'UV' ) !== false && file_exists( get_template_directory() . '/images/eureka-forbes/comm-uv.png' ) ) {
+                                        $front_img = $theme_uri . '/images/eureka-forbes/comm-uv.png';
+                                    } else {
+                                        $front_img = file_exists( get_template_directory() . '/images/eureka-forbes/aquaguard-commercial.jpg' ) ? ( $theme_uri . '/images/eureka-forbes/aquaguard-commercial.jpg' ) : ( $theme_uri . '/images/brands/eureka_forbes.png' );
+                                    }
+                                } elseif ( strpos( $u_sku, 'TET-' ) !== false ) {
+                                    if ( strpos( $u_sku, 'GINGER' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-ginger.png' ) ) {
+                                        $front_img = $theme_uri . '/images/tetley/tetley-ginger.png';
+                                    } elseif ( strpos( $u_sku, 'ELAICHI' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-elaichi.png' ) ) {
+                                        $front_img = $theme_uri . '/images/tetley/tetley-elaichi.png';
+                                    } elseif ( strpos( $u_sku, 'CLASSIC' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-classic.jpg' ) ) {
+                                        $front_img = $theme_uri . '/images/tetley/tetley-classic.jpg';
+                                    } else {
+                                        $front_img = file_exists( get_template_directory() . '/images/tetley/tetley-plain.png' ) ? ( $theme_uri . '/images/tetley/tetley-plain.png' ) : ( $theme_uri . '/images/brands/tetley.png' );
+                                    }
+                                }
+                            }
                             $menu_img = $m_data ? $m_data['menu'] : ( ! empty( $item['menu_image_url'] ) ? $item['menu_image_url'] : '' );
                             $has_menu_img = ! empty( $menu_img );
                             $bev_gallery = ( $m_key && ! empty( $nestle_manifest['machine_beverages_map'][ $m_key ] ) ) ? $nestle_manifest['machine_beverages_map'][ $m_key ] : array();
@@ -251,7 +283,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             $recipe_count = count( $recipes_list );
                             $has_bev_menu = ( $recipe_count > 0 );
                         ?>
-                        <article class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center bg-white border-2 border-zinc-200 p-5 sm:p-8 md:p-10 relative transition-all duration-300 hover:border-black" style="box-shadow: 6px 6px 0px 0px #1A56DB;">
+                        <article id="model-<?php echo esc_attr( $item['id'] ); ?>" class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center bg-white border-2 border-zinc-200 p-5 sm:p-8 md:p-10 relative transition-all duration-300 hover:border-black scroll-mt-28" style="box-shadow: 6px 6px 0px 0px #1A56DB;">
                             <!-- Visual Column: Dual-Tab Switcher (lg:col-span-5) -->
                             <div class="lg:col-span-5 <?php echo $is_even ? 'lg:order-1' : 'lg:order-2'; ?> flex flex-col justify-center">
                                 <div class="relative bg-zinc-50 border border-zinc-200 p-4 sm:p-5 overflow-hidden group">
@@ -383,9 +415,22 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                             </thead>
                                             <tbody class="divide-y divide-zinc-200">
                                                 <?php
-                                                $quick_specs = ! empty( $item['specs'] ) ? array_slice( $item['specs'], 0, 5 ) : array(
-                                                    array('name'=>'Duty Cycle','value'=>'Continuous 24/7 Heavy Duty'), array('name'=>'Power Supply','value'=>'230V AC / 50 Hz Standard'), array('name'=>'Compliance','value'=>'FSSAI & CE Industrial Standard'), array('name'=>'Invoicing','value'=>'100% GST Input Credit Verified'), array('name'=>'Warranty & AMC','value'=>'Comprehensive Pan-India AMC Available')
-                                                );
+                                                $quick_specs = array();
+                                                if ( ! empty( $item['specs'] ) && is_array( $item['specs'] ) ) {
+                                                    foreach ( $item['specs'] as $k => $v ) {
+                                                        if ( is_array( $v ) && isset( $v['name'] ) && isset( $v['value'] ) ) {
+                                                            $quick_specs[] = array( 'name' => $v['name'], 'value' => $v['value'] );
+                                                        } elseif ( is_string( $v ) || is_numeric( $v ) ) {
+                                                            $quick_specs[] = array( 'name' => (string) $k, 'value' => (string) $v );
+                                                        }
+                                                        if ( count( $quick_specs ) >= 5 ) break;
+                                                    }
+                                                }
+                                                if ( empty( $quick_specs ) ) {
+                                                    $quick_specs = array(
+                                                        array('name'=>'Duty Cycle','value'=>'Continuous 24/7 Heavy Duty'), array('name'=>'Power Supply','value'=>'230V AC / 50 Hz Standard'), array('name'=>'Compliance','value'=>'FSSAI & CE Industrial Standard'), array('name'=>'Invoicing','value'=>'100% GST Input Credit Verified'), array('name'=>'Warranty & AMC','value'=>'Comprehensive Pan-India AMC Available')
+                                                    );
+                                                }
                                                 foreach ( $quick_specs as $spec ) : ?>
                                                     <tr class="odd:bg-zinc-50 even:bg-white"><td class="py-2 px-3 sm:px-3.5 font-bold uppercase text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200"><?php echo esc_html( $spec['name'] ); ?></td><td class="py-2 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]"><?php echo esc_html( $spec['value'] ); ?></td></tr>
                                                 <?php endforeach; ?>
@@ -551,9 +596,20 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             <thead><tr class="bg-[#1A56DB] text-white font-black uppercase tracking-wider text-[11px]"><th class="p-3 text-center w-14 border-r border-blue-600">RFQ [✓]</th><th class="p-3 border-r border-blue-600">Model Name &amp; SKU</th><th class="p-3 border-r border-blue-600">Throughput / Capacity</th><th class="p-3 border-r border-blue-600">Duty Cycle / Power</th><th class="p-3 border-r border-blue-600">Target Deployment</th><th class="p-3 border-r border-blue-600">Commercial Terms</th><th class="p-3 text-center w-36">Quick Actions</th></tr></thead>
                             <tbody class="divide-y divide-zinc-200">
                                 <?php foreach ( $all_products as $row ) : 
-                                    $spec1 = ! empty( $row['specs'][0] ) ? $row['specs'][0]['value'] : 'Industrial Grade';
-                                    $spec2 = ! empty( $row['specs'][1] ) ? $row['specs'][1]['value'] : 'Standard 230V / 50Hz';
-                                    $spec3 = ! empty( $row['specs'][2] ) ? $row['specs'][2]['value'] : 'Commercial Use';
+                                    $row_vals = array();
+                                    if ( ! empty( $row['specs'] ) && is_array( $row['specs'] ) ) {
+                                        foreach ( $row['specs'] as $sk => $sv ) {
+                                            if ( is_array( $sv ) && isset( $sv['value'] ) ) {
+                                                $row_vals[] = $sv['value'];
+                                            } elseif ( is_string( $sv ) || is_numeric( $sv ) ) {
+                                                $row_vals[] = (string) $sv;
+                                            }
+                                            if ( count( $row_vals ) >= 3 ) break;
+                                        }
+                                    }
+                                    $spec1 = isset( $row_vals[0] ) ? $row_vals[0] : 'Industrial Grade';
+                                    $spec2 = isset( $row_vals[1] ) ? $row_vals[1] : 'Standard 230V / 50Hz';
+                                    $spec3 = isset( $row_vals[2] ) ? $row_vals[2] : 'Commercial Use';
                                 ?>
                                 <tr class="odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors">
                                     <td class="p-3 text-center border-r border-zinc-200"><label class="cursor-pointer inline-flex items-center justify-center p-1"><input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" data-id="<?php echo esc_attr( $row['id'] ); ?>" data-title="<?php echo esc_attr( $row['title'] ); ?>" data-sku="<?php echo esc_attr( $row['sku'] ); ?>"></label></td>
@@ -575,6 +631,108 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     </div>
                 </div>
             </section>
+
+<!-- Tetley Corporate Tea Accessories Table (as requested) -->
+            <?php 
+            $is_tetley_cat = ( $term && ( $term->slug === 'tetley-teas' || strpos( $term->slug, 'tetley' ) !== false ) );
+            if ( $is_tetley_cat ) : 
+                $tea_accessories = array(
+                    array(
+                        'sku' => 'SNAP-ACC-POT-5L',
+                        'title' => 'Commercial Instant Hot Water Boiler / Thermo-Pot (5 Litres)',
+                        'specs' => '5L SS304 Vacuum Tank, Digital Microprocessor Temp Control (60°C, 85°C, 98°C), Electric Dispense',
+                        'app' => 'Continuous Hot Water on Tap for High-Volume Corporate Tea Service & Break Rooms',
+                        'grade' => 'Commercial Heavy Duty'
+                    ),
+                    array(
+                        'sku' => 'SNAP-ACC-KETTLE-2L',
+                        'title' => 'Corporate SS304 Rapid Boil Electric Kettle (2.0 Litres)',
+                        'specs' => '2000W Fast-Boil Concealed Element, British Strix Thermostat, Auto Shut-Off & Boil-Dry Safety',
+                        'app' => 'Executive Meeting Rooms, Boardrooms & Small Pantry Stations',
+                        'grade' => 'Enterprise Grade'
+                    ),
+                    array(
+                        'sku' => 'SNAP-ACC-CHEST-6C',
+                        'title' => '6-Compartment Bamboo Executive Tea Chest & Pantry Organizer',
+                        'specs' => 'Natural Eco-Friendly Bamboo Wood, Transparent Acrylic Display Lid, Holds 120 Tea Envelopes',
+                        'app' => 'Boardroom Credenza, VIP Hospitality Lounges & Cafeteria Counters',
+                        'grade' => 'Executive Premium'
+                    ),
+                    array(
+                        'sku' => 'SNAP-ACC-CADDY-4C',
+                        'title' => '4-Compartment Wooden Tea Caddy / Countertop Dispenser',
+                        'specs' => 'Matte Black Industrial Wood, 4 Deep Divisions, Holds 80 Foil Envelopes Compact Footprint',
+                        'app' => 'Corporate Pantry Breakout Zones & Reception Welcome Areas',
+                        'grade' => 'Commercial Standard'
+                    ),
+                    array(
+                        'sku' => 'SNAP-ACC-MUG-DW6',
+                        'title' => 'Borosilicate Double-Walled Glass Tea Mugs (Pack of 6)',
+                        'specs' => '300ml Capacity, Heat-Insulated Double Wall (Cool to Touch), Scratch-Resistant Borosilicate',
+                        'app' => 'Executive Tea Service, High-Level Client Meetings & Boardroom Serving',
+                        'grade' => 'Hospitality Grade'
+                    ),
+                    array(
+                        'sku' => 'SNAP-ACC-STRAINER-12',
+                        'title' => 'Stainless Steel Fine Mesh Tea Strainers & Stirrer Spoons (Set of 12)',
+                        'specs' => 'Food-Grade SS304 Fine Laser Cut Mesh, Resting Lip Handle, Includes 12 SS Stirring Spoons',
+                        'app' => 'Institutional Pantry Loose-Leaf & Tea Bag Stations',
+                        'grade' => 'Food Grade SS304'
+                    ),
+                    array(
+                        'sku' => 'SNAP-ACC-DISP-RACK',
+                        'title' => 'Pantry Sugar Sachet & Dairy Creamer Dispenser Rack',
+                        'specs' => 'Dual-Tier Heavy Acrylic Organizer with Anti-Slip Base, 4 Sachet Bins & Stirrer Compartment',
+                        'app' => 'Self-Service Pantry Beverage Counter Organization',
+                        'grade' => 'Industrial Acrylic'
+                    ),
+                );
+            ?>
+            <section id="pantry-accessories" class="mb-20 sm:mb-24">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 border-b-4 border-[#1A56DB] pb-4">
+                    <div>
+                        <span class="text-[#1A56DB] font-black uppercase tracking-widest text-xs flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-[#1A56DB] inline-block"></span> Corporate Beverage Equipment &amp; Dispensing</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-[#0A0A0A] mt-1">Commercial Tea Pantry Accessories &amp; Serving Equipment</h2>
+                    </div>
+                    <p class="text-zinc-600 font-medium text-xs sm:text-sm max-w-md">Pair Tetley corporate teas with certified commercial hot water boilers, bamboo tea chests, and pantry organizers for a complete turnkey beverage station.</p>
+                </div>
+                <div class="bg-white border-2 border-zinc-200 overflow-x-auto shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse min-w-[700px]">
+                        <thead>
+                            <tr class="bg-[#0A0A0A] text-white font-black uppercase tracking-wider text-[11px]">
+                                <th class="p-3 text-center w-14 border-r border-zinc-800">RFQ [✓]</th>
+                                <th class="p-3 border-r border-zinc-800">Accessory / Equipment Name &amp; SKU</th>
+                                <th class="p-3 border-r border-zinc-800">Technical Capacity / Material</th>
+                                <th class="p-3 border-r border-zinc-800">Corporate Pantry Application</th>
+                                <th class="p-3 border-r border-zinc-800">Commercial Duty</th>
+                                <th class="p-3 text-center w-36">Quick Quote</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-200">
+                            <?php foreach ( $tea_accessories as $acc ) : ?>
+                            <tr class="odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors">
+                                <td class="p-3 text-center border-r border-zinc-200">
+                                    <label class="cursor-pointer inline-flex items-center justify-center p-1">
+                                        <input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" data-id="acc-<?php echo esc_attr( $acc['sku'] ); ?>" data-title="<?php echo esc_attr( $acc['title'] ); ?>" data-sku="<?php echo esc_attr( $acc['sku'] ); ?>">
+                                    </label>
+                                </td>
+                                <td class="p-3 border-r border-zinc-200">
+                                    <div class="font-black text-[#0A0A0A] uppercase leading-tight"><?php echo esc_html( $acc['title'] ); ?></div>
+                                    <span class="inline-block text-[10px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.5 mt-0.5">SKU: <?php echo esc_html( $acc['sku'] ); ?></span>
+                                </td>
+                                <td class="p-3 font-bold text-zinc-800 border-r border-zinc-200"><?php echo esc_html( $acc['specs'] ); ?></td>
+                                <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $acc['app'] ); ?></td>
+                                <td class="p-3 border-r border-zinc-200"><span class="text-[10px] font-black uppercase text-zinc-700 tracking-wider bg-zinc-200 px-1.5 py-0.5"><?php echo esc_html( $acc['grade'] ); ?></span></td>
+                                <td class="p-3 text-center">
+                                    <button class="h-[34px] w-full bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-[10px] tracking-wider px-2.5 flex items-center justify-center transition-colors js-open-quote-modal" data-product="<?php echo esc_attr( $acc['title'] ); ?>" data-sku="<?php echo esc_attr( $acc['sku'] ); ?>">Quote</button>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <?php endif; ?>
 
             <!-- 5. Procurement FAQ & Trust Section -->
             <section id="procurement-faq" class="bg-zinc-100 border-2 border-zinc-300 p-6 sm:p-8 md:p-12 mb-16">
