@@ -66,10 +66,22 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
         } elseif ( $depth === 2 ) {
             // Buffer L3
             if ( $this->current_l2 ) {
+                $cat_id = ( $item->object === 'product_cat' ) ? (int) $item->object_id : 0;
+                if ( ! $cat_id && ! empty( $url ) ) {
+                    $clean_path = trim( (string) parse_url( $url, PHP_URL_PATH ), '/' );
+                    $parts = explode( '/', $clean_path );
+                    $last_slug = end( $parts );
+                    if ( $last_slug ) {
+                        $term_obj = get_term_by( 'slug', $last_slug, 'product_cat' );
+                        if ( $term_obj && ! is_wp_error( $term_obj ) ) {
+                            $cat_id = (int) $term_obj->term_id;
+                        }
+                    }
+                }
                 $this->l3_by_parent[ $this->current_l2 ][] = [
                     'title'  => $title,
                     'url'    => $url,
-                    'cat_id' => ( $item->object === 'product_cat' ) ? (int) $item->object_id : 0,
+                    'cat_id' => $cat_id,
                 ];
             }
         }

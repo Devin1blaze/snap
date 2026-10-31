@@ -40,13 +40,13 @@ if ( ! function_exists( 'snap_b2b_beverage_icon' ) ) {
 // -----------------------------------------------------------------------------
 $is_b2b_category = false;
 if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
-    if ( $term->slug === 'b2b' || strpos( $term->slug, 'b2b' ) !== false ) {
+    if ( $term->slug === 'b2b' || strpos( $term->slug, 'b2b' ) !== false || ( isset( $term->parent ) && (int) $term->parent === 72 ) ) {
         $is_b2b_category = true;
     }
     if ( ! $is_b2b_category && isset( $term->term_id ) ) {
         foreach ( get_ancestors( $term->term_id, 'product_cat' ) as $anc_id ) {
             $anc = get_term( $anc_id, 'product_cat' );
-            if ( $anc && strpos( $anc->slug, 'b2b' ) !== false ) { $is_b2b_category = true; break; }
+            if ( $anc && ( strpos( $anc->slug, 'b2b' ) !== false || (int) $anc_id === 72 ) ) { $is_b2b_category = true; break; }
         }
     }
     $b2b_commercial_slugs = array(
@@ -73,7 +73,10 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         'usha-water-solutions', 'usha-water-dispensers', 'usha-water-coolers', 'usha-instant-coolers',
         'eureka-forbes-commercial', 'eureka-forbes-commercial-ro', 'eureka-forbes-commercial-uv', 'eureka-forbes-cooler-cum-purifiers', 'eureka-forbes-industrial-ro-plants',
         'corporate-pantry', 'tetley-teas',
-        'euronics-commercial', 'euronics-hand-dryers', 'euronics-sensor-taps', 'euronics-soap-dispensers', 'euronics-urinal-sensors', 'euronics-paper-dispensers', 'euronics-air-curtains'
+        'euronics-commercial', 'euronics-hand-dryers', 'euronics-sensor-taps', 'euronics-soap-dispensers', 'euronics-urinal-sensors', 'euronics-paper-dispensers', 'euronics-air-curtains',
+        'atlantis-commercial', 'atlantis-tea-premixes', 'atlantis-coffee-premixes', 'atlantis-cold-beverages',
+        'kimberly-clark-commercial', 'kimberly-clark-professional', 'kc-hand-towel-systems', 'kc-skincare-soap-dispensers', 'kc-bathroom-tissue-systems', 'kc-wypall-wiping-solutions',
+        'waterlogic-commercial', 'waterlogic-commercial-dispensers', 'waterlogic-freestanding', 'waterlogic-countertop', 'waterlogic-firewall-pou', 'wl7-firewall', 'wl3-firewall', 'wl2-firewall', 'wl-cube'
     );
     if ( ! $is_b2b_category && in_array( $term->slug, $b2b_commercial_slugs, true ) ) {
         $is_b2b_category = true;
@@ -155,6 +158,18 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return $theme_uri . '/images/tetley/tetley-plain.png';
                 }
 
+                if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
+                    if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) return $existing_url;
+                }
+
+                if ( strpos( $u_sku, 'KC-' ) !== false || strpos( $u_sku, 'KCP-' ) !== false || strpos( $u_sku, 'WYPALL' ) !== false || strpos( $u_sku, 'AQUARIUS' ) !== false || strpos( $u_sku, 'KIMBERLY' ) !== false ) {
+                    if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) return $existing_url;
+                }
+
+                if ( strpos( $u_sku, 'WL-' ) !== false || strpos( $u_sku, 'WATERLOGIC' ) !== false || strpos( $u_sku, 'FIREWALL' ) !== false ) {
+                    if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) return $existing_url;
+                }
+
                 if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
                     return $existing_url;
                 }
@@ -163,7 +178,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             }
         }
 
-        // Resolve Brand Root Term (e.g., Usha Water Solutions, Eureka Forbes Commercial, Blue Star Commercial, Corporate Pantry)
+        // Resolve Brand Root Term (e.g., Atlantis Commercial, Kimberly-Clark Professional, Waterlogic Commercial, Usha, Eureka Forbes, Blue Star, Corporate Pantry)
         $root_brand_term = null;
         if ( $term && ! is_wp_error( $term ) ) {
             if ( (int) $term->parent === 72 ) {
@@ -185,6 +200,253 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 }
             }
         }
+
+        // Lineage and Brand Family Detection Engine
+        $lineage_slugs = array( $term->slug );
+        if ( $root_brand_term && isset( $root_brand_term->slug ) ) {
+            $lineage_slugs[] = $root_brand_term->slug;
+        }
+        if ( $term && isset( $term->term_id ) ) {
+            foreach ( get_ancestors( $term->term_id, 'product_cat' ) as $anc_id ) {
+                $anc = get_term( $anc_id, 'product_cat' );
+                if ( $anc && ! is_wp_error( $anc ) ) {
+                    $lineage_slugs[] = $anc->slug;
+                }
+            }
+        }
+        $lineage_str = strtolower( implode( ' ', array_unique( $lineage_slugs ) ) );
+
+        $brand_key = 'corporate_pantry';
+        if ( strpos( $lineage_str, 'atlantis' ) !== false ) {
+            $brand_key = 'atlantis';
+        } elseif ( strpos( $lineage_str, 'kimberly' ) !== false || strpos( $lineage_str, 'kc-' ) !== false ) {
+            $brand_key = 'kimberly_clark';
+        } elseif ( strpos( $lineage_str, 'waterlogic' ) !== false || strpos( $lineage_str, 'wl-' ) !== false || strpos( $lineage_str, 'wl7' ) !== false || strpos( $lineage_str, 'wl3' ) !== false || strpos( $lineage_str, 'wl2' ) !== false ) {
+            $brand_key = 'waterlogic';
+        } elseif ( strpos( $lineage_str, 'euronics' ) !== false ) {
+            $brand_key = 'euronics';
+        } elseif ( strpos( $lineage_str, 'usha' ) !== false ) {
+            $brand_key = 'usha';
+        } elseif ( strpos( $lineage_str, 'eureka' ) !== false ) {
+            $brand_key = 'eureka_forbes';
+        } elseif ( strpos( $lineage_str, 'blue-star' ) !== false ) {
+            $brand_key = 'blue_star';
+        }
+
+        $brand_context_configs = array(
+            'atlantis' => array(
+                'badge'         => 'Enterprise Vending Consumables · Instant Tea & Coffee Premixes',
+                'desc_fallback' => 'Commercial 1kg instant tea and coffee vending premixes formulated for high-output office vending machines and institutional cafeterias. 100% pure dairy whitener and authentic tea extract blends providing consistent taste, 70–80 cups yield per kg, and full FSSAI certification with corporate GST tax credit.',
+                'subcat_note'   => 'Commercial 1kg Instant Vending Premixes · High Yield 70–80 Cups/kg · Multi-Canister Dispenser Compatible',
+                'pillars'       => array(
+                    array( 'emoji_food_beverage', 'High Yield Vending', '70–80 Cups / 1kg Pack' ),
+                    array( 'verified', '100% Pure Extracts', 'FSSAI Certified Quality' ),
+                    array( 'local_shipping', 'Bulk Case Supply', 'Pan-India Logistics' ),
+                    array( 'receipt_long', 'Corporate GST Invoicing', 'Verified ITC Input Credit' ),
+                ),
+                'default_features' => array(
+                    'Formulated for Multi-Canister Commercial Vending Machines',
+                    'High-Solubility Micro-Granules with Zero Dispenser Clogging',
+                    'Extended 12-Month Shelf Life in Moisture-Resistant Foil Packs',
+                    'Consistent Cup-to-Cup Taste Profile for Corporate Cafeterias',
+                    '100% Vegetarian & FSSAI Compliant Food Formulation',
+                    'Pan-India Bulk Case Supply with Corporate GST Input Credit',
+                ),
+                'default_specs' => array(
+                    array( 'name' => 'Pack Weight', 'value' => '1 kg Commercial Foil Pack' ),
+                    array( 'name' => 'Average Yield', 'value' => '70–80 Cups (14g / 100ml cup)' ),
+                    array( 'name' => 'Food Compliance', 'value' => 'FSSAI Licensed & ISO 22000' ),
+                    array( 'name' => 'Machine Fit', 'value' => 'Standard Vending Canisters' ),
+                    array( 'name' => 'GST & ITC', 'value' => '100% Verified ITC (HSN 2101 / 2106)' ),
+                ),
+                'cta_quote_label' => 'Request Premix Price Schedule',
+            ),
+            'kimberly_clark' => array(
+                'badge'         => 'Commercial Washroom Hygiene & Industrial Surface Maintenance',
+                'desc_fallback' => 'Institutional washroom dispensing systems and industrial wiping solutions engineered for enterprise facilities, hospitals, and manufacturing plants. Featuring Scott® folded and roll hand towels, Aquarius® touchless foam soap dispensers, jumbo roll tissue systems, and WypAll® engineered wipers reducing consumption by up to 30%.',
+                'subcat_note'   => 'Aquarius® Touchless Dispensing · Scott® Hand Towel & Tissue Systems · WypAll® Industrial Surface Wiping',
+                'pillars'       => array(
+                    array( 'sanitizer', 'Touchless Hygiene', 'Aquarius® & Icon™ Systems' ),
+                    array( 'eco', 'Controlled Usage', 'Up to 30% Waste Reduction' ),
+                    array( 'verified', 'LEED & HACCP Certified', 'Global Quality Benchmark' ),
+                    array( 'receipt_long', 'Corporate GST Invoicing', 'Verified ITC Input Credit' ),
+                ),
+                'default_features' => array(
+                    'Controlled One-Sheet-at-a-Time Dispensing Eliminates Overuse',
+                    'High-Capacity Rolls & Cassettes Minimize Janitorial Refill Frequency',
+                    'Durable Impact-Resistant ABS Dispensers with Keyless & Key Lock Options',
+                    'WypAll® Advanced HydroKnit® Fast-Absorbing Wiper Technology',
+                    'FSC Certified Sustainable Paper Fibers & Green Cleaning Compliance',
+                    'Direct Institutional Supply with Formal Corporate Purchase Orders (PO)',
+                ),
+                'default_specs' => array(
+                    array( 'name' => 'Dispensing Platform', 'value' => 'Aquarius® / Scott® / WypAll®' ),
+                    array( 'name' => 'Housing Construction', 'value' => 'Impact-Resistant ABS Polymer' ),
+                    array( 'name' => 'Refill Standard', 'value' => 'Scott® & Kleenex® Cartridges' ),
+                    array( 'name' => 'Hygiene Standards', 'value' => 'HACCP & LEED Compliant' ),
+                    array( 'name' => 'GST Invoicing', 'value' => '100% Corporate ITC (HSN 4818 / 3402)' ),
+                ),
+                'cta_quote_label' => 'Request Systems Price List',
+            ),
+            'waterlogic' => array(
+                'badge'         => 'Enterprise Bottleless Hydration · Firewall® Class A UVC Purification',
+                'desc_fallback' => 'Commercial bottleless point-of-use (POU) water dispensers engineered for corporate offices, medical facilities, and institutional campuses. Featuring patented Firewall® UVC purification destroying 99.9999% of bacteria and viruses, BioCote® antimicrobial surface defense, and multi-stage carbon block filtration eliminating single-use plastic bottles.',
+                'subcat_note'   => 'Firewall® Class A UVC Purification · 99.9999% Pathogen Inactivation · BioCote® Antimicrobial Surface Defense',
+                'pillars'       => array(
+                    array( 'wb_iridescent', 'Firewall® UVC Defense', '99.9999% Pathogen Inactivation' ),
+                    array( 'shield', 'BioCote® Antimicrobial', 'Continuous Surface Protection' ),
+                    array( 'recycling', 'Zero Plastic Footprint', '100% Bottleless Workplace' ),
+                    array( 'receipt_long', 'Corporate GST Invoicing', 'Verified ITC Input Credit' ),
+                ),
+                'default_features' => array(
+                    'Patented Point-of-Dispense Firewall® UVC Prevents Retro-Contamination',
+                    'BioCote® Silver-Ion Protection Inhibits Microbial Surface Colonization',
+                    'High-Throughput Cold, Ambient, Hot & Sparkling Water Capabilities',
+                    'Advanced Carbon Block Filtration Removing Microplastics, Chlorine & Heavy Metals',
+                    'Substantial Carbon & Cost Savings Eliminating 20L Water Jug Logistical Overhead',
+                    'Comprehensive Preventive AMC with Factory Certified Engineering Support',
+                ),
+                'default_specs' => array(
+                    array( 'name' => 'UV Technology', 'value' => 'Patented Firewall® Class A UVC' ),
+                    array( 'name' => 'Microbial Reduction', 'value' => '99.9999% Bacteria & 99.99% Viruses' ),
+                    array( 'name' => 'Surface Defense', 'value' => 'BioCote® Silver-Ion Antimicrobial' ),
+                    array( 'name' => 'Duty Cycle', 'value' => 'Continuous Enterprise Workplace Hydration' ),
+                    array( 'name' => 'GST & ITC', 'value' => '100% Verified ITC (HSN 8421)' ),
+                ),
+                'cta_quote_label' => 'Request Dispenser Price Schedule',
+            ),
+            'euronics' => array(
+                'badge'         => 'Commercial Washroom Automation & Entrance Defense Systems',
+                'desc_fallback' => 'High-traffic commercial washroom automation solutions including touchless sensor taps, high-speed jet hand dryers, automatic foam soap dispensers, sensor flush valves, and industrial air curtains for enterprise buildings.',
+                'subcat_note'   => 'Touchless Washroom Automation · Sensor Faucets & Hand Dryers · Industrial Air Curtains',
+                'pillars'       => array(
+                    array( 'air', 'Touchless Automation', 'High-Speed Jet Dryers' ),
+                    array( 'faucet', 'Water Conservation', 'Precision Sensor Taps' ),
+                    array( 'verified', 'Enterprise Certified', 'Commercial Duty Grade' ),
+                    array( 'receipt_long', 'Corporate GST Invoicing', 'Verified ITC Input Credit' ),
+                ),
+                'default_features' => array(
+                    'Microcontroller-Driven Proximity Sensing for Hands-Free Hygiene',
+                    'Heavy-Duty Solid Brass & Stainless Steel 304 Construction',
+                    'Substantial Water and Paper Consumption Reductions',
+                    'Pan-India Commercial Installation & Spare Parts Availability',
+                ),
+                'default_specs' => array(
+                    array( 'name' => 'Sensing Mechanism', 'value' => 'Active Infrared Proximity Sensor' ),
+                    array( 'name' => 'Material Grade', 'value' => 'SS 304 / Commercial Grade Polymer' ),
+                    array( 'name' => 'Power Supply', 'value' => '220V AC / 4x AA Battery Backup' ),
+                    array( 'name' => 'Duty Cycle', 'value' => 'Heavy Traffic Commercial Multi-Shift' ),
+                    array( 'name' => 'GST Invoicing', 'value' => '100% Corporate ITC (HSN 8516 / 8481)' ),
+                ),
+                'cta_quote_label' => 'Request Automation Price List',
+            ),
+            'usha' => array(
+                'badge'         => 'Commercial Water Dispensing & Heavy-Duty Storage Coolers',
+                'desc_fallback' => 'Commercial stainless steel storage water coolers, cold water dispensers, and instantaneous chilling systems engineered for high-traffic factories, offices, and institutions.',
+                'subcat_note'   => 'Commercial Storage Water Coolers · Inline & Bottled Water Dispensers',
+                'pillars'       => array(
+                    array( 'ac_unit', 'Heavy Chilling', 'Rapid Pull-Down Cooling' ),
+                    array( 'water_drop', 'Food-Grade Stainless', 'SS 304 Storage Tanks' ),
+                    array( 'verified', 'Direct OEM Supply', 'Factory QA Inspected' ),
+                    array( 'receipt_long', 'Corporate GST Invoicing', 'Verified ITC Input Credit' ),
+                ),
+                'default_features' => array(
+                    'Food-Grade SS 304 Inner Tank Ensuring Pure Hygienic Water',
+                    'Eco-Friendly High-Efficiency Hermetic Compressor Circuit',
+                    'Rugged Stainless Steel Outer Body for Demanding Commercial Sites',
+                    'Direct Factory Warranty & Pan-India Authorized Service Network',
+                ),
+                'default_specs' => array(
+                    array( 'name' => 'Cooling Tank', 'value' => 'SS 304 Food-Grade Stainless' ),
+                    array( 'name' => 'Compressor', 'value' => 'High-Efficiency Hermetic' ),
+                    array( 'name' => 'Refrigerant', 'value' => 'Eco-Friendly R134a / R290' ),
+                    array( 'name' => 'Power Supply', 'value' => '230V AC / 50 Hz Single Phase' ),
+                    array( 'name' => 'GST Invoicing', 'value' => '100% ITC Eligible (HSN 8418)' ),
+                ),
+                'cta_quote_label' => 'Request Cooler Price Schedule',
+            ),
+            'eureka_forbes' => array(
+                'badge'         => 'Commercial Water Purification & Industrial RO Plants',
+                'desc_fallback' => 'Industrial and commercial water purification systems, multi-stage RO purifiers, UV disinfection units, and storage cooler-cum-purifiers for corporate campuses and institutional facilities.',
+                'subcat_note'   => 'Commercial RO & UV Purification · Cooler-cum-Purifiers · Industrial Skid RO',
+                'pillars'       => array(
+                    array( 'water_damage', 'Multi-Stage RO', 'TDS Reduction & Mineral Guard' ),
+                    array( 'wb_iridescent', 'UV Disinfection', 'Pathogen Destruction' ),
+                    array( 'verified', 'Factory Certified', 'ISO 9001 Compliance' ),
+                    array( 'receipt_long', 'Corporate GST Invoicing', 'Verified ITC Input Credit' ),
+                ),
+                'default_features' => array(
+                    'High-Flow Commercial Thin-Film Composite RO Membranes',
+                    'Electronic Flow Monitoring & Auto-Flushing Cycles',
+                    'Integrated TDS Controller for Optimal Mineral Retention',
+                    'Pan-India Preventive Maintenance & Cartridge Replacement Network',
+                ),
+                'default_specs' => array(
+                    array( 'name' => 'Purification Tech', 'value' => 'RO + UV Multi-Stage Filtration' ),
+                    array( 'name' => 'Recovery Rate', 'value' => 'High-Recovery Low-Waste Design' ),
+                    array( 'name' => 'TDS Handling', 'value' => 'Up to 2,000 ppm Source Water' ),
+                    array( 'name' => 'Compliance', 'value' => 'IS 10500 Drinking Water Standard' ),
+                    array( 'name' => 'GST Invoicing', 'value' => '100% Corporate ITC (HSN 8421)' ),
+                ),
+                'cta_quote_label' => 'Request Purification Price List',
+            ),
+            'blue_star' => array(
+                'badge'         => 'Enterprise HVAC & Commercial Cold Chain Solutions',
+                'desc_fallback' => 'Blue Star commercial refrigeration, VRF central air conditioning, cold storages, visi coolers, and cassette air conditioners engineered for continuous commercial operations.',
+                'subcat_note'   => 'Commercial Refrigeration · VRF Central Air · Cold Chain Logistics',
+                'pillars'       => array(
+                    array( 'mode_fan', 'Commercial HVAC', 'Precision Climate Control' ),
+                    array( 'kitchen', 'Cold Storage', 'Multi-Temperature Freezers' ),
+                    array( 'verified', 'Blue Star Direct', 'Pan-India Commercial Support' ),
+                    array( 'receipt_long', 'Corporate GST Invoicing', 'Verified ITC Input Credit' ),
+                ),
+                'default_features' => array(
+                    'Heavy-Duty Tropicalized Compressors Engineered for 52°C Ambient',
+                    'High-Density Cyclopentane Polyurethane Insulation (C-Pentane)',
+                    'Pre-Coated GI Sheets for Ultimate Corrosion Resistance',
+                    'Direct OEM Warranty & Dedicated Corporate Project Engineering',
+                ),
+                'default_specs' => array(
+                    array( 'name' => 'Duty Rating', 'value' => 'Tropicalized Commercial 24/7' ),
+                    array( 'name' => 'Refrigerant', 'value' => 'Low-GWP Eco-Friendly Refrigerants' ),
+                    array( 'name' => 'Energy Rating', 'value' => 'BEE Star / Inverter Efficient' ),
+                    array( 'name' => 'Power Supply', 'value' => '230V Single / 415V Three Phase' ),
+                    array( 'name' => 'GST Invoicing', 'value' => '100% ITC Eligible (HSN 8415 / 8418)' ),
+                ),
+                'cta_quote_label' => 'Request Blue Star Price List',
+            ),
+            'corporate_pantry' => array(
+                'badge'         => 'Enterprise Fleet & Facility Procurement · Complete Series Overview',
+                'desc_fallback' => 'Complete commercial brewing & beverage automation fleet engineered for continuous multi-shift corporate and institutional operation. Review engineering throughput, compare specifications, and generate consolidated multi-model Request for Quotations (RFQ) with verified GST input credit.',
+                'subcat_note'   => 'Commercial Brewing & Vending Automation · High-Throughput Touchscreen & Soluble Systems',
+                'pillars'       => array(
+                    array( 'verified', 'Direct OEM Supply', 'Tiered Volume Pricing' ),
+                    array( 'local_shipping', 'Pan-India Logistics', 'Insured Dock Delivery' ),
+                    array( 'engineering', 'Factory QA Certified', '100% Pre-Dispatch Inspected' ),
+                    array( 'receipt_long', 'Corporate GST Invoicing', 'Verified Input Tax Credit' ),
+                ),
+                'default_features' => array(
+                    'Heavy-Duty Continuous 24/7 Commercial Duty Cycle',
+                    'Full GST Input Tax Credit Invoicing (HSN 8476)',
+                    'Factory Certified Quality Assurance & Inspection',
+                    'Pan-India Maintenance & Direct OEM Spare Parts',
+                ),
+                'default_specs' => array(
+                    array( 'name' => 'Duty Cycle', 'value' => 'Continuous 24/7 Heavy Duty' ),
+                    array( 'name' => 'Power Supply', 'value' => '230V AC / 50 Hz Standard' ),
+                    array( 'name' => 'Compliance', 'value' => 'FSSAI & CE Industrial Standard' ),
+                    array( 'name' => 'Invoicing', 'value' => '100% GST Input Credit Verified' ),
+                    array( 'name' => 'Warranty & AMC', 'value' => 'Comprehensive Pan-India AMC Available' ),
+                ),
+                'cta_quote_label' => 'Request Category Price List',
+            ),
+        );
+
+        $curr_brand_config = isset( $brand_context_configs[ $brand_key ] ) ? $brand_context_configs[ $brand_key ] : $brand_context_configs['corporate_pantry'];
+        $brand_hero_badge = $curr_brand_config['badge'];
+        $brand_hero_desc = $curr_brand_config['desc_fallback'];
+        $brand_trust_pillars = $curr_brand_config['pillars'];
+        $brand_cta_label = $curr_brand_config['cta_quote_label'];
 
         $query_cat_id = $root_brand_term ? $root_brand_term->term_id : ( ( $term && isset( $term->term_id ) ) ? $term->term_id : 0 );
 
@@ -326,7 +588,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
                 <div class="max-w-4xl">
                     <span class="inline-flex items-center gap-2 bg-[#FBBF24] text-black font-black text-[10px] sm:text-[11px] px-3.5 py-1.5 uppercase tracking-widest mb-4">
-                        <span class="w-2 h-2 bg-black inline-block"></span> Enterprise Fleet &amp; Facility Procurement · Complete Series Overview
+                        <span class="w-2 h-2 bg-black inline-block"></span> <?php echo esc_html( $brand_hero_badge ); ?>
                     </span>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight uppercase leading-[1.08] mb-5 sm:mb-6 break-words [text-wrap:balance]">
                         <?php 
@@ -338,12 +600,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         ?>
                     </h1>
                     <p class="text-sm sm:text-base md:text-lg text-zinc-300 leading-relaxed font-medium mb-6 sm:mb-8 max-w-3xl">
-                        <?php echo $category_desc ? wp_kses_post( $category_desc ) : "Complete commercial brewing &amp; beverage automation fleet engineered for continuous multi-shift corporate and institutional operation. Review engineering throughput, compare specifications, and generate consolidated multi-model Request for Quotations (RFQ) with verified GST input credit."; ?>
+                        <?php echo $category_desc ? wp_kses_post( $category_desc ) : esc_html( $brand_hero_desc ); ?>
                     </p>
 
                     <!-- Trust Pillars -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-white/10 mb-6 sm:mb-8">
-                        <?php foreach ( array( array('verified','Direct OEM Supply','Tiered Volume Pricing'), array('local_shipping','Pan-India Logistics','Insured Dock Delivery'), array('engineering','Factory QA Certified','100% Pre-Dispatch Inspected'), array('receipt_long','Corporate GST Invoicing','Verified Input Tax Credit') ) as $tp ) : ?>
+                        <?php foreach ( $brand_trust_pillars as $tp ) : ?>
                             <div class="bg-zinc-900/60 p-3 border border-white/10">
                                 <div class="text-[#FBBF24] font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-1.5"><span class="material-symbols-outlined text-base"><?php echo $tp[0]; ?></span> <?php echo $tp[1]; ?></div>
                                 <div class="text-zinc-400 text-[10px] sm:text-xs font-bold uppercase mt-1"><?php echo $tp[2]; ?></div>
@@ -353,7 +615,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
                     <!-- Dual Action CTAs -->
                     <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
-                        <button class="h-[52px] w-full sm:w-auto bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black px-6 sm:px-7 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all js-open-quote-modal" data-product="<?php echo esc_attr( $category_name ); ?>" data-sku="SERIES-ALL" data-custom-message="<?php echo esc_attr( "Bulk Price Inquiry for {$category_name} Series:\nPlease provide complete price schedule, MOQ tiers, and technical specification submittals for our facility." ); ?>"><span class="material-symbols-outlined text-lg">request_quote</span><span>Request Category Price List</span></button>
+                        <button class="h-[52px] w-full sm:w-auto bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black px-6 sm:px-7 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all js-open-quote-modal" data-product="<?php echo esc_attr( $category_name ); ?>" data-sku="SERIES-ALL" data-custom-message="<?php echo esc_attr( "Bulk Price Inquiry for {$category_name} Series:\nPlease provide complete price schedule, MOQ tiers, and technical specification submittals for our facility." ); ?>"><span class="material-symbols-outlined text-lg">request_quote</span><span><?php echo esc_html( $brand_cta_label ); ?></span></button>
                         <a href="tel:+919823012724" class="h-[52px] w-full sm:w-auto bg-white hover:bg-zinc-100 active:scale-95 text-black px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all"><span class="material-symbols-outlined text-lg">call</span><span>Call Technical Sales: +91 98230 12724</span></a>
                         <a href="#spec-matrix" class="h-[52px] w-full sm:w-auto border-2 border-white/40 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 bg-black/30 backdrop-blur-sm transition-all"><span>Compare Technical Specs (<?php echo esc_html( $total_models ); ?>)</span><span class="material-symbols-outlined text-lg">arrow_downward</span></a>
                     </div>
@@ -406,22 +668,27 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         $cn = strtolower( $ct->name );
                         if ( strpos( $cn, 'hand dryer' ) !== false || strpos( $cn, 'dryer' ) !== false ) $icon = 'air';
                         elseif ( strpos( $cn, 'sensor tap' ) !== false || strpos( $cn, 'faucet' ) !== false ) $icon = 'faucet';
-                        elseif ( strpos( $cn, 'soap' ) !== false ) $icon = 'sanitizer';
+                        elseif ( strpos( $cn, 'soap' ) !== false || strpos( $cn, 'skincare' ) !== false ) $icon = 'sanitizer';
                         elseif ( strpos( $cn, 'urinal' ) !== false || strpos( $cn, 'smartflush' ) !== false ) $icon = 'sensor_occupied';
-                        elseif ( strpos( $cn, 'paper' ) !== false || strpos( $cn, 'towel' ) !== false || strpos( $cn, 'receptacle' ) !== false ) $icon = 'description';
+                        elseif ( strpos( $cn, 'paper' ) !== false || strpos( $cn, 'towel' ) !== false || strpos( $cn, 'tissue' ) !== false || strpos( $cn, 'wypall' ) !== false || strpos( $cn, 'wiping' ) !== false || strpos( $cn, 'receptacle' ) !== false ) $icon = 'description';
                         elseif ( strpos( $cn, 'air curtain' ) !== false ) $icon = 'wind_power';
                         elseif ( strpos( $cn, 'room air conditioner' ) !== false || strpos( $cn, 'room ac' ) !== false ) $icon = 'mode_fan';
                         elseif ( strpos( $cn, 'light commercial' ) !== false || strpos( $cn, 'cassette' ) !== false || strpos( $cn, 'verticool' ) !== false ) $icon = 'grid_view';
                         elseif ( strpos( $cn, 'central air' ) !== false || strpos( $cn, 'vrf' ) !== false || strpos( $cn, 'chiller' ) !== false ) $icon = 'apartment';
                         elseif ( strpos( $cn, 'cold storage' ) !== false ) $icon = 'warehouse';
                         elseif ( strpos( $cn, 'refrigeration' ) !== false || strpos( $cn, 'freezer' ) !== false ) $icon = 'kitchen';
+                        elseif ( strpos( $cn, 'tea' ) !== false || strpos( $cn, 'premix' ) !== false || strpos( $cn, 'chai' ) !== false ) $icon = 'emoji_food_beverage';
+                        elseif ( strpos( $cn, 'coffee' ) !== false || strpos( $cn, 'dairy' ) !== false ) $icon = 'coffee';
+                        elseif ( strpos( $cn, 'cold beverage' ) !== false || strpos( $cn, 'beverage' ) !== false ) $icon = 'local_bar';
+                        elseif ( strpos( $cn, 'firewall' ) !== false || strpos( $cn, 'pou' ) !== false || strpos( $cn, 'waterlogic' ) !== false ) $icon = 'water_drop';
+                        elseif ( strpos( $cn, 'countertop' ) !== false ) $icon = 'countertops';
+                        elseif ( strpos( $cn, 'freestanding' ) !== false ) $icon = 'view_column';
                         elseif ( strpos( $cn, 'dispenser' ) !== false ) $icon = 'local_drink';
                         elseif ( strpos( $cn, 'cooler' ) !== false && strpos( $cn, 'instant' ) === false ) $icon = 'ac_unit';
                         elseif ( strpos( $cn, 'instant' ) !== false || strpos( $cn, 'inline' ) !== false ) $icon = 'bolt';
                         elseif ( ( strpos( $cn, 'ro ' ) !== false || strpos( $cn, ' ro' ) !== false || strpos( $cn, 'purifier' ) !== false ) && strpos( $cn, 'skid' ) === false ) $icon = 'water_damage';
                         elseif ( strpos( $cn, 'uv' ) !== false ) $icon = 'wb_iridescent';
                         elseif ( strpos( $cn, 'skid' ) !== false || strpos( $cn, 'plant' ) !== false ) $icon = 'factory';
-                        elseif ( strpos( $cn, 'tea' ) !== false || strpos( $cn, 'chai' ) !== false ) $icon = 'emoji_food_beverage';
 
                         $matching_count = 0;
                         foreach ( $all_products as $ap ) {
@@ -499,8 +766,13 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 <?php if ( $root_brand_term && $root_brand_term->term_id !== $term->term_id ) : ?>
                     <div id="subcat-filtered-banner" class="mb-8 bg-[#1A56DB]/10 border-2 border-[#1A56DB] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
                         <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[#1A56DB]">filter_list</span>
-                            <span class="text-xs font-bold text-[#0A0A0A]">Currently viewing <strong><?php echo esc_html( $category_name ); ?></strong>. All <strong><?php echo esc_html( $total_models ); ?> <?php echo esc_html( $root_brand_term->name ); ?></strong> commercial models are available on this page.</span>
+                            <span class="material-symbols-outlined text-[#1A56DB] shrink-0">filter_list</span>
+                            <div>
+                                <span class="text-xs font-bold text-[#0A0A0A]">Currently viewing <strong><?php echo esc_html( $category_name ); ?></strong>. All <strong><?php echo esc_html( $total_models ); ?> <?php echo esc_html( $root_brand_term->name ); ?></strong> commercial models are available on this page.</span>
+                                <?php if ( ! empty( $curr_brand_config['subcat_note'] ) ) : ?>
+                                    <div class="text-[11px] font-semibold text-[#1A56DB] mt-0.5"><?php echo esc_html( $curr_brand_config['subcat_note'] ); ?></div>
+                                <?php endif; ?>
+                            </div>
                         </div>
                         <a href="<?php echo esc_url( get_term_link( $root_brand_term ) ); ?>" class="js-fleet-show-all-link px-3 py-1.5 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white text-[10px] font-black uppercase tracking-wider transition-colors shrink-0">Show All <?php echo esc_html( $root_brand_term->name ); ?> (<?php echo esc_html( $total_models ); ?>)</a>
                     </div>
@@ -651,7 +923,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                         <div class="text-[10px] font-black uppercase text-zinc-500 tracking-wider mb-2 flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-[#FBBF24] inline-block"></span><span>Salient Operational Features:</span></div>
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#0A0A0A]">
                                             <?php 
-                                            $features = ! empty( $item['salient_features'] ) ? $item['salient_features'] : array( 'Heavy-Duty Continuous 24/7 Commercial Duty Cycle', 'Full GST Input Tax Credit Invoicing (HSN 8476)', 'Factory Certified Quality Assurance & Inspection', 'Pan-India Maintenance & Direct OEM Spare Parts' );
+                                            $features = ! empty( $item['salient_features'] ) ? $item['salient_features'] : ( ! empty( $curr_brand_config['default_features'] ) ? $curr_brand_config['default_features'] : array( 'Heavy-Duty Continuous 24/7 Commercial Duty Cycle', 'Full GST Input Tax Credit Invoicing (HSN 8476)', 'Factory Certified Quality Assurance & Inspection', 'Pan-India Maintenance & Direct OEM Spare Parts' ) );
                                             $top_features = array_slice( $features, 0, 4 );
                                             $more_features = array_slice( $features, 4 );
                                             foreach ( $top_features as $feat ) : ?>
@@ -688,7 +960,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                                     }
                                                 }
                                                 if ( empty( $quick_specs ) ) {
-                                                    $quick_specs = array(
+                                                    $quick_specs = ! empty( $curr_brand_config['default_specs'] ) ? $curr_brand_config['default_specs'] : array(
                                                         array('name'=>'Duty Cycle','value'=>'Continuous 24/7 Heavy Duty'), array('name'=>'Power Supply','value'=>'230V AC / 50 Hz Standard'), array('name'=>'Compliance','value'=>'FSSAI & CE Industrial Standard'), array('name'=>'Invoicing','value'=>'100% GST Input Credit Verified'), array('name'=>'Warranty & AMC','value'=>'Comprehensive Pan-India AMC Available')
                                                     );
                                                 }
@@ -714,6 +986,26 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             </div>
                         </article>
                         <?php endforeach; ?>
+                    </div>
+                <?php else : ?>
+                    <div class="bg-zinc-50 border-2 border-black p-8 sm:p-12 text-center max-w-3xl mx-auto shadow-[4px_4px_0px_0px_#0A0A0A]">
+                        <div class="w-16 h-16 bg-[#1A56DB]/10 text-[#1A56DB] rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-[#1A56DB]">
+                            <span class="material-symbols-outlined text-3xl">inventory_2</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black uppercase tracking-tight text-[#0A0A0A] mb-2"><?php echo esc_html( $category_name ); ?> Catalog Update In Progress</h3>
+                        <p class="text-zinc-600 text-sm max-w-xl mx-auto mb-6 leading-relaxed">
+                            Complete specifications, submittal sheets, and institutional pricing tiers for the <?php echo esc_html( $category_name ); ?> commercial lineup are available directly from our engineering desk. Request an immediate wholesale quotation or volume price schedule below.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                            <button class="h-[48px] w-full sm:w-auto bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-md transition-all js-open-quote-modal" data-product="<?php echo esc_attr( $category_name ); ?>" data-sku="<?php echo esc_attr( $term->slug ); ?>-RFQ" data-custom-message="<?php echo esc_attr( "Price schedule and technical datasheet request for {$category_name}." ); ?>">
+                                <span class="material-symbols-outlined text-base">request_quote</span>
+                                <span>Request Price Schedule</span>
+                            </button>
+                            <a href="tel:+919823012724" class="h-[48px] w-full sm:w-auto bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white px-5 font-bold uppercase text-xs tracking-widest flex items-center justify-center gap-2 transition-all shadow-md">
+                                <span class="material-symbols-outlined text-base">call</span>
+                                <span>Speak with Technical Sales</span>
+                            </a>
+                        </div>
                     </div>
                 <?php endif; ?>
             </section>
@@ -856,36 +1148,49 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         <table class="w-full text-left text-xs border-collapse min-w-[700px]">
                             <thead><tr class="bg-[#1A56DB] text-white font-black uppercase tracking-wider text-[11px]"><th class="p-3 text-center w-14 border-r border-blue-600"><span class="inline-flex items-center justify-center gap-1"><span>RFQ</span><span class="material-symbols-outlined text-[13px]">check_box</span></span></th><th class="p-3 border-r border-blue-600">Model Name &amp; SKU</th><th class="p-3 border-r border-blue-600">Throughput / Capacity</th><th class="p-3 border-r border-blue-600">Duty Cycle / Power</th><th class="p-3 border-r border-blue-600">Target Deployment</th><th class="p-3 border-r border-blue-600">Commercial Terms</th><th class="p-3 text-center w-36">Quick Actions</th></tr></thead>
                             <tbody class="divide-y divide-zinc-200">
-                                <?php foreach ( $all_products as $row ) : 
-                                    $row_vals = array();
-                                    if ( ! empty( $row['specs'] ) && is_array( $row['specs'] ) ) {
-                                        foreach ( $row['specs'] as $sk => $sv ) {
-                                            if ( is_array( $sv ) && isset( $sv['value'] ) ) {
-                                                $row_vals[] = $sv['value'];
-                                            } elseif ( is_string( $sv ) || is_numeric( $sv ) ) {
-                                                $row_vals[] = (string) $sv;
+                                <?php if ( ! empty( $all_products ) ) : ?>
+                                    <?php foreach ( $all_products as $row ) : 
+                                        $row_vals = array();
+                                        if ( ! empty( $row['specs'] ) && is_array( $row['specs'] ) ) {
+                                            foreach ( $row['specs'] as $sk => $sv ) {
+                                                if ( is_array( $sv ) && isset( $sv['value'] ) ) {
+                                                    $row_vals[] = $sv['value'];
+                                                } elseif ( is_string( $sv ) || is_numeric( $sv ) ) {
+                                                    $row_vals[] = (string) $sv;
+                                                }
+                                                if ( count( $row_vals ) >= 3 ) break;
                                             }
-                                            if ( count( $row_vals ) >= 3 ) break;
                                         }
-                                    }
-                                    $spec1 = isset( $row_vals[0] ) ? $row_vals[0] : 'Industrial Grade';
-                                    $spec2 = isset( $row_vals[1] ) ? $row_vals[1] : 'Standard 230V / 50Hz';
-                                    $spec3 = isset( $row_vals[2] ) ? $row_vals[2] : 'Commercial Use';
-                                    $is_row_match = ( empty( $active_subcat_slug ) || $active_subcat_slug === 'all' || in_array( $active_subcat_slug, $row['cat_slugs'], true ) );
-                                    if ( ! $is_row_match ) {
-                                        continue;
-                                    }
-                                ?>
-                                <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>">
-                                    <td class="p-3 text-center border-r border-zinc-200"><label class="cursor-pointer inline-flex items-center justify-center p-1"><input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" data-id="<?php echo esc_attr( $row['id'] ); ?>" data-title="<?php echo esc_attr( $row['title'] ); ?>" data-sku="<?php echo esc_attr( $row['sku'] ); ?>"></label></td>
-                                    <td class="p-3 border-r border-zinc-200"><div class="flex items-center gap-3"><img src="<?php echo esc_url( $row['thumb_url'] ); ?>" alt="<?php echo esc_attr( $row['title'] ); ?>" class="w-10 h-10 object-contain bg-white border border-zinc-200 p-0.5 shrink-0" loading="lazy"><div><div class="font-black text-[#0A0A0A] uppercase leading-tight"><?php echo esc_html( $row['title'] ); ?></div><span class="inline-block text-[10px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.5 mt-0.5">SKU: <?php echo esc_html( $row['sku'] ); ?></span></div></div></td>
-                                    <td class="p-3 font-bold text-zinc-800 border-r border-zinc-200"><?php echo esc_html( $spec1 ); ?></td>
-                                    <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec2 ); ?></td>
-                                    <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec3 ); ?></td>
-                                    <td class="p-3 border-r border-zinc-200"><span class="text-[10px] font-black uppercase text-zinc-600 tracking-wider bg-zinc-200/70 px-1.5 py-0.5">Institutional</span></td>
-                                    <td class="p-3 text-center"><div class="flex items-center justify-center gap-1.5"><button class="h-[34px] flex-1 min-w-[65px] bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-[10px] tracking-wider px-2.5 flex items-center justify-center transition-colors js-open-quote-modal" data-product="<?php echo esc_attr( $row['title'] ); ?>" data-sku="<?php echo esc_attr( $row['sku'] ); ?>">Quote</button><a href="tel:+919823012724" class="h-[34px] w-[34px] bg-zinc-100 hover:bg-[#FBBF24] hover:text-black text-[#0A0A0A] border border-zinc-300 transition-colors flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-xs">call</span></a></div></td>
-                                </tr>
-                                <?php endforeach; ?>
+                                        $spec1 = isset( $row_vals[0] ) ? $row_vals[0] : ( isset( $curr_brand_config['default_specs'][0]['value'] ) ? $curr_brand_config['default_specs'][0]['value'] : 'Industrial Grade' );
+                                        $spec2 = isset( $row_vals[1] ) ? $row_vals[1] : ( isset( $curr_brand_config['default_specs'][1]['value'] ) ? $curr_brand_config['default_specs'][1]['value'] : 'Standard 230V / 50Hz' );
+                                        $spec3 = isset( $row_vals[2] ) ? $row_vals[2] : ( isset( $curr_brand_config['default_specs'][2]['value'] ) ? $curr_brand_config['default_specs'][2]['value'] : 'Commercial Use' );
+                                        $is_row_match = ( empty( $active_subcat_slug ) || $active_subcat_slug === 'all' || in_array( $active_subcat_slug, $row['cat_slugs'], true ) );
+                                        if ( ! $is_row_match ) {
+                                            continue;
+                                        }
+                                    ?>
+                                    <tr class="js-b2b-matrix-row odd:bg-white even:bg-zinc-50 hover:bg-yellow-50/60 transition-colors" data-cat-slugs="<?php echo esc_attr( implode( ' ', $row['cat_slugs'] ) ); ?>">
+                                        <td class="p-3 text-center border-r border-zinc-200"><label class="cursor-pointer inline-flex items-center justify-center p-1"><input type="checkbox" class="b2b-sku-checkbox accent-[#FBBF24] w-4 h-4 cursor-pointer" data-id="<?php echo esc_attr( $row['id'] ); ?>" data-title="<?php echo esc_attr( $row['title'] ); ?>" data-sku="<?php echo esc_attr( $row['sku'] ); ?>"></label></td>
+                                        <td class="p-3 border-r border-zinc-200"><div class="flex items-center gap-3"><img src="<?php echo esc_url( $row['thumb_url'] ); ?>" alt="<?php echo esc_attr( $row['title'] ); ?>" class="w-10 h-10 object-contain bg-white border border-zinc-200 p-0.5 shrink-0" loading="lazy"><div><div class="font-black text-[#0A0A0A] uppercase leading-tight"><?php echo esc_html( $row['title'] ); ?></div><span class="inline-block text-[10px] font-mono font-bold bg-[#FBBF24] text-black px-1.5 py-0.5 mt-0.5">SKU: <?php echo esc_html( $row['sku'] ); ?></span></div></div></td>
+                                        <td class="p-3 font-bold text-zinc-800 border-r border-zinc-200"><?php echo esc_html( $spec1 ); ?></td>
+                                        <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec2 ); ?></td>
+                                        <td class="p-3 font-medium text-zinc-600 border-r border-zinc-200"><?php echo esc_html( $spec3 ); ?></td>
+                                        <td class="p-3 border-r border-zinc-200"><span class="text-[10px] font-black uppercase text-zinc-600 tracking-wider bg-zinc-200/70 px-1.5 py-0.5">Institutional</span></td>
+                                        <td class="p-3 text-center"><div class="flex items-center justify-center gap-1.5"><button class="h-[34px] flex-1 min-w-[65px] bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-[10px] tracking-wider px-2.5 flex items-center justify-center transition-colors js-open-quote-modal" data-product="<?php echo esc_attr( $row['title'] ); ?>" data-sku="<?php echo esc_attr( $row['sku'] ); ?>">Quote</button><a href="tel:+919823012724" class="h-[34px] w-[34px] bg-zinc-100 hover:bg-[#FBBF24] hover:text-black text-[#0A0A0A] border border-zinc-300 transition-colors flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-xs">call</span></a></div></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <tr>
+                                        <td colspan="7" class="p-8 text-center text-zinc-500 font-medium">
+                                            <div class="flex flex-col items-center justify-center gap-2">
+                                                <span class="material-symbols-outlined text-2xl text-[#1A56DB]">table_chart_view</span>
+                                                <span class="text-xs uppercase font-bold text-zinc-800">Detailed engineering matrix for <?php echo esc_html( $category_name ); ?> is being cataloged.</span>
+                                                <span class="text-[11px] text-zinc-500 max-w-md">Immediate technical datasheets, CAD drawings, and wholesale pricing schedules are available on request.</span>
+                                                <button class="mt-2 h-[38px] bg-[#0A0A0A] hover:bg-[#1A56DB] text-white px-4 text-xs font-black uppercase tracking-wider transition-colors js-open-quote-modal" data-product="<?php echo esc_attr( $category_name ); ?>" data-sku="<?php echo esc_attr( $term->slug ); ?>-SPECS">Request Complete Technical Submittal Schedule &rarr;</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     <?php endif; ?>
