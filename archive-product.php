@@ -879,88 +879,82 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             ?>
 
             <style>
-            #tier1-scroll-container::-webkit-scrollbar,
-            #tier2-scroll-container::-webkit-scrollbar {
-                height: 6px;
+            .fleet-nav-track::-webkit-scrollbar {
+                display: none;
             }
-            #tier1-scroll-container::-webkit-scrollbar-track,
-            #tier2-scroll-container::-webkit-scrollbar-track {
-                background: #F4F4F5;
-                border: 1px solid #E4E4E7;
-            }
-            #tier1-scroll-container::-webkit-scrollbar-thumb,
-            #tier2-scroll-container::-webkit-scrollbar-thumb {
-                background: #71717A;
-                border: 1px solid #0A0A0A;
-            }
-            #tier1-scroll-container::-webkit-scrollbar-thumb:hover,
-            #tier2-scroll-container::-webkit-scrollbar-thumb:hover {
-                background: #FBBF24;
+            .fleet-nav-track {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
             }
             </style>
 
             <?php if ( ! empty( $tier1_pills ) ) : ?>
-                <!-- TIER 1: BRAND DEPARTMENTS / MAIN CATEGORIES (ALWAYS VISIBLE & PINNED) -->
-                <div class="mb-4 bg-white border-2 border-black p-4 sm:p-5 shadow-[4px_4px_0px_0px_#0A0A0A]">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-3 pb-2.5 border-b-2 border-zinc-200">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 bg-[#1A56DB] inline-block"></span>
-                            <span class="text-xs font-black uppercase tracking-wider text-[#0A0A0A]">1. Main Brand Categories &amp; Departments</span>
-                        </div>
-                        <div class="flex items-center justify-between sm:justify-end gap-3">
-                            <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hidden md:inline">Click any category to switch departments &middot; Always accessible</span>
-                            <div class="flex items-center gap-1.5 shrink-0">
-                                <button type="button" id="tier1-scroll-left" class="w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll departments left" title="Scroll left">
-                                    <span class="material-symbols-outlined text-base">chevron_left</span>
-                                </button>
-                                <button type="button" id="tier1-scroll-right" class="w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll departments right" title="Scroll right">
-                                    <span class="material-symbols-outlined text-base">chevron_right</span>
-                                </button>
+                <!-- UNIFIED ENTERPRISE FLEET NAVIGATION HUB -->
+                <nav aria-label="Brand Fleet and Series Navigation" class="mb-10 bg-white border border-zinc-200/90 rounded-2xl shadow-[0_4px_24px_-6px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)] overflow-hidden transition-all">
+                    <!-- TIER 1: BRAND DEPARTMENTS (Always Accessible) -->
+                    <div class="p-3.5 sm:p-4.5 bg-white">
+                        <div class="flex items-center justify-between gap-4 mb-2.5 px-1">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-[#1A56DB] ring-4 ring-blue-50"></span>
+                                <span class="text-[11px] font-black uppercase tracking-widest text-zinc-900">
+                                    <?php echo esc_html( $root_brand_term ? $root_brand_term->name : 'Commercial Fleet' ); ?>
+                                    <span class="text-zinc-400 font-semibold lowercase ml-1">&middot; departments</span>
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider hidden sm:inline">Browse by department</span>
+                                <div class="flex items-center gap-1">
+                                    <button type="button" id="tier1-scroll-left" class="w-7 h-7 flex items-center justify-center rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 hover:text-black transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer" aria-label="Scroll left" title="Scroll left">
+                                        <span class="material-symbols-outlined text-sm">chevron_left</span>
+                                    </button>
+                                    <button type="button" id="tier1-scroll-right" class="w-7 h-7 flex items-center justify-center rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 hover:text-black transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer" aria-label="Scroll right" title="Scroll right">
+                                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="tier1-scroll-container" class="flex items-center gap-2 sm:gap-3 overflow-x-auto scroll-smooth py-1 pb-2 focus:outline-none" style="scrollbar-width: thin; scrollbar-color: #71717A #F4F4F5;">
-                        <?php foreach ( $tier1_pills as $pill ) : ?>
-                            <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-tier1-pill <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>h-[42px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all whitespace-nowrap <?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black border-2 border-black shadow-[2px_2px_0px_0px_#0A0A0A]' : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
-                                <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-black' : 'text-[#1A56DB]'; ?>"><?php echo esc_html( $pill['icon'] ); ?></span>
-                                <span><?php echo esc_html( $pill['name'] ); ?></span>
-                                <span class="<?php echo $pill['is_active'] ? 'bg-black text-[#FBBF24]' : 'bg-zinc-200 text-zinc-700'; ?> text-[10px] font-mono font-bold px-1.5 py-0.5 ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            <?php endif; ?>
 
-            <?php if ( ! empty( $tier2_pills ) ) : ?>
-                <!-- TIER 2: CONTEXTUAL SUBCATEGORIES & MODEL FAMILIES -->
-                <div class="mb-8 bg-zinc-50 border-2 border-black p-4 sm:p-5 shadow-[4px_4px_0px_0px_#0A0A0A]">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-3 pb-2.5 border-b-2 border-zinc-200">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 bg-[#F59E0B] inline-block"></span>
-                            <span class="text-xs font-black uppercase tracking-wider text-[#0A0A0A]">2. Subcategories &amp; Model Families &middot; <span class="text-[#1A56DB]"><?php echo esc_html( $tier2_title ); ?></span></span>
+                        <!-- Tier 1 Pills Flex Track -->
+                        <div id="tier1-scroll-container" class="fleet-nav-track flex items-center gap-2 overflow-x-auto scroll-smooth py-1 px-0.5 focus:outline-none">
+                            <?php foreach ( $tier1_pills as $pill ) : ?>
+                                <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-tier1-pill <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>group h-10 px-4 shrink-0 flex items-center gap-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all whitespace-nowrap <?php echo $pill['is_active'] ? 'bg-[#0A0A0A] text-white shadow-sm ring-1 ring-black/5' : 'bg-zinc-50 hover:bg-zinc-100/90 text-zinc-700 hover:text-zinc-950 border border-zinc-200/80 hover:border-zinc-300'; ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
+                                    <span class="material-symbols-outlined text-base <?php echo $pill['is_active'] ? 'text-[#FBBF24]' : 'text-zinc-500 group-hover:text-[#1A56DB]'; ?> transition-colors"><?php echo esc_html( $pill['icon'] ); ?></span>
+                                    <span><?php echo esc_html( $pill['name'] ); ?></span>
+                                    <span class="<?php echo $pill['is_active'] ? 'bg-white/20 text-white' : 'bg-zinc-200/80 text-zinc-600 group-hover:bg-zinc-300/80'; ?> text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ml-0.5 transition-colors"><?php echo esc_html( $pill['count'] ); ?></span>
+                                </a>
+                            <?php endforeach; ?>
                         </div>
-                        <div class="flex items-center justify-between sm:justify-end gap-3">
-                            <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hidden md:inline">Select model family or capacity series</span>
-                            <div class="flex items-center gap-1.5 shrink-0">
-                                <button type="button" id="tier2-scroll-left" class="w-8 h-8 flex items-center justify-center bg-white hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll subcategories left" title="Scroll left">
-                                    <span class="material-symbols-outlined text-base">chevron_left</span>
-                                </button>
-                                <button type="button" id="tier2-scroll-right" class="w-8 h-8 flex items-center justify-center bg-white hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll subcategories right" title="Scroll right">
-                                    <span class="material-symbols-outlined text-base">chevron_right</span>
-                                </button>
+                    </div>
+
+                    <!-- TIER 2: CONTEXTUAL SUBCATEGORIES RIBBON (Docked underneath) -->
+                    <?php if ( ! empty( $tier2_pills ) ) : ?>
+                        <div class="px-3.5 py-2.5 sm:px-4.5 bg-zinc-50/90 border-t border-zinc-200/80">
+                            <div class="flex items-center gap-3">
+                                <div class="hidden sm:flex items-center gap-1.5 shrink-0 pr-2.5 border-r border-zinc-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#1A56DB]"></span>
+                                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-zinc-500">Series &amp; Models</span>
+                                </div>
+                                <div id="tier2-scroll-container" class="fleet-nav-track flex-1 flex items-center gap-1.5 overflow-x-auto scroll-smooth py-0.5 focus:outline-none">
+                                    <?php foreach ( $tier2_pills as $pill ) : ?>
+                                        <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-tier2-pill <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>group h-8 px-3 shrink-0 flex items-center gap-1.5 text-xs font-semibold tracking-normal rounded-lg transition-all whitespace-nowrap <?php echo $pill['is_active'] ? 'bg-[#1A56DB] text-white shadow-sm font-bold' : 'bg-white hover:bg-zinc-100 text-zinc-600 hover:text-zinc-900 border border-zinc-200 hover:border-zinc-300'; ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
+                                            <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-white' : 'text-zinc-400 group-hover:text-[#1A56DB]'; ?> transition-colors"><?php echo esc_html( $pill['icon'] ); ?></span>
+                                            <span><?php echo esc_html( $pill['name'] ); ?></span>
+                                            <span class="<?php echo $pill['is_active'] ? 'bg-white/20 text-white' : 'bg-zinc-100 text-zinc-500'; ?> text-[9px] font-mono font-bold px-1.5 py-0.5 rounded ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="flex items-center gap-1 shrink-0 pl-1">
+                                    <button type="button" id="tier2-scroll-left" class="w-6 h-6 flex items-center justify-center rounded bg-white hover:bg-zinc-200 text-zinc-600 border border-zinc-200 transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer" aria-label="Scroll left" title="Scroll left">
+                                        <span class="material-symbols-outlined text-xs">chevron_left</span>
+                                    </button>
+                                    <button type="button" id="tier2-scroll-right" class="w-6 h-6 flex items-center justify-center rounded bg-white hover:bg-zinc-200 text-zinc-600 border border-zinc-200 transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer" aria-label="Scroll right" title="Scroll right">
+                                        <span class="material-symbols-outlined text-xs">chevron_right</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="tier2-scroll-container" class="flex items-center gap-2 sm:gap-3 overflow-x-auto scroll-smooth py-1 pb-2 focus:outline-none" style="scrollbar-width: thin; scrollbar-color: #71717A #E4E4E7;">
-                        <?php foreach ( $tier2_pills as $pill ) : ?>
-                            <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-tier2-pill <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>h-[40px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all whitespace-nowrap <?php echo $pill['is_active'] ? 'bg-[#0A0A0A] text-[#FBBF24] font-black border-2 border-black shadow-[2px_2px_0px_0px_#FBBF24]' : 'bg-white hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
-                                <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-[#FBBF24]' : 'text-[#1A56DB]'; ?>"><?php echo esc_html( $pill['icon'] ); ?></span>
-                                <span><?php echo esc_html( $pill['name'] ); ?></span>
-                                <span class="<?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black' : 'bg-zinc-200 text-zinc-700'; ?> text-[10px] font-mono font-bold px-1.5 py-0.5 ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
+                    <?php endif; ?>
+                </nav>
             <?php endif; ?>
 
             <?php if ( $root_brand_term && $root_brand_term->term_id !== $term->term_id ) : 
@@ -980,17 +974,19 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 ) );
                 $root_total_count = $root_total_query->found_posts;
             ?>
-                <div id="subcat-filtered-banner" class="mb-8 bg-[#1A56DB]/10 border-2 border-[#1A56DB] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[#1A56DB] shrink-0">filter_list</span>
+                <div id="subcat-filtered-banner" class="mb-10 bg-gradient-to-r from-blue-50/70 via-white to-blue-50/40 border border-blue-200/80 rounded-xl p-3.5 px-4 sm:px-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-[0_2px_8px_-2px_rgba(26,86,219,0.06)]">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-[#1A56DB]/10 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[#1A56DB] text-base">filter_list</span>
+                        </div>
                         <div>
-                            <span class="text-xs font-bold text-[#0A0A0A]">Currently viewing <strong><?php echo esc_html( $category_name ); ?></strong> (<?php echo esc_html( $total_models ); ?> models). All <strong><?php echo esc_html( $root_total_count ); ?> <?php echo esc_html( $root_brand_term->name ); ?></strong> commercial models are available across this brand portfolio.</span>
+                            <span class="text-xs text-zinc-700">Currently viewing <strong class="text-zinc-950 font-bold"><?php echo esc_html( $category_name ); ?></strong> (<?php echo esc_html( $total_models ); ?> models). All <strong class="text-zinc-950 font-bold"><?php echo esc_html( $root_total_count ); ?> <?php echo esc_html( $root_brand_term->name ); ?></strong> commercial models available.</span>
                             <?php if ( ! empty( $curr_brand_config['subcat_note'] ) ) : ?>
-                                <div class="text-[11px] font-semibold text-[#1A56DB] mt-0.5"><?php echo esc_html( $curr_brand_config['subcat_note'] ); ?></div>
+                                <div class="text-[11px] font-medium text-[#1A56DB] mt-0.5"><?php echo esc_html( $curr_brand_config['subcat_note'] ); ?></div>
                             <?php endif; ?>
                         </div>
                     </div>
-                    <a href="<?php echo esc_url( get_term_link( $root_brand_term ) ); ?>" class="js-fleet-show-all-link px-3 py-1.5 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white text-[10px] font-black uppercase tracking-wider transition-colors shrink-0">Show All <?php echo esc_html( $root_brand_term->name ); ?> (<?php echo esc_html( $root_total_count ); ?>)</a>
+                    <a href="<?php echo esc_url( get_term_link( $root_brand_term ) ); ?>" class="js-fleet-show-all-link px-3.5 py-1.5 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white text-[11px] font-bold uppercase tracking-wider rounded-lg transition-colors shrink-0 shadow-sm">View All (<?php echo esc_html( $root_total_count ); ?>)</a>
                 </div>
             <?php endif; ?>
 
@@ -1030,9 +1026,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         ?>
                         <?php 
                         $is_card_match = ( $active_subcat_slug === 'all' || in_array( $active_subcat_slug, $item['cat_slugs'], true ) );
-                        $card_style = $is_card_match ? 'box-shadow: 6px 6px 0px 0px #1A56DB;' : 'box-shadow: 6px 6px 0px 0px #1A56DB; display: none;';
+                        $card_style = $is_card_match ? '' : 'display: none;';
                         ?>
-                        <article id="model-<?php echo esc_attr( $item['id'] ); ?>" class="js-b2b-model-card grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center bg-white border-2 border-zinc-200 p-5 sm:p-8 md:p-10 relative transition-all duration-300 hover:border-black scroll-mt-28" data-cat-slugs="<?php echo esc_attr( implode( ' ', $item['cat_slugs'] ) ); ?>" style="<?php echo esc_attr( $card_style ); ?>">
+                        <article id="model-<?php echo esc_attr( $item['id'] ); ?>" class="js-b2b-model-card grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center bg-white border border-zinc-200/90 rounded-2xl p-6 sm:p-8 md:p-10 relative transition-all duration-300 hover:border-zinc-400 hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.08)] shadow-[0_2px_12px_-4px_rgba(0,0,0,0.04)] scroll-mt-28" data-cat-slugs="<?php echo esc_attr( implode( ' ', $item['cat_slugs'] ) ); ?>" style="<?php echo esc_attr( $card_style ); ?>">
                             <!-- Visual Column: Dual-Tab Switcher (lg:col-span-5) -->
                             <div class="lg:col-span-5 <?php echo $is_even ? 'lg:order-1' : 'lg:order-2'; ?> flex flex-col justify-center">
                                 <div class="relative bg-zinc-50 border border-zinc-200 p-4 sm:p-5 overflow-hidden group">
