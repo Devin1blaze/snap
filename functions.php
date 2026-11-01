@@ -804,12 +804,11 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
         }
 
         // Blue Star Commercial
-        if ( strpos( $u_sku, 'BS-LC' ) !== false || strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'CASS' ) !== false || strpos( $u_sku, 'CONC' ) !== false ) {
-            if ( strpos( $u_sku, 'VERT' ) !== false ) return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
-            if ( strpos( $u_sku, 'CASS-4W' ) !== false ) return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
+        if ( strpos( $u_sku, 'BS-LC' ) !== false || strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'CASS' ) !== false || strpos( $u_sku, 'CONC' ) !== false || strpos( $u_sku, 'BS-CAS' ) !== false || strpos( $u_sku, 'BS-VER' ) !== false || strpos( $u_sku, 'BS-CON' ) !== false ) {
+            if ( strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'BS-VER' ) !== false ) return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+            if ( strpos( $u_sku, 'CONC' ) !== false || strpos( $u_sku, 'BS-CON' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
             if ( strpos( $u_sku, 'CASS-1W' ) !== false ) return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
-            if ( strpos( $u_sku, 'CONC' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
-            return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+            return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
         }
 
         // Euronics Commercial Washroom Automation

@@ -641,226 +641,359 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
         <main class="container mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16">
             <?php
-            // Subcategory / Brand Fleet Navigation Pills
-            $fleet_pills = array();
-            
-            // Check if current term has child categories
-            $current_children = get_terms( array(
-                'taxonomy'   => 'product_cat',
-                'parent'     => $term->term_id,
-                'hide_empty' => false,
-                'orderby'    => 'term_id',
-                'order'      => 'ASC',
-            ) );
+            // =========================================================================
+            // TWO-TIER PERSISTENT FLEET NAVIGATION SYSTEM
+            // Tier 1: Primary Brand Departments (ALWAYS VISIBLE & PINNED across all pages)
+            // Tier 2: Subcategories & Model Families (Contextual to Active Department)
+            // =========================================================================
 
-            $nav_parent_term = null;
-            $nav_child_terms = array();
+            $tier1_pills = array();
+            $tier2_pills = array();
+            $active_dept_term = null;
+            $tier2_title = '';
 
-            if ( ! empty( $current_children ) && ! is_wp_error( $current_children ) ) {
-                // Case 1: Current category has subcategories (e.g. Light Commercial ACs, Room ACs, Water Coolers, Brand Root)
-                $nav_parent_term = $term;
-                $nav_child_terms = $current_children;
-            } elseif ( $term->parent && (int) $term->parent !== 72 ) {
-                // Case 2: Current category is a leaf subcategory (e.g. Cassette Air Conditioners)
-                // Show parent and sibling subcategories
-                $parent_obj = get_term( $term->parent, 'product_cat' );
-                if ( $parent_obj && ! is_wp_error( $parent_obj ) ) {
-                    $nav_parent_term = $parent_obj;
-                    $sibling_terms = get_terms( array(
-                        'taxonomy'   => 'product_cat',
-                        'parent'     => $parent_obj->term_id,
-                        'hide_empty' => false,
-                        'orderby'    => 'term_id',
-                        'order'      => 'ASC',
-                    ) );
-                    if ( ! empty( $sibling_terms ) && ! is_wp_error( $sibling_terms ) ) {
-                        $nav_child_terms = $sibling_terms;
-                    }
+            if ( ! function_exists( 'snap_stitch_get_cat_icon' ) ) {
+                function snap_stitch_get_cat_icon( $name ) {
+                    $cn = strtolower( $name );
+                    if ( strpos( $cn, 'hand dryer' ) !== false || strpos( $cn, 'dryer' ) !== false ) return 'air';
+                    if ( strpos( $cn, 'sensor tap' ) !== false || strpos( $cn, 'faucet' ) !== false ) return 'faucet';
+                    if ( strpos( $cn, 'soap' ) !== false || strpos( $cn, 'skincare' ) !== false ) return 'sanitizer';
+                    if ( strpos( $cn, 'urinal' ) !== false || strpos( $cn, 'smartflush' ) !== false ) return 'sensor_occupied';
+                    if ( strpos( $cn, 'paper' ) !== false || strpos( $cn, 'towel' ) !== false || strpos( $cn, 'tissue' ) !== false || strpos( $cn, 'wypall' ) !== false || strpos( $cn, 'wiping' ) !== false || strpos( $cn, 'receptacle' ) !== false ) return 'description';
+                    if ( strpos( $cn, 'safety' ) !== false || strpos( $cn, 'glove' ) !== false || strpos( $cn, 'ppe' ) !== false || strpos( $cn, 'kleenguard' ) !== false ) return 'shield';
+                    if ( strpos( $cn, 'air curtain' ) !== false ) return 'wind_power';
+                    if ( strpos( $cn, 'room air conditioner' ) !== false || strpos( $cn, 'room ac' ) !== false ) return 'mode_fan';
+                    if ( strpos( $cn, 'inverter split' ) !== false || strpos( $cn, 'inverter ac' ) !== false ) return 'energy_savings_leaf';
+                    if ( strpos( $cn, 'fixed speed' ) !== false ) return 'speed';
+                    if ( strpos( $cn, 'window' ) !== false && strpos( $cn, 'cooler' ) === false ) return 'window';
+                    if ( strpos( $cn, 'light commercial' ) !== false ) return 'grid_view';
+                    if ( strpos( $cn, 'cassette' ) !== false ) return 'grid_on';
+                    if ( strpos( $cn, 'verticool' ) !== false ) return 'view_column';
+                    if ( strpos( $cn, 'concealed' ) !== false ) return 'hvac';
+                    if ( strpos( $cn, 'central air' ) !== false || strpos( $cn, 'vrf' ) !== false || strpos( $cn, 'chiller' ) !== false || strpos( $cn, 'ducted' ) !== false ) return 'apartment';
+                    if ( strpos( $cn, 'cold storage' ) !== false ) return 'warehouse';
+                    if ( strpos( $cn, 'refrigeration' ) !== false || strpos( $cn, 'freezer' ) !== false ) return 'kitchen';
+                    if ( strpos( $cn, 'tea' ) !== false || strpos( $cn, 'premix' ) !== false || strpos( $cn, 'chai' ) !== false ) return 'emoji_food_beverage';
+                    if ( strpos( $cn, 'coffee' ) !== false || strpos( $cn, 'dairy' ) !== false ) return 'coffee';
+                    if ( strpos( $cn, 'cold beverage' ) !== false || strpos( $cn, 'beverage' ) !== false ) return 'local_bar';
+                    if ( strpos( $cn, 'firewall' ) !== false || strpos( $cn, 'pou' ) !== false || strpos( $cn, 'waterlogic' ) !== false ) return 'water_drop';
+                    if ( strpos( $cn, 'countertop' ) !== false ) return 'countertops';
+                    if ( strpos( $cn, 'freestanding' ) !== false ) return 'view_column';
+                    if ( strpos( $cn, 'dispenser' ) !== false ) return 'local_drink';
+                    if ( strpos( $cn, 'cooler' ) !== false && strpos( $cn, 'instant' ) === false ) return 'ac_unit';
+                    if ( strpos( $cn, 'instant' ) !== false || strpos( $cn, 'inline' ) !== false ) return 'bolt';
+                    if ( ( strpos( $cn, 'ro ' ) !== false || strpos( $cn, ' ro' ) !== false || strpos( $cn, 'purifier' ) !== false ) && strpos( $cn, 'skid' ) === false ) return 'water_damage';
+                    if ( strpos( $cn, 'uv' ) !== false ) return 'wb_iridescent';
+                    if ( strpos( $cn, 'skid' ) !== false || strpos( $cn, 'plant' ) !== false ) return 'factory';
+                    return 'precision_manufacturing';
                 }
-            } elseif ( $root_brand_term && ! is_wp_error( $root_brand_term ) ) {
-                // Case 3: Fallback to brand root children
-                $nav_parent_term = $root_brand_term;
-                $nav_child_terms = get_terms( array(
-                    'taxonomy'   => 'product_cat',
-                    'parent'     => $root_brand_term->term_id,
-                    'hide_empty' => false,
-                    'orderby'    => 'term_id',
-                    'order'      => 'ASC',
-                ) );
             }
 
-            if ( $nav_parent_term && ! empty( $nav_child_terms ) ) {
-                // Calculate total count for the nav parent term
-                $parent_count = 0;
-                if ( $term->term_id === $nav_parent_term->term_id ) {
-                    $parent_count = count( $all_products );
-                } else {
-                    $parent_prods = get_posts( array(
-                        'post_type'      => 'product',
-                        'post_status'    => 'publish',
-                        'posts_per_page' => -1,
-                        'tax_query'      => array(
-                            array(
-                                'taxonomy'         => 'product_cat',
-                                'field'            => 'term_id',
-                                'terms'            => $nav_parent_term->term_id,
-                                'include_children' => true,
-                            ),
+            if ( $root_brand_term && ! is_wp_error( $root_brand_term ) ) {
+                // Total brand products
+                $brand_root_query = new WP_Query( array(
+                    'post_type'      => 'product',
+                    'post_status'    => 'publish',
+                    'posts_per_page' => 1,
+                    'tax_query'      => array(
+                        array(
+                            'taxonomy'         => 'product_cat',
+                            'field'            => 'term_id',
+                            'terms'            => $root_brand_term->term_id,
+                            'include_children' => true,
                         ),
-                        'fields'         => 'ids',
-                    ) );
-                    $parent_count = count( $parent_prods );
-                }
+                    ),
+                    'fields'         => 'ids',
+                ) );
+                $brand_total_count = $brand_root_query->found_posts;
 
-                $fleet_pills[] = array(
-                    'name'        => 'All ' . $nav_parent_term->name,
-                    'count'       => $parent_count,
-                    'url'         => get_term_link( $nav_parent_term ),
-                    'is_active'   => ( $term->term_id === $nav_parent_term->term_id ),
+                // TIER 1 - First Pill: All [Brand Name]
+                $tier1_pills[] = array(
+                    'name'        => 'All ' . $root_brand_term->name,
+                    'count'       => $brand_total_count,
+                    'url'         => get_term_link( $root_brand_term ),
+                    'is_active'   => ( $term->term_id === $root_brand_term->term_id ),
                     'filter_slug' => 'all',
                     'icon'        => 'apps',
                 );
 
-                foreach ( $nav_child_terms as $ct ) {
-                    $icon = 'precision_manufacturing';
-                    $cn = strtolower( $ct->name );
-                    if ( strpos( $cn, 'hand dryer' ) !== false || strpos( $cn, 'dryer' ) !== false ) $icon = 'air';
-                    elseif ( strpos( $cn, 'sensor tap' ) !== false || strpos( $cn, 'faucet' ) !== false ) $icon = 'faucet';
-                    elseif ( strpos( $cn, 'soap' ) !== false || strpos( $cn, 'skincare' ) !== false ) $icon = 'sanitizer';
-                    elseif ( strpos( $cn, 'urinal' ) !== false || strpos( $cn, 'smartflush' ) !== false ) $icon = 'sensor_occupied';
-                    elseif ( strpos( $cn, 'paper' ) !== false || strpos( $cn, 'towel' ) !== false || strpos( $cn, 'tissue' ) !== false || strpos( $cn, 'wypall' ) !== false || strpos( $cn, 'wiping' ) !== false || strpos( $cn, 'receptacle' ) !== false ) $icon = 'description';
-                    elseif ( strpos( $cn, 'safety' ) !== false || strpos( $cn, 'glove' ) !== false || strpos( $cn, 'ppe' ) !== false || strpos( $cn, 'kleenguard' ) !== false ) $icon = 'shield';
-                    elseif ( strpos( $cn, 'air curtain' ) !== false ) $icon = 'wind_power';
-                    elseif ( strpos( $cn, 'room air conditioner' ) !== false || strpos( $cn, 'room ac' ) !== false ) $icon = 'mode_fan';
-                    elseif ( strpos( $cn, 'inverter split' ) !== false || strpos( $cn, 'inverter ac' ) !== false ) $icon = 'energy_savings_leaf';
-                    elseif ( strpos( $cn, 'fixed speed' ) !== false ) $icon = 'speed';
-                    elseif ( strpos( $cn, 'window' ) !== false && strpos( $cn, 'cooler' ) === false ) $icon = 'window';
-                    elseif ( strpos( $cn, 'light commercial' ) !== false ) $icon = 'grid_view';
-                    elseif ( strpos( $cn, 'cassette' ) !== false ) $icon = 'grid_on';
-                    elseif ( strpos( $cn, 'verticool' ) !== false ) $icon = 'view_column';
-                    elseif ( strpos( $cn, 'concealed' ) !== false ) $icon = 'hvac';
-                    elseif ( strpos( $cn, 'central air' ) !== false || strpos( $cn, 'vrf' ) !== false || strpos( $cn, 'chiller' ) !== false || strpos( $cn, 'ducted' ) !== false ) $icon = 'apartment';
-                    elseif ( strpos( $cn, 'cold storage' ) !== false ) $icon = 'warehouse';
-                    elseif ( strpos( $cn, 'refrigeration' ) !== false || strpos( $cn, 'freezer' ) !== false ) $icon = 'kitchen';
-                    elseif ( strpos( $cn, 'tea' ) !== false || strpos( $cn, 'premix' ) !== false || strpos( $cn, 'chai' ) !== false ) $icon = 'emoji_food_beverage';
-                    elseif ( strpos( $cn, 'coffee' ) !== false || strpos( $cn, 'dairy' ) !== false ) $icon = 'coffee';
-                    elseif ( strpos( $cn, 'cold beverage' ) !== false || strpos( $cn, 'beverage' ) !== false ) $icon = 'local_bar';
-                    elseif ( strpos( $cn, 'firewall' ) !== false || strpos( $cn, 'pou' ) !== false || strpos( $cn, 'waterlogic' ) !== false ) $icon = 'water_drop';
-                    elseif ( strpos( $cn, 'countertop' ) !== false ) $icon = 'countertops';
-                    elseif ( strpos( $cn, 'freestanding' ) !== false ) $icon = 'view_column';
-                    elseif ( strpos( $cn, 'dispenser' ) !== false ) $icon = 'local_drink';
-                    elseif ( strpos( $cn, 'cooler' ) !== false && strpos( $cn, 'instant' ) === false ) $icon = 'ac_unit';
-                    elseif ( strpos( $cn, 'instant' ) !== false || strpos( $cn, 'inline' ) !== false ) $icon = 'bolt';
-                    elseif ( ( strpos( $cn, 'ro ' ) !== false || strpos( $cn, ' ro' ) !== false || strpos( $cn, 'purifier' ) !== false ) && strpos( $cn, 'skid' ) === false ) $icon = 'water_damage';
-                    elseif ( strpos( $cn, 'uv' ) !== false ) $icon = 'wb_iridescent';
-                    elseif ( strpos( $cn, 'skid' ) !== false || strpos( $cn, 'plant' ) !== false ) $icon = 'factory';
+                // Fetch all Primary Brand Departments (direct children of $root_brand_term)
+                $brand_departments = get_terms( array(
+                    'taxonomy'   => 'product_cat',
+                    'parent'     => $root_brand_term->term_id,
+                    'hide_empty' => false,
+                    'orderby'    => 'name',
+                    'order'      => 'ASC',
+                ) );
 
-                    $matching_count = 0;
-                    foreach ( $all_products as $ap ) {
-                        if ( in_array( (int) $ct->term_id, $ap['cat_ids'], true ) || in_array( $ct->slug, $ap['cat_slugs'], true ) ) {
-                            $matching_count++;
+                // Identify Active Department (either current $term or an ancestor of $term)
+                if ( (int) $term->parent === (int) $root_brand_term->term_id ) {
+                    $active_dept_term = $term;
+                } elseif ( $term->term_id !== $root_brand_term->term_id ) {
+                    $ancestors = get_ancestors( $term->term_id, 'product_cat' );
+                    foreach ( $ancestors as $anc_id ) {
+                        $anc = get_term( $anc_id, 'product_cat' );
+                        if ( $anc && (int) $anc->parent === (int) $root_brand_term->term_id ) {
+                            $active_dept_term = $anc;
+                            break;
                         }
                     }
-                    if ( $matching_count === 0 && ! empty( $ct->count ) ) {
-                        $matching_count = (int) $ct->count;
-                    }
+                }
 
-                    $fleet_pills[] = array(
-                        'name'        => $ct->name,
-                        'count'       => $matching_count,
-                        'url'         => get_term_link( $ct ),
-                        'is_active'   => ( $term->term_id === $ct->term_id ),
-                        'filter_slug' => $ct->slug,
-                        'icon'        => $icon,
+                // Populate Tier 1 Pills
+                if ( ! empty( $brand_departments ) && ! is_wp_error( $brand_departments ) ) {
+                    foreach ( $brand_departments as $dept ) {
+                        $dept_q = new WP_Query( array(
+                            'post_type'      => 'product',
+                            'post_status'    => 'publish',
+                            'posts_per_page' => 1,
+                            'tax_query'      => array(
+                                array(
+                                    'taxonomy'         => 'product_cat',
+                                    'field'            => 'term_id',
+                                    'terms'            => $dept->term_id,
+                                    'include_children' => true,
+                                ),
+                            ),
+                            'fields'         => 'ids',
+                        ) );
+                        $dept_count = $dept_q->found_posts;
+
+                        $is_active_dept = false;
+                        if ( $term->term_id === $dept->term_id ) {
+                            $is_active_dept = true;
+                        } elseif ( $active_dept_term && $active_dept_term->term_id === $dept->term_id ) {
+                            $is_active_dept = true;
+                        }
+
+                        $tier1_pills[] = array(
+                            'name'        => $dept->name,
+                            'count'       => $dept_count,
+                            'url'         => get_term_link( $dept ),
+                            'is_active'   => $is_active_dept,
+                            'filter_slug' => $dept->slug,
+                            'icon'        => snap_stitch_get_cat_icon( $dept->name ),
+                        );
+                    }
+                }
+
+                // TIER 2 - Contextual Subcategories under Active Department
+                if ( $active_dept_term && ! is_wp_error( $active_dept_term ) ) {
+                    $dept_subcats = get_terms( array(
+                        'taxonomy'   => 'product_cat',
+                        'parent'     => $active_dept_term->term_id,
+                        'hide_empty' => false,
+                        'orderby'    => 'name',
+                        'order'      => 'ASC',
+                    ) );
+
+                    if ( ! empty( $dept_subcats ) && ! is_wp_error( $dept_subcats ) ) {
+                        $tier2_title = $active_dept_term->name;
+
+                        // Tier 2 Pill 1: All [Active Department Name]
+                        $dept_all_q = new WP_Query( array(
+                            'post_type'      => 'product',
+                            'post_status'    => 'publish',
+                            'posts_per_page' => 1,
+                            'tax_query'      => array(
+                                array(
+                                    'taxonomy'         => 'product_cat',
+                                    'field'            => 'term_id',
+                                    'terms'            => $active_dept_term->term_id,
+                                    'include_children' => true,
+                                ),
+                            ),
+                            'fields'         => 'ids',
+                        ) );
+                        $dept_all_count = $dept_all_q->found_posts;
+
+                        $tier2_pills[] = array(
+                            'name'        => 'All ' . $active_dept_term->name,
+                            'count'       => $dept_all_count,
+                            'url'         => get_term_link( $active_dept_term ),
+                            'is_active'   => ( $term->term_id === $active_dept_term->term_id ),
+                            'filter_slug' => 'all-' . $active_dept_term->slug,
+                            'icon'        => 'apps',
+                        );
+
+                        foreach ( $dept_subcats as $subcat ) {
+                            $sub_q = new WP_Query( array(
+                                'post_type'      => 'product',
+                                'post_status'    => 'publish',
+                                'posts_per_page' => 1,
+                                'tax_query'      => array(
+                                    array(
+                                        'taxonomy'         => 'product_cat',
+                                        'field'            => 'term_id',
+                                        'terms'            => $subcat->term_id,
+                                        'include_children' => true,
+                                    ),
+                                ),
+                                'fields'         => 'ids',
+                            ) );
+                            $sub_count = $sub_q->found_posts;
+
+                            $is_sub_active = ( $term->term_id === $subcat->term_id || term_is_ancestor_of( $subcat->term_id, $term->term_id, 'product_cat' ) );
+
+                            $tier2_pills[] = array(
+                                'name'        => $subcat->name,
+                                'count'       => $sub_count,
+                                'url'         => get_term_link( $subcat ),
+                                'is_active'   => $is_sub_active,
+                                'filter_slug' => $subcat->slug,
+                                'icon'        => snap_stitch_get_cat_icon( $subcat->name ),
+                            );
+                        }
+                    }
+                }
+            } else {
+                // Non-brand fallback
+                $current_children = get_terms( array(
+                    'taxonomy'   => 'product_cat',
+                    'parent'     => $term->term_id,
+                    'hide_empty' => false,
+                    'orderby'    => 'term_id',
+                    'order'      => 'ASC',
+                ) );
+                if ( ! empty( $current_children ) && ! is_wp_error( $current_children ) ) {
+                    $tier1_pills[] = array(
+                        'name'        => 'All ' . $term->name,
+                        'count'       => count( $all_products ),
+                        'url'         => get_term_link( $term ),
+                        'is_active'   => true,
+                        'filter_slug' => 'all',
+                        'icon'        => 'apps',
                     );
+                    foreach ( $current_children as $ct ) {
+                        $tier1_pills[] = array(
+                            'name'        => $ct->name,
+                            'count'       => (int) $ct->count,
+                            'url'         => get_term_link( $ct ),
+                            'is_active'   => false,
+                            'filter_slug' => $ct->slug,
+                            'icon'        => snap_stitch_get_cat_icon( $ct->name ),
+                        );
+                    }
                 }
             }
             ?>
-            <?php if ( ! empty( $fleet_pills ) ) : ?>
-                <style>
-                #pills-scroll-container::-webkit-scrollbar {
-                    height: 6px;
-                }
-                #pills-scroll-container::-webkit-scrollbar-track {
-                    background: #F4F4F5;
-                    border: 1px solid #E4E4E7;
-                }
-                #pills-scroll-container::-webkit-scrollbar-thumb {
-                    background: #71717A;
-                    border: 1px solid #0A0A0A;
-                }
-                #pills-scroll-container::-webkit-scrollbar-thumb:hover {
-                    background: #FBBF24;
-                }
-                </style>
-                <div class="mb-8 bg-white border-2 border-black p-4 sm:p-5 shadow-[4px_4px_0px_0px_#0A0A0A]">
+
+            <style>
+            #tier1-scroll-container::-webkit-scrollbar,
+            #tier2-scroll-container::-webkit-scrollbar {
+                height: 6px;
+            }
+            #tier1-scroll-container::-webkit-scrollbar-track,
+            #tier2-scroll-container::-webkit-scrollbar-track {
+                background: #F4F4F5;
+                border: 1px solid #E4E4E7;
+            }
+            #tier1-scroll-container::-webkit-scrollbar-thumb,
+            #tier2-scroll-container::-webkit-scrollbar-thumb {
+                background: #71717A;
+                border: 1px solid #0A0A0A;
+            }
+            #tier1-scroll-container::-webkit-scrollbar-thumb:hover,
+            #tier2-scroll-container::-webkit-scrollbar-thumb:hover {
+                background: #FBBF24;
+            }
+            </style>
+
+            <?php if ( ! empty( $tier1_pills ) ) : ?>
+                <!-- TIER 1: BRAND DEPARTMENTS / MAIN CATEGORIES (ALWAYS VISIBLE & PINNED) -->
+                <div class="mb-4 bg-white border-2 border-black p-4 sm:p-5 shadow-[4px_4px_0px_0px_#0A0A0A]">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-3 pb-2.5 border-b-2 border-zinc-200">
                         <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 bg-[#1A56DB] inline-block"></span>
-                            <span class="text-xs font-black uppercase tracking-wider text-[#0A0A0A]">Product Categories &amp; Model Families</span>
+                            <span class="w-2.5 h-2.5 bg-[#1A56DB] inline-block"></span>
+                            <span class="text-xs font-black uppercase tracking-wider text-[#0A0A0A]">1. Main Brand Categories &amp; Departments</span>
                         </div>
                         <div class="flex items-center justify-between sm:justify-end gap-3">
-                            <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hidden md:inline">Select any category pill to explore models, or use arrows to view all</span>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hidden md:inline">Click any category to switch departments &middot; Always accessible</span>
                             <div class="flex items-center gap-1.5 shrink-0">
-                                <button type="button" id="pills-scroll-left" class="w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll subcategories left" title="Scroll left">
+                                <button type="button" id="tier1-scroll-left" class="w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll departments left" title="Scroll left">
                                     <span class="material-symbols-outlined text-base">chevron_left</span>
                                 </button>
-                                <button type="button" id="pills-scroll-right" class="w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll subcategories right" title="Scroll right">
+                                <button type="button" id="tier1-scroll-right" class="w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll departments right" title="Scroll right">
                                     <span class="material-symbols-outlined text-base">chevron_right</span>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div class="relative flex items-center gap-2">
-                        <button type="button" id="pills-scroll-prev" class="hidden sm:flex shrink-0 w-9 h-[42px] items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Previous subcategories" title="Previous subcategories">
-                            <span class="material-symbols-outlined text-lg">chevron_left</span>
-                        </button>
-                        <div id="pills-scroll-container" class="flex-1 flex items-center gap-2 sm:gap-3 overflow-x-auto scroll-smooth py-1 pb-2 focus:outline-none" style="scrollbar-width: thin; scrollbar-color: #71717A #F4F4F5;">
-                            <?php foreach ( $fleet_pills as $pill ) : ?>
-                                <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-fleet-filter-btn <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>h-[42px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all <?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black border-2 border-black shadow-[2px_2px_0px_0px_#0A0A0A]' : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>" data-filter="<?php echo esc_attr( $pill['filter_slug'] ); ?>" data-target-url="<?php echo esc_url( $pill['url'] ); ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
-                                    <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-black' : 'text-[#1A56DB]'; ?>"><?php echo esc_html( $pill['icon'] ); ?></span>
-                                    <span><?php echo esc_html( $pill['name'] ); ?></span>
-                                    <span class="<?php echo $pill['is_active'] ? 'bg-black text-[#FBBF24]' : 'bg-zinc-200 text-zinc-700'; ?> text-[10px] font-mono font-bold px-1.5 py-0.5 ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
-                                </a>
-                            <?php endforeach; ?>
-                        </div>
-                        <button type="button" id="pills-scroll-next" class="hidden sm:flex shrink-0 w-9 h-[42px] items-center justify-center bg-zinc-100 hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Next subcategories" title="Next subcategories">
-                            <span class="material-symbols-outlined text-lg">chevron_right</span>
-                        </button>
+                    <div id="tier1-scroll-container" class="flex items-center gap-2 sm:gap-3 overflow-x-auto scroll-smooth py-1 pb-2 focus:outline-none" style="scrollbar-width: thin; scrollbar-color: #71717A #F4F4F5;">
+                        <?php foreach ( $tier1_pills as $pill ) : ?>
+                            <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-tier1-pill <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>h-[42px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all whitespace-nowrap <?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black border-2 border-black shadow-[2px_2px_0px_0px_#0A0A0A]' : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
+                                <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-black' : 'text-[#1A56DB]'; ?>"><?php echo esc_html( $pill['icon'] ); ?></span>
+                                <span><?php echo esc_html( $pill['name'] ); ?></span>
+                                <span class="<?php echo $pill['is_active'] ? 'bg-black text-[#FBBF24]' : 'bg-zinc-200 text-zinc-700'; ?> text-[10px] font-mono font-bold px-1.5 py-0.5 ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
+                            </a>
+                        <?php endforeach; ?>
                     </div>
                 </div>
+            <?php endif; ?>
 
-                <?php if ( $root_brand_term && $root_brand_term->term_id !== $term->term_id ) : 
-                    $root_total_query = new WP_Query( array(
-                        'post_type'      => 'product',
-                        'post_status'    => 'publish',
-                        'posts_per_page' => 1,
-                        'tax_query'      => array(
-                            array(
-                                'taxonomy'         => 'product_cat',
-                                'field'            => 'term_id',
-                                'terms'            => $root_brand_term->term_id,
-                                'include_children' => true,
-                            ),
-                        ),
-                        'fields'         => 'ids',
-                    ) );
-                    $root_total_count = $root_total_query->found_posts;
-                ?>
-                    <div id="subcat-filtered-banner" class="mb-8 bg-[#1A56DB]/10 border-2 border-[#1A56DB] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+            <?php if ( ! empty( $tier2_pills ) ) : ?>
+                <!-- TIER 2: CONTEXTUAL SUBCATEGORIES & MODEL FAMILIES -->
+                <div class="mb-8 bg-zinc-50 border-2 border-black p-4 sm:p-5 shadow-[4px_4px_0px_0px_#0A0A0A]">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-3 pb-2.5 border-b-2 border-zinc-200">
                         <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[#1A56DB] shrink-0">filter_list</span>
-                            <div>
-                                <span class="text-xs font-bold text-[#0A0A0A]">Currently viewing <strong><?php echo esc_html( $category_name ); ?></strong> (<?php echo esc_html( $total_models ); ?> models). All <strong><?php echo esc_html( $root_total_count ); ?> <?php echo esc_html( $root_brand_term->name ); ?></strong> commercial models are available across this brand portfolio.</span>
-                                <?php if ( ! empty( $curr_brand_config['subcat_note'] ) ) : ?>
-                                    <div class="text-[11px] font-semibold text-[#1A56DB] mt-0.5"><?php echo esc_html( $curr_brand_config['subcat_note'] ); ?></div>
-                                <?php endif; ?>
+                            <span class="w-2.5 h-2.5 bg-[#F59E0B] inline-block"></span>
+                            <span class="text-xs font-black uppercase tracking-wider text-[#0A0A0A]">2. Subcategories &amp; Model Families &middot; <span class="text-[#1A56DB]"><?php echo esc_html( $tier2_title ); ?></span></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-3">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hidden md:inline">Select model family or capacity series</span>
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                <button type="button" id="tier2-scroll-left" class="w-8 h-8 flex items-center justify-center bg-white hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll subcategories left" title="Scroll left">
+                                    <span class="material-symbols-outlined text-base">chevron_left</span>
+                                </button>
+                                <button type="button" id="tier2-scroll-right" class="w-8 h-8 flex items-center justify-center bg-white hover:bg-[#FBBF24] text-black border-2 border-black font-black transition-all shadow-[2px_2px_0px_0px_#0A0A0A] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-20 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer" aria-label="Scroll subcategories right" title="Scroll right">
+                                    <span class="material-symbols-outlined text-base">chevron_right</span>
+                                </button>
                             </div>
                         </div>
-                        <a href="<?php echo esc_url( get_term_link( $root_brand_term ) ); ?>" class="js-fleet-show-all-link px-3 py-1.5 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white text-[10px] font-black uppercase tracking-wider transition-colors shrink-0">Show All <?php echo esc_html( $root_brand_term->name ); ?> (<?php echo esc_html( $root_total_count ); ?>)</a>
                     </div>
-                <?php endif; ?>
+                    <div id="tier2-scroll-container" class="flex items-center gap-2 sm:gap-3 overflow-x-auto scroll-smooth py-1 pb-2 focus:outline-none" style="scrollbar-width: thin; scrollbar-color: #71717A #E4E4E7;">
+                        <?php foreach ( $tier2_pills as $pill ) : ?>
+                            <a href="<?php echo esc_url( $pill['url'] ); ?>" class="js-tier2-pill <?php echo $pill['is_active'] ? 'is-active ' : ''; ?>h-[40px] px-3.5 sm:px-4 shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider transition-all whitespace-nowrap <?php echo $pill['is_active'] ? 'bg-[#0A0A0A] text-[#FBBF24] font-black border-2 border-black shadow-[2px_2px_0px_0px_#FBBF24]' : 'bg-white hover:bg-zinc-100 text-zinc-800 font-extrabold border-2 border-zinc-300 hover:border-black'; ?>" data-active="<?php echo $pill['is_active'] ? 'true' : 'false'; ?>">
+                                <span class="material-symbols-outlined text-sm <?php echo $pill['is_active'] ? 'text-[#FBBF24]' : 'text-[#1A56DB]'; ?>"><?php echo esc_html( $pill['icon'] ); ?></span>
+                                <span><?php echo esc_html( $pill['name'] ); ?></span>
+                                <span class="<?php echo $pill['is_active'] ? 'bg-[#FBBF24] text-black font-black' : 'bg-zinc-200 text-zinc-700'; ?> text-[10px] font-mono font-bold px-1.5 py-0.5 ml-0.5"><?php echo esc_html( $pill['count'] ); ?></span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
             <?php endif; ?>
+
+            <?php if ( $root_brand_term && $root_brand_term->term_id !== $term->term_id ) : 
+                $root_total_query = new WP_Query( array(
+                    'post_type'      => 'product',
+                    'post_status'    => 'publish',
+                    'posts_per_page' => 1,
+                    'tax_query'      => array(
+                        array(
+                            'taxonomy'         => 'product_cat',
+                            'field'            => 'term_id',
+                            'terms'            => $root_brand_term->term_id,
+                            'include_children' => true,
+                        ),
+                    ),
+                    'fields'         => 'ids',
+                ) );
+                $root_total_count = $root_total_query->found_posts;
+            ?>
+                <div id="subcat-filtered-banner" class="mb-8 bg-[#1A56DB]/10 border-2 border-[#1A56DB] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[#1A56DB] shrink-0">filter_list</span>
+                        <div>
+                            <span class="text-xs font-bold text-[#0A0A0A]">Currently viewing <strong><?php echo esc_html( $category_name ); ?></strong> (<?php echo esc_html( $total_models ); ?> models). All <strong><?php echo esc_html( $root_total_count ); ?> <?php echo esc_html( $root_brand_term->name ); ?></strong> commercial models are available across this brand portfolio.</span>
+                            <?php if ( ! empty( $curr_brand_config['subcat_note'] ) ) : ?>
+                                <div class="text-[11px] font-semibold text-[#1A56DB] mt-0.5"><?php echo esc_html( $curr_brand_config['subcat_note'] ); ?></div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <a href="<?php echo esc_url( get_term_link( $root_brand_term ) ); ?>" class="js-fleet-show-all-link px-3 py-1.5 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white text-[10px] font-black uppercase tracking-wider transition-colors shrink-0">Show All <?php echo esc_html( $root_brand_term->name ); ?> (<?php echo esc_html( $root_total_count ); ?>)</a>
+                </div>
+            <?php endif; ?>
+
 
             <!-- 3. Flagship Alternating Split Blocks -->
             <section id="flagship-showcase" class="mb-20 sm:mb-24">
@@ -1592,55 +1725,53 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 });
             });
 
-            // Horizontal scroll navigation and auto-centering for category pills
-            var pillsContainer = document.getElementById('pills-scroll-container');
-            var prevBtns = [document.getElementById('pills-scroll-left'), document.getElementById('pills-scroll-prev')].filter(Boolean);
-            var nextBtns = [document.getElementById('pills-scroll-right'), document.getElementById('pills-scroll-next')].filter(Boolean);
+            // Multi-Tier Persistent Navigation Scrollers
+            function initPillScroller(containerId, leftBtnId, rightBtnId) {
+                var container = document.getElementById(containerId);
+                var leftBtn = document.getElementById(leftBtnId);
+                var rightBtn = document.getElementById(rightBtnId);
+                if (!container) return;
 
-            function updatePillsScrollState() {
-                if (!pillsContainer) return;
-                var maxScroll = pillsContainer.scrollWidth - pillsContainer.clientWidth;
-                var canScroll = maxScroll > 4;
-                var atStart = pillsContainer.scrollLeft <= 4;
-                var atEnd = pillsContainer.scrollLeft >= maxScroll - 4;
-
-                prevBtns.forEach(function(btn) {
-                    btn.disabled = atStart || !canScroll;
-                });
-                nextBtns.forEach(function(btn) {
-                    btn.disabled = atEnd || !canScroll;
-                });
-            }
-
-            if (pillsContainer) {
-                pillsContainer.addEventListener('scroll', updatePillsScrollState, { passive: true });
-                window.addEventListener('resize', updatePillsScrollState, { passive: true });
-
-                prevBtns.forEach(function(btn) {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        pillsContainer.scrollBy({ left: -320, behavior: 'smooth' });
-                        setTimeout(updatePillsScrollState, 350);
-                    });
-                });
-
-                nextBtns.forEach(function(btn) {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        pillsContainer.scrollBy({ left: 320, behavior: 'smooth' });
-                        setTimeout(updatePillsScrollState, 350);
-                    });
-                });
-
-                // Auto-scroll active pill into view on page load
-                var activePill = pillsContainer.querySelector('.js-fleet-filter-btn[data-active="true"]');
-                if (activePill) {
-                    var scrollOffset = activePill.offsetLeft - (pillsContainer.clientWidth / 2) + (activePill.clientWidth / 2);
-                    pillsContainer.scrollTo({ left: Math.max(0, scrollOffset), behavior: 'smooth' });
+                function update() {
+                    var maxScroll = container.scrollWidth - container.clientWidth;
+                    var canScroll = maxScroll > 4;
+                    var atStart = container.scrollLeft <= 4;
+                    var atEnd = container.scrollLeft >= maxScroll - 4;
+                    if (leftBtn) leftBtn.disabled = atStart || !canScroll;
+                    if (rightBtn) rightBtn.disabled = atEnd || !canScroll;
                 }
 
-                setTimeout(updatePillsScrollState, 150);
+                container.addEventListener("scroll", update, { passive: true });
+                window.addEventListener("resize", update, { passive: true });
+
+                if (leftBtn) {
+                    leftBtn.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        container.scrollBy({ left: -320, behavior: "smooth" });
+                        setTimeout(update, 350);
+                    });
+                }
+                if (rightBtn) {
+                    rightBtn.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        container.scrollBy({ left: 320, behavior: "smooth" });
+                        setTimeout(update, 350);
+                    });
+                }
+
+                var activePill = container.querySelector(".is-active, [data-active='true']");
+                if (activePill) {
+                    setTimeout(function() {
+                        var scrollOffset = activePill.offsetLeft - (container.clientWidth / 2) + (activePill.clientWidth / 2);
+                        container.scrollTo({ left: Math.max(0, scrollOffset), behavior: "smooth" });
+                    }, 150);
+                }
+                setTimeout(update, 150);
             }
+
+            initPillScroller("tier1-scroll-container", "tier1-scroll-left", "tier1-scroll-right");
+            initPillScroller("tier2-scroll-container", "tier2-scroll-left", "tier2-scroll-right");
+            initPillScroller("pills-scroll-container", "pills-scroll-left", "pills-scroll-right");
         });
         </script>
 
