@@ -448,7 +448,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         $brand_trust_pillars = $curr_brand_config['pillars'];
         $brand_cta_label = $curr_brand_config['cta_quote_label'];
 
-        $query_cat_id = $root_brand_term ? $root_brand_term->term_id : ( ( $term && isset( $term->term_id ) ) ? $term->term_id : 0 );
+        $query_cat_id = ( $term && isset( $term->term_id ) ) ? $term->term_id : ( $root_brand_term ? $root_brand_term->term_id : 0 );
 
         $family_args = array(
             'post_type'      => 'product',
@@ -643,69 +643,136 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             <?php
             // Subcategory / Brand Fleet Navigation Pills
             $fleet_pills = array();
-            $effective_root = $root_brand_term ?: $term;
-            if ( $effective_root && ! is_wp_error( $effective_root ) ) {
-                $child_terms = get_terms( array(
+            
+            // Check if current term has child categories
+            $current_children = get_terms( array(
+                'taxonomy'   => 'product_cat',
+                'parent'     => $term->term_id,
+                'hide_empty' => false,
+                'orderby'    => 'term_id',
+                'order'      => 'ASC',
+            ) );
+
+            $nav_parent_term = null;
+            $nav_child_terms = array();
+
+            if ( ! empty( $current_children ) && ! is_wp_error( $current_children ) ) {
+                // Case 1: Current category has subcategories (e.g. Light Commercial ACs, Room ACs, Water Coolers, Brand Root)
+                $nav_parent_term = $term;
+                $nav_child_terms = $current_children;
+            } elseif ( $term->parent && (int) $term->parent !== 72 ) {
+                // Case 2: Current category is a leaf subcategory (e.g. Cassette Air Conditioners)
+                // Show parent and sibling subcategories
+                $parent_obj = get_term( $term->parent, 'product_cat' );
+                if ( $parent_obj && ! is_wp_error( $parent_obj ) ) {
+                    $nav_parent_term = $parent_obj;
+                    $sibling_terms = get_terms( array(
+                        'taxonomy'   => 'product_cat',
+                        'parent'     => $parent_obj->term_id,
+                        'hide_empty' => false,
+                        'orderby'    => 'term_id',
+                        'order'      => 'ASC',
+                    ) );
+                    if ( ! empty( $sibling_terms ) && ! is_wp_error( $sibling_terms ) ) {
+                        $nav_child_terms = $sibling_terms;
+                    }
+                }
+            } elseif ( $root_brand_term && ! is_wp_error( $root_brand_term ) ) {
+                // Case 3: Fallback to brand root children
+                $nav_parent_term = $root_brand_term;
+                $nav_child_terms = get_terms( array(
                     'taxonomy'   => 'product_cat',
-                    'parent'     => $effective_root->term_id,
+                    'parent'     => $root_brand_term->term_id,
                     'hide_empty' => false,
                     'orderby'    => 'term_id',
                     'order'      => 'ASC',
                 ) );
+            }
 
-                if ( ! empty( $child_terms ) && ! is_wp_error( $child_terms ) ) {
-                    $root_count = count( $all_products );
-                    $fleet_pills[] = array(
-                        'name'        => 'All ' . $effective_root->name,
-                        'count'       => $root_count,
-                        'url'         => get_term_link( $effective_root ),
-                        'is_active'   => ( $term->term_id === $effective_root->term_id ),
-                        'filter_slug' => 'all',
-                        'icon'        => 'apps',
-                    );
-                    foreach ( $child_terms as $ct ) {
-                        $icon = 'precision_manufacturing';
-                        $cn = strtolower( $ct->name );
-                        if ( strpos( $cn, 'hand dryer' ) !== false || strpos( $cn, 'dryer' ) !== false ) $icon = 'air';
-                        elseif ( strpos( $cn, 'sensor tap' ) !== false || strpos( $cn, 'faucet' ) !== false ) $icon = 'faucet';
-                        elseif ( strpos( $cn, 'soap' ) !== false || strpos( $cn, 'skincare' ) !== false ) $icon = 'sanitizer';
-                        elseif ( strpos( $cn, 'urinal' ) !== false || strpos( $cn, 'smartflush' ) !== false ) $icon = 'sensor_occupied';
-                        elseif ( strpos( $cn, 'paper' ) !== false || strpos( $cn, 'towel' ) !== false || strpos( $cn, 'tissue' ) !== false || strpos( $cn, 'wypall' ) !== false || strpos( $cn, 'wiping' ) !== false || strpos( $cn, 'receptacle' ) !== false ) $icon = 'description';
-                        elseif ( strpos( $cn, 'air curtain' ) !== false ) $icon = 'wind_power';
-                        elseif ( strpos( $cn, 'room air conditioner' ) !== false || strpos( $cn, 'room ac' ) !== false ) $icon = 'mode_fan';
-                        elseif ( strpos( $cn, 'light commercial' ) !== false || strpos( $cn, 'cassette' ) !== false || strpos( $cn, 'verticool' ) !== false ) $icon = 'grid_view';
-                        elseif ( strpos( $cn, 'central air' ) !== false || strpos( $cn, 'vrf' ) !== false || strpos( $cn, 'chiller' ) !== false ) $icon = 'apartment';
-                        elseif ( strpos( $cn, 'cold storage' ) !== false ) $icon = 'warehouse';
-                        elseif ( strpos( $cn, 'refrigeration' ) !== false || strpos( $cn, 'freezer' ) !== false ) $icon = 'kitchen';
-                        elseif ( strpos( $cn, 'tea' ) !== false || strpos( $cn, 'premix' ) !== false || strpos( $cn, 'chai' ) !== false ) $icon = 'emoji_food_beverage';
-                        elseif ( strpos( $cn, 'coffee' ) !== false || strpos( $cn, 'dairy' ) !== false ) $icon = 'coffee';
-                        elseif ( strpos( $cn, 'cold beverage' ) !== false || strpos( $cn, 'beverage' ) !== false ) $icon = 'local_bar';
-                        elseif ( strpos( $cn, 'firewall' ) !== false || strpos( $cn, 'pou' ) !== false || strpos( $cn, 'waterlogic' ) !== false ) $icon = 'water_drop';
-                        elseif ( strpos( $cn, 'countertop' ) !== false ) $icon = 'countertops';
-                        elseif ( strpos( $cn, 'freestanding' ) !== false ) $icon = 'view_column';
-                        elseif ( strpos( $cn, 'dispenser' ) !== false ) $icon = 'local_drink';
-                        elseif ( strpos( $cn, 'cooler' ) !== false && strpos( $cn, 'instant' ) === false ) $icon = 'ac_unit';
-                        elseif ( strpos( $cn, 'instant' ) !== false || strpos( $cn, 'inline' ) !== false ) $icon = 'bolt';
-                        elseif ( ( strpos( $cn, 'ro ' ) !== false || strpos( $cn, ' ro' ) !== false || strpos( $cn, 'purifier' ) !== false ) && strpos( $cn, 'skid' ) === false ) $icon = 'water_damage';
-                        elseif ( strpos( $cn, 'uv' ) !== false ) $icon = 'wb_iridescent';
-                        elseif ( strpos( $cn, 'skid' ) !== false || strpos( $cn, 'plant' ) !== false ) $icon = 'factory';
+            if ( $nav_parent_term && ! empty( $nav_child_terms ) ) {
+                // Calculate total count for the nav parent term
+                $parent_count = 0;
+                if ( $term->term_id === $nav_parent_term->term_id ) {
+                    $parent_count = count( $all_products );
+                } else {
+                    $parent_prods = get_posts( array(
+                        'post_type'      => 'product',
+                        'post_status'    => 'publish',
+                        'posts_per_page' => -1,
+                        'tax_query'      => array(
+                            array(
+                                'taxonomy'         => 'product_cat',
+                                'field'            => 'term_id',
+                                'terms'            => $nav_parent_term->term_id,
+                                'include_children' => true,
+                            ),
+                        ),
+                        'fields'         => 'ids',
+                    ) );
+                    $parent_count = count( $parent_prods );
+                }
 
-                        $matching_count = 0;
-                        foreach ( $all_products as $ap ) {
-                            if ( in_array( (int) $ct->term_id, $ap['cat_ids'], true ) || in_array( $ct->slug, $ap['cat_slugs'], true ) ) {
-                                $matching_count++;
-                            }
+                $fleet_pills[] = array(
+                    'name'        => 'All ' . $nav_parent_term->name,
+                    'count'       => $parent_count,
+                    'url'         => get_term_link( $nav_parent_term ),
+                    'is_active'   => ( $term->term_id === $nav_parent_term->term_id ),
+                    'filter_slug' => 'all',
+                    'icon'        => 'apps',
+                );
+
+                foreach ( $nav_child_terms as $ct ) {
+                    $icon = 'precision_manufacturing';
+                    $cn = strtolower( $ct->name );
+                    if ( strpos( $cn, 'hand dryer' ) !== false || strpos( $cn, 'dryer' ) !== false ) $icon = 'air';
+                    elseif ( strpos( $cn, 'sensor tap' ) !== false || strpos( $cn, 'faucet' ) !== false ) $icon = 'faucet';
+                    elseif ( strpos( $cn, 'soap' ) !== false || strpos( $cn, 'skincare' ) !== false ) $icon = 'sanitizer';
+                    elseif ( strpos( $cn, 'urinal' ) !== false || strpos( $cn, 'smartflush' ) !== false ) $icon = 'sensor_occupied';
+                    elseif ( strpos( $cn, 'paper' ) !== false || strpos( $cn, 'towel' ) !== false || strpos( $cn, 'tissue' ) !== false || strpos( $cn, 'wypall' ) !== false || strpos( $cn, 'wiping' ) !== false || strpos( $cn, 'receptacle' ) !== false ) $icon = 'description';
+                    elseif ( strpos( $cn, 'safety' ) !== false || strpos( $cn, 'glove' ) !== false || strpos( $cn, 'ppe' ) !== false || strpos( $cn, 'kleenguard' ) !== false ) $icon = 'shield';
+                    elseif ( strpos( $cn, 'air curtain' ) !== false ) $icon = 'wind_power';
+                    elseif ( strpos( $cn, 'room air conditioner' ) !== false || strpos( $cn, 'room ac' ) !== false ) $icon = 'mode_fan';
+                    elseif ( strpos( $cn, 'inverter split' ) !== false || strpos( $cn, 'inverter ac' ) !== false ) $icon = 'energy_savings_leaf';
+                    elseif ( strpos( $cn, 'fixed speed' ) !== false ) $icon = 'speed';
+                    elseif ( strpos( $cn, 'window' ) !== false && strpos( $cn, 'cooler' ) === false ) $icon = 'window';
+                    elseif ( strpos( $cn, 'light commercial' ) !== false ) $icon = 'grid_view';
+                    elseif ( strpos( $cn, 'cassette' ) !== false ) $icon = 'grid_on';
+                    elseif ( strpos( $cn, 'verticool' ) !== false ) $icon = 'view_column';
+                    elseif ( strpos( $cn, 'concealed' ) !== false ) $icon = 'hvac';
+                    elseif ( strpos( $cn, 'central air' ) !== false || strpos( $cn, 'vrf' ) !== false || strpos( $cn, 'chiller' ) !== false || strpos( $cn, 'ducted' ) !== false ) $icon = 'apartment';
+                    elseif ( strpos( $cn, 'cold storage' ) !== false ) $icon = 'warehouse';
+                    elseif ( strpos( $cn, 'refrigeration' ) !== false || strpos( $cn, 'freezer' ) !== false ) $icon = 'kitchen';
+                    elseif ( strpos( $cn, 'tea' ) !== false || strpos( $cn, 'premix' ) !== false || strpos( $cn, 'chai' ) !== false ) $icon = 'emoji_food_beverage';
+                    elseif ( strpos( $cn, 'coffee' ) !== false || strpos( $cn, 'dairy' ) !== false ) $icon = 'coffee';
+                    elseif ( strpos( $cn, 'cold beverage' ) !== false || strpos( $cn, 'beverage' ) !== false ) $icon = 'local_bar';
+                    elseif ( strpos( $cn, 'firewall' ) !== false || strpos( $cn, 'pou' ) !== false || strpos( $cn, 'waterlogic' ) !== false ) $icon = 'water_drop';
+                    elseif ( strpos( $cn, 'countertop' ) !== false ) $icon = 'countertops';
+                    elseif ( strpos( $cn, 'freestanding' ) !== false ) $icon = 'view_column';
+                    elseif ( strpos( $cn, 'dispenser' ) !== false ) $icon = 'local_drink';
+                    elseif ( strpos( $cn, 'cooler' ) !== false && strpos( $cn, 'instant' ) === false ) $icon = 'ac_unit';
+                    elseif ( strpos( $cn, 'instant' ) !== false || strpos( $cn, 'inline' ) !== false ) $icon = 'bolt';
+                    elseif ( ( strpos( $cn, 'ro ' ) !== false || strpos( $cn, ' ro' ) !== false || strpos( $cn, 'purifier' ) !== false ) && strpos( $cn, 'skid' ) === false ) $icon = 'water_damage';
+                    elseif ( strpos( $cn, 'uv' ) !== false ) $icon = 'wb_iridescent';
+                    elseif ( strpos( $cn, 'skid' ) !== false || strpos( $cn, 'plant' ) !== false ) $icon = 'factory';
+
+                    $matching_count = 0;
+                    foreach ( $all_products as $ap ) {
+                        if ( in_array( (int) $ct->term_id, $ap['cat_ids'], true ) || in_array( $ct->slug, $ap['cat_slugs'], true ) ) {
+                            $matching_count++;
                         }
-
-                        $fleet_pills[] = array(
-                            'name'        => $ct->name,
-                            'count'       => $matching_count > 0 ? $matching_count : $ct->count,
-                            'url'         => get_term_link( $ct ),
-                            'is_active'   => ( $term->term_id === $ct->term_id ),
-                            'filter_slug' => $ct->slug,
-                            'icon'        => $icon,
-                        );
                     }
+                    if ( $matching_count === 0 && ! empty( $ct->count ) ) {
+                        $matching_count = (int) $ct->count;
+                    }
+
+                    $fleet_pills[] = array(
+                        'name'        => $ct->name,
+                        'count'       => $matching_count,
+                        'url'         => get_term_link( $ct ),
+                        'is_active'   => ( $term->term_id === $ct->term_id ),
+                        'filter_slug' => $ct->slug,
+                        'icon'        => $icon,
+                    );
                 }
             }
             ?>
@@ -763,18 +830,34 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     </div>
                 </div>
 
-                <?php if ( $root_brand_term && $root_brand_term->term_id !== $term->term_id ) : ?>
+                <?php if ( $root_brand_term && $root_brand_term->term_id !== $term->term_id ) : 
+                    $root_total_query = new WP_Query( array(
+                        'post_type'      => 'product',
+                        'post_status'    => 'publish',
+                        'posts_per_page' => 1,
+                        'tax_query'      => array(
+                            array(
+                                'taxonomy'         => 'product_cat',
+                                'field'            => 'term_id',
+                                'terms'            => $root_brand_term->term_id,
+                                'include_children' => true,
+                            ),
+                        ),
+                        'fields'         => 'ids',
+                    ) );
+                    $root_total_count = $root_total_query->found_posts;
+                ?>
                     <div id="subcat-filtered-banner" class="mb-8 bg-[#1A56DB]/10 border-2 border-[#1A56DB] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-[#1A56DB] shrink-0">filter_list</span>
                             <div>
-                                <span class="text-xs font-bold text-[#0A0A0A]">Currently viewing <strong><?php echo esc_html( $category_name ); ?></strong>. All <strong><?php echo esc_html( $total_models ); ?> <?php echo esc_html( $root_brand_term->name ); ?></strong> commercial models are available on this page.</span>
+                                <span class="text-xs font-bold text-[#0A0A0A]">Currently viewing <strong><?php echo esc_html( $category_name ); ?></strong> (<?php echo esc_html( $total_models ); ?> models). All <strong><?php echo esc_html( $root_total_count ); ?> <?php echo esc_html( $root_brand_term->name ); ?></strong> commercial models are available across this brand portfolio.</span>
                                 <?php if ( ! empty( $curr_brand_config['subcat_note'] ) ) : ?>
                                     <div class="text-[11px] font-semibold text-[#1A56DB] mt-0.5"><?php echo esc_html( $curr_brand_config['subcat_note'] ); ?></div>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <a href="<?php echo esc_url( get_term_link( $root_brand_term ) ); ?>" class="js-fleet-show-all-link px-3 py-1.5 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white text-[10px] font-black uppercase tracking-wider transition-colors shrink-0">Show All <?php echo esc_html( $root_brand_term->name ); ?> (<?php echo esc_html( $total_models ); ?>)</a>
+                        <a href="<?php echo esc_url( get_term_link( $root_brand_term ) ); ?>" class="js-fleet-show-all-link px-3 py-1.5 bg-[#0A0A0A] hover:bg-[#1A56DB] text-white text-[10px] font-black uppercase tracking-wider transition-colors shrink-0">Show All <?php echo esc_html( $root_brand_term->name ); ?> (<?php echo esc_html( $root_total_count ); ?>)</a>
                     </div>
                 <?php endif; ?>
             <?php endif; ?>
