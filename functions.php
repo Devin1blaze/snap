@@ -793,7 +793,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
         }
 
         // Eureka Forbes Commercial
-        if ( strpos( $u_sku, 'EF-' ) !== false ) {
+        if ( strpos( $u_sku, 'EF-' ) === 0 || strpos( $u_sku, '-EF-' ) !== false || strpos( $u_sku, 'EUREKA' ) !== false ) {
             if ( strpos( $u_sku, 'PRIMA' ) !== false || strpos( $u_sku, '50B' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
             if ( strpos( $u_sku, 'COMM-200' ) !== false || strpos( $u_sku, '200' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-200.png';
             if ( strpos( $u_sku, 'UV' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-uv-ss.png';
@@ -801,6 +801,14 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             if ( strpos( $u_sku, 'HOT-COLD' ) !== false || strpos( $u_sku, 'PRO-' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-pro-hot-cold.jpg';
             if ( strpos( $u_sku, 'SKID' ) !== false || strpos( $u_sku, '500' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-skid-ro-500.jpg';
             return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
+        }
+
+        // Blue Star Specific Models & Series
+        if ( strpos( $u_sku, 'IC324DNUHC' ) !== false || strpos( $u_sku, 'DNUHC' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/ID318DNUHC_Gallery_Images_01.png' );
+        }
+        if ( strpos( $u_sku, 'BWD-GA-REF' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/BWD3FMRGA-scaled.png' );
         }
 
         // Blue Star Commercial
