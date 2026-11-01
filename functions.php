@@ -819,6 +819,29 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             }
         }
 
+        // Kimberly-Clark Professional Commercial Hygiene & Safety
+        if ( strpos( $u_sku, 'KCP-' ) !== false || strpos( $u_sku, 'KIMBERLY' ) !== false ) {
+            if ( strpos( $u_sku, 'WYPALL' ) !== false || strpos( $u_sku, 'X80' ) !== false || strpos( $u_sku, 'X70' ) !== false || strpos( $u_sku, 'X60' ) !== false || strpos( $u_sku, 'L10' ) !== false || strpos( $u_sku, '60019' ) !== false || strpos( $u_sku, '03024' ) !== false || strpos( $u_sku, '6036' ) !== false || strpos( $u_sku, '1380' ) !== false || strpos( $u_sku, '8361' ) !== false || strpos( $u_sku, '6221' ) !== false || strpos( $u_sku, '41055' ) !== false || strpos( $u_sku, '94224' ) !== false ) {
+                return $theme_uri . '/images/kc/kc-wypall.jpg';
+            }
+            if ( strpos( $u_sku, 'KIMTECH' ) !== false || strpos( $u_sku, 'KIMWIPES' ) !== false || strpos( $u_sku, 'KIMTEX' ) !== false || strpos( $u_sku, '34155' ) !== false || strpos( $u_sku, '34256' ) !== false || strpos( $u_sku, '01030' ) !== false || strpos( $u_sku, '7623' ) !== false ) {
+                return $theme_uri . '/images/kc/kc-kimtech.jpg';
+            }
+            if ( strpos( $u_sku, 'KLEENGUARD' ) !== false || strpos( $u_sku, 'GLOVE' ) !== false || strpos( $u_sku, '97920' ) !== false || strpos( $u_sku, '97930' ) !== false || strpos( $u_sku, '53334' ) !== false || strpos( $u_sku, '38702' ) !== false ) {
+                return $theme_uri . '/images/kc/kc-kleenguard.jpg';
+            }
+            if ( strpos( $u_sku, 'TISSUE' ) !== false || strpos( $u_sku, 'JRT' ) !== false || strpos( $u_sku, '4002' ) !== false || strpos( $u_sku, '03060' ) !== false || strpos( $u_sku, '04003' ) !== false || strpos( $u_sku, '45348' ) !== false || strpos( $u_sku, '70210' ) !== false || strpos( $u_sku, '01057' ) !== false ) {
+                return $theme_uri . '/images/kc/kc-bathroom-tissue.jpg';
+            }
+            if ( strpos( $u_sku, 'SOAP' ) !== false || strpos( $u_sku, 'FOAM' ) !== false || strpos( $u_sku, 'SKINCARE' ) !== false || strpos( $u_sku, '6385' ) !== false || strpos( $u_sku, '69480' ) !== false || strpos( $u_sku, '11329' ) !== false || strpos( $u_sku, '30840' ) !== false || strpos( $u_sku, '12552' ) !== false ) {
+                return $theme_uri . '/images/kc/kc-skincare.jpg';
+            }
+            if ( strpos( $u_sku, 'FACIAL' ) !== false || strpos( $u_sku, 'CUBE' ) !== false || strpos( $u_sku, '01175' ) !== false || strpos( $u_sku, '1033' ) !== false || strpos( $u_sku, '1282' ) !== false ) {
+                return $theme_uri . '/images/kc/kc-facial.jpg';
+            }
+            return $theme_uri . '/images/kc/kc-hand-towel.jpg';
+        }
+
         // Tetley Corporate Teas
         if ( strpos( $u_sku, 'TET-' ) !== false ) {
             if ( strpos( $u_sku, 'CLASSIC' ) !== false ) return $theme_uri . '/images/tetley/tetley-classic.jpg';
