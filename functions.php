@@ -862,22 +862,45 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
 
         // Kimberly-Clark Professional Commercial Hygiene & Safety
         if ( strpos( $u_sku, 'KCP-' ) !== false || strpos( $u_sku, 'KIMBERLY' ) !== false ) {
-            if ( strpos( $u_sku, 'WYPALL' ) !== false || strpos( $u_sku, 'X80' ) !== false || strpos( $u_sku, 'X70' ) !== false || strpos( $u_sku, 'X60' ) !== false || strpos( $u_sku, 'L10' ) !== false || strpos( $u_sku, '60019' ) !== false || strpos( $u_sku, '03024' ) !== false || strpos( $u_sku, '6036' ) !== false || strpos( $u_sku, '1380' ) !== false || strpos( $u_sku, '8361' ) !== false || strpos( $u_sku, '6221' ) !== false || strpos( $u_sku, '41055' ) !== false || strpos( $u_sku, '94224' ) !== false ) {
+            // Priority 1: Model-specific authentic cutouts
+            $kc_models = array(
+                '70230', '49807', '70220', '69530', '69590', '69450', '1578', '02046', '02000', '6695',
+                '11329', '69480', '6385', '12552', '30840',
+                '70210', '45348', '01057', '04003', '03060', '4002',
+                '6221', '8361', '1380', '6036', '03024', '60019', '94224', '41055',
+                '34155', '34256', '01030', '7623',
+                '38702', '53334', '97920', '97930',
+                '1282', '1033', '01175'
+            );
+            foreach ( $kc_models as $m_num ) {
+                if ( strpos( $u_sku, $m_num ) !== false ) {
+                    $m_file = 'kc-' . $m_num . '.jpg';
+                    if ( $m_num === '45348' ) $m_file = 'kc-45348A.jpg';
+                    if ( $m_num === '4002' ) $m_file = 'kc-4002A.jpg';
+                    if ( $m_num === '1380' ) $m_file = 'kc-1380A.jpg';
+                    if ( file_exists( get_template_directory() . '/images/kc/' . $m_file ) ) {
+                        return $theme_uri . '/images/kc/' . $m_file;
+                    }
+                }
+            }
+
+            // Priority 2: Category Fallbacks
+            if ( strpos( $u_sku, 'WYPALL' ) !== false || strpos( $u_sku, 'X80' ) !== false || strpos( $u_sku, 'X70' ) !== false || strpos( $u_sku, 'X60' ) !== false || strpos( $u_sku, 'L10' ) !== false ) {
                 return $theme_uri . '/images/kc/kc-wypall.jpg';
             }
-            if ( strpos( $u_sku, 'KIMTECH' ) !== false || strpos( $u_sku, 'KIMWIPES' ) !== false || strpos( $u_sku, 'KIMTEX' ) !== false || strpos( $u_sku, '34155' ) !== false || strpos( $u_sku, '34256' ) !== false || strpos( $u_sku, '01030' ) !== false || strpos( $u_sku, '7623' ) !== false ) {
+            if ( strpos( $u_sku, 'KIMTECH' ) !== false || strpos( $u_sku, 'KIMWIPES' ) !== false || strpos( $u_sku, 'KIMTEX' ) !== false ) {
                 return $theme_uri . '/images/kc/kc-kimtech.jpg';
             }
-            if ( strpos( $u_sku, 'KLEENGUARD' ) !== false || strpos( $u_sku, 'GLOVE' ) !== false || strpos( $u_sku, '97920' ) !== false || strpos( $u_sku, '97930' ) !== false || strpos( $u_sku, '53334' ) !== false || strpos( $u_sku, '38702' ) !== false ) {
+            if ( strpos( $u_sku, 'KLEENGUARD' ) !== false || strpos( $u_sku, 'GLOVE' ) !== false ) {
                 return $theme_uri . '/images/kc/kc-kleenguard.jpg';
             }
-            if ( strpos( $u_sku, 'TISSUE' ) !== false || strpos( $u_sku, 'JRT' ) !== false || strpos( $u_sku, '4002' ) !== false || strpos( $u_sku, '03060' ) !== false || strpos( $u_sku, '04003' ) !== false || strpos( $u_sku, '45348' ) !== false || strpos( $u_sku, '70210' ) !== false || strpos( $u_sku, '01057' ) !== false ) {
+            if ( strpos( $u_sku, 'TISSUE' ) !== false || strpos( $u_sku, 'JRT' ) !== false ) {
                 return $theme_uri . '/images/kc/kc-bathroom-tissue.jpg';
             }
-            if ( strpos( $u_sku, 'SOAP' ) !== false || strpos( $u_sku, 'FOAM' ) !== false || strpos( $u_sku, 'SKINCARE' ) !== false || strpos( $u_sku, '6385' ) !== false || strpos( $u_sku, '69480' ) !== false || strpos( $u_sku, '11329' ) !== false || strpos( $u_sku, '30840' ) !== false || strpos( $u_sku, '12552' ) !== false ) {
+            if ( strpos( $u_sku, 'SOAP' ) !== false || strpos( $u_sku, 'FOAM' ) !== false || strpos( $u_sku, 'SKINCARE' ) !== false ) {
                 return $theme_uri . '/images/kc/kc-skincare.jpg';
             }
-            if ( strpos( $u_sku, 'FACIAL' ) !== false || strpos( $u_sku, 'CUBE' ) !== false || strpos( $u_sku, '01175' ) !== false || strpos( $u_sku, '1033' ) !== false || strpos( $u_sku, '1282' ) !== false ) {
+            if ( strpos( $u_sku, 'FACIAL' ) !== false || strpos( $u_sku, 'CUBE' ) !== false ) {
                 return $theme_uri . '/images/kc/kc-facial.jpg';
             }
             return $theme_uri . '/images/kc/kc-hand-towel.jpg';
@@ -885,6 +908,12 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
 
         // Tetley Corporate Teas
         if ( strpos( $u_sku, 'TET-' ) !== false ) {
+            if ( strpos( $u_sku, 'MASALA' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-masala.jpg' ) ) return $theme_uri . '/images/tetley/tetley-masala.jpg';
+            if ( ( strpos( $u_sku, 'LEMON' ) !== false || strpos( $u_sku, 'HONEY' ) !== false ) && file_exists( get_template_directory() . '/images/tetley/tetley-lemon-honey.jpg' ) ) return $theme_uri . '/images/tetley/tetley-lemon-honey.jpg';
+            if ( strpos( $u_sku, 'CAMOMILE' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-camomile.jpg' ) ) return $theme_uri . '/images/tetley/tetley-camomile.jpg';
+            if ( strpos( $u_sku, 'PEPPERMINT' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-peppermint.jpg' ) ) return $theme_uri . '/images/tetley/tetley-peppermint.jpg';
+            if ( strpos( $u_sku, 'LONGLEAF' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-longleaf.jpg' ) ) return $theme_uri . '/images/tetley/tetley-longleaf.jpg';
+            if ( strpos( $u_sku, 'ASSAM' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-assam.jpg' ) ) return $theme_uri . '/images/tetley/tetley-assam.jpg';
             if ( strpos( $u_sku, 'CLASSIC' ) !== false ) return $theme_uri . '/images/tetley/tetley-classic.jpg';
             if ( strpos( $u_sku, 'ELAICHI' ) !== false ) return $theme_uri . '/images/tetley/tetley-elaichi.png';
             if ( strpos( $u_sku, 'GINGER' ) !== false ) return $theme_uri . '/images/tetley/tetley-ginger.png';
