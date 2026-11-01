@@ -793,7 +793,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
         }
 
         // Eureka Forbes Commercial
-        if ( strpos( $u_sku, 'EF-' ) === 0 || strpos( $u_sku, '-EF-' ) !== false || strpos( $u_sku, 'EUREKA' ) !== false ) {
+        if ( preg_match( '/(^|-)EF-/', $u_sku ) || strpos( $u_sku, 'EUREKA' ) !== false ) {
             if ( strpos( $u_sku, 'PRIMA' ) !== false || strpos( $u_sku, '50B' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
             if ( strpos( $u_sku, 'COMM-200' ) !== false || strpos( $u_sku, '200' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-200.png';
             if ( strpos( $u_sku, 'UV' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-uv-ss.png';
@@ -807,8 +807,8 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
         if ( strpos( $u_sku, 'IC324DNUHC' ) !== false || strpos( $u_sku, 'DNUHC' ) !== false ) {
             return home_url( '/wp-content/uploads/2026/08/ID318DNUHC_Gallery_Images_01.png' );
         }
-        if ( strpos( $u_sku, 'BWD-GA-REF' ) !== false ) {
-            return home_url( '/wp-content/uploads/2026/08/BWD3FMRGA-scaled.png' );
+        if ( strpos( $u_sku, 'BWD-GA-REF' ) !== false || strpos( $u_sku, 'BWD-GA' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/ga.jpg' );
         }
 
         // Blue Star Commercial
@@ -817,6 +817,40 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             if ( strpos( $u_sku, 'CONC' ) !== false || strpos( $u_sku, 'BS-CON' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
             if ( strpos( $u_sku, 'CASS-1W' ) !== false ) return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
             return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
+        }
+
+        // Blue Star Central Air Conditioning (VRF, Ducted, Chillers, Condensing Units)
+        if ( strpos( $u_sku, 'VRF' ) !== false ) {
+            return 'https://resources.bluestarindia.com/Side_Disch1_1_3_075e9fbe62.jpg';
+        }
+        if ( strpos( $u_sku, 'DS-PACKAGED' ) !== false || strpos( $u_sku, 'PACKAGED' ) !== false || strpos( $u_sku, 'DUCTED' ) !== false ) {
+            return 'https://resources.bluestarindia.com/DPA_IDU_2_Front_Indoor1_1_f1767bf22d.png';
+        }
+        if ( strpos( $u_sku, 'LC-SCROLL-CHILLER' ) !== false || strpos( $u_sku, 'PROCESS' ) !== false ) {
+            return 'https://resources.bluestarindia.com/1_1_a5c9b854cc.png';
+        }
+        if ( strpos( $u_sku, 'WCC-CENTRIFUGAL' ) !== false || strpos( $u_sku, 'CENTRIFUGAL' ) !== false ) {
+            return 'https://resources.bluestarindia.com/centrifugal_chiller_FRONT_OP_2_0a6ee5bf7c.png';
+        }
+        if ( strpos( $u_sku, 'CDU-COMMERCIAL' ) !== false || strpos( $u_sku, 'CONDENSING' ) !== false ) {
+            return 'https://resources.bluestarindia.com/Fixed_Speed_Scroll_f0050c1862.jpg';
+        }
+
+        // Blue Star Cold Storages & Refrigeration Systems
+        if ( strpos( $u_sku, 'RS-HERMETIC' ) !== false ) {
+            return 'https://resources.bluestarindia.com/Hermetic_Series_isolation_c6f8c964c2.png';
+        }
+        if ( strpos( $u_sku, 'RS-SEMI-HERMETIC' ) !== false ) {
+            return 'https://resources.bluestarindia.com/RUAHOS_3014_122_Grey_BG_b3e4c0703c.png';
+        }
+        if ( strpos( $u_sku, 'CR-MODULAR-PUF' ) !== false || strpos( $u_sku, 'B2B-838174' ) !== false || strpos( $u_sku, 'MODULAR' ) !== false ) {
+            return 'https://resources.bluestarindia.com/Modular_Cold_Room_d6af2bdbf3.png';
+        }
+        if ( strpos( $u_sku, 'CR-RIPENING' ) !== false || strpos( $u_sku, 'B2B-689670' ) !== false || strpos( $u_sku, 'RIPENING' ) !== false || strpos( $u_sku, 'PUF-PANELS' ) !== false ) {
+            return 'https://resources.bluestarindia.com/Cold_Room_01_Grey_BG_ee9731fcf1.png';
+        }
+        if ( strpos( $u_sku, 'MORTUARY' ) !== false || strpos( $u_sku, 'MC-' ) !== false ) {
+            return 'https://resources.bluestarindia.com/Mortuary_7c68f8fc99.png';
         }
 
         // Euronics Commercial Washroom Automation

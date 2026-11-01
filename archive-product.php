@@ -127,7 +127,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return $theme_uri . '/images/usha/usha-aquagenie.jpg';
                 }
 
-                if ( strpos( $u_sku, 'EF-' ) === 0 || strpos( $u_sku, '-EF-' ) !== false || strpos( $u_sku, 'EUREKA' ) !== false ) {
+                if ( preg_match( '/(^|-)EF-/', $u_sku ) || strpos( $u_sku, 'EUREKA' ) !== false ) {
                     if ( strpos( $u_sku, 'PRIMA' ) !== false || strpos( $u_sku, '50B' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
                     if ( strpos( $u_sku, 'COMM-200' ) !== false || strpos( $u_sku, '200' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-200.png';
                     if ( strpos( $u_sku, 'UV' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-uv-ss.png';
@@ -141,8 +141,8 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return home_url( '/wp-content/uploads/2026/08/ID318DNUHC_Gallery_Images_01.png' );
                 }
 
-                if ( strpos( $u_sku, 'BWD-GA-REF' ) !== false ) {
-                    return home_url( '/wp-content/uploads/2026/08/BWD3FMRGA-scaled.png' );
+                if ( strpos( $u_sku, 'BWD-GA-REF' ) !== false || strpos( $u_sku, 'BWD-GA' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/ga.jpg' );
                 }
 
                 if ( strpos( $u_sku, 'BS-LC' ) !== false || strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'CASS' ) !== false || strpos( $u_sku, 'CONC' ) !== false ) {
