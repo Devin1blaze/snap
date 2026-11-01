@@ -1819,7 +1819,6 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
             initPillScroller("tier1-scroll-container", "tier1-scroll-left", "tier1-scroll-right");
             initPillScroller("tier2-scroll-container", "tier2-scroll-left", "tier2-scroll-right");
-            initPillScroller("pills-scroll-container", "pills-scroll-left", "pills-scroll-right");
         });
         </script>
 
