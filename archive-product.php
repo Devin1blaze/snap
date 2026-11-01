@@ -145,6 +145,40 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
                 }
 
+                // Blue Star Central Air Conditioning (VRF, Ducted, Chillers, Condensing Units)
+                if ( strpos( $u_sku, 'VRF' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/Side_Disch1_1_3_075e9fbe62.jpg';
+                }
+                if ( strpos( $u_sku, 'DS-PACKAGED' ) !== false || strpos( $u_sku, 'PACKAGED' ) !== false || strpos( $u_sku, 'DUCTED' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/DPA_IDU_2_Front_Indoor1_1_f1767bf22d.png';
+                }
+                if ( strpos( $u_sku, 'LC-SCROLL-CHILLER' ) !== false || strpos( $u_sku, 'PROCESS' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/1_1_a5c9b854cc.png';
+                }
+                if ( strpos( $u_sku, 'WCC-CENTRIFUGAL' ) !== false || strpos( $u_sku, 'CENTRIFUGAL' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/centrifugal_chiller_FRONT_OP_2_0a6ee5bf7c.png';
+                }
+                if ( strpos( $u_sku, 'CDU-COMMERCIAL' ) !== false || strpos( $u_sku, 'CONDENSING' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/Fixed_Speed_Scroll_f0050c1862.jpg';
+                }
+
+                // Blue Star Cold Storages & Refrigeration Systems
+                if ( strpos( $u_sku, 'RS-HERMETIC' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/Hermetic_Series_isolation_c6f8c964c2.png';
+                }
+                if ( strpos( $u_sku, 'RS-SEMI-HERMETIC' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/RUAHOS_3014_122_Grey_BG_b3e4c0703c.png';
+                }
+                if ( strpos( $u_sku, 'CR-MODULAR-PUF' ) !== false || strpos( $u_sku, 'B2B-838174' ) !== false || strpos( $u_sku, 'MODULAR' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/Modular_Cold_Room_d6af2bdbf3.png';
+                }
+                if ( strpos( $u_sku, 'CR-RIPENING' ) !== false || strpos( $u_sku, 'B2B-689670' ) !== false || strpos( $u_sku, 'RIPENING' ) !== false || strpos( $u_sku, 'PUF-PANELS' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/Cold_Room_01_Grey_BG_ee9731fcf1.png';
+                }
+                if ( strpos( $u_sku, 'MORTUARY' ) !== false || strpos( $u_sku, 'MC-' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/Mortuary_7c68f8fc99.png';
+                }
+
                 if ( strpos( $u_sku, 'EUR-' ) !== false ) {
                     if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
                         return $existing_url;
@@ -482,11 +516,13 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 $bev_array = is_array( $bev_meta ) ? $bev_meta : ( ! empty( $bev_meta ) ? array_map( 'trim', explode( ',', $bev_meta ) ) : array() );
 
                 $p_sku = $product->get_sku() ? $product->get_sku() : 'SNAP-' . $p_id;
-                $raw_img = wp_get_attachment_image_url( $product->get_image_id(), 'large' );
-                $raw_thumb = wp_get_attachment_image_url( $product->get_image_id(), 'thumbnail' );
-                if ( empty( $raw_img ) ) {
-                    $ext_url = get_post_meta( $p_id, '_thumbnail_ext_url', true );
-                    if ( ! empty( $ext_url ) ) { $raw_img = $ext_url; $raw_thumb = $ext_url; }
+                $ext_url = get_post_meta( $p_id, '_thumbnail_ext_url', true );
+                if ( ! empty( $ext_url ) ) {
+                    $raw_img = $ext_url;
+                    $raw_thumb = $ext_url;
+                } else {
+                    $raw_img = wp_get_attachment_image_url( $product->get_image_id(), 'large' );
+                    $raw_thumb = wp_get_attachment_image_url( $product->get_image_id(), 'thumbnail' );
                 }
 
                 $resolved_img = snap_stitch_resolve_b2b_image( $p_sku, $raw_img );
@@ -1016,7 +1052,23 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             $menu_img = $m_data ? $m_data['menu'] : ( ! empty( $item['menu_image_url'] ) ? $item['menu_image_url'] : '' );
                             $has_menu_img = ! empty( $menu_img );
                             $bev_gallery = ( $m_key && ! empty( $nestle_manifest['machine_beverages_map'][ $m_key ] ) ) ? $nestle_manifest['machine_beverages_map'][ $m_key ] : array();
-                            $angles = $m_data ? array( 'Front' => $m_data['front'], 'Left 45°' => $m_data['left'], 'Right 45°' => $m_data['right'] ) : array( 'Front' => $item['image_url'] );
+                            $angles = array( 'Front' => $front_img );
+                            if ( $m_data ) {
+                                $angles = array( 'Front' => $m_data['front'], 'Left 45°' => $m_data['left'], 'Right 45°' => $m_data['right'] );
+                            } else {
+                                $u_sku = strtoupper( (string) $item['sku'] );
+                                if ( strpos( $u_sku, 'VRF' ) !== false ) {
+                                    $angles = array( 'Side Discharge' => 'https://resources.bluestarindia.com/Side_Disch1_1_3_075e9fbe62.jpg', 'Top Discharge' => 'https://resources.bluestarindia.com/11_20a2532b5e.png' );
+                                } elseif ( strpos( $u_sku, 'DS-PACKAGED' ) !== false || strpos( $u_sku, 'PACKAGED' ) !== false ) {
+                                    $angles = array( 'Front View' => 'https://resources.bluestarindia.com/DPA_IDU_2_Front_Indoor1_1_f1767bf22d.png', 'Inverter System' => 'https://resources.bluestarindia.com/DPAI_Front_bf87e37964.png' );
+                                } elseif ( strpos( $u_sku, 'CHILLER' ) !== false ) {
+                                    $angles = array( 'Process Chiller' => 'https://resources.bluestarindia.com/1_1_a5c9b854cc.png', 'Centrifugal' => 'https://resources.bluestarindia.com/centrifugal_chiller_FRONT_OP_2_0a6ee5bf7c.png' );
+                                } elseif ( strpos( $u_sku, 'CR-MODULAR' ) !== false || strpos( $u_sku, 'B2B-838174' ) !== false || strpos( $u_sku, 'MODULAR' ) !== false ) {
+                                    $angles = array( 'Cutout View' => 'https://resources.bluestarindia.com/Modular_Cold_Room_d6af2bdbf3.png', 'Isolation View' => 'https://resources.bluestarindia.com/Cold_Room_01_Grey_BG_ee9731fcf1.png' );
+                                } elseif ( strpos( $u_sku, 'RS-HERMETIC' ) !== false || strpos( $u_sku, 'RS-SEMI' ) !== false ) {
+                                    $angles = array( 'Indoor Evaporator' => 'https://resources.bluestarindia.com/Hermetic_Series_isolation_c6f8c964c2.png', 'Outdoor Condensing' => 'https://resources.bluestarindia.com/RUAHOS_3014_122_Grey_BG_b3e4c0703c.png' );
+                                }
+                            }
                             if ( empty( $item['beverage_menu'] ) && ! empty( $bev_gallery ) ) {
                                 $item['beverage_menu'] = array_column( $bev_gallery, 'name' );
                             }
