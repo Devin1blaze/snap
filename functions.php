@@ -1109,11 +1109,11 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'vending-machines'                  => 'nestle/coffee-vending-machines.pdf',
             'brewing-bots'                      => 'nestle/coffee-vending-machines.pdf',
             'tetley-teas'                       => 'tetley/tetley-corporate-teas.pdf',
-            'atlantis-commercial'               => 'tetley/tetley-corporate-teas.pdf',
+            'atlantis-commercial'               => 'atlantis/atlantis-beverage-premixes.pdf',
             'atlantis-vending-machines'         => 'nestle/coffee-vending-machines.pdf',
-            'atlantis-tea-premixes'             => 'tetley/tetley-corporate-teas.pdf',
-            'atlantis-coffee-premixes'          => 'nestle/coffee-vending-machines.pdf',
-            'atlantis-cold-beverages'           => 'nestle/coffee-vending-machines.pdf',
+            'atlantis-tea-premixes'             => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-coffee-premixes'          => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-cold-beverages'           => 'atlantis/atlantis-beverage-premixes.pdf',
 
             // Euronics Washroom Automations (6 Subcategories)
             'euronics-commercial'               => 'euronics/euronics-washroom-automation.pdf',
@@ -1182,7 +1182,10 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
         if ( strpos( $u_sku, 'NES-' ) !== false || strpos( $u_sku, 'NESTLE' ) !== false || strpos( $u_sku, 'BOT-' ) !== false ) {
             return $theme_uri . '/brochures/nestle/coffee-vending-machines.pdf';
         }
-        if ( strpos( $u_sku, 'TET-' ) !== false || strpos( $u_sku, 'ATL-' ) !== false ) {
+        if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
+            return $theme_uri . '/brochures/atlantis/atlantis-beverage-premixes.pdf';
+        }
+        if ( strpos( $u_sku, 'TET-' ) !== false ) {
             return $theme_uri . '/brochures/tetley/tetley-corporate-teas.pdf';
         }
         if ( strpos( $u_sku, 'WL-' ) !== false || strpos( $u_sku, 'WATERLOGIC' ) !== false ) {
@@ -1203,7 +1206,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'euronics-commercial'        => 'euronics/euronics-master-catalog.pdf',
             'nestle-professional'        => 'nestle/coffee-vending-machines.pdf',
             'corporate-pantry'           => 'nestle/coffee-vending-machines.pdf',
-            'atlantis-commercial'        => 'tetley/tetley-corporate-teas.pdf',
+            'atlantis-commercial'        => 'atlantis/atlantis-beverage-premixes.pdf',
             'tetley-corporate'           => 'tetley/tetley-corporate-teas.pdf',
             'waterlogic-commercial'      => 'waterlogic/waterlogic-commercial-dispensers.pdf',
             'eureka-forbes-commercial'   => 'eureka-forbes/commercial-ro-purifiers.pdf',
