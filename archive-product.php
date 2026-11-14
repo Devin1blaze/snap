@@ -60,7 +60,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         'visi-coolers', 'visi-coolers-2', 'visi-coolers-b2b',
         'washroom-automations', 'hygiene-ppe', 'entrance-solutions', 'vending-machines',
         'coffee-vending-machines', 'commercial-coffee-vending-machines', 'brewing-bots',
-        'central-air-conditioning', 'ducted-systems', 'vrf-systems', 'air-coolers', 'air-coolers-2',
+        'central-air-conditioning', 'ducted-systems', 'vrf-systems', 'condensing-units', 'others-central-air-conditioning', 'air-coolers', 'air-coolers-2',
         'desert-air-coolers', 'desert-air-coolers-2', 'b2b-air-coolers', 'b2b-air-purifiers',
         'ice-machines', 'ice-machines-b2b', 'kitchen-refrigeration-products', 'kitchen-refrigeration-products-b2b',
         'medical-refrigeration-products', 'medical-refrigeration-products-b2b',
@@ -766,7 +766,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     if ( strpos( $cn, 'cassette' ) !== false ) return 'grid_on';
                     if ( strpos( $cn, 'verticool' ) !== false ) return 'view_column';
                     if ( strpos( $cn, 'concealed' ) !== false ) return 'hvac';
-                    if ( strpos( $cn, 'central air' ) !== false || strpos( $cn, 'vrf' ) !== false || strpos( $cn, 'chiller' ) !== false || strpos( $cn, 'ducted' ) !== false ) return 'apartment';
+                    if ( strpos( $cn, 'central air' ) !== false || strpos( $cn, 'vrf' ) !== false || strpos( $cn, 'chiller' ) !== false || strpos( $cn, 'ducted' ) !== false || strpos( $cn, 'condensing' ) !== false ) return 'apartment';
                     if ( strpos( $cn, 'cold storage' ) !== false ) return 'warehouse';
                     if ( strpos( $cn, 'refrigeration' ) !== false || strpos( $cn, 'freezer' ) !== false ) return 'kitchen';
                     if ( strpos( $cn, 'tea' ) !== false || strpos( $cn, 'premix' ) !== false || strpos( $cn, 'chai' ) !== false ) return 'emoji_food_beverage';

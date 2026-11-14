@@ -690,9 +690,41 @@ function snap_stitch_redirect_deprecated_categories() {
         exit;
     }
 
-    // 301 Redirect for Condensing Units URL alignment (eliminates 404s for semantic condensing units URLs)
-    if ( preg_match( '#(?:central-air-conditioning/condensing-units|product-category/(?:b2b/)?(?:blue-star-commercial/)?(?:central-air-conditioning/)?condensing-units)/?#i', $request_uri ) ) {
-        wp_safe_redirect( home_url( '/product-category/b2b/blue-star-commercial/central-air-conditioning/others-central-air-conditioning/' ), 301 );
+    // 301 Redirect legacy others-central-air-conditioning to canonical condensing-units
+    if ( preg_match( '#/others-central-air-conditioning/?#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/blue-star-commercial/central-air-conditioning/condensing-units/' ), 301 );
+        exit;
+    }
+
+    // 301 Redirect legacy duplicate concealed-split-acs to canonical concealed-splits
+    if ( preg_match( '#/concealed-split-acs/?#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/blue-star-commercial/light-commercial-acs/concealed-splits/' ), 301 );
+        exit;
+    }
+
+    // 301 Redirects for legacy/shorthand department category URLs
+    if ( preg_match( '#^/product-category/commercial-refrigeration/?$#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/blue-star-commercial/b2b-commercial-refrigeration/' ), 301 );
+        exit;
+    }
+    if ( preg_match( '#^/product-category/water-coolers/?$#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/blue-star-commercial/water-coolers/' ), 301 );
+        exit;
+    }
+    if ( preg_match( '#^/product-category/washroom-automations/?$#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/euronics-commercial/' ), 301 );
+        exit;
+    }
+    if ( preg_match( '#^/product-category/hygiene-ppe/?$#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/kimberly-clark-commercial/' ), 301 );
+        exit;
+    }
+    if ( preg_match( '#^/product-category/entrance-solutions/?$#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/euronics-commercial/euronics-air-curtains/' ), 301 );
+        exit;
+    }
+    if ( preg_match( '#^/product-category/vending-machines/?$#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/corporate-pantry/coffee-vending-machines/' ), 301 );
         exit;
     }
 }

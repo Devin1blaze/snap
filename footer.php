@@ -39,12 +39,12 @@
         <div>
             <h4 class="text-secondary-container font-black uppercase mb-8 tracking-tighter">Major Categories</h4>
             <ul class="space-y-4">
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/commercial-refrigeration/' ) ); ?>">Refrigeration</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/water-coolers/' ) ); ?>">Water Coolers &amp; Dispensers</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/washroom-automations/' ) ); ?>">Washroom Tech</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/hygiene-ppe/' ) ); ?>">Safety Gear</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/entrance-solutions/' ) ); ?>">Entrance Solutions</a></li>
-                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/vending-machines/' ) ); ?>">Vending Machines</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/b2b/blue-star-commercial/b2b-commercial-refrigeration/' ) ); ?>">Refrigeration</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/b2b/blue-star-commercial/water-coolers/' ) ); ?>">Water Coolers &amp; Dispensers</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/b2b/euronics-commercial/' ) ); ?>">Washroom Tech</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/b2b/kimberly-clark-commercial/' ) ); ?>">Safety Gear</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/b2b/euronics-commercial/euronics-air-curtains/' ) ); ?>">Entrance Solutions</a></li>
+                <li><a class="text-zinc-400 hover:text-white transition-colors block font-medium text-lg" href="<?php echo esc_url( home_url( '/product-category/b2b/corporate-pantry/coffee-vending-machines/' ) ); ?>">Vending Machines</a></li>
             </ul>
         </div>
         <div class="space-y-6">
