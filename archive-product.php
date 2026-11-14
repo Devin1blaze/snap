@@ -105,9 +105,20 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             function snap_stitch_resolve_b2b_image( $sku, $existing_url = '' ) {
                 $theme_uri = get_template_directory_uri();
+                $theme_dir = get_template_directory();
                 $u_sku = strtoupper( (string) $sku );
+                $has_valid_existing = ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false );
 
-                // Direct mapping to high-resolution authentic local images
+                // 1. Brewing Bots
+                if ( strpos( $u_sku, 'BOT-' ) !== false || strpos( $u_sku, 'BREWING' ) !== false ) {
+                    if ( strpos( $u_sku, 'MCP-750' ) !== false || strpos( $u_sku, 'CAMPUS' ) !== false ) return $theme_uri . '/images/brewing-bots/personal-large.webp';
+                    if ( strpos( $u_sku, 'MCP-500' ) !== false || strpos( $u_sku, 'BATCH' ) !== false ) return $theme_uri . '/images/brewing-bots/personal-small.webp';
+                    if ( strpos( $u_sku, 'B2C-70' ) !== false || strpos( $u_sku, 'BEAN' ) !== false ) return $theme_uri . '/images/brewing-bots/bean-to-cup.webp';
+                    if ( strpos( $u_sku, 'L2C-50' ) !== false || strpos( $u_sku, 'LEAF' ) !== false ) return $theme_uri . '/images/brewing-bots/leaf-to-cup.webp';
+                    return $theme_uri . '/images/brewing-bots/personal-large.webp';
+                }
+
+                // 2. Nestlé Professional Commercial Coffee Machines
                 if ( strpos( $u_sku, 'NES-' ) !== false || strpos( $u_sku, 'NESTLE' ) !== false || strpos( $u_sku, 'AMIGO' ) !== false || strpos( $u_sku, 'PREMIO' ) !== false || strpos( $u_sku, 'FRIO' ) !== false ) {
                     if ( strpos( $u_sku, 'PREMIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
                     if ( strpos( $u_sku, 'AMIGO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/amigo-front.png';
@@ -118,6 +129,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
                 }
 
+                // 3. Usha Water Solutions
                 if ( strpos( $u_sku, 'USHA' ) !== false ) {
                     if ( strpos( $u_sku, 'INSTAFRESH-CB' ) !== false || strpos( $u_sku, 'CABINET' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-cb.jpg';
                     if ( strpos( $u_sku, 'INSTAFRESH-TT' ) !== false || strpos( $u_sku, 'TABLE' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-tt.png';
@@ -129,6 +141,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return $theme_uri . '/images/usha/usha-aquagenie.jpg';
                 }
 
+                // 4. Eureka Forbes Commercial
                 if ( preg_match( '/(^|-)EF-/', $u_sku ) || strpos( $u_sku, 'EUREKA' ) !== false ) {
                     if ( strpos( $u_sku, 'PRIMA' ) !== false || strpos( $u_sku, '50B' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
                     if ( strpos( $u_sku, 'COMM-200' ) !== false || strpos( $u_sku, '200' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-200.png';
@@ -139,10 +152,10 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
                 }
 
+                // 5. Blue Star Specific Models & Series
                 if ( strpos( $u_sku, 'IC324DNUHC' ) !== false || strpos( $u_sku, 'DNUHC' ) !== false ) {
                     return home_url( '/wp-content/uploads/2026/08/ID318DNUHC_Gallery_Images_01.png' );
                 }
-
                 if ( strpos( $u_sku, 'BWD-GA-REF-GR' ) !== false || strpos( $u_sku, 'GA-REF-GR' ) !== false ) {
                     return home_url( '/wp-content/uploads/2026/08/bwd3fmrga-g_1_bwd3fmrga_grey_straight_view.png' );
                 }
@@ -155,16 +168,102 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 if ( strpos( $u_sku, 'BWD-GA-REF' ) !== false || strpos( $u_sku, 'BWD-GA' ) !== false ) {
                     return home_url( '/wp-content/uploads/2026/08/ga.jpg' );
                 }
-
-                if ( strpos( $u_sku, 'BS-LC' ) !== false || strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'CASS' ) !== false || strpos( $u_sku, 'CONC' ) !== false ) {
-                    if ( strpos( $u_sku, 'VERT' ) !== false ) return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
-                    if ( strpos( $u_sku, 'CASS-4W' ) !== false ) return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
-                    if ( strpos( $u_sku, 'CASS-1W' ) !== false ) return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
-                    if ( strpos( $u_sku, 'CONC' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
-                    return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+                if ( strpos( $u_sku, 'BWD-GB' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/gb-1.jpg' );
+                }
+                if ( strpos( $u_sku, 'BWD-UA' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/ua-1.jpg' );
+                }
+                if ( strpos( $u_sku, 'BWD-ECO' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/bwd-eco-series-326x220-1.png' );
+                }
+                if ( strpos( $u_sku, 'BWD-BOTTOM-LOAD' ) !== false || strpos( $u_sku, 'BOTTOM-LOAD' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/bottomloadingdispensers-1.jpg' );
+                }
+                if ( strpos( $u_sku, 'BWD-PLATINUM' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/storage-water-cooler-platinum-326x220-2.png' );
                 }
 
-                // Blue Star Central Air Conditioning (VRF, Ducted, Chillers, Condensing Units)
+                // Blue Star Storage Water Coolers
+                if ( strpos( $u_sku, 'SWC-WARM-COLD' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/storage-water-cooler-warm-cold-326x220-1.png' );
+                }
+                if ( strpos( $u_sku, 'SWC-SUPER-COOLER' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/super-cooler-326x220-1.png' );
+                }
+                if ( strpos( $u_sku, 'SWC-TROPICAL' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/water-coolers-1.png' );
+                }
+                if ( strpos( $u_sku, 'SDLX' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/storage-water-cooler-sdlx-326x220-2.png' );
+                }
+
+                // 6. Blue Star Visi Coolers & Freezers
+                if ( strpos( $u_sku, 'VC-TT-55' ) !== false || strpos( $u_sku, 'VC65D' ) !== false || strpos( $u_sku, 'VC-TT' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/VC65D.png' );
+                }
+                if ( strpos( $u_sku, 'SC-595' ) !== false || strpos( $u_sku, 'SC600F' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/SC600F.png' );
+                }
+                if ( strpos( $u_sku, 'SC-448' ) !== false || strpos( $u_sku, 'SC500F' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/SC500F.png' );
+                }
+                if ( strpos( $u_sku, 'SC-358' ) !== false || strpos( $u_sku, 'SC375' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/SC375_74b1966b-be7e-4ce5-818c-672054881d44.png' );
+                }
+                if ( strpos( $u_sku, 'SC-285' ) !== false || strpos( $u_sku, 'SC300F' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/SC300F.png' );
+                }
+                if ( strpos( $u_sku, 'VC-A-SERIES' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/visi-cooler-a-series-326x220-2.png' );
+                }
+                if ( strpos( $u_sku, 'VC-C-SERIES' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/visi-cooler-c-series-326x220-2.png' );
+                }
+                if ( strpos( $u_sku, 'VC-D-SERIES' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/visi-cooler-d-series-326x220-2.png' );
+                }
+                if ( strpos( $u_sku, 'VF-SERIES' ) !== false || strpos( $u_sku, 'VISIFREEZER' ) !== false || strpos( $u_sku, 'VISI-FREEZER' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/a4_visifreezer-flyer-plate-2-3.jpg' );
+                }
+
+                // 7. Blue Star Chest Freezers (Hard Top vs Glass Top)
+                if ( strpos( $u_sku, 'GT530' ) !== false ) return home_url( '/wp-content/uploads/2026/08/GalleryImage01_ea8c4ff9-1764-43ad-be5d-58084d43697d.png' );
+                if ( strpos( $u_sku, 'GT421' ) !== false ) return home_url( '/wp-content/uploads/2026/08/GalleryImage01_df3f0d97-4883-48d6-b47f-efae63fd02c9.png' );
+                if ( strpos( $u_sku, 'GT365' ) !== false ) return home_url( '/wp-content/uploads/2026/08/GalleryImage01_fa7f2a32-c60d-4b42-a710-a157719b39a7.png' );
+                if ( strpos( $u_sku, 'GT315' ) !== false ) return home_url( '/wp-content/uploads/2026/08/GalleryImage01_fbd8dd4a-4385-402a-9773-071762fc7252.png' );
+                if ( strpos( $u_sku, 'GT215' ) !== false ) return home_url( '/wp-content/uploads/2026/08/Gallery_Image_01_1fa59f45-e37b-4a1b-a8bf-e99d5c3eab39.png' );
+                if ( strpos( $u_sku, 'CF-GLASS-TOP' ) !== false ) return home_url( '/wp-content/uploads/2026/08/glass-top-freezer-5.png' );
+
+                if ( strpos( $u_sku, 'CHFDD500' ) !== false || strpos( $u_sku, 'CHFDD' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/GalleryImages01_c798f744-ed07-47de-8074-4b3b6213d49d.png' );
+                }
+                if ( strpos( $u_sku, 'CHF-HARD-TOP' ) !== false || strpos( $u_sku, 'CHFSD' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/hard-top-freezer-2-3.jpg' );
+                }
+
+                // 8. Blue Star Light Commercial ACs
+                if ( strpos( $u_sku, 'OIA318' ) !== false || strpos( $u_sku, 'OIA224' ) !== false || strpos( $u_sku, 'CASS-1W' ) !== false || strpos( $u_sku, '1-WAY' ) !== false || strpos( $u_sku, 'BS-CAS-1W' ) !== false ) {
+                    if ( $has_valid_existing ) return $existing_url;
+                    return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
+                }
+                if ( strpos( $u_sku, 'BS-LC-VERT' ) !== false || strpos( $u_sku, 'BS-VER' ) !== false || strpos( $u_sku, 'VERTICOOL' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+                }
+                if ( strpos( $u_sku, 'BS-LC-CONC' ) !== false || strpos( $u_sku, 'BS-CON' ) !== false || strpos( $u_sku, 'CONCEALED' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
+                }
+                if ( strpos( $u_sku, 'BS-LC-CASS' ) !== false || strpos( $u_sku, 'BS-CAS' ) !== false || strpos( $u_sku, 'CASS-4W' ) !== false ) {
+                    return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
+                }
+                if ( strpos( $u_sku, 'BS-LC' ) !== false || strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'CASS' ) !== false || strpos( $u_sku, 'CONC' ) !== false ) {
+                    if ( strpos( $u_sku, 'VERT' ) !== false ) return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+                    if ( strpos( $u_sku, 'CONC' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
+                    if ( strpos( $u_sku, '1W' ) !== false ) return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
+                    return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
+                }
+
+                // 9. Blue Star Central Air Conditioning (VRF, Ducted, Chillers, Condensing Units)
                 if ( strpos( $u_sku, 'VRF' ) !== false ) {
                     return 'https://resources.bluestarindia.com/Side_Disch1_1_3_075e9fbe62.jpg';
                 }
@@ -181,7 +280,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return 'https://resources.bluestarindia.com/Fixed_Speed_Scroll_f0050c1862.jpg';
                 }
 
-                // Blue Star Cold Storages & Refrigeration Systems
+                // Blue Star Cold Storages & Commercial Refrigeration Systems
                 if ( strpos( $u_sku, 'RS-HERMETIC' ) !== false ) {
                     return 'https://resources.bluestarindia.com/Hermetic_Series_isolation_c6f8c964c2.png';
                 }
@@ -197,14 +296,38 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 if ( strpos( $u_sku, 'MORTUARY' ) !== false || strpos( $u_sku, 'MC-' ) !== false ) {
                     return 'https://resources.bluestarindia.com/Mortuary_7c68f8fc99.png';
                 }
-
-                if ( strpos( $u_sku, 'EUR-' ) !== false ) {
-                    if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
-                        return $existing_url;
-                    }
+                if ( strpos( $u_sku, 'IM-COMMERCIAL' ) !== false || strpos( $u_sku, 'ICE-MACHINE' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/ice-machines-326x220-4.png' );
+                }
+                if ( strpos( $u_sku, 'MR60' ) !== false || strpos( $u_sku, 'B2B-A80344' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/mr60_black-iso-right-1-326x220-4.png' );
                 }
 
-                // Kimberly-Clark Professional Commercial Hygiene & Safety
+                // 10. Euronics Commercial Washroom Automation
+                if ( strpos( $u_sku, 'EUR-' ) !== false ) {
+                    if ( $has_valid_existing ) return $existing_url;
+                    if ( strpos( $u_sku, 'EAS' ) !== false || strpos( $u_sku, 'EAC' ) !== false || strpos( $u_sku, 'CURTAIN' ) !== false ) {
+                        return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-air-curtains.jpg' );
+                    }
+                    if ( strpos( $u_sku, 'EP' ) !== false || strpos( $u_sku, 'LINEA' ) !== false || strpos( $u_sku, 'TRIMAX AP' ) !== false || strpos( $u_sku, 'PAPER' ) !== false ) {
+                        return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-paper-dispensers.jpg' );
+                    }
+                    if ( strpos( $u_sku, 'EU' ) !== false || strpos( $u_sku, 'KUF' ) !== false || strpos( $u_sku, 'SMARTFLUSH' ) !== false || strpos( $u_sku, 'FLUSH' ) !== false ) {
+                        return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-urinal-sensors.jpg' );
+                    }
+                    if ( strpos( $u_sku, 'ES' ) !== false || strpos( $u_sku, 'TRIMAX S' ) !== false || strpos( $u_sku, 'SOAP' ) !== false ) {
+                        return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-soap-dispensers.jpg' );
+                    }
+                    if ( strpos( $u_sku, 'ET' ) !== false || strpos( $u_sku, 'AXEON' ) !== false || strpos( $u_sku, 'ARCTIC' ) !== false || strpos( $u_sku, 'KSDT' ) !== false || strpos( $u_sku, 'TAP' ) !== false ) {
+                        return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-sensor-taps.jpg' );
+                    }
+                    if ( strpos( $u_sku, 'RHD' ) !== false || strpos( $u_sku, 'EJD' ) !== false || strpos( $u_sku, 'YZD' ) !== false || strpos( $u_sku, 'SJD' ) !== false || strpos( $u_sku, 'XJD' ) !== false || strpos( $u_sku, 'DRYER' ) !== false ) {
+                        return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-hand-dryers.jpg' );
+                    }
+                    return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-sensor-taps.jpg' );
+                }
+
+                // 11. Kimberly-Clark Professional Commercial Hygiene & Safety
                 if ( strpos( $u_sku, 'KCP-' ) !== false || strpos( $u_sku, 'KIMBERLY' ) !== false || strpos( $u_sku, 'KC-' ) !== false ) {
                     $kc_models = array(
                         '70230', '49807', '70220', '69530', '69590', '69450', '1578', '02046', '02000', '6695',
@@ -221,7 +344,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             if ( $m_num === '45348' ) $m_file = 'kc-45348A.jpg';
                             if ( $m_num === '4002' ) $m_file = 'kc-4002A.jpg';
                             if ( $m_num === '1380' ) $m_file = 'kc-1380A.jpg';
-                            if ( file_exists( get_template_directory() . '/images/kc/' . $m_file ) ) {
+                            if ( file_exists( $theme_dir . '/images/kc/' . $m_file ) ) {
                                 return $theme_uri . '/images/kc/' . $m_file;
                             }
                         }
@@ -248,34 +371,42 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return $theme_uri . '/images/kc/kc-hand-towel.jpg';
                 }
 
-                // Tetley Corporate Teas
+                // 12. Tetley Corporate Teas
                 if ( strpos( $u_sku, 'TET-' ) !== false ) {
-                    if ( strpos( $u_sku, 'MASALA' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-masala.jpg' ) ) return $theme_uri . '/images/tetley/tetley-masala.jpg';
-                    if ( ( strpos( $u_sku, 'LEMON' ) !== false || strpos( $u_sku, 'HONEY' ) !== false ) && file_exists( get_template_directory() . '/images/tetley/tetley-lemon-honey.jpg' ) ) return $theme_uri . '/images/tetley/tetley-lemon-honey.jpg';
-                    if ( strpos( $u_sku, 'CAMOMILE' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-camomile.jpg' ) ) return $theme_uri . '/images/tetley/tetley-camomile.jpg';
-                    if ( strpos( $u_sku, 'PEPPERMINT' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-peppermint.jpg' ) ) return $theme_uri . '/images/tetley/tetley-peppermint.jpg';
-                    if ( strpos( $u_sku, 'LONGLEAF' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-longleaf.jpg' ) ) return $theme_uri . '/images/tetley/tetley-longleaf.jpg';
-                    if ( strpos( $u_sku, 'ASSAM' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-assam.jpg' ) ) return $theme_uri . '/images/tetley/tetley-assam.jpg';
+                    if ( strpos( $u_sku, 'MASALA' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-masala.jpg' ) ) return $theme_uri . '/images/tetley/tetley-masala.jpg';
+                    if ( ( strpos( $u_sku, 'LEMON' ) !== false || strpos( $u_sku, 'HONEY' ) !== false ) && file_exists( $theme_dir . '/images/tetley/tetley-lemon-honey.jpg' ) ) return $theme_uri . '/images/tetley/tetley-lemon-honey.jpg';
+                    if ( strpos( $u_sku, 'CAMOMILE' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-camomile.jpg' ) ) return $theme_uri . '/images/tetley/tetley-camomile.jpg';
+                    if ( strpos( $u_sku, 'PEPPERMINT' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-peppermint.jpg' ) ) return $theme_uri . '/images/tetley/tetley-peppermint.jpg';
+                    if ( strpos( $u_sku, 'LONGLEAF' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-longleaf.jpg' ) ) return $theme_uri . '/images/tetley/tetley-longleaf.jpg';
+                    if ( strpos( $u_sku, 'ASSAM' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-assam.jpg' ) ) return $theme_uri . '/images/tetley/tetley-assam.jpg';
                     if ( strpos( $u_sku, 'CLASSIC' ) !== false ) return $theme_uri . '/images/tetley/tetley-classic.jpg';
                     if ( strpos( $u_sku, 'ELAICHI' ) !== false ) return $theme_uri . '/images/tetley/tetley-elaichi.png';
                     if ( strpos( $u_sku, 'GINGER' ) !== false ) return $theme_uri . '/images/tetley/tetley-ginger.png';
                     return $theme_uri . '/images/tetley/tetley-plain.png';
                 }
 
+                // 13. Atlantis Instant Beverage Premixes
                 if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
-                    if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) return $existing_url;
+                    if ( strpos( $u_sku, 'COLD' ) !== false ) {
+                        return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-cold-beverages.jpg' );
+                    }
+                    if ( strpos( $u_sku, 'COFF' ) !== false || strpos( $u_sku, 'COFFEE' ) !== false ) {
+                        return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-coffee-premixes.jpg' );
+                    }
+                    return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-tea-premixes.jpg' );
                 }
 
+                // 14. Waterlogic Commercial Firewall Dispensers
                 if ( strpos( $u_sku, 'WL-' ) !== false || strpos( $u_sku, 'WATERLOGIC' ) !== false || strpos( $u_sku, 'FIREWALL' ) !== false ) {
                     if ( strpos( $u_sku, 'WL-7' ) !== false || strpos( $u_sku, 'WL7' ) !== false ) return $theme_uri . '/images/waterlogic/wl7.png';
                     if ( strpos( $u_sku, 'WL-3' ) !== false || strpos( $u_sku, 'WL3' ) !== false ) return $theme_uri . '/images/waterlogic/wl3.png';
                     if ( strpos( $u_sku, 'WL-2' ) !== false || strpos( $u_sku, 'WL2' ) !== false ) return $theme_uri . '/images/waterlogic/wl2.png';
                     if ( strpos( $u_sku, 'CUBE' ) !== false ) return $theme_uri . '/images/waterlogic/cube.png';
-                    if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) return $existing_url;
                     return $theme_uri . '/images/waterlogic/wl7.png';
                 }
 
-                if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) {
+                // Preserve authentic uploaded images if non-placeholder
+                if ( $has_valid_existing ) {
                     return $existing_url;
                 }
 
@@ -1314,9 +1445,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
                                 <!-- Action Button Bar: Normalized 4-Button Grid (Uniform 48px Height) -->
                                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 pt-2 w-full">
-                                    <button class="h-[48px] w-full bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black font-black uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-md transition-all js-open-quote-modal" data-product="<?php echo esc_attr( $item['title'] ); ?>" data-sku="<?php echo esc_attr( $item['sku'] ); ?>" title="Request quotation"><span class="material-symbols-outlined text-base">request_quote</span><span>Quote</span></button>
-                                    <a href="tel:+919823012724" class="h-[48px] w-full bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"><span class="material-symbols-outlined text-base">call</span><span>Call</span></a>
-                                    <a href="https://wa.me/919823012724?text=<?php echo rawurlencode( "Hi Snap Marketing, I would like to inquire about {$item['title']} (Model: {$item['sku']})." ); ?>" target="_blank" rel="noopener noreferrer" class="h-[48px] w-full bg-[#25D366] hover:bg-[#128C7E] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"><svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span>WhatsApp</span></a>
+                                    <button class="h-[48px] w-full bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black font-black uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-md transition-all js-open-quote-modal" data-product="<?php echo esc_attr( $item['title'] ); ?>" data-sku="<?php echo esc_attr( $item['sku'] ); ?>" title="Request quotation"><span class="material-symbols-outlined text-base shrink-0">request_quote</span><span class="whitespace-nowrap">Quote</span></button>
+                                    <a href="tel:+919823012724" class="h-[48px] w-full bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"><span class="material-symbols-outlined text-base shrink-0">call</span><span class="whitespace-nowrap">Call</span></a>
+                                    <a href="https://wa.me/919823012724?text=<?php echo rawurlencode( "Hi Snap Marketing, I would like to inquire about {$item['title']} (Model: {$item['sku']})." ); ?>" target="_blank" rel="noopener noreferrer" class="h-[48px] w-full bg-[#25D366] hover:bg-[#128C7E] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"><svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span class="whitespace-nowrap">WhatsApp</span></a>
                                     <?php 
                                     $final_card_brochure = ! empty( $item['brochure_url'] ) 
                                         ? $item['brochure_url'] 
@@ -1327,7 +1458,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                             : get_template_directory_uri() . '/brochures/bluestar/bluestar-master-catalog.pdf';
                                     }
                                     ?>
-                                    <a href="<?php echo esc_url( $final_card_brochure ); ?>" download target="_blank" rel="noopener noreferrer" class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md" title="Download Official Product Specification Brochure"><span class="material-symbols-outlined text-base">download</span><span>Brochure</span></a>
+                                    <a href="<?php echo esc_url( $final_card_brochure ); ?>" download target="_blank" rel="noopener noreferrer" class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md" title="Download Official Product Specification Brochure"><span class="material-symbols-outlined text-base shrink-0">download</span><span class="whitespace-nowrap">Brochure</span></a>
                                 </div>
                             </div>
                         </article>

@@ -803,9 +803,20 @@ add_action( 'template_redirect', 'snap_stitch_route_b2b_single_products', 10 );
 if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
     function snap_stitch_resolve_b2b_image( $sku, $existing_url = '' ) {
         $theme_uri = get_template_directory_uri();
+        $theme_dir = get_template_directory();
         $u_sku = strtoupper( (string) $sku );
+        $has_valid_existing = ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false );
 
-        // Nestlé Professional Commercial Coffee Machines
+        // 1. Brewing Bots
+        if ( strpos( $u_sku, 'BOT-' ) !== false || strpos( $u_sku, 'BREWING' ) !== false ) {
+            if ( strpos( $u_sku, 'MCP-750' ) !== false || strpos( $u_sku, 'CAMPUS' ) !== false ) return $theme_uri . '/images/brewing-bots/personal-large.webp';
+            if ( strpos( $u_sku, 'MCP-500' ) !== false || strpos( $u_sku, 'BATCH' ) !== false ) return $theme_uri . '/images/brewing-bots/personal-small.webp';
+            if ( strpos( $u_sku, 'B2C-70' ) !== false || strpos( $u_sku, 'BEAN' ) !== false ) return $theme_uri . '/images/brewing-bots/bean-to-cup.webp';
+            if ( strpos( $u_sku, 'L2C-50' ) !== false || strpos( $u_sku, 'LEAF' ) !== false ) return $theme_uri . '/images/brewing-bots/leaf-to-cup.webp';
+            return $theme_uri . '/images/brewing-bots/personal-large.webp';
+        }
+
+        // 2. Nestlé Professional Commercial Coffee Machines
         if ( strpos( $u_sku, 'NES-' ) !== false || strpos( $u_sku, 'NESTLE' ) !== false || strpos( $u_sku, 'AMIGO' ) !== false || strpos( $u_sku, 'PREMIO' ) !== false || strpos( $u_sku, 'FRIO' ) !== false ) {
             if ( strpos( $u_sku, 'PREMIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
             if ( strpos( $u_sku, 'AMIGO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/amigo-front.png';
@@ -816,7 +827,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
         }
 
-        // Usha Water Solutions
+        // 3. Usha Water Solutions
         if ( strpos( $u_sku, 'USHA' ) !== false ) {
             if ( strpos( $u_sku, 'INSTAFRESH-CB' ) !== false || strpos( $u_sku, 'CABINET' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-cb.jpg';
             if ( strpos( $u_sku, 'INSTAFRESH-TT' ) !== false || strpos( $u_sku, 'TABLE' ) !== false ) return $theme_uri . '/images/usha/usha-instafresh-tt.png';
@@ -828,7 +839,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             return $theme_uri . '/images/usha/usha-aquagenie.jpg';
         }
 
-        // Eureka Forbes Commercial
+        // 4. Eureka Forbes Commercial
         if ( preg_match( '/(^|-)EF-/', $u_sku ) || strpos( $u_sku, 'EUREKA' ) !== false ) {
             if ( strpos( $u_sku, 'PRIMA' ) !== false || strpos( $u_sku, '50B' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
             if ( strpos( $u_sku, 'COMM-200' ) !== false || strpos( $u_sku, '200' ) !== false ) return $theme_uri . '/images/eureka-forbes/ef-comm-200.png';
@@ -839,7 +850,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             return $theme_uri . '/images/eureka-forbes/ef-prima-50b.jpg';
         }
 
-        // Blue Star Specific Models & Series
+        // 5. Blue Star Specific Models & Series
         if ( strpos( $u_sku, 'IC324DNUHC' ) !== false || strpos( $u_sku, 'DNUHC' ) !== false ) {
             return home_url( '/wp-content/uploads/2026/08/ID318DNUHC_Gallery_Images_01.png' );
         }
@@ -855,16 +866,102 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
         if ( strpos( $u_sku, 'BWD-GA-REF' ) !== false || strpos( $u_sku, 'BWD-GA' ) !== false ) {
             return home_url( '/wp-content/uploads/2026/08/ga.jpg' );
         }
+        if ( strpos( $u_sku, 'BWD-GB' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/gb-1.jpg' );
+        }
+        if ( strpos( $u_sku, 'BWD-UA' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/ua-1.jpg' );
+        }
+        if ( strpos( $u_sku, 'BWD-ECO' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/bwd-eco-series-326x220-1.png' );
+        }
+        if ( strpos( $u_sku, 'BWD-BOTTOM-LOAD' ) !== false || strpos( $u_sku, 'BOTTOM-LOAD' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/bottomloadingdispensers-1.jpg' );
+        }
+        if ( strpos( $u_sku, 'BWD-PLATINUM' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/storage-water-cooler-platinum-326x220-2.png' );
+        }
 
-        // Blue Star Commercial
-        if ( strpos( $u_sku, 'BS-LC' ) !== false || strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'CASS' ) !== false || strpos( $u_sku, 'CONC' ) !== false || strpos( $u_sku, 'BS-CAS' ) !== false || strpos( $u_sku, 'BS-VER' ) !== false || strpos( $u_sku, 'BS-CON' ) !== false ) {
-            if ( strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'BS-VER' ) !== false ) return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
-            if ( strpos( $u_sku, 'CONC' ) !== false || strpos( $u_sku, 'BS-CON' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
-            if ( strpos( $u_sku, 'CASS-1W' ) !== false ) return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
+        // Blue Star Storage Water Coolers
+        if ( strpos( $u_sku, 'SWC-WARM-COLD' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/storage-water-cooler-warm-cold-326x220-1.png' );
+        }
+        if ( strpos( $u_sku, 'SWC-SUPER-COOLER' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/super-cooler-326x220-1.png' );
+        }
+        if ( strpos( $u_sku, 'SWC-TROPICAL' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/water-coolers-1.png' );
+        }
+        if ( strpos( $u_sku, 'SDLX' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/storage-water-cooler-sdlx-326x220-2.png' );
+        }
+
+        // 6. Blue Star Visi Coolers & Freezers
+        if ( strpos( $u_sku, 'VC-TT-55' ) !== false || strpos( $u_sku, 'VC65D' ) !== false || strpos( $u_sku, 'VC-TT' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/VC65D.png' );
+        }
+        if ( strpos( $u_sku, 'SC-595' ) !== false || strpos( $u_sku, 'SC600F' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/SC600F.png' );
+        }
+        if ( strpos( $u_sku, 'SC-448' ) !== false || strpos( $u_sku, 'SC500F' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/SC500F.png' );
+        }
+        if ( strpos( $u_sku, 'SC-358' ) !== false || strpos( $u_sku, 'SC375' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/SC375_74b1966b-be7e-4ce5-818c-672054881d44.png' );
+        }
+        if ( strpos( $u_sku, 'SC-285' ) !== false || strpos( $u_sku, 'SC300F' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/SC300F.png' );
+        }
+        if ( strpos( $u_sku, 'VC-A-SERIES' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/visi-cooler-a-series-326x220-2.png' );
+        }
+        if ( strpos( $u_sku, 'VC-C-SERIES' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/visi-cooler-c-series-326x220-2.png' );
+        }
+        if ( strpos( $u_sku, 'VC-D-SERIES' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/visi-cooler-d-series-326x220-2.png' );
+        }
+        if ( strpos( $u_sku, 'VF-SERIES' ) !== false || strpos( $u_sku, 'VISIFREEZER' ) !== false || strpos( $u_sku, 'VISI-FREEZER' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/a4_visifreezer-flyer-plate-2-3.jpg' );
+        }
+
+        // 7. Blue Star Chest Freezers (Hard Top vs Glass Top)
+        if ( strpos( $u_sku, 'GT530' ) !== false ) return home_url( '/wp-content/uploads/2026/08/GalleryImage01_ea8c4ff9-1764-43ad-be5d-58084d43697d.png' );
+        if ( strpos( $u_sku, 'GT421' ) !== false ) return home_url( '/wp-content/uploads/2026/08/GalleryImage01_df3f0d97-4883-48d6-b47f-efae63fd02c9.png' );
+        if ( strpos( $u_sku, 'GT365' ) !== false ) return home_url( '/wp-content/uploads/2026/08/GalleryImage01_fa7f2a32-c60d-4b42-a710-a157719b39a7.png' );
+        if ( strpos( $u_sku, 'GT315' ) !== false ) return home_url( '/wp-content/uploads/2026/08/GalleryImage01_fbd8dd4a-4385-402a-9773-071762fc7252.png' );
+        if ( strpos( $u_sku, 'GT215' ) !== false ) return home_url( '/wp-content/uploads/2026/08/Gallery_Image_01_1fa59f45-e37b-4a1b-a8bf-e99d5c3eab39.png' );
+        if ( strpos( $u_sku, 'CF-GLASS-TOP' ) !== false ) return home_url( '/wp-content/uploads/2026/08/glass-top-freezer-5.png' );
+
+        if ( strpos( $u_sku, 'CHFDD500' ) !== false || strpos( $u_sku, 'CHFDD' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/GalleryImages01_c798f744-ed07-47de-8074-4b3b6213d49d.png' );
+        }
+        if ( strpos( $u_sku, 'CHF-HARD-TOP' ) !== false || strpos( $u_sku, 'CHFSD' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/hard-top-freezer-2-3.jpg' );
+        }
+
+        // 8. Blue Star Light Commercial ACs
+        if ( strpos( $u_sku, 'OIA318' ) !== false || strpos( $u_sku, 'OIA224' ) !== false || strpos( $u_sku, 'CASS-1W' ) !== false || strpos( $u_sku, '1-WAY' ) !== false || strpos( $u_sku, 'BS-CAS-1W' ) !== false ) {
+            if ( $has_valid_existing ) return $existing_url;
+            return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
+        }
+        if ( strpos( $u_sku, 'BS-LC-VERT' ) !== false || strpos( $u_sku, 'BS-VER' ) !== false || strpos( $u_sku, 'VERTICOOL' ) !== false ) {
+            return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+        }
+        if ( strpos( $u_sku, 'BS-LC-CONC' ) !== false || strpos( $u_sku, 'BS-CON' ) !== false || strpos( $u_sku, 'CONCEALED' ) !== false ) {
+            return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
+        }
+        if ( strpos( $u_sku, 'BS-LC-CASS' ) !== false || strpos( $u_sku, 'BS-CAS' ) !== false || strpos( $u_sku, 'CASS-4W' ) !== false ) {
+            return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
+        }
+        if ( strpos( $u_sku, 'BS-LC' ) !== false || strpos( $u_sku, 'VERT' ) !== false || strpos( $u_sku, 'CASS' ) !== false || strpos( $u_sku, 'CONC' ) !== false ) {
+            if ( strpos( $u_sku, 'VERT' ) !== false ) return 'https://resources.bluestarindia.com/G_Series_a4341b2647.png';
+            if ( strpos( $u_sku, 'CONC' ) !== false ) return 'https://resources.bluestarindia.com/Frame_3_2_9052b81fb1.png';
+            if ( strpos( $u_sku, '1W' ) !== false ) return 'https://resources.bluestarindia.com/1_waycassatte_927857fc3c.png';
             return 'https://resources.bluestarindia.com/Layer_550_96ac8b7929.png';
         }
 
-        // Blue Star Central Air Conditioning (VRF, Ducted, Chillers, Condensing Units)
+        // 9. Blue Star Central Air Conditioning (VRF, Ducted, Chillers, Condensing Units)
         if ( strpos( $u_sku, 'VRF' ) !== false ) {
             return 'https://resources.bluestarindia.com/Side_Disch1_1_3_075e9fbe62.jpg';
         }
@@ -881,7 +978,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             return 'https://resources.bluestarindia.com/Fixed_Speed_Scroll_f0050c1862.jpg';
         }
 
-        // Blue Star Cold Storages & Refrigeration Systems
+        // Blue Star Cold Storages & Commercial Refrigeration Systems
         if ( strpos( $u_sku, 'RS-HERMETIC' ) !== false ) {
             return 'https://resources.bluestarindia.com/Hermetic_Series_isolation_c6f8c964c2.png';
         }
@@ -897,17 +994,39 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
         if ( strpos( $u_sku, 'MORTUARY' ) !== false || strpos( $u_sku, 'MC-' ) !== false ) {
             return 'https://resources.bluestarindia.com/Mortuary_7c68f8fc99.png';
         }
-
-        // Euronics Commercial Washroom Automation
-        if ( strpos( $u_sku, 'EUR-' ) !== false ) {
-            if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
-                return $existing_url;
-            }
+        if ( strpos( $u_sku, 'IM-COMMERCIAL' ) !== false || strpos( $u_sku, 'ICE-MACHINE' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/ice-machines-326x220-4.png' );
+        }
+        if ( strpos( $u_sku, 'MR60' ) !== false || strpos( $u_sku, 'B2B-A80344' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/mr60_black-iso-right-1-326x220-4.png' );
         }
 
-        // Kimberly-Clark Professional Commercial Hygiene & Safety
-        if ( strpos( $u_sku, 'KCP-' ) !== false || strpos( $u_sku, 'KIMBERLY' ) !== false ) {
-            // Priority 1: Model-specific authentic cutouts
+        // 10. Euronics Commercial Washroom Automation
+        if ( strpos( $u_sku, 'EUR-' ) !== false ) {
+            if ( $has_valid_existing ) return $existing_url;
+            if ( strpos( $u_sku, 'EAS' ) !== false || strpos( $u_sku, 'EAC' ) !== false || strpos( $u_sku, 'CURTAIN' ) !== false ) {
+                return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-air-curtains.jpg' );
+            }
+            if ( strpos( $u_sku, 'EP' ) !== false || strpos( $u_sku, 'LINEA' ) !== false || strpos( $u_sku, 'TRIMAX AP' ) !== false || strpos( $u_sku, 'PAPER' ) !== false ) {
+                return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-paper-dispensers.jpg' );
+            }
+            if ( strpos( $u_sku, 'EU' ) !== false || strpos( $u_sku, 'KUF' ) !== false || strpos( $u_sku, 'SMARTFLUSH' ) !== false || strpos( $u_sku, 'FLUSH' ) !== false ) {
+                return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-urinal-sensors.jpg' );
+            }
+            if ( strpos( $u_sku, 'ES' ) !== false || strpos( $u_sku, 'TRIMAX S' ) !== false || strpos( $u_sku, 'SOAP' ) !== false ) {
+                return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-soap-dispensers.jpg' );
+            }
+            if ( strpos( $u_sku, 'ET' ) !== false || strpos( $u_sku, 'AXEON' ) !== false || strpos( $u_sku, 'ARCTIC' ) !== false || strpos( $u_sku, 'KSDT' ) !== false || strpos( $u_sku, 'TAP' ) !== false ) {
+                return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-sensor-taps.jpg' );
+            }
+            if ( strpos( $u_sku, 'RHD' ) !== false || strpos( $u_sku, 'EJD' ) !== false || strpos( $u_sku, 'YZD' ) !== false || strpos( $u_sku, 'SJD' ) !== false || strpos( $u_sku, 'XJD' ) !== false || strpos( $u_sku, 'DRYER' ) !== false ) {
+                return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-hand-dryers.jpg' );
+            }
+            return home_url( '/wp-content/uploads/2026/10/snap-b2b-euronics-sensor-taps.jpg' );
+        }
+
+        // 11. Kimberly-Clark Professional Commercial Hygiene & Safety
+        if ( strpos( $u_sku, 'KCP-' ) !== false || strpos( $u_sku, 'KIMBERLY' ) !== false || strpos( $u_sku, 'KC-' ) !== false ) {
             $kc_models = array(
                 '70230', '49807', '70220', '69530', '69590', '69450', '1578', '02046', '02000', '6695',
                 '11329', '69480', '6385', '12552', '30840',
@@ -923,13 +1042,12 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
                     if ( $m_num === '45348' ) $m_file = 'kc-45348A.jpg';
                     if ( $m_num === '4002' ) $m_file = 'kc-4002A.jpg';
                     if ( $m_num === '1380' ) $m_file = 'kc-1380A.jpg';
-                    if ( file_exists( get_template_directory() . '/images/kc/' . $m_file ) ) {
+                    if ( file_exists( $theme_dir . '/images/kc/' . $m_file ) ) {
                         return $theme_uri . '/images/kc/' . $m_file;
                     }
                 }
             }
 
-            // Priority 2: Category Fallbacks
             if ( strpos( $u_sku, 'WYPALL' ) !== false || strpos( $u_sku, 'X80' ) !== false || strpos( $u_sku, 'X70' ) !== false || strpos( $u_sku, 'X60' ) !== false || strpos( $u_sku, 'L10' ) !== false ) {
                 return $theme_uri . '/images/kc/kc-wypall.jpg';
             }
@@ -951,35 +1069,42 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             return $theme_uri . '/images/kc/kc-hand-towel.jpg';
         }
 
-        // Tetley Corporate Teas
+        // 12. Tetley Corporate Teas
         if ( strpos( $u_sku, 'TET-' ) !== false ) {
-            if ( strpos( $u_sku, 'MASALA' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-masala.jpg' ) ) return $theme_uri . '/images/tetley/tetley-masala.jpg';
-            if ( ( strpos( $u_sku, 'LEMON' ) !== false || strpos( $u_sku, 'HONEY' ) !== false ) && file_exists( get_template_directory() . '/images/tetley/tetley-lemon-honey.jpg' ) ) return $theme_uri . '/images/tetley/tetley-lemon-honey.jpg';
-            if ( strpos( $u_sku, 'CAMOMILE' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-camomile.jpg' ) ) return $theme_uri . '/images/tetley/tetley-camomile.jpg';
-            if ( strpos( $u_sku, 'PEPPERMINT' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-peppermint.jpg' ) ) return $theme_uri . '/images/tetley/tetley-peppermint.jpg';
-            if ( strpos( $u_sku, 'LONGLEAF' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-longleaf.jpg' ) ) return $theme_uri . '/images/tetley/tetley-longleaf.jpg';
-            if ( strpos( $u_sku, 'ASSAM' ) !== false && file_exists( get_template_directory() . '/images/tetley/tetley-assam.jpg' ) ) return $theme_uri . '/images/tetley/tetley-assam.jpg';
+            if ( strpos( $u_sku, 'MASALA' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-masala.jpg' ) ) return $theme_uri . '/images/tetley/tetley-masala.jpg';
+            if ( ( strpos( $u_sku, 'LEMON' ) !== false || strpos( $u_sku, 'HONEY' ) !== false ) && file_exists( $theme_dir . '/images/tetley/tetley-lemon-honey.jpg' ) ) return $theme_uri . '/images/tetley/tetley-lemon-honey.jpg';
+            if ( strpos( $u_sku, 'CAMOMILE' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-camomile.jpg' ) ) return $theme_uri . '/images/tetley/tetley-camomile.jpg';
+            if ( strpos( $u_sku, 'PEPPERMINT' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-peppermint.jpg' ) ) return $theme_uri . '/images/tetley/tetley-peppermint.jpg';
+            if ( strpos( $u_sku, 'LONGLEAF' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-longleaf.jpg' ) ) return $theme_uri . '/images/tetley/tetley-longleaf.jpg';
+            if ( strpos( $u_sku, 'ASSAM' ) !== false && file_exists( $theme_dir . '/images/tetley/tetley-assam.jpg' ) ) return $theme_uri . '/images/tetley/tetley-assam.jpg';
             if ( strpos( $u_sku, 'CLASSIC' ) !== false ) return $theme_uri . '/images/tetley/tetley-classic.jpg';
             if ( strpos( $u_sku, 'ELAICHI' ) !== false ) return $theme_uri . '/images/tetley/tetley-elaichi.png';
             if ( strpos( $u_sku, 'GINGER' ) !== false ) return $theme_uri . '/images/tetley/tetley-ginger.png';
             return $theme_uri . '/images/tetley/tetley-plain.png';
         }
 
+        // 13. Atlantis Instant Beverage Premixes
         if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
-            if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) return $existing_url;
+            if ( strpos( $u_sku, 'COLD' ) !== false ) {
+                return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-cold-beverages.jpg' );
+            }
+            if ( strpos( $u_sku, 'COFF' ) !== false || strpos( $u_sku, 'COFFEE' ) !== false ) {
+                return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-coffee-premixes.jpg' );
+            }
+            return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-tea-premixes.jpg' );
         }
 
-        // Waterlogic Commercial Firewall Dispensers
+        // 14. Waterlogic Commercial Firewall Dispensers
         if ( strpos( $u_sku, 'WL-' ) !== false || strpos( $u_sku, 'WATERLOGIC' ) !== false || strpos( $u_sku, 'FIREWALL' ) !== false ) {
             if ( strpos( $u_sku, 'WL-7' ) !== false || strpos( $u_sku, 'WL7' ) !== false ) return $theme_uri . '/images/waterlogic/wl7.png';
             if ( strpos( $u_sku, 'WL-3' ) !== false || strpos( $u_sku, 'WL3' ) !== false ) return $theme_uri . '/images/waterlogic/wl3.png';
             if ( strpos( $u_sku, 'WL-2' ) !== false || strpos( $u_sku, 'WL2' ) !== false ) return $theme_uri . '/images/waterlogic/wl2.png';
             if ( strpos( $u_sku, 'CUBE' ) !== false ) return $theme_uri . '/images/waterlogic/cube.png';
-            if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) return $existing_url;
             return $theme_uri . '/images/waterlogic/wl7.png';
         }
 
-        if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) {
+        // Preserve authentic uploaded images if non-placeholder
+        if ( $has_valid_existing ) {
             return $existing_url;
         }
 
@@ -1003,7 +1128,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
  */
 if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
     function snap_stitch_resolve_b2b_brochure( $product_id = 0, $sku = '', $active_subcat_slug = '', $root_brand_slug = '' ) {
-        $theme_uri = get_template_directory_uri();
+        $theme_uri = set_url_scheme( get_template_directory_uri(), 'https' );
         $theme_dir = get_template_directory();
         $u_sku = strtoupper( (string) $sku );
 
@@ -1048,6 +1173,9 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             // Blue Star HVAC & Commercial Kitchen
             'BS-LC-VERT'                        => 'bluestar/verticool-air-conditioners.pdf',
             'VERTICOOL'                         => 'bluestar/verticool-air-conditioners.pdf',
+            'BS-LC-CONC'                        => 'bluestar/concealed-split-acs.pdf',
+            'CONCEALED-SPLIT'                   => 'bluestar/concealed-split-acs.pdf',
+            'BS-LC-CASS'                        => 'bluestar/cassette-air-conditioners.pdf',
             'RI-S-SERIES'                       => 'bluestar/commercial-kitchen-refrigeration.pdf',
             'RI-GP-SERIES'                      => 'bluestar/commercial-kitchen-refrigeration.pdf',
             'UC-S-SERIES'                       => 'bluestar/commercial-kitchen-refrigeration.pdf',
@@ -1078,6 +1206,10 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
 
             // Atlantis Beverage Premixes
             'ATL-PREM-'                         => 'atlantis/atlantis-beverage-premixes.pdf',
+
+            // Euronics Air Curtains
+            'EUR-EAC'                           => 'euronics/euronics-air-curtains-entrance.pdf',
+            'EUR-EAS'                           => 'euronics/euronics-air-curtains-entrance.pdf',
         );
         foreach ( $model_map as $mk => $m_rel ) {
             if ( strpos( $u_sku, $mk ) !== false ) {
@@ -1241,6 +1373,19 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
         if ( $product_id > 0 ) {
             $terms = get_the_terms( $product_id, 'product_cat' );
             if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+                // Prioritize leaf categories over intermediate/parent categories
+                $parent_ids = array();
+                foreach ( $terms as $t ) {
+                    if ( ! empty( $t->parent ) ) {
+                        $parent_ids[] = (int) $t->parent;
+                    }
+                }
+                usort( $terms, function( $a, $b ) use ( $parent_ids ) {
+                    $a_is_parent = in_array( (int) $a->term_id, $parent_ids, true ) ? 1 : 0;
+                    $b_is_parent = in_array( (int) $b->term_id, $parent_ids, true ) ? 1 : 0;
+                    return $a_is_parent <=> $b_is_parent;
+                } );
+
                 foreach ( $terms as $t ) {
                     $t_slug = (string) ( $t->slug ?? '' );
                     if ( $t_slug !== '' && isset( $series_map[ $t_slug ] ) ) {
