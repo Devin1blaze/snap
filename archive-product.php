@@ -25,7 +25,7 @@ $category_desc = ( $term && isset( $term->description ) ) ? $term->description :
 
 if ( ! function_exists( 'snap_b2b_beverage_icon' ) ) {
     function snap_b2b_beverage_icon( $drink ) {
-        $d = strtolower( $drink );
+        $d = strtolower( (string) $drink );
         $icon = 'local_cafe';
         if ( strpos( $d, 'tea' ) !== false || strpos( $d, 'chai' ) !== false ) $icon = 'emoji_food_beverage';
         elseif ( strpos( $d, 'choc' ) !== false || strpos( $d, 'milo' ) !== false ) $icon = 'restaurant';
@@ -40,13 +40,15 @@ if ( ! function_exists( 'snap_b2b_beverage_icon' ) ) {
 // -----------------------------------------------------------------------------
 $is_b2b_category = false;
 if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
-    if ( $term->slug === 'b2b' || strpos( $term->slug, 'b2b' ) !== false || ( isset( $term->parent ) && (int) $term->parent === 72 ) ) {
+    $term_slug = (string) $term->slug;
+    if ( $term_slug === 'b2b' || strpos( $term_slug, 'b2b' ) !== false || ( isset( $term->parent ) && (int) $term->parent === 72 ) ) {
         $is_b2b_category = true;
     }
     if ( ! $is_b2b_category && isset( $term->term_id ) ) {
         foreach ( get_ancestors( $term->term_id, 'product_cat' ) as $anc_id ) {
             $anc = get_term( $anc_id, 'product_cat' );
-            if ( $anc && ( strpos( $anc->slug, 'b2b' ) !== false || (int) $anc_id === 72 ) ) { $is_b2b_category = true; break; }
+            $anc_slug = ( $anc && isset( $anc->slug ) ) ? (string) $anc->slug : '';
+            if ( $anc_slug !== '' && ( strpos( $anc_slug, 'b2b' ) !== false || (int) $anc_id === 72 ) ) { $is_b2b_category = true; break; }
         }
     }
     $b2b_commercial_slugs = array(
@@ -252,14 +254,14 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 }
 
                 if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
-                    if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) return $existing_url;
+                    if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) return $existing_url;
                 }
 
                 if ( strpos( $u_sku, 'WL-' ) !== false || strpos( $u_sku, 'WATERLOGIC' ) !== false || strpos( $u_sku, 'FIREWALL' ) !== false ) {
-                    if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) return $existing_url;
+                    if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) return $existing_url;
                 }
 
-                if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
+                if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) {
                     return $existing_url;
                 }
 
@@ -568,7 +570,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 $specs_meta = get_post_meta( $p_id, '_technical_specs', true );
                 $salient_meta = get_post_meta( $p_id, '_salient_features', true );
                 $bev_meta = get_post_meta( $p_id, '_beverage_menu', true ) ?: get_post_meta( $p_id, '_menu_items', true );
-                $bev_array = is_array( $bev_meta ) ? $bev_meta : ( ! empty( $bev_meta ) ? array_map( 'trim', explode( ',', $bev_meta ) ) : array() );
+                $bev_array = is_array( $bev_meta ) ? $bev_meta : ( ! empty( $bev_meta ) ? array_map( 'trim', explode( ',', (string) $bev_meta ) ) : array() );
 
                 $p_sku = $product->get_sku() ? $product->get_sku() : 'SNAP-' . $p_id;
                 $ext_url = get_post_meta( $p_id, '_thumbnail_ext_url', true );
@@ -748,7 +750,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
             if ( ! function_exists( 'snap_stitch_get_cat_icon' ) ) {
                 function snap_stitch_get_cat_icon( $name ) {
-                    $cn = strtolower( $name );
+                    $cn = strtolower( (string) $name );
                     if ( strpos( $cn, 'hand dryer' ) !== false || strpos( $cn, 'dryer' ) !== false ) return 'air';
                     if ( strpos( $cn, 'sensor tap' ) !== false || strpos( $cn, 'faucet' ) !== false ) return 'faucet';
                     if ( strpos( $cn, 'soap' ) !== false || strpos( $cn, 'skincare' ) !== false ) return 'sanitizer';
@@ -1104,7 +1106,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             $m_key = ( $is_coffee_family && ! empty( $item['model_key'] ) ) ? $item['model_key'] : '';
                             $m_data = ( $m_key && isset( $nestle_hardware[ $m_key ] ) ) ? $nestle_hardware[ $m_key ] : null;
                             $front_img = $m_data ? $m_data['front'] : $item['image_url'];
-                            if ( empty( $front_img ) || strpos( $front_img, 'placeholder' ) !== false ) {
+                            if ( empty( $front_img ) || strpos( (string) $front_img, 'placeholder' ) !== false ) {
                                 $front_img = snap_stitch_resolve_b2b_image( $item['sku'], $front_img );
                             }
                             $menu_img = $m_data ? $m_data['menu'] : ( ! empty( $item['menu_image_url'] ) ? $item['menu_image_url'] : '' );
@@ -1454,7 +1456,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                         <?php foreach ( $canonical_models as $col_idx => $prod_col ) : 
                                             $col_sku = $prod_col['sku'];
                                             $target_idx = isset( $coffee_sku_map[ $col_sku ] ) ? $coffee_sku_map[ $col_sku ] : $col_idx;
-                                            $val = isset( $spec_row[ $target_idx ] ) ? $spec_row[ $target_idx ] : 'Standard';
+                                            $val = isset( $spec_row[ $target_idx ] ) ? (string) $spec_row[ $target_idx ] : 'Standard';
                                             $is_check = ( strpos( $val, '✓' ) !== false );
                                             $is_cross = ( strpos( $val, '✗' ) !== false );
                                         ?>

@@ -1,4 +1,9 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+#[\AllowDynamicProperties]
 class Mega_Menu_Walker extends Walker_Nav_Menu {
     private $current_item;
     private $custom_options;

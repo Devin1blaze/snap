@@ -1,6 +1,14 @@
 <?php
 require_once('../../../wp-load.php');
 
+if ( ! defined( 'ABSPATH' ) || ! function_exists( 'current_user_can' ) || ! current_user_can( 'manage_options' ) ) {
+    if ( function_exists( 'wp_die' ) ) {
+        wp_die( 'Unauthorized.' );
+    } else {
+        die( 'Unauthorized.' );
+    }
+}
+
 $source = ABSPATH;
 $dest = WP_CONTENT_DIR . '/core-backup';
 

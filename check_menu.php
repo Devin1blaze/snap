@@ -4,7 +4,19 @@
  */
 
 if (!defined('ABSPATH')) {
-    require_once('/var/www/html/wp-load.php');
+    if ( file_exists( '/var/www/html/wp-load.php' ) ) {
+        require_once('/var/www/html/wp-load.php');
+    } elseif ( file_exists( dirname( __DIR__, 3 ) . '/wp-load.php' ) ) {
+        require_once dirname( __DIR__, 3 ) . '/wp-load.php';
+    }
+}
+
+if ( ! defined( 'ABSPATH' ) || ( php_sapi_name() !== 'cli' && ! current_user_can( 'manage_options' ) ) ) {
+    if ( function_exists( 'wp_die' ) ) {
+        wp_die( 'Unauthorized.' );
+    } else {
+        die( 'Unauthorized.' );
+    }
 }
 
 $target_menu_id = 21;

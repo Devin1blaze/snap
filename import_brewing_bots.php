@@ -10,8 +10,12 @@ if ( file_exists( '/var/www/html/wp-load.php' ) ) {
     require_once dirname( __DIR__, 3 ) . '/wp-load.php';
 }
 
-if ( ! defined( 'ABSPATH' ) ) {
-    exit( 'Access denied' );
+if ( ! defined( 'ABSPATH' ) || ! function_exists( 'current_user_can' ) || ! current_user_can( 'manage_options' ) ) {
+    if ( function_exists( 'wp_die' ) ) {
+        wp_die( 'Unauthorized.' );
+    } else {
+        die( 'Unauthorized.' );
+    }
 }
 
 echo "=== IMPORTING CHAI POINT BREWING BOTS ===\n";

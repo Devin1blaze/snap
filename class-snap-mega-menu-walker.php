@@ -7,6 +7,11 @@
  *   - L2 items (children) ÔåÆ LEFT sidebar panel
  *   - L3 items (grandchildren) ÔåÆ RIGHT content panel
  */
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+#[\AllowDynamicProperties]
 class Snap_Mega_Menu_Walker extends Walker_Nav_Menu {
 
     private $first_l2 = true;
@@ -117,6 +122,7 @@ class Snap_Mega_Menu_Walker extends Walker_Nav_Menu {
 /**
  * Walker: Mobile Accordion Menu
  */
+#[\AllowDynamicProperties]
 class Snap_Mobile_Walker extends Walker_Nav_Menu {
 
     public function start_lvl( &$output, $depth = 0, $args = null ) {

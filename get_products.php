@@ -1,6 +1,14 @@
 <?php
 require_once('../../../wp-load.php');
 
+if ( ! defined( 'ABSPATH' ) || ! function_exists( 'current_user_can' ) || ! current_user_can( 'manage_options' ) ) {
+    if ( function_exists( 'wp_die' ) ) {
+        wp_die( 'Unauthorized.' );
+    } else {
+        die( 'Unauthorized.' );
+    }
+}
+
 $args_b2b = array(
     'post_type' => 'product',
     'posts_per_page' => 1,

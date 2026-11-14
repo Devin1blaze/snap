@@ -6,8 +6,12 @@
 require_once('../../../wp-load.php');
 
 // Security check: Only allow logged-in administrators
-if ( ! current_user_can('administrator') ) {
-    die('You must be logged in as an administrator to run this script.');
+if ( ! defined( 'ABSPATH' ) || ! function_exists( 'current_user_can' ) || ! current_user_can('manage_options') ) {
+    if ( function_exists( 'wp_die' ) ) {
+        wp_die('You must be logged in as an administrator to run this script.');
+    } else {
+        die('You must be logged in as an administrator to run this script.');
+    }
 }
 
 global $wpdb;

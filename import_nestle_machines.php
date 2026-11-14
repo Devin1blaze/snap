@@ -25,6 +25,14 @@ if ( file_exists( '/var/www/html/wp-load.php' ) ) {
     require_once __DIR__ . '/../../../wp-load.php';
 }
 
+if ( ! defined( 'ABSPATH' ) || ( php_sapi_name() !== 'cli' && ! current_user_can( 'manage_options' ) ) ) {
+    if ( function_exists( 'wp_die' ) ) {
+        wp_die( 'Unauthorized.' );
+    } else {
+        die( 'Unauthorized.' );
+    }
+}
+
 if ( ! defined( 'ABSPATH' ) || ! class_exists( 'WooCommerce' ) ) {
     fwrite( STDERR, "Error: WordPress and WooCommerce must be initialized.\n" );
     exit( 1 );

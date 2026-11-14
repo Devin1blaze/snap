@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+#[\AllowDynamicProperties]
 class Tailwind_Nav_Walker extends Walker_Nav_Menu {
 
     // State per top-level item

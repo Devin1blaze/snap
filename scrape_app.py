@@ -16,8 +16,8 @@ except ImportError:
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-EMAIL = "dasz.stone12@gmail.com"
-PASSWORD = "dXHe2LqA@dFU3e9"
+EMAIL = os.environ.get("GOJIBERRY_EMAIL", "")
+PASSWORD = os.environ.get("GOJIBERRY_PASSWORD", "")
 BASE_URL = "https://app.gojiberry.ai"
 OUTPUT_DIR = "e:/gojiberry/app_analysis"
 

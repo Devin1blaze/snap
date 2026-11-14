@@ -9,6 +9,14 @@
 // Load WordPress
 require_once dirname(__FILE__) . '/../../../wp-load.php';
 
+if ( ! defined( 'ABSPATH' ) || ( php_sapi_name() !== 'cli' && ! current_user_can( 'manage_options' ) ) ) {
+    if ( function_exists( 'wp_die' ) ) {
+        wp_die( 'Unauthorized.' );
+    } else {
+        die( 'Unauthorized.' );
+    }
+}
+
 echo "Starting WooCommerce Product Import...\n";
 
 // Path to SEO optimized products JSON

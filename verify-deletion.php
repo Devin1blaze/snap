@@ -7,6 +7,14 @@ if (file_exists($wp_load_path)) {
     die("wp-load.php not found at $wp_load_path");
 }
 
+if ( ! defined( 'ABSPATH' ) || ! function_exists( 'current_user_can' ) || ! current_user_can( 'manage_options' ) ) {
+    if ( function_exists( 'wp_die' ) ) {
+        wp_die( 'Unauthorized.' );
+    } else {
+        die( 'Unauthorized.' );
+    }
+}
+
 global $wpdb;
 
 echo "<h2>Deletion Verification Report</h2>\n";

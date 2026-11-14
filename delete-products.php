@@ -6,6 +6,9 @@
 require_once('../../../wp-load.php');
 
 // Security check
+if ( ! defined( 'ABSPATH' ) || ! current_user_can( 'manage_options' ) ) {
+    wp_die( 'Access denied.' );
+}
 
 
 // 1. Delete all products
