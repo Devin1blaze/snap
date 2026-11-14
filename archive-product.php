@@ -606,7 +606,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     'salient_features' => is_array( $salient_meta ) ? $salient_meta : array(),
                     'beverage_menu'    => $bev_array,
                     'menu_image_url'   => get_post_meta( $p_id, '_menu_image_url', true ),
-                    'brochure_url'     => get_post_meta( $p_id, '_brochure_url', true ),
+                    'brochure_url'     => function_exists( 'snap_stitch_resolve_b2b_brochure' ) 
+                                            ? snap_stitch_resolve_b2b_brochure( $p_id, $p_sku, ( $term && isset( $term->slug ) ) ? $term->slug : '', ( $root_brand_term && isset( $root_brand_term->slug ) ) ? $root_brand_term->slug : '' )
+                                            : ( get_post_meta( $p_id, '_brochure_url', true ) ?: '' ),
                     'is_featured'      => $product->is_featured(),
                     'excerpt'          => wp_strip_all_tags( $product->get_short_description() ),
                 );
@@ -702,6 +704,13 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
                         <button class="h-[52px] w-full sm:w-auto bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black px-6 sm:px-7 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all js-open-quote-modal" data-product="<?php echo esc_attr( $category_name ); ?>" data-sku="SERIES-ALL" data-custom-message="<?php echo esc_attr( "Bulk Price Inquiry for {$category_name} Series:\nPlease provide complete price schedule, MOQ tiers, and technical specification submittals for our facility." ); ?>"><span class="material-symbols-outlined text-lg">request_quote</span><span><?php echo esc_html( $brand_cta_label ); ?></span></button>
                         <a href="tel:+919823012724" class="h-[52px] w-full sm:w-auto bg-white hover:bg-zinc-100 active:scale-95 text-black px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl transition-all"><span class="material-symbols-outlined text-lg">call</span><span>Call Technical Sales: +91 98230 12724</span></a>
+                        <?php 
+                        $subcat_hero_brochure = function_exists( 'snap_stitch_resolve_b2b_brochure' )
+                            ? snap_stitch_resolve_b2b_brochure( 0, '', ( $term && isset( $term->slug ) ) ? $term->slug : '', ( $root_brand_term && isset( $root_brand_term->slug ) ) ? $root_brand_term->slug : '' )
+                            : '';
+                        if ( ! empty( $subcat_hero_brochure ) ) : ?>
+                            <a href="<?php echo esc_url( $subcat_hero_brochure ); ?>" target="_blank" rel="noopener noreferrer" class="h-[52px] w-full sm:w-auto border-2 border-white/60 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 bg-black/40 backdrop-blur-sm transition-all shadow-xl"><span class="material-symbols-outlined text-lg">download</span><span>Download Series Catalog</span></a>
+                        <?php endif; ?>
                         <a href="#spec-matrix" class="h-[52px] w-full sm:w-auto border-2 border-white/40 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 bg-black/30 backdrop-blur-sm transition-all"><span>Compare Technical Specs (<?php echo esc_html( $total_models ); ?>)</span><span class="material-symbols-outlined text-lg">arrow_downward</span></a>
                     </div>
                 </div>
@@ -1292,11 +1301,15 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     <button class="h-[48px] w-full bg-[#FBBF24] hover:bg-yellow-400 active:scale-95 text-black font-black uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-md transition-all js-open-quote-modal" data-product="<?php echo esc_attr( $item['title'] ); ?>" data-sku="<?php echo esc_attr( $item['sku'] ); ?>" title="Request quotation"><span class="material-symbols-outlined text-base">request_quote</span><span>Quote</span></button>
                                     <a href="tel:+919823012724" class="h-[48px] w-full bg-[#0A0A0A] hover:bg-[#1A56DB] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"><span class="material-symbols-outlined text-base">call</span><span>Call</span></a>
                                     <a href="https://wa.me/919823012724?text=<?php echo rawurlencode( "Hi Snap Marketing, I would like to inquire about {$item['title']} (Model: {$item['sku']})." ); ?>" target="_blank" rel="noopener noreferrer" class="h-[48px] w-full bg-[#25D366] hover:bg-[#128C7E] active:scale-95 text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"><svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span>WhatsApp</span></a>
-                                    <?php if ( ! empty( $item['brochure_url'] ) ) : ?>
-                                        <a href="<?php echo esc_url( $item['brochure_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"><span class="material-symbols-outlined text-base">download</span><span>Brochure</span></a>
-                                    <?php else : ?>
-                                        <button class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md js-open-quote-modal" data-product="<?php echo esc_attr( $item['title'] ); ?>" data-sku="<?php echo esc_attr( $item['sku'] ); ?>" data-custom-message="<?php echo esc_attr( "Requesting Official Product Brochure & Price Schedule for {$item['title']} (Model: {$item['sku']})" ); ?>"><span class="material-symbols-outlined text-base">download</span><span>Brochure</span></button>
-                                    <?php endif; ?>
+                                    <?php 
+                                    $final_card_brochure = ! empty( $item['brochure_url'] ) 
+                                        ? $item['brochure_url'] 
+                                        : ( function_exists( 'snap_stitch_resolve_b2b_brochure' ) ? snap_stitch_resolve_b2b_brochure( $item['id'], $item['sku'], ( $term && isset( $term->slug ) ) ? $term->slug : '', ( $root_brand_term && isset( $root_brand_term->slug ) ) ? $root_brand_term->slug : '' ) : '' );
+                                    if ( empty( $final_card_brochure ) ) {
+                                        $final_card_brochure = get_template_directory_uri() . '/brochures/bluestar/bluestar-master-catalog.pdf';
+                                    }
+                                    ?>
+                                    <a href="<?php echo esc_url( $final_card_brochure ); ?>" target="_blank" rel="noopener noreferrer" class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md" title="Download Official Product Specification Brochure"><span class="material-symbols-outlined text-base">download</span><span>Brochure</span></a>
                                 </div>
                             </div>
                         </article>

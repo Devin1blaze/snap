@@ -927,3 +927,180 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
         return wc_placeholder_img_src();
     }
 }
+
+/**
+ * Universal B2B Brochure Resolution Engine (Snap Marketing Self-Hosted PDF Assets)
+ *
+ * Cascading Resolution:
+ * Level 1: Product Specific Datasheet (matching SKU / model)
+ * Level 2: Sub-Category / Series Brochure (matching category slug)
+ * Level 3: Brand Master Catalog Fallback
+ *
+ * @param int    $product_id
+ * @param string $sku
+ * @param string $active_subcat_slug
+ * @param string $root_brand_slug
+ * @return string Dynamic internal brochure URL on snapmktg.com
+ */
+if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
+    function snap_stitch_resolve_b2b_brochure( $product_id = 0, $sku = '', $active_subcat_slug = '', $root_brand_slug = '' ) {
+        $theme_uri = get_template_directory_uri();
+        $theme_dir = get_template_directory();
+        $u_sku = strtoupper( (string) $sku );
+
+        // -------------------------------------------------------------
+        // Level 1: Dedicated Product / Model Specific Datasheets
+        // -------------------------------------------------------------
+        $model_map = array(
+            'BWD-GA'            => 'bluestar/bottled-water-dispensers.pdf',
+            'BWD-ECO'           => 'bluestar/bottled-water-dispensers.pdf',
+            'BWD-UA'            => 'bluestar/bottled-water-dispensers.pdf',
+            'BWD-GB'            => 'bluestar/bottled-water-dispensers.pdf',
+            'BWD-PLATINUM'      => 'bluestar/storage-water-coolers.pdf',
+            'RI-S-SERIES'       => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'UC-S-SERIES'       => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'WCC-CENTRIFUGAL'   => 'bluestar/centrifugal-chillers.pdf',
+            'CENTRIFUGAL'       => 'bluestar/centrifugal-chillers.pdf',
+            'VT-WHO-PQS'        => 'bluestar/cold-rooms.pdf',
+            'MF-DEEP-FREEZE-86' => 'bluestar/deep-freezers.pdf',
+        );
+        foreach ( $model_map as $mk => $m_rel ) {
+            if ( strpos( $u_sku, $mk ) !== false ) {
+                if ( file_exists( $theme_dir . '/brochures/' . $m_rel ) ) {
+                    return $theme_uri . '/brochures/' . $m_rel;
+                }
+            }
+        }
+
+        // -------------------------------------------------------------
+        // Level 2: Subcategory / Series Brochure Mapping (All 29 Subcats)
+        // -------------------------------------------------------------
+        $series_map = array(
+            // Kimberly-Clark Professional (7 Subcategories)
+            'kc-hand-towel-systems'             => 'kc/kc-hand-towel-systems.pdf',
+            'kc-skincare-soap-dispensers'       => 'kc/kc-skincare-soap-dispensers.pdf',
+            'kc-bathroom-tissue-systems'        => 'kc/kc-bathroom-tissue-systems.pdf',
+            'kc-wypall-wiping-solutions'        => 'kc/kc-wypall-wiping-solutions.pdf',
+            'kc-facial-tissue-systems'          => 'kc/kc-facial-tissue-systems.pdf',
+            'kc-kimtech-scientific'             => 'kc/kc-kimtech-scientific.pdf',
+            'kc-kleenguard-ppe'                 => 'kc/kc-kleenguard-ppe.pdf',
+
+            // Blue Star Central Air Conditioning (4 Subcategories)
+            'vrf-systems'                       => 'bluestar/vrf-systems.pdf',
+            'ducted-systems'                    => 'bluestar/ducted-systems.pdf',
+            'chillers'                          => 'bluestar/chillers.pdf',
+            'condensing-units'                  => 'bluestar/condensing-units.pdf',
+
+            // Blue Star Cold Storage Solutions (3 Subcategories)
+            'cold-rooms-b2b'                    => 'bluestar/cold-rooms.pdf',
+            'cold-rooms'                        => 'bluestar/cold-rooms.pdf',
+            'refrigeration'                     => 'bluestar/refrigeration-systems.pdf',
+            'special-application-cs'            => 'bluestar/cold-rooms.pdf',
+
+            // Blue Star Commercial Refrigeration (6 Subcategories)
+            'deep-freezers'                     => 'bluestar/deep-freezers.pdf',
+            'freezers-b2b'                      => 'bluestar/deep-freezers.pdf',
+            'glass-top-freezers-b2b'            => 'bluestar/deep-freezers.pdf',
+            'visi-coolers-b2b'                  => 'bluestar/visi-coolers.pdf',
+            'visi-coolers'                      => 'bluestar/visi-coolers.pdf',
+            'storage-water-coolers-b2b'         => 'bluestar/storage-water-coolers.pdf',
+            'storage-water-coolers'             => 'bluestar/storage-water-coolers.pdf',
+            'bottled-water-dispensers-b2b'      => 'bluestar/bottled-water-dispensers.pdf',
+            'bottled-water-dispensers'          => 'bluestar/bottled-water-dispensers.pdf',
+            'kitchen-refrigeration-products-b2b'=> 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'kitchen-refrigeration-products'    => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'ice-machines-b2b'                  => 'bluestar/ice-machines.pdf',
+            'ice-machines'                      => 'bluestar/ice-machines.pdf',
+
+            // Blue Star Light Commercial AC (3 Subcategories)
+            'cassette-air-conditioners'         => 'bluestar/cassette-air-conditioners.pdf',
+            'concealed-split-acs'               => 'bluestar/concealed-split-acs.pdf',
+            'verticool-air-conditioners'        => 'bluestar/verticool-air-conditioners.pdf',
+
+            // Corporate Pantry & Other Brands (6 Subcategories)
+            'coffee-vending-machines'           => 'nestle/coffee-vending-machines.pdf',
+            'commercial-coffee-vending-machines'=> 'nestle/coffee-vending-machines.pdf',
+            'vending-machines'                  => 'nestle/coffee-vending-machines.pdf',
+            'tetley-teas'                       => 'tetley/tetley-corporate-teas.pdf',
+            'euronics-commercial'               => 'euronics/euronics-washroom-automation.pdf',
+            'euronics-hand-dryers'              => 'euronics/euronics-washroom-automation.pdf',
+            'euronics-sensor-taps'              => 'euronics/euronics-washroom-automation.pdf',
+            'euronics-soap-dispensers'          => 'euronics/euronics-washroom-automation.pdf',
+            'euronics-air-curtains'             => 'euronics/euronics-air-curtains-entrance.pdf',
+            'waterlogic-commercial'             => 'waterlogic/waterlogic-commercial-dispensers.pdf',
+            'eureka-forbes-commercial'          => 'eureka-forbes/commercial-ro-purifiers.pdf',
+            'eureka-forbes-industrial-ro-plants'=> 'eureka-forbes/commercial-ro-purifiers.pdf',
+            'usha-water-solutions'              => 'usha/usha-water-solutions.pdf',
+            'usha-water-dispensers'             => 'usha/usha-water-solutions.pdf',
+            'usha-water-coolers'                => 'usha/usha-water-solutions.pdf',
+            'usha-instant-coolers'              => 'usha/usha-water-solutions.pdf',
+        );
+
+        // Check active subcategory slug match
+        if ( ! empty( $active_subcat_slug ) && isset( $series_map[ $active_subcat_slug ] ) ) {
+            $rel = $series_map[ $active_subcat_slug ];
+            if ( file_exists( $theme_dir . '/brochures/' . $rel ) ) {
+                return $theme_uri . '/brochures/' . $rel;
+            }
+        }
+
+        // Check product categories if product_id is provided
+        if ( $product_id > 0 ) {
+            $terms = get_the_terms( $product_id, 'product_cat' );
+            if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+                foreach ( $terms as $t ) {
+                    if ( isset( $series_map[ $t->slug ] ) ) {
+                        $rel = $series_map[ $t->slug ];
+                        if ( file_exists( $theme_dir . '/brochures/' . $rel ) ) {
+                            return $theme_uri . '/brochures/' . $rel;
+                        }
+                    }
+                }
+            }
+        }
+
+        // SKU pattern fallback
+        if ( strpos( $u_sku, 'KCP-' ) !== false || strpos( $u_sku, 'KIMBERLY' ) !== false ) {
+            return $theme_uri . '/brochures/kc/kc-master-catalog.pdf';
+        }
+        if ( strpos( $u_sku, 'EUR-' ) !== false || strpos( $u_sku, 'EURONICS' ) !== false ) {
+            return $theme_uri . '/brochures/euronics/euronics-master-catalog.pdf';
+        }
+        if ( strpos( $u_sku, 'NES-' ) !== false || strpos( $u_sku, 'NESTLE' ) !== false ) {
+            return $theme_uri . '/brochures/nestle/coffee-vending-machines.pdf';
+        }
+        if ( strpos( $u_sku, 'TET-' ) !== false ) {
+            return $theme_uri . '/brochures/tetley/tetley-corporate-teas.pdf';
+        }
+        if ( strpos( $u_sku, 'WL-' ) !== false || strpos( $u_sku, 'WATERLOGIC' ) !== false ) {
+            return $theme_uri . '/brochures/waterlogic/waterlogic-commercial-dispensers.pdf';
+        }
+        if ( strpos( $u_sku, 'EF-' ) !== false || strpos( $u_sku, 'EUREKA' ) !== false ) {
+            return $theme_uri . '/brochures/eureka-forbes/commercial-ro-purifiers.pdf';
+        }
+        if ( strpos( $u_sku, 'USHA' ) !== false ) {
+            return $theme_uri . '/brochures/usha/usha-water-solutions.pdf';
+        }
+
+        // Brand Master Fallback
+        $brand_map = array(
+            'blue-star-commercial'       => 'bluestar/bluestar-master-catalog.pdf',
+            'kimberly-clark-commercial'  => 'kc/kc-master-catalog.pdf',
+            'kimberly-clark-professional'=> 'kc/kc-master-catalog.pdf',
+            'euronics-commercial'        => 'euronics/euronics-master-catalog.pdf',
+            'nestle-professional'        => 'nestle/coffee-vending-machines.pdf',
+            'tetley-corporate'           => 'tetley/tetley-corporate-teas.pdf',
+            'waterlogic-commercial'      => 'waterlogic/waterlogic-commercial-dispensers.pdf',
+            'eureka-forbes-commercial'   => 'eureka-forbes/commercial-ro-purifiers.pdf',
+            'usha-water-solutions'       => 'usha/usha-water-solutions.pdf',
+        );
+        if ( ! empty( $root_brand_slug ) && isset( $brand_map[ $root_brand_slug ] ) ) {
+            $rel = $brand_map[ $root_brand_slug ];
+            if ( file_exists( $theme_dir . '/brochures/' . $rel ) ) {
+                return $theme_uri . '/brochures/' . $rel;
+            }
+        }
+
+        return $theme_uri . '/brochures/bluestar/bluestar-master-catalog.pdf';
+    }
+}
