@@ -963,6 +963,16 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'CENTRIFUGAL'       => 'bluestar/centrifugal-chillers.pdf',
             'VT-WHO-PQS'        => 'bluestar/cold-rooms.pdf',
             'MF-DEEP-FREEZE-86' => 'bluestar/deep-freezers.pdf',
+            'CDU-COMMERCIAL'    => 'bluestar/condensing-units.pdf',
+            'CDU'               => 'bluestar/condensing-units.pdf',
+            'RS-HERMETIC'       => 'bluestar/refrigeration-systems.pdf',
+            'RS-SEMI-HERMETIC'  => 'bluestar/refrigeration-systems.pdf',
+            'PS-SHOWCASE'       => 'bluestar/pastry-showcase.pdf',
+            'MD-MULTIDECK'      => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'MC-MORGUE-BS'      => 'bluestar/cold-rooms.pdf',
+            'PR-PHARMACY-BS'    => 'bluestar/deep-freezers.pdf',
+            'ILR-VACCINE-BS'    => 'bluestar/deep-freezers.pdf',
+            'B2B-A64430'        => 'bluestar/deep-freezers.pdf',
         );
         foreach ( $model_map as $mk => $m_rel ) {
             if ( strpos( $u_sku, $mk ) !== false ) {
@@ -973,7 +983,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
         }
 
         // -------------------------------------------------------------
-        // Level 2: Subcategory / Series Brochure Mapping (All 29 Subcats)
+        // Level 2: Subcategory / Series Brochure Mapping (All Subcats)
         // -------------------------------------------------------------
         $series_map = array(
             // Kimberly-Clark Professional (7 Subcategories)
@@ -990,46 +1000,114 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'ducted-systems'                    => 'bluestar/ducted-systems.pdf',
             'chillers'                          => 'bluestar/chillers.pdf',
             'condensing-units'                  => 'bluestar/condensing-units.pdf',
+            'others-central-air-conditioning'   => 'bluestar/condensing-units.pdf',
 
             // Blue Star Cold Storage Solutions (3 Subcategories)
             'cold-rooms-b2b'                    => 'bluestar/cold-rooms.pdf',
             'cold-rooms'                        => 'bluestar/cold-rooms.pdf',
+            'cold-storages'                     => 'bluestar/cold-rooms.pdf',
             'refrigeration'                     => 'bluestar/refrigeration-systems.pdf',
+            'refrigeration-units'               => 'bluestar/refrigeration-systems.pdf',
+            'refrigeration-units-b2b'           => 'bluestar/refrigeration-systems.pdf',
             'special-application-cs'            => 'bluestar/cold-rooms.pdf',
 
-            // Blue Star Commercial Refrigeration (6 Subcategories)
+            // Blue Star Commercial Refrigeration (6 Subcategories + Specialty)
             'deep-freezers'                     => 'bluestar/deep-freezers.pdf',
+            'deep-freezers-2'                   => 'bluestar/deep-freezers.pdf',
             'freezers-b2b'                      => 'bluestar/deep-freezers.pdf',
-            'glass-top-freezers-b2b'            => 'bluestar/deep-freezers.pdf',
+            'glass-top-freezers-b2b'            => 'bluestar/visi-freezers.pdf',
+            'glass-top-freezers'                => 'bluestar/visi-freezers.pdf',
+            'glass-top-2'                       => 'bluestar/visi-freezers.pdf',
             'visi-coolers-b2b'                  => 'bluestar/visi-coolers.pdf',
             'visi-coolers'                      => 'bluestar/visi-coolers.pdf',
             'storage-water-coolers-b2b'         => 'bluestar/storage-water-coolers.pdf',
             'storage-water-coolers'             => 'bluestar/storage-water-coolers.pdf',
             'bottled-water-dispensers-b2b'      => 'bluestar/bottled-water-dispensers.pdf',
             'bottled-water-dispensers'          => 'bluestar/bottled-water-dispensers.pdf',
+            'top-loading-dispensers-b2b'        => 'bluestar/bottled-water-dispensers.pdf',
+            'top-loading-dispensers'            => 'bluestar/bottled-water-dispensers.pdf',
             'kitchen-refrigeration-products-b2b'=> 'bluestar/commercial-kitchen-refrigeration.pdf',
             'kitchen-refrigeration-products'    => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'reach-in-chillers-and-freezers-b2b'=> 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'reach-in-chillers-and-freezers'    => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'undercounter-chillers-and-freezers-b2b' => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'undercounter-chillers-and-freezers'    => 'bluestar/commercial-kitchen-refrigeration.pdf',
             'ice-machines-b2b'                  => 'bluestar/ice-machines.pdf',
             'ice-machines'                      => 'bluestar/ice-machines.pdf',
+            'supermarket-refrigeration-b2b'     => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'supermarket-refrigeration'         => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'pastry-showcase'                   => 'bluestar/pastry-showcase.pdf',
+            'confectionery-showcase'            => 'bluestar/pastry-showcase.pdf',
+            'mini-bar-2'                        => 'bluestar/mini-bars.pdf',
+            'mini-bar'                          => 'bluestar/mini-bars.pdf',
+            'speciality-products'               => 'bluestar/deep-freezers.pdf',
+            'speciality-products-2'             => 'bluestar/deep-freezers.pdf',
+            'medical-refrigeration-products-b2b'=> 'bluestar/deep-freezers.pdf',
+            'medical-refrigeration-products'    => 'bluestar/deep-freezers.pdf',
+            'vaccine-storage-products-b2b'      => 'bluestar/deep-freezers.pdf',
+            'vaccine-storage-products'          => 'bluestar/deep-freezers.pdf',
 
             // Blue Star Light Commercial AC (3 Subcategories)
             'cassette-air-conditioners'         => 'bluestar/cassette-air-conditioners.pdf',
             'concealed-split-acs'               => 'bluestar/concealed-split-acs.pdf',
+            'concealed-splits'                  => 'bluestar/concealed-split-acs.pdf',
             'verticool-air-conditioners'        => 'bluestar/verticool-air-conditioners.pdf',
+            'light-commercial-acs'              => 'bluestar/cassette-air-conditioners.pdf',
 
-            // Corporate Pantry & Other Brands (6 Subcategories)
+            // Blue Star Room ACs & Air Coolers
+            'b2b-room-air-conditioners'         => 'bluestar/bluestar-master-catalog.pdf',
+            'inverter-split'                    => 'bluestar/bluestar-master-catalog.pdf',
+            'b2b-inverter-split-acs'            => 'bluestar/bluestar-master-catalog.pdf',
+            'fixed-speed-split'                 => 'bluestar/bluestar-master-catalog.pdf',
+            'window-ac'                         => 'bluestar/bluestar-master-catalog.pdf',
+            'b2b-window-acs'                    => 'bluestar/bluestar-master-catalog.pdf',
+            'smart-wi-fi-acs'                   => 'bluestar/bluestar-master-catalog.pdf',
+            'hot-cold-acs-2'                    => 'bluestar/bluestar-master-catalog.pdf',
+            'heavy-duty-acs-2'                  => 'bluestar/bluestar-master-catalog.pdf',
+            'b2b-air-coolers'                   => 'bluestar/bluestar-master-catalog.pdf',
+            'air-coolers'                       => 'bluestar/bluestar-master-catalog.pdf',
+            'desert-air-coolers'                => 'bluestar/bluestar-master-catalog.pdf',
+            'desert-air-coolers-2'              => 'bluestar/bluestar-master-catalog.pdf',
+            'personal-air-coolers-2'            => 'bluestar/bluestar-master-catalog.pdf',
+            'window-air-coolers-2'              => 'bluestar/bluestar-master-catalog.pdf',
+            'b2b-air-purifiers'                 => 'bluestar/bluestar-master-catalog.pdf',
+
+            // Corporate Pantry & Atlantis
             'coffee-vending-machines'           => 'nestle/coffee-vending-machines.pdf',
             'commercial-coffee-vending-machines'=> 'nestle/coffee-vending-machines.pdf',
             'vending-machines'                  => 'nestle/coffee-vending-machines.pdf',
+            'brewing-bots'                      => 'nestle/coffee-vending-machines.pdf',
             'tetley-teas'                       => 'tetley/tetley-corporate-teas.pdf',
+            'atlantis-commercial'               => 'tetley/tetley-corporate-teas.pdf',
+            'atlantis-vending-machines'         => 'nestle/coffee-vending-machines.pdf',
+            'atlantis-tea-premixes'             => 'tetley/tetley-corporate-teas.pdf',
+            'atlantis-coffee-premixes'          => 'nestle/coffee-vending-machines.pdf',
+            'atlantis-cold-beverages'           => 'nestle/coffee-vending-machines.pdf',
+
+            // Euronics Washroom Automations (6 Subcategories)
             'euronics-commercial'               => 'euronics/euronics-washroom-automation.pdf',
             'euronics-hand-dryers'              => 'euronics/euronics-washroom-automation.pdf',
             'euronics-sensor-taps'              => 'euronics/euronics-washroom-automation.pdf',
             'euronics-soap-dispensers'          => 'euronics/euronics-washroom-automation.pdf',
             'euronics-air-curtains'             => 'euronics/euronics-air-curtains-entrance.pdf',
+            'euronics-paper-dispensers'         => 'euronics/euronics-washroom-automation.pdf',
+            'euronics-urinal-sensors'           => 'euronics/euronics-washroom-automation.pdf',
+
+            // Waterlogic India (4 Subcategories)
             'waterlogic-commercial'             => 'waterlogic/waterlogic-commercial-dispensers.pdf',
+            'waterlogic-countertop'             => 'waterlogic/waterlogic-commercial-dispensers.pdf',
+            'waterlogic-freestanding'           => 'waterlogic/waterlogic-commercial-dispensers.pdf',
+            'waterlogic-high-capacity'          => 'waterlogic/waterlogic-commercial-dispensers.pdf',
+            'waterlogic-pure-dispensers'        => 'waterlogic/waterlogic-commercial-dispensers.pdf',
+
+            // Eureka Forbes Commercial (4 Subcategories)
             'eureka-forbes-commercial'          => 'eureka-forbes/commercial-ro-purifiers.pdf',
+            'eureka-forbes-commercial-ro'       => 'eureka-forbes/commercial-ro-purifiers.pdf',
+            'eureka-forbes-commercial-uv'       => 'eureka-forbes/commercial-ro-purifiers.pdf',
+            'eureka-forbes-cooler-cum-purifiers'=> 'eureka-forbes/commercial-ro-purifiers.pdf',
             'eureka-forbes-industrial-ro-plants'=> 'eureka-forbes/commercial-ro-purifiers.pdf',
+
+            // Usha Water Solutions (3 Subcategories)
             'usha-water-solutions'              => 'usha/usha-water-solutions.pdf',
             'usha-water-dispensers'             => 'usha/usha-water-solutions.pdf',
             'usha-water-coolers'                => 'usha/usha-water-solutions.pdf',
@@ -1066,10 +1144,10 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
         if ( strpos( $u_sku, 'EUR-' ) !== false || strpos( $u_sku, 'EURONICS' ) !== false ) {
             return $theme_uri . '/brochures/euronics/euronics-master-catalog.pdf';
         }
-        if ( strpos( $u_sku, 'NES-' ) !== false || strpos( $u_sku, 'NESTLE' ) !== false ) {
+        if ( strpos( $u_sku, 'NES-' ) !== false || strpos( $u_sku, 'NESTLE' ) !== false || strpos( $u_sku, 'BOT-' ) !== false ) {
             return $theme_uri . '/brochures/nestle/coffee-vending-machines.pdf';
         }
-        if ( strpos( $u_sku, 'TET-' ) !== false ) {
+        if ( strpos( $u_sku, 'TET-' ) !== false || strpos( $u_sku, 'ATL-' ) !== false ) {
             return $theme_uri . '/brochures/tetley/tetley-corporate-teas.pdf';
         }
         if ( strpos( $u_sku, 'WL-' ) !== false || strpos( $u_sku, 'WATERLOGIC' ) !== false ) {
@@ -1089,6 +1167,8 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'kimberly-clark-professional'=> 'kc/kc-master-catalog.pdf',
             'euronics-commercial'        => 'euronics/euronics-master-catalog.pdf',
             'nestle-professional'        => 'nestle/coffee-vending-machines.pdf',
+            'corporate-pantry'           => 'nestle/coffee-vending-machines.pdf',
+            'atlantis-commercial'        => 'tetley/tetley-corporate-teas.pdf',
             'tetley-corporate'           => 'tetley/tetley-corporate-teas.pdf',
             'waterlogic-commercial'      => 'waterlogic/waterlogic-commercial-dispensers.pdf',
             'eureka-forbes-commercial'   => 'eureka-forbes/commercial-ro-purifiers.pdf',

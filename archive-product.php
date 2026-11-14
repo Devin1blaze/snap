@@ -1306,7 +1306,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                         ? $item['brochure_url'] 
                                         : ( function_exists( 'snap_stitch_resolve_b2b_brochure' ) ? snap_stitch_resolve_b2b_brochure( $item['id'], $item['sku'], ( $term && isset( $term->slug ) ) ? $term->slug : '', ( $root_brand_term && isset( $root_brand_term->slug ) ) ? $root_brand_term->slug : '' ) : '' );
                                     if ( empty( $final_card_brochure ) ) {
-                                        $final_card_brochure = get_template_directory_uri() . '/brochures/bluestar/bluestar-master-catalog.pdf';
+                                        $final_card_brochure = function_exists( 'snap_stitch_resolve_b2b_brochure' )
+                                            ? snap_stitch_resolve_b2b_brochure( $item['id'], $item['sku'], '', ( $root_brand_term && isset( $root_brand_term->slug ) ) ? $root_brand_term->slug : '' )
+                                            : get_template_directory_uri() . '/brochures/bluestar/bluestar-master-catalog.pdf';
                                     }
                                     ?>
                                     <a href="<?php echo esc_url( $final_card_brochure ); ?>" target="_blank" rel="noopener noreferrer" class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md" title="Download Official Product Specification Brochure"><span class="material-symbols-outlined text-base">download</span><span>Brochure</span></a>
