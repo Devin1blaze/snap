@@ -110,8 +110,8 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     if ( strpos( $u_sku, 'PREMIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
                     if ( strpos( $u_sku, 'AMIGO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/amigo-front.png';
                     if ( strpos( $u_sku, 'DUO' ) !== false || strpos( $u_sku, 'GUSTO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/duo-gusto-front.png';
-                    if ( strpos( $u_sku, 'SOL' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/solution-front.webp';
-                    if ( strpos( $u_sku, 'SPEC' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/spectra-front.png';
+                    if ( strpos( $u_sku, 'SOLUTION' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/solution-front.webp';
+                    if ( strpos( $u_sku, 'SPECTRA' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/spectra-front.png';
                     if ( strpos( $u_sku, 'FRIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/frio-front.webp';
                     return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
                 }
@@ -610,12 +610,6 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     'is_featured'      => $product->is_featured(),
                     'excerpt'          => wp_strip_all_tags( $product->get_short_description() ),
                 );
-                // Assign model_key for Nestle machines
-                $f_k = '';
-                foreach ( array('PREMIO'=>'premio','AMIGO'=>'amigo','DUO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOL'=>'solution','SPEC'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
-                    if ( stripos( $product->get_sku(), $nd ) !== false || stripos( get_the_title(), $nd ) !== false ) { $f_k = $k; break; }
-                }
-                $all_products[ count( $all_products ) - 1 ]['model_key'] = $f_k;
             }
             wp_reset_postdata();
         }
@@ -638,7 +632,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             $seen_fams = array();
             foreach ( $all_products as $p_item ) {
                 $f_k = '';
-                foreach ( array('PREMIO'=>'premio','AMIGO'=>'amigo','DUO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOL'=>'solution','SPEC'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
+                foreach ( array('NES-PREMIO'=>'premio','PREMIO'=>'premio','NES-AMIGO'=>'amigo','AMIGO'=>'amigo','DUO GUSTO'=>'duo_gusto','GUSTO'=>'duo_gusto','SOLUTION'=>'solution','SPECTRA'=>'spectra','FRIO'=>'frio') as $nd => $k ) {
                     if ( stripos( $p_item['sku'], $nd ) !== false || stripos( $p_item['title'], $nd ) !== false ) { $f_k = $k; break; }
                 }
                 if ( $f_k && isset( $seen_fams[ $f_k ] ) ) continue;
@@ -1098,7 +1092,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         foreach ( $canonical_models as $idx => $item ) :
                             $is_even = ( $idx % 2 === 0 );
                             $card_uid = 'card-' . $item['id'] . '-' . $idx;
-                            $m_key = ! empty( $item['model_key'] ) ? $item['model_key'] : '';
+                            $m_key = ( $is_coffee_family && ! empty( $item['model_key'] ) ) ? $item['model_key'] : '';
                             $m_data = ( $m_key && isset( $nestle_hardware[ $m_key ] ) ) ? $nestle_hardware[ $m_key ] : null;
                             $front_img = $m_data ? $m_data['front'] : $item['image_url'];
                             if ( empty( $front_img ) || strpos( $front_img, 'placeholder' ) !== false ) {
@@ -1139,12 +1133,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             <!-- Visual Column: Dual-Tab Switcher (lg:col-span-5) -->
                             <div class="lg:col-span-5 <?php echo $is_even ? 'lg:order-1' : 'lg:order-2'; ?> flex flex-col justify-center">
                                 <div class="relative bg-zinc-50 border border-zinc-200 p-4 sm:p-5 overflow-hidden group">
+                                    <?php if ( $has_bev_menu ) : ?>
                                     <div class="flex items-center gap-1.5 mb-3 z-20 relative">
                                         <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-black bg-[#0A0A0A] text-[#FBBF24] transition-all shadow-sm active:scale-95 focus-visible:ring-2 focus-visible:ring-[#1A56DB] focus-visible:outline-none" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="hardware"><span class="material-symbols-outlined text-xs">precision_manufacturing</span><span>Machine Hardware</span></button>
-                                        <?php if ( $has_bev_menu ) : ?>
                                         <button type="button" class="js-card-tab-btn flex-1 py-1.5 px-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 border-2 border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-700 transition-all shadow-sm active:scale-95 focus-visible:ring-2 focus-visible:ring-[#1A56DB] focus-visible:outline-none" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-target="menu"><span class="material-symbols-outlined text-xs">touch_app</span><span>Touchscreen Menu</span></button>
-                                        <?php endif; ?>
                                     </div>
+                                    <?php endif; ?>
                                     <!-- Tab 1: Machine Hardware Cutout + Multi-Angle Strip -->
                                     <div class="js-tab-pane flex flex-col justify-between" data-card="<?php echo esc_attr( $card_uid ); ?>" data-tab-content="hardware">
                                         <div class="relative aspect-[4/3] sm:aspect-square flex items-center justify-center overflow-hidden bg-white border border-zinc-200 p-4 sm:p-6">
@@ -1156,6 +1150,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                             <img id="main-img-<?php echo esc_attr( $card_uid ); ?>" src="<?php echo esc_url( $front_img ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" class="w-full h-full max-h-[260px] sm:max-h-[320px] md:max-h-[360px] object-contain mix-blend-multiply transition-all duration-300 p-2 sm:p-3" loading="lazy">
                                         </div>
                                         <!-- Multi-Angle Thumbnail Strip -->
+                                        <?php if ( count( $angles ) > 1 ) : ?>
                                         <div class="mt-2.5 pt-2 border-t border-zinc-200 flex items-center justify-between gap-1.5">
                                             <span class="text-[9px] font-black uppercase tracking-wider text-zinc-500 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-[#1A56DB] inline-block"></span> View Angle:</span>
                                             <div class="flex items-center gap-1">
@@ -1166,6 +1161,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                                 <?php endforeach; ?>
                                             </div>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                     <!-- Tab 2: Authentic Touchscreen Menu Kiosk Display -->
                                     <?php if ( $has_bev_menu ) : ?>
@@ -1417,7 +1413,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                 <tr class="bg-[#0A0A0A] text-white font-black uppercase tracking-wider text-[11px]">
                                     <th class="p-3 sticky left-0 bg-[#0A0A0A] z-20 w-64 min-w-[220px] border-r border-zinc-800">Engineering Parameter / Model</th>
                                     <?php foreach ( $canonical_models as $col_prod ) : 
-                                        $col_m_key = ! empty( $col_prod['model_key'] ) ? $col_prod['model_key'] : '';
+                                        $col_m_key = ( $is_coffee_family && ! empty( $col_prod['model_key'] ) ) ? $col_prod['model_key'] : '';
                                         $col_img = ( $col_m_key && isset( $nestle_hardware[ $col_m_key ]['front'] ) ) ? $nestle_hardware[ $col_m_key ]['front'] : $col_prod['thumb_url'];
                                     ?>
                                         <th class="p-3 border-r border-zinc-800 text-center min-w-[150px]">
