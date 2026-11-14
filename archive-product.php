@@ -112,8 +112,8 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     if ( strpos( $u_sku, 'PREMIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
                     if ( strpos( $u_sku, 'AMIGO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/amigo-front.png';
                     if ( strpos( $u_sku, 'DUO' ) !== false || strpos( $u_sku, 'GUSTO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/duo-gusto-front.png';
-                    if ( strpos( $u_sku, 'SOLUTION' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/solution-front.webp';
-                    if ( strpos( $u_sku, 'SPECTRA' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/spectra-front.png';
+                    if ( strpos( $u_sku, 'SOLUTION' ) !== false || strpos( $u_sku, 'NES-SOL' ) !== false || strpos( $u_sku, 'SOL-200' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/solution-front.webp';
+                    if ( strpos( $u_sku, 'SPECTRA' ) !== false || strpos( $u_sku, 'NES-SPEC' ) !== false || strpos( $u_sku, 'SPEC-150' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/spectra-front.png';
                     if ( strpos( $u_sku, 'FRIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/frio-front.webp';
                     return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
                 }
@@ -143,6 +143,15 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return home_url( '/wp-content/uploads/2026/08/ID318DNUHC_Gallery_Images_01.png' );
                 }
 
+                if ( strpos( $u_sku, 'BWD-GA-REF-GR' ) !== false || strpos( $u_sku, 'GA-REF-GR' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/bwd3fmrga-g_1_bwd3fmrga_grey_straight_view.png' );
+                }
+                if ( strpos( $u_sku, 'BWD-GA-REF-MR' ) !== false || strpos( $u_sku, 'GA-REF-MR' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/bwd3fmrga-m_1_bwd3fmrga_maroon_straight_view.png' );
+                }
+                if ( strpos( $u_sku, 'BWD-GA-REF-WH' ) !== false || strpos( $u_sku, 'GA-REF-WH' ) !== false ) {
+                    return home_url( '/wp-content/uploads/2026/08/BWD3FMRGA-scaled.png' );
+                }
                 if ( strpos( $u_sku, 'BWD-GA-REF' ) !== false || strpos( $u_sku, 'BWD-GA' ) !== false ) {
                     return home_url( '/wp-content/uploads/2026/08/ga.jpg' );
                 }
@@ -258,7 +267,12 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                 }
 
                 if ( strpos( $u_sku, 'WL-' ) !== false || strpos( $u_sku, 'WATERLOGIC' ) !== false || strpos( $u_sku, 'FIREWALL' ) !== false ) {
+                    if ( strpos( $u_sku, 'WL-7' ) !== false || strpos( $u_sku, 'WL7' ) !== false ) return $theme_uri . '/images/waterlogic/wl7.png';
+                    if ( strpos( $u_sku, 'WL-3' ) !== false || strpos( $u_sku, 'WL3' ) !== false ) return $theme_uri . '/images/waterlogic/wl3.png';
+                    if ( strpos( $u_sku, 'WL-2' ) !== false || strpos( $u_sku, 'WL2' ) !== false ) return $theme_uri . '/images/waterlogic/wl2.png';
+                    if ( strpos( $u_sku, 'CUBE' ) !== false ) return $theme_uri . '/images/waterlogic/cube.png';
                     if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) return $existing_url;
+                    return $theme_uri . '/images/waterlogic/wl7.png';
                 }
 
                 if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) {
@@ -628,7 +642,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
             'amigo'     => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/amigo-front.png', 'left' => $theme_uri . '/images/nestle-machines/hardware/amigo-left.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/amigo-right.png', 'menu' => $theme_uri . '/images/nestle-machines/amigo-menu.webp' ),
             'duo_gusto' => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/duo-gusto-front.png', 'left' => $theme_uri . '/images/nestle-machines/hardware/duo-gusto-left.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/duo-gusto-right.png', 'menu' => $theme_uri . '/images/nestle-machines/duo-gusto-menu.webp' ),
             'solution'  => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/solution-front.webp', 'left' => $theme_uri . '/images/nestle-machines/hardware/solution-left.webp', 'right' => $theme_uri . '/images/nestle-machines/hardware/solution-right.webp', 'menu' => $theme_uri . '/images/nestle-machines/solution-menu.webp' ),
-            'spectra'   => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/spectra-front.png', 'left' => $theme_uri . '/images/nestle-machines/hardware/spectra-front.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/spectra-front.png', 'menu' => $theme_uri . '/images/nestle-machines/spectra-menu.webp' ),
+            'spectra'   => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/spectra-front.png', 'left' => $theme_uri . '/images/nestle-machines/hardware/spectra-left.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/spectra-right.jpg', 'menu' => $theme_uri . '/images/nestle-machines/spectra-menu.webp' ),
             'frio'      => array( 'front' => $theme_uri . '/images/nestle-machines/hardware/frio-front.webp', 'left' => $theme_uri . '/images/nestle-machines/hardware/frio-left.png', 'right' => $theme_uri . '/images/nestle-machines/hardware/frio-right.png', 'menu' => $theme_uri . '/images/nestle-machines/frio-menu.webp' ),
         );
         $canonical_models = array();

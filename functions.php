@@ -492,7 +492,9 @@ function snap_stitch_get_menu_products() {
             }
             if ( ! $product ) continue;
 
-            $image_url = wp_get_attachment_image_url( $product->get_image_id(), 'medium' ) ?: wc_placeholder_img_src();
+            $raw_img = wp_get_attachment_image_url( $product->get_image_id(), 'medium' ) ?: '';
+            $image_url = function_exists( 'snap_stitch_resolve_b2b_image' ) ? snap_stitch_resolve_b2b_image( $product->get_sku(), $raw_img ) : $raw_img;
+            $image_url = $image_url ?: wc_placeholder_img_src();
             $terms = wc_get_product_terms( $product->get_id(), 'product_cat', array( 'fields' => 'names' ) );
             $brand = ! empty( $terms ) ? $terms[0] : 'BLUE STAR';
             $is_b2b = function_exists( 'snap_stitch_is_b2b_product' ) ? snap_stitch_is_b2b_product( $product->get_id() ) : false;
@@ -576,10 +578,13 @@ function snap_ajax_search_callback() {
             $is_b2b = function_exists( 'snap_stitch_is_b2b_product' ) ? snap_stitch_is_b2b_product($product->get_id()) : false;
             $price_html = $is_b2b ? '<span class="text-[#FBBF24] text-[10px] uppercase font-black tracking-tighter">B2B Product</span>' : wp_kses_post( (string) $product->get_price_html() );
             
+            $raw_thumb = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') ?: '';
+            $resolved_thumb = function_exists( 'snap_stitch_resolve_b2b_image' ) ? snap_stitch_resolve_b2b_image( $product->get_sku(), $raw_thumb ) : $raw_thumb;
+            
             $results[] = [
                 'title' => esc_html( html_entity_decode( (string) get_the_title() ) ),
                 'url' => esc_url( get_permalink() ),
-                'image' => esc_url( get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') ?: wc_placeholder_img_src() ),
+                'image' => esc_url( $resolved_thumb ?: wc_placeholder_img_src() ),
                 'price' => $price_html
             ];
         }
@@ -805,8 +810,8 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             if ( strpos( $u_sku, 'PREMIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
             if ( strpos( $u_sku, 'AMIGO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/amigo-front.png';
             if ( strpos( $u_sku, 'DUO' ) !== false || strpos( $u_sku, 'GUSTO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/duo-gusto-front.png';
-            if ( strpos( $u_sku, 'SOLUTION' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/solution-front.webp';
-            if ( strpos( $u_sku, 'SPECTRA' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/spectra-front.png';
+            if ( strpos( $u_sku, 'SOLUTION' ) !== false || strpos( $u_sku, 'NES-SOL' ) !== false || strpos( $u_sku, 'SOL-200' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/solution-front.webp';
+            if ( strpos( $u_sku, 'SPECTRA' ) !== false || strpos( $u_sku, 'NES-SPEC' ) !== false || strpos( $u_sku, 'SPEC-150' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/spectra-front.png';
             if ( strpos( $u_sku, 'FRIO' ) !== false ) return $theme_uri . '/images/nestle-machines/hardware/frio-front.webp';
             return $theme_uri . '/images/nestle-machines/hardware/premio-front.png';
         }
@@ -837,6 +842,15 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
         // Blue Star Specific Models & Series
         if ( strpos( $u_sku, 'IC324DNUHC' ) !== false || strpos( $u_sku, 'DNUHC' ) !== false ) {
             return home_url( '/wp-content/uploads/2026/08/ID318DNUHC_Gallery_Images_01.png' );
+        }
+        if ( strpos( $u_sku, 'BWD-GA-REF-GR' ) !== false || strpos( $u_sku, 'GA-REF-GR' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/bwd3fmrga-g_1_bwd3fmrga_grey_straight_view.png' );
+        }
+        if ( strpos( $u_sku, 'BWD-GA-REF-MR' ) !== false || strpos( $u_sku, 'GA-REF-MR' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/bwd3fmrga-m_1_bwd3fmrga_maroon_straight_view.png' );
+        }
+        if ( strpos( $u_sku, 'BWD-GA-REF-WH' ) !== false || strpos( $u_sku, 'GA-REF-WH' ) !== false ) {
+            return home_url( '/wp-content/uploads/2026/08/BWD3FMRGA-scaled.png' );
         }
         if ( strpos( $u_sku, 'BWD-GA-REF' ) !== false || strpos( $u_sku, 'BWD-GA' ) !== false ) {
             return home_url( '/wp-content/uploads/2026/08/ga.jpg' );
@@ -951,6 +965,20 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             return $theme_uri . '/images/tetley/tetley-plain.png';
         }
 
+        if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
+            if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) return $existing_url;
+        }
+
+        // Waterlogic Commercial Firewall Dispensers
+        if ( strpos( $u_sku, 'WL-' ) !== false || strpos( $u_sku, 'WATERLOGIC' ) !== false || strpos( $u_sku, 'FIREWALL' ) !== false ) {
+            if ( strpos( $u_sku, 'WL-7' ) !== false || strpos( $u_sku, 'WL7' ) !== false ) return $theme_uri . '/images/waterlogic/wl7.png';
+            if ( strpos( $u_sku, 'WL-3' ) !== false || strpos( $u_sku, 'WL3' ) !== false ) return $theme_uri . '/images/waterlogic/wl3.png';
+            if ( strpos( $u_sku, 'WL-2' ) !== false || strpos( $u_sku, 'WL2' ) !== false ) return $theme_uri . '/images/waterlogic/wl2.png';
+            if ( strpos( $u_sku, 'CUBE' ) !== false ) return $theme_uri . '/images/waterlogic/cube.png';
+            if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) return $existing_url;
+            return $theme_uri . '/images/waterlogic/wl7.png';
+        }
+
         if ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false ) {
             return $existing_url;
         }
@@ -983,27 +1011,73 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
         // Level 1: Dedicated Product / Model Specific Datasheets
         // -------------------------------------------------------------
         $model_map = array(
-            'BWD-GA'            => 'bluestar/bottled-water-dispensers.pdf',
-            'BWD-ECO'           => 'bluestar/bottled-water-dispensers.pdf',
-            'BWD-UA'            => 'bluestar/bottled-water-dispensers.pdf',
-            'BWD-GB'            => 'bluestar/bottled-water-dispensers.pdf',
-            'BWD-PLATINUM'      => 'bluestar/storage-water-coolers.pdf',
-            'RI-S-SERIES'       => 'bluestar/commercial-kitchen-refrigeration.pdf',
-            'UC-S-SERIES'       => 'bluestar/commercial-kitchen-refrigeration.pdf',
-            'WCC-CENTRIFUGAL'   => 'bluestar/centrifugal-chillers.pdf',
-            'CENTRIFUGAL'       => 'bluestar/centrifugal-chillers.pdf',
-            'VT-WHO-PQS'        => 'bluestar/cold-rooms.pdf',
-            'MF-DEEP-FREEZE-86' => 'bluestar/deep-freezers.pdf',
-            'CDU-COMMERCIAL'    => 'bluestar/condensing-units.pdf',
-            'CDU'               => 'bluestar/condensing-units.pdf',
-            'RS-HERMETIC'       => 'bluestar/refrigeration-systems.pdf',
-            'RS-SEMI-HERMETIC'  => 'bluestar/refrigeration-systems.pdf',
-            'PS-SHOWCASE'       => 'bluestar/pastry-showcase.pdf',
-            'MD-MULTIDECK'      => 'bluestar/commercial-kitchen-refrigeration.pdf',
-            'MC-MORGUE-BS'      => 'bluestar/cold-rooms.pdf',
-            'PR-PHARMACY-BS'    => 'bluestar/deep-freezers.pdf',
-            'ILR-VACCINE-BS'    => 'bluestar/deep-freezers.pdf',
-            'B2B-A64430'        => 'bluestar/deep-freezers.pdf',
+            // Blue Star Water Dispensers & Storage Water Coolers
+            'BWD-GA'                            => 'bluestar/bottled-water-dispensers.pdf',
+            'BWD-ECO'                           => 'bluestar/bottled-water-dispensers.pdf',
+            'BWD-UA'                            => 'bluestar/bottled-water-dispensers.pdf',
+            'BWD-GB'                            => 'bluestar/bottled-water-dispensers.pdf',
+            'BWD-BOTTOM-LOAD'                   => 'bluestar/bottled-water-dispensers.pdf',
+            'BWD-PLATINUM'                      => 'bluestar/storage-water-coolers.pdf',
+            'SWC-WARM-COLD'                     => 'bluestar/storage-water-coolers-warm-cold.pdf',
+            'SWC-SUPER-COOLER'                  => 'bluestar/storage-water-coolers.pdf',
+            'SWC-TROPICAL'                      => 'bluestar/storage-water-coolers.pdf',
+            'SDLX-SERIES'                       => 'bluestar/storage-water-coolers.pdf',
+
+            // Blue Star Specialty Coolers & Freezers
+            'B2B-A33518'                        => 'bluestar/chest-coolers.pdf',
+            'B2B-A80344'                        => 'bluestar/mini-bars.pdf',
+            'MR60'                              => 'bluestar/mini-bars.pdf',
+            'VF-SERIES'                         => 'bluestar/visi-freezers.pdf',
+            'CF-GLASS-TOP'                      => 'bluestar/visi-freezers.pdf',
+            'GT215'                             => 'bluestar/visi-freezers.pdf',
+            'GT315'                             => 'bluestar/visi-freezers.pdf',
+            'GT365'                             => 'bluestar/visi-freezers.pdf',
+            'GT421'                             => 'bluestar/visi-freezers.pdf',
+            'GT530'                             => 'bluestar/visi-freezers.pdf',
+
+            // Blue Star Visi Coolers
+            'SC-285'                            => 'bluestar/visi-coolers.pdf',
+            'SC-358'                            => 'bluestar/visi-coolers.pdf',
+            'SC-448'                            => 'bluestar/visi-coolers.pdf',
+            'SC-595'                            => 'bluestar/visi-coolers.pdf',
+            'VC-TT-55'                          => 'bluestar/visi-coolers.pdf',
+            'VC-A-SERIES'                       => 'bluestar/visi-coolers.pdf',
+            'VC-C-SERIES'                       => 'bluestar/visi-coolers.pdf',
+            'VC-D-SERIES'                       => 'bluestar/visi-coolers.pdf',
+
+            // Blue Star HVAC & Commercial Kitchen
+            'BS-LC-VERT'                        => 'bluestar/verticool-air-conditioners.pdf',
+            'VERTICOOL'                         => 'bluestar/verticool-air-conditioners.pdf',
+            'RI-S-SERIES'                       => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'RI-GP-SERIES'                      => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'UC-S-SERIES'                       => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'UC-GP-SERIES'                      => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'BB-190-300'                        => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'SS-PREP-STATION'                   => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'MD-MULTIDECK'                      => 'bluestar/commercial-kitchen-refrigeration.pdf',
+            'PS-SHOWCASE'                       => 'bluestar/pastry-showcase.pdf',
+            'IM-COMMERCIAL'                     => 'bluestar/ice-machines.pdf',
+            'WCC-CENTRIFUGAL'                   => 'bluestar/centrifugal-chillers.pdf',
+            'CENTRIFUGAL'                       => 'bluestar/centrifugal-chillers.pdf',
+            'LC-SCROLL-CHILLER'                 => 'bluestar/chillers.pdf',
+            'CDU-COMMERCIAL'                    => 'bluestar/condensing-units.pdf',
+            'CDU'                               => 'bluestar/condensing-units.pdf',
+            'RS-HERMETIC'                       => 'bluestar/refrigeration-systems.pdf',
+            'RS-SEMI-HERMETIC'                  => 'bluestar/refrigeration-systems.pdf',
+            'VT-WHO-PQS'                        => 'bluestar/cold-rooms.pdf',
+            'MC-MORGUE-BS'                      => 'bluestar/cold-rooms.pdf',
+            'CR-RIPENING-ROOM'                  => 'bluestar/cold-rooms.pdf',
+            'CR-MODULAR-PUF'                    => 'bluestar/cold-rooms.pdf',
+            'PUF-PANELS'                        => 'bluestar/cold-rooms.pdf',
+            'MF-DEEP-FREEZE-86'                 => 'bluestar/deep-freezers.pdf',
+            'PR-PHARMACY-BS'                    => 'bluestar/deep-freezers.pdf',
+            'ILR-VACCINE-BS'                    => 'bluestar/deep-freezers.pdf',
+            'BF-BLAST-FREEZER'                  => 'bluestar/deep-freezers.pdf',
+            'CHF-HARD-TOP'                      => 'bluestar/deep-freezers.pdf',
+            'B2B-A64430'                        => 'bluestar/deep-freezers.pdf',
+
+            // Atlantis Beverage Premixes
+            'ATL-PREM-'                         => 'atlantis/atlantis-beverage-premixes.pdf',
         );
         foreach ( $model_map as $mk => $m_rel ) {
             if ( strpos( $u_sku, $mk ) !== false ) {
@@ -1026,31 +1100,17 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'kc-kimtech-scientific'             => 'kc/kc-kimtech-scientific.pdf',
             'kc-kleenguard-ppe'                 => 'kc/kc-kleenguard-ppe.pdf',
 
-            // Blue Star Central Air Conditioning (4 Subcategories)
-            'vrf-systems'                       => 'bluestar/vrf-systems.pdf',
-            'ducted-systems'                    => 'bluestar/ducted-systems.pdf',
-            'chillers'                          => 'bluestar/chillers.pdf',
-            'condensing-units'                  => 'bluestar/condensing-units.pdf',
-            'others-central-air-conditioning'   => 'bluestar/condensing-units.pdf',
-
-            // Blue Star Cold Storage Solutions (3 Subcategories)
-            'cold-rooms-b2b'                    => 'bluestar/cold-rooms.pdf',
-            'cold-rooms'                        => 'bluestar/cold-rooms.pdf',
-            'cold-storages'                     => 'bluestar/cold-rooms.pdf',
-            'refrigeration'                     => 'bluestar/refrigeration-systems.pdf',
-            'refrigeration-units'               => 'bluestar/refrigeration-systems.pdf',
-            'refrigeration-units-b2b'           => 'bluestar/refrigeration-systems.pdf',
-            'special-application-cs'            => 'bluestar/cold-rooms.pdf',
-
-            // Blue Star Commercial Refrigeration (6 Subcategories + Specialty)
-            'deep-freezers'                     => 'bluestar/deep-freezers.pdf',
-            'deep-freezers-2'                   => 'bluestar/deep-freezers.pdf',
-            'freezers-b2b'                      => 'bluestar/deep-freezers.pdf',
+            // Specific Blue Star Commercial Refrigeration
             'glass-top-freezers-b2b'            => 'bluestar/visi-freezers.pdf',
             'glass-top-freezers'                => 'bluestar/visi-freezers.pdf',
             'glass-top-2'                       => 'bluestar/visi-freezers.pdf',
             'visi-coolers-b2b'                  => 'bluestar/visi-coolers.pdf',
             'visi-coolers'                      => 'bluestar/visi-coolers.pdf',
+            'floor-standing-visi-coolers'       => 'bluestar/visi-coolers.pdf',
+            'table-top-visi-coolers'            => 'bluestar/visi-coolers.pdf',
+            'table-top-visi'                    => 'bluestar/visi-coolers.pdf',
+            'chest-coolers'                     => 'bluestar/chest-coolers.pdf',
+            'storage-water-coolers-warm-cold'   => 'bluestar/storage-water-coolers-warm-cold.pdf',
             'storage-water-coolers-b2b'         => 'bluestar/storage-water-coolers.pdf',
             'storage-water-coolers'             => 'bluestar/storage-water-coolers.pdf',
             'bottled-water-dispensers-b2b'      => 'bluestar/bottled-water-dispensers.pdf',
@@ -1071,6 +1131,10 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'confectionery-showcase'            => 'bluestar/pastry-showcase.pdf',
             'mini-bar-2'                        => 'bluestar/mini-bars.pdf',
             'mini-bar'                          => 'bluestar/mini-bars.pdf',
+            'deep-freezers'                     => 'bluestar/deep-freezers.pdf',
+            'deep-freezers-2'                   => 'bluestar/deep-freezers.pdf',
+            'freezers-b2b'                      => 'bluestar/deep-freezers.pdf',
+            'hard-top-2'                        => 'bluestar/deep-freezers.pdf',
             'speciality-products'               => 'bluestar/deep-freezers.pdf',
             'speciality-products-2'             => 'bluestar/deep-freezers.pdf',
             'medical-refrigeration-products-b2b'=> 'bluestar/deep-freezers.pdf',
@@ -1078,11 +1142,27 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'vaccine-storage-products-b2b'      => 'bluestar/deep-freezers.pdf',
             'vaccine-storage-products'          => 'bluestar/deep-freezers.pdf',
 
-            // Blue Star Light Commercial AC (3 Subcategories)
+            // Blue Star Cold Storage Solutions
+            'cold-rooms-b2b'                    => 'bluestar/cold-rooms.pdf',
+            'cold-rooms'                        => 'bluestar/cold-rooms.pdf',
+            'cold-storages'                     => 'bluestar/cold-rooms.pdf',
+            'cold-storages-2'                   => 'bluestar/cold-rooms.pdf',
+            'special-application-cs'            => 'bluestar/cold-rooms.pdf',
+            'refrigeration-units'               => 'bluestar/refrigeration-systems.pdf',
+            'refrigeration-units-b2b'           => 'bluestar/refrigeration-systems.pdf',
+
+            // Blue Star Central Air Conditioning
+            'vrf-systems'                       => 'bluestar/vrf-systems.pdf',
+            'ducted-systems'                    => 'bluestar/ducted-systems.pdf',
+            'chillers'                          => 'bluestar/chillers.pdf',
+            'condensing-units'                  => 'bluestar/condensing-units.pdf',
+            'others-central-air-conditioning'   => 'bluestar/condensing-units.pdf',
+
+            // Blue Star Light Commercial AC
+            'verticool-air-conditioners'        => 'bluestar/verticool-air-conditioners.pdf',
             'cassette-air-conditioners'         => 'bluestar/cassette-air-conditioners.pdf',
             'concealed-split-acs'               => 'bluestar/concealed-split-acs.pdf',
             'concealed-splits'                  => 'bluestar/concealed-split-acs.pdf',
-            'verticool-air-conditioners'        => 'bluestar/verticool-air-conditioners.pdf',
             'light-commercial-acs'              => 'bluestar/cassette-air-conditioners.pdf',
 
             // Blue Star Room ACs & Air Coolers
@@ -1110,7 +1190,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'brewing-bots'                      => 'nestle/coffee-vending-machines.pdf',
             'tetley-teas'                       => 'tetley/tetley-corporate-teas.pdf',
             'atlantis-commercial'               => 'atlantis/atlantis-beverage-premixes.pdf',
-            'atlantis-vending-machines'         => 'nestle/coffee-vending-machines.pdf',
+            'atlantis-vending-machines'         => 'atlantis/atlantis-beverage-premixes.pdf',
             'atlantis-tea-premixes'             => 'atlantis/atlantis-beverage-premixes.pdf',
             'atlantis-coffee-premixes'          => 'atlantis/atlantis-beverage-premixes.pdf',
             'atlantis-cold-beverages'           => 'atlantis/atlantis-beverage-premixes.pdf',
@@ -1124,12 +1204,13 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'euronics-paper-dispensers'         => 'euronics/euronics-washroom-automation.pdf',
             'euronics-urinal-sensors'           => 'euronics/euronics-washroom-automation.pdf',
 
-            // Waterlogic India (4 Subcategories)
+            // Waterlogic India (5 Subcategories)
             'waterlogic-commercial'             => 'waterlogic/waterlogic-commercial-dispensers.pdf',
             'waterlogic-countertop'             => 'waterlogic/waterlogic-commercial-dispensers.pdf',
             'waterlogic-freestanding'           => 'waterlogic/waterlogic-commercial-dispensers.pdf',
             'waterlogic-high-capacity'          => 'waterlogic/waterlogic-commercial-dispensers.pdf',
             'waterlogic-pure-dispensers'        => 'waterlogic/waterlogic-commercial-dispensers.pdf',
+            'waterlogic-firewall-pou'           => 'waterlogic/waterlogic-commercial-dispensers.pdf',
 
             // Eureka Forbes Commercial (4 Subcategories)
             'eureka-forbes-commercial'          => 'eureka-forbes/commercial-ro-purifiers.pdf',
