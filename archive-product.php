@@ -711,7 +711,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             ? snap_stitch_resolve_b2b_brochure( 0, '', ( $term && isset( $term->slug ) ) ? $term->slug : '', ( $root_brand_term && isset( $root_brand_term->slug ) ) ? $root_brand_term->slug : '' )
                             : '';
                         if ( ! empty( $subcat_hero_brochure ) ) : ?>
-                            <a href="<?php echo esc_url( $subcat_hero_brochure ); ?>" target="_blank" rel="noopener noreferrer" class="h-[52px] w-full sm:w-auto border-2 border-white/60 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 bg-black/40 backdrop-blur-sm transition-all shadow-xl"><span class="material-symbols-outlined text-lg">download</span><span>Download Series Catalog</span></a>
+                            <a href="<?php echo esc_url( $subcat_hero_brochure ); ?>" download target="_blank" rel="noopener noreferrer" class="h-[52px] w-full sm:w-auto border-2 border-white/60 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 bg-black/40 backdrop-blur-sm transition-all shadow-xl"><span class="material-symbols-outlined text-lg">download</span><span>Download Series Catalog</span></a>
                         <?php endif; ?>
                         <a href="#spec-matrix" class="h-[52px] w-full sm:w-auto border-2 border-white/40 hover:border-white hover:bg-white hover:text-black active:scale-95 text-white px-5 sm:px-6 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 bg-black/30 backdrop-blur-sm transition-all"><span>Compare Technical Specs (<?php echo esc_html( $total_models ); ?>)</span><span class="material-symbols-outlined text-lg">arrow_downward</span></a>
                     </div>
@@ -1313,7 +1313,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                             : get_template_directory_uri() . '/brochures/bluestar/bluestar-master-catalog.pdf';
                                     }
                                     ?>
-                                    <a href="<?php echo esc_url( $final_card_brochure ); ?>" target="_blank" rel="noopener noreferrer" class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md" title="Download Official Product Specification Brochure"><span class="material-symbols-outlined text-base">download</span><span>Brochure</span></a>
+                                    <a href="<?php echo esc_url( $final_card_brochure ); ?>" download target="_blank" rel="noopener noreferrer" class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md" title="Download Official Product Specification Brochure"><span class="material-symbols-outlined text-base">download</span><span>Brochure</span></a>
                                 </div>
                             </div>
                         </article>

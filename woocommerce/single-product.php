@@ -156,7 +156,7 @@ get_header( 'shop' ); ?>
                                 $brochure_url = get_post_meta( $product_id, '_brochure_url', true );
                                 if ( ! empty( $brochure_url ) ) :
                             ?>
-                            <a href="<?php echo esc_url( $brochure_url ); ?>" target="_blank" class="flex-1 flex items-center justify-center gap-2 border-2 border-zinc-200 text-black font-bold min-h-[48px] py-2 px-3 uppercase tracking-widest hover:border-black hover:bg-black hover:text-white transition-all text-[11px]">
+                            <a href="<?php echo esc_url( $brochure_url ); ?>" download target="_blank" class="flex-1 flex items-center justify-center gap-2 border-2 border-zinc-200 text-black font-bold min-h-[48px] py-2 px-3 uppercase tracking-widest hover:border-black hover:bg-black hover:text-white transition-all text-[11px]">
                                 <span class="material-symbols-outlined text-sm flex-shrink-0">download</span>
                                 <span class="text-center leading-tight">DOWNLOAD BROCHURE</span>
                             </a>
