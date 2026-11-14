@@ -1536,7 +1536,8 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
 <!-- Tetley Corporate Tea Accessories Table (as requested) -->
             <?php 
-            $is_tetley_cat = ( $term && ( $term->slug === 'tetley-teas' || strpos( $term->slug, 'tetley' ) !== false ) );
+            $t_slug = ( $term && isset( $term->slug ) ) ? (string) $term->slug : '';
+            $is_tetley_cat = ( $t_slug !== '' && ( $t_slug === 'tetley-teas' || strpos( $t_slug, 'tetley' ) !== false ) );
             if ( $is_tetley_cat ) : 
                 $tea_accessories = array(
                     array(
