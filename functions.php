@@ -1083,8 +1083,11 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
             return $theme_uri . '/images/tetley/tetley-plain.png';
         }
 
-        // 13. Atlantis Instant Beverage Premixes
+        // 13. Atlantis Instant Beverage Premixes & Equipment
         if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
+            if ( $has_valid_existing ) {
+                return $existing_url;
+            }
             if ( strpos( $u_sku, 'COLD' ) !== false ) {
                 return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-cold-beverages.jpg' );
             }
@@ -1315,17 +1318,34 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'window-air-coolers-2'              => 'bluestar/bluestar-master-catalog.pdf',
             'b2b-air-purifiers'                 => 'bluestar/bluestar-master-catalog.pdf',
 
-            // Corporate Pantry & Atlantis
+            // Corporate Pantry & Atlantis Commercial Solutions (20 Subcategories)
             'coffee-vending-machines'           => 'nestle/coffee-vending-machines.pdf',
             'commercial-coffee-vending-machines'=> 'nestle/coffee-vending-machines.pdf',
             'vending-machines'                  => 'nestle/coffee-vending-machines.pdf',
             'brewing-bots'                      => 'nestle/coffee-vending-machines.pdf',
             'tetley-teas'                       => 'tetley/tetley-corporate-teas.pdf',
-            'atlantis-commercial'               => 'atlantis/atlantis-beverage-premixes.pdf',
-            'atlantis-vending-machines'         => 'atlantis/atlantis-beverage-premixes.pdf',
-            'atlantis-tea-premixes'             => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-commercial'               => 'atlantis/atlantis-master-catalog.pdf',
+            'atlantis-vending-machines'         => 'atlantis/atlantis-vending-machines.pdf',
             'atlantis-coffee-premixes'          => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-tea-premixes'             => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-sachets'                  => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-beverage-whiteners'       => 'atlantis/atlantis-beverage-premixes.pdf',
             'atlantis-cold-beverages'           => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-soups-hot-beverages'      => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-table-top-dispensers'     => 'atlantis/atlantis-water-dispensers.pdf',
+            'atlantis-floor-standing-dispensers'=> 'atlantis/atlantis-water-dispensers.pdf',
+            'atlantis-fridge-dispensers'        => 'atlantis/atlantis-water-dispensers.pdf',
+            'atlantis-brew-vending'             => 'atlantis/atlantis-vending-machines.pdf',
+            'atlantis-select-vending'           => 'atlantis/atlantis-vending-machines.pdf',
+            'atlantis-classic-vending'          => 'atlantis/atlantis-vending-machines.pdf',
+            'atlantis-neo-vending'              => 'atlantis/atlantis-vending-machines.pdf',
+            'atlantis-coin-vending'             => 'atlantis/atlantis-vending-machines.pdf',
+            'atlantis-compact-vending'          => 'atlantis/atlantis-vending-machines.pdf',
+            'atlantis-cool-vend'                => 'atlantis/atlantis-vending-machines.pdf',
+            'atlantis-capsule-machines'         => 'atlantis/atlantis-vending-machines.pdf',
+            'atlantis-coffee-capsules'          => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-wine-coolers'             => 'atlantis/atlantis-water-dispensers.pdf',
+            'atlantis-accessories'              => 'atlantis/atlantis-water-dispensers.pdf',
 
             // Euronics Washroom Automations (6 Subcategories)
             'euronics-commercial'               => 'euronics/euronics-washroom-automation.pdf',

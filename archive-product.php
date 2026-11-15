@@ -385,8 +385,11 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     return $theme_uri . '/images/tetley/tetley-plain.png';
                 }
 
-                // 13. Atlantis Instant Beverage Premixes
+                // 13. Atlantis Instant Beverage Premixes & Equipment
                 if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
+                    if ( $has_valid_existing ) {
+                        return $existing_url;
+                    }
                     if ( strpos( $u_sku, 'COLD' ) !== false ) {
                         return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-cold-beverages.jpg' );
                     }
