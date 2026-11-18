@@ -48,12 +48,55 @@ get_header( 'shop' ); ?>
                     <?php 
                         $image_id = $product->get_image_id();
                         $sku = $product->get_sku();
-                        $existing_src = $image_id ? wp_get_attachment_image_url( $image_id, 'full' ) : '';
-                        $resolved_src = function_exists( 'snap_stitch_resolve_b2b_image' ) ? snap_stitch_resolve_b2b_image( $sku, $existing_src ) : $existing_src;
-                        if ( ! empty( $resolved_src ) && strpos( $resolved_src, 'placeholder' ) === false ) {
-                            echo '<img src="' . esc_url( $resolved_src ) . '" alt="' . esc_attr( get_the_title() ) . '" class="w-full h-full object-contain hover:scale-105 transition-all duration-500 mix-blend-multiply" id="snap-main-image" />';
-                        } elseif ( $image_id ) {
-                            echo wp_get_attachment_image( $image_id, 'full', false, array( 'class' => 'w-full h-full object-contain hover:scale-105 transition-all duration-500 mix-blend-multiply', 'id' => 'snap-main-image' ) );
+                        $ext_thumb_url = get_post_meta( $product_id, '_thumbnail_ext_url', true );
+                        
+                        $main_image_src = '';
+                        $main_image_srcset = '';
+                        $is_attachment_valid = false;
+
+                        // 1. Check native WordPress Media Library attachment
+                        if ( $image_id ) {
+                            $att_src = wp_get_attachment_image_url( $image_id, 'full' );
+                            if ( ! empty( $att_src ) && strpos( $att_src, 'placeholder' ) === false ) {
+                                $main_image_src = $att_src;
+                                $main_image_srcset = wp_get_attachment_image_srcset( $image_id, 'full' );
+                                $is_attachment_valid = true;
+                            }
+                        }
+
+                        // 2. Fall back to _thumbnail_ext_url if no valid attachment
+                        if ( empty( $main_image_src ) && ! empty( $ext_thumb_url ) && strpos( $ext_thumb_url, 'placeholder' ) === false ) {
+                            $main_image_src = $ext_thumb_url;
+                        }
+
+                        // 3. Check B2B image resolver
+                        if ( function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
+                            $resolved_src = snap_stitch_resolve_b2b_image( $sku, $main_image_src, $product_id );
+                            if ( ! empty( $resolved_src ) && strpos( $resolved_src, 'placeholder' ) === false ) {
+                                if ( empty( $main_image_src ) || ( ! $is_attachment_valid && $resolved_src !== $main_image_src ) ) {
+                                    $main_image_src = $resolved_src;
+                                    $main_image_srcset = '';
+                                    $is_attachment_valid = false;
+                                }
+                            }
+                        }
+
+                        // Ensure never falling back to placeholder if external URL is available
+                        if ( ( empty( $main_image_src ) || strpos( $main_image_src, 'placeholder' ) !== false ) && ! empty( $ext_thumb_url ) ) {
+                            $main_image_src = $ext_thumb_url;
+                            $main_image_srcset = '';
+                            $is_attachment_valid = false;
+                        }
+
+                        // Render Main Image
+                        if ( $is_attachment_valid && $image_id ) {
+                            echo wp_get_attachment_image( $image_id, 'full', false, array( 
+                                'class' => 'w-full h-full object-contain hover:scale-105 transition-all duration-500 mix-blend-multiply', 
+                                'id'    => 'snap-main-image' 
+                            ) );
+                        } elseif ( ! empty( $main_image_src ) && strpos( $main_image_src, 'placeholder' ) === false ) {
+                            $srcset_attr = ! empty( $main_image_srcset ) ? ' srcset="' . esc_attr( $main_image_srcset ) . '"' : '';
+                            echo '<img src="' . esc_url( $main_image_src ) . '"' . $srcset_attr . ' alt="' . esc_attr( get_the_title() ) . '" class="w-full h-full object-contain hover:scale-105 transition-all duration-500 mix-blend-multiply" id="snap-main-image" />';
                         } else {
                             echo '<span class="material-symbols-outlined text-white text-9xl opacity-20">inventory_2</span>';
                         }
@@ -61,26 +104,76 @@ get_header( 'shop' ); ?>
                 </div>
                 <!-- Thumbnails -->
                 <?php 
-                    $attachment_ids = $product->get_gallery_image_ids();
-                    $main_image_id = $product->get_image_id();
-                    if ( $main_image_id ) {
-                        array_unshift( $attachment_ids, $main_image_id );
-                        $attachment_ids = array_unique( $attachment_ids );
+                    $thumbnails = array();
+                    $seen_urls = array();
+
+                    // Include main image as first thumbnail if valid
+                    if ( ! empty( $main_image_src ) && strpos( $main_image_src, 'placeholder' ) === false ) {
+                        $thumbnails[] = array(
+                            'thumb_src' => $main_image_src,
+                            'full_src'  => $main_image_src,
+                            'srcset'    => $main_image_srcset ?: '',
+                            'alt'       => get_the_title(),
+                            'is_active' => true,
+                        );
+                        $seen_urls[ $main_image_src ] = true;
                     }
-                    if ( $attachment_ids ) : 
+
+                    // Collect Media Library gallery attachments
+                    $attachment_ids = $product->get_gallery_image_ids();
+                    if ( ! empty( $attachment_ids ) ) {
+                        foreach ( $attachment_ids as $att_id ) {
+                            if ( $att_id == $image_id ) continue;
+                            $full_src = wp_get_attachment_image_url( $att_id, 'full' );
+                            $thumb_src = wp_get_attachment_image_url( $att_id, 'thumbnail' );
+                            if ( ! empty( $full_src ) && empty( $seen_urls[ $full_src ] ) && strpos( $full_src, 'placeholder' ) === false ) {
+                                $thumbnails[] = array(
+                                    'thumb_src' => $thumb_src ?: $full_src,
+                                    'full_src'  => $full_src,
+                                    'srcset'    => wp_get_attachment_image_srcset( $att_id, 'full' ) ?: '',
+                                    'alt'       => get_the_title(),
+                                    'is_active' => false,
+                                );
+                                $seen_urls[ $full_src ] = true;
+                            }
+                        }
+                    }
+
+                    // Collect _gallery_ext_urls
+                    $gallery_ext = get_post_meta( $product_id, '_gallery_ext_urls', true );
+                    if ( is_string( $gallery_ext ) && ! empty( $gallery_ext ) ) {
+                        $decoded = json_decode( $gallery_ext, true );
+                        $gallery_ext = is_array( $decoded ) ? $decoded : array_map( 'trim', explode( ',', $gallery_ext ) );
+                    }
+                    if ( is_array( $gallery_ext ) && ! empty( $gallery_ext ) ) {
+                        foreach ( $gallery_ext as $ext_item ) {
+                            $ext_url = is_string( $ext_item ) ? trim( $ext_item ) : '';
+                            if ( ! empty( $ext_url ) && empty( $seen_urls[ $ext_url ] ) && strpos( $ext_url, 'placeholder' ) === false ) {
+                                $thumbnails[] = array(
+                                    'thumb_src' => $ext_url,
+                                    'full_src'  => $ext_url,
+                                    'srcset'    => '',
+                                    'alt'       => get_the_title(),
+                                    'is_active' => false,
+                                );
+                                $seen_urls[ $ext_url ] = true;
+                            }
+                        }
+                    }
+
+                    if ( count( $thumbnails ) > 1 ) : 
                 ?>
                 <div class="grid grid-cols-5 gap-2 mt-2">
-                    <?php foreach ( $attachment_ids as $attachment_id ) : ?>
-                    <div class="aspect-square border border-zinc-200 bg-white flex items-center justify-center p-2 hover:border-secondary transition-colors cursor-pointer overflow-hidden snap-thumbnail-wrapper">
-                        <?php 
-                            $full_src = wp_get_attachment_image_url( $attachment_id, 'full' );
-                            $full_srcset = wp_get_attachment_image_srcset( $attachment_id, 'full' );
-                            echo wp_get_attachment_image( $attachment_id, 'thumbnail', false, array( 
-                                'class' => 'w-full h-full object-contain snap-thumbnail',
-                                'data-full-src' => $full_src,
-                                'data-full-srcset' => $full_srcset ? $full_srcset : ''
-                            ) ); 
-                        ?>
+                    <?php foreach ( $thumbnails as $thumb ) : ?>
+                    <div class="aspect-square border <?php echo ! empty( $thumb['is_active'] ) ? 'border-secondary ring-2 ring-secondary' : 'border-zinc-200'; ?> bg-white flex items-center justify-center p-2 hover:border-secondary transition-all cursor-pointer overflow-hidden snap-thumbnail-wrapper">
+                        <img 
+                            src="<?php echo esc_url( $thumb['thumb_src'] ); ?>" 
+                            alt="<?php echo esc_attr( $thumb['alt'] ); ?>" 
+                            class="w-full h-full object-contain snap-thumbnail"
+                            data-full-src="<?php echo esc_url( $thumb['full_src'] ); ?>"
+                            data-full-srcset="<?php echo esc_attr( $thumb['srcset'] ); ?>"
+                            loading="lazy"
+                        />
                     </div>
                     <?php endforeach; ?>
                 </div>
@@ -400,6 +493,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const newAlt = img.getAttribute('alt');
                 
                 if (newSrc) {
+                    thumbnails.forEach(w => {
+                        w.classList.remove('border-secondary', 'ring-2', 'ring-secondary');
+                        w.classList.add('border-zinc-200');
+                    });
+                    this.classList.remove('border-zinc-200');
+                    this.classList.add('border-secondary', 'ring-2', 'ring-secondary');
+
                     // Fade out
                     mainImage.style.opacity = '0.5';
                     

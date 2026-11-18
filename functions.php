@@ -493,7 +493,7 @@ function snap_stitch_get_menu_products() {
             if ( ! $product ) continue;
 
             $raw_img = wp_get_attachment_image_url( $product->get_image_id(), 'medium' ) ?: '';
-            $image_url = function_exists( 'snap_stitch_resolve_b2b_image' ) ? snap_stitch_resolve_b2b_image( $product->get_sku(), $raw_img ) : $raw_img;
+            $image_url = function_exists( 'snap_stitch_resolve_b2b_image' ) ? snap_stitch_resolve_b2b_image( $product->get_sku(), $raw_img, $product->get_id() ) : $raw_img;
             $image_url = $image_url ?: wc_placeholder_img_src();
             $terms = wc_get_product_terms( $product->get_id(), 'product_cat', array( 'fields' => 'names' ) );
             $brand = ! empty( $terms ) ? $terms[0] : 'BLUE STAR';
@@ -579,7 +579,7 @@ function snap_ajax_search_callback() {
             $price_html = $is_b2b ? '<span class="text-[#FBBF24] text-[10px] uppercase font-black tracking-tighter">B2B Product</span>' : wp_kses_post( (string) $product->get_price_html() );
             
             $raw_thumb = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') ?: '';
-            $resolved_thumb = function_exists( 'snap_stitch_resolve_b2b_image' ) ? snap_stitch_resolve_b2b_image( $product->get_sku(), $raw_thumb ) : $raw_thumb;
+            $resolved_thumb = function_exists( 'snap_stitch_resolve_b2b_image' ) ? snap_stitch_resolve_b2b_image( $product->get_sku(), $raw_thumb, $product->get_id() ) : $raw_thumb;
             
             $results[] = [
                 'title' => esc_html( html_entity_decode( (string) get_the_title() ) ),
@@ -799,13 +799,64 @@ add_action( 'template_redirect', 'snap_stitch_route_b2b_single_products', 10 );
 
 /**
  * Canonical B2B product image resolver
+ *
+ * Cascading Resolution Strategy:
+ * 1. WordPress Media Library Attachment (Featured image _thumbnail_id)
+ * 2. External CDN Image (_thumbnail_ext_url)
+ * 3. Brand/Model Direct Asset Mappings (Hardware & Theme assets)
+ * 4. Contextual Category Fallback (Premixes only, never on equipment)
+ * 5. Safe Placeholder Fallback
+ *
+ * @param string|int $sku_or_id
+ * @param string     $existing_url
+ * @param int        $product_id
+ * @return string Image URL
  */
 if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
-    function snap_stitch_resolve_b2b_image( $sku, $existing_url = '' ) {
+    function snap_stitch_resolve_b2b_image( $sku_or_id = '', $existing_url = '', $product_id = 0 ) {
         $theme_uri = get_template_directory_uri();
         $theme_dir = get_template_directory();
-        $u_sku = strtoupper( (string) $sku );
+        $sku_str   = is_string( $sku_or_id ) ? $sku_or_id : '';
+        $u_sku     = strtoupper( $sku_str );
         $has_valid_existing = ( ! empty( $existing_url ) && strpos( (string) $existing_url, 'placeholder' ) === false );
+
+        // 1. Resolve product ID if available
+        $p_id = 0;
+        if ( $product_id > 0 ) {
+            $p_id = (int) $product_id;
+        } elseif ( is_numeric( $sku_or_id ) && (int) $sku_or_id > 0 && get_post_type( (int) $sku_or_id ) === 'product' ) {
+            $p_id = (int) $sku_or_id;
+        } elseif ( ! empty( $sku_str ) && function_exists( 'wc_get_product_id_by_sku' ) ) {
+            $p_id = wc_get_product_id_by_sku( $sku_str );
+        }
+        if ( ! $p_id && is_singular( 'product' ) ) {
+            $p_id = get_the_ID();
+        }
+
+        // 2. Check for authentic local WordPress Media Library Attachment
+        if ( $p_id > 0 ) {
+            $thumb_id = (int) get_post_thumbnail_id( $p_id );
+            if ( $thumb_id > 0 ) {
+                if ( $has_valid_existing && ( strpos( $existing_url, 'uploads' ) !== false || strpos( $existing_url, 'wp-content' ) !== false ) ) {
+                    return $existing_url;
+                }
+                $attach_url = wp_get_attachment_image_url( $thumb_id, 'full' );
+                if ( ! empty( $attach_url ) && strpos( $attach_url, 'placeholder' ) === false ) {
+                    return $attach_url;
+                }
+            }
+
+            // 3. Check for authentic external CDN image (_thumbnail_ext_url)
+            $ext_url = get_post_meta( $p_id, '_thumbnail_ext_url', true );
+            if ( ! empty( $ext_url ) && strpos( $ext_url, 'placeholder' ) === false ) {
+                return $ext_url;
+            }
+        }
+
+        // 4. Honor valid non-placeholder existing URL passed in
+        if ( $has_valid_existing ) {
+            return $existing_url;
+        }
 
         // 1. Brewing Bots
         if ( strpos( $u_sku, 'BOT-' ) !== false || strpos( $u_sku, 'BREWING' ) !== false ) {
@@ -1084,17 +1135,20 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_image' ) ) {
         }
 
         // 13. Atlantis Instant Beverage Premixes & Equipment
-        if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
-            if ( $has_valid_existing ) {
-                return $existing_url;
-            }
-            if ( strpos( $u_sku, 'COLD' ) !== false ) {
+        $is_atlantis = ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false || ( $p_id > 0 && function_exists( 'has_term' ) && has_term( 'atlantis-commercial', 'product_cat', $p_id ) ) );
+        if ( $is_atlantis ) {
+            // Premix categories / SKU keywords
+            if ( strpos( $u_sku, 'COLD' ) !== false || strpos( $u_sku, 'ICED' ) !== false || strpos( $u_sku, 'ICY' ) !== false || strpos( $u_sku, 'NIMBO' ) !== false || strpos( $u_sku, 'NIMBU' ) !== false ) {
                 return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-cold-beverages.jpg' );
             }
-            if ( strpos( $u_sku, 'COFF' ) !== false || strpos( $u_sku, 'COFFEE' ) !== false ) {
+            if ( strpos( $u_sku, 'COFF' ) !== false || strpos( $u_sku, 'COFFEE' ) !== false || strpos( $u_sku, 'CAPPUCCINO' ) !== false || strpos( $u_sku, 'BEANS' ) !== false ) {
                 return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-coffee-premixes.jpg' );
             }
-            return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-tea-premixes.jpg' );
+            if ( strpos( $u_sku, 'TEA' ) !== false || strpos( $u_sku, 'CHAI' ) !== false ) {
+                return home_url( '/wp-content/uploads/2026/10/snap-b2b-atlantis-tea-premixes.jpg' );
+            }
+            // For water dispensers, vending machines, coolers, accessories: NEVER fall back to tea premix image!
+            return wc_placeholder_img_src();
         }
 
         // 14. Waterlogic Commercial Firewall Dispensers
