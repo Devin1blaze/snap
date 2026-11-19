@@ -300,11 +300,26 @@ get_header( 'shop' ); ?>
         $final_content = apply_filters( 'the_content', $raw_content );
         $final_content = str_replace( ']]>', ']]&gt;', $final_content );
         
-        $has_description = ! empty( trim(strip_tags($final_content)) ) || preg_match('/<img/i', $final_content);
+        // Resolve Salient Features from postmeta
+        $salient_meta = get_post_meta( $product_id, '_salient_features', true );
+        if ( ! is_array( $salient_meta ) && is_string( $salient_meta ) ) {
+            $dec_salient = json_decode( $salient_meta, true );
+            $salient_meta = is_array( $dec_salient ) ? $dec_salient : maybe_unserialize( $salient_meta );
+        }
+        $salient_features = array();
+        if ( ! empty( $salient_meta ) && is_array( $salient_meta ) ) {
+            foreach ( $salient_meta as $sf ) {
+                if ( is_string( $sf ) && trim( $sf ) !== '' ) {
+                    $salient_features[] = trim( $sf );
+                }
+            }
+        }
+
         $excerpt = get_the_excerpt();
-        if ( !$has_description && !empty(trim($excerpt)) ) {
+        $has_description = ! empty( trim( strip_tags( $final_content ) ) ) || ! empty( $salient_features ) || preg_match( '/<img/i', $final_content );
+        if ( ! $has_description && ! empty( trim( $excerpt ) ) ) {
             $has_description = true;
-            $final_content = '<p class="text-zinc-600 leading-relaxed">' . $excerpt . '</p>';
+            $final_content = '<p class="text-zinc-600 leading-relaxed font-medium">' . esc_html( $excerpt ) . '</p>';
         }
         
         $active_tab = $has_description ? 'description' : 'specifications';
@@ -320,8 +335,33 @@ get_header( 'shop' ); ?>
         <!-- Tab Content: Description -->
         <?php if ( $has_description ) : ?>
         <div id="tab-description" class="snap-tab-content <?php echo $active_tab === 'description' ? 'block' : 'hidden'; ?>">
-            <div class="py-12 max-w-4xl prose prose-zinc prose-lg">
-                <?php echo $final_content; ?>
+            <div class="py-12 max-w-4xl">
+                <?php if ( ! empty( $excerpt ) && trim( strip_tags( $final_content ) ) !== trim( strip_tags( $excerpt ) ) ) : ?>
+                    <p class="text-zinc-700 text-base md:text-lg font-medium leading-relaxed mb-8 border-l-4 border-[#1A56DB] pl-4 bg-zinc-50 py-3">
+                        <?php echo esc_html( wp_strip_all_tags( $excerpt ) ); ?>
+                    </p>
+                <?php endif; ?>
+
+                <?php if ( ! empty( $salient_features ) ) : ?>
+                    <div class="mb-8 p-6 bg-zinc-50 border border-zinc-200 shadow-sm">
+                        <div class="text-xs font-black uppercase text-zinc-500 tracking-wider mb-4 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-[#FBBF24] inline-block"></span>
+                            <span>Key Operational & Engineering Highlights</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-semibold text-[#0A0A0A]">
+                            <?php foreach ( $salient_features as $s_feat ) : ?>
+                                <div class="flex items-start gap-2">
+                                    <span class="material-symbols-outlined text-base text-[#1A56DB] shrink-0 font-bold mt-0.5">check_circle</span>
+                                    <span class="leading-snug"><?php echo esc_html( $s_feat ); ?></span>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <div class="prose prose-zinc prose-lg max-w-none">
+                    <?php echo $final_content; ?>
+                </div>
             </div>
         </div>
         <?php endif; ?>
@@ -330,9 +370,35 @@ get_header( 'shop' ); ?>
         <div id="tab-specifications" class="snap-tab-content <?php echo $active_tab === 'specifications' ? 'block' : 'hidden'; ?> py-12">
             <div class="max-w-4xl">
                 <?php 
-                $specs = get_post_meta( $product_id, '_technical_specs', true );
-                if ( ! empty( $specs ) && is_array( $specs ) ) {
+                $specs_meta = get_post_meta( $product_id, '_technical_specs', true );
+                if ( ! is_array( $specs_meta ) && is_string( $specs_meta ) ) {
+                    $dec_specs = json_decode( $specs_meta, true );
+                    $specs_meta = is_array( $dec_specs ) ? $dec_specs : maybe_unserialize( $specs_meta );
+                }
+
+                // Normalize specs to array of ['name' => ..., 'value' => ...]
+                $normalized_specs = array();
+                if ( ! empty( $specs_meta ) && is_array( $specs_meta ) ) {
+                    foreach ( $specs_meta as $k => $v ) {
+                        if ( is_array( $v ) && isset( $v['name'], $v['value'] ) ) {
+                            $s_name = trim( (string) $v['name'] );
+                            $s_val  = trim( (string) $v['value'] );
+                            if ( $s_name !== '' && $s_val !== '' ) {
+                                $normalized_specs[] = array( 'name' => $s_name, 'value' => $s_val );
+                            }
+                        } elseif ( is_string( $v ) || is_numeric( $v ) ) {
+                            $s_name = trim( (string) $k );
+                            $s_val  = trim( (string) $v );
+                            if ( $s_name !== '' && $s_val !== '' ) {
+                                $normalized_specs[] = array( 'name' => $s_name, 'value' => $s_val );
+                            }
+                        }
+                    }
+                }
+
+                if ( ! empty( $normalized_specs ) ) {
                     echo '<table class="min-w-full border border-zinc-200" style="border-collapse:collapse;">';
+                    echo '<thead><tr style="background:#f4f4f5;border-bottom:2px solid #e4e4e7;"><th style="padding:12px 16px;text-align:left;font-size:0.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#52525b;width:35%;border-right:1px solid #e4e4e7;">Engineering Parameter</th><th style="padding:12px 16px;text-align:left;font-size:0.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#52525b;">Verified Specification</th></tr></thead>';
                     echo '<tbody>';
                     $row_count = 0;
                     $known_labels = array(
@@ -366,21 +432,20 @@ get_header( 'shop' ); ?>
                         'covered_in_warranty' => 'Warranty Coverage',
                         'in_sales_package' => 'In The Sales Package'
                     );
-                    foreach ( $specs as $spec ) {
+                    foreach ( $normalized_specs as $spec ) {
                         $row_count++;
                         $bg = ( $row_count % 2 === 0 ) ? 'background:#f9fafb;' : 'background:#fff;';
-                        if ( ! is_array( $spec ) || ! isset( $spec['name'], $spec['value'] ) ) continue;
-                        $raw_name = trim( $spec['name'] );
+                        $raw_name = $spec['name'];
                         $display_label = isset( $known_labels[strtolower( $raw_name )] ) ? $known_labels[strtolower( $raw_name )] : ucwords( str_replace( '_', ' ', $raw_name ) );
                         echo '<tr style="' . $bg . '">';
-                        echo '<td style="padding:12px 16px;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em;color:#71717a;width:35%;border-bottom:1px solid #e4e4e7;">' . esc_html( $display_label ) . '</td>';
-                        echo '<td style="padding:12px 16px;font-size:0.875rem;color:#18181b;border-bottom:1px solid #e4e4e7;">' . wp_kses_post( $spec['value'] ) . '</td>';
+                        echo '<td style="padding:12px 16px;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em;color:#71717a;width:35%;border-bottom:1px solid #e4e4e7;border-right:1px solid #e4e4e7;">' . esc_html( $display_label ) . '</td>';
+                        echo '<td style="padding:12px 16px;font-size:0.875rem;font-weight:600;color:#18181b;border-bottom:1px solid #e4e4e7;">' . wp_kses_post( $spec['value'] ) . '</td>';
                         echo '</tr>';
                     }
                     echo '</tbody></table>';
-                } elseif ( ! empty( $specs ) && is_string( $specs ) ) {
+                } elseif ( ! empty( $specs_meta ) && is_string( $specs_meta ) && ( strpos( $specs_meta, '<table' ) !== false || strpos( $specs_meta, '<div' ) !== false ) ) {
                     // Raw HTML table from scraper
-                    echo wp_kses_post( $specs );
+                    echo wp_kses_post( $specs_meta );
                 } elseif ( ! empty( $extracted_specs ) ) {
                     // Extracted from Description
                     echo '<div class="prose prose-zinc prose-sm max-w-none">';

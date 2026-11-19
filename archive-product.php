@@ -461,8 +461,23 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
         if ( ! function_exists( 'snap_stitch_resolve_product_card_features' ) ) {
             function snap_stitch_resolve_product_card_features( $item, $brand_key = '', $default_features = array() ) {
-                if ( ! empty( $item['salient_features'] ) && is_array( $item['salient_features'] ) ) {
-                    return $item['salient_features'];
+                if ( ! empty( $item['salient_features'] ) ) {
+                    $feats = $item['salient_features'];
+                    if ( ! is_array( $feats ) && is_string( $feats ) ) {
+                        $dec = json_decode( $feats, true );
+                        $feats = is_array( $dec ) ? $dec : maybe_unserialize( $feats );
+                    }
+                    if ( is_array( $feats ) && ! empty( $feats ) ) {
+                        $clean = array();
+                        foreach ( $feats as $f ) {
+                            if ( is_string( $f ) && trim( $f ) !== '' ) {
+                                $clean[] = trim( $f );
+                            }
+                        }
+                        if ( ! empty( $clean ) ) {
+                            return $clean;
+                        }
+                    }
                 }
 
                 $title = isset( $item['title'] ) ? strtolower( $item['title'] ) : '';
@@ -578,12 +593,25 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
         if ( ! function_exists( 'snap_stitch_resolve_product_card_specs' ) ) {
             function snap_stitch_resolve_product_card_specs( $item, $brand_key = '', $default_specs = array() ) {
                 $quick_specs = array();
-                if ( ! empty( $item['specs'] ) && is_array( $item['specs'] ) ) {
-                    foreach ( $item['specs'] as $k => $v ) {
+                $raw_specs = ! empty( $item['specs'] ) ? $item['specs'] : null;
+                if ( ! is_array( $raw_specs ) && is_string( $raw_specs ) ) {
+                    $dec = json_decode( $raw_specs, true );
+                    $raw_specs = is_array( $dec ) ? $dec : maybe_unserialize( $raw_specs );
+                }
+                if ( ! empty( $raw_specs ) && is_array( $raw_specs ) ) {
+                    foreach ( $raw_specs as $k => $v ) {
                         if ( is_array( $v ) && isset( $v['name'] ) && isset( $v['value'] ) ) {
-                            $quick_specs[] = array( 'name' => $v['name'], 'value' => $v['value'] );
+                            $name = trim( (string) $v['name'] );
+                            $val  = trim( (string) $v['value'] );
+                            if ( $name !== '' && $val !== '' ) {
+                                $quick_specs[] = array( 'name' => $name, 'value' => $val );
+                            }
                         } elseif ( is_string( $v ) || is_numeric( $v ) ) {
-                            $quick_specs[] = array( 'name' => (string) $k, 'value' => (string) $v );
+                            $name = trim( (string) $k );
+                            $val  = trim( (string) $v );
+                            if ( $name !== '' && $val !== '' ) {
+                                $quick_specs[] = array( 'name' => $name, 'value' => $val );
+                            }
                         }
                         if ( count( $quick_specs ) >= 5 ) break;
                     }
@@ -1036,7 +1064,31 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
                 $p_id = $product->get_id();
                 $specs_meta = get_post_meta( $p_id, '_technical_specs', true );
+                if ( ! is_array( $specs_meta ) && is_string( $specs_meta ) ) {
+                    $decoded_specs = json_decode( $specs_meta, true );
+                    if ( is_array( $decoded_specs ) ) {
+                        $specs_meta = $decoded_specs;
+                    } else {
+                        $unser_specs = maybe_unserialize( $specs_meta );
+                        if ( is_array( $unser_specs ) ) {
+                            $specs_meta = $unser_specs;
+                        }
+                    }
+                }
+
                 $salient_meta = get_post_meta( $p_id, '_salient_features', true );
+                if ( ! is_array( $salient_meta ) && is_string( $salient_meta ) ) {
+                    $decoded_salient = json_decode( $salient_meta, true );
+                    if ( is_array( $decoded_salient ) ) {
+                        $salient_meta = $decoded_salient;
+                    } else {
+                        $unser_salient = maybe_unserialize( $salient_meta );
+                        if ( is_array( $unser_salient ) ) {
+                            $salient_meta = $unser_salient;
+                        }
+                    }
+                }
+
                 $bev_meta = get_post_meta( $p_id, '_beverage_menu', true ) ?: get_post_meta( $p_id, '_menu_items', true );
                 $bev_array = is_array( $bev_meta ) ? $bev_meta : ( ! empty( $bev_meta ) ? array_map( 'trim', explode( ',', (string) $bev_meta ) ) : array() );
 
@@ -1072,6 +1124,14 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     }
                 }
 
+                $item_excerpt = wp_strip_all_tags( $product->get_short_description() );
+                if ( empty( $item_excerpt ) ) {
+                    $raw_excerpt_meta = get_post_meta( $p_id, '_short_description', true );
+                    if ( ! empty( $raw_excerpt_meta ) ) {
+                        $item_excerpt = wp_strip_all_tags( $raw_excerpt_meta );
+                    }
+                }
+
                 $all_products[] = array(
                     'id'               => $p_id,
                     'title'            => $product->get_name(),
@@ -1089,7 +1149,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                             ? snap_stitch_resolve_b2b_brochure( $p_id, $p_sku, ( $term && isset( $term->slug ) ) ? $term->slug : '', ( $root_brand_term && isset( $root_brand_term->slug ) ) ? $root_brand_term->slug : '' )
                                             : ( get_post_meta( $p_id, '_brochure_url', true ) ?: '' ),
                     'is_featured'      => $product->is_featured(),
-                    'excerpt'          => wp_strip_all_tags( $product->get_short_description() ),
+                    'excerpt'          => $item_excerpt,
                 );
             }
             wp_reset_postdata();
@@ -1718,7 +1778,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     <?php endif; ?>
 
                                     <?php if ( ! empty( $item['excerpt'] ) ) : ?>
-                                        <p class="text-zinc-600 text-xs sm:text-sm font-medium mb-4 leading-relaxed"><?php echo esc_html( $item['excerpt'] ); ?></p>
+                                        <p class="text-zinc-600 text-xs sm:text-sm font-medium mb-3 leading-relaxed"><?php echo esc_html( $item['excerpt'] ); ?></p>
                                     <?php endif; ?>
 
                                     <!-- Salient Features: 4-Bullet Grid + Expandable Accordion -->
@@ -1751,20 +1811,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                             </thead>
                                             <tbody class="divide-y divide-zinc-200">
                                                 <?php
-                                                $quick_specs = array();
-                                                if ( ! empty( $item['specs'] ) && is_array( $item['specs'] ) ) {
-                                                    foreach ( $item['specs'] as $k => $v ) {
-                                                        if ( is_array( $v ) && isset( $v['name'] ) && isset( $v['value'] ) ) {
-                                                            $quick_specs[] = array( 'name' => $v['name'], 'value' => $v['value'] );
-                                                        } elseif ( is_string( $v ) || is_numeric( $v ) ) {
-                                                            $quick_specs[] = array( 'name' => (string) $k, 'value' => (string) $v );
-                                                        }
-                                                        if ( count( $quick_specs ) >= 5 ) break;
-                                                    }
-                                                }
-                                                if ( empty( $quick_specs ) ) {
-                                                    $quick_specs = snap_stitch_resolve_product_card_specs( $item, $brand_key, ! empty( $curr_brand_config['default_specs'] ) ? $curr_brand_config['default_specs'] : array() );
-                                                }
+                                                $quick_specs = snap_stitch_resolve_product_card_specs( $item, $brand_key, ! empty( $curr_brand_config['default_specs'] ) ? $curr_brand_config['default_specs'] : array() );
                                                 foreach ( $quick_specs as $spec ) : ?>
                                                     <tr class="odd:bg-zinc-50 even:bg-white"><td class="py-2 px-3 sm:px-3.5 font-bold uppercase text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200"><?php echo esc_html( $spec['name'] ); ?></td><td class="py-2 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]"><?php echo esc_html( $spec['value'] ); ?></td></tr>
                                                 <?php endforeach; ?>
