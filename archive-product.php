@@ -461,6 +461,13 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
         if ( ! function_exists( 'snap_stitch_resolve_product_card_features' ) ) {
             function snap_stitch_resolve_product_card_features( $item, $brand_key = '', $default_features = array() ) {
+                $title    = isset( $item['title'] ) ? strtolower( (string) $item['title'] ) : '';
+                $sku      = isset( $item['sku'] ) ? strtolower( (string) $item['sku'] ) : '';
+                $slugs    = isset( $item['cat_slugs'] ) ? (array) $item['cat_slugs'] : array();
+                $slug_str = strtolower( implode( ' ', $slugs ) );
+
+                $is_atlantis = ( $brand_key === 'atlantis' || strpos( $slug_str, 'atlantis' ) !== false || strpos( $sku, 'atl' ) !== false || strpos( $title, 'atlantis' ) !== false );
+
                 if ( ! empty( $item['salient_features'] ) ) {
                     $feats = $item['salient_features'];
                     if ( ! is_array( $feats ) && is_string( $feats ) ) {
@@ -475,30 +482,56 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                             }
                         }
                         if ( ! empty( $clean ) ) {
-                            return $clean;
+                            if ( $is_atlantis ) {
+                                $joined = strtolower( implode( ' ', $clean ) );
+                                $is_dispenser_ctx = ( strpos( $slug_str, 'dispenser' ) !== false || strpos( $title, 'water dispenser' ) !== false );
+                                $is_vending_ctx   = ( strpos( $slug_str, 'vending' ) !== false || strpos( $title, 'vending machine' ) !== false );
+                                $has_premix_leak  = ( strpos( $joined, 'micro-granules' ) !== false || strpos( $joined, 'foil pack' ) !== false || strpos( $joined, '70-80 cups' ) !== false );
+
+                                if ( ( $is_dispenser_ctx || $is_vending_ctx ) && $has_premix_leak ) {
+                                    // Reject cross-contaminated features and fall through to division-accurate features
+                                } else {
+                                    return $clean;
+                                }
+                            } else {
+                                return $clean;
+                            }
                         }
                     }
                 }
 
-                $title = isset( $item['title'] ) ? strtolower( $item['title'] ) : '';
-                $sku   = isset( $item['sku'] ) ? strtolower( $item['sku'] ) : '';
-                $slugs = isset( $item['cat_slugs'] ) ? (array) $item['cat_slugs'] : array();
-                $slug_str = implode( ' ', $slugs );
+                // Atlantis Brand Specific Dynamic Division Features (Category-first + keyword fallback)
+                if ( $is_atlantis ) {
+                    // 1. Wine Coolers (Dual Zone Precision Compressor Refrigeration)
+                    if (
+                        strpos( $slug_str, 'wine-cooler' ) !== false ||
+                        strpos( $title, 'wine cooler' ) !== false ||
+                        strpos( $sku, 'wine-cooler' ) !== false
+                    ) {
+                        return array(
+                            '17-Bottle Dual-Zone Precision Compressor Wine & Beverage Cooler',
+                            'Double-Paned UV-Protected Tempered Glass Door with Stainless Steel Trim',
+                            'Digital Touch Temperature Controller (5°C to 18°C Operational Range)',
+                            'Low-Vibration Silent Commercial Compressor with Auto-Defrost Technology',
+                            'Wooden Pull-Out Display Shelves with Soft LED Interior Illumination',
+                            'Pan-India Direct Logistics with Corporate GST ITC Input Tax Invoicing',
+                        );
+                    }
 
-                // Atlantis Brand Specific Dynamic Division Features
-                if ( $brand_key === 'atlantis' || strpos( $slug_str, 'atlantis' ) !== false || strpos( $sku, 'atl' ) !== false ) {
-                    // 1. Accessories, Sanitizers & Wine Coolers
-                    $is_acc = (
+                    // 2. Pantry Accessories (Wall Mount Glass Holders, Soap/Sanitizer Dispensers, RO Kit)
+                    if (
                         strpos( $slug_str, 'accessories' ) !== false ||
-                        strpos( $slug_str, 'wine-coolers' ) !== false ||
-                        strpos( $title, 'holder' ) !== false ||
+                        strpos( $title, 'glass holder' ) !== false ||
+                        strpos( $title, 'pull type' ) !== false ||
                         strpos( $title, 'sanitizer' ) !== false ||
                         strpos( $title, 'soap dispenser' ) !== false ||
-                        strpos( $title, 'wine' ) !== false ||
                         strpos( $title, 'ro kit' ) !== false ||
-                        strpos( $title, 'valve' ) !== false
-                    );
-                    if ( $is_acc ) {
+                        strpos( $title, 'float valve' ) !== false ||
+                        strpos( $sku, 'ro-kit' ) !== false ||
+                        strpos( $sku, 'glass-holder' ) !== false ||
+                        strpos( $sku, 'sanitizer' ) !== false ||
+                        strpos( $sku, 'soap' ) !== false
+                    ) {
                         return array(
                             'High-Durability Commercial ABS & Stainless Steel Engineering',
                             'Heavy-Duty Wall Mount & Countertop Institutional Architecture',
@@ -508,71 +541,132 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         );
                     }
 
-                    // 2. Beverage Premixes & Consumables
-                    $is_premix = (
-                        strpos( $title, 'premix' ) !== false ||
-                        strpos( $title, 'powder' ) !== false ||
-                        strpos( $title, 'whitener' ) !== false ||
-                        strpos( $title, 'sachet' ) !== false ||
-                        strpos( $title, 'beans' ) !== false ||
-                        strpos( $title, 'soup' ) !== false ||
-                        ( strpos( $title, 'capsule' ) !== false && strpos( $title, 'capsule machine' ) === false ) ||
+                    // 3. Water Dispensers (Floor Standing, Table Top, Cooling Cabinet / Fridge)
+                    if (
+                        strpos( $slug_str, 'table-top-dispenser' ) !== false ||
+                        strpos( $slug_str, 'floor-standing-dispenser' ) !== false ||
+                        strpos( $slug_str, 'fridge-dispenser' ) !== false ||
+                        strpos( $slug_str, 'dispensers-with-fridge' ) !== false ||
+                        strpos( $title, 'water dispenser' ) !== false ||
+                        strpos( $title, 'floor standing water' ) !== false ||
+                        strpos( $title, 'table top water' ) !== false ||
+                        strpos( $title, 'cooling cabinet' ) !== false ||
+                        strpos( $title, 'dispenser with fridge' ) !== false ||
+                        strpos( $title, 'normal & cold floor standing' ) !== false ||
+                        strpos( $title, 'hot & cold floor standing' ) !== false ||
+                        strpos( $title, 'hot, normal & cold floor standing' ) !== false ||
+                        strpos( $title, 'airpress touchless' ) !== false ||
+                        strpos( $sku, '-tt' ) !== false ||
+                        strpos( $sku, '-fs' ) !== false ||
+                        strpos( $sku, '-cc' ) !== false ||
+                        strpos( $sku, 'table-top' ) !== false ||
+                        strpos( $sku, 'cooling-cabinet' ) !== false ||
+                        strpos( $sku, 'big-plus' ) !== false ||
+                        strpos( $sku, 'jumbo-plus' ) !== false ||
+                        strpos( $sku, 'frosty-plus' ) !== false ||
+                        strpos( $sku, 'blue-normal' ) !== false ||
+                        strpos( $sku, 'blue-hot' ) !== false ||
+                        strpos( $sku, 'super' ) !== false ||
+                        strpos( $sku, 'airpress-fs' ) !== false
+                    ) {
+                        return array(
+                            'Food-Grade 304 Stainless Steel Anti-Bacterial Water Tanks',
+                            'Heavy-Duty Fast-Flow Push Taps (Hot, Normal & Cold Options)',
+                            'Tropicalized High-Efficiency Heavy-Duty Compressor Cooling',
+                            'Child Lock Safety Protection on Hot Water Dispense Line',
+                            'Robust Commercial ABS & Metal Construction for Continuous Office Use',
+                            'Pan-India Corporate Warranty & 100% GST ITC Input Tax Invoicing',
+                        );
+                    }
+
+                    // 4. Coffee Capsules (Single Serve Pods)
+                    if (
+                        strpos( $slug_str, 'coffee-capsules' ) !== false ||
+                        ( strpos( $title, 'capsule' ) !== false && strpos( $title, 'capsule machine' ) === false && strpos( $slug_str, 'capsule-machines' ) === false ) ||
+                        ( strpos( $sku, 'capsule' ) !== false && strpos( $sku, 'jazz' ) === false )
+                    ) {
+                        return array(
+                            'Precision Roast Profile: Nespresso® OriginalLine Compatible Pods',
+                            'Hermetically Sealed Oxygen-Barrier Aroma-Lock Freshness Architecture',
+                            '100% Pure Specialty Roasted Arabica & Robusta Coffee Blends',
+                            'Barista-Grade Extraction Engineered for 15–19 Bar Commercial Pressure',
+                            'Dense Golden Crema & Velvety Finish with Zero Artificial Additives',
+                            'Executive Boardroom & Corporate Pantry Multi-Pack Procurement with GST ITC',
+                        );
+                    }
+
+                    // 5. Beverage Premixes, Whiteners, Single Serve Sachets & Consumables
+                    if (
                         strpos( $slug_str, 'premix' ) !== false ||
                         strpos( $slug_str, 'beverage-whiteners' ) !== false ||
                         strpos( $slug_str, 'sachets' ) !== false ||
-                        strpos( $slug_str, 'coffee-capsules' ) !== false ||
+                        strpos( $slug_str, 'cold-beverages' ) !== false ||
                         strpos( $slug_str, 'hot-beverages' ) !== false ||
-                        strpos( $slug_str, 'cold-beverages' ) !== false
-                    );
-                    if ( $is_premix ) {
+                        strpos( $title, 'premix' ) !== false ||
+                        strpos( $title, 'whitener' ) !== false ||
+                        strpos( $title, 'dairy mix' ) !== false ||
+                        strpos( $title, 'sachet' ) !== false ||
+                        strpos( $title, 'soup' ) !== false ||
+                        strpos( $title, 'coffee beans' ) !== false ||
+                        strpos( $title, 'pure coffee powder' ) !== false ||
+                        strpos( $title, 'chicory' ) !== false ||
+                        strpos( $title, 'iced tea' ) !== false ||
+                        strpos( $title, 'nimbu paani' ) !== false
+                    ) {
                         return array(
-                            'Commercial 1kg Moisture-Barrier Foil Pack',
-                            'High-Solubility Micro-Granules with Zero Dispenser Clogging',
-                            '70-80 Cups Yield per 1kg Pack',
-                            'FSSAI Licensed & ISO 22000 Certified',
+                            'Commercial 1kg Moisture-Barrier Foil Pack with Nitrogen Flushing',
+                            'High-Solubility Micro-Granules Guaranteeing Zero Dispenser Clogging',
+                            'High Yield: Approx. 70–80 Standard Vending Cups per 1kg Pack',
                             '100% Pure Extracts with Consistent Cup-to-Cup Taste Profile',
-                            'Pan-India Bulk Case Supply with Corporate GST Input Credit',
+                            'FSSAI Registered, BRCGS & ISO 22000 Certified Food Safety Compliance',
+                            'Pan-India Bulk Case Supply with 100% Corporate GST ITC Input Tax Credit',
                         );
                     }
 
-                    // 3. Vending Machines & Beverage Dispensers
-                    $is_vending_machine = (
-                        strpos( $slug_str, 'capsule-machines' ) !== false ||
-                        strpos( $title, 'capsule machine' ) !== false ||
-                        strpos( $slug_str, 'cool-vend' ) !== false ||
-                        strpos( $title, 'cool vend' ) !== false ||
+                    // 6. Vending Machines & Beverage Dispensers
+                    if (
                         strpos( $slug_str, 'vending' ) !== false ||
+                        strpos( $slug_str, 'cool-vend' ) !== false ||
+                        strpos( $slug_str, 'capsule-machines' ) !== false ||
                         strpos( $title, 'vending machine' ) !== false ||
                         strpos( $title, 'vending machines' ) !== false ||
-                        strpos( $title, 'beverage dispensing machine' ) !== false ||
-                        strpos( $title, 'beverage dispenser' ) !== false ||
+                        strpos( $title, 'capsule machine' ) !== false ||
                         strpos( $title, 'bean to cup' ) !== false ||
-                        strpos( $title, 'lane' ) !== false ||
-                        strpos( $title, 'select' ) !== false ||
-                        strpos( $title, 'neo' ) !== false ||
-                        strpos( $title, 'classic' ) !== false ||
-                        strpos( $title, 'compact' ) !== false ||
-                        strpos( $title, 'brew' ) !== false
-                    );
-                    if ( $is_vending_machine ) {
+                        strpos( $title, 'beverage dispensing machine' ) !== false ||
+                        strpos( $title, 'cool vend' ) !== false ||
+                        strpos( $title, '2-lane' ) !== false ||
+                        strpos( $title, '3-lane' ) !== false ||
+                        strpos( $title, '4-lane' ) !== false ||
+                        strpos( $title, '2 lane' ) !== false ||
+                        strpos( $title, '3 lane' ) !== false ||
+                        strpos( $title, '4 lane' ) !== false ||
+                        strpos( $title, 'coin operated' ) !== false ||
+                        strpos( $title, 'hot beverage dispenser' ) !== false ||
+                        strpos( $sku, 'lane' ) !== false ||
+                        strpos( $sku, 'compact-coffee' ) !== false ||
+                        strpos( $sku, 'select-coffee' ) !== false ||
+                        strpos( $sku, 'atlantis-brew' ) !== false ||
+                        strpos( $sku, 'cool-vend' ) !== false ||
+                        strpos( $sku, 'jazz' ) !== false
+                    ) {
                         return array(
-                            'Commercial Micro-Controller Dispensing System',
-                            'Multi-Canister Beverage Selection & Dedicated Hot Water Line',
-                            'Digital Cup Counter & Auto-Flushing Hygiene Cycle',
-                            'High-Speed Commercial Dispense (Up to 4–8 Cups per Minute)',
-                            'Direct Bubble Top & Online RO Water Line Compatibility',
-                            'Pan-India On-Site Maintenance & 100% GST ITC Invoicing',
+                            'Commercial Micro-Controller Dispensing System with Precision Calibration',
+                            'Multi-Canister Beverage Selection with Independent Hot Water Line',
+                            'Digital Cup Counter & Automated Auto-Flushing Daily Cleaning Cycle',
+                            'High-Speed Dispense Capability (Up to 4–8 Cups per Minute)',
+                            'Direct 20L Bubble Top & Online RO Water Line Compatibility',
+                            'Pan-India On-Site Maintenance AMC & 100% GST ITC Invoicing (HSN 8476)',
                         );
                     }
 
-                    // 4. Water Dispensers (Floor Standing, Table Top, Cooling Cabinet / Fridge)
+                    // Default Atlantis Fallback: Commercial Water Dispensers
                     return array(
-                        'Food-Grade 304 Stainless Steel Tanks',
-                        'Fast-Flow Heavy-Duty Taps (Hot, Normal & Cold)',
-                        'Tropicalized High-Efficiency Compressor Cooling',
-                        'Push Taps with Child Lock Safety',
-                        'Heavy-Duty ABS & Metal Construction for Continuous Office Use',
-                        'Pan-India Corporate Warranty & GST ITC Input Tax Credit',
+                        'Food-Grade 304 Stainless Steel Tanks ensuring Rust-Free Hygienic Water',
+                        'Fast-Flow Heavy-Duty Push Taps (Hot, Normal & Cold Dispense)',
+                        'Tropicalized High-Efficiency Compressor Cooling for Heavy Commercial Duty',
+                        'Child Lock Safety Protection on Hot Water Dispense Line',
+                        'Pan-India Corporate Warranty backed by Direct OEM Technical Support',
+                        '100% GST Input Tax Credit Invoicing (HSN 8418 / 8476)',
                     );
                 }
 
@@ -592,6 +686,13 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
 
         if ( ! function_exists( 'snap_stitch_resolve_product_card_specs' ) ) {
             function snap_stitch_resolve_product_card_specs( $item, $brand_key = '', $default_specs = array() ) {
+                $title    = isset( $item['title'] ) ? strtolower( (string) $item['title'] ) : '';
+                $sku      = isset( $item['sku'] ) ? strtolower( (string) $item['sku'] ) : '';
+                $slugs    = isset( $item['cat_slugs'] ) ? (array) $item['cat_slugs'] : array();
+                $slug_str = strtolower( implode( ' ', $slugs ) );
+
+                $is_atlantis = ( $brand_key === 'atlantis' || strpos( $slug_str, 'atlantis' ) !== false || strpos( $sku, 'atl' ) !== false || strpos( $title, 'atlantis' ) !== false );
+
                 $quick_specs = array();
                 $raw_specs = ! empty( $item['specs'] ) ? $item['specs'] : null;
                 if ( ! is_array( $raw_specs ) && is_string( $raw_specs ) ) {
@@ -617,27 +718,50 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     }
                 }
                 if ( ! empty( $quick_specs ) ) {
-                    return $quick_specs;
+                    if ( $is_atlantis ) {
+                        $names_str = strtolower( implode( ' ', array_column( $quick_specs, 'name' ) ) );
+                        $is_dispenser_ctx = ( strpos( $slug_str, 'dispenser' ) !== false || strpos( $title, 'water dispenser' ) !== false );
+                        $has_premix_spec  = ( strpos( $names_str, 'pack weight' ) !== false || strpos( $names_str, 'cup yield' ) !== false );
+                        if ( $is_dispenser_ctx && $has_premix_spec ) {
+                            // Reject contaminated specs and fall through to division-specific specs
+                        } else {
+                            return $quick_specs;
+                        }
+                    } else {
+                        return $quick_specs;
+                    }
                 }
 
-                $title = isset( $item['title'] ) ? strtolower( $item['title'] ) : '';
-                $sku   = isset( $item['sku'] ) ? strtolower( $item['sku'] ) : '';
-                $slugs = isset( $item['cat_slugs'] ) ? (array) $item['cat_slugs'] : array();
-                $slug_str = implode( ' ', $slugs );
+                if ( $is_atlantis ) {
+                    // 1. Wine Coolers
+                    if (
+                        strpos( $slug_str, 'wine-cooler' ) !== false ||
+                        strpos( $title, 'wine cooler' ) !== false ||
+                        strpos( $sku, 'wine-cooler' ) !== false
+                    ) {
+                        return array(
+                            array( 'name' => 'Storage Capacity', 'value' => '17 Standard Wine Bottles' ),
+                            array( 'name' => 'Temperature Range', 'value' => '5°C – 18°C Digital Precision' ),
+                            array( 'name' => 'Cooling System',   'value' => 'Low-Vibration Silent Compressor' ),
+                            array( 'name' => 'Door Architecture', 'value' => 'UV-Protected Double Tempered Glass' ),
+                            array( 'name' => 'GST & Invoicing',  'value' => '100% Corporate ITC (HSN 8418)' ),
+                        );
+                    }
 
-                if ( $brand_key === 'atlantis' || strpos( $slug_str, 'atlantis' ) !== false || strpos( $sku, 'atl' ) !== false ) {
-                    // 1. Accessories
-                    $is_acc = (
+                    // 2. Pantry Accessories
+                    if (
                         strpos( $slug_str, 'accessories' ) !== false ||
-                        strpos( $slug_str, 'wine-coolers' ) !== false ||
-                        strpos( $title, 'holder' ) !== false ||
+                        strpos( $title, 'glass holder' ) !== false ||
+                        strpos( $title, 'pull type' ) !== false ||
                         strpos( $title, 'sanitizer' ) !== false ||
                         strpos( $title, 'soap dispenser' ) !== false ||
-                        strpos( $title, 'wine' ) !== false ||
                         strpos( $title, 'ro kit' ) !== false ||
-                        strpos( $title, 'valve' ) !== false
-                    );
-                    if ( $is_acc ) {
+                        strpos( $title, 'float valve' ) !== false ||
+                        strpos( $sku, 'ro-kit' ) !== false ||
+                        strpos( $sku, 'glass-holder' ) !== false ||
+                        strpos( $sku, 'sanitizer' ) !== false ||
+                        strpos( $sku, 'soap' ) !== false
+                    ) {
                         return array(
                             array( 'name' => 'Build Material',   'value' => 'Commercial Grade ABS / SS' ),
                             array( 'name' => 'Mounting Type',    'value' => 'Wall Mount / Countertop' ),
@@ -647,23 +771,76 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         );
                     }
 
-                    // 2. Premixes
-                    $is_premix = (
-                        strpos( $title, 'premix' ) !== false ||
-                        strpos( $title, 'powder' ) !== false ||
-                        strpos( $title, 'whitener' ) !== false ||
-                        strpos( $title, 'sachet' ) !== false ||
-                        strpos( $title, 'beans' ) !== false ||
-                        strpos( $title, 'soup' ) !== false ||
-                        ( strpos( $title, 'capsule' ) !== false && strpos( $title, 'capsule machine' ) === false ) ||
+                    // 3. Water Dispensers
+                    if (
+                        strpos( $slug_str, 'table-top-dispenser' ) !== false ||
+                        strpos( $slug_str, 'floor-standing-dispenser' ) !== false ||
+                        strpos( $slug_str, 'fridge-dispenser' ) !== false ||
+                        strpos( $slug_str, 'dispensers-with-fridge' ) !== false ||
+                        strpos( $title, 'water dispenser' ) !== false ||
+                        strpos( $title, 'floor standing water' ) !== false ||
+                        strpos( $title, 'table top water' ) !== false ||
+                        strpos( $title, 'cooling cabinet' ) !== false ||
+                        strpos( $title, 'dispenser with fridge' ) !== false ||
+                        strpos( $title, 'normal & cold floor standing' ) !== false ||
+                        strpos( $title, 'hot & cold floor standing' ) !== false ||
+                        strpos( $title, 'hot, normal & cold floor standing' ) !== false ||
+                        strpos( $title, 'airpress touchless' ) !== false ||
+                        strpos( $sku, '-tt' ) !== false ||
+                        strpos( $sku, '-fs' ) !== false ||
+                        strpos( $sku, '-cc' ) !== false ||
+                        strpos( $sku, 'table-top' ) !== false ||
+                        strpos( $sku, 'cooling-cabinet' ) !== false ||
+                        strpos( $sku, 'big-plus' ) !== false ||
+                        strpos( $sku, 'jumbo-plus' ) !== false ||
+                        strpos( $sku, 'frosty-plus' ) !== false ||
+                        strpos( $sku, 'blue-normal' ) !== false ||
+                        strpos( $sku, 'blue-hot' ) !== false ||
+                        strpos( $sku, 'super' ) !== false ||
+                        strpos( $sku, 'airpress-fs' ) !== false
+                    ) {
+                        return array(
+                            array( 'name' => 'Tank Material',     'value' => 'Food-Grade SS 304 Stainless Steel' ),
+                            array( 'name' => 'Cooling System',    'value' => 'Tropicalized Compressor Cooling' ),
+                            array( 'name' => 'Dispense Options',  'value' => 'Hot, Cold & Normal Push Taps' ),
+                            array( 'name' => 'Safety Feature',    'value' => 'Child Lock on Hot Water Tap' ),
+                            array( 'name' => 'GST & Invoicing',   'value' => '100% Verified Corporate ITC (HSN 8418)' ),
+                        );
+                    }
+
+                    // 4. Coffee Capsules
+                    if (
+                        strpos( $slug_str, 'coffee-capsules' ) !== false ||
+                        ( strpos( $title, 'capsule' ) !== false && strpos( $title, 'capsule machine' ) === false && strpos( $slug_str, 'capsule-machines' ) === false ) ||
+                        ( strpos( $sku, 'capsule' ) !== false && strpos( $sku, 'jazz' ) === false )
+                    ) {
+                        return array(
+                            array( 'name' => 'Capsule System',    'value' => 'Nespresso® OriginalLine Compatible' ),
+                            array( 'name' => 'Roast & Intensity', 'value' => 'Specialty Roast (Intensity 8–10)' ),
+                            array( 'name' => 'Packaging Format',  'value' => 'Hermetically Sealed Aroma Pods' ),
+                            array( 'name' => 'Extraction Target', 'value' => 'Espresso & Lungo Extractions' ),
+                            array( 'name' => 'GST & Invoicing',   'value' => '100% Verified Corporate ITC' ),
+                        );
+                    }
+
+                    // 5. Beverage Premixes & Consumables
+                    if (
                         strpos( $slug_str, 'premix' ) !== false ||
                         strpos( $slug_str, 'beverage-whiteners' ) !== false ||
                         strpos( $slug_str, 'sachets' ) !== false ||
-                        strpos( $slug_str, 'coffee-capsules' ) !== false ||
+                        strpos( $slug_str, 'cold-beverages' ) !== false ||
                         strpos( $slug_str, 'hot-beverages' ) !== false ||
-                        strpos( $slug_str, 'cold-beverages' ) !== false
-                    );
-                    if ( $is_premix ) {
+                        strpos( $title, 'premix' ) !== false ||
+                        strpos( $title, 'whitener' ) !== false ||
+                        strpos( $title, 'dairy mix' ) !== false ||
+                        strpos( $title, 'sachet' ) !== false ||
+                        strpos( $title, 'soup' ) !== false ||
+                        strpos( $title, 'coffee beans' ) !== false ||
+                        strpos( $title, 'pure coffee powder' ) !== false ||
+                        strpos( $title, 'chicory' ) !== false ||
+                        strpos( $title, 'iced tea' ) !== false ||
+                        strpos( $title, 'nimbu paani' ) !== false
+                    ) {
                         return array(
                             array( 'name' => 'Pack Weight',      'value' => '1 kg Commercial Foil Pack' ),
                             array( 'name' => 'Average Yield',    'value' => '70–80 Cups (14g / 100ml cup)' ),
@@ -673,26 +850,32 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         );
                     }
 
-                    // 3. Vending Machines
-                    $is_vending_machine = (
-                        strpos( $slug_str, 'capsule-machines' ) !== false ||
-                        strpos( $title, 'capsule machine' ) !== false ||
-                        strpos( $slug_str, 'cool-vend' ) !== false ||
-                        strpos( $title, 'cool vend' ) !== false ||
+                    // 6. Vending Machines
+                    if (
                         strpos( $slug_str, 'vending' ) !== false ||
+                        strpos( $slug_str, 'cool-vend' ) !== false ||
+                        strpos( $slug_str, 'capsule-machines' ) !== false ||
                         strpos( $title, 'vending machine' ) !== false ||
                         strpos( $title, 'vending machines' ) !== false ||
-                        strpos( $title, 'beverage dispensing machine' ) !== false ||
-                        strpos( $title, 'beverage dispenser' ) !== false ||
+                        strpos( $title, 'capsule machine' ) !== false ||
                         strpos( $title, 'bean to cup' ) !== false ||
-                        strpos( $title, 'lane' ) !== false ||
-                        strpos( $title, 'select' ) !== false ||
-                        strpos( $title, 'neo' ) !== false ||
-                        strpos( $title, 'classic' ) !== false ||
-                        strpos( $title, 'compact' ) !== false ||
-                        strpos( $title, 'brew' ) !== false
-                    );
-                    if ( $is_vending_machine ) {
+                        strpos( $title, 'beverage dispensing machine' ) !== false ||
+                        strpos( $title, 'cool vend' ) !== false ||
+                        strpos( $title, '2-lane' ) !== false ||
+                        strpos( $title, '3-lane' ) !== false ||
+                        strpos( $title, '4-lane' ) !== false ||
+                        strpos( $title, '2 lane' ) !== false ||
+                        strpos( $title, '3 lane' ) !== false ||
+                        strpos( $title, '4 lane' ) !== false ||
+                        strpos( $title, 'coin operated' ) !== false ||
+                        strpos( $title, 'hot beverage dispenser' ) !== false ||
+                        strpos( $sku, 'lane' ) !== false ||
+                        strpos( $sku, 'compact-coffee' ) !== false ||
+                        strpos( $sku, 'select-coffee' ) !== false ||
+                        strpos( $sku, 'atlantis-brew' ) !== false ||
+                        strpos( $sku, 'cool-vend' ) !== false ||
+                        strpos( $sku, 'jazz' ) !== false
+                    ) {
                         return array(
                             array( 'name' => 'Dispense Control', 'value' => 'Micro-Controller Programmed' ),
                             array( 'name' => 'Canister System',  'value' => 'Multi-Canister High-Capacity Hopper' ),
@@ -702,7 +885,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                         );
                     }
 
-                    // 4. Water Dispensers
+                    // Default Atlantis Specs: Water Dispensers
                     return array(
                         array( 'name' => 'Tank Material',     'value' => 'Food-Grade SS 304 Stainless Steel' ),
                         array( 'name' => 'Cooling System',    'value' => 'Tropicalized Compressor Cooling' ),
@@ -1799,13 +1982,13 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                                 <div class="flex items-start gap-1.5"><span class="material-symbols-outlined text-sm text-[#1A56DB] shrink-0 font-bold mt-0.5">check_circle</span><span class="leading-snug"><?php echo esc_html( $m_feat ); ?></span></div>
                                             <?php endforeach; ?>
                                         </div>
-                                        <button type="button" class="text-[11px] font-black uppercase text-[#1A56DB] hover:text-[#0A0A0A] flex items-center gap-1 mt-2.5 js-toggle-features transition-colors" data-target="features-drawer-<?php echo esc_attr( $card_uid ); ?>"><span>+ View Full Operational Highlights</span></button>
+                                        <button type="button" class="text-[11px] font-black uppercase text-[#1A56DB] hover:text-[#0A0A0A] flex items-center gap-1 mt-2.5 js-toggle-features transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A56DB]" data-target="features-drawer-<?php echo esc_attr( $card_uid ); ?>" aria-expanded="false"><span>+ View Full Operational Highlights</span></button>
                                         <?php endif; ?>
                                     </div>
 
                                     <!-- 5-Row Quick-Specs Table with Clear Headers -->
-                                    <div class="border border-zinc-200 mb-5 overflow-hidden">
-                                        <table class="w-full text-left text-xs">
+                                    <div class="border border-zinc-200 mb-5 overflow-x-auto">
+                                        <table class="w-full text-left text-xs min-w-[280px]">
                                             <thead class="bg-zinc-100 text-[10px] font-black uppercase text-zinc-600 border-b border-zinc-200">
                                                 <tr><th class="py-2 px-3 sm:px-3.5 border-r border-zinc-200 w-2/5 sm:w-1/3">Engineering Parameter</th><th class="py-2 px-3 sm:px-3.5">Verified Specification</th></tr>
                                             </thead>
@@ -1813,7 +1996,7 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                                 <?php
                                                 $quick_specs = snap_stitch_resolve_product_card_specs( $item, $brand_key, ! empty( $curr_brand_config['default_specs'] ) ? $curr_brand_config['default_specs'] : array() );
                                                 foreach ( $quick_specs as $spec ) : ?>
-                                                    <tr class="odd:bg-zinc-50 even:bg-white"><td class="py-2 px-3 sm:px-3.5 font-bold uppercase text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200"><?php echo esc_html( $spec['name'] ); ?></td><td class="py-2 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A]"><?php echo esc_html( $spec['value'] ); ?></td></tr>
+                                                    <tr class="odd:bg-zinc-50 even:bg-white"><td class="py-2 px-3 sm:px-3.5 font-bold uppercase text-zinc-500 w-2/5 sm:w-1/3 border-r border-zinc-200 break-words"><?php echo esc_html( $spec['name'] ); ?></td><td class="py-2 px-3 sm:px-3.5 font-extrabold text-[#0A0A0A] break-words"><?php echo esc_html( $spec['value'] ); ?></td></tr>
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>
@@ -1832,7 +2015,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                                     if ( empty( $final_card_brochure ) ) {
                                         $final_card_brochure = function_exists( 'snap_stitch_resolve_b2b_brochure' )
                                             ? snap_stitch_resolve_b2b_brochure( $item['id'], $item['sku'], '', ( $root_brand_term && isset( $root_brand_term->slug ) ) ? $root_brand_term->slug : '' )
-                                            : get_template_directory_uri() . '/brochures/bluestar/bluestar-master-catalog.pdf';
+                                            : ( ( $brand_key === 'atlantis' || strpos( $slug_str, 'atlantis' ) !== false ) 
+                                                ? get_template_directory_uri() . '/brochures/atlantis/atlantis-master-catalog.pdf' 
+                                                : get_template_directory_uri() . '/brochures/bluestar/bluestar-master-catalog.pdf' );
                                     }
                                     ?>
                                     <a href="<?php echo esc_url( $final_card_brochure ); ?>" download target="_blank" rel="noopener noreferrer" class="h-[48px] w-full border-2 border-black hover:bg-black hover:text-white active:scale-95 text-black font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md" title="Download Official Product Specification Brochure"><span class="material-symbols-outlined text-base shrink-0">download</span><span class="whitespace-nowrap">Brochure</span></a>
@@ -2258,7 +2443,9 @@ if ( $term && ! is_wp_error( $term ) && isset( $term->slug ) ) {
                     var drawer = document.getElementById(this.getAttribute('data-target'));
                     if (!drawer) return;
                     drawer.classList.toggle('hidden');
-                    this.innerHTML = drawer.classList.contains('hidden') ? '<span>+ View Full Operational Highlights</span>' : '<span>− Hide Full Operational Highlights</span>';
+                    var isHidden = drawer.classList.contains('hidden');
+                    this.setAttribute('aria-expanded', !isHidden);
+                    this.innerHTML = isHidden ? '<span>+ View Full Operational Highlights</span>' : '<span>− Hide Full Operational Highlights</span>';
                 });
             });
 

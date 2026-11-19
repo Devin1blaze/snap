@@ -397,7 +397,7 @@ get_header( 'shop' ); ?>
                 }
 
                 if ( ! empty( $normalized_specs ) ) {
-                    echo '<table class="min-w-full border border-zinc-200" style="border-collapse:collapse;">';
+                    echo '<div class="overflow-x-auto border border-zinc-200"><table class="min-w-full" style="border-collapse:collapse;">';
                     echo '<thead><tr style="background:#f4f4f5;border-bottom:2px solid #e4e4e7;"><th style="padding:12px 16px;text-align:left;font-size:0.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#52525b;width:35%;border-right:1px solid #e4e4e7;">Engineering Parameter</th><th style="padding:12px 16px;text-align:left;font-size:0.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#52525b;">Verified Specification</th></tr></thead>';
                     echo '<tbody>';
                     $row_count = 0;
@@ -438,11 +438,11 @@ get_header( 'shop' ); ?>
                         $raw_name = $spec['name'];
                         $display_label = isset( $known_labels[strtolower( $raw_name )] ) ? $known_labels[strtolower( $raw_name )] : ucwords( str_replace( '_', ' ', $raw_name ) );
                         echo '<tr style="' . $bg . '">';
-                        echo '<td style="padding:12px 16px;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em;color:#71717a;width:35%;border-bottom:1px solid #e4e4e7;border-right:1px solid #e4e4e7;">' . esc_html( $display_label ) . '</td>';
-                        echo '<td style="padding:12px 16px;font-size:0.875rem;font-weight:600;color:#18181b;border-bottom:1px solid #e4e4e7;">' . wp_kses_post( $spec['value'] ) . '</td>';
+                        echo '<td style="padding:12px 16px;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em;color:#71717a;width:35%;border-bottom:1px solid #e4e4e7;border-right:1px solid #e4e4e7;word-break:break-word;">' . esc_html( $display_label ) . '</td>';
+                        echo '<td style="padding:12px 16px;font-size:0.875rem;font-weight:600;color:#18181b;border-bottom:1px solid #e4e4e7;word-break:break-word;">' . wp_kses_post( $spec['value'] ) . '</td>';
                         echo '</tr>';
                     }
-                    echo '</tbody></table>';
+                    echo '</tbody></table></div>';
                 } elseif ( ! empty( $specs_meta ) && is_string( $specs_meta ) && ( strpos( $specs_meta, '<table' ) !== false || strpos( $specs_meta, '<div' ) !== false ) ) {
                     // Raw HTML table from scraper
                     echo wp_kses_post( $specs_meta );

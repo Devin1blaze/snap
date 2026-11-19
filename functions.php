@@ -1483,7 +1483,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             return $theme_uri . '/brochures/nestle/coffee-vending-machines.pdf';
         }
         if ( strpos( $u_sku, 'ATL-' ) !== false || strpos( $u_sku, 'ATLANTIS' ) !== false ) {
-            return $theme_uri . '/brochures/atlantis/atlantis-beverage-premixes.pdf';
+            return $theme_uri . '/brochures/atlantis/atlantis-master-catalog.pdf';
         }
         if ( strpos( $u_sku, 'TET-' ) !== false ) {
             return $theme_uri . '/brochures/tetley/tetley-corporate-teas.pdf';
@@ -1506,7 +1506,7 @@ if ( ! function_exists( 'snap_stitch_resolve_b2b_brochure' ) ) {
             'euronics-commercial'        => 'euronics/euronics-master-catalog.pdf',
             'nestle-professional'        => 'nestle/coffee-vending-machines.pdf',
             'corporate-pantry'           => 'nestle/coffee-vending-machines.pdf',
-            'atlantis-commercial'        => 'atlantis/atlantis-beverage-premixes.pdf',
+            'atlantis-commercial'        => 'atlantis/atlantis-master-catalog.pdf',
             'tetley-corporate'           => 'tetley/tetley-corporate-teas.pdf',
             'waterlogic-commercial'      => 'waterlogic/waterlogic-commercial-dispensers.pdf',
             'eureka-forbes-commercial'   => 'eureka-forbes/commercial-ro-purifiers.pdf',
